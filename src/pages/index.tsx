@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react';
 
-import Head from "next/head"
-import Link from "next/link"
+import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -35,8 +35,8 @@ export default function Home() {
             <section
               className="w-full mt-6 bg-white rounded-lg grid grid-cols-1 sm:mt-20 sm:grid-cols-2 sm:w-1000"
               style={{
-                minHeight: "350px",
-                boxShadow: "rgba(0, 0, 0, 0.12) 0px 30px 60px 0px",
+                minHeight: '350px',
+                boxShadow: 'rgba(0, 0, 0, 0.12) 0px 30px 60px 0px',
               }}
             >
               <div className="flex flex-col justify-center rounded-l-lg bg-gray-50">
@@ -83,7 +83,7 @@ export default function Home() {
               </div>
             </section>
             <p className="mt-6 text-xs font-medium text-center text-gray-600">
-              Built by{" "}
+              Built by{' '}
               <a
                 className="font-medium text-blue-600 transition duration-150 ease-in-out hover:text-blue-500 focus:outline-none focus:underline"
                 href="https://twitter.com/agctyz"
@@ -95,15 +95,15 @@ export default function Home() {
         </div>
       </main>
     </div>
-  )
+  );
 }
 
 interface FeatureListProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 function FeatureList({ children }: FeatureListProps) {
-  return <ul className="px-12 py-12 space-y-5">{children}</ul>
+  return <ul className="px-12 py-12 space-y-5">{children}</ul>;
 }
 
 function Feature({ children, main }) {
@@ -116,7 +116,7 @@ function Feature({ children, main }) {
         <InfoText text={main} />
       </p>
     </li>
-  )
+  );
 }
 
 function InfoText({ text }) {
@@ -125,7 +125,7 @@ function InfoText({ text }) {
       <CheckIcon className="inline-flex flex-shrink-0 w-5 h-5 p-1 mr-3 text-gray-100 bg-blue-600 rounded-full sm:hidden" />
       {text}
     </span>
-  )
+  );
 }
 
 function CheckIcon(props) {
@@ -138,5 +138,5 @@ function CheckIcon(props) {
         d="M5 13l4 4L19 7"
       />
     </svg>
-  )
+  );
 }
