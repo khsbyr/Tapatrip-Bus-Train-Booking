@@ -42,5 +42,14 @@
     "contactList": [
       { "text": "Онлайн туслах", "route": "#" },
       { "text": "Харилцагчийн туслах", "route": "#" }
+    ],
+    "currency": [
+      { "text": "MNT", "route": "#" },
+      { "text": "USD", "route": "#" }
+    ],
+    "language": [
+      { "text": "MN", "route": "#" },
+      { "text": "EN", "route": "#" },
+      { "text": "RU", "route": "#" }
     ]
   }
