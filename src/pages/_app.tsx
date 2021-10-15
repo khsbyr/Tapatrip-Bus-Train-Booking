@@ -1,7 +1,7 @@
 import React from "react"
 
 import { AppProps } from "next/app"
-import "../styles/tailwind.scss"
+import "@assets/tailwind.scsss"
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return <Component {...pageProps} />
