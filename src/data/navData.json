@@ -1,0 +1,46 @@
+{
+    "generalList": [
+      {
+        "text": "Нислэг",
+        "route": "flight",
+        "icon":""
+
+      },
+      {
+        "text": "Буудал",
+        "route": "hotel",
+        "icon":""
+      },
+      {
+        "text": "Аялал",
+        "route": "travel",
+        "icon":""
+      },
+      {
+        "text": "Автобус",
+        "route": "bus",
+        "icon":""
+      },
+      {
+        "text": "Галт тэрэг",
+        "route": "train",
+        "icon":""
+      }
+    ],
+    "profile": [
+      { "text": "Таны захиалга", "route": "my-order" },
+      { "text": "Нэвтрэх", "route": "login" }
+    ],
+    "companyList": [
+      { "text": "Tapatrip.com - ын тухай", "route": "about" },
+      { "text": "Үйлчилгээний нөхцөл", "route": "terms-of-use" },
+      { "text": "Нууцлалын бодлого", "route": "privacy-policy" },
+      { "text": "Түгээмэл асуултууд", "route": "#" },
+      { "text": "Ажлын байр", "route": "#" },
+      { "text": "Мэдээлэл", "route": "#" }
+    ],
+    "contactList": [
+      { "text": "Онлайн туслах", "route": "#" },
+      { "text": "Харилцагчийн туслах", "route": "#" }
+    ]
+  }
