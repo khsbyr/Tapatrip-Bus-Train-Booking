@@ -1,41 +1,9 @@
-# Next.js Advanced Starter 🚀
+# Next.js Tapatrip V2
 
 An opinionated starter skeleton with advanced features for Next.js.
 
 Use Tailwind CSS, ESLint, Prettier & absolute imports instantly.
 Easily extendable zero-config template for pros and beginners.
-
-Check out the [Demo website.](https://nextjs-advanced-starter.vercel.app/)
-
-## Table of Contents
-
-- [Next.js Advanced Starter 🚀](#nextjs-advanced-starter-)
-  - [Table of Contents](#table-of-contents)
-  - [Why?](#why)
-  - [Features](#features)
-  - [Who this template is for](#who-this-template-is-for)
-  - [How to use](#how-to-use)
-  - [Explanation why some dependencies are in this template](#explanation-why-some-dependencies-are-in-this-template)
-    - [@tailwindcss/forms](#tailwindcssforms)
-    - [@tailwindcss/typography](#tailwindcsstypography)
-  - [Extending the template](#extending-the-template)
-    - [Config files](#config-files)
-    - [Changing the font](#changing-the-font)
-    - [Configuring ESLint rules](#configuring-eslint-rules)
-    - [Adding new absolute import paths](#adding-new-absolute-import-paths)
-  - [Recommended extensions for VSCode](#recommended-extensions-for-vscode)
-  - [Resources](#resources)
-
-## Why?
-
-This template aims to provide a minimal well-thought-out base for building advanced Next.js powered websites.
-
-It feels like there are so many templates and tutorials about configuring stacks out there that just don't work, no matter what you do. This is the template that **just works**. I know how frustrating it can be just wanting to build something but needing DAYS for coming up with the initial configuration. Especially getting Eslint + Prettier + absolute imports to work (well) together is super annoying and I believe using these features should be as simple as clicking a button. Also you probably want to style your webapp and there are few better ways than styling it with Tailwind CSS.
-
-The reason why I created this template in the first place is because I absolutely hate having to copy the same config over to a new project everytime and I don't really want to use existing templates because there always seems to be something wrong with them. Either the config is weird or the maintainers are not transparent with features.
-
-**Inviting you to collaborate**
-That being said I invite you to leave your critique about this template. If there's something wrong with ESLint, if prettier doesn't work as expected, if there's a new version of React or if the README is not transparent enough please don't hesitate to open an issue or (even better) a pull request. I've had enough with templates that don't work.
 
 ## Features
 
@@ -172,7 +140,6 @@ Tip: The font you choose should have at least these weights: 400, 500, 600, 700,
 If you need additional rules or want to turn off specific rules just edit `.eslintrc.js`. Only change the order of plugins and items in the "extends" array if you know what you're doing as this can have unexpected side effects: Items on the bottom ovverride the former items. This is the intended behaviour so you can extend and configure existing rules easily. For example first we add the popular airbnb rules and then have prettier ovverride some of these rules so code formatting doesn't interfere with other rules.
 
 ### Adding new absolute import paths
-
 
 This will instruct Next.js to set up a new alias to your specific folder. If you try to import a file with @myalias now it will still throw an error however because we need to tell our IDE that this path actually exists:
 
