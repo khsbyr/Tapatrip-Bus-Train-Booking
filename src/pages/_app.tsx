@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { AppProps } from 'next/app';
-import '@assets/tailwind.scss';
+import '@assets/chrome-bug.css';
+import '@assets/main.scss';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return <Component {...pageProps} />;
