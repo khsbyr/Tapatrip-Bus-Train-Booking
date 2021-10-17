@@ -3,27 +3,27 @@
     {
       "text": "Нислэг",
       "route": "flight",
-      "icon": ""
+      "icon": "/assets/Flight.png"
     },
     {
       "text": "Буудал",
       "route": "hotel",
-      "icon": ""
+      "icon": "/assets/Flight.png"
     },
     {
       "text": "Аялал",
       "route": "travel",
-      "icon": ""
+      "icon": "/assets/Flight.png"
     },
     {
       "text": "Автобус",
       "route": "bus",
-      "icon": ""
+      "icon": "/assets/Flight.png"
     },
     {
       "text": "Галт тэрэг",
       "route": "train",
-      "icon": ""
+      "icon": "/assets/Flight.png"
     }
   ],
   "profile": [
