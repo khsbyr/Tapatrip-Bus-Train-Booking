@@ -9,6 +9,7 @@ import Grid from '@components/Grid/Grid';
 import Application from '@components/Application/Application';
 import Comments from '@components/Comments/Comments';
 import Email from '@components/Email/Email';
+import Footer from '@components/Footer/Footer';
 
 export const getStaticProps = async () => {
   const res = NavData;
@@ -37,6 +38,7 @@ export default function Home({ NavData }) {
         <Application />
         <Comments CommentList={CommentList} />
         <Email />
+        <Footer navbarData={NavData} />
       </div>
     </div>
   );

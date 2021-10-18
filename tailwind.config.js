@@ -19,6 +19,7 @@ module.exports = {
       backgroundColor: theme => ({
         ...theme('colors'),
         bg: '#F1F2F6',
+        button: '#F1583C',
       }),
 
       fontFamily: {
@@ -40,6 +41,10 @@ module.exports = {
         primary: '#3490dc',
         secondary: '#8AB1D5',
         selected: '#177AD6',
+      },
+
+      placeholderColor: {
+        primary: '#8AB1D5',
       },
     },
   },
