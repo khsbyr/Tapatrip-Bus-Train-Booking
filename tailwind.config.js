@@ -12,6 +12,40 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
+      backgroundImage: theme => ({
+        'Header-image': "url('/assets/Header.png')",
+      }),
+
+      backgroundColor: theme => ({
+        ...theme('colors'),
+        bg: '#F1F2F6',
+        button: '#F1583C',
+      }),
+
+      fontFamily: {
+        Roboto: ['Roboto', 'sans-serif'],
+      },
+
+      theme: {
+        screens: {
+          tablet: '769px',
+        },
+      },
+
+      borderColor: theme => ({
+        ...theme('colors'),
+        selected: '#177AD6',
+      }),
+
+      textColor: {
+        primary: '#3490dc',
+        secondary: '#8AB1D5',
+        selected: '#177AD6',
+      },
+
+      placeholderColor: {
+        primary: '#8AB1D5',
+      },
     },
   },
   variants: {
