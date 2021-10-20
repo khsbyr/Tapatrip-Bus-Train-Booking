@@ -55,14 +55,12 @@ const Application: FC = () => {
                 </p>
               </div>
             </div>
-
             <div className="flex mt-10 flex-wrap">
               <img src="/assets/App store.png" className="h-12 mr-7" />
               <img src="/assets/Google play.png" className="h-12 mr-7" />
               <img src="/assets/App gallery.png" className="h-12" />
             </div>
           </div>
-
           <div className="hidden md:block">
             <img src="/assets/App download image.png" />
           </div>
