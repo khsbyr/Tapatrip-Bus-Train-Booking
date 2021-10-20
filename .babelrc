@@ -26,7 +26,7 @@
     [
       "babel-plugin-import",
       {
-        "libraryName": "@mui/material",
+        "libraryName": "@material-ui/core",
         "libraryDirectory": "",
         "camel2DashComponentName": false
       },
@@ -35,11 +35,20 @@
     [
       "babel-plugin-import",
       {
-        "libraryName": "@mui/icons-material",
+        "libraryName": "@material-ui/icons",
         "libraryDirectory": "",
         "camel2DashComponentName": false
       },
       "icons"
+    ],
+    [
+      "babel-plugin-import",
+      {
+        "libraryName": "@material-ui/lab",
+        "libraryDirectory": "",
+        "camel2DashComponentName": false
+      },
+      "lab"
     ]
   ]
 }
