@@ -30,7 +30,8 @@
       "@public/*": ["./public/*"],
       "@utils/*": ["./src/utils/*"],
       "@app/*": ["./src/app/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@helpers/*": ["./src/helpers/*"]
     }
   },
   "exclude": ["node_modules"],
