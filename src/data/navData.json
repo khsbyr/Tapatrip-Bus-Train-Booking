@@ -43,8 +43,8 @@
     { "text": "Харилцагчийн туслах", "route": "#" }
   ],
   "currency": [
-    { "text": "MNT", "route": "#" },
-    { "text": "USD", "route": "#" }
+    { "text": "$", "route": "#" },
+    { "text": "MNT", "route": "#" }
   ],
   "language": [
     { "text": "MN", "route": "#" },

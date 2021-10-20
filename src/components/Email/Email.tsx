@@ -24,7 +24,7 @@ const Email: FC = () => {
           <div className="flex flex-row items-center mt-16 rounded-2xl py-1 h-14 bg-bg ">
             <MailIcon className="w-8 h-8 ml-4" style={{ color: '#8AB1D5' }} />
             <input
-              className="appearance-none bg-transparent border-none w-full ml-2 py-1 px-2 placeholder-primary"
+              className="appearance-none bg-transparent w-full ml-2 py-1 px-2 placeholder-primary border-none"
               type="text"
               placeholder="И-Мэйл хаягаа оруулна уу"
               aria-label="Full name"
