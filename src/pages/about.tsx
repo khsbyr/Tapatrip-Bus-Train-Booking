@@ -7,6 +7,22 @@ import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
+const MONTH_NAMES = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
 export default function about() {
   const [value, setValue] = React.useState<Date | null>(
     new Date('2014-08-18T21:11:54')
