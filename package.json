@@ -14,15 +14,8 @@
     "test-all": "yarn lint && yarn type-check && yarn test"
   },
   "dependencies": {
-    "@date-io/moment": "2.11.0",
-    "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
     "@headlessui/react": "^1.4.1",
     "@heroicons/react": "^1.0.4",
-    "@mui/icons-material": "^5.0.4",
-    "@mui/lab": "^5.0.0-alpha.51",
-    "@mui/material": "^5.0.4",
-    "@mui/styled-engine-sc": "^5.0.3",
     "autoprefixer": "^10.3.7",
     "moment": "^2.29.1",
     "next": "11.1.2",
