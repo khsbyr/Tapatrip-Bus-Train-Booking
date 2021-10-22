@@ -13,25 +13,25 @@ import Comments from '@components/Comments/Comments';
 import Email from '@components/Email/Email';
 import Footer from '@components/Footer/Footer';
 
-export const getStaticProps = async () => {
-  const res = NavData;
-  const gridList = GridList;
-  const commentList = CommentList;
+// export const getStaticProps = async () => {
+//   const res = NavData;
+//   const gridList = GridList;
+//   const commentList = CommentList;
+//   console.log('aaa');
+//   return {
+//     props: {
+//       NavData: res,
+//       GridList: gridList,
+//       CommentList: commentList,
+//     },
+//   };
+// };
 
-  return {
-    props: {
-      NavData: res,
-      GridList: gridList,
-      CommentList: commentList,
-    },
-  };
-};
-
-export default function Home({ NavData }) {
-  const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY, {
-    variables: { region: '1', type: '2' },
-  });
-  console.log(data);
+export default function Home({ NavData, GridList, CommentList }) {
+  // const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY, {
+  //   variables: { region: '1', type: '2' },
+  // });
+  // console.log(data);
   return (
     <div>
       <Head>
@@ -66,3 +66,17 @@ export default function Home({ NavData }) {
     </div>
   );
 }
+
+export const getStaticProps = async () => {
+  const res = NavData;
+  const gridList = GridList;
+  const commentList = CommentList;
+  console.log('asadasdadsaaa');
+  return {
+    props: {
+      NavData: res,
+      GridList: gridList,
+      CommentList: commentList,
+    },
+  };
+};
