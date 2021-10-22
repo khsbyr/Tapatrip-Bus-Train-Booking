@@ -13,34 +13,10 @@ import Comments from '@components/Comments/Comments';
 import Email from '@components/Email/Email';
 import Footer from '@components/Footer/Footer';
 
-// console.log(BUS_ALL_LOCATIONS_QUERY);
-
-// const BUS_ALL_LOCATIONS_QUERY = gql`
-//   query busAllLocations($region: String, $type: String) {
-//     busAllLocations(region: $region, type: $type) {
-//       edges {
-//         node {
-//           name
-//           id
-//           regionName
-//           region
-//           type
-//           typeName
-//           picture
-//         }
-//       }
-//     }
-//   }
-// `;
-
 export const getStaticProps = async () => {
   const res = NavData;
   const gridList = GridList;
   const commentList = CommentList;
-
-  // const { data, loading, error, fetchMore } = useQuery(BUS_ALL_LOCATIONS_QUERY);
-
-  // console.log(data);
 
   return {
     props: {
