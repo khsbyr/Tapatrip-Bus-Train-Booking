@@ -6,7 +6,7 @@ import travelData from '@data/getTravelData.json';
 import SelectSeats from '@components/SelectSeats';
 import PassengerInfo from '@components/PassengerInfo';
 import Payments from '@components/Payments';
-import { ArrowRightOutlined } from '@ant-design/icons';
+import { ArrowRightOutlined, CaretRightOutlined } from '@ant-design/icons';
 
 const { Step } = Steps;
 export const getStaticProps = async () => {
@@ -46,11 +46,12 @@ const AppSteps = travelData => {
 
   return (
     <>
-      <div className={s.typography}>
-        <Steps current={current} onChange={onChange}>
+      <div className={s.steps}>
+        <Steps current={current} onChange={onChange} size="small">
           {steps.map(item => (
             <Step
               key={item.title}
+              icon={<CaretRightOutlined />}
               title={item.title}
               className="text-xs text-white"
             />
@@ -67,124 +68,27 @@ const AppSteps = travelData => {
             <div className="w-full md:w-2/5 lg:w-1/3">
               <div className={s.right}>
                 {current === 0 && (
-                  <div className={s.selectedSeats}>
-                    <div className={s.direct}>
-                      <div className={s.direction}>
-                        <p className="text-xs text-green-400 font-bold">
-                          ХЯМД, ХУРДАН
-                        </p>
-                        <p className="flex text-xl font-bold md:text-xs lg:text-xl">
-                          <p>10.19 8:25AM</p>{' '}
-                          <ArrowRightOutlined className="flex items-center" />{' '}
-                          <p>11.30PM</p>
-                        </p>
-                        <p className="text-xs">3цаг 20минут, 1 зогсолт</p>
-                      </div>
-                      <div className={s.direction1}>
-                        <p className="font-bold">Улаанбаатар -с Дархан</p>
-                        <p className="font-bold">Чиглэл</p>
-                      </div>
-                    </div>
-                    <div className={s.order}>
-                      <div className="flex grid grid-cols-2">
-                        <p className="flex justify-start">Сонгогдсон суудал</p>
-                        <p className="flex justify-end">1, 8</p>
-                      </div>
-                      <div className="flex grid grid-cols-2">
-                        <p className="flex justify-start">Тасалбар(2том хүн)</p>
-                        <p className="flex justify-end">15'000 ₮</p>
-                      </div>
-                      <div className="flex grid grid-cols-2 font-bold">
-                        <p className="flex justify-start">Нийт үнэ</p>
-                        <p className="flex justify-end">15'000 ₮</p>
-                      </div>
-                    </div>
+                  <div className="p-2">
+                    {/* // -------------------Components_0---------------------------// */}
                     <button className={s.button} onClick={() => next()}>
                       {steps[current].button}
                     </button>
                   </div>
                 )}
                 {current === 1 && (
-                  <div className={s.selectedSeats}>
-                    <div className={s.direct}>
-                      <div className={s.direction}>
-                        <p className="text-xs text-green-400 font-bold">
-                          ХЯМД, ХУРДАН
-                        </p>
-                        <p className="flex text-xl font-bold">
-                          <p>10.19 8:25AM</p>{' '}
-                          <ArrowRightOutlined className="flex items-center" />{' '}
-                          <p>11.30PM</p>
-                        </p>
-                        <p className="text-xs">3цаг 20минут, 1 зогсолт</p>
-                      </div>
-                      <div className={s.direction1}>
-                        <p className="font-bold">Улаанбаатар -с Дархан</p>
-                        <p className="font-bold">Чиглэл</p>
-                      </div>
-                    </div>
-                    <div className={s.order}>
-                      {/* <div className="flex grid grid-cols-2">
-                        <p className="flex justify-start">Сонгогдсон суудал</p>
-                        <p className="flex justify-end">1, 8</p>
-                      </div> */}
-                      <div className="flex grid grid-cols-2">
-                        <p className="flex justify-start">Тасалбар(2том хүн)</p>
-                        <p className="flex justify-end">15'000 ₮</p>
-                      </div>
-                      <div className="flex grid grid-cols-2 font-bold">
-                        <p className="flex justify-start">Нийт үнэ</p>
-                        <p className="flex justify-end">15'000 ₮</p>
-                      </div>
-                    </div>
-                    <Checkbox className="font-normal text-blue-900">
-                      <p>
-                        Аялалын мэдээлэл болон бусад шинэчлэлийг имэйлээр
-                        илгээнэ үү.
-                      </p>
-                    </Checkbox>
+                  <div className="p-2">
+                    {/* // -------------------Components_1---------------------------// */}
+
                     <button className={s.button} onClick={() => next()}>
                       {steps[current].button}
                     </button>
                   </div>
                 )}
                 {current === steps.length - 1 && (
-                  <div className={s.selectedSeats}>
-                    <div className={s.direct}>
-                      <div className={s.direction}>
-                        <p className="text-xs text-green-400 font-bold">
-                          ХЯМД, ХУРДАН
-                        </p>
-                        <p className="flex text-xl font-bold md:text-xs lg:text-xl">
-                          <p>10.19 8:25AM</p>{' '}
-                          <ArrowRightOutlined className="flex items-center" />{' '}
-                          <p>11.30PM</p>
-                        </p>
-                        <p className="text-xs">3цаг 20минут, 1 зогсолт</p>
-                      </div>
-                      <div className={s.direction1}>
-                        <p className="font-bold">Улаанбаатар -с Дархан</p>
-                        <p className="font-bold">Чиглэл</p>
-                      </div>
-                    </div>
-                    <div className={s.order}>
-                      {/* <div className="flex grid grid-cols-2">
-                        <p className="flex justify-start">Сонгогдсон суудал</p>
-                        <p className="flex justify-end">1, 8</p>
-                      </div> */}
-                      <div className="flex grid grid-cols-2">
-                        <p className="flex justify-start">Тасалбар(2том хүн)</p>
-                        <p className="flex justify-end">15'000 ₮</p>
-                      </div>
-                      <div className="flex grid grid-cols-2 font-bold">
-                        <p className="flex justify-start">Нийт үнэ</p>
-                        <p className="flex justify-end">15'000 ₮</p>
-                      </div>
-                    </div>
-                    <button
-                      className={s.button}
-                      onClick={() => message.success('Processing complete!')}
-                    >
+                  <div className="p-2">
+                    {/* // -------------------Components_2---------------------------// */}
+
+                    <button className={s.button}>
                       {steps[current].button}
                     </button>
                   </div>

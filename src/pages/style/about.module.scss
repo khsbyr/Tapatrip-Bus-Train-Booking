@@ -4,64 +4,9 @@
 .typography {
   @apply flex flex-wrap w-full sm:w-10/12 md:w-9/12;
 }
-
-// // ----------------------------------------------------Seat Select Left Up------------------------------------------------//
-
-// .left {
-//   @apply w-full lg:w-7/12 space-y-3;
-// }
-
-// .Information {
-//   @apply flex grid flex-wrap bg-white text-sm font-medium px-6 pb-2 rounded-lg shadow-md w-full sm:grid-cols-2;
-// }
-// .businfo {
-//   @apply flex flex-wrap w-full pr-0 sm:pr-2;
-// }
-// .bush1 {
-//   @apply text-lg w-full font-semibold py-2;
-// }
-// .driverinfo {
-//   @apply flex flex-wrap w-full pl-0 sm:pl-2;
-// }
-
-// // ----------------------------------------------------Seat Select Left Down------------------------------------------------//
-
-// .selectSeats {
-//   @apply w-full bg-white rounded-lg shadow-md;
-// }
-// .seatsh1 {
-//   @apply flex flex-wrap w-full text-lg font-semibold px-6 py-2;
-// }
-// .zahialga {
-//   @apply flex justify-start space-x-0 flex-wrap w-full text-sm font-normal py-2 sm:justify-end w-3/4;
-// }
-// .yeszahialga {
-//   @apply border-2 px-3 rounded-md mr-2;
-// }
-// .nozahialga {
-//   @apply rounded-md bg-gray-200 px-3 border-2 mr-2;
-// }
-
-// // ----------------------------------------------------Seat Select Right------------------------------------------------//
-
-.right {
-  @apply w-full pl-0 md:p-2;
-}
-.selectedSeats {
-  @apply w-full space-y-3;
-}
-.direct {
-  @apply w-full shadow-md divide-y;
-}
-.direction {
-  @apply bg-white rounded-md px-4 py-4 space-y-1 text-sm md:text-xs lg:text-xl;
-}
-.direction1 {
-  @apply bg-white rounded-md py-4 px-4 space-x-2 text-xs flex grid grid-cols-2;
-}
-.order {
-  @apply bg-white w-full rounded-md shadow-md px-4 py-4 space-y-2;
-}
 .button {
   @apply w-full bg-red-500 shadow-md rounded-md font-semibold py-2 mt-2 hover:bg-red-700 text-white;
+}
+.steps {
+  @apply text-sm;
 }

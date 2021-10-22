@@ -1,6 +1,7 @@
-import { Radio } from 'antd';
+import { Divider, Radio } from 'antd';
 import PayTransfer from '@components/PayTransfer';
 import React from 'react';
+import s from './Payments.module.scss';
 export default function Payment() {
   const [value, setValue] = React.useState(1);
   const onChange = e => {
@@ -8,15 +9,11 @@ export default function Payment() {
     setValue(e.target.value);
   };
   return (
-    <div className="p-2 space-y-3">
-      <div className="rounded-lg bg-white py-2 shadow-md">
-        <div className="flex w-full border-b-2 px-6">
-          <p className="text-sm w-full font-semibold py-2">
-            Төлбөр төлөх зааварчилгаа
-          </p>
-          <p className="flex justify-end w-1/2 text-sm w-full font-semibold py-2">
-            09:59
-          </p>
+    <div className={s.div1}>
+      <div className={s.div2}>
+        <div className={s.zaavarh1}>
+          <p className={s.zaavarh1p1}>Төлбөр төлөх зааварчилгаа</p>
+          <p className={s.zaavarh1p2}>09:59</p>
         </div>
         <ul className="p-4 text-xs px-10">
           <li>
@@ -40,7 +37,7 @@ export default function Payment() {
         </ul>
       </div>
 
-      <div className="rounded-lg bg-white py-2 shadow-md">
+      <div className={s.radioGroup}>
         <Radio.Group onChange={onChange} value={value}>
           <div className="px-6 space-y-4 w-full">
             <Radio value={1}>
