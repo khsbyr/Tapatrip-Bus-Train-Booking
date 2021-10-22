@@ -31,8 +31,7 @@
       "@utils/*": ["./src/utils/*"],
       "@app/*": ["./src/app/*"],
       "@assets/*": ["./src/assets/*"],
-      "@helpers/*": ["./src/helpers/*"],
-      "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"] // this mapping is relative to "baseUrl"
+      "@helpers/*": ["./src/helpers/*"]
     }
   },
   "exclude": ["node_modules"],
