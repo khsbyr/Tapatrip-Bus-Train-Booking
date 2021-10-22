@@ -37,7 +37,7 @@ const Tabs: FC<Props> = ({ navbarData }) => {
                     src={'/assets/plane-solid.svg'}
                     className="text-blue-300"
                   /> */}
-                  <BookOpenIcon className="w-10 h-10 ml-2" />
+                  <BookOpenIcon className="w-10 h-10 ml-0" />
                   {z.text}
                 </a>
               </li>

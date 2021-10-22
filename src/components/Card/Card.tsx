@@ -1,4 +1,5 @@
 import {
+  ArrowRightIcon,
   ChevronDownIcon,
   ChevronUpIcon,
   UserIcon,
@@ -18,7 +19,7 @@ interface Props {
   direction_name: string;
   start_location: string;
   end_location: string;
-  stops: any;
+  stops?: any;
 }
 
 const Card: FC<Props> = ({
@@ -46,9 +47,15 @@ const Card: FC<Props> = ({
               </h1>
               <div className="flex justify-between ">
                 <div className="space-y-2">
-                  <h1 className="text-cardDate font-bold text-xl">
-                    {start_date} {end_date}
-                  </h1>
+                  <div className="flex space-x-4">
+                    <h1 className="text-cardDate font-bold text-xl">
+                      {start_date}
+                    </h1>
+                    <ArrowRightIcon className="h-7 text-direction" />
+                    <h1 className="text-cardDate font-bold text-xl">
+                      {end_date}
+                    </h1>
+                  </div>
                   <h1 className="font-light text-cardDate text-lg"> {date} </h1>
                 </div>
                 <div className="space-y-2">
@@ -98,7 +105,11 @@ const Card: FC<Props> = ({
                 <Steps progressDot direction="vertical">
                   <Step title={start_date} description={start_location} />
                   {stops?.map(z => (
-                    <Step title={z.start_date} description={z.description} />
+                    <Step
+                      title={z.start_date}
+                      description={z.description}
+                      key={z.id}
+                    />
                   ))}
                   <Step title={end_date} description={end_location} />
                 </Steps>

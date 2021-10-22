@@ -31,6 +31,7 @@ const Navbar2: FC<Props> = ({ navbarData }) => {
                       <a
                         className={`${'text-white'} hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
                         href={`${z.route}`}
+                        key={z.id}
                       >
                         {z.text}
                       </a>
@@ -49,6 +50,7 @@ const Navbar2: FC<Props> = ({ navbarData }) => {
                         className={` text-selected
                          hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
                         href={`${z.route}`}
+                        key={z.id}
                       >
                         {z.text}
                       </a>
@@ -92,6 +94,7 @@ const Navbar2: FC<Props> = ({ navbarData }) => {
                     <a
                       className="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium block"
                       href={`${z.route}`}
+                      key={z.id}
                     >
                       {z.text}
                     </a>
@@ -100,6 +103,7 @@ const Navbar2: FC<Props> = ({ navbarData }) => {
                     <a
                       className="text-gray-800 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                       href={`${z.route}`}
+                      key={z.id}
                     >
                       {z.text}
                     </a>

@@ -10,7 +10,6 @@ interface Props {
 
 const SearchBus: FC<Props> = ({ navbarData }) => {
   const { asPath, pathname } = useRouter();
-  console.log(asPath === '/bus');
   return (
     <ContentWrapper>
       <div>

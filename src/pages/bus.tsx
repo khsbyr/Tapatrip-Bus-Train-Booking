@@ -39,6 +39,7 @@ const Bus: FC = () => {
                 start_location={z.start_location}
                 end_location={z.end_location}
                 stops={z.stops}
+                key={z.id}
               />
             ))}
           </div>
