@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
-import { useQuery } from '@apollo/client';
-import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
+// import { useQuery } from '@apollo/client';
+// import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
 import NavData from '@data/navData.json';
 import GridList from '@data/gridList.json';
 import CommentList from '@data/commentList.json';
@@ -28,10 +28,10 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ NavData }) {
-  const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY, {
-    variables: { region: '1', type: '2' },
-  });
-  console.log(data);
+  // const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY, {
+  //   variables: { region: '1', type: '2' },
+  // });
+  // console.log(data);
   return (
     <div>
       <Head>
