@@ -1,60 +1,40 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
+import SearchBus from '@components/Search-Bus/SearchBus';
 
 interface Props {
   navbarData?: any;
 }
 
-const Navbar: FC<Props> = ({ navbarData }) => {
+const Navbar2: FC<Props> = ({ navbarData }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [navbar, setNavbar] = useState(false);
-
-  const changeBackground = () => {
-    if (window.scrollY >= 80) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
-  };
-
-  if (typeof window !== 'undefined') {
-    window.addEventListener('scroll', changeBackground);
-  }
-
   return (
     <>
       <div>
         <nav
-          className={`relative md:fixed w-full 
-          ${navbar ? 'bg-white' : 'bg-none'}
-          md:h-20 md:top-0 z-10 ${navbar ? 'shadow-lg' : 'shadow-none'}`}
+          className={`relative md:relative  w-full bg-white md:h-auto md:top-0 z-10 shadow-lg `}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:mt-3">
+          <div className="max-w-7xl mx-auto md:mt-3">
             <div className=" flex items-center justify-between h-12">
               <div className="flex items-center ">
                 <div className="flex-shrink-0">
                   <img
-                    src={`${
-                      navbar ? '/assets/logoBlue.png' : '/assets/logoWhite.png'
-                    } `}
+                    src="/assets/logoBlue.png"
                     alt="Logo"
                     className="w-36 md:w-full md:h-full"
                   />
                 </div>
-                <div className={`${navbar ? 'hidden' : 'lg:block'} hidden`}>
+                <div className="hidden">
                   <div className="ml-10 flex items-baseline space-x-4">
                     {navbarData.generalList.map(z => (
                       <a
-                        className={`${'text-white'} hover:text-gray-300 px-1 py-2 rounded-md text-sm font-light`}
+                        className={`${'text-white'} hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
                         href={`${z.route}`}
                       >
                         {z.text}
                       </a>
                     ))}
-                    <button className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-40">
-                      Захиалга шалгах
-                    </button>
                   </div>
                 </div>
               </div>
@@ -64,20 +44,15 @@ const Navbar: FC<Props> = ({ navbarData }) => {
               <div className="flex items-center ">
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
-                    {/* {navbarData.profile.map(z => (
+                    {navbarData.profile.map(z => (
                       <a
-                        className={`${
-                          navbar ? 'text-selected' : 'text-white'
-                        } hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
+                        className={` text-selected
+                         hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
                         href={`${z.route}`}
                       >
                         {z.text}
                       </a>
-                      
-                    ))} */}
-                    <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40">
-                      Нэвтрэх
-                    </button>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -98,6 +73,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 </button>
               </div>
             </div>
+            <SearchBus navbarData={navbarData} />
           </div>
 
           <Transition
@@ -114,7 +90,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                   {navbarData.profile.map(z => (
                     <a
-                      className="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-light block"
+                      className="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium block"
                       href={`${z.route}`}
                     >
                       {z.text}
@@ -122,7 +98,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   ))}
                   {navbarData.generalList.map(z => (
                     <a
-                      className="text-gray-800 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-light"
+                      className="text-gray-800 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                       href={`${z.route}`}
                     >
                       {z.text}
@@ -138,4 +114,4 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   );
 };
 
-export default Navbar;
+export default Navbar2;

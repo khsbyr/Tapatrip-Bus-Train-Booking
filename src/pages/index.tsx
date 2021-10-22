@@ -24,7 +24,7 @@ export const getStaticProps = async () => {
   };
 };
 
-export default function Home({ NavData }) {
+export default function Home() {
   return (
     <div>
       <Head>

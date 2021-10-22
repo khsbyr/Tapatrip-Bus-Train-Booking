@@ -21,6 +21,7 @@ module.exports = {
         ...theme('colors'),
         bg: '#F1F2F6',
         button: '#F1583C',
+        alert: '#FFF7ED',
       }),
       theme: {
         screens: {
@@ -30,11 +31,16 @@ module.exports = {
       borderColor: theme => ({
         ...theme('colors'),
         selected: '#177AD6',
+        alert: '#F7B352',
       }),
       textColor: {
         primary: '#3490dc',
         secondary: '#8AB1D5',
         selected: '#177AD6',
+        alert: '#F7B352',
+        cardDescColor: '#24C8A7',
+        cardDate: '#0A3761',
+        direction: '#8AB1D5',
       },
 
       placeholderColor: {

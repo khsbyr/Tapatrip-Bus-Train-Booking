@@ -1,0 +1,114 @@
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  UserIcon,
+} from '@heroicons/react/solid';
+import React, { FC, useState } from 'react';
+import { Steps } from 'antd';
+
+const { Step } = Steps;
+
+interface Props {
+  description: string;
+  start_date: string;
+  end_date: string;
+  date: string;
+  price: number;
+  passengers: number;
+  direction_name: string;
+  start_location: string;
+  end_location: string;
+  stops: any;
+}
+
+const Card: FC<Props> = ({
+  description,
+  start_date,
+  end_date,
+  date,
+  price,
+  passengers,
+  direction_name,
+  start_location,
+  end_location,
+  stops,
+}) => {
+  const [isActive, setIsActive] = useState(false);
+
+  return (
+    <>
+      <div className="px-2">
+        <div className="max-w-7xl mx-auto">
+          <div className=" relative bg-white w-full h-auto rounded-2xl shadow-lg">
+            <div className="px-20 space-y-4">
+              <h1 className="pt-4 font-bold text-cardDescColor">
+                {description}
+              </h1>
+              <div className="flex justify-between ">
+                <div className="space-y-2">
+                  <h1 className="text-cardDate font-bold text-xl">
+                    {start_date} {end_date}
+                  </h1>
+                  <h1 className="font-light text-cardDate text-lg"> {date} </h1>
+                </div>
+                <div className="space-y-2">
+                  <h1 className="text-cardDate font-bold text-2xl">
+                    {price} MNT
+                  </h1>
+                  <h1 className="flex items-center">
+                    <UserIcon className="w-4 h-4 " /> {passengers} зорчигчийн
+                    үнэ
+                  </h1>
+                </div>
+              </div>
+
+              <div className="flex py-5 justify-between items-center ">
+                <div>
+                  <h1 className="text-cardDate font-semibold text-md">
+                    {direction_name}
+                  </h1>
+                </div>
+                <div className="flex items-center space-x-8">
+                  <button
+                    className="text-direction font-medium flex"
+                    onClick={() => setIsActive(!isActive)}
+                  >
+                    Чиглэлийн мэдээлэл
+                    {isActive ? (
+                      <ChevronUpIcon className="w-6 h-6" />
+                    ) : (
+                      <ChevronDownIcon className="w-6 h-6" />
+                    )}
+                  </button>
+                  <button className="bg-button text-white font-bold py-2 px-4 rounded-lg h-10 w-40">
+                    Захиалах
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="bg-bg w-12 h-12 rounded-full absolute top-28 -left-7 "></div>
+            <div className="bg-bg w-12 h-12 rounded-full absolute top-28 -right-7"></div>
+            <div
+              className="bg-bg w-full h-0.5 absolute"
+              style={{ top: '135px' }}
+            ></div>
+            <div className={`${!isActive ? 'hidden' : 'block'}`}>
+              <div className="border border-dashed "></div>
+              <div className="px-20 py-5">
+                <Steps progressDot direction="vertical">
+                  <Step title={start_date} description={start_location} />
+                  {stops?.map(z => (
+                    <Step title={z.start_date} description={z.description} />
+                  ))}
+                  <Step title={end_date} description={end_location} />
+                </Steps>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Card;
