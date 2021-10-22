@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
+import { useQuery } from '@apollo/client';
+import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
 import NavData from '@data/navData.json';
 import GridList from '@data/gridList.json';
 import CommentList from '@data/commentList.json';
@@ -11,10 +13,35 @@ import Comments from '@components/Comments/Comments';
 import Email from '@components/Email/Email';
 import Footer from '@components/Footer/Footer';
 
+// console.log(BUS_ALL_LOCATIONS_QUERY);
+
+// const BUS_ALL_LOCATIONS_QUERY = gql`
+//   query busAllLocations($region: String, $type: String) {
+//     busAllLocations(region: $region, type: $type) {
+//       edges {
+//         node {
+//           name
+//           id
+//           regionName
+//           region
+//           type
+//           typeName
+//           picture
+//         }
+//       }
+//     }
+//   }
+// `;
+
 export const getStaticProps = async () => {
   const res = NavData;
   const gridList = GridList;
   const commentList = CommentList;
+
+  // const { data, loading, error, fetchMore } = useQuery(BUS_ALL_LOCATIONS_QUERY);
+
+  // console.log(data);
+
   return {
     props: {
       NavData: res,
@@ -25,6 +52,10 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ NavData }) {
+  const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY, {
+    variables: { region: '1', type: '2' },
+  });
+  console.log(data);
   return (
     <div>
       <Head>
