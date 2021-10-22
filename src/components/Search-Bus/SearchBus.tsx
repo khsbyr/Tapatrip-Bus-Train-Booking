@@ -1,67 +1,41 @@
-import Datepicker from '@components/ui/Datepicker/Datepicker';
-import {
-  LocationMarkerIcon,
-  MailIcon,
-  MapIcon,
-  StopIcon,
-} from '@heroicons/react/solid';
+import Autocomplete from '@components/ui/Autocomplete/Autocomplete';
+import { DatePicker } from 'antd';
 import React, { FC } from 'react';
-import s from './SearchBus.module.scss';
+import ContentWrapper from './style';
+import { useRouter } from 'next/router';
 
 interface Props {
   navbarData?: any;
 }
 
-const SearchBus: FC<Props> = () => {
+const SearchBus: FC<Props> = ({ navbarData }) => {
+  const { asPath, pathname } = useRouter();
   return (
-    <div>
-      <form className={s.form}>
-        {/* <div className="grid grid-cols-3 gap-x-10  "> */}
-        <div className="flex items-center rounded-2xl py-1 h-14 bg-bg w-full">
-          <LocationMarkerIcon
-            className="w-8 h-8 ml-4"
-            style={{ color: '#8AB1D5' }}
-          />
-          <input
-            className="appearance-none bg-transparent w-full ml-2 py-1 px-2 placeholder-primary border-none"
-            type="text"
+    <ContentWrapper>
+      <div>
+        <form
+          className={`px-2 py-6 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4
+          ${asPath === '/bus' ? 'md:px-0' : 'md:px-12'} 
+          `}
+        >
+          <Autocomplete
+            data={navbarData.generalList}
             placeholder="Хаанаас: хот байршил..."
-            aria-label="Full name"
           />
-        </div>
 
-        <div className="flex items-center  rounded-2xl py-1 h-14 bg-bg w-full">
-          <LocationMarkerIcon
-            className="w-8 h-8 ml-4"
-            style={{ color: '#8AB1D5' }}
-          />
-          <input
-            className="appearance-none bg-transparent w-full ml-2 py-1 px-2 placeholder-primary border-none"
-            type="text"
+          <Autocomplete
+            data={navbarData.generalList}
             placeholder="Хаашаа: хот байршил..."
-            aria-label="Full name"
           />
-        </div>
 
-        <div className="flex items-center  rounded-2xl py-1 h-14 bg-bg w-full">
-          <LocationMarkerIcon
-            className="w-8 h-8 ml-4"
-            style={{ color: '#8AB1D5' }}
-          />
-          <input
-            className="appearance-none bg-transparent w-full ml-2 py-1 px-2 placeholder-primary border-none"
-            type="text"
-            placeholder="Явах өдөр..."
-            aria-label="Full name"
-          />
-        </div>
+          <DatePicker placeholder="Он, сар, өдөр" />
 
-        <button className="bg-button text-white font-bold py-2 px-4 rounded-2xl h-14 w-full">
-          Хайх
-        </button>
-        {/* </div> */}
-      </form>
-    </div>
+          <button className="bg-button text-white font-bold py-2 px-4 rounded-2xl h-14 w-full">
+            Хайх
+          </button>
+        </form>
+      </div>
+    </ContentWrapper>
   );
 };
 

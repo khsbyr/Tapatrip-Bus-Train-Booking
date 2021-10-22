@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
-import { useQuery } from '@apollo/client';
-import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
+// import { useQuery } from '@apollo/client';
+// import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
 import NavData from '@data/navData.json';
 import GridList from '@data/gridList.json';
 import CommentList from '@data/commentList.json';
