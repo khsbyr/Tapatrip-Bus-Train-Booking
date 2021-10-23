@@ -10,10 +10,8 @@ interface Props {
 }
 const businfo = travelData.bus;
 const driverInfo = travelData.driver;
-const SelectSeats = ({ travelData }) => {
+const SelectSeats = travelData => {
   return (
-    // <div>G</div>
-    // <div className={s.typography}>
     <div className={s.left}>
       <div className={s.Information}>
         <div className={s.businfo}>
@@ -22,8 +20,8 @@ const SelectSeats = ({ travelData }) => {
             <Image
               className="object-cover rounded-lg"
               src={busimg}
-              width="124"
-              height="124"
+              width="100"
+              height="100"
             />
           </div>
           <div className="space-y-1 pl-2 md:w-3/5">
@@ -38,8 +36,8 @@ const SelectSeats = ({ travelData }) => {
             <Image
               className="object-cover rounded-lg"
               src={driverimage}
-              width="124"
-              height="124"
+              width="100"
+              height="100"
             />
           </div>
           <div className="space-y-1 pl-2 md:w-3/5">
@@ -51,9 +49,7 @@ const SelectSeats = ({ travelData }) => {
       <div className={s.selectSeats}>
         <div className="divide-y">
           <div className={s.seatsh1}>
-            <div className="w-full sm:w-1/4">
-              <h1>Суудал сонгох</h1>
-            </div>
+            <h1 className="text-blue-900 sm:w-1/4">Суудал сонгох</h1>
             <div className={s.zahialga}>
               <p className="pr-4 pb-2">
                 <label className={s.yeszahialga}></label>
@@ -71,39 +67,6 @@ const SelectSeats = ({ travelData }) => {
         </div>
       </div>
     </div>
-    /* <div className={s.right}>
-        <div className={s.selectedSeats}>
-          <div className={s.direct}>
-            <div className={s.direction}>
-              <p className="text-xs text-green-400 font-bold">ХЯМД, ХУРДАН</p>
-              <p className="text-xl font-bold">
-                10.19 8:25AM {<ArrowForwardIcon />} 11.30PM
-              </p>
-              <p className="text-xs">3цаг 20минут, 1 зогсолт</p>
-            </div>
-            <div className={s.direction1}>
-              <p className="font-bold">Улаанбаатар -с Дархан</p>
-              <p className="font-bold">Чиглэл</p>
-            </div>
-          </div>
-          <div className={s.order}>
-            <div className="flex grid grid-cols-2">
-              <p className="flex justify-start">Сонгогдсон суудал</p>
-              <p className="flex justify-end">1, 8</p>
-            </div>
-            <div className="flex grid grid-cols-2">
-              <p className="flex justify-start">Тасалбар(2том хүн)</p>
-              <p className="flex justify-end">15'000 ₮</p>
-            </div>
-            <div className="flex grid grid-cols-2 font-bold">
-              <p className="flex justify-start">Нийт үнэ</p>
-              <p className="flex justify-end">15'000 ₮</p>
-            </div>
-          </div>
-          <button className={s.button}>Зорчигчийн мэдээлэл оруулах</button>
-        </div>
-      </div>\
-    </div> */
   );
 };
 

@@ -1,14 +1,5 @@
 import * as React from 'react';
-import {
-  Input,
-  Col,
-  Row,
-  Select,
-  InputNumber,
-  DatePicker,
-  AutoComplete,
-  Cascader,
-} from 'antd';
+import { Input, Select } from 'antd';
 import mngIcon from 'public/assets/flagMongolia.png';
 import enIcon from 'public/assets/flagEng.png';
 import Image from 'next/image';
@@ -29,7 +20,7 @@ export default function PassengerInfo() {
         <div className="w-full text-lg font-bold border-b-2 pb-1">
           Зорчигч 1
         </div>
-        <div className="flex flex-wrap py-2 mt-2 font-normal space-y-5 sm:space-y-0 sm:grid grid-cols-2">
+        <div className="py-2 mt-2 font-normal space-y-5 sm:space-y-0 sm:grid grid-cols-2">
           <div className="w-full space-y-4 sm:pr-3 lg:pr-5">
             <label className="px-2" htmlFor="RegisterNo">
               Регистрийн дугаар
@@ -79,41 +70,10 @@ export default function PassengerInfo() {
                 defaultValue="5"
                 className="bg-gray-100 border-0 rounded-lg p-1 w-1/5"
               >
-                <Option value="1">А</Option>
-                <Option value="2">Б</Option>
-                <Option value="3">В</Option>
-                <Option value="4">Г</Option>
-                <Option value="5">Д</Option>
-                <Option value="6">Е</Option>
-                <Option value="7">Ё</Option>
-                <Option value="8">Ж</Option>
-                <Option value="9">З</Option>
-                <Option value="10">И</Option>
-                <Option value="11">Й</Option>
-                <Option value="12">К</Option>
-                <Option value="13">Л</Option>
-                <Option value="14">М</Option>
-                <Option value="15">Н</Option>
-                <Option value="16">О</Option>
-                <Option value="17">Ө</Option>
-                <Option value="18">П</Option>
-                <Option value="19">Р</Option>
-                <Option value="20">С</Option>
-                <Option value="21">Т</Option>
-                <Option value="22">У</Option>
-                <Option value="23">Ү</Option>
-                <Option value="24">Ф</Option>
-                <Option value="25">Х</Option>
-                <Option value="26">Ц</Option>
-                <Option value="27">Ч</Option>
-                <Option value="28">Ш</Option>
-                <Option value="29">Щ</Option>
-                <Option value="30">Ф</Option>
-                <Option value="31">Ъ</Option>
-                <Option value="32">Ь</Option>
-                <Option value="33">Э</Option>
-                <Option value="34">Ю</Option>
-                <Option value="35">Я</Option>
+                <div className="">
+                  <h1>g</h1>
+                  <h1>g</h1>
+                </div>
               </Select>
               <Input
                 className="rounded-lg border-0 bg-gray-100 p-2 w-3/5"
@@ -129,7 +89,7 @@ export default function PassengerInfo() {
           </div>
         </div>
 
-        <div className="flex flex-wrap py-2 mt-2 font-normal space-y-5 sm:space-y-0 sm:grid grid-cols-2">
+        <div className="py-2 mt-2 font-normal space-y-5 sm:space-y-0 sm:grid grid-cols-2">
           <div className="w-full space-y-4 sm:pr-3 lg:pr-5">
             <label className="px-2" htmlFor="lastName">
               Овог
@@ -150,7 +110,7 @@ export default function PassengerInfo() {
           </div>
         </div>
 
-        <div className="flex flex-wrap py-2 mt-2 font-normal space-y-5 sm:space-y-0 sm:grid grid-cols-2">
+        <div className="py-2 mt-2 font-normal space-y-5 sm:space-y-0 sm:grid grid-cols-2">
           <div className="w-full space-y-4 sm:pr-3 lg:pr-5">
             <label className="px-2" htmlFor="email">
               И-мэйл хаяг
