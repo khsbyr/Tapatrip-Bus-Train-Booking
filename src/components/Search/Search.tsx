@@ -13,7 +13,7 @@ const Search: FC<Props> = ({ navbarData }) => {
         <div className="w-full max-w-7xl mx-auto px-2 py-4 sm:px-0">
           <Tabs navbarData={navbarData} />
           <SearchBus navbarData={navbarData} />
-          <img src="/assets/Map mongolia.png" className="px-12" />
+          {/* <img src="/assets/Map mongolia.png" className="px-12" /> */}
         </div>
       </div>
     </div>

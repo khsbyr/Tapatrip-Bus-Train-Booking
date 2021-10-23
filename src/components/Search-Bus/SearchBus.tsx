@@ -12,7 +12,7 @@ const SearchBus: FC<Props> = ({ navbarData }) => {
   const { asPath, pathname } = useRouter();
   return (
     <ContentWrapper>
-      <div>
+      <div className="px-2">
         <form
           className={`px-2 py-6 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4
           ${asPath === '/bus' ? 'md:px-0' : 'md:px-12'} 

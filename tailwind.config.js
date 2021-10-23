@@ -22,6 +22,7 @@ module.exports = {
         bg: '#F1F2F6',
         button: '#F1583C',
         alert: '#FFF7ED',
+        steps: '#177AD6',
       }),
       theme: {
         screens: {
@@ -32,6 +33,7 @@ module.exports = {
         ...theme('colors'),
         selected: '#177AD6',
         alert: '#F7B352',
+        bg: '#F1F2F6',
       }),
       textColor: {
         primary: '#3490dc',

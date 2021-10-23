@@ -4,20 +4,17 @@ import TravelList from '@data/getTravelList.json';
 import React, { FC, useState } from 'react';
 import Card from '@components/Card/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
-import { endianness } from 'os';
+import Footer from '@components/Footer/Footer';
 
 const Bus: FC = () => {
   const [isActive, setIsActive] = useState(false);
-  function onclick() {
-    setIsActive(!isActive);
-  }
 
   return (
     <>
       <div className=" bg-bg">
         <Navbar2 navbarData={NavData} />
-        <div className="max-w-7xl mx-auto my-5 grid grid-cols-4 gap-x-8 relative">
-          <div className="col-span-4 md:col-span-3 space-y-5">
+        <div className="max-w-7xl mx-auto my-5 grid grid-cols-1 md:grid-cols-3">
+          <div className="md:col-span-2 space-y-5">
             <div className="px-2">
               <div className="bg-alert border border-alert h-16 flex items-center rounded-2xl space-x-5 px-2">
                 <ShieldExclamationIcon className="w-7 h-7 ml-12 text-alert" />
@@ -43,32 +40,11 @@ const Bus: FC = () => {
               />
             ))}
           </div>
-          <div className="relative">
-            <div className="fixed bg-white p-12 rounded-xl divide-y-2">
-              <div>
-                <h1 className="text-cardDate font-bold text-2xl">
-                  Автобусны төрөл
-                </h1>
-                <div className="mt-8">
-                  <label className="flex items-center justify-between">
-                    <span className="text-direction font-lg font-semibold text-lg">
-                      Том автобус
-                    </span>
-                    <input type="checkbox" className="form-checkbox w-5 h-5" />
-                  </label>
-                </div>
-                <div>
-                  <label className="flex items-center justify-between">
-                    <span className="text-direction font-lg font-semibold text-lg">
-                      Дунд оврын автобус
-                    </span>
-                    <input type="checkbox" className="form-checkbox w-5 h-5" />
-                  </label>
-                </div>
-              </div>
-              <div className="mt-8">
+          <div className="relative hidden md:block">
+            <div className="fixed bg-white py-5 px-5 rounded-xl divide-y-2">
+              <div className="mt-0">
                 <h1 className="text-cardDate font-bold text-2xl">Тосох цаг</h1>
-                <div className="flex">
+                <div className="flex flex-wrap">
                   <img src="/assets/Group 1308.png" />
                   <img src="/assets/Group 1308.png" />
                   <img src="/assets/Group 1308.png" />
@@ -76,7 +52,7 @@ const Bus: FC = () => {
               </div>
               <div className="mt-8">
                 <h1 className="text-cardDate font-bold text-2xl">Хүргэх цаг</h1>
-                <div className="flex">
+                <div className="flex flex-wrap">
                   <img src="/assets/Group 1308.png" />
                   <img src="/assets/Group 1308.png" />
                   <img src="/assets/Group 1308.png" />
@@ -85,6 +61,7 @@ const Bus: FC = () => {
             </div>
           </div>
         </div>
+        <Footer navbarData={NavData} />
       </div>
     </>
   );
