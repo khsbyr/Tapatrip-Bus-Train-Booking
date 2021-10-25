@@ -45,17 +45,17 @@ const Order: FC = () => {
               <div className="mt-0">
                 <h1 className="text-cardDate font-bold text-2xl">Тосох цаг</h1>
                 <div className="flex flex-wrap">
-                  <img src="assets/Group 1308.png" />
-                  <img src="assets/Group 1308.png" />
-                  <img src="assets/Group 1308.png" />
+                  <img src="../assets/Group 1308.png" />
+                  <img src="../assets/Group 1308.png" />
+                  <img src="../assets/Group 1308.png" />
                 </div>
               </div>
               <div className="mt-8">
                 <h1 className="text-cardDate font-bold text-2xl">Хүргэх цаг</h1>
                 <div className="flex flex-wrap">
-                  <img src="assets/Group 1308.png" />
-                  <img src="assets/Group 1308.png" />
-                  <img src="assets/Group 1308.png" />
+                  <img src="../assets/Group 1308.png" />
+                  <img src="../assets/Group 1308.png" />
+                  <img src="../assets/Group 1308.png" />
                 </div>
               </div>
             </div>
