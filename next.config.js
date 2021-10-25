@@ -16,13 +16,17 @@ module.exports = phase => {
 
   console.log(`isDev:${isDev}  isProd:${isProd}   isStaging:${isStaging}`);
 
-  const env = {};
-
   // next.config.js object
   return {
-    basePath: '/bus',
-    env,
     i18n,
-    reactStrictMode: true,
+    async redirects() {
+      return [
+        {
+          source: '/en',
+          destination: '/bus',
+          permanent: false,
+        },
+      ];
+    },
   };
 };

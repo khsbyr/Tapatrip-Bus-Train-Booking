@@ -6,7 +6,7 @@ import Card from '@components/Card/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
 import Footer from '@components/Footer/Footer';
 
-const Bus: FC = () => {
+const Order: FC = () => {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -67,4 +67,4 @@ const Bus: FC = () => {
   );
 };
 
-export default Bus;
+export default Order;
