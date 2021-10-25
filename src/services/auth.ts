@@ -5,21 +5,31 @@ import AuthTokenStorageService from '@services/AuthTokenStorageService';
 const AuthService = {
   async authenticate(payload) {
     const data = {
-      grantType: 'password',
-      username: payload.username,
+      email: payload.email,
+      dialCode: payload.dialCode,
+      phone: payload.phone,
       password: payload.password,
-      rememberMe: payload.rememberMe,
-      clientId: process.env.VUE_APP_CLIENT_ID,
-      clientSecret: process.env.VUE_APP_CLIENT_SECRET,
+      remember: payload.remember,
     };
 
     const response = await Client.post(
-      `${process.env.VUE_APP_API_BASE_URL}/oauth/token`,
+      `${process.env.NEXT_APP_API_URL}/account/login`,
       data
     );
     const accessToken = response.data;
 
     AuthTokenStorageService.store(accessToken);
+
+    return response;
+  },
+
+  async guestToken() {
+    const response = await Client.post(
+      `${process.env.NEXT_APP_API_URL}/account/guest_jwt/`
+    );
+    const guestToken = response.data;
+
+    AuthTokenStorageService.guestStore(guestToken);
 
     return response;
   },

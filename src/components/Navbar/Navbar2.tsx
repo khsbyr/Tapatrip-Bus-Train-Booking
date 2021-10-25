@@ -20,7 +20,7 @@ const Navbar2: FC<Props> = ({ navbarData }) => {
               <div className="flex items-center ">
                 <div className="flex-shrink-0">
                   <img
-                    src="/assets/logoBlue.png"
+                    src="../assets/logoBlue.png"
                     alt="Logo"
                     className="w-36 md:w-full md:h-full px-4"
                   />

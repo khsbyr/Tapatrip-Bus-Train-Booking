@@ -46,9 +46,9 @@ const BUS_ALL_LOCATIONS_QUERY = gql`
   }
 `;
 
-export default function Home({ NavData, GridList, CommentList }) {
-  const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
-  console.log(error);
+export default function Bus({ NavData, GridList, CommentList }) {
+  // const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
+  // console.log(error);
   return (
     <div>
       <Head>
@@ -75,9 +75,9 @@ export default function Home({ NavData, GridList, CommentList }) {
         <Search navbarData={NavData} />
         <App />
         <Grid GridList={GridList} />
-        <Application />
+        {/* <Application />
         <Comments CommentList={CommentList} />
-        <Email />
+        <Email /> */}
         <Footer navbarData={NavData} />
       </div>
     </div>

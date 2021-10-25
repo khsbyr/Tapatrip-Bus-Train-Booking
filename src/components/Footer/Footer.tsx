@@ -43,18 +43,18 @@ const Footer: FC<Props> = ({ navbarData }) => {
               Биднийг дагаарай
             </h1>
             <div className="flex mt-6">
-              <img src="/assets/Facebook.png" className="mr-5" />
-              <img src="/assets/twitter.png" className="mr-5" />
-              <img src="/assets/instagram.png" />
+              <img src="../assets/Facebook.png" className="mr-5" />
+              <img src="../assets/twitter.png" className="mr-5" />
+              <img src="../assets/instagram.png" />
             </div>
           </div>
           <div>
             <div className="flex flex-wrap">
-              <img src="/assets/IATA_logo.png" className="p-3" />
-              <img src="/assets/veri.png" className="p-3" />
-              <img src="/assets/mastercard.png" className="p-3" />
-              <img src="/assets/visa.png" className="p-3" />
-              <img src="/assets/securteTrust.png" />
+              <img src="../assets/IATA_logo.png" className="p-3" />
+              <img src="../assets/veri.png" className="p-3" />
+              <img src="../assets/mastercard.png" className="p-3" />
+              <img src="../assets/visa.png" className="p-3" />
+              <img src="../assets/securteTrust.png" />
             </div>
           </div>
         </div>

@@ -46,7 +46,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 <div className="flex-shrink-0">
                   <img
                     src={`${
-                      navbar ? '/assets/logoBlue.png' : '/assets/logoWhite.png'
+                      navbar ? 'assets/logoBlue.png' : 'assets/logoWhite.png'
                     } `}
                     alt="Logo"
                     className="w-36 md:w-full md:h-full"

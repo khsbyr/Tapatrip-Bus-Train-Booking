@@ -6,7 +6,7 @@ import Card from '@components/Card/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
 import Footer from '@components/Footer/Footer';
 
-const Bus: FC = () => {
+const Order: FC = () => {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -45,17 +45,17 @@ const Bus: FC = () => {
               <div className="mt-0">
                 <h1 className="text-cardDate font-bold text-2xl">Тосох цаг</h1>
                 <div className="flex flex-wrap">
-                  <img src="/assets/Group 1308.png" />
-                  <img src="/assets/Group 1308.png" />
-                  <img src="/assets/Group 1308.png" />
+                  <img src="../assets/Group 1308.png" />
+                  <img src="../assets/Group 1308.png" />
+                  <img src="../assets/Group 1308.png" />
                 </div>
               </div>
               <div className="mt-8">
                 <h1 className="text-cardDate font-bold text-2xl">Хүргэх цаг</h1>
                 <div className="flex flex-wrap">
-                  <img src="/assets/Group 1308.png" />
-                  <img src="/assets/Group 1308.png" />
-                  <img src="/assets/Group 1308.png" />
+                  <img src="../assets/Group 1308.png" />
+                  <img src="../assets/Group 1308.png" />
+                  <img src="../assets/Group 1308.png" />
                 </div>
               </div>
             </div>
@@ -67,4 +67,4 @@ const Bus: FC = () => {
   );
 };
 
-export default Bus;
+export default Order;

@@ -7,7 +7,7 @@ import PassengerInfo from '@components/PassengerInfo';
 import Payments from '@components/Payments';
 import SelectSeats from '@components/SelectSeats';
 import Footer from '@components/Footer/Footer';
-import ContentWrapper from './style/style';
+import ContentWrapper from './style';
 import Card2 from '@components/Card/Card2';
 import TravelList from '@data/getTravelList[1].json';
 
