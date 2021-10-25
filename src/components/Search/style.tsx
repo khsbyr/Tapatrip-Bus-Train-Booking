@@ -4,6 +4,7 @@ const ContentWrapper = styled.div`
   .ant-tabs-top > .ant-tabs-nav::before,
   .ant-tabs-top > div > .ant-tabs-nav::before {
     border: none !important;
+    background-color: #red;
   }
 
   .ant-tabs-tab {
