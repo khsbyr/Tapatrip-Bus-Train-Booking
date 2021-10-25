@@ -4,9 +4,7 @@ import Navbar from '@components/Navbar/Navbar';
 const Layout = ({ navbarData }) => {
   return (
     <div>
-      <div>
-        <Navbar navbarData={navbarData} />
-      </div>
+      <Navbar navbarData={navbarData} />
     </div>
   );
 };

@@ -48,7 +48,7 @@ const BUS_ALL_LOCATIONS_QUERY = gql`
 
 export default function Home({ NavData, GridList, CommentList }) {
   const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
-  console.log(error);
+  console.log(data);
   return (
     <div>
       <Head>
