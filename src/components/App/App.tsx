@@ -8,7 +8,7 @@ const App: FC = () => {
         <div className="bg-white h-auto flex items-center justify-center rounded-lg shadow-md py-10">
           <div className="flex">
             <div className="flex items-center">
-              <img src="/assets/Application.png" />
+              <img src="assets/Application.png" />
             </div>
             <div className="max-w-sm ml-10 space-y-4">
               <h1 className="text-cardDate font-semibold">
@@ -19,9 +19,9 @@ const App: FC = () => {
                 нэг дороос захиалах боломжтой.
               </p>
               <div className="flex flex-wrap">
-                <img src="/assets/App store.png" className="h-10 " />
-                <img src="/assets/Google play.png" className="h-10 " />
-                <img src="/assets/App gallery.png" className="h-10" />
+                <img src="assets/App store.png" className="h-10 " />
+                <img src="assets/Google play.png" className="h-10 " />
+                <img src="assets/App gallery.png" className="h-10" />
               </div>
             </div>
           </div>
@@ -30,7 +30,7 @@ const App: FC = () => {
         <div className="bg-white h-auto flex items-center justify-center rounded-lg shadow-md py-10">
           <div className="flex items-center">
             <div className="flex items-center">
-              <img src="/assets/mail.png" className="h-auto" />
+              <img src="assets/mail.png" className="h-auto" />
             </div>
             <div className="space-y-7">
               <h1 className="text-cardDate font-semibold">

@@ -14,7 +14,7 @@ module.exports = {
         Roboto: ['Roboto', 'sans-serif'],
       },
       backgroundImage: theme => ({
-        'Header-image': "url('/assets/Header.png')",
+        'Header-image': "url('assets/Header.png')",
       }),
 
       backgroundColor: theme => ({

@@ -20,7 +20,7 @@ const SelectSeats = travelData => {
           </h1>
           <div className="flex space-x-12">
             <div>
-              <img src="/assets/busimg.jpg" className="h-40" />
+              <img src="assets/busimg.jpg" className="h-40" />
             </div>
             <div className="text-cardDate space-y-3">
               <p>ААН: Тээвэр ХХК</p>

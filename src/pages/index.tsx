@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
-// import { useQuery } from '@apollo/client';
-// import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
+import { useQuery, gql } from '@apollo/client';
+//import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
 import NavData from '@data/navData.json';
 import GridList from '@data/gridList.json';
 import CommentList from '@data/commentList.json';
@@ -28,11 +28,27 @@ import App from '@components/App/App';
 //   };
 // };
 
+const BUS_ALL_LOCATIONS_QUERY = gql`
+  {
+    busAllLocations(region: "1") {
+      edges {
+        node {
+          name
+          id
+          regionName
+          region
+          type
+          typeName
+          picture
+        }
+      }
+    }
+  }
+`;
+
 export default function Home({ NavData, GridList, CommentList }) {
-  // const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY, {
-  //   variables: { region: '1', type: '2' },
-  // });
-  // console.log(data);
+  const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
+  console.log(error);
   return (
     <div>
       <Head>
@@ -42,7 +58,7 @@ export default function Home({ NavData, GridList, CommentList }) {
       <div className="bg-bg font-Roboto">
         <div className="hidden  md:block ">
           <img
-            src="/assets/Header.png"
+            src="assets/Header.png"
             alt="Logo"
             className="h-96 object-cover mx-auto"
           />
@@ -55,14 +71,13 @@ export default function Home({ NavData, GridList, CommentList }) {
             </p>
           </div>
         </div>
-
         <Layout navbarData={NavData} />
         <Search navbarData={NavData} />
         <App />
-        {/* <Grid GridList={GridList} />S */}
-        {/* <Application /> */}
-        {/* <Comments CommentList={CommentList} /> */}
-        {/* <Email /> */}
+        <Grid GridList={GridList} />
+        <Application />
+        <Comments CommentList={CommentList} />
+        <Email />
         <Footer navbarData={NavData} />
       </div>
     </div>
