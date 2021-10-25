@@ -8,12 +8,12 @@
     {
       "text": "Буудал",
       "route": "hotel",
-      "icon": "/assets/Flight.png"
+      "icon": "/assets/Hotel.png"
     },
     {
       "text": "Аялал",
       "route": "travel",
-      "icon": "/assets/Flight.png"
+      "icon": "/assets/Travel.png"
     },
     {
       "text": "Автобус",
