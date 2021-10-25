@@ -38,28 +38,25 @@ const Card: FC<Props> = ({
 
   return (
     <>
-      <div className="px-2">
+      <div className="p-2 md:p-0">
         <div className="max-w-7xl mx-auto">
-          <div className=" relative bg-white w-full h-auto rounded-2xl">
-            <div className="px-20 space-y-4">
-              <h1 className="pt-4 font-bold text-cardDescColor">
-                {description}
-              </h1>
-              <div className="flex justify-between ">
-                <div className="space-y-2">
+          <div className="relative bg-white w-full h-auto rounded-2xl">
+            <div className="px-5 space-y-4">
+              <div className="flex justify-between">
+                <div className="space-y-2 py-5">
                   <div className="flex space-x-4">
-                    <h1 className="text-cardDate font-bold text-xl">
+                    <h1 className="text-cardDate font-bold text-md">
                       {start_date}
                     </h1>
-                    <ArrowRightIcon className="h-7 text-direction" />
-                    <h1 className="text-cardDate font-bold text-xl">
+                    <ArrowRightIcon className="h-5 text-direction" />
+                    <h1 className="text-cardDate font-bold text-md">
                       {end_date}
                     </h1>
                   </div>
-                  <h1 className="font-light text-cardDate text-lg"> {date} </h1>
+                  <h1 className="font-light text-cardDate text-md"> {date} </h1>
                 </div>
-                <div className="space-y-2">
-                  <h1 className="text-cardDate font-bold text-2xl">
+                <div className="space-y-2 py-5">
+                  <h1 className="text-cardDate font-bold text-md">
                     {price} MNT
                   </h1>
                   <h1 className="flex items-center">
@@ -87,21 +84,18 @@ const Card: FC<Props> = ({
                       <ChevronDownIcon className="w-6 h-6" />
                     )}
                   </button>
-                  <button className="bg-button text-white font-bold py-2 px-4 rounded-lg h-10 w-40">
-                    Захиалах
-                  </button>
                 </div>
               </div>
             </div>
-            <div className="border-4 w-7 h-12 border-r-0 rounded-tl-full rounded-bl-full absolute top-28 right-0 bg-bg border-bg"></div>
-            <div className="border-4 w-7 h-12 border-l-0 rounded-tr-full rounded-br-full absolute top-28 left-0 bg-bg border-bg"></div>
+            <div className="border-4 w-5 h-9 border-r-0 rounded-tl-full rounded-bl-full absolute top-24 right-0 bg-bg border-bg"></div>
+            <div className="border-4 w-5 h-9 border-l-0 rounded-tr-full rounded-br-full absolute top-24 left-0 bg-bg border-bg"></div>
             <div
               className="bg-bg w-full h-0.5 absolute"
-              style={{ top: '135px' }}
+              style={{ top: '113px' }}
             ></div>
             <div className={`${!isActive ? 'hidden' : 'block'}`}>
               <div className="border border-dashed "></div>
-              <div className="px-20 py-5">
+              <div className="px-5 py-5">
                 <Steps progressDot direction="vertical">
                   <Step title={start_date} description={start_location} />
                   {stops?.map(z => (

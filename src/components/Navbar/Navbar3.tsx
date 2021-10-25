@@ -7,22 +7,22 @@ interface Props {
   navbarData?: any;
 }
 
-const Navbar2: FC<Props> = ({ navbarData }) => {
+const Navbar3: FC<Props> = ({ navbarData }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <div>
         <nav
-          className={`relative md:relative  w-full bg-white md:h-auto md:top-0 z-10 shadow-lg `}
+          className={`relative md:relative w-full bg-white md:h-auto md:top-0 z-10 shadow-lg `}
         >
-          <div className="max-w-7xl mx-auto md:mt-3">
-            <div className=" flex items-center justify-between h-12">
+          <div className="max-w-7xl mx-auto py-4">
+            <div className="flex items-center justify-between h-12">
               <div className="flex items-center ">
                 <div className="flex-shrink-0">
                   <img
                     src="/assets/logoBlue.png"
                     alt="Logo"
-                    className="w-36 md:w-full md:h-full px-4"
+                    className="w-36 md:w-full md:h-full"
                   />
                 </div>
                 <div className="hidden">
@@ -59,7 +59,7 @@ const Navbar2: FC<Props> = ({ navbarData }) => {
                 </div>
               </div>
 
-              <div className=" flex md:hidden">
+              <div className="-mr-2 flex md:hidden">
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   type="button"
@@ -75,7 +75,6 @@ const Navbar2: FC<Props> = ({ navbarData }) => {
                 </button>
               </div>
             </div>
-            <SearchBus navbarData={navbarData} />
           </div>
 
           <Transition
@@ -118,4 +117,4 @@ const Navbar2: FC<Props> = ({ navbarData }) => {
   );
 };
 
-export default Navbar2;
+export default Navbar3;

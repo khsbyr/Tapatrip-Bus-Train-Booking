@@ -12,6 +12,7 @@ import Application from '@components/Application/Application';
 import Comments from '@components/Comments/Comments';
 import Email from '@components/Email/Email';
 import Footer from '@components/Footer/Footer';
+import App from '@components/App/App';
 
 // export const getStaticProps = async () => {
 //   const res = NavData;
@@ -57,10 +58,11 @@ export default function Home({ NavData, GridList, CommentList }) {
 
         <Layout navbarData={NavData} />
         <Search navbarData={NavData} />
-        <Grid GridList={GridList} />
-        <Application />
-        <Comments CommentList={CommentList} />
-        <Email />
+        <App />
+        {/* <Grid GridList={GridList} />S */}
+        {/* <Application /> */}
+        {/* <Comments CommentList={CommentList} /> */}
+        {/* <Email /> */}
         <Footer navbarData={NavData} />
       </div>
     </div>
