@@ -1,0 +1,28 @@
+[
+  {
+    "id": 0,
+    "is_start_stop": 1,
+    "description": "ХЯМД, ХУРДАН",
+    "start_date": "2021-10-07 15:00",
+    "start_location": "Улаанбаатар, Драгон авто вокзал",
+    "end_date": "2021-10-07 15:00",
+    "end_location": "Дархан",
+    "date": "3 цаг 20 минут",
+    "price": 15000,
+    "passengers": 1,
+    "direction_name": "Го.Есөнбулаг - УБ - Го.Есөнбулаг",
+    "car_type_name": "Том автобус",
+    "stops": [
+      {
+        "id": 0,
+        "start_date": "15:00 PM",
+        "description": "Урьхан"
+      },
+      {
+        "id": 1,
+        "start_date": "16:00 PM",
+        "description": "Эрдэнэт"
+      }
+    ]
+  }
+]
