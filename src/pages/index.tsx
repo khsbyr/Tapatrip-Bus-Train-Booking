@@ -58,7 +58,7 @@ export default function Home({ NavData, GridList, CommentList }) {
       <div className="bg-bg font-Roboto">
         <div className="hidden  md:block ">
           <img
-            src="assets/Header.png"
+            src="../assets/Header.png"
             alt="Logo"
             className="h-96 object-cover mx-auto"
           />

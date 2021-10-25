@@ -19,12 +19,13 @@ module.exports = phase => {
   // next.config.js object
   return {
     i18n,
+    reactStrictMode: true,
     async redirects() {
       return [
         {
-          source: '/en',
+          source: '/',
           destination: '/bus',
-          permanent: false,
+          permanent: true,
         },
       ];
     },
