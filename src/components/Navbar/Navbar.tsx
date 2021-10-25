@@ -1,6 +1,7 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
+import OrderModal from '@components/OrderModal/OrderModal';
 
 interface Props {
   navbarData?: any;
@@ -9,6 +10,15 @@ interface Props {
 const Navbar: FC<Props> = ({ navbarData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [navbar, setNavbar] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  function checkOrder() {
+    setIsModalVisible(true);
+  }
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
@@ -54,7 +64,10 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                         {z.text}
                       </a>
                     ))}
-                    <button className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-40">
+                    <button
+                      className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-40"
+                      onClick={checkOrder}
+                    >
                       Захиалга шалгах
                     </button>
                   </div>
@@ -136,6 +149,9 @@ const Navbar: FC<Props> = ({ navbarData }) => {
           </Transition>
         </nav>
       </div>
+      {isModalVisible && (
+        <OrderModal isModalVisible={isModalVisible} close={closeModal} />
+      )}
     </>
   );
 };
