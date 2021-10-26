@@ -88,7 +88,7 @@ export const getStaticProps = async () => {
   const res = NavData;
   const gridList = GridList;
   const commentList = CommentList;
-  console.log('asadasdadsaaa');
+
   return {
     props: {
       NavData: res,

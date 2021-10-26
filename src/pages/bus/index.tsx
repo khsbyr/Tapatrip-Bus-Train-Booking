@@ -12,6 +12,7 @@ import Application from '@components/Application/Application';
 import Comments from '@components/Comments/Comments';
 import Email from '@components/Email/Email';
 import Footer from '@components/Footer/Footer';
+import Header from '@components/Header/Header';
 import App from '@components/App/App';
 
 // export const getStaticProps = async () => {
@@ -88,7 +89,7 @@ export const getStaticProps = async () => {
   const res = NavData;
   const gridList = GridList;
   const commentList = CommentList;
-  console.log('asadasdadsaaa');
+
   return {
     props: {
       NavData: res,
