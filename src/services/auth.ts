@@ -12,10 +12,7 @@ const AuthService = {
       remember: payload.remember,
     };
 
-    const response = await Client.post(
-      `${process.env.NEXT_APP_API_URL}/account/login`,
-      data
-    );
+    const response = await Client.post('/account/login', data);
     const accessToken = response.data;
 
     AuthTokenStorageService.store(accessToken);
@@ -24,14 +21,10 @@ const AuthService = {
   },
 
   async guestToken() {
-    const response = await Client.post(
-      `${process.env.NEXT_APP_API_URL}/account/guest_jwt/`
-    );
-    const guestToken = response.data;
-
+    const response = await Client.post('/account/guest_jwt/');
+    const guestToken = response.data.result.JWToken;
     AuthTokenStorageService.guestStore(guestToken);
-
-    return response;
+    return guestToken;
   },
 
   logout() {
