@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client';
 // console.log(process.env.NEXT_GRAPHQL_URL);
 
 export const client = new ApolloClient({
-  uri: 'http://47.243.62.69:8001/graphql',
+  uri: process.env.NEXT_GRAPHQL_URL,
   cache: new InMemoryCache(),
   headers: {
     Authorization:
