@@ -5,49 +5,17 @@ import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
 import NavData from '@data/navData.json';
 import GridList from '@data/gridList.json';
 import CommentList from '@data/commentList.json';
-import Layout from '@components/Layout/Layout';
-import Search from '@components/Search/Search';
-import Grid from '@components/Grid/Grid';
-import Application from '@components/Application/Application';
-import Comments from '@components/Comments/Comments';
-import Email from '@components/Email/Email';
-import Footer from '@components/Footer/Footer';
-import App from '@components/App/App';
+import Layout from '@components/common/Layout';
+import Search from '@components/common/Search/Search';
+import Grid from '@components/common/Grid/Grid';
+import Application from '@components/common/Application/Application';
+import Comments from '@components/common/Comments/Comments';
+import Email from '@components/common/Email/Email';
+import Footer from '@components/common/Footer';
+import App from '@components/common/App/App';
 import AuthService from '@services/auth';
 import cookie from 'js-cookie';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
-
-// export const getStaticProps = async () => {
-//   const res = NavData;
-//   const gridList = GridList;
-//   const commentList = CommentList;
-//   console.log('aaa');
-//   return {
-//     props: {
-//       NavData: res,
-//       GridList: gridList,
-//       CommentList: commentList,
-//     },
-//   };
-// };
-
-// const BUS_ALL_LOCATIONS_QUERY = gql`
-//   {
-//     busAllLocations(region: "1") {
-//       edges {
-//         node {
-//           name
-//           id
-//           regionName
-//           region
-//           type
-//           typeName
-//           picture
-//         }
-//       }
-//     }
-//   }
-// `;
 
 export default function Home({ NavData, GridList, CommentList, guestToken }) {
   const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
@@ -59,7 +27,6 @@ export default function Home({ NavData, GridList, CommentList, guestToken }) {
       <Head>
         <title>Tapatrip - Online Travel Platform</title>
       </Head>
-
       <div className="bg-bg font-Roboto">
         <div className="hidden  md:block ">
           <img
@@ -76,7 +43,6 @@ export default function Home({ NavData, GridList, CommentList, guestToken }) {
             </p>
           </div>
         </div>
-        <Layout navbarData={NavData} />
         <Search navbarData={NavData} />
         <App />
         <Grid GridList={GridList} />

@@ -1,39 +1,39 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
-import SearchBus from '@components/Search-Bus/SearchBus';
+import SearchBus from '@components/common/Search-Bus/SearchBus';
 
 interface Props {
   navbarData?: any;
 }
 
-const Navbar3: FC<Props> = ({ navbarData }) => {
+const Navbar2: FC<Props> = ({ navbarData }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <div>
         <nav
-          className={`relative md:relative w-full bg-white md:h-auto md:top-0 z-10 shadow-lg `}
+          className={`relative md:relative  w-full bg-white md:h-auto md:top-0 z-10 shadow-lg `}
         >
-          <div className="max-w-7xl mx-auto py-4">
-            <div className="flex items-center justify-between h-12">
+          <div className="max-w-7xl mx-auto md:mt-3">
+            <div className=" flex items-center justify-between h-12">
               <div className="flex items-center ">
                 <div className="flex-shrink-0">
                   <img
                     src="../assets/logoBlue.png"
                     alt="Logo"
-                    className="w-36 md:w-full md:h-full"
+                    className="w-36 md:w-full md:h-full px-4"
                   />
                 </div>
                 <div className="hidden">
                   <div className="ml-10 flex items-baseline space-x-4">
-                    {navbarData.generalList.map(z => (
+                    {navbarData.generalList.map(data => (
                       <a
                         className={`${'text-white'} hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
-                        href={`${z.route}`}
-                        key={z.id}
+                        href={`${data.route}`}
+                        key={data.id}
                       >
-                        {z.text}
+                        {data.text}
                       </a>
                     ))}
                   </div>
@@ -45,21 +45,21 @@ const Navbar3: FC<Props> = ({ navbarData }) => {
               <div className="flex items-center ">
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
-                    {navbarData.profile.map(data => (
+                    {navbarData.profile.map(z => (
                       <a
                         className={` text-selected
                          hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
-                        href={`${data.route}`}
-                        key={data.id}
+                        href={`${z.route}`}
+                        key={z.id}
                       >
-                        {data.text}
+                        {z.text}
                       </a>
                     ))}
                   </div>
                 </div>
               </div>
 
-              <div className="-mr-2 flex md:hidden">
+              <div className=" flex md:hidden">
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   type="button"
@@ -75,6 +75,7 @@ const Navbar3: FC<Props> = ({ navbarData }) => {
                 </button>
               </div>
             </div>
+            <SearchBus navbarData={navbarData} />
           </div>
 
           <Transition
@@ -117,4 +118,4 @@ const Navbar3: FC<Props> = ({ navbarData }) => {
   );
 };
 
-export default Navbar3;
+export default Navbar2;

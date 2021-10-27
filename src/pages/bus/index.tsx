@@ -5,14 +5,14 @@ import { useQuery, gql } from '@apollo/client';
 import NavData from '@data/navData.json';
 import GridList from '@data/gridList.json';
 import CommentList from '@data/commentList.json';
-import Layout from '@components/Layout/Layout';
-import Search from '@components/Search/Search';
-import Grid from '@components/Grid/Grid';
-import Application from '@components/Application/Application';
-import Comments from '@components/Comments/Comments';
-import Email from '@components/Email/Email';
-import Footer from '@components/Footer/Footer';
-import App from '@components/App/App';
+import Layout from '@components/common/Layout';
+import Search from '@components/common/Search/Search';
+import Grid from '@components/common/Grid/Grid';
+import Application from '@components/common/Application/Application';
+import Comments from '@components/common/Comments/Comments';
+import Email from '@components/common/Email/Email';
+import Footer from '@components/common/Footer';
+import App from '@components/common/App/App';
 
 // export const getStaticProps = async () => {
 //   const res = NavData;
@@ -47,16 +47,12 @@ const BUS_ALL_LOCATIONS_QUERY = gql`
 `;
 
 export default function Bus({ NavData, GridList, CommentList }) {
-  // const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
-  // console.log(error);
+  const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
+  console.log(error);
   return (
     <div>
-      <Head>
-        <title>Tapatrip - Online Travel Platform</title>
-      </Head>
-
       <div className="bg-bg font-Roboto">
-        <div className="hidden  md:block ">
+        {/* <div className="hidden  md:block ">
           <img
             src="assets/Header.png"
             alt="Logo"
@@ -70,14 +66,11 @@ export default function Bus({ NavData, GridList, CommentList }) {
               Тийз захиалгын онлайн платформ
             </p>
           </div>
-        </div>
-        <Layout navbarData={NavData} />
+        </div> */}
+        {/* <Layout navbarData={NavData} /> */}
         <Search navbarData={NavData} />
         <App />
         <Grid GridList={GridList} />
-        {/* <Application />
-        <Comments CommentList={CommentList} />
-        <Email /> */}
         <Footer navbarData={NavData} />
       </div>
     </div>

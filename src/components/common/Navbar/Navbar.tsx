@@ -1,7 +1,7 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
-import OrderModal from '@components/OrderModal/OrderModal';
+import OrderModal from '@components/common/OrderModal/OrderModal';
 
 interface Props {
   navbarData?: any;

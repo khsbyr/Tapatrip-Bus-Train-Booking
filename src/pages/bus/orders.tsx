@@ -1,12 +1,12 @@
-import Navbar2 from '@components/Navbar/Navbar2';
+import Navbar2 from '@components/common/Navbar/Navbar2';
 import NavData from '@data/navData.json';
 import TravelList from '@data/getTravelList.json';
 import React, { FC, useState } from 'react';
-import Card from '@components/Card/Card';
+import Card from '@components/common/Card/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
-import Footer from '@components/Footer/Footer';
+import Footer from '@components/common/Footer';
 
-const Order: FC = () => {
+const Orders: FC = () => {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -67,4 +67,4 @@ const Order: FC = () => {
   );
 };
 
-export default Order;
+export default Orders;

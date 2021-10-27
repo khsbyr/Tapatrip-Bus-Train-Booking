@@ -20,5 +20,14 @@ module.exports = phase => {
   return {
     i18n,
     reactStrictMode: true,
+    async redirects() {
+      return [
+        {
+          source: '/',
+          destination: '/bus',
+          permanent: true,
+        },
+      ];
+    },
   };
 };
