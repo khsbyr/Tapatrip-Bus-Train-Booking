@@ -6,7 +6,7 @@ import NavData from '@data/navData.json';
 import TapaServiceList from '@data/tapaServiceList.json';
 import Layout from '@components/common/Layout';
 import Search from '@components/bus/Search/Search';
-import Navbar from '@components/common/Navbar/Navbar';
+import Navbar from '@components/common/Navbar';
 import TapaService from '@components/common/TapaService';
 import Subscribe from '@components/common/Subscribe';
 
