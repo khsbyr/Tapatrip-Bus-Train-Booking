@@ -9,7 +9,10 @@ export default function Layout({ children }) {
       <Head>
         <title>Tapatrip - Bus Booking System</title>
       </Head>
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        {children}
+        <Footer navbarData={NavData} />
+      </main>
     </>
   );
 }
