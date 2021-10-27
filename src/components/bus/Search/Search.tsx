@@ -1,4 +1,4 @@
-import SearchBus from '@components/Search-Bus/SearchBus';
+import SearchBus from '@components/bus/SearchBus/SearchBus';
 import React, { FC } from 'react';
 import { Tabs } from 'antd';
 import ContentWrapper from './style';

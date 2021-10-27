@@ -1,7 +1,7 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
-import SearchBus from '@components/bus/Search-Bus/SearchBus';
+import SearchBus from '@components/bus/SearchBus/SearchBus';
 
 interface Props {
   navbarData?: any;
