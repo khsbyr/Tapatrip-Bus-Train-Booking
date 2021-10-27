@@ -3,13 +3,13 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
 import NavData from '@data/navData.json';
-import GridList from '@data/gridList.json';
+import TapaServiceList from '@data/tapaServiceList.json';
 import Layout from '@components/common/Layout';
 import Search from '@components/bus/Search/Search';
-import Grid from '@components/common/Grid/Grid';
+import TapaService from '@components/common/TapaService';
 import Subscribe from '@components/common/Subscribe';
 
-export default function Bus({ NavData, GridList }) {
+export default function Bus({ NavData, tapaServiceList }) {
   // const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
   // console.log(error);
   return (
@@ -30,7 +30,7 @@ export default function Bus({ NavData, GridList }) {
 
       <Search navbarData={NavData} />
       <Subscribe />
-      <Grid GridList={GridList} />
+      <TapaService tapaServiceList={tapaServiceList} />
     </Layout>
     // {/* <Layout navbarData={NavData} /> */}
   );
@@ -38,11 +38,11 @@ export default function Bus({ NavData, GridList }) {
 
 export const getStaticProps = async () => {
   const res = NavData;
-  const gridList = GridList;
+  const tapaServiceList = TapaServiceList;
   return {
     props: {
       NavData: res,
-      GridList: gridList,
+      tapaServiceList: tapaServiceList,
     },
   };
 };

@@ -7,12 +7,12 @@ import GridList from '@data/gridList.json';
 import CommentList from '@data/commentList.json';
 import Layout from '@components/common/Layout';
 import Search from '@components/bus/Search/Search';
-import Grid from '@components/common/Grid/Grid';
+import Grid from '@components/common/TapaService';
 import Application from '@components/common/Application/Application';
 import Comments from '@components/common/Comments/Comments';
 import Email from '@components/common/Email/Email';
 import Footer from '@components/common/Footer';
-import App from '@components/common/App/App';
+import App from '@components/common/Subscribe';
 import AuthService from '@services/auth';
 import cookie from 'js-cookie';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
@@ -45,7 +45,6 @@ export default function Home({ NavData, GridList, CommentList, guestToken }) {
         </div>
         <Search navbarData={NavData} />
         <App />
-        <Grid GridList={GridList} />
         <Application />
         <Comments CommentList={CommentList} />
         <Email />
