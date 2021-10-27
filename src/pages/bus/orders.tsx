@@ -2,7 +2,7 @@ import Navbar2 from '@components/common/Navbar/Navbar2';
 import NavData from '@data/navData.json';
 import TravelList from '@data/getTravelList.json';
 import React, { FC, useState } from 'react';
-import Card from '@components/common/Card/Card';
+import Card from '@components/bus/Card/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
 import Footer from '@components/common/Footer';
 

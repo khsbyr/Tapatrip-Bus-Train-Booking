@@ -1,5 +1,5 @@
 import { Divider, Radio } from 'antd';
-import PayTransfer from '@components/common/PayTransfer';
+import PayTransfer from '@components/bus/PayTransfer';
 import React from 'react';
 import s from './Payments.module.scss';
 export default function Payment() {

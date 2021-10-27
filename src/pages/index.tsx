@@ -6,7 +6,7 @@ import NavData from '@data/navData.json';
 import GridList from '@data/gridList.json';
 import CommentList from '@data/commentList.json';
 import Layout from '@components/common/Layout';
-import Search from '@components/common/Search/Search';
+import Search from '@components/bus/Search/Search';
 import Grid from '@components/common/Grid/Grid';
 import Application from '@components/common/Application/Application';
 import Comments from '@components/common/Comments/Comments';

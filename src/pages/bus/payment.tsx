@@ -3,12 +3,12 @@ import NavData from '@data/navData.json';
 import { Steps } from 'antd';
 import React, { FC } from 'react';
 import travelData from '@data/getTravelData.json';
-import PassengerInfo from '@components/common/PassengerInfo';
-import Payments from '@components/common/Payments';
-import SelectSeats from '@components/common/SelectSeats';
+import PassengerInfo from '@components/bus/PassengerInfo';
+import Payments from '@components/bus/Payments';
+import SelectSeats from '@components/bus/SelectSeats';
 import Footer from '@components/common/Footer';
 import ContentWrapper from './style';
-import Card2 from '@components/common/Card/Card2';
+import Card2 from '@components/bus/Card/Card2';
 import TravelList from '@data/getTravelList[1].json';
 
 export const getStaticProps = async () => {
