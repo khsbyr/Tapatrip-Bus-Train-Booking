@@ -2,6 +2,7 @@ import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import OrderModal from '@components/bus/OrderModal/OrderModal';
+import styles from './navbar.module.scss';
 
 interface Props {
   navbarData?: any;
@@ -40,8 +41,8 @@ const Navbar: FC<Props> = ({ navbarData }) => {
           ${navbar ? 'bg-white' : 'bg-none'}
           md:h-20 md:top-0 z-10 ${navbar ? 'shadow-lg' : 'shadow-none'}`}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:mt-3">
-            <div className=" flex items-center justify-between h-12">
+          <div className={styles.navbar}>
+            <div className={styles.navbarBody}>
               <div className="flex items-center ">
                 <div className="flex-shrink-0">
                   <img
@@ -51,48 +52,31 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                         : '../assets/logoWhite.png'
                     } `}
                     alt="Logo"
-                    className="w-36 md:w-full md:h-full"
+                    className={styles.logo}
                   />
                 </div>
                 <div className={`${navbar ? 'hidden' : 'lg:block'} hidden`}>
-                  <div className="ml-10 flex items-baseline space-x-4">
-                    {navbarData.generalList.map(data => (
+                  <div className={styles.menuBody}>
+                    {navbarData.generalList.map(menu => (
                       <a
-                        className={`${'text-white'} hover:text-gray-300 px-1 py-2 rounded-md text-sm font-light`}
-                        href={`${data.route}`}
+                        key={menu.id}
+                        className={styles.menu}
+                        href={`${menu.route}`}
                       >
-                        {data.text}
+                        {menu.text}
                       </a>
                     ))}
-                    <button
-                      className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-40"
-                      onClick={checkOrder}
-                    >
+                    <button className={styles.orderButton} onClick={checkOrder}>
                       Захиалга шалгах
                     </button>
                   </div>
                 </div>
               </div>
 
-              <div className="w-32 text-gray-700"></div>
-
               <div className="flex items-center ">
                 <div className="hidden md:block">
-                  <div className="ml-10 flex items-baseline space-x-4">
-                    {/* {navbarData.profile.map(z => (
-                      <a
-                        className={`${
-                          navbar ? 'text-selected' : 'text-white'
-                        } hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
-                        href={`${z.route}`}
-                      >
-                        {z.text}
-                      </a>
-                      
-                    ))} */}
-                    <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40">
-                      Нэвтрэх
-                    </button>
+                  <div className={styles.loginBody}>
+                    <button className={styles.loginButton}>Нэвтрэх</button>
                   </div>
                 </div>
               </div>
@@ -129,18 +113,20 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                   {navbarData.profile.map(data => (
                     <a
+                      key={data.id}
                       className="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-light block"
                       href={`${data.route}`}
                     >
                       {data.text}
                     </a>
                   ))}
-                  {navbarData.generalList.map(data => (
+                  {navbarData.generalList.map(menu => (
                     <a
+                      key={menu.id}
                       className="text-gray-800 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-light"
-                      href={`${data.route}`}
+                      href={`${menu.route}`}
                     >
-                      {data.text}
+                      {menu.text}
                     </a>
                   ))}
                 </div>

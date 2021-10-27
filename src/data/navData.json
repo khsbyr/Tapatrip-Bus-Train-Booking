@@ -1,34 +1,39 @@
 {
   "generalList": [
     {
+      "id": 1,
       "text": "Нислэг",
       "route": "flight",
       "icon": "../assets/svgIcons/Flight.svg"
     },
     {
+      "id": 2,
       "text": "Буудал",
       "route": "hotel",
       "icon": "/assets/svgIcons/Hotel.svg"
     },
     {
+      "id": 3,
       "text": "Аялал",
       "route": "travel",
       "icon": "/assets/svgIcons/Trip.svg"
     },
     {
+      "id": 4,
       "text": "Автобус",
       "route": "bus",
       "icon": "../assets/svgIcons/Bus.svg"
     },
     {
+      "id": 5,
       "text": "Галт тэрэг",
       "route": "train",
       "icon": "../assets/svgIcons/Flight.svg"
     }
   ],
   "profile": [
-    { "text": "Таны захиалга", "route": "my-order" },
-    { "text": "Нэвтрэх", "route": "login" }
+    { "id": 1, "text": "Таны захиалга", "route": "my-order" },
+    { "id": 2, "text": "Нэвтрэх", "route": "login" }
   ],
   "companyList": [
     { "id": 1, "text": "Tapatrip.com - ын тухай", "route": "about" },
