@@ -1,5 +1,5 @@
-import { MailIcon, MenuIcon } from '@heroicons/react/solid';
 import React, { FC } from 'react';
+import styles from './footer.module.scss';
 
 interface Props {
   navbarData?: any;
@@ -7,18 +7,18 @@ interface Props {
 
 const Footer: FC<Props> = ({ navbarData }) => {
   return (
-    <div className="bg-white " style={{ height: 'auto' }}>
-      <div className="max-w-7xl mx-auto py-12 px-3 md:py-20 md:px-6">
-        <div className="grid grid-cols-2 gap-10 md:gap-0 md:grid-cols-4">
+    <div className={styles.footer}>
+      <div className={styles.subFooter}>
+        <div className={styles.subBody}>
           <div>
             <h1 style={{ color: '#0A3761' }} className="font-bold text-lg">
               Компаний тухай
             </h1>
             <div className="mt-6">
-              {navbarData.companyList.map(z => (
-                <a href={z.route}>
+              {navbarData.companyList.map(company => (
+                <a key={company.id} href={company.route}>
                   <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
-                    {z.text}
+                    {company.text}
                   </p>
                 </a>
               ))}
@@ -29,10 +29,10 @@ const Footer: FC<Props> = ({ navbarData }) => {
               Холбоо барих
             </h1>
             <div className="mt-6">
-              {navbarData.contactList.map(z => (
-                <a href={z.route}>
+              {navbarData.contactList.map(contact => (
+                <a key={contact.id} href={contact.route}>
                   <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
-                    {z.text}
+                    {contact.text}
                   </p>
                 </a>
               ))}
