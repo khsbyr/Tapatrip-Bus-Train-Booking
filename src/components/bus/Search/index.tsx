@@ -2,7 +2,8 @@ import SearchBus from '@components/bus/SearchBus';
 import React, { FC } from 'react';
 import { Tabs } from 'antd';
 import ContentWrapper from './style';
-import style from './Search.module.scss';
+import style from './search.module.scss';
+import path from 'path/posix';
 
 const { TabPane } = Tabs;
 
@@ -14,16 +15,25 @@ const Search: FC<Props> = ({ navbarData }) => {
   return (
     <ContentWrapper>
       <div className={style.searchBody}>
-        <Tabs defaultActiveKey="Автобус" centered tabBarGutter={160}>
-          {navbarData.generalList.map(z => (
+        <Tabs defaultActiveKey="4" centered tabBarGutter={160}>
+          {navbarData.generalList.map(menu => (
             <TabPane
               tab={
-                <span>
-                  <img className="w-8 h-8" src={z.icon} />
-                  {z.text}
-                </span>
+                <div className="tab-title">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 55 40"
+                  >
+                    <g>
+                      <path d={menu.path} />
+                    </g>
+                  </svg>
+                  <span className="text">{menu.text}</span>
+                </div>
               }
-              key={z.text}
+              key={menu.id}
             />
           ))}
         </Tabs>

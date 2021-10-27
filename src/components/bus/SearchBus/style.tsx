@@ -18,6 +18,21 @@ const ContentWrapper = styled.div`
   .ant-picker-suffix {
     color: #8ab1d5 !important;
   }
+
+  .ant-tabs-tab-active {
+    .tab-title {
+      svg {
+        rect,
+        circle,
+        path {
+          fill: #177ad6;
+        }
+      }
+      .text {
+        color: #177ad6;
+      }
+    }
+  }
 `;
 
 export default ContentWrapper;
