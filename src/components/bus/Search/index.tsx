@@ -3,15 +3,15 @@ import React, { FC } from 'react';
 import { Tabs } from 'antd';
 import ContentWrapper from './style';
 import style from './search.module.scss';
-import path from 'path/posix';
 
 const { TabPane } = Tabs;
 
 interface Props {
   navbarData?: any;
+  startLocations?: any;
 }
 
-const Search: FC<Props> = ({ navbarData }) => {
+const Search: FC<Props> = ({ navbarData, startLocations }) => {
   return (
     <ContentWrapper>
       <div className={style.searchBody}>
@@ -39,7 +39,7 @@ const Search: FC<Props> = ({ navbarData }) => {
             />
           ))}
         </Tabs>
-        <SearchBus navbarData={navbarData} />
+        <SearchBus startLocations={startLocations} />
       </div>
     </ContentWrapper>
   );

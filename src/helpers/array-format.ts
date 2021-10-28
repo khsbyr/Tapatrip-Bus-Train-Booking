@@ -1,4 +1,4 @@
 export default function arrayFormat(data: any) {
-  console.log(data);
-  return data;
+  const result = data === undefined ? '' : data.busAllLocations.edges;
+  return result;
 }

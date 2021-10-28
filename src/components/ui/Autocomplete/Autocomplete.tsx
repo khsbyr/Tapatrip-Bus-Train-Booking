@@ -22,21 +22,6 @@ const Autocomplete: FC<Props> = props => {
         showSearch
         disabled={disabled}
         style={{ width: '100%' }}
-        // placeholder={
-        //   <React.Fragment>
-        //     <div className="flex items-center">
-        //       <LocationMarkerIcon
-        //         width={30}
-        //         height={30}
-        //         className="mr-4"
-        //         style={{
-        //           color: '#8AB1D5',
-        //         }}
-        //       />
-        //       Хаанаас: хот байршил...
-        //     </div>
-        //   </React.Fragment>
-        // }
         placeholder={placeholder}
         defaultValue={defaultValue}
         optionFilterProp="children"
@@ -45,11 +30,11 @@ const Autocomplete: FC<Props> = props => {
         onChange={onChange}
       >
         {data &&
-          data.map((z, value) => (
-            <Option key={value} value={z.id}>
+          data.map((data, value) => (
+            <Option key={value} value={data.node.id}>
               <div className="flex items-center">
                 <LocationMarkerIcon className="w-9 h-9 text-direction pr-3" />
-                {z.text}
+                {data.node.name}
               </div>
             </Option>
           ))}

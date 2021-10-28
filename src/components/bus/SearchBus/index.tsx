@@ -5,10 +5,10 @@ import ContentWrapper from './style';
 import { useRouter } from 'next/router';
 
 interface Props {
-  navbarData?: any;
+  startLocations?: any;
 }
 
-const SearchBus: FC<Props> = ({ navbarData }) => {
+const SearchBus: FC<Props> = ({ startLocations }) => {
   const { asPath, pathname } = useRouter();
   return (
     <ContentWrapper>
@@ -19,12 +19,12 @@ const SearchBus: FC<Props> = ({ navbarData }) => {
           `}
         >
           <Autocomplete
-            data={navbarData.generalList}
+            data={startLocations}
             placeholder="Хаанаас: хот байршил..."
           />
 
           <Autocomplete
-            data={navbarData.generalList}
+            data={startLocations}
             placeholder="Хаашаа: хот байршил..."
           />
 
