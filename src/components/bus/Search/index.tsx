@@ -27,7 +27,9 @@ const Search: FC<Props> = ({ navbarData }) => {
                     viewBox="0 0 55 40"
                   >
                     <g>
-                      <path d={menu.path} />
+                      {menu.path.map(value => (
+                        <path key={value} d={value} />
+                      ))}
                     </g>
                   </svg>
                   <span className="text">{menu.text}</span>
