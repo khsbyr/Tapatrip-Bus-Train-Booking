@@ -3,7 +3,6 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
 import NavData from '@data/navData.json';
-import GridList from '@data/gridList.json';
 import CommentList from '@data/commentList.json';
 import Layout from '@components/common/Layout';
 import Search from '@components/bus/Search';
@@ -56,14 +55,12 @@ export default function Home({ NavData, GridList, CommentList, guestToken }) {
 
 export const getStaticProps = async () => {
   const res = NavData;
-  const gridList = GridList;
   const commentList = CommentList;
   const guestToken = await AuthService.guestToken();
 
   return {
     props: {
       NavData: res,
-      GridList: gridList,
       CommentList: commentList,
       guestToken: guestToken,
     },
