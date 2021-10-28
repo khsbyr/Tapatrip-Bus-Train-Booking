@@ -27,13 +27,13 @@ const Navbar2: FC<Props> = ({ navbarData }) => {
                 </div>
                 <div className="hidden">
                   <div className="ml-10 flex items-baseline space-x-4">
-                    {navbarData.generalList.map(z => (
+                    {navbarData.generalList.map(data => (
                       <a
                         className={`${'text-white'} hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
-                        href={`${z.route}`}
-                        key={z.id}
+                        href={`${data.route}`}
+                        key={data.id}
                       >
-                        {z.text}
+                        {data.text}
                       </a>
                     ))}
                   </div>

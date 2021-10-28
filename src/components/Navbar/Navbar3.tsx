@@ -45,14 +45,14 @@ const Navbar3: FC<Props> = ({ navbarData }) => {
               <div className="flex items-center ">
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
-                    {navbarData.profile.map(z => (
+                    {navbarData.profile.map(data => (
                       <a
                         className={` text-selected
                          hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
-                        href={`${z.route}`}
-                        key={z.id}
+                        href={`${data.route}`}
+                        key={data.id}
                       >
-                        {z.text}
+                        {data.text}
                       </a>
                     ))}
                   </div>

@@ -1,37 +1,25 @@
-declare var window: any;
+import cookie from 'js-cookie';
 
 const AuthTokenStorageService = {
   store(accessToken) {
-    window.$cookies.set(
-      process.env.USER_TOKEN_KEY,
-      accessToken,
-      '',
-      '',
-      process.env.NEXT_APP_COOKIE_HOST_NAME
-    );
+    cookie.set('user-token', accessToken, { expires: 1 / 24 });
   },
 
   guestStore(guestToken) {
-    window.$cookies.set(
-      process.env.GUEST_TOKEN_KEY,
-      guestToken,
-      '',
-      '',
-      process.env.NEXT_APP_COOKIE_HOST_NAME
-    );
+    cookie.set('guest-token', guestToken, { expires: 1 / 24 });
   },
 
   getAccessToken() {
-    return window.$cookies.get(process.env.USER_TOKEN_KEY);
+    return cookie.get('user-token');
   },
 
   getGuestToken() {
-    return window.$cookies.get(process.env.GUEST_TOKEN_KEY);
+    return cookie.get('guest-token');
   },
 
   clear() {
-    window.$cookies.remove(process.env.USER_TOKEN_KEY);
-    window.$cookies.remove(process.env.GUEST_TOKEN_KEY);
+    cookie.remove('user-token');
+    cookie.remove('guest-token');
   },
 };
 

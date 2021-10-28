@@ -1,12 +1,24 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
 
-console.log(process.env.NEXT_GRAPHQL_URL);
+const httpLink = createHttpLink({
+  uri: 'http://47.243.62.69:8001/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = AuthTokenStorageService.getGuestToken();
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
 
 export const client = new ApolloClient({
-  uri: process.env.NEXT_GRAPHQL_URL,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
-  headers: {
-    Authorization:
-      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6Imd1ZXN0X3VzZXIiLCJleHAiOjE2MzUyMTMwNTUsImVtYWlsIjpudWxsLCJkZXZpY2VfaXAiOiIxMDMuMTQuMzYuODIiLCJkZXZpY2VfbmFtZSI6ImlaajZjOHF1aWplMTRqWiIsImRldmljZV9vcyI6Ik90aGVyIn0.siWR1vXmLhXRGahdeyKbJIW-sMDLe8zZaq6xQUMimZA',
-  },
 });

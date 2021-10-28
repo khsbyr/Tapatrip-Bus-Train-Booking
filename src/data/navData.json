@@ -3,27 +3,27 @@
     {
       "text": "Нислэг",
       "route": "flight",
-      "icon": "../assets/Flight.png"
+      "icon": "../assets/svgIcons/Flight.svg"
     },
     {
       "text": "Буудал",
       "route": "hotel",
-      "icon": "/assets/Hotel.png"
+      "icon": "/assets/svgIcons/Hotel.svg"
     },
     {
       "text": "Аялал",
       "route": "travel",
-      "icon": "/assets/Travel.png"
+      "icon": "/assets/svgIcons/Trip.svg"
     },
     {
       "text": "Автобус",
       "route": "bus",
-      "icon": "../assets/Flight.png"
+      "icon": "../assets/svgIcons/Bus.svg"
     },
     {
       "text": "Галт тэрэг",
       "route": "train",
-      "icon": "../assets/Flight.png"
+      "icon": "../assets/svgIcons/Flight.svg"
     }
   ],
   "profile": [

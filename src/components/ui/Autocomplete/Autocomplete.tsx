@@ -45,8 +45,8 @@ const Autocomplete: FC<Props> = props => {
         onChange={onChange}
       >
         {data &&
-          data.map((z, index) => (
-            <Option key={index} value={z.id}>
+          data.map((z, value) => (
+            <Option key={value} value={z.id}>
               <div className="flex items-center">
                 <LocationMarkerIcon className="w-9 h-9 text-direction pr-3" />
                 {z.text}

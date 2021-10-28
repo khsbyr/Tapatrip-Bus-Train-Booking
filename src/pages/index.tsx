@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
-//import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
+import { useQuery } from '@apollo/client';
+import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
 import NavData from '@data/navData.json';
 import GridList from '@data/gridList.json';
 import CommentList from '@data/commentList.json';
@@ -13,6 +13,9 @@ import Comments from '@components/Comments/Comments';
 import Email from '@components/Email/Email';
 import Footer from '@components/Footer/Footer';
 import App from '@components/App/App';
+import AuthService from '@services/auth';
+import cookie from 'js-cookie';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
 
 // export const getStaticProps = async () => {
 //   const res = NavData;
@@ -28,27 +31,29 @@ import App from '@components/App/App';
 //   };
 // };
 
-const BUS_ALL_LOCATIONS_QUERY = gql`
-  {
-    busAllLocations(region: "1") {
-      edges {
-        node {
-          name
-          id
-          regionName
-          region
-          type
-          typeName
-          picture
-        }
-      }
-    }
-  }
-`;
+// const BUS_ALL_LOCATIONS_QUERY = gql`
+//   {
+//     busAllLocations(region: "1") {
+//       edges {
+//         node {
+//           name
+//           id
+//           regionName
+//           region
+//           type
+//           typeName
+//           picture
+//         }
+//       }
+//     }
+//   }
+// `;
 
-export default function Home({ NavData, GridList, CommentList }) {
+export default function Home({ NavData, GridList, CommentList, guestToken }) {
   const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
-  console.log(error);
+  console.log(data);
+  AuthTokenStorageService.guestStore(guestToken);
+
   return (
     <div>
       <Head>
@@ -58,7 +63,7 @@ export default function Home({ NavData, GridList, CommentList }) {
       <div className="bg-bg font-Roboto">
         <div className="hidden  md:block ">
           <img
-            src="assets/Header.png"
+            src="../assets/Header.png"
             alt="Logo"
             className="h-96 object-cover mx-auto"
           />
@@ -88,12 +93,14 @@ export const getStaticProps = async () => {
   const res = NavData;
   const gridList = GridList;
   const commentList = CommentList;
+  const guestToken = await AuthService.guestToken();
 
   return {
     props: {
       NavData: res,
       GridList: gridList,
       CommentList: commentList,
+      guestToken: guestToken,
     },
   };
 };

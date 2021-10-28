@@ -46,7 +46,9 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 <div className="flex-shrink-0">
                   <img
                     src={`${
-                      navbar ? 'assets/logoBlue.png' : 'assets/logoWhite.png'
+                      navbar
+                        ? '../assets/logoBlue.png'
+                        : '../assets/logoWhite.png'
                     } `}
                     alt="Logo"
                     className="w-36 md:w-full md:h-full"
@@ -54,12 +56,12 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 </div>
                 <div className={`${navbar ? 'hidden' : 'lg:block'} hidden`}>
                   <div className="ml-10 flex items-baseline space-x-4">
-                    {navbarData.generalList.map(z => (
+                    {navbarData.generalList.map(data => (
                       <a
                         className={`${'text-white'} hover:text-gray-300 px-1 py-2 rounded-md text-sm font-light`}
-                        href={`${z.route}`}
+                        href={`${data.route}`}
                       >
-                        {z.text}
+                        {data.text}
                       </a>
                     ))}
                     <button
@@ -125,20 +127,20 @@ const Navbar: FC<Props> = ({ navbarData }) => {
             {ref => (
               <div className="md:hidden bg-white" id="mobile-menu">
                 <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                  {navbarData.profile.map(z => (
+                  {navbarData.profile.map(data => (
                     <a
                       className="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-light block"
-                      href={`${z.route}`}
+                      href={`${data.route}`}
                     >
-                      {z.text}
+                      {data.text}
                     </a>
                   ))}
-                  {navbarData.generalList.map(z => (
+                  {navbarData.generalList.map(data => (
                     <a
                       className="text-gray-800 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-light"
-                      href={`${z.route}`}
+                      href={`${data.route}`}
                     >
-                      {z.text}
+                      {data.text}
                     </a>
                   ))}
                 </div>

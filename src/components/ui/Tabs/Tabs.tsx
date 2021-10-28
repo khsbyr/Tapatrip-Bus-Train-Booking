@@ -1,5 +1,6 @@
 import { BookOpenIcon } from '@heroicons/react/solid';
 import React, { FC } from 'react';
+import { Z_ASCII } from 'zlib';
 
 interface Props {
   navbarData: any;
@@ -33,11 +34,8 @@ const Tabs: FC<Props> = ({ navbarData }) => {
                   href={z.route}
                   role="tablist"
                 >
-                  {/* <img
-                    src={'/assets/plane-solid.svg'}
-                    className="text-blue-300"
-                  /> */}
-                  <BookOpenIcon className="w-10 h-10 ml-0" />
+                  <img src={z.icon} className="w-12 h-12" />
+                  {/* <BookOpenIcon className="w-10 h-10 ml-0" /> */}
                   {z.text}
                 </a>
               </li>
