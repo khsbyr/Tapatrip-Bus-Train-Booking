@@ -1,39 +1,63 @@
-import Autocomplete from '@components/ui/Autocomplete/Autocomplete';
-import { DatePicker } from 'antd';
+import { AutoComplete, DatePicker } from 'antd';
+import { LocationMarkerIcon } from '@heroicons/react/solid';
 import React, { FC } from 'react';
 import ContentWrapper from './style';
-import { useRouter } from 'next/router';
+import style from './SearchBus.module.scss';
+import graphqlArrayFormat from '@helpers/graphql-array-format';
 
 interface Props {
   startLocations?: any;
 }
 
 const SearchBus: FC<Props> = ({ startLocations }) => {
-  const { asPath, pathname } = useRouter();
+  const { Option } = AutoComplete;
+  const formatLocation = graphqlArrayFormat(startLocations);
+
+  const handleSearch = (value: string) => {
+    console.log(value);
+  };
+
+  const handleSelect = (value: string) => {
+    console.log(value);
+  };
   return (
     <ContentWrapper>
-      <div className="px-2">
-        <form
-          className={`px-2 py-6 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4
-          ${asPath === '/bus' ? 'md:px-12' : 'md:px-12'} 
-          `}
+      <div className={style.container}>
+        <AutoComplete
+          onSearch={handleSearch}
+          onSelect={handleSelect}
+          placeholder="Хаанаас: хот байршил..."
         >
-          <Autocomplete
-            data={startLocations}
-            placeholder="Хаанаас: хот байршил..."
-          />
+          {formatLocation.map((location, value) => (
+            <Option key={value} value={location.name}>
+              <div className="flex items-center">
+                <img
+                  className="w-7 h-7 text-direction pr-3"
+                  src="assets/svgIcons/stopLocation.svg"
+                />
+                {location.name}
+              </div>
+            </Option>
+          ))}
+        </AutoComplete>
+        <AutoComplete placeholder="Хаашаа: хот байршил...">
+          {formatLocation.map((location, value) => (
+            <Option key={value} value={location.name}>
+              <div className="flex items-center">
+                <img
+                  className="w-7 h-7 text-direction pr-3"
+                  src="assets/svgIcons/stopLocation.svg"
+                />
+                {location.name}
+              </div>
+            </Option>
+          ))}
+        </AutoComplete>
+        <DatePicker placeholder="Он, сар, өдөр" />
 
-          <Autocomplete
-            data={startLocations}
-            placeholder="Хаашаа: хот байршил..."
-          />
-
-          <DatePicker placeholder="Он, сар, өдөр" />
-
-          <button className="bg-button text-white font-bold py-2 px-4 rounded-2xl h-14 w-full">
-            Хайх
-          </button>
-        </form>
+        <button className="bg-button text-white font-bold rounded-2xl w-30">
+          Хайх
+        </button>
       </div>
     </ContentWrapper>
   );
