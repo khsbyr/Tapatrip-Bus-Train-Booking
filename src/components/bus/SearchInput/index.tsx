@@ -1,8 +1,9 @@
+import React, { FC, useState } from 'react';
 import { AutoComplete, DatePicker } from 'antd';
-import React, { FC } from 'react';
 import ContentWrapper from './style';
 import style from './SearchBus.module.scss';
 import graphqlArrayFormat from '@helpers/graphql-array-format';
+import arrayFilter from '@helpers/array-filter';
 
 interface Props {
   startLocations?: any;
@@ -11,13 +12,17 @@ interface Props {
 const SearchBus: FC<Props> = ({ startLocations }) => {
   const { Option } = AutoComplete;
   const formatLocation = graphqlArrayFormat(startLocations);
+  const [startLocation, setStartLocation] = useState(formatLocation);
+  const [selectStartLocation, setSelectStartLocation] = useState();
 
   const handleSearch = (value: string) => {
-    console.log(value);
+    let result = arrayFilter(formatLocation, value);
+    setStartLocation(result);
   };
 
   const handleSelect = (value: string) => {
-    console.log(value);
+    let selectResult = arrayFilter(formatLocation, value);
+    setSelectStartLocation(selectResult);
   };
   return (
     <ContentWrapper>
@@ -29,7 +34,7 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
             onSelect={handleSelect}
             placeholder="Хаанаас: хот байршил..."
           >
-            {formatLocation.map((location, value) => (
+            {startLocation.map((location, value) => (
               <Option key={value} value={location.name}>
                 <div className="flex items-center">
                   <img
