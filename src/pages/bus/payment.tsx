@@ -1,4 +1,3 @@
-import Navbar3 from '@components/common/Navbar/Navbar3';
 import NavData from '@data/navData.json';
 import { Steps } from 'antd';
 import React, { FC } from 'react';
@@ -10,6 +9,7 @@ import Footer from '@components/common/Footer';
 import ContentWrapper from './style';
 import Card2 from '@components/bus/Card/Card2';
 import TravelList from '@data/getTravelList[1].json';
+import Navbar3 from '@components/common/Navbar/Navbar3';
 
 export const getStaticProps = async () => {
   const res = travelData;
