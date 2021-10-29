@@ -1,3 +1,19 @@
 .container {
-  @apply px-4 md:px-12 py-6 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4;
+  @apply px-4 md:px-12 py-6 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-6;
+
+  .startLocation {
+    @apply col-start-1 col-end-3 relative;
+  }
+
+  .endLocation {
+    @apply col-start-3 col-end-5 relative;
+  }
+
+  .searchButton {
+    @apply bg-button text-white font-bold rounded-2xl;
+  }
+
+  .currentIcon {
+    @apply w-6 h-6 absolute bottom-4 left-2;
+  }
 }

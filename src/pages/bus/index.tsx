@@ -33,7 +33,6 @@ export default function Bus({ NavData, tapaServiceList, guestToken }) {
 }
 
 export async function getStaticProps(context) {
-  console.log(context);
   const navData = NavData;
   const tapaServiceList = TapaServiceList;
   const guestToken = await AuthService.guestToken();

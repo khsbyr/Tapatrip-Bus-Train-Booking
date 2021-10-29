@@ -38,15 +38,18 @@ const ContentWrapper = styled.div`
   .ant-select-selection-item {
     width: 100% !important;
     color: #8ab1d5 !important;
+    margin-left: 30px !important;
   }
 
   .ant-select-selection-search {
     top: 12px !important;
+    left: 40px !important;
   }
 
   .ant-select-selection-placeholder {
     color: #8ab1d5;
-    margin-top: -2px !important;
+    margin-top: -1px !important;
+    margin-left: 30px !important;
   }
 
   .ant-select-clear {
