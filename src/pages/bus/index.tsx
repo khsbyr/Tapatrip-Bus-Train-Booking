@@ -4,7 +4,7 @@ import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
 import NavData from '@data/navData.json';
 import TapaServiceList from '@data/tapaServiceList.json';
 import Layout from '@components/common/Layout';
-import Search from '@components/bus/Search';
+import Search from '@components/bus/SearchPanel';
 import Navbar from '@components/common/Navbar';
 import HeaderBackground from '@components/common/HeaderBackground';
 import TapaService from '@components/common/TapaService';
