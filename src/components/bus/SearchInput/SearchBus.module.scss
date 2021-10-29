@@ -10,7 +10,7 @@
   }
 
   .searchButton {
-    @apply bg-button text-white font-bold rounded-2xl relative;
+    @apply bg-button text-white font-bold rounded-2xl relative hover:bg-hover focus:bg-down;
   }
 
   .currentIcon {

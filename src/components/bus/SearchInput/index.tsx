@@ -15,7 +15,7 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
   const [startLocation, setStartLocation] = useState(formatLocation);
   const [selectStartLocation, setSelectStartLocation] = useState();
 
-  const handleSearch = (value: string) => {
+  const handleSearchStartLocation = (value: string) => {
     let result = arrayFilter(formatLocation, value);
     setStartLocation(result);
   };
@@ -24,13 +24,17 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
     let selectResult = arrayFilter(formatLocation, value);
     setSelectStartLocation(selectResult);
   };
+
+  const handleSearchBus = () => {
+    alert('dd');
+  };
   return (
     <ContentWrapper>
       <div className={style.container}>
         <div className={style.startLocation}>
           <AutoComplete
             showSearch
-            onSearch={handleSearch}
+            onSearch={handleSearchStartLocation}
             onSelect={handleSelect}
             placeholder="Хаанаас: хот байршил..."
           >
@@ -71,7 +75,9 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
           />
         </div>
         <DatePicker placeholder="Он, сар, өдөр" />
-        <button className={style.searchButton}>Хайх</button>
+        <button className={style.searchButton} onClick={handleSearchBus}>
+          Хайх
+        </button>
       </div>
     </ContentWrapper>
   );
