@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react';
 import { AutoComplete, DatePicker } from 'antd';
+import { useLazyQuery } from '@apollo/client';
+import { BUS_LOCATION_ENDS_QUERY } from '@graphql/queries';
 import ContentWrapper from './style';
 import style from './SearchBus.module.scss';
 import graphqlArrayFormat from '@helpers/graphql-array-format';
@@ -14,20 +16,25 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
   const formatLocation = graphqlArrayFormat(startLocations);
   const [startLocation, setStartLocation] = useState(formatLocation);
   const [selectStartLocation, setSelectStartLocation] = useState();
+  const [getEndLocations, { loading, error, data }] = useLazyQuery(
+    BUS_LOCATION_ENDS_QUERY
+  );
 
   const handleSearchStartLocation = (value: string) => {
     let result = arrayFilter(formatLocation, value);
     setStartLocation(result);
   };
 
-  const handleSelect = (value: string) => {
-    let selectResult = arrayFilter(formatLocation, value);
-    setSelectStartLocation(selectResult);
+  const handleSelect = (key: string, options) => {
+    getEndLocations({
+      variables: { locationStopLocation: options.key },
+    });
   };
 
-  const handleSearchBus = () => {
-    alert('dd');
+  const handleSearchBus = async () => {
+    //busLocation({ variables: { locationStopLocation: selectStartLocation } });
   };
+
   return (
     <ContentWrapper>
       <div className={style.container}>
@@ -39,7 +46,7 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
             placeholder="Хаанаас: хот байршил..."
           >
             {startLocation.map((location, value) => (
-              <Option key={value} value={location.name}>
+              <Option key={location.id} value={location.name}>
                 <div className="flex items-center">
                   <img
                     className="w-7 h-7 text-direction pr-3"

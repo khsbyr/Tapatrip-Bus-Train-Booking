@@ -39,16 +39,8 @@ export const BUS_ALL_LOCATION_STOPS_QUERY = gql`
 `;
 
 export const BUS_LOCATION_ENDS_QUERY = gql`
-  query busAllLocationEnds(
-    $locationStopLocation: String
-    $locationStop: String
-    $locationEnd: String
-  ) {
-    busAllLocationEnds(
-      locationStop_Location: $locationStopLocation
-      locationStop: $locationStop
-      locationEnd: $locationEnd
-    ) {
+  query busAllLocationEnds($locationStopLocation: ID!) {
+    busAllLocationEnds(locationStop_Location: $locationStopLocation) {
       edges {
         node {
           id
