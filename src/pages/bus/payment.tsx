@@ -1,14 +1,14 @@
-import Navbar3 from '@components/Navbar/Navbar3';
+import Navbar3 from '@components/common/Navbar/Navbar3';
 import NavData from '@data/navData.json';
 import { Steps } from 'antd';
 import React, { FC } from 'react';
 import travelData from '@data/getTravelData.json';
-import PassengerInfo from '@components/PassengerInfo';
-import Payments from '@components/Payments';
-import SelectSeats from '@components/SelectSeats';
-import Footer from '@components/Footer/Footer';
+import PassengerInfo from '@components/bus/PassengerInfo';
+import Payments from '@components/bus/Payments';
+import SelectSeats from '@components/bus/SelectSeats';
+import Footer from '@components/common/Footer';
 import ContentWrapper from './style';
-import Card2 from '@components/Card/Card2';
+import Card2 from '@components/bus/Card/Card2';
 import TravelList from '@data/getTravelList[1].json';
 
 export const getStaticProps = async () => {

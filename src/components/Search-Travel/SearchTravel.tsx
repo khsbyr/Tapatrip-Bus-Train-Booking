@@ -1,7 +1,7 @@
 import Autocomplete from '@components/ui/Autocomplete/Autocomplete';
 import { DatePicker, Carousel } from 'antd';
 import React, { FC } from 'react';
-import ContentWrapper from '../Search-Bus/style';
+import ContentWrapper from '../Search/style';
 import { useRouter } from 'next/router';
 
 interface Props {
@@ -30,8 +30,8 @@ const SearchTravel: FC<Props> = ({ navbarData }) => {
           </button>
         </form>
         <Carousel className={`md:px-2`} arrows dots={true}>
-          <img className="carouselImage" src="assets/Travel1.png" />
-          <img className="carouselImage" src="assets/Travel1.png" />
+          <img className="carouselImage" src="/assets/Travel1.png" />
+          <img className="carouselImage" src="/assets/Travel1.png" />
         </Carousel>
       </div>
     </ContentWrapper>

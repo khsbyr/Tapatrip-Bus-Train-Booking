@@ -1,0 +1,31 @@
+.body {
+  @apply max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 py-10 gap-2;
+
+  .application {
+    @apply bg-white h-auto flex items-center justify-center rounded-lg shadow-md py-10;
+
+    .childBody {
+      @apply max-w-sm ml-10 space-y-4;
+    }
+
+    .title {
+      @apply text-cardDate font-semibold;
+    }
+
+    .description {
+      @apply text-cardDate font-thin;
+    }
+
+    .subBody {
+      @apply flex flex-row items-center rounded-2xl h-12 bg-bg;
+    }
+
+    .input {
+      @apply appearance-none bg-transparent w-full ml-2 py-1 px-2 placeholder-primary border-none focus:outline-none;
+    }
+
+    .button {
+      @apply bg-bg text-direction py-2 px-4 rounded-2xl h-12 w-32;
+    }
+  }
+}
