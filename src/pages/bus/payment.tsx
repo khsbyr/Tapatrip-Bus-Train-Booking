@@ -53,7 +53,7 @@ const Payment: FC = () => {
             size="small"
             // className="bg-steps p-4"
             responsive={true}
-            className="site-navigation-steps bg-steps w-1/3 ml-64"
+            className="site-navigation-steps bg-steps"
           >
             {steps.map(item => (
               <Step
@@ -66,7 +66,7 @@ const Payment: FC = () => {
           </Steps>
         </div>
 
-        <div className="max-w-7xl mx-auto my-5 flex flex-wrap">
+        <div className="max-w-7xl mx-auto my-5 flex">
           <div className="w-full md:w-3/5 lg:w-3/5">
             {steps[current].content}
           </div>

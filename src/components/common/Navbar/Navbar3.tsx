@@ -1,7 +1,7 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
-// import SearchBus from '@components/bus/SearchInput';
+import SearchBus from '@components/bus/SearchInput';
 
 interface Props {
   navbarData?: any;
@@ -75,6 +75,7 @@ const Navbar3: FC<Props> = ({ navbarData }) => {
                 </button>
               </div>
             </div>
+            {/* <SearchBus /> */}
           </div>
 
           <Transition

@@ -20,7 +20,7 @@ export default function SelectSeats() {
           Суудал сонгох
         </h1>
       </div>
-      <div className="flex flex-wrap">
+      <div className="flex">
         <div className="space-y-6">
           <h1 className="pl-10 text-cardDate font-bold text-lg">
             Автобусын мэдээлэл
@@ -56,7 +56,7 @@ export default function SelectSeats() {
           </div>
         </div>
         <div>
-          <Seat48_52 datas={travelData} />
+          {/* <Seat48_52 datas={travelData} /> */}
           <Seat24 datas={travelData} />
         </div>
       </div>

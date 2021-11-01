@@ -7,6 +7,7 @@ import style from './SearchBus.module.scss';
 import graphqlArrayFormat from '@helpers/graphql-startLocation-format';
 import arrayFilter from '@helpers/array-filter';
 import graphqlArrayEndFormat from '@helpers/graphql-endLocation-format';
+import { useRouter } from 'next/router';
 
 interface Props {
   startLocations?: any;
@@ -14,6 +15,7 @@ interface Props {
 
 const SearchBus: FC<Props> = ({ startLocations }) => {
   const { Option } = AutoComplete;
+  const router = useRouter();
   const formatLocation = graphqlArrayFormat(startLocations);
   const [startLocation, setStartLocation] = useState(formatLocation);
   const [selectStartLocation, setSelectStartLocation] = useState();
@@ -42,6 +44,7 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
   };
 
   const handleSearchBus = async () => {
+    router.push('/bus/orders');
     //busLocation({ variables: { locationStopLocation: selectStartLocation } });
   };
 
@@ -61,7 +64,7 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
                 <div className="flex items-center">
                   <img
                     className="w-7 h-7 text-direction pr-3"
-                    src="assets/svgIcons/stopLocation.svg"
+                    src="../../assets/svgIcons/stopLocation.svg"
                   />
                   {location.name}
                 </div>
@@ -70,7 +73,7 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
           </AutoComplete>
           <img
             className={style.currentIcon}
-            src="assets/svgIcons/currentLocation.svg"
+            src="../../assets/svgIcons/currentLocation.svg"
           />
         </div>
         <div className={style.endLocation}>
@@ -81,7 +84,7 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
                   <div className="flex items-center">
                     <img
                       className="w-7 h-7 text-direction pr-3"
-                      src="assets/svgIcons/stopLocation.svg"
+                      src="../../assets/svgIcons/stopLocation.svg"
                     />
                     {location.name}
                   </div>
@@ -90,7 +93,7 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
           </AutoComplete>
           <img
             className={style.currentIcon}
-            src="assets/svgIcons/stopLocation.svg"
+            src="../../assets/svgIcons/stopLocation.svg"
           />
         </div>
         <DatePicker placeholder="Он, сар, өдөр" />
