@@ -4,7 +4,7 @@ import React, { FC, useState } from 'react';
 import Card from '@components/bus/Card/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
 import Footer from '@components/common/Footer';
-import Navbar2 from '@components/common/Navbar/NavBar2';
+import Navbar2 from '@components/common/Navbar/Navbar2';
 
 const Orders: FC = () => {
   const [isActive, setIsActive] = useState(false);
