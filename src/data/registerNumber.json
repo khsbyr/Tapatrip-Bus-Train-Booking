@@ -1,0 +1,142 @@
+[
+  {
+    "uniCode": "А",
+    "value": 0
+  },
+  {
+    "uniCode": "Б",
+    "value": 1
+  },
+  {
+    "uniCode": "В",
+    "value": 2
+  },
+  {
+    "uniCode": "Г",
+    "value": 3
+  },
+  {
+    "uniCode": "Д",
+    "value": 4
+  },
+  {
+    "uniCode": "Е",
+    "value": 5
+  },
+  {
+    "uniCode": "Ё",
+    "value": 6
+  },
+  {
+    "uniCode": "Ж",
+    "value": 7
+  },
+  {
+    "uniCode": "З",
+    "value": 8
+  },
+  {
+    "uniCode": "И",
+    "value": 9
+  },
+  {
+    "uniCode": "Й",
+    "value": 10
+  },
+  {
+    "uniCode": "К",
+    "value": 11
+  },
+  {
+    "uniCode": "Л",
+    "value": 12
+  },
+  {
+    "uniCode": "М",
+    "value": 13
+  },
+  {
+    "uniCode": "Н",
+    "value": 14
+  },
+  {
+    "uniCode": "О",
+    "value": 15
+  },
+  {
+    "uniCode": "Ө",
+    "value": 16
+  },
+  {
+    "uniCode": "П",
+    "value": 17
+  },
+  {
+    "uniCode": "Р",
+    "value": 18
+  },
+  {
+    "uniCode": "С",
+    "value": 19
+  },
+  {
+    "uniCode": "Т",
+    "value": 20
+  },
+  {
+    "uniCode": "У",
+    "value": 21
+  },
+  {
+    "uniCode": "Ү",
+    "value": 22
+  },
+  {
+    "uniCode": "Ф",
+    "value": 23
+  },
+  {
+    "uniCode": "Х",
+    "value": 24
+  },
+  {
+    "uniCode": "Ц",
+    "value": 25
+  },
+  {
+    "uniCode": "Ч",
+    "value": 26
+  },
+  {
+    "uniCode": "Ш",
+    "value": 27
+  },
+  {
+    "uniCode": "Щ",
+    "value": 28
+  },
+  {
+    "uniCode": "Ъ",
+    "value": 29
+  },
+  {
+    "uniCode": "Ь",
+    "value": 30
+  },
+  {
+    "uniCode": "Ы",
+    "value": 31
+  },
+  {
+    "uniCode": "Э",
+    "value": 32
+  },
+  {
+    "uniCode": "Ю",
+    "value": 33
+  },
+  {
+    "uniCode": "Я",
+    "value": 34
+  }
+]

@@ -1,58 +1,88 @@
-import { Divider, Radio } from 'antd';
-import PayTransfer from '@components/bus/PayTransfer';
+import { Statistic, Radio, Space, Input } from 'antd';
+import PayTransfer from '@components/bus/Payments/PayTransfer';
+import QPay from '@components/bus/Payments/QPay';
 import React from 'react';
 import s from './Payments.module.scss';
+import ContentWrapper from './style';
+import Banks from '@data/bankInformation.json';
+
+export const getStaticProps = async () => {
+  const res = Banks;
+
+  return {
+    props: { Banks: res },
+  };
+};
 export default function Payment() {
+  console.log(Banks);
   const [value, setValue] = React.useState(1);
   const onChange = e => {
     console.log('radio checked', e.target.value);
     setValue(e.target.value);
   };
-  return (
-    <div className={s.div1}>
-      <div className={s.div2}>
-        <div className={s.zaavarh1}>
-          <p className={s.zaavarh1p1}>Төлбөр төлөх зааварчилгаа</p>
-          <p className={s.zaavarh1p2}>09:59</p>
-        </div>
-        <ul className="p-4 text-xs px-10">
-          <li>
-            Хэрэглэгч та Авто тээврийн үндэсний төвийн дор дурдсан дансруу
-            билетийн төлбөрөө 20 минутын дотор шилжүүлэх ба гүйлгээний утга
-            хэсэгт ЗАХИАЛГЫН КОД болон холбогдох утасны дугаараа заавал бичиж
-            шилжүүлэг хийнэ.
-          </li>
-          <li className="py-6">
-            Дараах тохиолдлуудад таны захиалга хүчингүй болно гэдгийг анхаарна
-            уу.
-          </li>
-          <ul>
-            <li>-Заагдсан хугацаанд төлбөр хийгээгүй</li>
-            <li>-Дутуу төлбөр хийх</li>
-            <li>
-              -Захиалгын кодыг буруу /ямар нэгэн илүү тэмдэг, тэмдэглэгээ
-              бичихгүй(!.,-)/ эсвэл дутуу бичих
-            </li>
-          </ul>
-        </ul>
-      </div>
+  const { Countdown } = Statistic;
+  const deadline = Date.now() + 60 * 60;
+  //  * 333.3;
 
-      <div className={s.radioGroup}>
-        <Radio.Group onChange={onChange} value={value}>
-          <div className="px-6 space-y-4 w-full">
-            <Radio value={1}>
-              <p>Шилжүүлэх</p>
-              {value === 1 && <PayTransfer />}
-            </Radio>
-            <div>
-              <Radio value={2}>
-                QPay
-                {value === 2 && <PayTransfer />}
-              </Radio>
-            </div>
+  const onFinish = () => {
+    console.log('finished!');
+  };
+
+  return (
+    <ContentWrapper>
+      <div className={s.root}>
+        <div className={s.body}>
+          <div className={s.instructions}>
+            <p className={s.title}>Төлбөр төлөх зааварчилгаа</p>
+            <p className={s.time}>
+              <Countdown value={deadline} onFinish={onFinish} />
+            </p>
           </div>
-        </Radio.Group>
+          <ul className="p-4 text-sm px-10">
+            <li>
+              Хэрэглэгч та Авто тээврийн үндэсний төвийн дор дурдсан дансруу
+              билетийн төлбөрөө 20 минутын дотор шилжүүлэх ба гүйлгээний утга
+              хэсэгт ЗАХИАЛГЫН КОД болон холбогдох утасны дугаараа заавал бичиж
+              шилжүүлэг хийнэ.
+            </li>
+            <li className="py-6">
+              Дараах тохиолдлуудад таны захиалга хүчингүй болно гэдгийг анхаарна
+              уу.
+            </li>
+            <ul>
+              <li>-Заагдсан хугацаанд төлбөр хийгээгүй</li>
+              <li>-Дутуу төлбөр хийх</li>
+              <li>
+                -Захиалгын кодыг буруу /ямар нэгэн илүү тэмдэг, тэмдэглэгээ
+                бичихгүй(!.,-)/ эсвэл дутуу бичих
+              </li>
+            </ul>
+          </ul>
+        </div>
+
+        <div className={s.radioGroup}>
+          <h1 className={s.paymentTitle}>Төлбөр төлөх хэлбэр сонгоно уу</h1>
+
+          <Radio.Group onChange={onChange} value={value}>
+            <div className="w-full ml-6">
+              <Space direction="vertical">
+                <Radio value={1}>
+                  <div className="">
+                    <p className={s.paymentShape}>Шилжүүлэх</p>
+                    {value === 1 && <PayTransfer banks={Banks} />}
+                  </div>
+                </Radio>
+                <Radio value={2}>
+                  <div>
+                    <p className={s.paymentShape}>QPay</p>
+                    {value === 2 && <QPay />}
+                  </div>
+                </Radio>
+              </Space>
+            </div>
+          </Radio.Group>
+        </div>
       </div>
-    </div>
+    </ContentWrapper>
   );
 }

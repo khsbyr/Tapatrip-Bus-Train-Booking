@@ -1,18 +1,24 @@
-.div1 {
-  @apply p-2 space-y-3;
+.root {
+  @apply space-y-3 text-cardDate;
 }
-.div2 {
+.body {
   @apply rounded-lg bg-white py-2 shadow-md;
 }
-.zaavarh1 {
-  @apply flex w-full border-b-2 px-6;
+.instructions {
+  @apply flex text-lg items-center w-full font-bold border-b-2 px-6;
 }
-.zaavarh1p1 {
-  @apply text-sm w-full font-semibold py-2;
+.title {
+  @apply w-full sm:w-3/4 py-2;
 }
-.zaavarh1p2 {
-  @apply flex justify-end w-1/2 text-sm w-full font-semibold py-2;
+.time {
+  @apply flex justify-end w-full sm:w-1/4 py-2;
 }
 .radioGroup {
-  @apply rounded-lg bg-white py-2 shadow-md;
+  @apply rounded-lg bg-white shadow-md;
+}
+.paymentTitle {
+  @apply text-lg font-bold border-b-2 px-6 py-2;
+}
+.paymentShape {
+  @apply text-lg font-bold py-2 text-cardDate;
 }
