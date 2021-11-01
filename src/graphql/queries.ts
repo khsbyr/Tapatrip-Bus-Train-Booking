@@ -19,7 +19,7 @@ export const BUS_ALL_LOCATIONS_QUERY = gql`
 `;
 
 export const BUS_ALL_LOCATION_STOPS_QUERY = gql`
-  query busAllLocationStops($location: String, $type: String) {
+  query busAllLocationStops($location: ID!, $type: String) {
     busAllLocationStops(location: $location, type: $type) {
       edges {
         node {
@@ -47,6 +47,9 @@ export const BUS_LOCATION_ENDS_QUERY = gql`
           locationStop {
             id
             name
+            location {
+              name
+            }
           }
           locationEnd {
             id

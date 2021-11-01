@@ -11,7 +11,7 @@ import TapaService from '@components/common/TapaService';
 import Subscribe from '@components/common/Subscribe';
 import AuthService from '@services/auth';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
-import arrayFormat from '@helpers/array-format';
+import { arrayFormat } from '@helpers/array-format';
 
 export default function Bus({ NavData, tapaServiceList, guestToken }) {
   useEffect(() => {
