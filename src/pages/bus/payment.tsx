@@ -1,7 +1,6 @@
 import NavData from '@data/navData.json';
 import { Steps } from 'antd';
 import React, { FC } from 'react';
-import travelData from '@data/getTravelData.json';
 import PassengerInfo from '@components/bus/PassengerInfo';
 import Payments from '@components/bus/Payments';
 import SelectSeats from '@components/bus/SelectSeats';
@@ -10,21 +9,12 @@ import ContentWrapper from './style';
 import Card2 from '@components/bus/Card/Card2';
 import TravelList from '@data/getTravelList[1].json';
 import Navbar3 from '@components/common/Navbar/Navbar3';
-
-export const getStaticProps = async () => {
-  const res = travelData;
-
-  return {
-    props: { travelData: res },
-  };
-};
-
 const { Step } = Steps;
 
 const steps = [
   {
     title: 'Суудал сонгох',
-    content: <SelectSeats travelData={travelData} />,
+    content: <SelectSeats />,
     button: 'Зорчигчийн мэдээлэл оруулах',
   },
   {
@@ -55,25 +45,26 @@ const Payment: FC = () => {
     <ContentWrapper>
       <div className="relative bg-bg">
         <Navbar3 navbarData={NavData} />
-
-        <Steps
-          type="navigation"
-          current={current}
-          onChange={onChange}
-          size="small"
-          // className="bg-steps p-4"
-          responsive={true}
-          className="site-navigation-steps bg-steps"
-        >
-          {steps.map(item => (
-            <Step
-              key={item.title}
-              icon=" "
-              title={item.title}
-              className="text-xs text-white"
-            />
-          ))}
-        </Steps>
+        <div className="bg-steps">
+          <Steps
+            type="navigation"
+            current={current}
+            onChange={onChange}
+            size="small"
+            // className="bg-steps p-4"
+            responsive={true}
+            className="site-navigation-steps bg-steps w-1/3 ml-64"
+          >
+            {steps.map(item => (
+              <Step
+                key={item.title}
+                icon=" "
+                title={item.title}
+                className="text-xs text-white"
+              />
+            ))}
+          </Steps>
+        </div>
 
         <div className="max-w-7xl mx-auto my-5 flex flex-wrap">
           <div className="w-full md:w-3/5 lg:w-3/5">
@@ -99,7 +90,7 @@ const Payment: FC = () => {
                   />
                 ))}
                 <button
-                  className="w-full bg-red-500 shadow-md rounded-md font-semibold py-2 mt-2 hover:bg-red-700 text-white"
+                  className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white"
                   onClick={() => next()}
                 >
                   {steps[current].button}
@@ -125,7 +116,7 @@ const Payment: FC = () => {
                   />
                 ))}
                 <button
-                  className="w-full bg-red-500 shadow-md rounded-md font-semibold py-2 mt-2 hover:bg-red-700 text-white"
+                  className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white"
                   onClick={() => next()}
                 >
                   {steps[current].button}
@@ -150,7 +141,7 @@ const Payment: FC = () => {
                     key={z.id}
                   />
                 ))}
-                <button className="w-full bg-red-500 shadow-md rounded-md font-semibold py-2 mt-2 hover:bg-red-700 text-white">
+                <button className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white">
                   {steps[current].button}
                 </button>
               </div>
