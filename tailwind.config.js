@@ -25,6 +25,7 @@ module.exports = {
         down: '#EF5134',
         alert: '#FFF7ED',
         steps: '#177AD6',
+        register: '#0A3761',
       }),
       theme: {
         screens: {
@@ -36,6 +37,7 @@ module.exports = {
         selected: '#177AD6',
         alert: '#F7B352',
         bg: '#F1F2F6',
+        seat: '#0A3761',
       }),
       textColor: {
         primary: '#3490dc',
@@ -45,6 +47,7 @@ module.exports = {
         cardDescColor: '#24C8A7',
         cardDate: '#0A3761',
         direction: '#8AB1D5',
+        copyText: '#BFC1DA',
       },
 
       placeholderColor: {

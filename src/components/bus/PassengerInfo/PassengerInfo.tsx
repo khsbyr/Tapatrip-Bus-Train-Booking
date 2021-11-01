@@ -1,164 +1,170 @@
 import * as React from 'react';
-import { Input, Select } from 'antd';
+import { Input, Select, Divider } from 'antd';
 import mngIcon from 'public/assets/flagMongolia.png';
 import enIcon from 'public/assets/flagEng.png';
 import Image from 'next/image';
+import ContentWrapper from './style';
+import { Fragment, useState } from 'react';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
+import registNo from '@data/registerNumber.json';
+import RegisterNumber from '@components/bus/PassengerInfo/RegisterNumber';
+import s from '@components/bus/PassengerInfo/PassengerInfo.module.scss';
+import { Listbox, Transition } from '@headlessui/react';
+import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 
+export const getStaticProps = async () => {
+  const res = registNo;
+  return {
+    props: { registNo: res },
+  };
+};
 const { Option } = Select;
-export default function PassengerInfo() {
+interface Props {
+  registNo?: string;
+}
+const countries = [
+  { name: '+976', src: mngIcon, value: 0 },
+  { name: '+444', src: enIcon, value: 1 },
+];
+const selection = [
+  { name: 'Хувь хүн', value: 0 },
+  { name: 'Байгууллага', value: 1 },
+];
+export default function PassengerIfo() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState(selection[0]);
   return (
-    <div className="p-2 space-y-2">
-      <div className="flex flex-nowrap w-full rounded-lg bg-white">
-        <p className="w-3/4 p-3">
-          Та бүртгэл үүсгэснээр хялбар, хурдан захиалга хийх боломжтой.
-        </p>
-        <button className="flex justify-end border-2 rounded-lg p-1 text-blue-900 px-0 m-2 sm:px-6 items-center hover:text-white hover:bg-blue-900 ">
-          Бүртгүүлэх
-        </button>
-      </div>
-      <div className="rounded-lg bg-white p-4">
-        <div className="w-full text-lg font-bold border-b-2 pb-1">
-          Зорчигч 1
+    <ContentWrapper>
+      <div className={s.root}>
+        <div className={s.regist}>
+          <p className="text-cardDate w-3/4 p-3">
+            Та бүртгэл үүсгэснээр хялбар, хурдан захиалга хийх боломжтой.
+          </p>
+          <button className={s.registButton}>Бүртгүүлэх</button>
         </div>
-        <div className="py-2 mt-2 font-normal space-y-5 sm:space-y-0 sm:grid grid-cols-2">
-          <div className="w-full space-y-4 sm:pr-3 lg:pr-5">
-            <label className="px-2" htmlFor="RegisterNo">
-              Регистрийн дугаар
-            </label>
-            <div className="w-full border-0">
+        <div className={s.customerInfo}>
+          <h1 className={s.customerInfoTitle}>Захиалагчийн мэдээлэл</h1>
+          <div className={s.customerInfoForm}>
+            <div className="flex items-center w-full mt-10 px-2 sm:pr-3 lg:pr-3">
               <Select
-                defaultValue="19"
-                className="bg-gray-100 p-1 w-1/5 border-0 rounded-lg "
+                defaultValue={selection[0].value}
+                suffixIcon={
+                  <ChevronDownIcon className="text-secondary h-6 w-6" />
+                }
+                className="w-full bg-bg rounded-lg py-2 text-cardDate text-base"
               >
-                <Option value="1">А</Option>
-                <Option value="2">Б</Option>
-                <Option value="3">В</Option>
-                <Option value="4">Г</Option>
-                <Option value="5">Д</Option>
-                <Option value="6">Е</Option>
-                <Option value="7">Ё</Option>
-                <Option value="8">Ж</Option>
-                <Option value="9">З</Option>
-                <Option value="10">И</Option>
-                <Option value="11">Й</Option>
-                <Option value="12">К</Option>
-                <Option value="13">Л</Option>
-                <Option value="14">М</Option>
-                <Option value="15">Н</Option>
-                <Option value="16">О</Option>
-                <Option value="17">Ө</Option>
-                <Option value="18">П</Option>
-                <Option value="19">Р</Option>
-                <Option value="20">С</Option>
-                <Option value="21">Т</Option>
-                <Option value="22">У</Option>
-                <Option value="23">Ү</Option>
-                <Option value="24">Ф</Option>
-                <Option value="25">Х</Option>
-                <Option value="26">Ц</Option>
-                <Option value="27">Ч</Option>
-                <Option value="28">Ш</Option>
-                <Option value="29">Щ</Option>
-                <Option value="30">Ф</Option>
-                <Option value="31">Ъ</Option>
-                <Option value="32">Ь</Option>
-                <Option value="33">Э</Option>
-                <Option value="34">Ю</Option>
-                <Option value="35">Я</Option>
+                {selection.map(select => (
+                  <Option value={select.value}>
+                    <p className="text-cardDate text-base">{select.name}</p>
+                  </Option>
+                ))}
               </Select>
-              <Select
-                defaultValue="5"
-                className="bg-gray-100 border-0 rounded-lg p-1 w-1/5"
+            </div>
+            <div className={s.customerRegisterNumber}>
+              <label
+                className={s.customerRegisterNumberLabel}
+                htmlFor="RegisterNo"
               >
-                <div className="">
-                  <h1>g</h1>
-                  <h1>g</h1>
-                </div>
-              </Select>
-              <Input
-                className="rounded-lg border-0 bg-gray-100 p-2 w-3/5"
-                placeholder="99887766"
-              />
+                Регистрийн дугаар
+              </label>
+              <RegisterNumber registNo={registNo} />
             </div>
           </div>
-          <div className="w-full space-y-4 sm:pl-3 lg:pl-5">
-            <label className="px-2" htmlFor="Vaccine">
-              Вакцинд хамрагдсан эсэх
-            </label>
-            <Input className="rounded-lg bg-gray-100 border-0 p-2" disabled />
-          </div>
-        </div>
-
-        <div className="py-2 mt-2 font-normal space-y-5 sm:space-y-0 sm:grid grid-cols-2">
-          <div className="w-full space-y-4 sm:pr-3 lg:pr-5">
-            <label className="px-2" htmlFor="lastName">
-              Овог
-            </label>
-            <Input
-              className="rounded-lg bg-gray-100 border-0 p-2"
-              placeholder="Овог оруулна уу"
-            />
-          </div>
-          <div className="w-full space-y-4 sm:pl-3 lg:pl-5">
-            <label className="px-2" htmlFor="firstName">
-              Нэр
-            </label>
-            <Input
-              className="rounded-lg bg-gray-100 border-0 p-2"
-              placeholder="Нэр оруулна уу"
-            />
-          </div>
-        </div>
-
-        <div className="py-2 mt-2 font-normal space-y-5 sm:space-y-0 sm:grid grid-cols-2">
-          <div className="w-full space-y-4 sm:pr-3 lg:pr-5">
-            <label className="px-2" htmlFor="email">
-              И-мэйл хаяг
-            </label>
-            <Input
-              className="rounded-lg bg-gray-100 border-0 p-2"
-              placeholder="Таны тасалбарыг илгээх болно"
-            />
-          </div>
-          <div className="w-full space-y-4 sm:pl-3 lg:pl-5">
-            <label className="px-2" htmlFor="pNumber">
-              Утас дугаар
-            </label>
-            {/* <Input.Group compact className="w-full"> */}
-            <div className="rounded-lg p-1 bg-gray-100">
-              <Select defaultValue="mn" className=" w-2/5">
-                <Option value="mn">
-                  <p className="flex items-center h-full w-full text-xs">
-                    <Image
-                      src={mngIcon}
-                      width="26"
-                      height="13"
-                      className="rounded-sm"
-                    />
-                    +976
-                  </p>
-                </Option>
-                <Option value="en">
-                  <p className="flex items-center h-full w-full text-xs">
-                    <Image
-                      src={enIcon}
-                      width="26"
-                      height="13"
-                      className="rounded-sm"
-                    />
-                    +44
-                  </p>
-                </Option>
-              </Select>
+          <div className={s.customerInfoForm}>
+            <div className={s.customerMail}>
+              <label className={s.customerRegisterNumberLabel} htmlFor="email">
+                И-мэйл хаяг
+              </label>
               <Input
-                className="bg-gray-100 border-0 w-3/5"
-                placeholder="Дугаар оруулна уу"
+                className={s.input}
+                placeholder="Таны тасалбарыг илгээх болно"
               />
             </div>
-            {/* </Input.Group> */}
+            <div className="w-full space-y-2 sm:pr-3 lg:pl-3">
+              <label
+                className={s.customerRegisterNumberLabel}
+                htmlFor="pNumber"
+              >
+                Утас дугаар
+              </label>
+              <div className="flex rounded-lg bg-bg">
+                <Select
+                  defaultValue={countries[0].value}
+                  className="w-36 text-sm border-r-2 p-2 text-cardDate"
+                >
+                  {countries.map(country => (
+                    <Option value={country.value}>
+                      <p className="h-full w-full">
+                        <Image
+                          src={country.src}
+                          width="24"
+                          height="12"
+                          className="rounded-sm"
+                        />{' '}
+                        {country.name}
+                      </p>
+                    </Option>
+                  ))}
+                </Select>
+                <Input className={s.input} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={s.passengerInfo}>
+          <div className={s.passengerInfoTitle}>
+            <h1 className=" w-1/2 text-cardDate">Зорчигч 1</h1>
+
+            <div className="pl-52">
+              <h1 className="text-cardDate">ХҮҮХЭД 1000₮ </h1>
+              <h1 className="text-cardDate font-normal text-xs">
+                АМЬ ДААТГАЛ БАГТСАН
+              </h1>
+            </div>
+          </div>
+          <div className={s.passengerInfoForm}>
+            <div className={s.passengerRegisterLastname}>
+              <label
+                className={s.customerRegisterNumberLabel}
+                htmlFor="RegisterNo"
+              >
+                Регистрийн дугаар
+              </label>
+              <RegisterNumber registNo={registNo} />
+            </div>
+            <div className={s.passengerVaccineFirstname}>
+              <label
+                className={s.customerRegisterNumberLabel}
+                htmlFor="Vaccine"
+              >
+                Вакцинд хамрагдсан эсэх
+              </label>
+              <Input className={s.input} />
+            </div>
+          </div>
+
+          <div className={s.passengerInfoForm}>
+            <div className={s.passengerRegisterLastname}>
+              <label
+                className={s.customerRegisterNumberLabel}
+                htmlFor="lastName"
+              >
+                Овог
+              </label>
+              <Input className={s.input} />
+            </div>
+            <div className={s.passengerVaccineFirstname}>
+              <label
+                className={s.customerRegisterNumberLabel}
+                htmlFor="firstName"
+              >
+                Нэр
+              </label>
+              <Input className={s.input} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ContentWrapper>
   );
 }

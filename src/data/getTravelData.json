@@ -209,5 +209,103 @@
       "number": 45,
       "is_avialable": 1
     }
+  ],
+  "seat24": [
+    {
+      "number": 1,
+      "is_avialable": 0
+    },
+    {
+      "number": 2,
+      "is_avialable": 0
+    },
+    {
+      "number": 3,
+      "is_avialable": 0
+    },
+    {
+      "number": 4,
+      "is_avialable": 0
+    },
+    {
+      "number": 5,
+      "is_avialable": 0
+    },
+    {
+      "number": 6,
+      "is_avialable": 0
+    },
+    {
+      "number": 7,
+      "is_avialable": 0
+    },
+    {
+      "number": 8,
+      "is_avialable": 0
+    },
+    {
+      "number": 9,
+      "is_avialable": 0
+    },
+    {
+      "number": 10,
+      "is_avialable": 0
+    },
+    {
+      "number": 11,
+      "is_avialable": 0
+    },
+    {
+      "number": 12,
+      "is_avialable": 0
+    },
+    {
+      "number": 13,
+      "is_avialable": 0
+    },
+    {
+      "number": 14,
+      "is_avialable": 0
+    },
+    {
+      "number": 15,
+      "is_avialable": 0
+    },
+    {
+      "number": 16,
+      "is_avialable": 0
+    },
+    {
+      "number": 17,
+      "is_avialable": 0
+    },
+    {
+      "number": 18,
+      "is_avialable": 0
+    },
+    {
+      "number": 19,
+      "is_avialable": 0
+    },
+    {
+      "number": 20,
+      "is_avialable": 0
+    },
+    {
+      "number": 21,
+      "is_avialable": 0
+    },
+    {
+      "number": 22,
+      "is_avialable": 0
+    },
+    {
+      "number": 23,
+      "is_avialable": 0
+    },
+    {
+      "number": 24,
+      "is_avialable": 0
+    }
   ]
 }

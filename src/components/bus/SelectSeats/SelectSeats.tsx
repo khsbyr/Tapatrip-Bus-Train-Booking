@@ -1,56 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 import s from './SelectSeats.module.scss';
-import driverimage from 'public/assets/profile2.png';
-import busimg from 'public/assets/busimg.jpg';
-import BusSkech from 'public/assets/BusSkech.svg';
-import Image from 'next/image';
 import travelData from '@data/getTravelData.json';
+import Seat48_52 from '@components/bus/SelectSeats/Seat48_52';
+import Seat24 from '@components/bus/SelectSeats/Seat24';
+export const getStaticProps = async () => {
+  const res = travelData;
 
-const SelectSeats = travelData => {
+  return {
+    props: { travelData: res },
+  };
+};
+
+export default function SelectSeats() {
+  const [isClick, setIsClick] = useState(false);
   return (
-    <div className="bg-white h-auto rounded-lg shadow-lg pl-10 py-3 space-y-10">
+    <div className={s.root}>
       <div>
-        <h1 className="text-cardDate font-bold text-lg"> Суудал сонгох</h1>
+        <h1 className="pl-10 text-cardDate font-bold text-lg pb-2 border-b-2">
+          Суудал сонгох
+        </h1>
       </div>
-
-      <div className="flex flex-wrap justify-between">
-        <div className="space-y-10">
-          <h1 className="text-cardDate font-bold text-lg">
+      <div className="flex flex-wrap">
+        <div className="space-y-6">
+          <h1 className="pl-10 text-cardDate font-bold text-lg">
             Автобусын мэдээлэл
           </h1>
-          <div className="flex space-x-12">
+          <div className="pl-10 flex space-x-12">
             <div>
               <img src="../assets/busimg.jpg" className="h-40" />
             </div>
-            <div className="text-cardDate space-y-3">
+            <div className="text-cardDate font-medium space-y-3">
               <p>ААН: Тээвэр ХХК</p>
               <p>Загвар: Hyundai Universe</p>
               <p>Улсын дугаар: 12312312</p>
               <p>Жолоочийн дугаар: 12312312</p>
             </div>
           </div>
-          <div className="flex space-x-10">
+          <div className="pl-10 flex space-x-10">
             <div className="flex items-center space-x-5">
-              <div className="border bg-white h-7 w-10 rounded-md"></div>
-              <h1>Захиалах боломжтой</h1>
+              <p className="text-cardDate font-bold border-2 bg-white h-7 w-10 rounded-md"></p>
+              <h1 className="text-cardDate">Захиалах боломжтой</h1>
             </div>
-            <div className="flex items-center space-x-5">
+            <div className="text-cardDate flex items-center space-x-5">
               <div className=" bg-bg h-7 w-10 rounded-md"></div>
-              <h1>Захиалагдсан</h1>
+              <h1 className="text-cardDate">Захиалагдсан</h1>
             </div>
           </div>
-          <div>
+          <div className="pl-10 flex flex-wrap">
             <h1 className="text-cardDate font-bold text-md">
               Сонгогдсон суудал
             </h1>
+            <div className="space-x-5 px-5 text-lg font-bold">
+              {isClick ? <button className={s.selectedSeats}>1</button> : <></>}
+            </div>
           </div>
         </div>
         <div>
-          <img src="../assets/bus.svg" className="" />
+          <Seat48_52 datas={travelData} />
+          <Seat24 datas={travelData} />
         </div>
       </div>
     </div>
   );
-};
-
-export default SelectSeats;
+}
