@@ -22,9 +22,11 @@ interface Props {
 const SearchBus: FC<Props> = ({ startLocations }) => {
   const { Option } = AutoComplete;
   const router = useRouter();
-  const formatLocation = startLocationFormat(startLocations);
-  const [startLocation, setStartLocation] = useState(formatLocation);
+  const startFormatLocation = startLocationFormat(startLocations);
   const [isUlaanbaatar, setIsUlaanbaatar] = useState(true);
+  const [selectStartLocation, setSelectStartLocation] = useState('');
+  const [selectStopLocation, setSelectStopLocation] = useState('');
+
   const [getEndLocations, { loading, error, data: endData }] = useLazyQuery(
     BUS_LOCATION_ENDS_QUERY
   );
@@ -32,21 +34,14 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
     BUS_ALL_LOCATION_STOPS_QUERY
   );
 
-  console.log(stopData);
-  // const [endLocation, setEndLocation] = useState(getEndLocations);
-  const endLocation = endData && endData.busAllLocationEnds.edges;
-  const stopLocation = stopData && stopData.busAllLocationStops.edges;
-  const endFormatLocation = endLocationFormat(endLocation);
+  const formatEndLocation = endData && endData.busAllLocationEnds.edges;
+  const endFormatLocation = endLocationFormat(formatEndLocation);
 
-  console.log(endFormatLocation);
-  // console.log(graphqlArrayEndFormat(endFormatLocation));
+  const formatStopLocation = stopData && stopData.busAllLocationStops.edges;
+  const stopFormatLocation = stopLocationFormat(formatStopLocation);
 
-  const handleSearchStartLocation = (value: string) => {
-    let result = arrayFilter(formatLocation, value);
-    setStartLocation(result);
-  };
-
-  const handleSelect = (key: string, options) => {
+  const handleStartSelect = (key: string, options) => {
+    setSelectStartLocation(options.key);
     if (options.key != 'QnVzQWxsTG9jYXRpb246MQ==') {
       getStopLocations({
         variables: { location: options.key },
@@ -55,9 +50,23 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
     } else {
       setIsUlaanbaatar(true);
       getEndLocations({
-        variables: { locationStopLocation: options.key },
+        variables: { locationStopLocation: options.key, locationStop: '' },
       });
     }
+  };
+
+  const handleStopSelect = (key: string, options) => {
+    setSelectStopLocation(options.key);
+    getEndLocations({
+      variables: {
+        locationStopLocation: selectStartLocation,
+        locationStop: options.key,
+      },
+    });
+  };
+
+  const handleEndSelect = (key: string, options) => {
+    setSelectStopLocation(options.key);
   };
 
   const handleSearchBus = async () => {
@@ -70,23 +79,25 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
       <div className={style.container}>
         <div className={style.startLocation}>
           <AutoComplete
-            showSearch
-            onSearch={handleSearchStartLocation}
-            onSelect={handleSelect}
-            defaultValue="Улаанбаатар"
+            allowClear
+            defaultActiveFirstOption
+            notFoundContent="Хайлт илэрцгүй"
+            filterOption={true}
+            onSelect={handleStartSelect}
             placeholder="Хаанаас: хот байршил..."
           >
-            {startLocation.map((location, value) => (
-              <Option key={location.id} value={location.name}>
-                <div className="flex items-center">
-                  <img
-                    className="w-7 h-7 text-direction pr-3"
-                    src="../../assets/svgIcons/stopLocation.svg"
-                  />
-                  {location.name}
-                </div>
-              </Option>
-            ))}
+            {startFormatLocation &&
+              startFormatLocation.map((location, value) => (
+                <Option key={location.id} value={location.name}>
+                  <div className="flex items-center">
+                    <img
+                      className="w-7 h-7 text-direction pr-3"
+                      src="../../assets/svgIcons/stopLocation.svg"
+                    />
+                    {location.name}
+                  </div>
+                </Option>
+              ))}
           </AutoComplete>
           <img
             className={style.currentIcon}
@@ -95,14 +106,14 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
         </div>
         <div className={style.stopLocation}>
           <AutoComplete
+            allowClear
+            onSelect={handleStopSelect}
             disabled={isUlaanbaatar}
-            onSearch={handleSearchStartLocation}
-            onSelect={handleSelect}
             placeholder="Хаанаас: сум байршил..."
           >
-            {endFormatLocation &&
-              endFormatLocation.map((location, value) => (
-                <Option key={value} value={location.name}>
+            {stopFormatLocation &&
+              stopFormatLocation.map((location, value) => (
+                <Option key={location.id} value={location.name}>
                   <div className="flex items-center">
                     <img
                       className="w-7 h-7 text-direction pr-3"
@@ -119,10 +130,16 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
           />
         </div>
         <div className={style.endLocation}>
-          <AutoComplete placeholder="Хаашаа: хот байршил...">
+          <AutoComplete
+            allowClear
+            filterOption={true}
+            notFoundContent="Хайлт илэрцгүй"
+            onSelect={handleEndSelect}
+            placeholder="Хаашаа: хот байршил..."
+          >
             {endFormatLocation &&
               endFormatLocation.map((location, value) => (
-                <Option key={value} value={location.name}>
+                <Option key={location.id} value={location.name}>
                   <div className="flex items-center">
                     <img
                       className="w-7 h-7 text-direction pr-3"

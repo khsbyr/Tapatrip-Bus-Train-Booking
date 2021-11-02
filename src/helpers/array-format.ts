@@ -25,11 +25,7 @@ export function stopLocationFormat(data: any) {
     data.map(element =>
       arr.push({
         id: element.node.id,
-        name:
-          element.node.locationEnd.name +
-          ' /' +
-          element.node.locationEnd.location.name +
-          '/',
+        name: element.node.name,
       })
     );
   return arr;
