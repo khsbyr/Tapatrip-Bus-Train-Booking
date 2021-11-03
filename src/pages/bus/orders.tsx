@@ -1,23 +1,41 @@
 import NavData from '@data/navData.json';
-import TravelList from '@data/getTravelList.json';
 import { useQuery } from '@apollo/client';
-import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
+import {
+  BUS_ALL_LOCATIONS_QUERY,
+  BUS_ALL_SCHEDULES_QUERY,
+} from '@graphql/queries';
+import { Result, Button } from 'antd';
 import React, { useState } from 'react';
 import Card from '@components/bus/Card/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
-import Footer from '@components/common/Footer';
 import BusNavbar from '@components/bus/Navbar';
 import Layout from '@components/common/Layout';
 import { useRouter } from 'next/router';
 import { arrayFormat } from '@helpers/array-format';
+import { css } from '@emotion/react';
+import ClipLoader from 'react-spinners/ClipLoader';
+
+const override = css`
+  display: block;
+  margin: auto;
+  border-color: red;
+`;
 
 export default function Orders() {
-  const [isActive, setIsActive] = useState(false);
   const router = useRouter();
   const { endLocation, date } = router.query;
   const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
-  const { data: scheduleData } = useQuery(BUS_ALL_LOCATIONS_QUERY);
+  const { data: scheduleData, loading } = useQuery(BUS_ALL_SCHEDULES_QUERY, {
+    variables: {
+      locationEnd: endLocation,
+      leaveDate: date ? date + ',' + date : '',
+    },
+  });
+
+  const scheduleResult =
+    scheduleData === undefined ? '' : scheduleData.busAllSchedules.edges;
   const startLocations = arrayFormat(data);
+  console.log(scheduleResult);
   return (
     <Layout>
       <div className=" bg-bg">
@@ -33,21 +51,24 @@ export default function Orders() {
                 </p>
               </div>
             </div>
-            {TravelList.map(z => (
-              <Card
-                description={z.description}
-                start_date={z.start_date}
-                end_date={z.end_date}
-                date={z.date}
-                price={z.price}
-                passengers={z.passengers}
-                direction_name={z.direction_name}
-                start_location={z.start_location}
-                end_location={z.end_location}
-                stops={z.stops}
-                key={z.id}
+            {
+              <ClipLoader
+                color="#ffffff"
+                loading={loading}
+                css={override}
+                size={150}
               />
-            ))}
+            }
+            {scheduleResult.length > 0 ? (
+              scheduleResult.map(schedules => <Card datas={schedules} />)
+            ) : (
+              <Result
+                status="404"
+                title="Уучлаарай"
+                subTitle="Энэ хайлтад тохирох үр дүн олдсонгүй"
+                extra={<Button type="primary">Дахин оролдох</Button>}
+              />
+            )}
           </div>
           <div className="relative hidden md:block">
             <div className="fixed bg-white py-5 px-5 rounded-xl divide-y-2">

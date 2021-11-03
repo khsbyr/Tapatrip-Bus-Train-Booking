@@ -13,20 +13,23 @@ import {
   endLocationFormat,
 } from '@helpers/array-format';
 import { useRouter } from 'next/router';
+import moment from 'moment';
 
-interface Props {
-  startLocations?: any;
-}
+const dateFormat = 'YYYY-MM-DD';
 
 export default function SearchBus({ startLocations }) {
   const { Option } = AutoComplete;
   const router = useRouter();
+  const { endLocation, date } = router.query;
+  const currentDate = date
+    ? date
+    : moment().endOf('day').format(dateFormat).toString();
   const startFormatLocation = startLocationFormat(startLocations);
   const [isUlaanbaatar, setIsUlaanbaatar] = useState(true);
   const [selectStartLocation, setSelectStartLocation] = useState('');
   const [selectStopLocation, setSelectStopLocation] = useState('');
   const [selectEndLocation, setSelectEndLocation] = useState('');
-  const [selectDate, setSelectDate] = useState('');
+  const [selectDate, setSelectDate] = useState(currentDate);
 
   const [getEndLocations, { loading, error, data: endData }] = useLazyQuery(
     BUS_LOCATION_ENDS_QUERY
@@ -93,16 +96,13 @@ export default function SearchBus({ startLocations }) {
         },
       });
     } else {
-      message.warning({
-        content: 'Та явах чиглэлээ сонгоно уу?',
-        className: 'custom-class',
-        style: {
-          marginTop: '34vh',
-          marginLeft: '38vh',
-        },
-      });
+      message.warning('Та явах чиглэлээ сонгоно уу?');
     }
   };
+
+  function disabledDate(current) {
+    return current && current < moment().subtract(1, 'days');
+  }
 
   return (
     <ContentWrapper>
@@ -185,7 +185,13 @@ export default function SearchBus({ startLocations }) {
             src="../../assets/svgIcons/stopLocation.svg"
           />
         </div>
-        <DatePicker onChange={onChange} placeholder="Он, сар, өдөр" />
+        <DatePicker
+          defaultValue={moment(selectDate, dateFormat)}
+          format={dateFormat}
+          disabledDate={disabledDate}
+          onChange={onChange}
+          placeholder="Он, сар, өдөр"
+        />
         <button className={style.searchButton} onClick={handleSearchBus}>
           Хайх
         </button>
