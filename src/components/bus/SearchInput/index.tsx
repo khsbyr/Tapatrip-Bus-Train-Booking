@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { AutoComplete, DatePicker } from 'antd';
+import { AutoComplete, DatePicker, message, Spin } from 'antd';
 import { useLazyQuery } from '@apollo/client';
 import {
   BUS_LOCATION_ENDS_QUERY,
@@ -7,7 +7,6 @@ import {
 } from '@graphql/queries';
 import ContentWrapper from './style';
 import style from './SearchBus.module.scss';
-import arrayFilter from '@helpers/array-filter';
 import {
   startLocationFormat,
   stopLocationFormat,
@@ -26,6 +25,8 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
   const [isUlaanbaatar, setIsUlaanbaatar] = useState(true);
   const [selectStartLocation, setSelectStartLocation] = useState('');
   const [selectStopLocation, setSelectStopLocation] = useState('');
+  const [selectEndLocation, setSelectEndLocation] = useState('');
+  const [selectDate, setSelectDate] = useState('');
 
   const [getEndLocations, { loading, error, data: endData }] = useLazyQuery(
     BUS_LOCATION_ENDS_QUERY
@@ -33,6 +34,8 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
   const [getStopLocations, { data: stopData }] = useLazyQuery(
     BUS_ALL_LOCATION_STOPS_QUERY
   );
+
+  console.log(error);
 
   const formatEndLocation = endData && endData.busAllLocationEnds.edges;
   const endFormatLocation = endLocationFormat(formatEndLocation);
@@ -66,12 +69,34 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
   };
 
   const handleEndSelect = (key: string, options) => {
-    setSelectStopLocation(options.key);
+    setSelectEndLocation(options.key);
   };
 
+  function onChange(date, dateString) {
+    setSelectDate(dateString);
+  }
+
   const handleSearchBus = async () => {
-    router.push('/bus/orders');
-    //busLocation({ variables: { locationStopLocation: selectStartLocation } });
+    if (selectEndLocation != '') {
+      router.push({
+        pathname: '/bus/orders',
+        query: {
+          // startLocattion: selectStartLocation,
+          // stopLocattion: selectStopLocation ? selectStopLocation : '',
+          endLocation: selectEndLocation,
+          date: selectDate,
+        },
+      });
+    } else {
+      message.warning({
+        content: 'Та явах чиглэлээ сонгоно уу?',
+        className: 'custom-class',
+        style: {
+          marginTop: '34vh',
+          marginLeft: '38vh',
+        },
+      });
+    }
   };
 
   return (
@@ -155,7 +180,7 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
             src="../../assets/svgIcons/stopLocation.svg"
           />
         </div>
-        <DatePicker placeholder="Он, сар, өдөр" />
+        <DatePicker onChange={onChange} placeholder="Он, сар, өдөр" />
         <button className={style.searchButton} onClick={handleSearchBus}>
           Хайх
         </button>

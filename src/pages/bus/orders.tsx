@@ -1,16 +1,24 @@
 import NavData from '@data/navData.json';
 import TravelList from '@data/getTravelList.json';
-import React, { FC, useState } from 'react';
+import { useQuery } from '@apollo/client';
+import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
+import React, { useState } from 'react';
 import Card from '@components/bus/Card/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
 import Footer from '@components/common/Footer';
 import Navbar2 from '@components/common/Navbar/Navbar2';
+import Layout from '@components/common/Layout';
+import { useRouter } from 'next/router';
+import { arrayFormat } from '@helpers/array-format';
 
-const Orders: FC = () => {
+export default function Orders() {
   const [isActive, setIsActive] = useState(false);
-
+  const router = useRouter();
+  const { endLocation, date } = router.query;
+  const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
+  const startLocations = arrayFormat(data);
   return (
-    <>
+    <Layout>
       <div className=" bg-bg">
         <Navbar2 navbarData={NavData} />
         <div className="max-w-7xl mx-auto my-5 grid grid-cols-1 md:grid-cols-3">
@@ -63,8 +71,6 @@ const Orders: FC = () => {
         </div>
         <Footer navbarData={NavData} />
       </div>
-    </>
+    </Layout>
   );
-};
-
-export default Orders;
+}
