@@ -18,7 +18,7 @@ interface Props {
   startLocations?: any;
 }
 
-const SearchBus: FC<Props> = ({ startLocations }) => {
+export default function SearchBus({ startLocations }) {
   const { Option } = AutoComplete;
   const router = useRouter();
   const startFormatLocation = startLocationFormat(startLocations);
@@ -31,11 +31,16 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
   const [getEndLocations, { loading, error, data: endData }] = useLazyQuery(
     BUS_LOCATION_ENDS_QUERY
   );
-  const [getStopLocations, { data: stopData }] = useLazyQuery(
-    BUS_ALL_LOCATION_STOPS_QUERY
-  );
+  const [
+    getStopLocations,
+    { data: stopData, loading: stopLoading, error: stopError },
+  ] = useLazyQuery(BUS_ALL_LOCATION_STOPS_QUERY);
 
-  console.log(error);
+  // if (loading) return 'Loading...';
+  // if (error) return `Error! ${error.message}`;
+
+  // if (stopLoading) return 'Loading...';
+  // if (stopError) return `Error! ${stopError.message}`;
 
   const formatEndLocation = endData && endData.busAllLocationEnds.edges;
   const endFormatLocation = endLocationFormat(formatEndLocation);
@@ -187,6 +192,4 @@ const SearchBus: FC<Props> = ({ startLocations }) => {
       </div>
     </ContentWrapper>
   );
-};
-
-export default SearchBus;
+}

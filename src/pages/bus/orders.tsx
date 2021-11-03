@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import Card from '@components/bus/Card/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
 import Footer from '@components/common/Footer';
-import Navbar2 from '@components/common/Navbar/Navbar2';
+import BusNavbar from '@components/bus/Navbar';
 import Layout from '@components/common/Layout';
 import { useRouter } from 'next/router';
 import { arrayFormat } from '@helpers/array-format';
@@ -16,11 +16,12 @@ export default function Orders() {
   const router = useRouter();
   const { endLocation, date } = router.query;
   const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
+  const { data: scheduleData } = useQuery(BUS_ALL_LOCATIONS_QUERY);
   const startLocations = arrayFormat(data);
   return (
     <Layout>
       <div className=" bg-bg">
-        <Navbar2 navbarData={NavData} />
+        <BusNavbar navbarData={NavData} startLocations={startLocations} />
         <div className="max-w-7xl mx-auto my-5 grid grid-cols-1 md:grid-cols-3">
           <div className="md:col-span-2 space-y-5">
             <div className="px-2">
@@ -69,7 +70,6 @@ export default function Orders() {
             </div>
           </div>
         </div>
-        <Footer navbarData={NavData} />
       </div>
     </Layout>
   );
