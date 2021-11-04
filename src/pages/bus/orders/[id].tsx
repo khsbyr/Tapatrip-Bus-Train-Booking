@@ -44,7 +44,7 @@ export default function Payment({ params }) {
     <ContentWrapper>
       <div className="relative bg-bg">
         <Navbar3 navbarData={NavData} />
-        <div className="bg-steps border-2 w-full">
+        <div className="bg-steps w-full">
           <div className="max-w-7xl mx-auto">
             <Steps
               type="navigation"
@@ -62,7 +62,7 @@ export default function Payment({ params }) {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto my-5 flex">
+        <div className="flex flex-wrap max-w-7xl mx-auto py-5">
           <div className="w-full md:w-3/5 lg:w-3/5">
             {steps[current].content}
           </div>
@@ -82,7 +82,7 @@ export default function Payment({ params }) {
               </div>
             )}
             {current === 1 && (
-              <div className="p-2">
+              <div className="px-2">
                 {/* // -------------------Components_1---------------------------// */}
                 {/* {TravelList.map(z => (
                   <StepCard datas="" />
@@ -96,7 +96,7 @@ export default function Payment({ params }) {
               </div>
             )}
             {current === steps.length - 1 && (
-              <div className="p-2">
+              <div className="px-2">
                 {/* // -------------------Components_2---------------------------// */}
                 {/* {TravelList.map(z => (
                   <StepCard datas="" />
