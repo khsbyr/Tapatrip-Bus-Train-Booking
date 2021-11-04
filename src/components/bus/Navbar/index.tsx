@@ -2,6 +2,8 @@ import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import SearchBus from '@components/bus/SearchInput';
+import logoBLue from '@public/assets/logoBlue.png';
+import Image from 'next/image';
 
 interface Props {
   navbarData?: any;
@@ -13,14 +15,14 @@ export default function BusNav({ navbarData, startLocations }) {
   return (
     <div>
       <nav
-        className={`relative md:relative  w-full bg-white md:h-auto md:top-0 z-10 shadow-lg `}
+        className={`relative md:relative w-full bg-white md:h-auto md:top-0 z-10 shadow-lg `}
       >
         <div className="max-w-7xl mx-auto md:mt-3">
           <div className=" flex items-center justify-between h-12">
             <div className="flex items-center ">
               <div className="flex-shrink-0">
-                <img
-                  src="../assets/logoBlue.png"
+                <Image
+                  src={logoBLue}
                   alt="Logo"
                   className="w-36 md:w-full md:h-full px-4"
                 />

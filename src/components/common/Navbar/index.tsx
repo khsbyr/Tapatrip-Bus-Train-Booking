@@ -3,6 +3,8 @@ import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import OrderModal from '@components/bus/OrderModal/OrderModal';
 import styles from './navbar.module.scss';
+import SelectLanguage from '@components/common/Selects/selectLanguage';
+import SelectRate from '@components/common/Selects/selectRate';
 
 interface Props {
   navbarData?: any;
@@ -69,6 +71,8 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     <button className={styles.orderButton} onClick={checkOrder}>
                       Захиалга шалгах
                     </button>
+                    <SelectRate />
+                    <SelectLanguage />
                   </div>
                 </div>
               </div>
@@ -101,6 +105,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
 
           <Transition
             show={isOpen}
+            className="flex justify-end w-full absolute"
             enter="transition ease-out duration-100 transform"
             enterFrom="opacity-0 scale-95"
             enterTo="opacity-100 scale-100"
