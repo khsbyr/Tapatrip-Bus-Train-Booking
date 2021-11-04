@@ -8,7 +8,7 @@ interface Props {
   startLocations?: any;
 }
 
-export default function BusNavbar({ navbarData, startLocations }) {
+export default function BusNav({ navbarData, startLocations }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>

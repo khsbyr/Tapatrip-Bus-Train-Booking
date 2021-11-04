@@ -13,7 +13,7 @@ import Layout from '@components/common/Layout';
 import { useRouter } from 'next/router';
 import { arrayFormat } from '@helpers/array-format';
 import { css } from '@emotion/react';
-import ClipLoader from 'react-spinners/ClipLoader';
+import ClipLoader from 'react-spinners/BeatLoader';
 
 const override = css`
   display: block;
@@ -53,10 +53,11 @@ export default function Orders() {
             </div>
             {
               <ClipLoader
-                color="#ffffff"
+                color={'#177ad6;'}
                 loading={loading}
                 css={override}
-                size={150}
+                speedMultiplier={1}
+                size={80}
               />
             }
             {scheduleResult.length > 0 ? (

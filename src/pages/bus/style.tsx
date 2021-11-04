@@ -34,10 +34,4 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const override = styled.div`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`;
-
-export default { ContentWrapper, override };
+export default ContentWrapper;

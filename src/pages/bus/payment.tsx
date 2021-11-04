@@ -6,7 +6,7 @@ import Payments from '@components/bus/Payments';
 import SelectSeats from '@components/bus/SelectSeats';
 import Footer from '@components/common/Footer';
 import ContentWrapper from './style';
-import Card2 from '@components/bus/Card/Card2';
+import StepCard from '@components/bus/StepCard';
 import TravelList from '@data/getTravelList[1].json';
 import Navbar3 from '@components/common/Navbar/Navbar3';
 const { Step } = Steps;
@@ -30,6 +30,7 @@ const steps = [
 ];
 
 const Payment: FC = () => {
+  console.log('aa');
   const [current, setCurrent] = React.useState(0);
 
   const onChange = current => {
@@ -51,7 +52,6 @@ const Payment: FC = () => {
             current={current}
             onChange={onChange}
             size="small"
-            // className="bg-steps p-4"
             responsive={true}
             className="site-navigation-steps bg-steps"
           >
@@ -75,19 +75,7 @@ const Payment: FC = () => {
               <div className="px-2">
                 {/* // -------------------Components_0---------------------------// */}
                 {TravelList.map(z => (
-                  <Card2
-                    description={z.description}
-                    start_date={z.start_date}
-                    end_date={z.end_date}
-                    date={z.date}
-                    price={z.price}
-                    passengers={z.passengers}
-                    direction_name={z.direction_name}
-                    start_location={z.start_location}
-                    end_location={z.end_location}
-                    stops={z.stops}
-                    key={z.id}
-                  />
+                  <StepCard datas="" />
                 ))}
                 <button
                   className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white"
@@ -101,19 +89,7 @@ const Payment: FC = () => {
               <div className="p-2">
                 {/* // -------------------Components_1---------------------------// */}
                 {TravelList.map(z => (
-                  <Card2
-                    description={z.description}
-                    start_date={z.start_date}
-                    end_date={z.end_date}
-                    date={z.date}
-                    price={z.price}
-                    passengers={z.passengers}
-                    direction_name={z.direction_name}
-                    start_location={z.start_location}
-                    end_location={z.end_location}
-                    stops={z.stops}
-                    key={z.id}
-                  />
+                  <StepCard datas="" />
                 ))}
                 <button
                   className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white"
@@ -127,19 +103,7 @@ const Payment: FC = () => {
               <div className="p-2">
                 {/* // -------------------Components_2---------------------------// */}
                 {TravelList.map(z => (
-                  <Card2
-                    description={z.description}
-                    start_date={z.start_date}
-                    end_date={z.end_date}
-                    date={z.date}
-                    price={z.price}
-                    passengers={z.passengers}
-                    direction_name={z.direction_name}
-                    start_location={z.start_location}
-                    end_location={z.end_location}
-                    stops={z.stops}
-                    key={z.id}
-                  />
+                  <StepCard datas="" />
                 ))}
                 <button className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white">
                   {steps[current].button}
@@ -148,7 +112,6 @@ const Payment: FC = () => {
             )}
           </div>
         </div>
-        <Footer navbarData={NavData} />
       </div>
     </ContentWrapper>
   );
