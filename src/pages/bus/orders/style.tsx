@@ -15,10 +15,6 @@ const ContentWrapper = styled.div`
     display: none;
   }
 
-  .ant-steps-navigation .ant-steps-item {
-    margin-top: 3px;
-  }
-
   .ant-steps-navigation .ant-steps-item::after {
     border: 2px solid white;
     border-bottom: none;
