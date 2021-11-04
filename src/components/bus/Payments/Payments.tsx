@@ -7,7 +7,6 @@ import ContentWrapper from './style';
 import Banks from '@data/bankInformation.json';
 
 export default function Payment() {
-  console.log(Banks);
   const [value, setValue] = React.useState(1);
   const onChange = e => {
     console.log('radio checked', e.target.value);
@@ -26,8 +25,8 @@ export default function Payment() {
       <div className={s.root}>
         <div className={s.body}>
           <div className={s.instructions}>
-            <p className={s.title}>Төлбөр төлөх зааварчилгаа</p>
-            <p className={s.time}>
+            <p>Төлбөр төлөх зааварчилгаа</p>
+            <p>
               <Countdown value={deadline} onFinish={onFinish} />
             </p>
           </div>
@@ -56,13 +55,13 @@ export default function Payment() {
         <div className={s.radioGroup}>
           <h1 className={s.paymentTitle}>Төлбөр төлөх хэлбэр сонгоно уу</h1>
 
-          <Radio.Group onChange={onChange} value={value}>
+          <Radio.Group onChange={onChange} value={value} className="w-full">
             <div className="w-full ml-6">
               <Space direction="vertical">
                 <Radio value={1}>
-                  <div className="">
+                  <div className="w-full">
                     <p className={s.paymentShape}>Шилжүүлэх</p>
-                    {value === 1 && <PayTransfer banks={Banks} />}
+                    {value === 1 && <PayTransfer />}
                   </div>
                 </Radio>
                 <Radio value={2}>
