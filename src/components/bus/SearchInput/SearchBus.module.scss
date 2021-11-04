@@ -1,14 +1,12 @@
 .container {
-  @apply px-4 md:px-12 py-6 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-8;
+  @apply px-4 md:px-12 py-6 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-6;
 
   .startLocation {
     @apply col-start-1 col-end-3 relative;
   }
-  .stopLocation {
-    @apply col-start-3 col-end-5 relative;
-  }
+
   .endLocation {
-    @apply col-start-5 col-end-7 relative;
+    @apply col-start-3 col-end-5 relative;
   }
 
   .searchButton {

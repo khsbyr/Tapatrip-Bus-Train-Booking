@@ -11,13 +11,15 @@ import { ShieldExclamationIcon } from '@heroicons/react/solid';
 import BusNavbar from '@components/bus/Navbar';
 import Layout from '@components/common/Layout';
 import { useRouter } from 'next/router';
-import { arrayFormat } from '@helpers/array-format';
+import arrayFormat from '@helpers/array-format';
 import { css } from '@emotion/react';
-import ClipLoader from 'react-spinners/BeatLoader';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const override = css`
   display: block;
-  margin: auto;
+  margin-left: 1000px;
+  justify-content: 'center';
+  align-items: 'center';
   border-color: red;
 `;
 
@@ -61,9 +63,7 @@ export default function Orders() {
               />
             }
             {scheduleResult.length > 0 ? (
-              scheduleResult.map(schedules => (
-                <Card key={schedules.node.id} datas={schedules} />
-              ))
+              scheduleResult.map(schedules => <Card datas={schedules} />)
             ) : (
               <Result
                 status="404"

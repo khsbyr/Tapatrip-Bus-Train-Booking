@@ -38,6 +38,7 @@ module.exports = {
         alert: '#F7B352',
         bg: '#F1F2F6',
         seat: '#0A3761',
+        weather: '#8AB1D5',
       }),
       textColor: {
         primary: '#3490dc',

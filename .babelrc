@@ -26,7 +26,6 @@
         }
       }
     ],
-    ["styled-components", { "ssr": true }],
-    ["@emotion"]
+    ["styled-components", { "ssr": true }]
   ]
 }

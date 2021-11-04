@@ -1,8 +1,8 @@
+import SearchBus from '@components/bus/SearchInput';
 import React, { FC } from 'react';
 import { Tabs } from 'antd';
 import ContentWrapper from './style';
 import style from './search.module.scss';
-import SearchBus from '@components/bus/SearchInput';
 
 const { TabPane } = Tabs;
 
