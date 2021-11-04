@@ -36,7 +36,7 @@ const OrderModal: FC<Props> = props => {
             Захиалгын мэдээлэл шалгах
           </h1>
           <div className="flex justify-center">
-            <div className="w-1/2 space-y-4">
+            <div className="sm:w-1/2 space-y-4">
               <div className="space-y-2">
                 <label
                   className="text-cardDate text-base px-2 font-medium"
@@ -103,30 +103,49 @@ const OrderModal: FC<Props> = props => {
               </div>
             </div>
           </div>
-          <div className={`${!isActive ? 'hidden' : 'block grid grid-cols-2'}`}>
+          <div
+            className={`${
+              !isActive ? 'hidden' : 'block grid grid-cols-1 sm:grid-cols-2'
+            }`}
+          >
             <div className="text-sm font-medium text-cardDate">
               <h1 className="flex justify-center text-cardDate text-xl font-bold pb-4 border-b-2">
                 Захиалгын мэдээлэл
               </h1>
-              <div className="border-r-2 space-y-3 py-2 pr-2">
+              <div className="px-4 py-2 sm:border-r-2 space-y-3">
                 <p className="space-y-1">
-                  <p className="flex font-bold justify-between">
+                  <p className="flex font-bold">
                     {TravelList[0].start_location}
-                    <h1 className="text-red-400">-аас </h1>
+                    <h1 className="text-red-400 px-4 sm:px-8">-аас </h1>
                     {TravelList[0].end_location}
                   </p>
-                  <p className="flex font-bold text-lg justify-between">
+                  <p className="flex font-bold text-lg">
                     {TravelList[0].start_date}
-                    <ArrowRightIcon className="h-7 text-direction" />
+                    <ArrowRightIcon className="px-4 sm:px-10 h-7 text-direction" />
                     {TravelList[0].end_date}
                   </p>
                   {TravelList[0].date}, {TravelList[0].is_start_stop} зогсолт
                 </p>
 
                 <p className="text-base space-y-2">
-                  <p>Захиалга хийсэн огноо:{TravelList[0].order_date}</p>
-                  <p>Суудлын дугаар: 1, 8</p>
-                  <p>Төлбөр төлөгдсөн эсэх: Төлөгдсөн</p>
+                  <p className="flex">
+                    Захиалга хийсэн огноо:
+                    <h1 className="px-2 font-bold text-base text-cardDate">
+                      {TravelList[0].order_date}
+                    </h1>
+                  </p>
+                  <p className="flex">
+                    Суудлын дугаар:
+                    <h1 className="px-2 font-bold text-base text-cardDate">
+                      1, 8
+                    </h1>
+                  </p>
+                  <p className="flex">
+                    Төлбөр төлөгдсөн эсэх:{' '}
+                    <h1 className="px-2 font-bold text-base text-cardDate">
+                      Төлөгдсөн
+                    </h1>
+                  </p>
                 </p>
               </div>
             </div>
@@ -134,7 +153,7 @@ const OrderModal: FC<Props> = props => {
               <h1 className="flex justify-center text-cardDate text-xl font-bold pb-4 border-b-2">
                 Автобусны мэдээлэл
               </h1>
-              <div className="pl-6 py-2 text-base text-cardDate font-medium">
+              <div className="px-4 py-2 text-base text-cardDate font-medium">
                 <ul className="w-full space-y-2">
                   <li className="flex">
                     ААН:

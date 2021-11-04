@@ -14,6 +14,9 @@ const ContentWrapper = styled.div`
   .ant-input:focus {
     background-color: transparent;
   }
+  .ant-modal-content {
+    width: 10000;
+  }
 `;
 
 export default ContentWrapper;

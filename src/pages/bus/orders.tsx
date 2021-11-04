@@ -41,12 +41,12 @@ const Orders: FC = () => {
               />
             ))}
           </div>
-          <div className="relative hidden md:block">
-            <div className="fixed bg-white py-5 px-5 rounded-xl divide-y-2">
+          <div className="hidden md:block">
+            <div className="sticky top-0 fixed bg-white py-5 px-5 rounded-xl divide-y-2">
               <div className="mt-0 space-y-2">
                 <h1 className="text-cardDate font-bold text-2xl">Тосох цаг</h1>
                 <div className="flex justify-center flex-wrap space-x-4">
-                  <div className="rounded shadow-md text-cardDate px-4 py-1">
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
                     <p className="flex justify-center">
                       <SunIcon className="w-10" />
                     </p>
@@ -56,8 +56,8 @@ const Orders: FC = () => {
                     <p className="flex justify-center font-medium">
                       06:00-10:00
                     </p>
-                  </div>
-                  <div className="rounded shadow-md text-cardDate px-4 py-1">
+                  </button>
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
                     <p className="flex justify-center">
                       <CloudIcon className="w-10" />
                     </p>
@@ -67,8 +67,8 @@ const Orders: FC = () => {
                     <p className="flex justify-center font-medium">
                       06:00-10:00
                     </p>
-                  </div>
-                  <div className="rounded shadow-md text-cardDate px-4 py-1">
+                  </button>
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
                     <p className="flex justify-center">
                       <MoonIcon className="w-10" />
                     </p>
@@ -78,13 +78,13 @@ const Orders: FC = () => {
                     <p className="flex justify-center font-medium">
                       06:00-10:00
                     </p>
-                  </div>
+                  </button>
                 </div>
               </div>
               <div className="mt-8 pt-4 space-y-2 ">
-                <h1 className="text-cardDate font-bold text-2xl">Тосох цаг</h1>
+                <h1 className="text-cardDate font-bold text-2xl">Хүргэх цаг</h1>
                 <div className="flex justify-center flex-wrap space-x-4">
-                  <div className="rounded shadow-md text-cardDate px-4 py-1">
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
                     <p className="flex justify-center">
                       <SunIcon className="w-10" />
                     </p>
@@ -94,8 +94,8 @@ const Orders: FC = () => {
                     <p className="flex justify-center font-medium">
                       06:00-10:00
                     </p>
-                  </div>
-                  <div className="rounded shadow-md text-cardDate px-4 py-1">
+                  </button>
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
                     <p className="flex justify-center">
                       <CloudIcon className="w-10" />
                     </p>
@@ -105,8 +105,8 @@ const Orders: FC = () => {
                     <p className="flex justify-center font-medium">
                       06:00-10:00
                     </p>
-                  </div>
-                  <div className="rounded shadow-md text-cardDate px-4 py-1">
+                  </button>
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
                     <p className="flex justify-center">
                       <MoonIcon className="w-10" />
                     </p>
@@ -116,7 +116,7 @@ const Orders: FC = () => {
                     <p className="flex justify-center font-medium">
                       06:00-10:00
                     </p>
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
