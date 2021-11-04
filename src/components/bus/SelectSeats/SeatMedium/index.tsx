@@ -1,13 +1,11 @@
 import busSketch from '@public/assets/45.svg';
 import Image from 'next/image';
 import seatRangeMap from '@helpers/seatRangeMap';
-import s from './Seat48_52.module.scss';
-interface Props {
-  datas?: any;
-}
+import style from './SeatMedium.module.scss';
+
 const Seat48_52 = ({ datas }) => {
   const seatRanges = seatRangeMap(datas.seat);
-  console.log(datas);
+  //console.log(datas);
   return (
     <div className="pl-10 flex">
       <div className="z-0 relative w-full">
@@ -21,13 +19,13 @@ const Seat48_52 = ({ datas }) => {
                 {seat.map((seat, j) =>
                   j !== 2 ? (
                     <td>
-                      <button className={s.seatButton} value={j}>
+                      <button className={style.seatButton} value={j}>
                         {seat && seat.number}
                       </button>
                     </td>
                   ) : (
                     <td>
-                      <button className={s.seatButtonMarginLeft} value={j}>
+                      <button className={style.seatButtonMarginLeft} value={j}>
                         {seat && seat.number}
                       </button>
                     </td>
@@ -40,7 +38,7 @@ const Seat48_52 = ({ datas }) => {
                   k == 3 || k == 4 ? (
                     <td>
                       <button
-                        className={s.seatButtonMarginRight}
+                        className={style.seatButtonMarginRight}
                         value={k}
                         onClick={seat.number}
                       >
@@ -49,7 +47,7 @@ const Seat48_52 = ({ datas }) => {
                     </td>
                   ) : (
                     <td>
-                      <button className={s.seatButton} value={k}>
+                      <button className={style.seatButton} value={k}>
                         {seat && seat.number}
                       </button>
                     </td>

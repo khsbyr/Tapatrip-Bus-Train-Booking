@@ -26,17 +26,23 @@ export default function Orders() {
   const router = useRouter();
   const { endLocation, date } = router.query;
   const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
-  const { data: scheduleData, loading } = useQuery(BUS_ALL_SCHEDULES_QUERY, {
+  const {
+    data: scheduleData,
+    loading,
+    error,
+  } = useQuery(BUS_ALL_SCHEDULES_QUERY, {
     variables: {
       locationEnd: endLocation,
       leaveDate: date ? date + ',' + date : '',
     },
   });
 
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
+
   const scheduleResult =
     scheduleData === undefined ? '' : scheduleData.busAllSchedules.edges;
   const startLocations = arrayFormat(data);
-  console.log(scheduleResult);
   return (
     <Layout>
       <div className=" bg-bg">

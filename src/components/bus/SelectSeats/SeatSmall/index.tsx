@@ -1,13 +1,11 @@
 import busSketch from '@public/assets/24.svg';
 import Image from 'next/image';
 import seat24RangeMap from '@helpers/seat24RangeMap';
-import s from './Seat24.module.scss';
-interface Props {
-  datas?: any;
-}
+import style from './SeatSmall.module.scss';
+
 const Seat24 = ({ datas }) => {
   const seatRanges = seat24RangeMap(datas.seat24);
-  console.log(datas);
+  //console.log(datas);
   return (
     <div className="pl-10 flex">
       <div className="z-0 relative w-full">
@@ -23,7 +21,7 @@ const Seat24 = ({ datas }) => {
                     <td></td>
                   ) : (
                     <td>
-                      <button className={s.seatButton} value={k}>
+                      <button className={style.seatButton} value={k}>
                         {seat && seat.number}
                       </button>
                     </td>

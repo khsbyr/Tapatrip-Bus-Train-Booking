@@ -6,13 +6,6 @@ import s from './Payments.module.scss';
 import ContentWrapper from './style';
 import Banks from '@data/bankInformation.json';
 
-export const getStaticProps = async () => {
-  const res = Banks;
-
-  return {
-    props: { Banks: res },
-  };
-};
 export default function Payment() {
   console.log(Banks);
   const [value, setValue] = React.useState(1);

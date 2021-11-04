@@ -20,25 +20,24 @@ export default function StepCard({ datas }) {
               <div className="space-y-2 py-5">
                 <div className="flex space-x-4">
                   <h1 className="text-cardDate font-bold text-md">
-                    {datas.node.leaveDate}
+                    {datas.leaveDate}
                   </h1>
                   <ArrowRightIcon className="h-5 text-direction" />
                   <h1 className="text-cardDate font-bold text-md">
-                    {datas.node.leaveDate}
+                    {datas.leaveDate}
                   </h1>
                 </div>
                 <h1 className="font-light text-cardDate text-md">
                   {' '}
-                  {datas.node.leaveTime}{' '}
+                  {datas.leaveTime}{' '}
                 </h1>
               </div>
               <div className="space-y-2 py-5">
                 <h1 className="text-cardDate font-bold text-md">
-                  {datas.node.adultTicket} MNT
+                  {datas.adultTicket} MNT
                 </h1>
                 <h1 className="flex items-center">
-                  <UserIcon className="w-4 h-4 " /> {''}
-                  зорчигчийн үнэ
+                  <UserIcon className="w-4 h-4 " />1 зорчигчийн үнэ
                 </h1>
               </div>
             </div>
@@ -46,7 +45,7 @@ export default function StepCard({ datas }) {
             <div className="flex flex-wrap py-5 justify-between items-center ">
               <div>
                 <h1 className="text-cardDate font-semibold text-md">
-                  {datas.node.directionName}
+                  {datas.directionName}
                 </h1>
               </div>
               <div className="flex items-center space-x-8">
@@ -75,19 +74,19 @@ export default function StepCard({ datas }) {
             <div className="px-5 py-5">
               <Steps progressDot direction="vertical">
                 <Step
-                  title={datas.node.leaveDate}
+                  title={datas.leaveDate}
                   description={
-                    datas.node.startStopName +
+                    datas.startStopName +
                     '-' +
-                    datas.node.locationEnd.locationStop.location.name
+                    datas.locationEnd.locationStop.location.name
                   }
                 />
                 <Step
-                  title={datas.node.leaveDate}
+                  title={datas.leaveDate}
                   description={
-                    datas.node.locationEnd.locationEnd.name +
+                    datas.locationEnd.locationEnd.name +
                     '-' +
-                    datas.node.locationEnd.locationEnd.location.name
+                    datas.locationEnd.locationEnd.location.name
                   }
                 />
               </Steps>

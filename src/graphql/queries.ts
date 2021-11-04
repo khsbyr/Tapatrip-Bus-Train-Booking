@@ -122,22 +122,41 @@ export const BUS_ALL_SCHEDULES_QUERY = gql`
 `;
 
 export const BUS_SCHEDULES_DETAIL_QUERY = gql`
-  query busSchedule($id: String) {
+  query busSchedule($id: ID!) {
     busSchedule(id: $id) {
       id
       distance
       leaveDate
       leaveTime
+      driverPhone
       adultTicket
+      childTicket
+      startStopName
+      directionName
       locationEnd {
-        locationEnd {
+        id
+        locationStop {
+          id
           name
-          picture
+          location {
+            id
+            name
+          }
+        }
+        locationEnd {
+          id
+          location {
+            id
+            name
+          }
+          type
+          name
         }
       }
       bus {
         modelName
         seatCount
+        plateNumber
         transporter {
           name
         }

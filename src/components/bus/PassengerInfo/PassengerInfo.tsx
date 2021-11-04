@@ -12,16 +12,7 @@ import s from '@components/bus/PassengerInfo/PassengerInfo.module.scss';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 
-export const getStaticProps = async () => {
-  const res = registNo;
-  return {
-    props: { registNo: res },
-  };
-};
 const { Option } = Select;
-interface Props {
-  registNo?: string;
-}
 const countries = [
   { name: '+976', src: mngIcon, value: 0 },
   { name: '+444', src: enIcon, value: 1 },
@@ -30,7 +21,7 @@ const selection = [
   { name: 'Хувь хүн', value: 0 },
   { name: 'Байгууллага', value: 1 },
 ];
-export default function PassengerIfo() {
+export default function PassengerIfo(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(selection[0]);
   return (

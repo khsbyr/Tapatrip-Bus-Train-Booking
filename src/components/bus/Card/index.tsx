@@ -13,9 +13,6 @@ const { Step } = Steps;
 
 export default function Card({ datas }) {
   const [isActive, setIsActive] = useState(false);
-  const handleOrder = async () => {
-    alert(datas.node.id);
-  };
   return (
     <div className="px-2">
       <div className="max-w-7xl mx-auto">
