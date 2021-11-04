@@ -1,45 +1,19 @@
 import NavData from '@data/navData.json';
-import { useQuery } from '@apollo/client';
-import {
-  BUS_ALL_LOCATIONS_QUERY,
-  BUS_ALL_SCHEDULES_QUERY,
-} from '@graphql/queries';
-import { Result, Button } from 'antd';
-import React, { useState } from 'react';
+import TravelList from '@data/getTravelList.json';
+import React, { FC, useState } from 'react';
 import Card from '@components/bus/Card/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
-import BusNavbar from '@components/bus/Navbar';
-import Layout from '@components/common/Layout';
-import { useRouter } from 'next/router';
-import { arrayFormat } from '@helpers/array-format';
-import { css } from '@emotion/react';
-import ClipLoader from 'react-spinners/ClipLoader';
+import Footer from '@components/common/Footer';
+import Navbar2 from '@components/common/Navbar/Navbar3';
+import { Result, Button } from 'antd';
+import { SunIcon, CloudIcon, MoonIcon } from '@heroicons/react/outline';
+const Orders: FC = () => {
+  const [isActive, setIsActive] = useState(false);
 
-const override = css`
-  display: block;
-  margin: auto;
-  border-color: red;
-`;
-
-export default function Orders() {
-  const router = useRouter();
-  const { endLocation, date } = router.query;
-  const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
-  const { data: scheduleData, loading } = useQuery(BUS_ALL_SCHEDULES_QUERY, {
-    variables: {
-      locationEnd: endLocation,
-      leaveDate: date ? date + ',' + date : '',
-    },
-  });
-
-  const scheduleResult =
-    scheduleData === undefined ? '' : scheduleData.busAllSchedules.edges;
-  const startLocations = arrayFormat(data);
-  console.log(scheduleResult);
   return (
-    <Layout>
-      <div className=" bg-bg">
-        <BusNavbar navbarData={NavData} startLocations={startLocations} />
+    <>
+      <div className="bg-bg">
+        <Navbar2 navbarData={NavData} />
         <div className="max-w-7xl mx-auto my-5 grid grid-cols-1 md:grid-cols-3">
           <div className="md:col-span-2 space-y-5">
             <div className="px-2">
@@ -51,47 +25,107 @@ export default function Orders() {
                 </p>
               </div>
             </div>
-            {
-              <ClipLoader
-                color="#ffffff"
-                loading={loading}
-                css={override}
-                size={150}
+            {TravelList.map(z => (
+              <Card
+                description={z.description}
+                start_date={z.start_date}
+                end_date={z.end_date}
+                date={z.date}
+                price={z.price}
+                passengers={z.passengers}
+                direction_name={z.direction_name}
+                start_location={z.start_location}
+                end_location={z.end_location}
+                stops={z.stops}
+                key={z.id}
               />
-            }
-            {scheduleResult.length > 0 ? (
-              scheduleResult.map(schedules => <Card datas={schedules} />)
-            ) : (
-              <Result
-                status="404"
-                title="Уучлаарай"
-                subTitle="Энэ хайлтад тохирох үр дүн олдсонгүй"
-                extra={<Button type="primary">Дахин оролдох</Button>}
-              />
-            )}
+            ))}
           </div>
-          <div className="relative hidden md:block">
-            <div className="fixed bg-white py-5 px-5 rounded-xl divide-y-2">
-              <div className="mt-0">
+          <div className="hidden md:block">
+            <div className="sticky top-0 fixed bg-white py-5 px-5 rounded-xl divide-y-2">
+              <div className="mt-0 space-y-2">
                 <h1 className="text-cardDate font-bold text-2xl">Тосох цаг</h1>
-                <div className="flex flex-wrap">
-                  <img src="../assets/Group 1308.png" />
-                  <img src="../assets/Group 1308.png" />
-                  <img src="../assets/Group 1308.png" />
+                <div className="flex justify-center flex-wrap space-x-4">
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
+                    <p className="flex justify-center">
+                      <SunIcon className="w-10" />
+                    </p>
+                    <p className="flex justify-center text-base font-medium">
+                      Өглөө
+                    </p>
+                    <p className="flex justify-center font-medium">
+                      06:00-10:00
+                    </p>
+                  </button>
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
+                    <p className="flex justify-center">
+                      <CloudIcon className="w-10" />
+                    </p>
+                    <p className="flex justify-center text-base font-medium">
+                      Өдөр
+                    </p>
+                    <p className="flex justify-center font-medium">
+                      06:00-10:00
+                    </p>
+                  </button>
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
+                    <p className="flex justify-center">
+                      <MoonIcon className="w-10" />
+                    </p>
+                    <p className="flex justify-center text-base font-medium">
+                      Орой
+                    </p>
+                    <p className="flex justify-center font-medium">
+                      06:00-10:00
+                    </p>
+                  </button>
                 </div>
               </div>
-              <div className="mt-8">
+              <div className="mt-8 pt-4 space-y-2 ">
                 <h1 className="text-cardDate font-bold text-2xl">Хүргэх цаг</h1>
-                <div className="flex flex-wrap">
-                  <img src="../assets/Group 1308.png" />
-                  <img src="../assets/Group 1308.png" />
-                  <img src="../assets/Group 1308.png" />
+                <div className="flex justify-center flex-wrap space-x-4">
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
+                    <p className="flex justify-center">
+                      <SunIcon className="w-10" />
+                    </p>
+                    <p className="flex justify-center text-base font-medium">
+                      Өглөө
+                    </p>
+                    <p className="flex justify-center font-medium">
+                      06:00-10:00
+                    </p>
+                  </button>
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
+                    <p className="flex justify-center">
+                      <CloudIcon className="w-10" />
+                    </p>
+                    <p className="flex justify-center text-base font-medium">
+                      Өдөр
+                    </p>
+                    <p className="flex justify-center font-medium">
+                      06:00-10:00
+                    </p>
+                  </button>
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
+                    <p className="flex justify-center">
+                      <MoonIcon className="w-10" />
+                    </p>
+                    <p className="flex justify-center text-base font-medium">
+                      Орой
+                    </p>
+                    <p className="flex justify-center font-medium">
+                      06:00-10:00
+                    </p>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <Footer navbarData={NavData} />
       </div>
-    </Layout>
+    </>
   );
-}
+};
+
+export default Orders;

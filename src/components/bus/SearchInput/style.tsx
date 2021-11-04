@@ -13,7 +13,11 @@ const ContentWrapper = styled.div`
   }
 
   .ant-picker-input > input {
-    color: #177ad6 !important;
+    color: #8ab1d5 !important;
+  }
+
+  .ant-picker-suffix {
+    color: #8ab1d5 !important;
   }
 
   .ant-select {

@@ -9,10 +9,33 @@ import { Steps } from 'antd';
 
 const { Step } = Steps;
 
-export default function Card({ datas }) {
-  console.log('card');
-  console.log(datas);
+interface Props {
+  description: string;
+  start_date: string;
+  end_date: string;
+  date: string;
+  price: number;
+  passengers: number;
+  direction_name: string;
+  start_location: string;
+  end_location: string;
+  stops?: any;
+}
+
+const Card: FC<Props> = ({
+  description,
+  start_date,
+  end_date,
+  date,
+  price,
+  passengers,
+  direction_name,
+  start_location,
+  end_location,
+  stops,
+}) => {
   const [isActive, setIsActive] = useState(false);
+
   return (
     <>
       <div className="px-2">
@@ -20,29 +43,28 @@ export default function Card({ datas }) {
           <div className=" relative bg-white w-full h-auto rounded-2xl">
             <div className="px-20 space-y-4">
               <h1 className="pt-4 font-bold text-cardDescColor">
-                {datas.node.leaveDate}
+                {description}
               </h1>
               <div className="flex justify-between ">
                 <div className="space-y-2">
                   <div className="flex space-x-4">
                     <h1 className="text-cardDate font-bold text-xl">
-                      {datas.node.leaveDate}
+                      {start_date}
                     </h1>
                     <ArrowRightIcon className="h-7 text-direction" />
                     <h1 className="text-cardDate font-bold text-xl">
-                      {datas.node.leaveDate}
+                      {end_date}
                     </h1>
                   </div>
-                  <h1 className="font-light text-cardDate text-lg">
-                    {datas.node.leaveTime}
-                  </h1>
+                  <h1 className="font-light text-cardDate text-lg"> {date} </h1>
                 </div>
                 <div className="space-y-2">
                   <h1 className="text-cardDate font-bold text-2xl">
-                    {datas.node.adultTicket} MNT
+                    {price} MNT
                   </h1>
                   <h1 className="flex items-center">
-                    <UserIcon className="w-4 h-4 " /> 1 зорчигчийн үнэ
+                    <UserIcon className="w-4 h-4 " /> {passengers} зорчигчийн
+                    үнэ
                   </h1>
                 </div>
               </div>
@@ -50,7 +72,7 @@ export default function Card({ datas }) {
               <div className="flex flex-wrap py-5 justify-between items-center ">
                 <div>
                   <h1 className="text-cardDate font-semibold text-md">
-                    {datas.node.directionName}
+                    {direction_name}
                   </h1>
                 </div>
                 <div className="flex items-center space-x-8">
@@ -81,22 +103,15 @@ export default function Card({ datas }) {
               <div className="border border-dashed "></div>
               <div className="px-20 py-5">
                 <Steps progressDot direction="vertical">
-                  <Step
-                    title={datas.node.leaveDate}
-                    description={
-                      datas.node.locationEnd.locationStop.name +
-                      '-' +
-                      datas.node.locationEnd.locationStop.location.name
-                    }
-                  />
-                  <Step
-                    title={datas.node.leaveDate}
-                    description={
-                      datas.node.locationEnd.locationEnd.name +
-                      '-' +
-                      datas.node.locationEnd.locationEnd.location.name
-                    }
-                  />
+                  <Step title={start_date} description={start_location} />
+                  {stops?.map(z => (
+                    <Step
+                      title={z.start_date}
+                      description={z.description}
+                      key={z.id}
+                    />
+                  ))}
+                  <Step title={end_date} description={end_location} />
                 </Steps>
               </div>
             </div>
@@ -105,4 +120,6 @@ export default function Card({ datas }) {
       </div>
     </>
   );
-}
+};
+
+export default Card;

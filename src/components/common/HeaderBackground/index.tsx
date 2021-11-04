@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styles from './background.module.scss';
 
-export default function HeaderBackground() {
+const HeaderBackground: FC = () => {
   return (
     <div className={styles.body}>
       <img src="assets/Header.png" alt="Logo" className={styles.image} />
@@ -11,4 +11,6 @@ export default function HeaderBackground() {
       </div>
     </div>
   );
-}
+};
+
+export default HeaderBackground;

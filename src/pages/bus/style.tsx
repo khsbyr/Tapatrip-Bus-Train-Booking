@@ -23,21 +23,31 @@ const ContentWrapper = styled.div`
     border: 2px solid white;
     border-bottom: none;
     border-left: none;
-    content: '';
+    margin-left: -4px;
+    margin-top: -10px;
+    width: 10px;
+    height: 10px;
   }
-
+  @media only screen and (max-width: 576px) {
+    .ant-steps-navigation .ant-steps-item::after {
+      border: 2px solid white;
+      border-bottom: none;
+      border-left: none;
+      margin-left: -10px;
+      margin-top: -20px;
+    }
+  }
+  @media only screen and (min-width: 768px) {
+    .ant-steps-item-title {
+      font-size: 16px;
+    }
+  }
   .ant-steps-item-wait
     > .ant-steps-item-container
     > .ant-steps-item-content
     > .ant-steps-item-title {
-    color: #adadad !important;
+    color: #8ab1d5 !important;
   }
 `;
 
-const override = styled.div`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`;
-
-export default { ContentWrapper, override };
+export default ContentWrapper;
