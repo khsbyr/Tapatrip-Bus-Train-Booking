@@ -4,6 +4,7 @@ import {
   BUS_ALL_LOCATIONS_QUERY,
   BUS_ALL_SCHEDULES_QUERY,
 } from '@graphql/queries';
+import { SunIcon, CloudIcon, MoonIcon } from '@heroicons/react/outline';
 import { Result, Button } from 'antd';
 import React, { useState } from 'react';
 import Card from '@components/bus/Card';
@@ -73,22 +74,82 @@ export default function Orders() {
               />
             )}
           </div>
-          <div className="relative hidden md:block">
-            <div className="fixed bg-white py-5 px-5 rounded-xl divide-y-2">
-              <div className="mt-0">
+          <div className="hidden md:block">
+            <div className="sticky top-0 fixed bg-white py-5 px-5 rounded-xl divide-y-2">
+              <div className="mt-0 space-y-2">
                 <h1 className="text-cardDate font-bold text-2xl">Тосох цаг</h1>
-                <div className="flex flex-wrap">
-                  <img src="../assets/Group 1308.png" />
-                  <img src="../assets/Group 1308.png" />
-                  <img src="../assets/Group 1308.png" />
+                <div className="flex justify-center flex-wrap space-x-4">
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
+                    <p className="flex justify-center">
+                      <SunIcon className="w-10" />
+                    </p>
+                    <p className="flex justify-center text-base font-medium">
+                      Өглөө
+                    </p>
+                    <p className="flex justify-center font-medium">
+                      06:00-10:00
+                    </p>
+                  </button>
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
+                    <p className="flex justify-center">
+                      <CloudIcon className="w-10" />
+                    </p>
+                    <p className="flex justify-center text-base font-medium">
+                      Өдөр
+                    </p>
+                    <p className="flex justify-center font-medium">
+                      06:00-10:00
+                    </p>
+                  </button>
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
+                    <p className="flex justify-center">
+                      <MoonIcon className="w-10" />
+                    </p>
+                    <p className="flex justify-center text-base font-medium">
+                      Орой
+                    </p>
+                    <p className="flex justify-center font-medium">
+                      06:00-10:00
+                    </p>
+                  </button>
                 </div>
               </div>
-              <div className="mt-8">
+              <div className="mt-8 pt-4 space-y-2 ">
                 <h1 className="text-cardDate font-bold text-2xl">Хүргэх цаг</h1>
-                <div className="flex flex-wrap">
-                  <img src="../assets/Group 1308.png" />
-                  <img src="../assets/Group 1308.png" />
-                  <img src="../assets/Group 1308.png" />
+                <div className="flex justify-center flex-wrap space-x-4">
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
+                    <p className="flex justify-center">
+                      <SunIcon className="w-10" />
+                    </p>
+                    <p className="flex justify-center text-base font-medium">
+                      Өглөө
+                    </p>
+                    <p className="flex justify-center font-medium">
+                      06:00-10:00
+                    </p>
+                  </button>
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
+                    <p className="flex justify-center">
+                      <CloudIcon className="w-10" />
+                    </p>
+                    <p className="flex justify-center text-base font-medium">
+                      Өдөр
+                    </p>
+                    <p className="flex justify-center font-medium">
+                      06:00-10:00
+                    </p>
+                  </button>
+                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
+                    <p className="flex justify-center">
+                      <MoonIcon className="w-10" />
+                    </p>
+                    <p className="flex justify-center text-base font-medium">
+                      Орой
+                    </p>
+                    <p className="flex justify-center font-medium">
+                      06:00-10:00
+                    </p>
+                  </button>
                 </div>
               </div>
             </div>
