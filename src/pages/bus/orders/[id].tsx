@@ -48,7 +48,7 @@ export default function Payment() {
     },
     {
       title: 'Зорчигчийн мэдээлэл',
-      content: <PassengerInfo datas={scheduleDataResult} />,
+      content: <PassengerInfo />,
       button: 'Төлбөр төлөх',
     },
     {
@@ -66,8 +66,8 @@ export default function Payment() {
     setCurrent(current + 1);
   };
   return (
-    <ContentWrapper>
-      <Layout>
+    <Layout>
+      <ContentWrapper>
         <div className="relative bg-bg">
           <SeatNav navbarData={NavData} />
           <div className="bg-steps w-full">
@@ -142,7 +142,7 @@ export default function Payment() {
             </div>
           </div>
         </div>
-      </Layout>
-    </ContentWrapper>
+      </ContentWrapper>
+    </Layout>
   );
 }
