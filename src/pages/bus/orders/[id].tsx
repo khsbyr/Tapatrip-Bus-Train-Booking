@@ -5,7 +5,7 @@ import PassengerInfo from '@components/bus/PassengerInfo';
 import Payments from '@components/bus/Payments';
 import SelectSeats from '@components/bus/SelectSeats';
 import Footer from '@components/common/Footer';
-import ContentWrapper from '../style';
+import ContentWrapper from './style';
 import StepCard from '@components/bus/StepCard';
 import TravelList from '@data/getTravelList[1].json';
 import Navbar3 from '@components/common/Navbar/Navbar3';
@@ -44,24 +44,22 @@ export default function Payment({ params }) {
     <ContentWrapper>
       <div className="relative bg-bg">
         <Navbar3 navbarData={NavData} />
-        <div className="bg-steps">
-          <Steps
-            type="navigation"
-            current={current}
-            onChange={onChange}
-            size="small"
-            responsive={true}
-            className="site-navigation-steps bg-steps"
-          >
-            {steps.map(item => (
-              <Step
-                key={item.title}
-                icon=" "
-                title={item.title}
-                className="text-xs text-white"
-              />
-            ))}
-          </Steps>
+        <div className="bg-steps border-2 w-full">
+          <div className="max-w-7xl mx-auto">
+            <Steps
+              type="navigation"
+              current={current}
+              onChange={onChange}
+              size="small"
+              // className="bg-steps p-4"
+              responsive={true}
+              className="site-navigation-steps max-w-2xl mr-auto hidden md:flex"
+            >
+              {steps.map(item => (
+                <Step key={item.title} icon=" " title={item.title} />
+              ))}
+            </Steps>
+          </div>
         </div>
 
         <div className="max-w-7xl mx-auto my-5 flex">

@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
+    "@emotion/react": "^11.5.0",
     "@headlessui/react": "^1.4.1",
     "@heroicons/react": "^1.0.4",
     "antd": "^4.16.13",
@@ -31,6 +32,7 @@
     "postcss": "^8.3.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-spinners": "^0.11.0",
     "sass": "^1.42.1",
     "styled-components": "^5.3.3",
     "tailwindcss": "^2.2.16"
