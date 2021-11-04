@@ -45,25 +45,22 @@ const Payment: FC = () => {
     <ContentWrapper>
       <div className="relative bg-bg">
         <Navbar3 navbarData={NavData} />
-        <div className="bg-steps">
-          <Steps
-            type="navigation"
-            current={current}
-            onChange={onChange}
-            size="small"
-            // className="bg-steps p-4"
-            responsive={true}
-            className="site-navigation-steps bg-steps w-1/3 ml-64"
-          >
-            {steps.map(item => (
-              <Step
-                key={item.title}
-                icon=" "
-                title={item.title}
-                className="text-xs text-white"
-              />
-            ))}
-          </Steps>
+        <div className="bg-steps border-2 w-full">
+          <div className="max-w-7xl mx-auto">
+            <Steps
+              type="navigation"
+              current={current}
+              onChange={onChange}
+              size="small"
+              // className="bg-steps p-4"
+              responsive={true}
+              className="site-navigation-steps max-w-2xl mr-auto hidden md:flex"
+            >
+              {steps.map(item => (
+                <Step key={item.title} icon=" " title={item.title} />
+              ))}
+            </Steps>
+          </div>
         </div>
 
         <div className="max-w-7xl mx-auto my-5 flex flex-wrap">
@@ -98,7 +95,7 @@ const Payment: FC = () => {
               </div>
             )}
             {current === 1 && (
-              <div className="p-2">
+              <div className="px-2">
                 {/* // -------------------Components_1---------------------------// */}
                 {TravelList.map(z => (
                   <Card2
@@ -124,7 +121,7 @@ const Payment: FC = () => {
               </div>
             )}
             {current === steps.length - 1 && (
-              <div className="p-2">
+              <div className="px-2">
                 {/* // -------------------Components_2---------------------------// */}
                 {TravelList.map(z => (
                   <Card2

@@ -16,16 +16,16 @@ export default function SelectSeats() {
   return (
     <div className={s.root}>
       <div>
-        <h1 className="pl-10 text-cardDate font-bold text-lg pb-2 border-b-2">
+        <h1 className="pl-8 text-cardDate font-bold text-lg pb-2 border-b-2">
           Суудал сонгох
         </h1>
       </div>
       <div className="flex flex-wrap">
         <div className="space-y-6">
-          <h1 className="pl-10 text-cardDate font-bold text-lg">
+          <h1 className="pl-8 text-cardDate font-bold text-lg">
             Автобусын мэдээлэл
           </h1>
-          <div className="pl-10 flex space-x-12">
+          <div className="pl-8 flex space-x-12">
             <div>
               <img src="../assets/busimg.jpg" className="h-40" />
             </div>
@@ -36,7 +36,7 @@ export default function SelectSeats() {
               <p>Жолоочийн дугаар: 12312312</p>
             </div>
           </div>
-          <div className="pl-10 flex space-x-10">
+          <div className="pl-8 flex space-x-10">
             <div className="flex items-center space-x-5">
               <p className="text-cardDate font-bold border-2 bg-white h-7 w-10 rounded-md"></p>
               <h1 className="text-cardDate">Захиалах боломжтой</h1>
@@ -46,7 +46,7 @@ export default function SelectSeats() {
               <h1 className="text-cardDate">Захиалагдсан</h1>
             </div>
           </div>
-          <div className="pl-10 flex flex-wrap">
+          <div className="pl-8 flex flex-wrap">
             <h1 className="text-cardDate font-bold text-md">
               Сонгогдсон суудал
             </h1>

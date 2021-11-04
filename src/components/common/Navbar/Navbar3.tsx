@@ -19,11 +19,13 @@ const Navbar3: FC<Props> = ({ navbarData }) => {
             <div className="flex items-center justify-between h-12">
               <div className="flex items-center ">
                 <div className="flex-shrink-0">
-                  <img
-                    src="../assets/logoBlue.png"
-                    alt="Logo"
-                    className="w-36 md:w-full md:h-full"
-                  />
+                  <a href="http://localhost:3000/en/bus">
+                    <img
+                      src="../assets/logoBlue.png"
+                      alt="Logo"
+                      className="w-36 md:w-full md:h-full px-4"
+                    />
+                  </a>
                 </div>
                 <div className="hidden">
                   <div className="ml-10 flex items-baseline space-x-4">
