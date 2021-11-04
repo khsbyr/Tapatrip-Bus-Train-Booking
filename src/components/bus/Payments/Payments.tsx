@@ -4,7 +4,17 @@ import QPay from '@components/bus/Payments/QPay';
 import React from 'react';
 import s from './Payments.module.scss';
 import ContentWrapper from './style';
+import Banks from '@data/bankInformation.json';
+
+export const getStaticProps = async () => {
+  const res = Banks;
+
+  return {
+    props: { Banks: res },
+  };
+};
 export default function Payment() {
+  console.log(Banks);
   const [value, setValue] = React.useState(1);
   const onChange = e => {
     console.log('radio checked', e.target.value);
@@ -23,8 +33,8 @@ export default function Payment() {
       <div className={s.root}>
         <div className={s.body}>
           <div className={s.instructions}>
-            <p>Төлбөр төлөх зааварчилгаа</p>
-            <p>
+            <p className={s.title}>Төлбөр төлөх зааварчилгаа</p>
+            <p className={s.time}>
               <Countdown value={deadline} onFinish={onFinish} />
             </p>
           </div>
@@ -53,13 +63,13 @@ export default function Payment() {
         <div className={s.radioGroup}>
           <h1 className={s.paymentTitle}>Төлбөр төлөх хэлбэр сонгоно уу</h1>
 
-          <Radio.Group onChange={onChange} value={value} className="w-full">
+          <Radio.Group onChange={onChange} value={value}>
             <div className="w-full ml-6">
               <Space direction="vertical">
                 <Radio value={1}>
-                  <div className="w-full">
+                  <div className="">
                     <p className={s.paymentShape}>Шилжүүлэх</p>
-                    {value === 1 && <PayTransfer />}
+                    {value === 1 && <PayTransfer banks={Banks} />}
                   </div>
                 </Radio>
                 <Radio value={2}>

@@ -11,35 +11,31 @@ import TapaService from '@components/common/TapaService';
 import Subscribe from '@components/common/Subscribe';
 import AuthService from '@services/auth';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
-import arrayFormat from '@helpers/array-format';
+import { arrayFormat } from '@helpers/array-format';
 
-export default function Bus({ NavData, tapaServiceList, guestToken }) {
+export default function Bus({ guestToken }) {
   useEffect(() => {
     AuthTokenStorageService.guestStore(guestToken);
   }, []);
-
-  const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
+  const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
   const startLocations = arrayFormat(data);
-
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
   return (
     <Layout>
       <HeaderBackground />
       <Navbar navbarData={NavData} />
       <Search navbarData={NavData} startLocations={startLocations} />
       <Subscribe />
-      <TapaService tapaServiceList={tapaServiceList} />
+      <TapaService tapaServiceList={TapaServiceList} />
     </Layout>
   );
 }
 
-export async function getServerSideProps(context) {
-  const navData = NavData;
-  const tapaServiceList = TapaServiceList;
+export async function getServerSideProps() {
   const guestToken = await AuthService.guestToken();
   return {
     props: {
-      NavData: navData,
-      tapaServiceList: tapaServiceList,
       guestToken: guestToken,
     },
   };

@@ -19,7 +19,7 @@ export const BUS_ALL_LOCATIONS_QUERY = gql`
 `;
 
 export const BUS_ALL_LOCATION_STOPS_QUERY = gql`
-  query busAllLocationStops($location: String, $type: String) {
+  query busAllLocationStops($location: ID!, $type: String) {
     busAllLocationStops(location: $location, type: $type) {
       edges {
         node {
@@ -39,14 +39,20 @@ export const BUS_ALL_LOCATION_STOPS_QUERY = gql`
 `;
 
 export const BUS_LOCATION_ENDS_QUERY = gql`
-  query busAllLocationEnds($locationStopLocation: ID!) {
-    busAllLocationEnds(locationStop_Location: $locationStopLocation) {
+  query busAllLocationEnds($locationStopLocation: ID!, $locationStop: ID!) {
+    busAllLocationEnds(
+      locationStop_Location: $locationStopLocation
+      locationStop: $locationStop
+    ) {
       edges {
         node {
           id
           locationStop {
             id
             name
+            location {
+              name
+            }
           }
           locationEnd {
             id
@@ -62,20 +68,23 @@ export const BUS_LOCATION_ENDS_QUERY = gql`
 `;
 
 export const BUS_ALL_SCHEDULES_QUERY = gql`
-  query busAllSchedules($locationEnd: String, $leaveDate: String) {
+  query busAllSchedules($locationEnd: ID!, $leaveDate: String) {
     busAllSchedules(locationEnd: $locationEnd, leaveDate: $leaveDate) {
       edges {
         node {
           id
+          code
           distance
           leaveDate
-          leaveTime
+          estimatedTime
+          driverPhone
           adultTicket
-          locationEnd {
-            locationEnd {
-              name
-            }
-          }
+          childTicket
+          startStopName
+          leaveTime
+          endStopName
+          directionId
+          directionName
           bus {
             modelName
             seatCount
@@ -85,6 +94,26 @@ export const BUS_ALL_SCHEDULES_QUERY = gql`
           }
           insurance {
             name
+          }
+          locationEnd {
+            id
+            locationStop {
+              id
+              name
+              location {
+                id
+                name
+              }
+            }
+            locationEnd {
+              id
+              location {
+                id
+                name
+              }
+              type
+              name
+            }
           }
         }
       }

@@ -1,193 +1,30 @@
-import { Input, Modal, Select } from 'antd';
-import React, { useState, FC } from 'react';
+import { Input, Modal } from 'antd';
+import React, { FC } from 'react';
 import ContentWrapper from './style';
-import mngIcon from 'public/assets/flagMongolia.png';
-import enIcon from 'public/assets/flagEng.png';
-import Image from 'next/image';
-import TravelList from '@data/getTravelList[1].json';
-import TravelData from '@data/getTravelData.json';
 
-import Card2 from '@components/bus/Card/Card2';
-import { ArrowRightIcon } from '@heroicons/react/solid';
-const countries = [
-  { name: '+976', src: mngIcon, value: 0 },
-  { name: '+44', src: enIcon, value: 1 },
-];
-const { Option } = Select;
 interface Props {
   isModalVisible?: any;
   close?: any;
 }
 
 const OrderModal: FC<Props> = props => {
-  const [isActive, setIsActive] = useState(false);
   return (
-    <Modal
-      // title="Захиалгийн мэдээлэл шалгах"
-      okText=" "
-      cancelText="Буцах"
-      visible={props.isModalVisible}
-      onCancel={() => props.close()}
-      width={700}
-    >
-      <ContentWrapper>
-        <div className="space-y-4">
-          <h1 className="text-cardDate text-xl font-bold border-b-2 pb-2">
-            Захиалгын мэдээлэл шалгах
-          </h1>
-          <div className="flex justify-center">
-            <div className="sm:w-1/2 space-y-4">
-              <div className="space-y-2">
-                <label
-                  className="text-cardDate text-base px-2 font-medium"
-                  htmlFor=""
-                >
-                  Захиалгын дугаар
-                </label>
-                <Input
-                  className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base"
-                  placeholder="Захиалгын дугаар оруулна уу"
-                />
-              </div>
-              <div className="space-y-2">
-                <label
-                  className="text-cardDate text-base px-2 font-medium"
-                  htmlFor=""
-                >
-                  Утас дугаар
-                </label>
-                <div className="flex rounded-lg bg-bg">
-                  <Select
-                    defaultValue={countries[0].value}
-                    className="w-48 text-sm border-r-2 p-2 mx-2 text-cardDate"
-                  >
-                    {countries.map(country => (
-                      <Option value={country.value}>
-                        <p className="h-full w-full">
-                          <Image
-                            src={country.src}
-                            width="24"
-                            height="12"
-                            className="rounded-sm"
-                          />{' '}
-                          {country.name}
-                        </p>
-                      </Option>
-                    ))}
-                  </Select>
-                  <Input
-                    className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base"
-                    placeholder="Утасы дугаар оруулна уу"
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label
-                  className="text-cardDate text-base px-2 font-medium"
-                  htmlFor=""
-                >
-                  Баталгаажуулах
-                </label>
-                <p className="flex rounded-lg bg-bg border-0">
-                  <Input
-                    className="w-2/3 py-3 bg-bg border-0 border-r-2 rounded-l-lg text-cardDate text-base"
-                    placeholder="6 оронтой код оруулна уу"
-                  />
-                  <button
-                    className="text-cardDate font-medium w-1/3"
-                    onClick={() => setIsActive(!isActive)}
-                  >
-                    CMC код илгээх
-                  </button>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div
-            className={`${
-              !isActive ? 'hidden' : 'block grid grid-cols-1 sm:grid-cols-2'
-            }`}
-          >
-            <div className="text-sm font-medium text-cardDate">
-              <h1 className="flex justify-center text-cardDate text-xl font-bold pb-4 border-b-2">
-                Захиалгын мэдээлэл
-              </h1>
-              <div className="px-4 py-2 sm:border-r-2 space-y-3">
-                <p className="space-y-1">
-                  <p className="flex font-bold">
-                    {TravelList[0].start_location}
-                    <h1 className="text-red-400 px-4 sm:px-8">-аас </h1>
-                    {TravelList[0].end_location}
-                  </p>
-                  <p className="flex font-bold text-lg">
-                    {TravelList[0].start_date}
-                    <ArrowRightIcon className="px-4 sm:px-10 h-7 text-direction" />
-                    {TravelList[0].end_date}
-                  </p>
-                  {TravelList[0].date}, {TravelList[0].is_start_stop} зогсолт
-                </p>
+    <ContentWrapper>
+      <Modal
+        title="Захиалгийн мэдээлэл шалгах"
+        okText="Хадгалах"
+        cancelText="Буцах"
+        visible={props.isModalVisible}
+        // onOk={save}
+        onCancel={() => props.close()}
+      >
+        <Input placeholder="Basic usage" />
 
-                <p className="text-base space-y-2">
-                  <p className="flex">
-                    Захиалга хийсэн огноо:
-                    <h1 className="px-2 font-bold text-base text-cardDate">
-                      {TravelList[0].order_date}
-                    </h1>
-                  </p>
-                  <p className="flex">
-                    Суудлын дугаар:
-                    <h1 className="px-2 font-bold text-base text-cardDate">
-                      1, 8
-                    </h1>
-                  </p>
-                  <p className="flex">
-                    Төлбөр төлөгдсөн эсэх:{' '}
-                    <h1 className="px-2 font-bold text-base text-cardDate">
-                      Төлөгдсөн
-                    </h1>
-                  </p>
-                </p>
-              </div>
-            </div>
-            <div>
-              <h1 className="flex justify-center text-cardDate text-xl font-bold pb-4 border-b-2">
-                Автобусны мэдээлэл
-              </h1>
-              <div className="px-4 py-2 text-base text-cardDate font-medium">
-                <ul className="w-full space-y-2">
-                  <li className="flex">
-                    ААН:
-                    <p className="font-bold pl-2">
-                      {TravelData.insurance.company_name}
-                    </p>
-                  </li>
-                  <li className="flex">
-                    Марк загвар:
-                    <p className="font-bold pl-2">
-                      {TravelData.bus.model_name}
-                    </p>
-                  </li>
-                  <li className="flex">
-                    Улсын дугаар:
-                    <p className="font-bold pl-2">
-                      {TravelData.bus.plate_number}
-                    </p>
-                  </li>
-                  <li className="flex">
-                    Жолооч:
-                    <p className="font-bold pl-2">{TravelData.driver.name}</p>
-                  </li>
-                  <li className="flex">
-                    Утасны дугаар:
-                    <p className="font-bold pl-2">{TravelData.driver.phone}</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ContentWrapper>
-    </Modal>
+        <Input placeholder="Basic usage" />
+
+        <Input placeholder="Basic usage" />
+      </Modal>
+    </ContentWrapper>
   );
 };
 

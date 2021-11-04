@@ -1,11 +1,9 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
-import React, { FC, useState, Fragment } from 'react';
-import SelectLanguage from '@components/common/Selects/selectLanguage';
-import SelectRate from '@components/common/Selects/selectRate';
+import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import OrderModal from '@components/bus/OrderModal/OrderModal';
 import styles from './navbar.module.scss';
-import Image from 'next/image';
+
 interface Props {
   navbarData?: any;
 }
@@ -40,24 +38,22 @@ const Navbar: FC<Props> = ({ navbarData }) => {
       <div>
         <nav
           className={`relative md:fixed w-full 
-          ${navbar ? 'bg-bg' : 'bg-none'}
+          ${navbar ? 'bg-white' : 'bg-none'}
           md:h-20 md:top-0 z-10 ${navbar ? 'shadow-lg' : 'shadow-none'}`}
         >
           <div className={styles.navbar}>
             <div className={styles.navbarBody}>
               <div className="flex items-center ">
                 <div className="flex-shrink-0">
-                  <a href="http://localhost:3000/en/bus">
-                    <img
-                      src={`${
-                        navbar
-                          ? '../assets/logoBlue.png'
-                          : '../assets/logoWhite.png'
-                      } `}
-                      alt="Logo"
-                      className={styles.logo}
-                    />
-                  </a>
+                  <img
+                    src={`${
+                      navbar
+                        ? '../assets/logoBlue.png'
+                        : '../assets/logoWhite.png'
+                    } `}
+                    alt="Logo"
+                    className={styles.logo}
+                  />
                 </div>
                 <div className={`${navbar ? 'hidden' : 'lg:block'} hidden`}>
                   <div className={styles.menuBody}>
@@ -73,8 +69,6 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     <button className={styles.orderButton} onClick={checkOrder}>
                       Захиалга шалгах
                     </button>
-                    <SelectRate />
-                    <SelectLanguage />
                   </div>
                 </div>
               </div>
@@ -82,14 +76,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
               <div className="flex items-center ">
                 <div className="hidden md:block">
                   <div className={styles.loginBody}>
-                    <a
-                      className="hover:text-white"
-                      href={`bus/${navbarData.profile[1].route}`}
-                    >
-                      <button className={styles.loginButton}>
-                        {navbarData.profile[1].text}
-                      </button>
-                    </a>
+                    <button className={styles.loginButton}>Нэвтрэх</button>
                   </div>
                 </div>
               </div>

@@ -9,6 +9,7 @@ const ContentWrapper = styled.div`
     border: none !important;
   }
   .ant-input:hover {
+    /* background-color: black; */
     border-right: none;
   }
   .ant-input:focus {

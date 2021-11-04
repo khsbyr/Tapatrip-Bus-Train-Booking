@@ -1,39 +1,48 @@
 .root {
-  @apply space-y-4;
+  @apply space-y-2;
 }
 .regist {
-  @apply flex justify-between px-4 py-2 font-medium items-center w-full rounded-lg bg-white;
+  @apply flex flex-nowrap items-center w-full rounded-lg bg-white;
 }
 .registButton {
-  @apply flex justify-end border-2 items-center  rounded-lg text-cardDate font-medium py-2 px-6 hover:text-white hover:bg-register hover:border-seat;
+  @apply flex justify-end border-0 rounded-lg p-1 text-cardDate py-1.5 m-2 sm:px-6 items-center border-2 hover:text-white hover:bg-register hover:border-seat;
 }
-.Information {
-  @apply pb-2 w-full bg-white rounded-lg shadow-md text-base;
+.customerInfo {
+  @apply pb-1 w-full bg-white rounded-lg shadow-md text-base;
 }
 .customerInfoTitle {
-  @apply text-cardDate text-xl font-bold border-b-2 px-4 py-2;
+  @apply text-cardDate text-xl font-bold border-b-2 px-4 py-3 pb-4;
 }
-.InfoForm {
-  @apply space-y-4 mt-4 sm:mt-2;
-}
-.customerSelect {
-  @apply z-10 relative w-full mt-9 font-medium sm:pr-2;
+.customerInfoForm {
+  @apply grid p-2 font-normal sm:space-y-0 sm:grid-cols-2;
 }
 .customerRegisterNumber {
-  @apply w-full space-y-3 sm:pl-2;
+  @apply w-full space-y-4 sm:pr-3 lg:pl-3;
 }
-.Label {
+.customerRegisterNumberLabel {
   @apply text-cardDate text-base px-2 font-medium;
 }
-.leftContent {
-  @apply w-full space-y-3 sm:pr-2;
+.customerMail {
+  @apply space-y-2 px-3 sm:pr-3 lg:pr-3;
 }
-.rightContent {
-  @apply w-full space-y-3 sm:pl-2;
+.mailLabel {
+  @apply px-2 text-cardDate text-base;
 }
 .input {
   @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base;
 }
+.passengerInfo {
+  @apply pb-3 rounded-lg bg-white w-full text-cardDate text-base;
+}
 .passengerInfoTitle {
-  @apply flex justify-between w-full items-center text-cardDate text-xl font-bold border-b-2 px-4 py-2;
+  @apply flex w-full items-center text-cardDate text-xl font-bold border-b-2 px-4 py-3 pb-4;
+}
+.passengerInfoForm {
+  @apply grid px-4 pt-2 mt-2 font-normal space-y-3 sm:space-y-0 sm:grid-cols-2;
+}
+.passengerRegisterLastname {
+  @apply w-full space-y-3 sm:pr-3 lg:pr-3;
+}
+.passengerVaccineFirstname {
+  @apply w-full space-y-3 sm:pl-3 lg:pl-3;
 }
