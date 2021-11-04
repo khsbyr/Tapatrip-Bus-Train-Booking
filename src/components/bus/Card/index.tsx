@@ -4,40 +4,35 @@ import {
   ChevronUpIcon,
   UserIcon,
 } from '@heroicons/react/solid';
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { Steps } from 'antd';
+import style from './Card.module.scss';
+import Link from 'next/link';
 
 const { Step } = Steps;
 
 export default function Card({ datas }) {
-  console.log('card');
-  console.log(datas);
   const [isActive, setIsActive] = useState(false);
+  const handleOrder = async () => {
+    alert(datas.node.id);
+  };
   return (
     <div className="px-2">
       <div className="max-w-7xl mx-auto">
-        <div className=" relative bg-white w-full h-auto rounded-2xl">
+        <div className={style.card}>
           <div className="px-20 space-y-4">
-            <h1 className="pt-4 font-bold text-cardDescColor">
-              {datas.node.leaveDate}
-            </h1>
+            <h1 className={style.leaveTitle}>{datas.node.leaveDate}</h1>
             <div className="flex justify-between ">
               <div className="space-y-2">
                 <div className="flex space-x-4">
-                  <h1 className="text-cardDate font-bold text-xl">
-                    {datas.node.leaveDate}
-                  </h1>
+                  <h1 className={style.startTitle}>{datas.node.leaveDate}</h1>
                   <ArrowRightIcon className="h-7 text-direction" />
-                  <h1 className="text-cardDate font-bold text-xl">
-                    {datas.node.leaveDate}
-                  </h1>
+                  <h1 className={style.startTitle}>{datas.node.leaveDate}</h1>
                 </div>
-                <h1 className="font-light text-cardDate text-lg">
-                  {datas.node.leaveTime}
-                </h1>
+                <h1 className={style.timeText}>{datas.node.leaveTime}</h1>
               </div>
               <div className="space-y-2">
-                <h1 className="text-cardDate font-bold text-2xl">
+                <h1 className={style.priceText}>
                   {datas.node.adultTicket} MNT
                 </h1>
                 <h1 className="flex items-center">
@@ -46,7 +41,7 @@ export default function Card({ datas }) {
               </div>
             </div>
 
-            <div className="flex flex-wrap py-5 justify-between items-center ">
+            <div className={style.rowDirection}>
               <div>
                 <h1 className="text-cardDate font-semibold text-md">
                   {datas.node.directionName}
@@ -64,18 +59,15 @@ export default function Card({ datas }) {
                     <ChevronDownIcon className="w-6 h-6" />
                   )}
                 </button>
-                <button className="bg-button text-white font-bold py-2 px-4 rounded-lg h-10 w-40">
-                  Захиалах
-                </button>
+                <Link href={`/bus/orders/${datas.node.id}`}>
+                  <button className={style.orderButton}>Захиалах</button>
+                </Link>
               </div>
             </div>
           </div>
-          <div className="border-4 w-7 h-12 border-r-0 rounded-tl-full rounded-bl-full absolute top-28 right-0 bg-bg border-bg"></div>
-          <div className="border-4 w-7 h-12 border-l-0 rounded-tr-full rounded-br-full absolute top-28 left-0 bg-bg border-bg"></div>
-          <div
-            className="bg-bg w-full h-0.5 absolute"
-            style={{ top: '135px' }}
-          ></div>
+          <div className={style.rightRound}></div>
+          <div className={style.leftRound}></div>
+          <div className={style.line} style={{ top: '135px' }}></div>
           <div className={`${!isActive ? 'hidden' : 'block'}`}>
             <div className="border border-dashed "></div>
             <div className="px-20 py-5">

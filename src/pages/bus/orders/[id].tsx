@@ -5,7 +5,7 @@ import PassengerInfo from '@components/bus/PassengerInfo';
 import Payments from '@components/bus/Payments';
 import SelectSeats from '@components/bus/SelectSeats';
 import Footer from '@components/common/Footer';
-import ContentWrapper from './style';
+import ContentWrapper from '../style';
 import StepCard from '@components/bus/StepCard';
 import TravelList from '@data/getTravelList[1].json';
 import Navbar3 from '@components/common/Navbar/Navbar3';
@@ -29,8 +29,7 @@ const steps = [
   },
 ];
 
-const Payment: FC = () => {
-  console.log('aa');
+export default function Payment({ params }) {
   const [current, setCurrent] = React.useState(0);
 
   const onChange = current => {
@@ -41,7 +40,6 @@ const Payment: FC = () => {
   const next = () => {
     setCurrent(current + 1);
   };
-
   return (
     <ContentWrapper>
       <div className="relative bg-bg">
@@ -74,9 +72,9 @@ const Payment: FC = () => {
             {current === 0 && (
               <div className="px-2">
                 {/* // -------------------Components_0---------------------------// */}
-                {TravelList.map(z => (
+                {/* {TravelList.map(z => (
                   <StepCard datas="" />
-                ))}
+                ))} */}
                 <button
                   className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white"
                   onClick={() => next()}
@@ -88,9 +86,9 @@ const Payment: FC = () => {
             {current === 1 && (
               <div className="p-2">
                 {/* // -------------------Components_1---------------------------// */}
-                {TravelList.map(z => (
+                {/* {TravelList.map(z => (
                   <StepCard datas="" />
-                ))}
+                ))} */}
                 <button
                   className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white"
                   onClick={() => next()}
@@ -102,9 +100,9 @@ const Payment: FC = () => {
             {current === steps.length - 1 && (
               <div className="p-2">
                 {/* // -------------------Components_2---------------------------// */}
-                {TravelList.map(z => (
+                {/* {TravelList.map(z => (
                   <StepCard datas="" />
-                ))}
+                ))} */}
                 <button className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white">
                   {steps[current].button}
                 </button>
@@ -115,6 +113,4 @@ const Payment: FC = () => {
       </div>
     </ContentWrapper>
   );
-};
-
-export default Payment;
+}

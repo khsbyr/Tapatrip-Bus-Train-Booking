@@ -6,7 +6,7 @@ import {
 } from '@graphql/queries';
 import { Result, Button } from 'antd';
 import React, { useState } from 'react';
-import Card from '@components/bus/Card/Card';
+import Card from '@components/bus/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
 import BusNavbar from '@components/bus/Navbar';
 import Layout from '@components/common/Layout';
@@ -61,7 +61,9 @@ export default function Orders() {
               />
             }
             {scheduleResult.length > 0 ? (
-              scheduleResult.map(schedules => <Card datas={schedules} />)
+              scheduleResult.map(schedules => (
+                <Card key={schedules.node.id} datas={schedules} />
+              ))
             ) : (
               <Result
                 status="404"
