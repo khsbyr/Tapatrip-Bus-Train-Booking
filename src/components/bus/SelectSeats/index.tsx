@@ -45,7 +45,7 @@ export default function SelectSeats({ datas }) {
               Сонгогдсон суудал
             </h1>
             <div className="space-x-5 px-5 text-lg font-bold">
-              {isClick ? <button className={s.selectedSeats}>1</button> : <></>}
+              {<button className={s.selectedSeats}>1</button>}
             </div>
           </div>
         </div>
