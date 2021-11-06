@@ -4,8 +4,8 @@ import seatRangeMap from '@helpers/seatRangeMap';
 import style from './SeatMedium.module.scss';
 
 const Seat48_52 = ({ datas }) => {
-  const seatRanges = seatRangeMap(datas.seat);
-  //console.log(datas);
+  const seatRanges = seatRangeMap(datas.seats);
+  console.log(seatRanges);
   return (
     <div className="pl-10 flex">
       <div className="z-0 relative w-full">
@@ -19,13 +19,29 @@ const Seat48_52 = ({ datas }) => {
                 {seat.map((seat, j) =>
                   j !== 2 ? (
                     <td>
-                      <button className={style.seatButton} value={j}>
+                      <button
+                        className={
+                          seat.isAvialable
+                            ? style.seatButtonDisabled
+                            : style.seatButton
+                        }
+                        value={j}
+                        disabled={seat.isAvialable}
+                      >
                         {seat && seat.number}
                       </button>
                     </td>
                   ) : (
                     <td>
-                      <button className={style.seatButtonMarginLeft} value={j}>
+                      <button
+                        className={
+                          seat.isAvialable
+                            ? style.seatButtonMarginLeftDisabled
+                            : style.seatButtonMarginLeft
+                        }
+                        value={j}
+                        disabled={seat.isAvialable}
+                      >
                         {seat && seat.number}
                       </button>
                     </td>
@@ -38,16 +54,28 @@ const Seat48_52 = ({ datas }) => {
                   k == 3 || k == 4 ? (
                     <td>
                       <button
-                        className={style.seatButtonMarginRight}
+                        className={
+                          seat.isAvialable
+                            ? style.seatButtonMarginRightDisabled
+                            : style.seatButtonMarginRight
+                        }
                         value={k}
-                        onClick={seat.number}
+                        disabled={seat.isAvialable}
                       >
                         {seat && seat.number}
                       </button>
                     </td>
                   ) : (
                     <td>
-                      <button className={style.seatButton} value={k}>
+                      <button
+                        className={
+                          seat.isAvialable
+                            ? style.seatButtonDisabled
+                            : style.seatButton
+                        }
+                        value={k}
+                        disabled={seat.isAvialable}
+                      >
                         {seat && seat.number}
                       </button>
                     </td>

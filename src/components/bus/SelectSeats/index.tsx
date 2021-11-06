@@ -26,9 +26,9 @@ export default function SelectSeats({ datas }) {
             </div>
             <div className="text-cardDate font-medium space-y-3">
               <p>ААН: {bus.transporter.name}</p>
-              <p>Загвар: {datas.bus.modelName}</p>
-              <p>Улсын дугаар: {datas.bus.plateNumber}</p>
-              <p>Жолоочийн дугаар: {datas.driverPhone}</p>
+              <p>Загвар: {bus.modelName}</p>
+              <p>Улсын дугаар: {bus.plateNumber}</p>
+              <p>Жолоочийн дугаар: {driverPhone}</p>
             </div>
           </div>
           <div className="pl-10 flex space-x-10">
@@ -51,8 +51,11 @@ export default function SelectSeats({ datas }) {
           </div>
         </div>
         <div>
-          <SeatMedium datas={travelData} />
-          {/* <SeatSmall datas={travelData} /> */}
+          {bus.seatCount < 25 ? (
+            <SeatSmall datas={datas} />
+          ) : (
+            <SeatMedium datas={datas} />
+          )}
         </div>
       </div>
     </div>
