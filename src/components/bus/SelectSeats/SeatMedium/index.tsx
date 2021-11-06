@@ -3,7 +3,7 @@ import Image from 'next/image';
 import seatRangeMap from '@helpers/seatRangeMap';
 import style from './SeatMedium.module.scss';
 
-const Seat48_52 = ({ datas }) => {
+const SeatMedium = ({ datas }) => {
   const seatRanges = seatRangeMap(datas.seats);
   console.log(seatRanges);
   return (
@@ -89,4 +89,4 @@ const Seat48_52 = ({ datas }) => {
     </div>
   );
 };
-export default Seat48_52;
+export default SeatMedium;

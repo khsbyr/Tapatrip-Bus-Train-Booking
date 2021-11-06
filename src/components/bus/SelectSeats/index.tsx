@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import s from './SelectSeats.module.scss';
-import travelData from '@data/getTravelData.json';
 import SeatMedium from '@components/bus/SelectSeats/SeatMedium';
 import SeatSmall from '@components/bus/SelectSeats/SeatSmall';
 
