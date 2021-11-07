@@ -81,7 +81,7 @@ export default function Orders() {
             )}
           </div>
           <div className="hidden md:block">
-            <div className="sticky top-0 fixed bg-white py-5 px-5 rounded-xl divide-y-2">
+            <div className="sticky top-0 bg-white py-5 px-5 rounded-xl divide-y-2">
               <div className="mt-0 space-y-2">
                 <h1 className="text-cardDate font-bold text-2xl">Тосох цаг</h1>
                 <div className="flex justify-center flex-wrap space-x-4">

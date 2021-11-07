@@ -38,8 +38,6 @@ const SeatMedium = ({ datas }) => {
                         className={
                           seat.isAvialable
                             ? style.seatButtonDisabled
-                            : selectedSeats.indexOf(seat.number) > -1
-                            ? style.seatButtonSelected
                             : style.seatButton
                         }
                         value={seat.number}
