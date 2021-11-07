@@ -48,7 +48,7 @@ export default function Payment() {
     },
     {
       title: 'Зорчигчийн мэдээлэл',
-      content: <PassengerInfo />,
+      content: <PassengerInfo datas={scheduleDataResult} />,
       button: 'Төлбөр төлөх',
     },
     {
