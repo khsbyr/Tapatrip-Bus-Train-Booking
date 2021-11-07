@@ -46,3 +46,10 @@ export function endLocationFormat(data: any) {
     );
   return arr;
 }
+
+export function arrayFilterSeat(data: any, value: String) {
+  let result = data.filter(function (currentElement) {
+    return currentElement.indexOf(value) > -1;
+  });
+  return result;
+}

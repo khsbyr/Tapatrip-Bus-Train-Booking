@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
-import s from './SelectSeats.module.scss';
+import style from './SelectSeats.module.scss';
 import SeatMedium from '@components/bus/SelectSeats/SeatMedium';
 import SeatSmall from '@components/bus/SelectSeats/SeatSmall';
+import { useGlobalStore } from '@context/globalStore';
 
 export default function SelectSeats({ datas }) {
-  console.log(datas);
-  const [isClick, setIsClick] = useState(false);
+  const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const { bus, driverPhone } = datas;
+
+  const handleRemoveSeat = e => {
+    const index = selectedSeats.indexOf(e.target.value);
+    if (index > -1) {
+      selectedSeats.splice(index, 1);
+      setSelectedSeats(selectedSeats);
+    }
+  };
+
   return (
-    <div className={s.root}>
+    <div className={style.root}>
       <div>
         <h1 className="pl-10 text-cardDate font-bold text-lg pb-2 border-b-2">
           Суудал сонгох
@@ -45,7 +54,16 @@ export default function SelectSeats({ datas }) {
               Сонгогдсон суудал
             </h1>
             <div className="space-x-5 px-5 text-lg font-bold">
-              {<button className={s.selectedSeats}>1</button>}
+              {selectedSeats &&
+                selectedSeats.map(seat => (
+                  <button
+                    value={seat}
+                    onClick={handleRemoveSeat}
+                    className={style.selectedSeats}
+                  >
+                    {seat}
+                  </button>
+                ))}
             </div>
           </div>
         </div>

@@ -11,5 +11,5 @@
 //   @apply z-10 rounded-lg bg-white text-xl text-cardDate w-9 h-12 font-medium border-seat border-2 mr-0.5 mb-1 -ml-10 hover:bg-register hover:text-white focus:bg-register focus:text-white;
 // }
 .selectedSeats {
-  @apply rounded-lg bg-register text-white w-9 h-12 text-xl;
+  @apply rounded-lg bg-register text-white w-9 h-12 text-xl hover:to-blue-500 hover:text-white focus:to-blue-500 focus:text-white;
 }

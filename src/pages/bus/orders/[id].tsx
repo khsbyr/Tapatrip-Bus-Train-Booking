@@ -118,9 +118,7 @@ export default function Payment() {
               {current === 1 && (
                 <div className="p-2">
                   {/* // -------------------Components_1---------------------------// */}
-                  {/* {TravelList.map(z => (
-                  <StepCard datas="" />
-                ))} */}
+                  <StepCard datas={scheduleDataResult} />
                   <button
                     className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white"
                     onClick={() => next()}
@@ -132,9 +130,7 @@ export default function Payment() {
               {current === steps.length - 1 && (
                 <div className="p-2">
                   {/* // -------------------Components_2---------------------------// */}
-                  {/* {TravelList.map(z => (
-                  <StepCard datas="" />
-                ))} */}
+                  <StepCard datas={scheduleDataResult} />
                   <button className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white">
                     {steps[current].button}
                   </button>

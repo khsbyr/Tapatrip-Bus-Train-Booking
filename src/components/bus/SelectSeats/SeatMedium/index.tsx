@@ -1,11 +1,25 @@
+import { useState } from 'react';
 import busSketch from '@public/assets/45.svg';
 import Image from 'next/image';
 import seatRangeMap from '@helpers/seatRangeMap';
+import { useGlobalStore } from '@context/globalStore';
 import style from './SeatMedium.module.scss';
+import { message } from 'antd';
+
+const seats = [];
 
 const SeatMedium = ({ datas }) => {
   const seatRanges = seatRangeMap(datas.seats);
-  console.log(seatRanges);
+  const { selectedSeats, setSelectedSeats } = useGlobalStore();
+
+  const handleSelectSeat = e => {
+    if (seats.indexOf(e.target.value) === -1) {
+      seats.push(e.target.value);
+      setSelectedSeats(seats);
+    } else {
+      message.warning('Та энэ суудлыг сонгосон байна?');
+    }
+  };
   return (
     <div className="pl-10 flex">
       <div className="z-0 relative w-full">
@@ -15,31 +29,37 @@ const SeatMedium = ({ datas }) => {
         <table>
           {seatRanges.map((seat, i) =>
             seat.length === 4 ? (
-              <tr>
+              <tr key={i}>
                 {seat.map((seat, j) =>
                   j !== 2 ? (
-                    <td>
+                    <td key={j}>
                       <button
+                        key={seat.number}
                         className={
                           seat.isAvialable
                             ? style.seatButtonDisabled
+                            : selectedSeats.indexOf(seat.number) > -1
+                            ? style.seatButtonSelected
                             : style.seatButton
                         }
-                        value={j}
+                        value={seat.number}
+                        onClick={handleSelectSeat}
                         disabled={seat.isAvialable}
                       >
                         {seat && seat.number}
                       </button>
                     </td>
                   ) : (
-                    <td>
+                    <td key={j}>
                       <button
+                        key={seat.number}
                         className={
                           seat.isAvialable
                             ? style.seatButtonMarginLeftDisabled
                             : style.seatButtonMarginLeft
                         }
-                        value={j}
+                        value={seat.number}
+                        onClick={handleSelectSeat}
                         disabled={seat.isAvialable}
                       >
                         {seat && seat.number}
@@ -49,31 +69,35 @@ const SeatMedium = ({ datas }) => {
                 )}
               </tr>
             ) : (
-              <tr>
+              <tr key={i}>
                 {seat.map((seat, k) =>
                   k == 3 || k == 4 ? (
-                    <td>
+                    <td key={k}>
                       <button
+                        key={seat.number}
                         className={
                           seat.isAvialable
                             ? style.seatButtonMarginRightDisabled
                             : style.seatButtonMarginRight
                         }
-                        value={k}
+                        value={seat.number}
+                        onClick={handleSelectSeat}
                         disabled={seat.isAvialable}
                       >
                         {seat && seat.number}
                       </button>
                     </td>
                   ) : (
-                    <td>
+                    <td key={k}>
                       <button
+                        key={seat.number}
                         className={
                           seat.isAvialable
                             ? style.seatButtonDisabled
                             : style.seatButton
                         }
-                        value={k}
+                        value={seat.number}
+                        onClick={handleSelectSeat}
                         disabled={seat.isAvialable}
                       >
                         {seat && seat.number}

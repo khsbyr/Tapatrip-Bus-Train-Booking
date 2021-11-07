@@ -22,6 +22,7 @@ module.exports = {
         bg: '#F1F2F6',
         button: '#F1583C',
         disabled: '#EAEDF4',
+        selected: '#0A3761',
         hover: '#F06950',
         down: '#EF5134',
         alert: '#FFF7ED',

@@ -6,10 +6,12 @@ import {
 } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Steps } from 'antd';
+import { useGlobalStore } from '@context/globalStore';
 
 const { Step } = Steps;
 
 export default function StepCard({ datas }) {
+  const { selectedSeats } = useGlobalStore();
   const [isActive, setIsActive] = useState(false);
   return (
     <div className="p-2 md:p-0">
@@ -34,10 +36,15 @@ export default function StepCard({ datas }) {
               </div>
               <div className="space-y-2 py-5">
                 <h1 className="text-cardDate font-bold text-md">
-                  {datas.adultTicket} MNT
+                  {selectedSeats.length === 0
+                    ? datas.adultTicket
+                    : datas.adultTicket * selectedSeats.length}{' '}
+                  MNT
                 </h1>
                 <h1 className="flex items-center">
-                  <UserIcon className="w-4 h-4 " />1 зорчигчийн үнэ
+                  <UserIcon className="w-4 h-4 " />
+                  {selectedSeats.length === 0 ? 1 : selectedSeats.length}{' '}
+                  зорчигчийн үнэ
                 </h1>
               </div>
             </div>

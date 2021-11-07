@@ -8,20 +8,12 @@ import s from '@components/bus/PassengerInfo/PassengerInfo.module.scss';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/solid';
 import InputPhoneNumber from '@components/common/InputPhoneNumber';
-export const getStaticProps = async () => {
-  const res = registNo;
-  return {
-    props: { registNo: res },
-  };
-};
-interface Props {
-  registNo?: string;
-}
 
 const selection = [
   { name: 'Хувь хүн', value: 0 },
   { name: 'Байгууллага', value: 1 },
 ];
+
 export default function PassengerIfo() {
   const [selected, setSelected] = useState(selection[0]);
   const [isSelected, setIsSelected] = useState(false);
