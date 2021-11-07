@@ -1,10 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { AutoComplete, DatePicker, message, Spin } from 'antd';
 import { useLazyQuery } from '@apollo/client';
 import {
   BUS_LOCATION_ENDS_QUERY,
   BUS_ALL_LOCATION_STOPS_QUERY,
 } from '@graphql/queries';
+import { useGlobalStore } from '@context/globalStore';
 import ContentWrapper from './style';
 import style from './SearchBus.module.scss';
 import {
@@ -20,15 +21,20 @@ const dateFormat = 'YYYY-MM-DD';
 export default function SearchBus({ startLocations }) {
   const { Option } = AutoComplete;
   const router = useRouter();
-  const { endLocation, date } = router.query;
+  const { date } = router.query;
   const currentDate = date
     ? date
     : moment().endOf('day').format(dateFormat).toString();
   const startFormatLocation = startLocationFormat(startLocations);
-  const [isUlaanbaatar, setIsUlaanbaatar] = useState(true);
-  const [selectStartLocation, setSelectStartLocation] = useState('');
-  const [selectStopLocation, setSelectStopLocation] = useState('');
-  const [selectEndLocation, setSelectEndLocation] = useState('');
+
+  const { selectStartLocation, setSelectStartLocation } = useGlobalStore();
+  const { selectStopLocation, setSelectStopLocation } = useGlobalStore();
+  const { selectEndLocation, setSelectEndLocation } = useGlobalStore();
+
+  const { endLocationList, setEndLocationList } = useGlobalStore();
+  const { stopLocationList, setStopLocationList } = useGlobalStore();
+
+  const { isUlaanbaatar, setIsUlaanbaatar } = useGlobalStore();
   const [selectDate, setSelectDate] = useState(currentDate);
 
   const [getEndLocations, { loading, error, data: endData }] = useLazyQuery(
@@ -45,39 +51,44 @@ export default function SearchBus({ startLocations }) {
   // if (stopLoading) return 'Loading...';
   // if (stopError) return `Error! ${stopError.message}`;
 
-  const formatEndLocation = endData && endData.busAllLocationEnds.edges;
+  const formatEndLocation =
+    endLocationList && endLocationList.busAllLocationEnds.edges;
   const endFormatLocation = endLocationFormat(formatEndLocation);
 
-  const formatStopLocation = stopData && stopData.busAllLocationStops.edges;
+  const formatStopLocation =
+    stopLocationList && stopLocationList.busAllLocationStops.edges;
   const stopFormatLocation = stopLocationFormat(formatStopLocation);
 
   const handleStartSelect = (key: string, options) => {
-    setSelectStartLocation(options.key);
+    setSelectStartLocation(options);
     if (options.key != 'QnVzQWxsTG9jYXRpb246MQ==') {
       getStopLocations({
         variables: { location: options.key },
       });
       setIsUlaanbaatar(false);
+      setStopLocationList(stopData && stopData);
     } else {
       setIsUlaanbaatar(true);
       getEndLocations({
         variables: { locationStopLocation: options.key, locationStop: '' },
       });
+      setEndLocationList(endData && endData);
     }
   };
 
   const handleStopSelect = (key: string, options) => {
-    setSelectStopLocation(options.key);
+    setSelectStopLocation(options);
     getEndLocations({
       variables: {
-        locationStopLocation: selectStartLocation,
+        locationStopLocation: selectStartLocation.key,
         locationStop: options.key,
       },
     });
+    setEndLocationList(endData && endData);
   };
 
   const handleEndSelect = (key: string, options) => {
-    setSelectEndLocation(options.key);
+    setSelectEndLocation(options);
   };
 
   function onChange(date, dateString) {
@@ -85,14 +96,12 @@ export default function SearchBus({ startLocations }) {
   }
 
   const handleSearchBus = async () => {
-    if (selectEndLocation != '') {
+    if (selectEndLocation.key != '') {
       router.push({
         pathname: '/bus/orders',
         query: {
-          // startLocattion: selectStartLocation,
-          // stopLocattion: selectStopLocation ? selectStopLocation : '',
-          endLocation: selectEndLocation,
-          date: selectDate,
+          endLocation: selectEndLocation.key,
+          date: '',
         },
       });
     } else {
@@ -110,7 +119,7 @@ export default function SearchBus({ startLocations }) {
         <div className={style.startLocation}>
           <AutoComplete
             allowClear
-            defaultActiveFirstOption
+            defaultValue={selectStartLocation.value}
             notFoundContent="Хайлт илэрцгүй"
             filterOption={true}
             onSelect={handleStartSelect}
@@ -138,6 +147,7 @@ export default function SearchBus({ startLocations }) {
           <AutoComplete
             allowClear
             onSelect={handleStopSelect}
+            defaultValue={selectStopLocation.value}
             disabled={isUlaanbaatar}
             placeholder="Хаанаас: сум байршил..."
           >
@@ -163,6 +173,7 @@ export default function SearchBus({ startLocations }) {
           <AutoComplete
             allowClear
             filterOption={true}
+            defaultValue={selectEndLocation.value}
             notFoundContent="Хайлт илэрцгүй"
             onSelect={handleEndSelect}
             placeholder="Хаашаа: хот байршил..."

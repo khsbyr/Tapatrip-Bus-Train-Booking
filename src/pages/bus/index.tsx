@@ -18,9 +18,10 @@ export default function Bus({ guestToken }) {
     AuthTokenStorageService.guestStore(guestToken);
   }, []);
   const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
-  const startLocations = arrayFormat(data);
+
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
+  const startLocations = arrayFormat(data);
   return (
     <Layout>
       <HeaderBackground />
