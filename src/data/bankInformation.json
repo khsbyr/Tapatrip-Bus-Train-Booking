@@ -2,15 +2,13 @@
   {
     "id": 0,
     "name": "Хаан банк",
-    "pNumber": 88008734,
     "accountNumber": 5057397049,
     "accountName": "АВТО ТЭЭВРИЙН ҮНДЭСНИЙ ТӨВ"
   },
   {
     "id": 1,
     "name": "Голомт банк",
-    "pNumber": 88008734,
-    "accountNumber": 12121212,
+    "accountNumber": 1605186111,
     "accountName": "АВТО ТЭЭВРИЙН ҮНДЭСНИЙ ТӨВ"
   }
 ]

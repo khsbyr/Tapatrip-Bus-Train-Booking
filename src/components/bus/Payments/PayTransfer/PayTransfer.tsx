@@ -119,16 +119,16 @@ export default function Payment() {
             </div>
             <div className="space-y-3 sm:pl-2 text-base">
               <div className="space-y-2">
-                <h1 className="text-cardDate ml-2">Утасны дугаар</h1>
+                <h1 className="text-cardDate ml-2">Холбогдох утас</h1>
                 <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
                   <label className="text-cardDate" htmlFor="firstName">
-                    {banks[0].pNumber}
+                    Холбогдох утас
                   </label>
                   <Popover content={'Copy'}>
                     <button
                       className=""
                       onClick={() =>
-                        navigator.clipboard.writeText(banks[0].pNumber)
+                        navigator.clipboard.writeText('Холбогдох утас')
                       }
                     >
                       <DuplicateIcon className="outline w-6 h-6 text-copyText" />
@@ -198,16 +198,16 @@ export default function Payment() {
             </div>
             <div className="space-y-3 sm:pl-2 text-base">
               <div className="space-y-2">
-                <h1 className="text-cardDate ml-2">Утасны дугаар</h1>
+                <h1 className="text-cardDate ml-2">Холбогдох утас</h1>
                 <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
                   <label className="text-cardDate" htmlFor="firstName">
-                    {banks[0].pNumber}
+                    Холбогдох утас
                   </label>
                   <Popover content={'Copy'}>
                     <button
                       className=""
                       onClick={() =>
-                        navigator.clipboard.writeText(banks[1].pNumber)
+                        navigator.clipboard.writeText('Холбогдох утас')
                       }
                     >
                       <DuplicateIcon className="outline w-6 h-6 text-copyText" />

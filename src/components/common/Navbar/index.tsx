@@ -37,9 +37,12 @@ const Navbar: FC<Props> = ({ navbarData }) => {
 
   return (
     <>
-      <div>
+      <div className="">
         <nav
-          className={`relative md:fixed w-full 
+          // className={`relative md:fixed md:h-20 md:top-0 z-10 ${
+          //   navbar ? 'bg-white shadow-lg max-w-7xl' : 'bg-none shadow-none'
+          // }`}
+          className={`relative md:fixed w-full
           ${navbar ? 'bg-white' : 'bg-none'}
           md:h-20 md:top-0 z-10 ${navbar ? 'shadow-lg' : 'shadow-none'}`}
         >
