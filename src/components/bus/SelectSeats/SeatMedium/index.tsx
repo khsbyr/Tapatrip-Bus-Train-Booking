@@ -15,6 +15,7 @@ const SeatMedium = ({ datas }) => {
   const handleSelectSeat = e => {
     if (seats.indexOf(e.target.value) === -1) {
       seats.push(e.target.value);
+      setSelectedSeats('');
       setSelectedSeats(seats);
     } else {
       message.warning('Та энэ суудлыг сонгосон байна?');

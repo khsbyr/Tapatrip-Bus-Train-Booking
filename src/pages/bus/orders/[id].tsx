@@ -67,27 +67,27 @@ export default function Payment() {
   };
   return (
     <Layout>
-      <ContentWrapper>
+      
         <div className="relative bg-bg">
-          <SeatNav navbarData={NavData} />
-
-          <div className="bg-steps w-full">
-            <div className="max-w-7xl mx-auto">
-              <Steps
-                type="navigation"
-                current={current}
-                onChange={onChange}
-                size="small"
-                // className="bg-steps p-4"
-                responsive={true}
-                className="site-navigation-steps max-w-2xl mr-auto hidden md:flex"
-              >
-                {steps.map(item => (
-                  <Step key={item.title} icon=" " title={item.title} />
-                ))}
-              </Steps>
+          <SeatNav navbarData={NavData} /> 
+          <ContentWrapper>
+            <div className="bg-steps w-full">
+              <div className="max-w-7xl mx-auto">
+                <Steps
+                  type="navigation"
+                  current={current}
+                  onChange={onChange}
+                  size="small"
+                  responsive={true}
+                  className="site-navigation-steps max-w-2xl mr-auto hidden md:flex"
+                >
+                  {steps.map(item => (
+                    <Step key={item.title} icon=" " title={item.title} />
+                  ))}
+                </Steps>
+              </div>
             </div>
-          </div>
+          </ContentWrapper>
           <div className="max-w-7xl mx-auto my-5 flex">
             <div className="w-full md:w-3/5 lg:w-3/5">
               {
@@ -139,7 +139,6 @@ export default function Payment() {
             </div>
           </div>
         </div>
-      </ContentWrapper>
     </Layout>
   );
 }
