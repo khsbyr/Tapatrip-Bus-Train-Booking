@@ -13,8 +13,7 @@ export default function Payment() {
     setValue(e.target.value);
   };
   const { Countdown } = Statistic;
-  const deadline = Date.now() + 60 * 60;
-  //  * 333.3;
+  const deadline = Date.now() + 60 * 60 * 333.3;
 
   const onFinish = () => {
     console.log('finished!');
