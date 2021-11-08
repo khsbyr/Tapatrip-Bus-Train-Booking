@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PassengerInfo from '@components/bus/PassengerInfo';
 import Payments from '@components/bus/Payments';
+import PaymentCard from '@components/bus/PaymentCard';
 import { useQuery } from '@apollo/client';
 import { BUS_SCHEDULES_DETAIL_QUERY } from '@graphql/queries';
 import { Steps } from 'antd';
@@ -54,7 +55,7 @@ export default function Payment() {
     {
       title: 'Төлбөр төлөх',
       content: <Payments />,
-      button: 'Дуусгах',
+      button: 'Захиалагчийн мэдээлэл шалгах',
     },
   ];
 
@@ -127,9 +128,10 @@ export default function Payment() {
               </div>
             )}
             {current === steps.length - 1 && (
-              <div className="p-2">
+              <div className="p-2 space-y-3">
                 {/* // -------------------Components_2---------------------------// */}
                 <StepCard datas={scheduleDataResult} />
+                <PaymentCard />
                 <button className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white">
                   {steps[current].button}
                 </button>
