@@ -6,7 +6,6 @@ import { useGlobalStore } from '@context/globalStore';
 import style from './SeatMedium.module.scss';
 import { message } from 'antd';
 import { arrayFilterSeat } from '@helpers/array-format';
-import arrayFilter from '@helpers/array-filter';
 
 const seats = [];
 const isSelected = [];
@@ -21,8 +20,8 @@ const SeatMedium = ({ datas }) => {
     if (isArray.length === 0) {
       let passenger= {
           id:'',
-          firstName:'',
-          lastName:'',
+          firstName:'dsadsad',
+          lastName:'sadsad',
           documentNumber:'',
           gender:'',
           isChild:'',

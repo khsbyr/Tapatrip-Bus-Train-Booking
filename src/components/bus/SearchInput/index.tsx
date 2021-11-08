@@ -52,11 +52,11 @@ export default function SearchBus({ startLocations }) {
   // if (stopError) return `Error! ${stopError.message}`;
 
   const formatEndLocation =
-    endLocationList && endLocationList.busAllLocationEnds.edges;
+    endData && endData.busAllLocationEnds.edges;
   const endFormatLocation = endLocationFormat(formatEndLocation);
 
   const formatStopLocation =
-    stopLocationList && stopLocationList.busAllLocationStops.edges;
+    stopData && stopData.busAllLocationStops.edges;
   const stopFormatLocation = stopLocationFormat(formatStopLocation);
 
   const handleStartSelect = (key: string, options) => {
@@ -90,6 +90,21 @@ export default function SearchBus({ startLocations }) {
   const handleEndSelect = (key: string, options) => {
     setSelectEndLocation(options);
   };
+
+  // const handleEndFocus = () => {
+  //   if (selectStartLocation.key == 'QnVzQWxsTG9jYXRpb246MQ==') {
+  //     getEndLocations({
+  //       variables: { locationStopLocation: selectStartLocation.key, locationStop: '' },
+  //     });
+  //   } else {
+  //     getEndLocations({
+  //         variables: {
+  //           locationStopLocation: selectStartLocation.key,
+  //           locationStop: selectStopLocation.key,
+  //         },
+  //     });
+  //   }
+  // };
 
   function onChange(date, dateString) {
     setSelectDate(dateString);
