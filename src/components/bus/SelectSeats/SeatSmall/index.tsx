@@ -6,22 +6,26 @@ import { useGlobalStore } from '@context/globalStore';
 import { message } from 'antd';
 
 const seats = [];
+const isSelected = [];
 
 const Seat24 = ({ datas }) => {
   const seatRanges = seat24RangeMap(datas.seats);
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
+  const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
 
   const handleSelectSeat = e => {
     if (seats.indexOf(e.target.value) === -1) {
       seats.push(e.target.value);
+      isSelected[e.target.value]=true;
       setSelectedSeats(seats);
+      setIsSelectedSeats(isSelected);
     } else {
       message.warning('Та энэ суудлыг сонгосон байна?');
     }
   };
 
   return (
-    <div className="pl-10 flex">
+    <div className="flex">
       <div className="z-0 relative w-full">
         <Image src={busSketch} className="z-0" />
       </div>
@@ -38,7 +42,7 @@ const Seat24 = ({ datas }) => {
                       className={
                         seat.isAvialable
                           ? style.seatButtonDisabled
-                          : style.seatButton
+                          : (isSelectedSeats[seat.number]) ? style.seatButtonSelected : style.seatButton
                       }
                       value={seat.number}
                       onClick={handleSelectSeat}

@@ -6,13 +6,16 @@ import { useGlobalStore } from '@context/globalStore';
 
 export default function SelectSeats({ datas }) {
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
+   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
   const { bus, driverPhone } = datas;
 
   const handleRemoveSeat = e => {
     const index = selectedSeats.indexOf(e.target.value);
     if (index > -1) {
       selectedSeats.splice(index, 1);
+      isSelectedSeats[e.target.value]=false;
       setSelectedSeats(selectedSeats);
+      setIsSelectedSeats(isSelectedSeats);
     }
   };
 

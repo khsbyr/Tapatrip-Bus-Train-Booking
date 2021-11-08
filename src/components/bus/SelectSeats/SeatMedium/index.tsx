@@ -7,16 +7,19 @@ import style from './SeatMedium.module.scss';
 import { message } from 'antd';
 
 const seats = [];
+const isSelected = [];
 
 const SeatMedium = ({ datas }) => {
   const seatRanges = seatRangeMap(datas.seats);
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
+  const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
 
   const handleSelectSeat = e => {
     if (seats.indexOf(e.target.value) === -1) {
       seats.push(e.target.value);
-      setSelectedSeats('');
+      isSelected[e.target.value]=true;
       setSelectedSeats(seats);
+      setIsSelectedSeats(isSelected);
     } else {
       message.warning('Та энэ суудлыг сонгосон байна?');
     }
@@ -39,7 +42,7 @@ const SeatMedium = ({ datas }) => {
                         className={
                           seat.isAvialable
                             ? style.seatButtonDisabled
-                            : style.seatButton
+                            : (isSelectedSeats[seat.number]) ? style.seatButtonSelected : style.seatButton
                         }
                         value={seat.number}
                         onClick={handleSelectSeat}
@@ -55,7 +58,7 @@ const SeatMedium = ({ datas }) => {
                         className={
                           seat.isAvialable
                             ? style.seatButtonMarginLeftDisabled
-                            : style.seatButtonMarginLeft
+                            : (isSelectedSeats[seat.number]) ? style.seatButtonMarginLeftSelected : style.seatButtonMarginLeft
                         }
                         value={seat.number}
                         onClick={handleSelectSeat}
@@ -77,7 +80,7 @@ const SeatMedium = ({ datas }) => {
                         className={
                           seat.isAvialable
                             ? style.seatButtonMarginRightDisabled
-                            : style.seatButtonMarginRight
+                            : (isSelectedSeats[seat.number]) ? style.seatButtonMarginRightSelected : style.seatButtonMarginRight
                         }
                         value={seat.number}
                         onClick={handleSelectSeat}
@@ -93,7 +96,7 @@ const SeatMedium = ({ datas }) => {
                         className={
                           seat.isAvialable
                             ? style.seatButtonDisabled
-                            : style.seatButton
+                            : (isSelectedSeats[seat.number]) ? style.seatButtonSelected : style.seatButton
                         }
                         value={seat.number}
                         onClick={handleSelectSeat}
