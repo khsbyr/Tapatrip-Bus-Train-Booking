@@ -19,16 +19,16 @@ export default function SelectSeats({ datas }) {
   return (
     <div className={style.root}>
       <div>
-        <h1 className="pl-10 text-cardDate font-bold text-lg pb-2 border-b-2">
+        <h1 className="px-3 md:px-8 text-cardDate font-bold text-lg pb-2 border-b-2">
           Суудал сонгох
         </h1>
       </div>
-      <div className="flex">
-        <div className="space-y-6">
-          <h1 className="pl-10 text-cardDate font-bold text-lg">
+      <div className="px-3 md:px-8 flex flex-wrap">
+        <div className="w-full lg:w-7/12 space-y-6">
+          <h1 className="text-cardDate font-bold text-lg">
             Автобусын мэдээлэл
           </h1>
-          <div className="pl-10 flex space-x-4">
+          <div className="flex space-x-4">
             <div>
               <img src="../../assets/busimg.jpg" className="h-40" />
             </div>
@@ -39,7 +39,7 @@ export default function SelectSeats({ datas }) {
               <p>Жолоочийн дугаар: {driverPhone}</p>
             </div>
           </div>
-          <div className="pl-10 flex space-x-10">
+          <div className="flex space-x-10">
             <div className="flex items-center space-x-5">
               <p className="text-cardDate font-bold border-2 bg-white h-7 w-10 rounded-md"></p>
               <h1 className="text-cardDate">Захиалах боломжтой</h1>
@@ -49,11 +49,11 @@ export default function SelectSeats({ datas }) {
               <h1 className="text-cardDate">Захиалагдсан</h1>
             </div>
           </div>
-          <div className="pl-10 flex flex-wrap">
-            <h1 className="text-cardDate font-bold text-md">
+          <div className="">
+            <h1 className="text-cardDate font-bold text-lg">
               Сонгогдсон суудал
             </h1>
-            <div className="space-x-5 px-5 text-lg font-bold">
+            <div className="py-2 text-lg font-bold">
               {selectedSeats &&
                 selectedSeats.map(seat => (
                   <button
@@ -67,7 +67,7 @@ export default function SelectSeats({ datas }) {
             </div>
           </div>
         </div>
-        <div>
+        <div className="">
           {bus.seatCount < 25 ? (
             <SeatSmall datas={datas} />
           ) : (

@@ -22,7 +22,7 @@ const SeatMedium = ({ datas }) => {
     }
   };
   return (
-    <div className="pl-10 flex">
+    <div className="border-2 flex">
       <div className="z-0 relative w-full">
         <Image src={busSketch} className="z-0" />
       </div>

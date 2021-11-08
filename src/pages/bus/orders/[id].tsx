@@ -67,7 +67,6 @@ export default function Payment() {
   };
   return (
     <Layout>
-      
         <div className="relative bg-bg">
           <SeatNav navbarData={NavData} /> 
           <ContentWrapper>
@@ -106,39 +105,39 @@ export default function Payment() {
                 <div className="px-2">
                   {/* // -------------------Components_0---------------------------// */}
 
-                  <StepCard datas={scheduleDataResult} />
-                  <button
-                    className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white"
-                    onClick={() => next()}
-                  >
-                    {steps[current].button}
-                  </button>
-                </div>
-              )}
-              {current === 1 && (
-                <div className="p-2">
-                  {/* // -------------------Components_1---------------------------// */}
-                  <StepCard datas={scheduleDataResult} />
-                  <button
-                    className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white"
-                    onClick={() => next()}
-                  >
-                    {steps[current].button}
-                  </button>
-                </div>
-              )}
-              {current === steps.length - 1 && (
-                <div className="p-2">
-                  {/* // -------------------Components_2---------------------------// */}
-                  <StepCard datas={scheduleDataResult} />
-                  <button className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white">
-                    {steps[current].button}
-                  </button>
-                </div>
-              )}
-            </div>
+                <StepCard datas={scheduleDataResult} />
+                <button
+                  className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white"
+                  onClick={() => next()}
+                >
+                  {steps[current].button}
+                </button>
+              </div>
+            )}
+            {current === 1 && (
+              <div className="p-2">
+                {/* // -------------------Components_1---------------------------// */}
+                <StepCard datas={scheduleDataResult} />
+                <button
+                  className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white"
+                  onClick={() => next()}
+                >
+                  {steps[current].button}
+                </button>
+              </div>
+            )}
+            {current === steps.length - 1 && (
+              <div className="p-2">
+                {/* // -------------------Components_2---------------------------// */}
+                <StepCard datas={scheduleDataResult} />
+                <button className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white">
+                  {steps[current].button}
+                </button>
+              </div>
+            )}
           </div>
         </div>
+      </div>
     </Layout>
   );
 }
