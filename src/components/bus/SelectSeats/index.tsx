@@ -10,7 +10,8 @@ export default function SelectSeats({ datas }) {
   const { bus, driverPhone } = datas;
 
   const handleRemoveSeat = e => {
-    const index = selectedSeats.indexOf(e.target.value);
+    //const index = selectedSeats.indexOf(e.target.value);
+    const index = selectedSeats.findIndex(item => item.seatNumber === e.target.value)
     if (index > -1) {
       selectedSeats.splice(index, 1);
       isSelectedSeats[e.target.value]=false;
@@ -60,11 +61,11 @@ export default function SelectSeats({ datas }) {
               {selectedSeats &&
                 selectedSeats.map(seat => (
                   <button
-                    value={seat}
+                    value={seat.seatNumber}
                     onClick={handleRemoveSeat}
                     className={style.selectedSeats}
                   >
-                    {seat}
+                    {seat.seatNumber}
                   </button>
                 ))}
             </div>

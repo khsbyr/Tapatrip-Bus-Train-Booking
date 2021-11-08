@@ -5,6 +5,8 @@ import seatRangeMap from '@helpers/seatRangeMap';
 import { useGlobalStore } from '@context/globalStore';
 import style from './SeatMedium.module.scss';
 import { message } from 'antd';
+import { arrayFilterSeat } from '@helpers/array-format';
+import arrayFilter from '@helpers/array-filter';
 
 const seats = [];
 const isSelected = [];
@@ -15,8 +17,19 @@ const SeatMedium = ({ datas }) => {
   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
 
   const handleSelectSeat = e => {
-    if (seats.indexOf(e.target.value) === -1) {
-      seats.push(e.target.value);
+    let isArray = arrayFilterSeat(seats,e.target.value);
+    if (isArray.length === 0) {
+      let passenger= {
+          id:'',
+          firstName:'',
+          lastName:'',
+          documentNumber:'',
+          gender:'',
+          isChild:'',
+          genderName: '',
+          seatNumber: e.target.value 
+      }
+      seats.push(passenger);
       isSelected[e.target.value]=true;
       setSelectedSeats(seats);
       setIsSelectedSeats(isSelected);

@@ -137,7 +137,7 @@ export default function PassengerIfo({ datas }) {
               <h1 className="text-cardDate">Зорчигч {++i}</h1>
 
               <p>
-                <h1 className="text-cardDate">Том хүн {datas.adultTicket} ₮</h1>
+                <h1 className="text-cardDate">Том хүн {datas.adultTicket}</h1>
                 <h1 className="text-cardDate font-normal text-xs">
                   АМЬ ДААТГАЛ БАГТСАН
                 </h1>
@@ -149,7 +149,7 @@ export default function PassengerIfo({ datas }) {
                   <label className={s.Label} htmlFor="RegisterNo">
                     Регистрийн дугаар
                   </label>
-                  <RegisterNumber registNo={registNo} />
+                  <RegisterNumber registNo={registNo} seatNumber={seat.number} passengerNumber={++i}/>
                 </div>
                 <div className={s.leftContent}>
                   <label className={s.Label} htmlFor="RegisterNo">

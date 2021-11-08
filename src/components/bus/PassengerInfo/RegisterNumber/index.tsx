@@ -6,16 +6,21 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 
-const RegisterNumber = ({ registNo }) => {
+const RegisterNumber = ({ registNo, seatNumber='', passengerNumber=0 }) => {
+  console.log(seatNumber);
   const [isOpen1, setIsOpen1] = useState(false);
   const [values1, setValues1] = useState('A');
+  const [isOpen2, setIsOpen2] = useState(false);
+  const [values2, setValues2] = useState('A');
+
   const next = value => {
+    console.log(value);
     setValues1(value);
     setIsOpen1(false);
   };
-  const [isOpen2, setIsOpen2] = useState(false);
-  const [values2, setValues2] = useState('A');
+ 
   const next1 = value => {
+    console.log(value);
     setValues2(value);
     setIsOpen2(false);
   };
@@ -49,7 +54,7 @@ const RegisterNumber = ({ registNo }) => {
             )}
           </h2>
         </button>
-        <Input className="rounded-lg bg-bg border-0 p-2 py-3" />
+        <Input value={seatNumber} className="rounded-lg bg-bg border-0 p-2 py-3" />
       </div>
       {!isOpen1 ? (
         <h1></h1>

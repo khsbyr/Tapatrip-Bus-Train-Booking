@@ -8,7 +8,7 @@ export interface State {
   startLocationList: any;
   stopLocationList: any;
   endLocationList: any;
-  selectedSeats: [];
+  selectedSeats: any;
   isSelectedSeats: any;
 }
 
