@@ -104,6 +104,9 @@ export default function Payment() {
               />
             }
             {steps[current].content}
+            <button className={s.buttonBlock} onClick={() => next()}>
+              {steps[current].button}
+            </button>
           </div>
 
           <div className={s.card}>
