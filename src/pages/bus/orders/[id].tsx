@@ -63,6 +63,10 @@ export default function Payment() {
     setCurrent(current);
   };
 
+  const onSubmit = e => {
+    console.log('submit');
+  };
+
   const next = () => {
     setCurrent(current + 1);
   };
@@ -121,7 +125,7 @@ export default function Payment() {
                 <StepCard datas={scheduleDataResult} />
                 <button
                   className="w-full bg-button shadow-md rounded-md font-semibold py-3 mt-2 hover:bg-red-500 text-white"
-                  onClick={() => next()}
+                  onClick={onSubmit}
                 >
                   {steps[current].button}
                 </button>
