@@ -18,8 +18,11 @@ const selection = [
 export default function PassengerIfo({ datas }) {
   const [selected, setSelected] = useState(selection[0]);
   const [isSelected, setIsSelected] = useState(false);
-
+  const { customers, setCustomers } = useGlobalStore();
   const { selectedSeats } = useGlobalStore();
+
+  console.log(selectedSeats);
+  console.log(customers);
 
   const onClick = () => {
     setIsSelected(!isSelected);
@@ -27,6 +30,27 @@ export default function PassengerIfo({ datas }) {
 
   const select = () => {
     setIsSelected(!isSelected);
+  };
+
+  const handleCompany = value => {
+    console.log(value);
+  };
+
+
+  const handleCustomerEmail = e => {
+    if(customers) {
+      customers.email = e.target.value;
+      setCustomers(customers);
+    }
+    else {
+      let customer = {
+        documentNumber: '',
+        email:e.target.value,
+        dialNumber: '976',
+        phoneNumber:''
+      }
+       setCustomers(customer);
+    }
   };
 
   return (
@@ -43,7 +67,7 @@ export default function PassengerIfo({ datas }) {
         <div className="w-full sm:grid grid-cols-2 px-4 py-2">
           <div className={s.InfoForm}>
             <div className={s.customerSelect}>
-              <Listbox value={selected} onChange={setSelected}>
+              <Listbox value={selected} onChange={handleCompany}>
                 <button className="w-full" onClick={onClick}>
                   <Listbox.Button className="relative w-full py-3 pl-3 text-left text-cardDate bg-bg rounded-lg cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500">
                     <span className="block truncate font-medium">
@@ -112,6 +136,8 @@ export default function PassengerIfo({ datas }) {
               </label>
               <Input
                 className={s.input}
+                type="email"
+                onChange={handleCustomerEmail} 
                 placeholder="Таны тасалбарыг илгээх болно"
               />
             </div>
@@ -121,7 +147,7 @@ export default function PassengerIfo({ datas }) {
               <label className={s.Label} htmlFor="RegisterNo">
                 Регистрийн дугаар
               </label>
-              <RegisterNumber registNo={registNo} />
+              <Input className={s.input} />
             </div>
             <div className={s.rightContent}>
               <InputPhoneNumber />
@@ -155,7 +181,7 @@ export default function PassengerIfo({ datas }) {
                   <label className={s.Label} htmlFor="RegisterNo">
                     Овог
                   </label>
-                  <Input value={seat.lastName} className={s.input} />
+                  <Input  className={s.input} />
                 </div>
               </div>
               <div className={s.InfoForm}>
@@ -169,7 +195,7 @@ export default function PassengerIfo({ datas }) {
                   <label className={s.Label} htmlFor="RegisterNo">
                     Нэр
                   </label>
-                  <Input value={seat.firstName} className={s.input} />
+                  <Input defaultValue={seat.firstName} className={s.input} />
                 </div>
               </div>
             </div>

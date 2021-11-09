@@ -8,6 +8,7 @@ import { BUS_PASSENGER } from '@graphql/mutation';
 
 const RegisterNumber = ({ registNo, seatNumber='', passengerNumber=0 }) => {
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
+  const { customers, setCustomers } = useGlobalStore();
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [values1, setValues1] = useState('A');
@@ -43,27 +44,9 @@ const RegisterNumber = ({ registNo, seatNumber='', passengerNumber=0 }) => {
   const handleRegister = e => {
     console.log(e.target.value.length);
     if(e.target.value.length===8) {
-       const registerNumber = values1+values2+e.target.value;
-      //  addPassenger({ variables: { documentNumber: registerNumber} });
-      //  console.log(seatNumber);
-      //  //const passenger = data.busPassenger.passenger;
-      
-      //  if(data) {
-      //     const passenger = data && data.busPassenger.passenger;
-      //     selectedSeats[passengerNumber-1].lastName=passenger.lastName;
-      //     //setSelectedSeats(setSelectedSeats);
-      //     console.log(selectedSeats);
-      //  }
-       //if (error) message.error('dsadsa');
-      // 
-      //  else {
-      //     message.error('Алдаа!!!!');
-      //  }
-      
-       //setSelectedSeats(setSelectedSeats);
-       //selectedSeats[passengerNumber-1].=true;
-      //  console.log(selectedSeats[passengerNumber-1].lastName);
-      //  console.log(data.busPassenger.passenger);
+      const registerNumber = values1+values2+e.target.value;
+      selectedSeats[passengerNumber-1].documentNumber=registerNumber
+      setSelectedSeats(selectedSeats);
     }
     else if(e.target.value.length>8) {
       message.warning('Таны бичсэн регистерийн дугаарын урт хэтэрсэн байна!!!');
@@ -99,7 +82,7 @@ const RegisterNumber = ({ registNo, seatNumber='', passengerNumber=0 }) => {
             )}
           </h2>
         </button>
-        <Input id={seatNumber} type="number" onChange={handleRegister} className="rounded-lg bg-bg border-0 p-2 py-3" />
+        <Input id={'register'+seatNumber} type="number" onChange={handleRegister} maxLength={8} className="rounded-lg bg-bg border-0 p-2 py-3" />
       </div>
       {!isOpen1 ? (
         <h1></h1>
