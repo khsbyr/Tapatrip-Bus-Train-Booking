@@ -47,12 +47,12 @@ export default function Orders() {
     <Layout>
       <div className=" bg-bg">
         <BusNavbar navbarData={NavData} startLocations={startLocations} />
-        <div className="max-w-7xl mx-auto my-5 grid grid-cols-1 md:grid-cols-3">
+        <div className="max-w-7xl mx-auto my-5 grid grid-cols-1 lg:grid-cols-3">
           <div className="md:col-span-2 space-y-5">
             <div className="px-2">
-              <div className="bg-alert border border-alert h-16 flex items-center rounded-2xl space-x-5 px-2">
-                <ShieldExclamationIcon className="w-7 h-7 ml-12 text-alert" />
-                <p className="text-alert font-bold text-lg">
+              <div className="bg-alert border border-alert h-auto flex items-center rounded-2xl space-x-5 px-2">
+                <ShieldExclamationIcon className="w-7 h-7 ml-2 lg:ml-12 text-alert flex-shrink-0" />
+                <p className="text-alert font-bold text-md md:text-lg py-3">
                   Хамгийн сүүлийн үеийн COVID-19 аяллын мэдээллийг эндээс үзнэ
                   үү
                 </p>
@@ -80,7 +80,7 @@ export default function Orders() {
               />
             )}
           </div>
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <div className="sticky top-0 bg-white py-5 px-5 rounded-xl divide-y-2">
               <div className="mt-0 space-y-2">
                 <h1 className="text-cardDate font-bold text-2xl">Тосох цаг</h1>

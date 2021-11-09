@@ -1,19 +1,19 @@
 .card {
   @apply relative bg-white w-full h-auto rounded-2xl;
   .leaveTitle {
-    @apply pt-4 font-bold text-cardDescColor text-xs md:text-sm lg:text-base;
+    @apply pt-4 font-bold text-cardDescColor text-xs;
   }
   .startTitle {
-    @apply text-cardDate font-bold text-sm md:text-lg lg:text-xl;
+    @apply text-cardDate font-bold text-sm;
   }
   .timeText {
-    @apply font-light text-cardDate text-xs md:text-sm lg:text-lg;
+    @apply font-light text-cardDate text-xs;
   }
   .priceText {
-    @apply text-cardDate font-bold text-sm md:text-lg lg:text-2xl;
+    @apply text-cardDate font-bold text-sm;
   }
   .rowDirection {
-    @apply py-5 grid grid-cols-2 lg:grid-cols-3 items-center text-center;
+    @apply py-5 flex justify-between items-center;
   }
   .orderButton {
     @apply bg-button text-white font-thin md:font-bold md:py-2 px-4 rounded-lg h-8 md:h-10 text-center w-full lg:w-40 hover:bg-hover focus:bg-down;
