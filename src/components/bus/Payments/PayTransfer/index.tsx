@@ -10,7 +10,6 @@ import { Fragment, useState } from 'react';
 import Image from 'next/image';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import banks from '@data/bankInformation.json';
-import s from './PayTransfer.module.scss';
 export default function Payment() {
   const [selected, setSelected] = useState(banks[0]);
   const [isSelected, setIsSelected] = useState(false);
@@ -31,7 +30,7 @@ export default function Payment() {
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
   const copyToAccNumber = () => {
-    navigator.clipboard.writeText(banks[0].accountNumber);
+    navigator.clipboard.writeText("5057397049");
     setCopyAccNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
   const [copyPhoneNumber, setCopyPhoneNumber] = useState(
