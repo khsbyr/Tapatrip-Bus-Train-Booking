@@ -1,0 +1,19 @@
+.root {
+  @apply space-y-3 w-full text-cardDate;
+}
+.body {
+  @apply rounded-lg bg-white py-2 shadow-md;
+}
+.instructions {
+  @apply flex justify-between w-full py-2 text-lg items-center font-bold border-b-2 px-6;
+}
+
+.radioGroup {
+  @apply rounded-lg bg-white w-full shadow-md;
+}
+.paymentTitle {
+  @apply text-lg text-cardDate font-bold border-b-2 pl-6 py-2;
+}
+.paymentShape {
+  @apply text-lg font-bold py-2 w-full text-cardDate;
+}
