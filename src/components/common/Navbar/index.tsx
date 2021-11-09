@@ -39,7 +39,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
     <>
       <div>
         <nav
-          className={`absolute top-5 md:mt-0 md:fixed w-full 
+          className={`absolute top-5 md:mt-0 md:fixed w-screen 
           ${navbar ? 'bg-white' : 'bg-none'}
           md:h-20 md:top-0 z-10 ${navbar ? 'shadow-lg' : 'shadow-none'}`}
         >

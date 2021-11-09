@@ -12,30 +12,30 @@ const ContentWrapper = styled.div`
 
   .ant-steps-navigation .ant-steps-item::before {
     background-color: white !important;
-    display: none;
+    display: none !important;
   }
 
   .ant-steps-navigation .ant-steps-item::after {
-    border: 2px solid white;
-    border-bottom: none;
-    border-left: none;
-    margin-left: -4px;
-    margin-top: -10px;
-    width: 10px;
-    height: 10px;
+    border: 2px solid white !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    margin-left: -4px !important;
+    margin-top: -10px !important;
+    width: 10px !important;
+    height: 10px !important;
   }
   @media only screen and (max-width: 576px) {
     .ant-steps-navigation .ant-steps-item::after {
-      border: 2px solid white;
-      border-bottom: none;
-      border-left: none;
-      margin-left: -10px;
-      margin-top: -20px;
+      border: 2px solid white !important;
+      border-bottom: none !important;
+      border-left: none !important;
+      margin-left: -10px !important;
+      margin-top: -20px !important;
     }
   }
   @media only screen and (min-width: 768px) {
     .ant-steps-item-title {
-      font-size: 16px;
+      font-size: 16px !important;
     }
   }
   .ant-steps-item-wait

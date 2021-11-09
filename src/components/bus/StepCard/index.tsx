@@ -7,6 +7,7 @@ import {
 import React, { FC, useState } from 'react';
 import { Steps } from 'antd';
 import { useGlobalStore } from '@context/globalStore';
+import ContentWrapper from './style';
 
 const { Step } = Steps;
 
@@ -79,24 +80,26 @@ export default function StepCard({ datas }) {
           <div className={`${!isActive ? 'hidden' : 'block'}`}>
             <div className="border border-dashed "></div>
             <div className="px-5 py-5">
-              <Steps progressDot direction="vertical">
-                <Step
-                  title={datas.leaveDate}
-                  description={
-                    datas.startStopName +
-                    '-' +
-                    datas.locationEnd.locationStop.location.name
-                  }
-                />
-                <Step
-                  title={datas.leaveDate}
-                  description={
-                    datas.locationEnd.locationEnd.name +
-                    '-' +
-                    datas.locationEnd.locationEnd.location.name
-                  }
-                />
-              </Steps>
+              <ContentWrapper>
+                <Steps progressDot direction="vertical">
+                  <Step
+                    title={datas.leaveDate}
+                    description={
+                      datas.startStopName +
+                      '-' +
+                      datas.locationEnd.locationStop.location.name
+                    }
+                  />
+                  <Step
+                    title={datas.leaveDate}
+                    description={
+                      datas.locationEnd.locationEnd.name +
+                      '-' +
+                      datas.locationEnd.locationEnd.location.name
+                    }
+                  />
+                </Steps>
+              </ContentWrapper>
             </div>
           </div>
         </div>

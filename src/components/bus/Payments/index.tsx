@@ -4,7 +4,6 @@ import QPay from '@components/bus/Payments/QPay';
 import React from 'react';
 import s from './Payments.module.scss';
 import ContentWrapper from './style';
-import Banks from '@data/bankInformation.json';
 
 export default function Payment() {
   const [value, setValue] = React.useState(1);
