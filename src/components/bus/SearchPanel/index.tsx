@@ -15,7 +15,12 @@ const Search: FC<Props> = ({ navbarData, startLocations }) => {
   return (
     <ContentWrapper>
       <div className={style.searchBody}>
-        <Tabs defaultActiveKey="4" centered tabBarGutter={160}>
+        <Tabs
+          defaultActiveKey="4"
+          centered
+          tabBarGutter={160}
+          className="hidden lg:block"
+        >
           {navbarData.generalList.map(menu => (
             <TabPane
               tab={
