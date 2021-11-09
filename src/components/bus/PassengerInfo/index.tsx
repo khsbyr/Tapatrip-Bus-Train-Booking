@@ -35,8 +35,7 @@ export default function PassengerIfo({ datas }) {
   const handleCompany = value => {
     console.log(value);
   };
-
-
+  
   const handleCustomerEmail = e => {
     if(customers) {
       customers.email = e.target.value;
@@ -49,7 +48,7 @@ export default function PassengerIfo({ datas }) {
         dialNumber: '976',
         phoneNumber:''
       }
-       setCustomers(customer);
+      setCustomers(customer);
     }
   };
 
