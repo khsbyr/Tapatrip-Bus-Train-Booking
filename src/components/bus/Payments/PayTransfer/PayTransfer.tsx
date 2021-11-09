@@ -23,17 +23,15 @@ export default function Payment() {
   const [copyOrderNumber, setCopyOrderNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
-  const copyToOrderNumber = e => {
-    navigator.clipboard.writeText('1111111');
-    e.target.focus();
+  const copyToOrderNumber = num => {
+    navigator.clipboard.writeText('num');
     setCopyOrderNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
   const [copyAccNumber, setCopyAccNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
-  const copyToAccNumber = e => {
-    navigator.clipboard.writeText('5858585858');
-    e.target.focus();
+  const copyToAccNumber = () => {
+    navigator.clipboard.writeText(banks[0].accountNumber);
     setCopyAccNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
   const [copyPhoneNumber, setCopyPhoneNumber] = useState(
@@ -48,7 +46,7 @@ export default function Payment() {
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
   const copyToAccName = e => {
-    navigator.clipboard.writeText('AVTV');
+    navigator.clipboard.writeText(banks[0].accountName);
     e.target.focus();
     setCopyAccName(<CheckIcon className="text-secondary h-6 w-6" />);
   };
@@ -145,7 +143,7 @@ export default function Payment() {
               <h1 className="text-cardDate ml-2">Хүлээн авагч</h1>
               <p className="flex justify-between bg-bg rounded-lg py-3 p-2">
                 <label className="text-cardDate" htmlFor="firstName">
-                  {banks[0].accountName}
+                  {banks[selected.id].accountName}
                 </label>
                 <button onClick={copyToAccName}>{copyAccName}</button>
               </p>
