@@ -2,12 +2,10 @@ import { Form, Input, InputNumber, Space, Select, Checkbox } from 'antd';
 import mngIcon from 'public/assets/flagMongolia.png';
 import enIcon from 'public/assets/flagEng.png';
 import Image from 'next/image';
-import ContentWrapper from './style';
 
 const { Option } = Select;
 export default function loginGmail() {
   return (
-    <ContentWrapper>
       <form action="" className="space-y-6">
         <div className="space-y-2">
           <label
@@ -53,6 +51,5 @@ export default function loginGmail() {
           </a>
         </p>
       </form>
-    </ContentWrapper>
   );
 }
