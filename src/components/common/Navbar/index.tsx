@@ -1,7 +1,7 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
-import OrderModal from '@components/bus/OrderModal/OrderModal';
+import OrderModal from '@components/bus/OrderModal';
 import styles from './navbar.module.scss';
 import SelectLanguage from '@components/common/Selects/selectLanguage';
 
@@ -50,8 +50,8 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   <img
                     src={`${
                       navbar
-                        ? '../assets/logoBlue.png'
-                        : '../assets/logoWhite.png'
+                        ? '../assets/svgIcons/NewLogo.svg'
+                        : '../assets/svgIcons/NewLogoWhite.svg'
                     } `}
                     alt="Logo"
                     className={styles.logo}

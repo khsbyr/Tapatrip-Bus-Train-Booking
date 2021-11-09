@@ -15,7 +15,7 @@ export default function StepCard({ datas }) {
   const { selectedSeats } = useGlobalStore();
   const [isActive, setIsActive] = useState(false);
   return (
-    <div className="p-2 md:p-0">
+    <div className="md:p-0">
       <div className="max-w-7xl mx-auto">
         <div className="relative bg-white w-full h-auto rounded-2xl">
           <div className="px-5 space-y-4">

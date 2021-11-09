@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import style from './SelectSeats.module.scss';
+import s from './SelectSeats.module.scss';
 import SeatMedium from '@components/bus/SelectSeats/SeatMedium';
 import SeatSmall from '@components/bus/SelectSeats/SeatSmall';
 import { useGlobalStore } from '@context/globalStore';
+import Image from 'next/image';
+import busImg from '@public/assets/busimg.jpg';
 
 export default function SelectSeats({ datas }) {
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
@@ -17,34 +19,38 @@ export default function SelectSeats({ datas }) {
   };
 
   return (
-    <div className={style.root}>
+    <div className={s.root}>
       <div>
-        <h1 className="px-3 md:px-8 text-cardDate font-bold text-lg pb-2 border-b-2">
-          Суудал сонгох
-        </h1>
+        <h1 className={s.selecetSeatTitle}>Суудал сонгох</h1>
       </div>
-      <div className="px-3 md:px-8 flex flex-wrap">
-        <div className="w-full lg:w-7/12 space-y-6">
-          <h1 className="text-cardDate font-bold text-lg">
-            Автобусын мэдээлэл
-          </h1>
+      <div className={s.body}>
+        <div className="space-y-6">
+          <h1 className={s.busInformationTitle}>Автобусын мэдээлэл</h1>
           <div className="flex space-x-4">
             <div>
-              <img src="../../assets/busimg.jpg" className="h-40" />
+              <Image src={busImg} width="180" height="180" />
             </div>
-            <div className="text-cardDate font-medium space-y-3">
-              <p>ААН: {bus.transporter.name}</p>
-              <p>Загвар: {bus.modelName}</p>
-              <p>Улсын дугаар: {bus.plateNumber}</p>
-              <p>Жолоочийн дугаар: {driverPhone}</p>
+            <div className={s.busInformation}>
+              <p>
+                ААН: <h1>{bus.transporter.name}</h1>
+              </p>
+              <p>
+                Загвар: <h1>{bus.modelName}</h1>
+              </p>
+              <p>
+                Улсын дугаар: <h1>{bus.plateNumber}</h1>
+              </p>
+              <p>
+                Жолоочийн дугаар: <h1>{driverPhone}</h1>
+              </p>
             </div>
           </div>
-          <div className="flex space-x-10">
-            <div className="flex items-center space-x-5">
+          <div className="flex flex-wrap">
+            <div className="flex items-center py-1 space-x-5 mr-5">
               <p className="text-cardDate font-bold border-2 bg-white h-7 w-10 rounded-md"></p>
               <h1 className="text-cardDate">Захиалах боломжтой</h1>
             </div>
-            <div className="text-cardDate flex items-center space-x-5">
+            <div className="text-cardDate py-1 flex items-center space-x-5">
               <div className=" bg-bg h-7 w-10 rounded-md"></div>
               <h1 className="text-cardDate">Захиалагдсан</h1>
             </div>
@@ -59,7 +65,7 @@ export default function SelectSeats({ datas }) {
                   <button
                     value={seat}
                     onClick={handleRemoveSeat}
-                    className={style.selectedSeats}
+                    className={s.selectedSeats}
                   >
                     {seat}
                   </button>
@@ -67,13 +73,11 @@ export default function SelectSeats({ datas }) {
             </div>
           </div>
         </div>
-        <div className="">
-          {bus.seatCount < 25 ? (
-            <SeatSmall datas={datas} />
-          ) : (
-            <SeatMedium datas={datas} />
-          )}
-        </div>
+        {bus.seatCount < 25 ? (
+          <SeatSmall datas={datas} />
+        ) : (
+          <SeatMedium datas={datas} />
+        )}
       </div>
     </div>
   );

@@ -49,7 +49,7 @@ const RegisterNumber = ({ registNo }) => {
             )}
           </h2>
         </button>
-        <Input className="rounded-lg bg-bg border-0 p-2 py-3" />
+        <Input className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base" />
       </div>
       {!isOpen1 ? (
         <h1></h1>

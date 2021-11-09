@@ -1,6 +1,26 @@
 .root {
   @apply bg-white h-auto rounded-lg shadow-lg py-3 space-y-4;
 }
+.selecetSeatTitle {
+  @apply px-3 sm:pl-6 md:pl-8 text-cardDate font-bold text-lg pb-2 border-b-2;
+}
+.body {
+  @apply px-3 sm:pl-6 md:pl-8 flex flex-wrap justify-between;
+}
+.busInformationTitle {
+  @apply text-cardDate font-bold text-lg;
+}
+.busInformation {
+  @apply text-cardDate space-y-3 font-medium;
+
+  p {
+    @apply flex flex-wrap;
+
+    h1 {
+      @apply pl-0 sm:pl-2 font-normal text-cardDate;
+    }
+  }
+}
 .seatButton {
   @apply z-10 rounded-lg bg-white text-xl text-cardDate w-9 h-12 font-medium border-seat border-2 mb-1 mr-0.5 hover:bg-register hover:text-white focus:bg-register focus:text-white;
 }

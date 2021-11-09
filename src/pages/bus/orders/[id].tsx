@@ -65,7 +65,9 @@ export default function Payment() {
   };
 
   const next = () => {
-    setCurrent(current + 1);
+    if (current < steps.length - 1) {
+      setCurrent(current + 1);
+    }
   };
   return (
     <Layout>
@@ -103,34 +105,15 @@ export default function Payment() {
             }
             {steps[current].content}
           </div>
-          <div className={s.card}>
-            {current === 0 && (
-              <div className="px-2">
-                {/* // -------------------Components_0---------------------------// */}
 
-                <StepCard datas={scheduleDataResult} />
-                <button className={s.button} onClick={() => next()}>
-                  {steps[current].button}
-                </button>
-              </div>
-            )}
-            {current === 1 && (
-              <div className="px-2">
-                {/* // -------------------Components_1---------------------------// */}
-                <StepCard datas={scheduleDataResult} />
-                <button className={s.button} onClick={() => next()}>
-                  {steps[current].button}
-                </button>
-              </div>
-            )}
-            {current === steps.length - 1 && (
-              <div className="px-2 space-y-3">
-                {/* // -------------------Components_2---------------------------// */}
-                <StepCard datas={scheduleDataResult} />
-                <PaymentCard />
-                <button className={s.button}>{steps[current].button}</button>
-              </div>
-            )}
+          <div className={s.card}>
+            <div className="px-2 md:px-0 space-y-3 mt-3 md:mt-0">
+              <StepCard datas={scheduleDataResult} />
+              {current === steps.length - 1 ? <PaymentCard /> : ''}
+              <button className={s.button} onClick={() => next()}>
+                {steps[current].button}
+              </button>
+            </div>
           </div>
         </div>
       </div>

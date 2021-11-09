@@ -3,7 +3,7 @@ import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import Profile from '@components/common/Navbar/Profile';
 import Image from 'next/image';
-import BackgroundImage from '@public/assets/logoBlue.png';
+import BackgroundImage from '@public/assets/svgIcons/NewLogo.svg';
 // import SearchBus from '@components/bus/SearchInput';
 
 interface Props {
