@@ -1,4 +1,4 @@
-import { Input, Select, Popover } from 'antd';
+import { Input, Button, Popover } from 'antd';
 import {
   ChevronDownIcon,
   ChevronUpIcon,
@@ -10,7 +10,7 @@ import { Fragment, useState } from 'react';
 import Image from 'next/image';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import banks from '@data/bankInformation.json';
-
+import s from './PayTransfer.module.scss';
 export default function Payment() {
   const [selected, setSelected] = useState(banks[0]);
   const [isSelected, setIsSelected] = useState(false);
@@ -20,6 +20,37 @@ export default function Payment() {
   const select = () => {
     setIsSelected(!isSelected);
   };
+  const [copyOrderNumber, setCopyOrderNumber] = useState(
+    <DuplicateIcon className="text-secondary h-6 w-6" />
+  );
+  const copyToOrderNumber = num => {
+    navigator.clipboard.writeText('num');
+    setCopyOrderNumber(<CheckIcon className="text-secondary h-6 w-6" />);
+  };
+  const [copyAccNumber, setCopyAccNumber] = useState(
+    <DuplicateIcon className="text-secondary h-6 w-6" />
+  );
+  const copyToAccNumber = () => {
+    navigator.clipboard.writeText(banks[0].accountNumber);
+    setCopyAccNumber(<CheckIcon className="text-secondary h-6 w-6" />);
+  };
+  const [copyPhoneNumber, setCopyPhoneNumber] = useState(
+    <DuplicateIcon className="text-secondary h-6 w-6" />
+  );
+  const copyToPhoneNumber = e => {
+    navigator.clipboard.writeText('9999999');
+    e.target.focus();
+    setCopyPhoneNumber(<CheckIcon className="text-secondary h-6 w-6" />);
+  };
+  const [copyAccName, setCopyAccName] = useState(
+    <DuplicateIcon className="text-secondary h-6 w-6" />
+  );
+  const copyToAccName = e => {
+    navigator.clipboard.writeText(banks[0].accountName);
+    e.target.focus();
+    setCopyAccName(<CheckIcon className="text-secondary h-6 w-6" />);
+  };
+
   return (
     <div className="w-full -ml-6 text-base">
       <Listbox value={selected} onChange={setSelected}>
@@ -77,165 +108,49 @@ export default function Payment() {
             </Listbox.Options>
           </Transition>
         </div>
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2">
+          <div className="space-y-3 sm:pr-2 text-base">
+            <div className="space-y-2">
+              <h1 className="text-cardDate ml-2">Захиалгын дугаар</h1>
+              <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
+                <label className="text-cardDate" htmlFor="firstName">
+                  00112233
+                </label>
+                <button onClick={copyToOrderNumber}>{copyOrderNumber}</button>
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h1 className="text-cardDate ml-2">Дансны дугаар</h1>
+              <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
+                <label className="text-cardDate" htmlFor="firstName">
+                  {banks[selected.id].accountNumber}
+                </label>
+                <button onClick={copyToAccNumber}>{copyAccNumber}</button>
+              </p>
+            </div>
+          </div>
+          <div className="space-y-3 sm:pl-2">
+            <div className="space-y-2">
+              <h1 className="text-cardDate ml-2">Холбогдох утас</h1>
+              <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
+                <label className="text-cardDate text-base" htmlFor="firstName">
+                  Холбогдох утас
+                </label>
+                <button onClick={copyToPhoneNumber}>{copyPhoneNumber}</button>
+              </p>
+            </div>
+            <div className="space-y-3 w-full">
+              <h1 className="text-cardDate ml-2">Хүлээн авагч</h1>
+              <p className="flex justify-between bg-bg rounded-lg py-3 p-2">
+                <label className="text-cardDate" htmlFor="firstName">
+                  {banks[selected.id].accountName}
+                </label>
+                <button onClick={copyToAccName}>{copyAccName}</button>
+              </p>
+            </div>
+          </div>
+        </div>
       </Listbox>
-      {selected.id === 0 && (
-        <div className="flex flex-wrap">
-          <div className="mt-4 grid sm:grid-cols-2">
-            <div className="space-y-3 sm:pr-2 text-base">
-              <div className="space-y-2">
-                <h1 className="text-cardDate ml-2">Захиалгын дугаар</h1>
-                <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                  <label className="text-cardDate" htmlFor="firstName">
-                    00112233
-                  </label>
-                  <Popover content={'Copy'}>
-                    <button
-                      className=""
-                      onClick={() => navigator.clipboard.writeText('00112233')}
-                    >
-                      <DuplicateIcon className="outline w-6 h-6 text-copyText" />
-                    </button>
-                  </Popover>
-                </p>
-              </div>
-              <div className="space-y-2">
-                <h1 className="text-cardDate ml-2">Дансны дугаар</h1>
-                <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                  <label className="text-cardDate" htmlFor="firstName">
-                    {banks[0].accountNumber}
-                  </label>
-                  <Popover content={'Copy'}>
-                    <button
-                      className=""
-                      onClick={() =>
-                        navigator.clipboard.writeText(banks[0].accountNumber)
-                      }
-                    >
-                      <DuplicateIcon className="outline w-6 h-6 text-copyText" />
-                    </button>
-                  </Popover>
-                </p>
-              </div>
-            </div>
-            <div className="space-y-3 sm:pl-2 text-base">
-              <div className="space-y-2">
-                <h1 className="text-cardDate ml-2">Утасны дугаар</h1>
-                <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                  <label className="text-cardDate" htmlFor="firstName">
-                    {banks[0].pNumber}
-                  </label>
-                  <Popover content={'Copy'}>
-                    <button
-                      className=""
-                      onClick={() =>
-                        navigator.clipboard.writeText(banks[0].pNumber)
-                      }
-                    >
-                      <DuplicateIcon className="outline w-6 h-6 text-copyText" />
-                    </button>
-                  </Popover>
-                </p>
-              </div>
-              <div className="space-y-2">
-                <h1 className="text-cardDate ml-2">Хүлээн авагч</h1>
-                <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                  <label className="text-cardDate" htmlFor="firstName">
-                    {banks[0].accountName}
-                  </label>
-                  <Popover content={'Copy'}>
-                    <button
-                      onClick={() =>
-                        navigator.clipboard.writeText(banks[0].accountName)
-                      }
-                    >
-                      <DuplicateIcon className="outline w-6 h-6 text-copyText" />
-                    </button>
-                  </Popover>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-      {selected.id === 1 && (
-        <div className="flex flex-wrap">
-          <div className="mt-4 grid sm:grid-cols-2">
-            <div className="space-y-3 sm:pr-2 text-base">
-              <div className="space-y-2">
-                <h1 className="text-cardDate ml-2">Захиалгын дугаар</h1>
-                <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                  <label className="text-cardDate" htmlFor="firstName">
-                    00112233
-                  </label>
-                  <Popover content={'Copy'}>
-                    <button
-                      className=""
-                      onClick={() => navigator.clipboard.writeText('00112233')}
-                    >
-                      <DuplicateIcon className="outline w-6 h-6 text-copyText" />
-                    </button>
-                  </Popover>
-                </p>
-              </div>
-              <div className="space-y-2">
-                <h1 className="text-cardDate ml-2">Дансны дугаар</h1>
-                <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                  <label className="text-cardDate" htmlFor="firstName">
-                    {banks[1].accountNumber}
-                  </label>
-                  <Popover content={'Copy'}>
-                    <button
-                      className=""
-                      onClick={() =>
-                        navigator.clipboard.writeText(banks[1].accountNumber)
-                      }
-                    >
-                      <DuplicateIcon className="outline w-6 h-6 text-copyText" />
-                    </button>
-                  </Popover>
-                </p>
-              </div>
-            </div>
-            <div className="space-y-3 sm:pl-2 text-base">
-              <div className="space-y-2">
-                <h1 className="text-cardDate ml-2">Утасны дугаар</h1>
-                <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                  <label className="text-cardDate" htmlFor="firstName">
-                    {banks[0].pNumber}
-                  </label>
-                  <Popover content={'Copy'}>
-                    <button
-                      className=""
-                      onClick={() =>
-                        navigator.clipboard.writeText(banks[1].pNumber)
-                      }
-                    >
-                      <DuplicateIcon className="outline w-6 h-6 text-copyText" />
-                    </button>
-                  </Popover>
-                </p>
-              </div>
-              <div className="space-y-2">
-                <h1 className="text-cardDate ml-2">Хүлээн авагч</h1>
-                <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                  <label className="text-cardDate" htmlFor="firstName">
-                    {banks[0].accountName}
-                  </label>
-                  <Popover content={'Copy'}>
-                    <button
-                      onClick={() =>
-                        navigator.clipboard.writeText(banks[1].accountName)
-                      }
-                    >
-                      <DuplicateIcon className="outline w-6 h-6 text-copyText" />
-                    </button>
-                  </Popover>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

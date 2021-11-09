@@ -21,7 +21,7 @@ const Seat24 = ({ datas }) => {
   };
 
   return (
-    <div className="pl-10 flex">
+    <div className="flex">
       <div className="z-0 relative w-full">
         <Image src={busSketch} className="z-0" />
       </div>
