@@ -91,21 +91,6 @@ export default function SearchBus({ startLocations }) {
     setSelectEndLocation(options);
   };
 
-  // const handleEndFocus = () => {
-  //   if (selectStartLocation.key == 'QnVzQWxsTG9jYXRpb246MQ==') {
-  //     getEndLocations({
-  //       variables: { locationStopLocation: selectStartLocation.key, locationStop: '' },
-  //     });
-  //   } else {
-  //     getEndLocations({
-  //         variables: {
-  //           locationStopLocation: selectStartLocation.key,
-  //           locationStop: selectStopLocation.key,
-  //         },
-  //     });
-  //   }
-  // };
-
   function onChange(date, dateString) {
     setSelectDate(dateString);
   }
@@ -116,7 +101,7 @@ export default function SearchBus({ startLocations }) {
         pathname: '/bus/orders',
         query: {
           endLocation: selectEndLocation.key,
-          date: '',
+          date: selectDate,
         },
       });
     } else {
