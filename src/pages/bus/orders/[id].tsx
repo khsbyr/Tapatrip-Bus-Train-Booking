@@ -16,6 +16,7 @@ const { Step } = Steps;
 import { css } from '@emotion/react';
 import ClipLoader from 'react-spinners/ClipLoader';
 import s from './orders.module.scss';
+import { useGlobalStore } from '@context/globalStore';
 
 const override = css`
   position: absolute;
@@ -27,6 +28,7 @@ const override = css`
 export default function Payment() {
   const router = useRouter();
   const [current, setCurrent] = useState(0);
+  const { selectedSeats, customers } = useGlobalStore();
   const { id } = router.query;
   const {
     data: scheduleDataDetail,
@@ -64,14 +66,14 @@ export default function Payment() {
     setCurrent(current);
   };
 
-  const onSubmit = e => {
+  const onSubmit = () => {
+    console.log(customers);
+    console.log(selectedSeats);
     console.log('submit');
   };
 
   const next = () => {
-    if (current < steps.length - 1) {
-      setCurrent(current + 1);
-    }
+    setCurrent(current + 1);
   };
   return (
     <Layout>
@@ -108,19 +110,35 @@ export default function Payment() {
               />
             }
             {steps[current].content}
-            <button className={s.buttonBlock} onClick={() => next()}>
-              {steps[current].button}
-            </button>
           </div>
-
           <div className={s.card}>
-            <div className="px-2 md:px-0 space-y-3 mt-3 md:mt-0">
-              <StepCard datas={scheduleDataResult} />
-              {current === steps.length - 1 ? <PaymentCard /> : ''}
-              <button className={s.button} onClick={() => next()}>
-                {steps[current].button}
-              </button>
-            </div>
+            {current === 0 && (
+              <div className="px-2">
+                {/* // -------------------Components_0---------------------------// */}
+
+                <StepCard datas={scheduleDataResult} />
+                <button className={s.button} onClick={() => next()}>
+                  {steps[current].button}
+                </button>
+              </div>
+            )}
+            {current === 1 && (
+              <div className="px-2">
+                {/* // -------------------Components_1---------------------------// */}
+                <StepCard datas={scheduleDataResult} />
+                <button className={s.button} onClick={onSubmit}>
+                  {steps[current].button}
+                </button>
+              </div>
+            )}
+            {current === steps.length - 1 && (
+              <div className="px-2 space-y-3">
+                {/* // -------------------Components_2---------------------------// */}
+                <StepCard datas={scheduleDataResult} />
+                <PaymentCard />
+                <button className={s.button}>{steps[current].button}</button>
+              </div>
+            )}
           </div>
         </div>
       </div>

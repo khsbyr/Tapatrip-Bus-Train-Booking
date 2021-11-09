@@ -20,8 +20,8 @@ const SeatMedium = ({ datas }) => {
     if (isArray.length === 0) {
       let passenger= {
           id:'',
-          firstName:'dsadsad',
-          lastName:'sadsad',
+          firstName:'',
+          lastName:'',
           documentNumber:'',
           gender:'',
           isChild:'',

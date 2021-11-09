@@ -8,11 +8,10 @@ import busImg from '@public/assets/busimg.jpg';
 
 export default function SelectSeats({ datas }) {
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
-   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
+  const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
   const { bus, driverPhone } = datas;
 
   const handleRemoveSeat = e => {
-    //const index = selectedSeats.indexOf(e.target.value);
     const index = selectedSeats.findIndex(item => item.seatNumber === e.target.value)
     if (index > -1) {
       selectedSeats.splice(index, 1);
