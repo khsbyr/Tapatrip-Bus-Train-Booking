@@ -7,7 +7,6 @@ import RegisterNumber from '@components/bus/PassengerInfo/RegisterNumber';
 import s from '@components/bus/PassengerInfo/PassengerInfo.module.scss';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/solid';
-import { useRouter } from 'next/router';
 import InputPhoneNumber from '@components/common/InputPhoneNumber';
 import { useGlobalStore } from '@context/globalStore';
 
@@ -17,12 +16,10 @@ const selection = [
 ];
 
 export default function PassengerIfo({ datas }) {
-  const router = useRouter();
   const [selected, setSelected] = useState(selection[0]);
   const [isSelected, setIsSelected] = useState(false);
   const { customers, setCustomers } = useGlobalStore();
-  const { id } = router.query;
-  const { selectedSeats } = useGlobalStore();
+  const { selectedSeats, setSelectedSeats } = useGlobalStore();
 
   console.log(selectedSeats);
   console.log(customers);
@@ -36,7 +33,7 @@ export default function PassengerIfo({ datas }) {
   };
 
   const handleCompany = data => {
-    console.log(data);
+    setSelected(data);
     if(customers) {
       customers.isCompany = data.value===0 ? false :true;
       setCustomers(customers);
@@ -85,6 +82,18 @@ export default function PassengerIfo({ datas }) {
       }
       setCustomers(customer);
     }
+  };
+
+  const handlePassengerSurname = e => {
+    selectedSeats[e.target.id-1].lastName=e.target.value
+    setSelectedSeats(selectedSeats);
+    console.log(selectedSeats);
+  };
+
+  const handlePassengerFirstname = e => {
+    selectedSeats[e.target.id-1].firstName=e.target.value
+    setSelectedSeats(selectedSeats);
+    console.log(selectedSeats);
   };
 
   return (
@@ -215,7 +224,7 @@ export default function PassengerIfo({ datas }) {
                   <label className={s.Label} htmlFor="RegisterNo">
                     Овог
                   </label>
-                  <Input  className={s.input} />
+                  <Input  onChange={handlePassengerSurname} id={i} className={s.input} />
                 </div>
               </div>
               <div className={s.InfoForm}>
@@ -229,7 +238,7 @@ export default function PassengerIfo({ datas }) {
                   <label className={s.Label} htmlFor="RegisterNo">
                     Нэр
                   </label>
-                  <Input defaultValue={seat.firstName} className={s.input} />
+                  <Input onChange={handlePassengerFirstname} id={i} className={s.input} />
                 </div>
               </div>
             </div>

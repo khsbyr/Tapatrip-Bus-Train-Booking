@@ -25,9 +25,6 @@ const Login = () => {
               defaultActiveKey="1"
               className="flex flex-wrap text-base font-medium text-cardDate px-5 rounded-lg py-2 pb-4 bg-white"
             >
-              {/* <TabPane tab="И-мэйл хаяг" key="2">
-                <LoginGMail />
-              </TabPane> */}
               <TabPane tab="Утасны дугаар" key="1">
                 <LoginPhoneNumber />
               </TabPane>
