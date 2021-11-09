@@ -6,8 +6,8 @@ import ContentWrapper from './style';
 import s from '@components/common/InputPhoneNumber/PhoneNumber.module.scss';
 import { useGlobalStore } from '@context/globalStore';
 const countries = [
-  { name: '976', src: mngIcon, value: 0 },
-  { name: '44', src: enIcon, value: 1 },
+  { name: ' 976', src: mngIcon, value: 0 },
+  { name: ' 44', src: enIcon, value: 1 },
 ];
 const { Option } = Select;
 export default function InputPhoneNumber() {
@@ -20,7 +20,8 @@ export default function InputPhoneNumber() {
     }
     else {
       let customer = {
-        documentNumber: '',
+        companyRegister: '',
+        isCompany: true,
         email:'',
         dialNumber: value,
         phoneNumber:''
@@ -36,9 +37,10 @@ export default function InputPhoneNumber() {
     }
     else {
       let customer = {
-        documentNumber: '',
+        companyRegister: '',
+        isCompany: true,
         email:'',
-        dialNumber: '976',
+        dialNumber: '',
         phoneNumber: e.target.value,
       }
        setCustomers(customer);
@@ -65,7 +67,7 @@ export default function InputPhoneNumber() {
                   height="12"
                   className="rounded-sm"
                 />{' '}
-                {country.name}
+                {' '+country.name}
               </p>
             </Option>
           ))}

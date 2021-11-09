@@ -7,6 +7,7 @@ import RegisterNumber from '@components/bus/PassengerInfo/RegisterNumber';
 import s from '@components/bus/PassengerInfo/PassengerInfo.module.scss';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/solid';
+import { useRouter } from 'next/router';
 import InputPhoneNumber from '@components/common/InputPhoneNumber';
 import { useGlobalStore } from '@context/globalStore';
 
@@ -16,9 +17,11 @@ const selection = [
 ];
 
 export default function PassengerIfo({ datas }) {
+  const router = useRouter();
   const [selected, setSelected] = useState(selection[0]);
   const [isSelected, setIsSelected] = useState(false);
   const { customers, setCustomers } = useGlobalStore();
+  const { id } = router.query;
   const { selectedSeats } = useGlobalStore();
 
   console.log(selectedSeats);
@@ -32,8 +35,22 @@ export default function PassengerIfo({ datas }) {
     setIsSelected(!isSelected);
   };
 
-  const handleCompany = value => {
-    console.log(value);
+  const handleCompany = data => {
+    console.log(data);
+    if(customers) {
+      customers.isCompany = data.value===0 ? false :true;
+      setCustomers(customers);
+    }
+    else {
+      let customer = {
+        companyRegister:'',
+        isCompany: data.value===0 ? false :true,
+        email: '',
+        dialNumber: '976',
+        phoneNumber:''
+      }
+      setCustomers(customer);
+    }
   };
   
   const handleCustomerEmail = e => {
@@ -43,8 +60,26 @@ export default function PassengerIfo({ datas }) {
     }
     else {
       let customer = {
-        documentNumber: '',
+        companyRegister:'',
+        isCompany: true,
         email:e.target.value,
+        dialNumber: '976',
+        phoneNumber:''
+      }
+      setCustomers(customer);
+    }
+  };
+
+  const handleCustomerRegister = e => {
+    if(customers) {
+      customers.companyRegister = e.target.value;
+      setCustomers(customers);
+    }
+    else {
+      let customer = {
+        companyRegister: e.target.value,
+        isCompany: true,
+        email:'',
         dialNumber: '976',
         phoneNumber:''
       }
@@ -146,7 +181,7 @@ export default function PassengerIfo({ datas }) {
               <label className={s.Label} htmlFor="RegisterNo">
                 Регистрийн дугаар
               </label>
-              <Input className={s.input} />
+              <Input  onChange={handleCustomerRegister}  className={s.input} />
             </div>
             <div className={s.rightContent}>
               <InputPhoneNumber />
