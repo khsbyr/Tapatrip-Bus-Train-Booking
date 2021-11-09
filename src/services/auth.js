@@ -22,21 +22,14 @@ const AuthService = {
   
   async guestToken() {
     const response = await Client.post('/account/guest_jwt/');
-    const guestToken = response.data.result.JWToken;
+    let guestToken = response.data.result.JWToken;
     AuthTokenStorageService.guestStore(guestToken);
     return guestToken;
   },
 
   logout() {
-    return new Promise<void>(resolve => {
-      if (Client.defaults.headers.common) {
-        const headersCommon = Client.defaults.headers.common;
-        delete headersCommon.Authorization;
-        Client.defaults.headers.common = headersCommon;
-      }
-      AuthTokenStorageService.clear();
-      resolve();
-    });
+    AuthTokenStorageService.clear();
+    resolve();
   },
 
   isAuthenticated() {
