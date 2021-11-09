@@ -20,34 +20,36 @@ export default function Payment() {
   const select = () => {
     setIsSelected(!isSelected);
   };
+
   const [copyOrderNumber, setCopyOrderNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
-  const copyToOrderNumber = num => {
-    navigator.clipboard.writeText('num');
+  const copyToOrderNumber = () => {
+    navigator.clipboard.writeText('Захиалгын дугаар');
     setCopyOrderNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
+
   const [copyAccNumber, setCopyAccNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
-  const copyToAccNumber = () => {
-    navigator.clipboard.writeText(banks[0].accountNumber);
+  const copyToAccNumber = bank => {
+    navigator.clipboard.writeText(bank.accountNumber);
     setCopyAccNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
+
   const [copyPhoneNumber, setCopyPhoneNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
-  const copyToPhoneNumber = e => {
-    navigator.clipboard.writeText('9999999');
-    e.target.focus();
+  const copyToPhoneNumber = () => {
+    navigator.clipboard.writeText('Холбогдох утас');
     setCopyPhoneNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
+
   const [copyAccName, setCopyAccName] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
-  const copyToAccName = e => {
-    navigator.clipboard.writeText(banks[0].accountName);
-    e.target.focus();
+  const copyToAccName = bank => {
+    navigator.clipboard.writeText(bank.accountName);
     setCopyAccName(<CheckIcon className="text-secondary h-6 w-6" />);
   };
 
@@ -116,7 +118,9 @@ export default function Payment() {
                 <label className="text-cardDate" htmlFor="firstName">
                   00112233
                 </label>
-                <button onClick={copyToOrderNumber}>{copyOrderNumber}</button>
+                <button onClick={() => copyToOrderNumber()}>
+                  {copyOrderNumber}
+                </button>
               </p>
             </div>
             <div className="space-y-2">
@@ -125,7 +129,9 @@ export default function Payment() {
                 <label className="text-cardDate" htmlFor="firstName">
                   {banks[selected.id].accountNumber}
                 </label>
-                <button onClick={copyToAccNumber}>{copyAccNumber}</button>
+                <button onClick={() => copyToAccNumber(banks[selected.id])}>
+                  {copyAccNumber}
+                </button>
               </p>
             </div>
           </div>
@@ -145,7 +151,9 @@ export default function Payment() {
                 <label className="text-cardDate" htmlFor="firstName">
                   {banks[selected.id].accountName}
                 </label>
-                <button onClick={copyToAccName}>{copyAccName}</button>
+                <button onClick={() => copyToAccName(banks[selected.id])}>
+                  {copyAccName}
+                </button>
               </p>
             </div>
           </div>
