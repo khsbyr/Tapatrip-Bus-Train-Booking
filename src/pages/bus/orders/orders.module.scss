@@ -1,0 +1,12 @@
+.body {
+  @apply max-w-7xl mx-auto my-5 flex flex-wrap;
+}
+.button {
+  @apply w-full bg-button text-lg shadow-md rounded-md font-medium py-3 mt-2 hover:bg-red-500 text-white;
+}
+.content {
+  @apply w-full md:w-3/5 lg:w-3/5;
+}
+.card {
+  @apply w-full md:w-2/5 lg:w-2/5;
+}

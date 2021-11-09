@@ -1,8 +1,8 @@
 .navbar {
-  @apply px-4 sm:px-6 lg:px-8 md:mt-3;
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:mt-3;
 
   .navbarBody {
-    @apply max-w-7xl mx-auto flex items-center justify-between h-12;
+    @apply flex items-center justify-between h-12;
 
     .logo {
       @apply w-36 md:w-full md:h-full;

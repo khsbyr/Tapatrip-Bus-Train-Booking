@@ -2,13 +2,13 @@
   {
     "id": 0,
     "name": "Хаан банк",
-    "accountNumber": 5057397049,
+    "accountNumber": "5057397049",
     "accountName": "АВТО ТЭЭВРИЙН ҮНДЭСНИЙ ТӨВ"
   },
   {
     "id": 1,
     "name": "Голомт банк",
-    "accountNumber": 1605186111,
+    "accountNumber": "1605186111",
     "accountName": "АВТО ТЭЭВРИЙН ҮНДЭСНИЙ ТӨВ"
   }
 ]
