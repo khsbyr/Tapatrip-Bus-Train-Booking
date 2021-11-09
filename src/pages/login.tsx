@@ -1,6 +1,5 @@
 import NavbarProfile from '@components/common/Navbar/NavbarProfile';
 import LoginPhoneNumber from '@components/common/Login/loginPhoneNumber';
-// import LoginGMail from '@components/common/Login/loginGmail';
 import Img from '@public/assets/loginImg.gif';
 import Image from 'next/image';
 import NavData from '@data/navData.json';
