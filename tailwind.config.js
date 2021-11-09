@@ -51,6 +51,7 @@ module.exports = {
         cardDate: '#0A3761',
         direction: '#8AB1D5',
         copyText: '#BFC1DA',
+        mobileNav: '#BCC4CC',
       },
 
       placeholderColor: {

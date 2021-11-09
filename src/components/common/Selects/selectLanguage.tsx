@@ -31,8 +31,8 @@ export default function selectLanguage() {
             <Image
               className="rounded"
               src={selectedLanguage.src}
-              width="26"
-              height="13"
+              width="28"
+              height="15"
             />
           </span>
           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
@@ -71,7 +71,7 @@ export default function selectLanguage() {
                     <span
                       className={`${
                         selected ? 'font-medium' : 'font-normal'
-                      } block truncate flex justify-between`}
+                      }  truncate flex justify-between`}
                     >
                       <label className="" htmlFor="">
                         {language.name}

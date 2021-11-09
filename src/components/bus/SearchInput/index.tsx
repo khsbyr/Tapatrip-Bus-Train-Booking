@@ -143,7 +143,7 @@ export default function SearchBus({ startLocations }) {
             src="../../assets/svgIcons/currentLocation.svg"
           />
         </div>
-        <div className={style.stopLocation}>
+        <div className={style.startLocation}>
           <AutoComplete
             allowClear
             onSelect={handleStopSelect}
@@ -169,7 +169,7 @@ export default function SearchBus({ startLocations }) {
             src="../../assets/svgIcons/currentLocation.svg"
           />
         </div>
-        <div className={style.endLocation}>
+        <div className={style.startLocation}>
           <AutoComplete
             allowClear
             filterOption={true}
