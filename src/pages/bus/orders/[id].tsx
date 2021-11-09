@@ -64,6 +64,10 @@ export default function Payment() {
     setCurrent(current);
   };
 
+  const onSubmit = e => {
+    console.log('submit');
+  };
+
   const next = () => {
     if (current < steps.length - 1) {
       setCurrent(current + 1);

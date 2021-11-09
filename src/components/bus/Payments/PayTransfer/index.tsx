@@ -10,7 +10,6 @@ import { Fragment, useState } from 'react';
 import Image from 'next/image';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import banks from '@data/bankInformation.json';
-import s from './PayTransfer.module.scss';
 export default function Payment() {
   const [selected, setSelected] = useState(banks[0]);
   const [isSelected, setIsSelected] = useState(false);
@@ -20,36 +19,34 @@ export default function Payment() {
   const select = () => {
     setIsSelected(!isSelected);
   };
-
   const [copyOrderNumber, setCopyOrderNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
-  const copyToOrderNumber = () => {
-    navigator.clipboard.writeText('Захиалгын дугаар');
+  const copyToOrderNumber = num => {
+    navigator.clipboard.writeText('num');
     setCopyOrderNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
-
   const [copyAccNumber, setCopyAccNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
-  const copyToAccNumber = bank => {
-    navigator.clipboard.writeText(bank.accountNumber);
+  const copyToAccNumber = () => {
+    navigator.clipboard.writeText('5057397049');
     setCopyAccNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
-
   const [copyPhoneNumber, setCopyPhoneNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
-  const copyToPhoneNumber = () => {
-    navigator.clipboard.writeText('Холбогдох утас');
+  const copyToPhoneNumber = e => {
+    navigator.clipboard.writeText('9999999');
+    e.target.focus();
     setCopyPhoneNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
-
   const [copyAccName, setCopyAccName] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
-  const copyToAccName = bank => {
-    navigator.clipboard.writeText(bank.accountName);
+  const copyToAccName = e => {
+    navigator.clipboard.writeText(banks[0].accountName);
+    e.target.focus();
     setCopyAccName(<CheckIcon className="text-secondary h-6 w-6" />);
   };
 
@@ -118,9 +115,7 @@ export default function Payment() {
                 <label className="text-cardDate" htmlFor="firstName">
                   00112233
                 </label>
-                <button onClick={() => copyToOrderNumber()}>
-                  {copyOrderNumber}
-                </button>
+                <button onClick={copyToOrderNumber}>{copyOrderNumber}</button>
               </p>
             </div>
             <div className="space-y-2">
@@ -129,13 +124,11 @@ export default function Payment() {
                 <label className="text-cardDate" htmlFor="firstName">
                   {banks[selected.id].accountNumber}
                 </label>
-                <button onClick={() => copyToAccNumber(banks[selected.id])}>
-                  {copyAccNumber}
-                </button>
+                <button onClick={copyToAccNumber}>{copyAccNumber}</button>
               </p>
             </div>
           </div>
-          <div className="space-y-3 sm:pl-2 mt-4 sm:mt-0">
+          <div className="space-y-3 sm:pl-2">
             <div className="space-y-2">
               <h1 className="text-cardDate ml-2">Холбогдох утас</h1>
               <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
@@ -147,15 +140,12 @@ export default function Payment() {
             </div>
             <div className="space-y-3 w-full">
               <h1 className="text-cardDate ml-2">Хүлээн авагч</h1>
-              <div className="flex bg-bg rounded-lg py-3 p-2">
-                {/* <label className="text-cardDate" htmlFor="firstName"> */}
-                {banks[selected.id].accountName}{' '}
-                <DuplicateIcon className="text-secondary h-7 w-7" />
-                {/* </label> */}
-                {/* <button onClick={() => copyToAccName(banks[selected.id])}>
-                  {copyAccName}
-                </button> */}
-              </div>
+              <p className="flex justify-between bg-bg rounded-lg py-3 p-2">
+                <label className="text-cardDate" htmlFor="firstName">
+                  {banks[selected.id].accountName}
+                </label>
+                <button onClick={copyToAccName}>{copyAccName}</button>
+              </p>
             </div>
           </div>
         </div>

@@ -8,7 +8,8 @@ export interface State {
   startLocationList: any;
   stopLocationList: any;
   endLocationList: any;
-  selectedSeats: [];
+  selectedSeats: any;
+  isSelectedSeats: any;
 }
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   stopLocationList: '',
   endLocationList: '',
   selectedSeats: '',
+  isSelectedSeats: '',
 };
 
 type Action =
@@ -53,6 +55,10 @@ type Action =
     }
   | {
       type: 'SET_SELECTED_SEATS';
+      value: any;
+    }
+  | {
+      type: 'SET_IS_SELECTED_SEATS';
       value: any;
     };
 
@@ -110,6 +116,12 @@ function uiReducer(state: State, action: Action) {
         selectedSeats: action.value,
       };
     }
+    case 'SET_IS_SELECTED_SEATS': {
+      return {
+        ...state,
+        isSelectedSeats: action.value,
+      };
+    }
   }
 }
 
@@ -156,6 +168,11 @@ export const GlobalProvider: FC = props => {
     [dispatch]
   );
 
+  const setIsSelectedSeats = useCallback(
+    (value: any) => dispatch({ type: 'SET_IS_SELECTED_SEATS', value }),
+    [dispatch]
+  );
+
   const value = useMemo(
     () => ({
       ...state,
@@ -167,6 +184,7 @@ export const GlobalProvider: FC = props => {
       setStopLocationList,
       setEndLocationList,
       setSelectedSeats,
+      setIsSelectedSeats,
     }),
     [state]
   );
