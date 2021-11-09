@@ -68,9 +68,9 @@ export default function Card({ datas }) {
           </div>
           <div className={style.rightRound}></div>
           <div className={style.leftRound}></div>
-          <div className={style.line} style={{ top: '135px' }}></div>
-          <div className={style.line1} style={{ top: '117px' }}></div>
-          <div className={style.line2} style={{ top: '100px' }}></div>
+          <div className={style.line}></div>
+          <div className={style.line1}></div>
+          <div className={style.line2}></div>
           <div className={`${!isActive ? 'hidden' : 'block'}`}>
             <div className="border border-dashed "></div>
             <div className="px-5 lg:px-20 py-5">

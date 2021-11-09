@@ -25,14 +25,14 @@
     @apply lg:border-4 lg:w-7 lg:h-12 border-l-0 rounded-tr-full rounded-br-full absolute top-28 left-0 bg-bg border-bg;
   }
   .line {
-    @apply hidden lg:block bg-bg w-full h-0.5 absolute;
+    @apply hidden lg:block bg-bg w-full h-0.5 absolute top-[135px];
   }
 
   .line1 {
-    @apply hidden md:block lg:hidden bg-bg w-full h-0.5 absolute;
+    @apply hidden md:block lg:hidden bg-bg w-full h-0.5 absolute top-[117px];
   }
 
   .line2 {
-    @apply md:hidden bg-bg w-full h-0.5 absolute;
+    @apply md:hidden bg-bg w-full h-0.5 absolute top-[100px];
   }
 }
