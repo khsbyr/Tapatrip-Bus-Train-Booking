@@ -1,13 +1,14 @@
-import { Input, Select } from 'antd';
+import { Input, Select, Form } from 'antd';
 import mngIcon from 'public/assets/flagMongolia.png';
 import enIcon from 'public/assets/flagEng.png';
 import Image from 'next/image';
 import ContentWrapper from './style';
 import s from '@components/common/InputPhoneNumber/PhoneNumber.module.scss';
 import { useGlobalStore } from '@context/globalStore';
+import { PATTERN_PHONE, validateMessages } from '@helpers/constantValidation';
 const countries = [
-  { name: ' 976', src: mngIcon, value: 0 },
-  { name: ' 44', src: enIcon, value: 1 },
+  { name: ' +976', src: mngIcon, value: 0 },
+  { name: ' +44', src: enIcon, value: 1 },
 ];
 const { Option } = Select;
 export default function InputPhoneNumber() {
@@ -46,32 +47,46 @@ export default function InputPhoneNumber() {
   };
 
   return (
-    <ContentWrapper className="space-y-3.5">
-      <label className={s.Label} htmlFor="pNumber">
-        Утас дугаар
-      </label>
-      <div className="flex items-center rounded-lg bg-bg">
-        <Select
-          defaultValue={countries[0].name}
-          onChange={handleChange}
-          className="w-48 text-sm border-r-2 p-2 mx-2 text-cardDate"
+    <Form validateMessages={validateMessages}>
+      <ContentWrapper className="space-y-3.5">
+        <label className={s.Label} htmlFor="pNumber">
+          Утасны дугаар
+        </label>
+        <Form.Item
+          name="phone"
+          rules={[
+            {
+              required: true,
+              pattern: PATTERN_PHONE,
+              message: 'Утасны дугаар буруу байна',
+            },
+          ]}
         >
-          {countries.map(country => (
-            <Option value={country.name}>
-              <p className="h-full w-full flex items-center">
-                <Image
-                  src={country.src}
-                  width="24"
-                  height="12"
-                  className="rounded-sm mr-2"
-                />{' '}
-                {' ' + country.name}
-              </p>
-            </Option>
-          ))}
-        </Select>
-        <Input onChange={handleCustomerPhone} className={s.input} />
-      </div>
-    </ContentWrapper>
+          <div className="flex items-center rounded-lg bg-bg">
+            <Select
+              defaultValue={countries[0].name}
+              onChange={handleChange}
+              className="w-48 text-sm border-r-2 p-2 mx-2 text-cardDate"
+            >
+              {countries.map(country => (
+                <Option value={country.name}>
+                  <p className="h-full w-full flex items-center ">
+                    <Image
+                      src={country.src}
+                      width="24"
+                      height="12"
+                      className="rounded-sm flex-shrink-0"
+                    />{' '}
+                    <p className="pl-3">{country.name}</p>
+                  </p>
+                </Option>
+              ))}
+            </Select>
+
+            <Input onChange={handleCustomerPhone} />
+          </div>
+        </Form.Item>
+      </ContentWrapper>
+    </Form>
   );
 }

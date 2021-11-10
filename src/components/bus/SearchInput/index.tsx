@@ -96,7 +96,10 @@ export default function SearchBus({ startLocations }) {
   }
 
   const handleSearchBus = async () => {
-    if (selectEndLocation.key != '') {
+    if(selectEndLocation.key===undefined || selectEndLocation.key == '') {
+      message.warning('Та явах чиглэлээ сонгоно уу?');
+    }
+    else {
       router.push({
         pathname: '/bus/orders',
         query: {
@@ -104,9 +107,7 @@ export default function SearchBus({ startLocations }) {
           date: selectDate,
         },
       });
-    } else {
-      message.warning('Та явах чиглэлээ сонгоно уу?');
-    }
+    }   
   };
 
   function disabledDate(current) {

@@ -30,6 +30,7 @@ export default function Payment() {
   const [current, setCurrent] = useState(0);
   const { selectedSeats, customers } = useGlobalStore();
   const { id } = router.query;
+  
   const {
     data: scheduleDataDetail,
     loading,
