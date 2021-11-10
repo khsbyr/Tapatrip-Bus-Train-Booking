@@ -27,10 +27,9 @@ Build:
     script:
         - yarn install
         - yarn build
-        - yarn export
     artifacts:
         paths:
-        - build/
+        - .next/
         expire_in: 1 day
 
 ######################
