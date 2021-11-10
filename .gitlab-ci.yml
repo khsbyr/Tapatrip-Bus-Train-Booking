@@ -6,7 +6,6 @@ stages:
     - build
     - deploy
 variables:
-# Common
     AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
     AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
     AWS_REGION: $AWS_REGION
@@ -37,7 +36,6 @@ Build:
 ######################
 Deploy:
     stage: deploy
-    when: manual
     before_script:
         - apk add --update curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev
         - pip install awscli
