@@ -4,7 +4,7 @@ import Payments from '@components/bus/Payments';
 import PaymentCard from '@components/bus/PaymentCard';
 import { useQuery } from '@apollo/client';
 import { BUS_SCHEDULES_DETAIL_QUERY } from '@graphql/queries';
-import { Steps } from 'antd';
+import { message, Steps } from 'antd';
 import NavData from '@data/navData.json';
 import SelectSeats from '@components/bus/SelectSeats';
 import ContentWrapper from './style';
@@ -17,15 +17,10 @@ import s from './orders.module.scss';
 import ConfirmModal from '@components/common/ConfirmModal';
 import { useGlobalStore } from '@context/globalStore';
 import Loader from '@components/common/Loader';
+import AuthService from '@services/auth';
 
 export default function Payment() {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  function checkOrder() {
-    setIsModalVisible(true);
-  }
-  const closeModal = () => {
-    setIsModalVisible(false);
-  };
   const router = useRouter();
   const [current, setCurrent] = useState(0);
   const { selectedSeats, customers } = useGlobalStore();
@@ -40,7 +35,7 @@ export default function Payment() {
       id: id,
     },
   });
-  // if (loading) return <Loader />;
+
   if (error) return `Error! ${error.message}`;
   const scheduleDataResult =
     scheduleDataDetail === undefined ? '' : scheduleDataDetail.busSchedule;
@@ -67,10 +62,24 @@ export default function Payment() {
     setCurrent(current);
   };
 
-  const onSubmit = () => {
-    console.log(customers);
-    console.log(selectedSeats);
-    console.log('submit');
+  const onSubmit = async () => {
+    const payload = {
+      phone:'88080482',
+      dialCode:'976'
+    }
+    const result = await AuthService.verifySms(payload);
+    console.log(result);
+    // if(!customers) message.warn('Захиалагчийн мэдээллээ оруулна уу?')
+    // console.log(customers);
+    // console.log(selectedSeats);
+    // console.log('submit');
+  };
+
+  // function checkOrder() {
+  //   setIsModalVisible(true);
+  // }
+  const closeModal = () => {
+    setIsModalVisible(false);
   };
 
   const next = () => {
@@ -110,7 +119,7 @@ export default function Payment() {
                   {steps[current].button}
                 </button>
               ) : (
-                <button className={s.buttonBlock} onClick={checkOrder}>
+                <button className={s.buttonBlock} onClick={onSubmit}>
                   {steps[current].button}
                 </button>
               )}
@@ -124,7 +133,7 @@ export default function Payment() {
                     {steps[current].button}
                   </button>
                 ) : (
-                  <button className={s.button} onClick={checkOrder}>
+                  <button className={s.button} onClick={onSubmit}>
                     {steps[current].button}
                   </button>
                 )}

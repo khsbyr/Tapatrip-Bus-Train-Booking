@@ -66,6 +66,7 @@ export default function SelectSeats({ datas }) {
               {selectedSeats &&
                 selectedSeats.map(seat => (
                   <button
+                    key={seat.seatNumber}
                     value={seat.seatNumber}
                     onClick={handleRemoveSeat}
                     className={s.selectedSeats}

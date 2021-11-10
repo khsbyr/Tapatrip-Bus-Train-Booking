@@ -201,7 +201,7 @@ export default function PassengerIfo({ datas }) {
 
       {selectedSeats &&
         selectedSeats.map((seat, i) => (
-          <div className={s.Information}>
+          <div key={seat.number} className={s.Information}>
             <div className={s.passengerInfoTitle}>
               <h1 className="text-cardDate">Зорчигч {++i}</h1>
 

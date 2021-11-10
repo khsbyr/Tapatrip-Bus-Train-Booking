@@ -94,6 +94,7 @@ const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
         <div className="z-10 flex flex-wrap mt-2 bg-white ml-1 w-64 absolute shadow-md rounded-xl px-2 py-3">
           {registNo.map(k => (
             <button
+              key={k.uniCode}
               value={k.uniCode}
               onClick={handleValue1}
               className="bg-bg text-cardDate font-semibold rounded-md h-9 w-10 m-1 hover:bg-register hover:text-white "
@@ -110,6 +111,7 @@ const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
           <div className="z-10 ml-14 mt-2 flex flex-wrap bg-white absolute w-64 shadow-md rounded-xl p-2 py-3">
             {registNo.map(k1 => (
               <button
+                key={k1.uniCode}
                 value={k1.uniCode}
                 onClick={handleValue2}
                 className="bg-bg text-cardDate font-semibold rounded-md h-9 w-10 m-1 hover:bg-register hover:text-white"
