@@ -11,5 +11,5 @@
   @apply w-full lg:w-2/5;
 }
 .buttonBlock {
-  @apply w-full bg-button my-3 text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white block lg:hidden;
+  @apply w-full bg-button my-3 text-base shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white block lg:hidden sm:text-lg md:my-0 md:mt-3;
 }
