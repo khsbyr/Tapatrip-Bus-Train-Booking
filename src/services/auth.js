@@ -22,7 +22,7 @@ const AuthService = {
   
   async guestToken() {
     const response = await Client.post('/account/guest_jwt/');
-    let guestToken = response.data.result.JWToken;
+    const guestToken = response.data.result.JWToken;
     AuthTokenStorageService.guestStore(guestToken);
     return guestToken;
   },

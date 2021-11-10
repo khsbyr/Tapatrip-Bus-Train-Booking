@@ -1,12 +1,15 @@
 .body {
-  @apply max-w-7xl mx-auto my-5 flex flex-wrap;
+  @apply max-w-7xl mx-auto flex py-0 md:py-5 flex-wrap flex-col-reverse md:flex-row;
 }
 .button {
-  @apply w-full bg-button text-lg shadow-md rounded-md font-medium py-3 mt-2 hover:bg-red-500 text-white;
+  @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white hidden md:block;
 }
 .content {
-  @apply w-full md:w-3/5 lg:w-3/5;
+  @apply mt-3 md:mt-0 w-full px-2 md:w-3/5 lg:w-3/5;
 }
 .card {
   @apply w-full md:w-2/5 lg:w-2/5;
+}
+.buttonBlock {
+  @apply w-full bg-button my-3 text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white block md:hidden;
 }

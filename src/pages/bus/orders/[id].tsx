@@ -16,6 +16,7 @@ const { Step } = Steps;
 import { css } from '@emotion/react';
 import ClipLoader from 'react-spinners/ClipLoader';
 import s from './orders.module.scss';
+import { useGlobalStore } from '@context/globalStore';
 
 const override = css`
   position: absolute;
@@ -27,6 +28,7 @@ const override = css`
 export default function Payment() {
   const router = useRouter();
   const [current, setCurrent] = useState(0);
+  const { selectedSeats, customers } = useGlobalStore();
   const { id } = router.query;
   const {
     data: scheduleDataDetail,
@@ -64,7 +66,9 @@ export default function Payment() {
     setCurrent(current);
   };
 
-  const onSubmit = e => {
+  const onSubmit = () => {
+    console.log(customers);
+    console.log(selectedSeats);
     console.log('submit');
   };
 
@@ -122,7 +126,7 @@ export default function Payment() {
               <div className="px-2">
                 {/* // -------------------Components_1---------------------------// */}
                 <StepCard datas={scheduleDataResult} />
-                <button className={s.button} onClick={() => next()}>
+                <button className={s.button} onClick={onSubmit}>
                   {steps[current].button}
                 </button>
               </div>
