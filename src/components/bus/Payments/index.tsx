@@ -28,7 +28,7 @@ export default function Payment() {
               <Countdown value={deadline} onFinish={onFinish} />
             </p>
           </div>
-          <ul className="p-4 text-sm px-10">
+          <ul className="p-4 text-sm sm:text-base px-10">
             <li>
               Хэрэглэгч та Авто тээврийн үндэсний төвийн дор дурдсан дансруу
               билетийн төлбөрөө 20 минутын дотор шилжүүлэх ба гүйлгээний утга

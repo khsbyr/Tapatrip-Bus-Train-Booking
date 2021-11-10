@@ -8,10 +8,10 @@
   @apply border-2 items-center my-2 rounded-lg text-cardDate font-medium py-2 px-6 w-full sm:w-32 hover:text-white hover:bg-register hover:border-seat;
 }
 .Information {
-  @apply pb-2 w-full bg-white rounded-lg shadow-md text-base;
+  @apply pb-2 w-full bg-white rounded-lg shadow-md text-sm sm:text-base;
 }
 .customerInfoTitle {
-  @apply text-cardDate text-xl font-bold border-b-2 px-4 py-2;
+  @apply text-cardDate text-base sm:text-lg font-bold border-b-2 px-4 py-2;
 }
 .InfoForm {
   @apply space-y-4 mt-4 sm:mt-2;
@@ -23,7 +23,7 @@
   @apply w-full space-y-3 sm:pl-2;
 }
 .Label {
-  @apply text-cardDate text-base px-2 font-medium;
+  @apply text-cardDate text-sm sm:text-base px-2 font-medium;
 }
 .leftContent {
   @apply w-full space-y-3 sm:pr-2;
@@ -32,8 +32,8 @@
   @apply w-full space-y-3 sm:pl-2;
 }
 .input {
-  @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base;
+  @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base;
 }
 .passengerInfoTitle {
-  @apply flex justify-between w-full items-center text-cardDate text-xl font-bold border-b-2 px-4 py-2;
+  @apply flex justify-between w-full items-center text-cardDate text-base sm:text-lg font-bold border-b-2 px-4 py-2;
 }

@@ -14,10 +14,18 @@ import SeatNav from '@components/bus/SeatNavbar';
 import { useRouter } from 'next/router';
 const { Step } = Steps;
 import s from './orders.module.scss';
+import ConfirmModal from '@components/common/ConfirmModal';
 import { useGlobalStore } from '@context/globalStore';
 import Loader from '@components/common/Loader';
 
 export default function Payment() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  function checkOrder() {
+    setIsModalVisible(true);
+  }
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
   const router = useRouter();
   const [current, setCurrent] = useState(0);
   const { selectedSeats, customers } = useGlobalStore();
@@ -96,37 +104,26 @@ export default function Payment() {
           <div className={s.body}>
             <div className={s.content}>{steps[current].content}</div>
             <div className={s.card}>
-              {current === 0 && (
-                <div className="px-2">
-                  {/* // -------------------Components_0---------------------------// */}
-
-                  <StepCard datas={scheduleDataResult} />
+              <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
+                <StepCard datas={scheduleDataResult} />
+                {current === steps.length - 1 ? <PaymentCard /> : ''}
+                {current !== 1 ? (
                   <button className={s.button} onClick={() => next()}>
                     {steps[current].button}
                   </button>
-                </div>
-              )}
-              {current === 1 && (
-                <div className="px-2">
-                  {/* // -------------------Components_1---------------------------// */}
-                  <StepCard datas={scheduleDataResult} />
-                  <button className={s.button} onClick={onSubmit}>
+                ) : (
+                  <button className={s.button} onClick={checkOrder}>
                     {steps[current].button}
                   </button>
-                </div>
-              )}
-              {current === steps.length - 1 && (
-                <div className="px-2 space-y-3">
-                  {/* // -------------------Components_2---------------------------// */}
-                  <StepCard datas={scheduleDataResult} />
-                  <PaymentCard />
-                  <button className={s.button}>{steps[current].button}</button>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         )}
       </div>
+      {isModalVisible && (
+        <ConfirmModal isModalVisible={isModalVisible} close={closeModal} />
+      )}
     </Layout>
   );
 }
