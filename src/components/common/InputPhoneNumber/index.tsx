@@ -27,7 +27,7 @@ export default function InputPhoneNumber() {
                   src={country.src}
                   width="24"
                   height="12"
-                  className="rounded-sm"
+                  className="rounded-sm mr-2"
                 />{' '}
                 {country.name}
               </p>

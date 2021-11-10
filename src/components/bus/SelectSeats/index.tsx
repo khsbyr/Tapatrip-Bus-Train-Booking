@@ -24,7 +24,7 @@ export default function SelectSeats({ datas }) {
         <h1 className={s.selecetSeatTitle}>Суудал сонгох</h1>
       </div>
       <div className={s.body}>
-        <div className="space-y-6">
+        <div className="sm:w-7/12 space-y-6">
           <h1 className={s.busInformationTitle}>Автобусын мэдээлэл</h1>
           <div className="flex space-x-4">
             <div>
@@ -47,16 +47,16 @@ export default function SelectSeats({ datas }) {
           </div>
           <div className="flex flex-wrap">
             <div className="flex items-center py-1 space-x-5 mr-5">
-              <p className="text-cardDate font-bold border-2 bg-white h-7 w-10 rounded-md"></p>
+              <p className="text-cardDate font-bold border-2 border-seat bg-white h-10 w-8 rounded-md"></p>
               <h1 className="text-cardDate">Захиалах боломжтой</h1>
             </div>
             <div className="text-cardDate py-1 flex items-center space-x-5">
-              <div className=" bg-bg h-7 w-10 rounded-md"></div>
+              <div className=" bg-bg border-2 border-bg h-10 w-8 rounded-md"></div>
               <h1 className="text-cardDate">Захиалагдсан</h1>
             </div>
           </div>
           <div className="">
-            <h1 className="text-cardDate font-bold text-lg">
+            <h1 className="text-cardDate font-bold text-base sm:text-lg">
               Сонгогдсон суудал
             </h1>
             <div className="py-2 text-lg font-bold">

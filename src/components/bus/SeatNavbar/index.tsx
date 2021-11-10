@@ -15,14 +15,10 @@ export default function SeatNav({ navbarData }) {
         className={`relative w-full bg-white md:h-auto md:top-0 z-10 shadow-lg `}
       >
         <div className="max-w-7xl mx-auto py-4">
-          <div className="flex items-center justify-between h-12">
+          <div className="flex items-center justify-around h-12">
             <div className="flex items-center ">
               <div className="flex-shrink-0">
-                <img
-                  src="../../assets/svgIcons/NewLogo.svg"
-                  alt="Logo"
-                  // className="md:w-full md:h-full"
-                />
+                <img src="../../assets/svgIcons/NewLogo.svg" alt="Logo" />
               </div>
               <div className="hidden">
                 <div className="ml-10 flex items-baseline space-x-4">

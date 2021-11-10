@@ -52,7 +52,7 @@ const RegisterNumber = ({ registNo }) => {
         <Input className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base" />
       </div>
       {!isOpen1 ? (
-        <h1></h1>
+        ''
       ) : (
         <div className="z-10 flex flex-wrap mt-2 bg-white ml-1 w-64 absolute shadow-md rounded-xl px-2 py-3">
           {registNo.map(k => (

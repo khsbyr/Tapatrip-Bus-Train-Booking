@@ -1,13 +1,15 @@
 import NavbarProfile from '@components/common/Navbar/NavbarProfile';
 import LoginPhoneNumber from '@components/common/Login/loginPhoneNumber';
 // import LoginGMail from '@components/common/Login/loginGmail';
+import { useState } from 'react';
 import Img from '@public/assets/loginImg.gif';
 import Image from 'next/image';
 import NavData from '@data/navData.json';
 import { Tabs } from 'antd';
-const { TabPane } = Tabs;
 
 const Login = () => {
+  const { TabPane } = Tabs;
+
   return (
     <div className="relative bg-bg">
       <NavbarProfile navbarData={NavData} />

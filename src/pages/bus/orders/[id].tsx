@@ -16,6 +16,7 @@ const { Step } = Steps;
 import { css } from '@emotion/react';
 import ClipLoader from 'react-spinners/ClipLoader';
 import s from './orders.module.scss';
+import ConfirmModal from '@components/common/ConfirmModal';
 
 const override = css`
   position: absolute;
@@ -25,6 +26,13 @@ const override = css`
 `;
 
 export default function Payment() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  function checkOrder() {
+    setIsModalVisible(true);
+  }
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
   const router = useRouter();
   const [current, setCurrent] = useState(0);
   const { id } = router.query;
@@ -110,16 +118,25 @@ export default function Payment() {
           </div>
 
           <div className={s.card}>
-            <div className="px-2 md:px-0 space-y-3 mt-3 md:mt-0">
+            <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
               <StepCard datas={scheduleDataResult} />
               {current === steps.length - 1 ? <PaymentCard /> : ''}
-              <button className={s.button} onClick={() => next()}>
-                {steps[current].button}
-              </button>
+              {current !== 1 ? (
+                <button className={s.button} onClick={() => next()}>
+                  {steps[current].button}
+                </button>
+              ) : (
+                <button className={s.button} onClick={checkOrder}>
+                  {steps[current].button}
+                </button>
+              )}
             </div>
           </div>
         </div>
       </div>
+      {isModalVisible && (
+        <ConfirmModal isModalVisible={isModalVisible} close={closeModal} />
+      )}
     </Layout>
   );
 }
