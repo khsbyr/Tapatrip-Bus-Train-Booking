@@ -102,7 +102,18 @@ export default function Payment() {
           <Loader />
         ) : (
           <div className={s.body}>
-            <div className={s.content}>{steps[current].content}</div>
+            <div className={s.content}>
+              {steps[current].content}
+              {current !== 1 ? (
+                <button className={s.buttonBlock} onClick={() => next()}>
+                  {steps[current].button}
+                </button>
+              ) : (
+                <button className={s.buttonBlock} onClick={checkOrder}>
+                  {steps[current].button}
+                </button>
+              )}
+            </div>
             <div className={s.card}>
               <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
                 <StepCard datas={scheduleDataResult} />
