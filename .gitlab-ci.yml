@@ -45,4 +45,4 @@ Deploy:
 
     script:
         - aws s3 sync .next/ s3://$S3_BUCKET_NAME/ --region $AWS_REGION
-        - aws cloudfront create-invalidation — distribution-id $CDN_DISTRIBUTION_ID --paths '/*'
+        - aws cloudfront create-invalidation —-distribution-id $CDN_DISTRIBUTION_ID --paths '/*'
