@@ -15,6 +15,7 @@ import { useRouter } from 'next/router';
 import { arrayFormat } from '@helpers/array-format';
 import { css } from '@emotion/react';
 import ClipLoader from 'react-spinners/BeatLoader';
+import Loader from '@components/common/Loader';
 
 const override = css`
   display: block;
@@ -37,7 +38,6 @@ export default function Orders() {
     },
   });
 
-  if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
   const scheduleResult =
@@ -58,15 +58,7 @@ export default function Orders() {
                 </p>
               </div>
             </div>
-            {
-              <ClipLoader
-                color={'#177ad6;'}
-                loading={loading}
-                css={override}
-                speedMultiplier={1}
-                size={80}
-              />
-            }
+            {loading ? <Loader /> : ''}
             {scheduleResult.length > 0 ? (
               scheduleResult.map(schedules => (
                 <Card key={schedules.node.id} datas={schedules} />

@@ -13,23 +13,24 @@ import StepCard from '@components/bus/StepCard';
 import SeatNav from '@components/bus/SeatNavbar';
 import { useRouter } from 'next/router';
 const { Step } = Steps;
-import { css } from '@emotion/react';
-import ClipLoader from 'react-spinners/ClipLoader';
 import s from './orders.module.scss';
+import ConfirmModal from '@components/common/ConfirmModal';
 import { useGlobalStore } from '@context/globalStore';
-
-const override = css`
-  position: absolute;
-  left: 100px;
-  top: 0px;
-  z-index: 1;
-`;
+import Loader from '@components/common/Loader';
 
 export default function Payment() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  function checkOrder() {
+    setIsModalVisible(true);
+  }
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
   const router = useRouter();
   const [current, setCurrent] = useState(0);
   const { selectedSeats, customers } = useGlobalStore();
   const { id } = router.query;
+  
   const {
     data: scheduleDataDetail,
     loading,
@@ -39,7 +40,7 @@ export default function Payment() {
       id: id,
     },
   });
-  if (loading) return 'Loading...';
+  // if (loading) return <Loader />;
   if (error) return `Error! ${error.message}`;
   const scheduleDataResult =
     scheduleDataDetail === undefined ? '' : scheduleDataDetail.busSchedule;
@@ -98,50 +99,32 @@ export default function Payment() {
             </ContentWrapper>
           </div>
         </div>
-        <div className={s.body}>
-          <div className={s.content}>
-            {
-              <ClipLoader
-                color={'#177ad6;'}
-                loading={loading}
-                css={override}
-                speedMultiplier={1}
-                size={80}
-              />
-            }
-            {steps[current].content}
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className={s.body}>
+            <div className={s.content}>{steps[current].content}</div>
+            <div className={s.card}>
+              <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
+                <StepCard datas={scheduleDataResult} />
+                {current === steps.length - 1 ? <PaymentCard /> : ''}
+                {current !== 1 ? (
+                  <button className={s.button} onClick={() => next()}>
+                    {steps[current].button}
+                  </button>
+                ) : (
+                  <button className={s.button} onClick={checkOrder}>
+                    {steps[current].button}
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
-          <div className={s.card}>
-            {current === 0 && (
-              <div className="px-2">
-                {/* // -------------------Components_0---------------------------// */}
-
-                <StepCard datas={scheduleDataResult} />
-                <button className={s.button} onClick={() => next()}>
-                  {steps[current].button}
-                </button>
-              </div>
-            )}
-            {current === 1 && (
-              <div className="px-2">
-                {/* // -------------------Components_1---------------------------// */}
-                <StepCard datas={scheduleDataResult} />
-                <button className={s.button} onClick={onSubmit}>
-                  {steps[current].button}
-                </button>
-              </div>
-            )}
-            {current === steps.length - 1 && (
-              <div className="px-2 space-y-3">
-                {/* // -------------------Components_2---------------------------// */}
-                <StepCard datas={scheduleDataResult} />
-                <PaymentCard />
-                <button className={s.button}>{steps[current].button}</button>
-              </div>
-            )}
-          </div>
-        </div>
+        )}
       </div>
+      {isModalVisible && (
+        <ConfirmModal isModalVisible={isModalVisible} close={closeModal} />
+      )}
     </Layout>
   );
 }

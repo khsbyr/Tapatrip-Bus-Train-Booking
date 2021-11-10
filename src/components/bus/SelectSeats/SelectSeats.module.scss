@@ -2,19 +2,19 @@
   @apply bg-white h-auto rounded-lg shadow-lg py-3 space-y-4;
 }
 .selecetSeatTitle {
-  @apply px-3 sm:pl-6 md:pl-8 text-cardDate font-bold text-lg pb-2 border-b-2;
+  @apply px-3 sm:pl-6 text-cardDate font-bold text-base sm:text-lg pb-2 border-b-2;
 }
 .body {
-  @apply px-3 sm:pl-6 md:pl-8 flex flex-wrap justify-between;
+  @apply px-3 sm:pl-6 flex flex-wrap justify-between;
 }
 .busInformationTitle {
-  @apply text-cardDate font-bold text-lg;
+  @apply text-cardDate font-bold text-base sm:text-lg;
 }
 .busInformation {
-  @apply text-cardDate space-y-3 font-medium;
+  @apply text-cardDate space-y-1 sm:space-y-3 font-medium xl:text-base;
 
   p {
-    @apply flex flex-wrap;
+    @apply flex flex-wrap sm:flex-nowrap;
 
     h1 {
       @apply pl-0 sm:pl-2 font-normal text-cardDate;
@@ -22,7 +22,7 @@
   }
 }
 .seatButton {
-  @apply z-10 rounded-lg bg-white text-xl text-cardDate w-9 h-12 font-medium border-seat border-2 mb-1 mr-0.5 hover:bg-register hover:text-white focus:bg-register focus:text-white;
+  @apply z-10 rounded-lg bg-white text-sm text-cardDate w-9 h-12 font-medium border-seat border-2 mb-1 mr-0.5 hover:bg-register hover:text-white focus:bg-register focus:text-white;
 }
 .selectedSeats {
   @apply rounded-lg bg-register text-white w-9 h-12 text-xl mr-3 mb-2 hover:to-blue-500 hover:text-white focus:to-blue-500 focus:text-white;

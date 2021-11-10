@@ -4,9 +4,10 @@ import Img from '@public/assets/loginImg.gif';
 import Image from 'next/image';
 import NavData from '@data/navData.json';
 import { Tabs } from 'antd';
-const { TabPane } = Tabs;
 
 const Login = () => {
+  const { TabPane } = Tabs;
+
   return (
     <div className="relative bg-bg">
       <NavbarProfile navbarData={NavData} />
