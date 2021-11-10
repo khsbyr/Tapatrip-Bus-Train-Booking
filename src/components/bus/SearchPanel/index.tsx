@@ -38,8 +38,10 @@ const Search: FC<Props> = ({ navbarData, startLocations }) => {
                     </g>
                   </svg>
                   <span className="text">{menu.text}</span>
+                  {console.log(menu.id)}
                 </div>
               }
+              disabled={menu.id !== 4}
               key={menu.id}
             />
           ))}
