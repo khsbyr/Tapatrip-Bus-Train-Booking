@@ -1,6 +1,6 @@
 export default function index() {
   return (
-    <div className="max-w-7xl mx-auto bg-white rounded-2xl p-4 text-cardDate text-lg">
+    <div className="max-w-7xl mx-auto bg-white rounded-2xl p-4 text-cardDate text-base sm:text-lg">
       <div className="flex justify-between">
         <p>1 Том хүн</p>
         <p>15000₮</p>
