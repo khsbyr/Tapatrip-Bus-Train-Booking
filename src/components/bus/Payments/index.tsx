@@ -8,6 +8,7 @@ import ContentWrapper from './style';
 export default function Payment() {
   const [value, setValue] = React.useState(1);
   const onChange = e => {
+    console.log('radio checked', e.target.value);
     setValue(e.target.value);
   };
   const { Countdown } = Statistic;
@@ -52,11 +53,7 @@ export default function Payment() {
         <div className={s.radioGroup}>
           <h1 className={s.paymentTitle}>Төлбөр төлөх хэлбэр сонгоно уу</h1>
 
-          <Radio.Group
-            onChange={onChange}
-            value={value}
-            className="w-full mb-4"
-          >
+          <Radio.Group onChange={onChange} value={value} className="w-full">
             <div className="w-full ml-6">
               <Space direction="vertical">
                 <Radio value={1}>

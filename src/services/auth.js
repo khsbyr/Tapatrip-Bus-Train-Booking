@@ -19,7 +19,7 @@ const AuthService = {
 
     return response;
   },
-
+  
   async guestToken() {
     const response = await Client.post('/account/guest_jwt/');
     const guestToken = response.data.result.JWToken;
@@ -28,15 +28,8 @@ const AuthService = {
   },
 
   logout() {
-    return new Promise<void>(resolve => {
-      if (Client.defaults.headers.common) {
-        const headersCommon = Client.defaults.headers.common;
-        delete headersCommon.Authorization;
-        Client.defaults.headers.common = headersCommon;
-      }
-      AuthTokenStorageService.clear();
-      resolve();
-    });
+    AuthTokenStorageService.clear();
+    resolve();
   },
 
   isAuthenticated() {

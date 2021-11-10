@@ -52,11 +52,11 @@ export default function SearchBus({ startLocations }) {
   // if (stopError) return `Error! ${stopError.message}`;
 
   const formatEndLocation =
-    endLocationList && endLocationList.busAllLocationEnds.edges;
+    endData && endData.busAllLocationEnds.edges;
   const endFormatLocation = endLocationFormat(formatEndLocation);
 
   const formatStopLocation =
-    stopLocationList && stopLocationList.busAllLocationStops.edges;
+    stopData && stopData.busAllLocationStops.edges;
   const stopFormatLocation = stopLocationFormat(formatStopLocation);
 
   const handleStartSelect = (key: string, options) => {
@@ -101,7 +101,7 @@ export default function SearchBus({ startLocations }) {
         pathname: '/bus/orders',
         query: {
           endLocation: selectEndLocation.key,
-          date: '',
+          date: selectDate,
         },
       });
     } else {

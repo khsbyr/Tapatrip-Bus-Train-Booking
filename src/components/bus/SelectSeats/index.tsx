@@ -8,13 +8,16 @@ import busImg from '@public/assets/busimg.jpg';
 
 export default function SelectSeats({ datas }) {
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
+  const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
   const { bus, driverPhone } = datas;
 
   const handleRemoveSeat = e => {
-    const index = selectedSeats.indexOf(e.target.value);
+    const index = selectedSeats.findIndex(item => item.seatNumber === e.target.value)
     if (index > -1) {
       selectedSeats.splice(index, 1);
+      isSelectedSeats[e.target.value]=false;
       setSelectedSeats(selectedSeats);
+      setIsSelectedSeats(isSelectedSeats);
     }
   };
 
@@ -63,11 +66,11 @@ export default function SelectSeats({ datas }) {
               {selectedSeats &&
                 selectedSeats.map(seat => (
                   <button
-                    value={seat}
+                    value={seat.seatNumber}
                     onClick={handleRemoveSeat}
                     className={s.selectedSeats}
                   >
-                    {seat}
+                    {seat.seatNumber}
                   </button>
                 ))}
             </div>

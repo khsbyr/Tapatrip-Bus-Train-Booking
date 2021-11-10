@@ -49,7 +49,7 @@ export function endLocationFormat(data: any) {
 
 export function arrayFilterSeat(data: any, value: String) {
   let result = data.filter(function (currentElement) {
-    return currentElement.indexOf(value) > -1;
+    return currentElement.seatNumber.indexOf(value) > -1;
   });
   return result;
 }

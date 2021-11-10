@@ -4,17 +4,33 @@ import seat24RangeMap from '@helpers/seat24RangeMap';
 import style from './SeatSmall.module.scss';
 import { useGlobalStore } from '@context/globalStore';
 import { message } from 'antd';
+import { arrayFilterSeat } from '@helpers/array-format';
 
 const seats = [];
+const isSelected = [];
 
 const Seat24 = ({ datas }) => {
   const seatRanges = seat24RangeMap(datas.seats);
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
+  const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
 
   const handleSelectSeat = e => {
-    if (seats.indexOf(e.target.value) === -1) {
-      seats.push(e.target.value);
+    let isArray = arrayFilterSeat(seats,e.target.value);
+    if (isArray.length === 0) {
+      let passenger= {
+          id:'',
+          firstName:'',
+          lastName:'',
+          documentNumber:'',
+          gender:'',
+          isChild:'',
+          genderName: '',
+          seatNumber: e.target.value 
+      }
+      seats.push(passenger);
+      isSelected[e.target.value]=true;
       setSelectedSeats(seats);
+      setIsSelectedSeats(isSelected);
     } else {
       message.warning('Та энэ суудлыг сонгосон байна?');
     }
@@ -38,7 +54,7 @@ const Seat24 = ({ datas }) => {
                       className={
                         seat.isAvialable
                           ? style.seatButtonDisabled
-                          : style.seatButton
+                          : (isSelectedSeats[seat.number]) ? style.seatButtonSelected : style.seatButton
                       }
                       value={seat.number}
                       onClick={handleSelectSeat}

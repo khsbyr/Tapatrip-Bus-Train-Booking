@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import banks from '@data/bankInformation.json';
 import s from './PayTransfer.module.scss';
+
 export default function Payment() {
   const [selected, setSelected] = useState(banks[0]);
   const [isSelected, setIsSelected] = useState(false);
@@ -20,15 +21,13 @@ export default function Payment() {
   const select = () => {
     setIsSelected(!isSelected);
   };
-
   const [copyOrderNumber, setCopyOrderNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
   const copyToOrderNumber = () => {
-    navigator.clipboard.writeText('Захиалгын дугаар');
+    navigator.clipboard.writeText('num');
     setCopyOrderNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
-
   const [copyAccNumber, setCopyAccNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
@@ -36,15 +35,13 @@ export default function Payment() {
     navigator.clipboard.writeText(bank.accountNumber);
     setCopyAccNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
-
   const [copyPhoneNumber, setCopyPhoneNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
   const copyToPhoneNumber = () => {
-    navigator.clipboard.writeText('Холбогдох утас');
+    navigator.clipboard.writeText('9999999');
     setCopyPhoneNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
-
   const [copyAccName, setCopyAccName] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
@@ -136,7 +133,7 @@ export default function Payment() {
               </p>
             </div>
           </div>
-          <div className="space-y-3 sm:pl-2 mt-4 sm:mt-0">
+          <div className="space-y-3 sm:pl-2">
             <div className="space-y-2">
               <h1 className="text-cardDate ml-2">Холбогдох утас</h1>
               <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">

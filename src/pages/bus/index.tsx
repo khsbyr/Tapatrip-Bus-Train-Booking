@@ -12,6 +12,7 @@ import Subscribe from '@components/common/Subscribe';
 import AuthService from '@services/auth';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import { arrayFormat } from '@helpers/array-format';
+import Loader from '@components/common/Loader';
 
 export default function Bus({ guestToken }) {
   useEffect(() => {
@@ -19,7 +20,7 @@ export default function Bus({ guestToken }) {
   }, []);
   const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
 
-  if (loading) return 'Loading...';
+  if (loading) return <Loader />;
   if (error) return `Error! ${error.message}`;
   const startLocations = arrayFormat(data);
   return (

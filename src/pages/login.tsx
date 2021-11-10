@@ -1,7 +1,5 @@
 import NavbarProfile from '@components/common/Navbar/NavbarProfile';
 import LoginPhoneNumber from '@components/common/Login/loginPhoneNumber';
-// import LoginGMail from '@components/common/Login/loginGmail';
-import { useState } from 'react';
 import Img from '@public/assets/loginImg.gif';
 import Image from 'next/image';
 import NavData from '@data/navData.json';
@@ -27,9 +25,6 @@ const Login = () => {
               defaultActiveKey="1"
               className="flex flex-wrap text-base font-medium text-cardDate px-5 rounded-lg py-2 pb-4 bg-white"
             >
-              {/* <TabPane tab="И-мэйл хаяг" key="2">
-                <LoginGMail />
-              </TabPane> */}
               <TabPane tab="Утасны дугаар" key="1">
                 <LoginPhoneNumber />
               </TabPane>
