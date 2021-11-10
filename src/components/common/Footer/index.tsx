@@ -16,7 +16,11 @@ const Footer: FC<Props> = ({ navbarData }) => {
             </h1>
             <div className="mt-6">
               {navbarData.companyList.map(company => (
-                <a key={company.id} href={company.route}>
+                <a
+                  key={company.id}
+                  href={'#'}
+                  // href={company.route}
+                >
                   <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
                     {company.text}
                   </p>
@@ -30,7 +34,11 @@ const Footer: FC<Props> = ({ navbarData }) => {
             </h1>
             <div className="mt-6">
               {navbarData.contactList.map(contact => (
-                <a key={contact.id} href={contact.route}>
+                <a
+                  key={contact.id}
+                  href={'#'}
+                  //  href={contact.route}
+                >
                   <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
                     {contact.text}
                   </p>
@@ -42,10 +50,22 @@ const Footer: FC<Props> = ({ navbarData }) => {
             <h1 style={{ color: '#0A3761' }} className="font-bold text-lg">
               Биднийг дагаарай
             </h1>
-            <div className="flex mt-6">
-              <img src="../../assets/Facebook.png" className="mr-5" />
-              <img src="../../assets/twitter.png" className="mr-5" />
-              <img src="../../assets/instagram.png" />
+            <div className="flex mt-4">
+              <a
+                href="https://www.facebook.com/TapaTripTravelAgency"
+                className="fill-current text-green-600"
+              >
+                <img src="../../assets/Facebook.png" className="mr-5 h-8 w-8" />
+              </a>
+              <a href="https://twitter.com/Tapatrip">
+                <img src="../../assets/twitter.png" className="mr-5 h-8 w-8" />
+              </a>
+              <a href="https://www.instagram.com/tapatrip_official/">
+                <img
+                  src="../../assets/instagram.png"
+                  className="mr-5 h-8 w-8"
+                />
+              </a>
             </div>
           </div>
           <div className="hidden md:block">

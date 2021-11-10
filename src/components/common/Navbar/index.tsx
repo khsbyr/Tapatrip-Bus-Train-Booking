@@ -84,7 +84,9 @@ const Navbar: FC<Props> = ({ navbarData }) => {
               <div className="flex items-center ">
                 <div className="hidden md:block">
                   <div className={styles.loginBody}>
-                    <button className={styles.loginButton}>Нэвтрэх</button>
+                    <a href="/login">
+                      <button className={styles.loginButton}>Нэвтрэх</button>
+                    </a>
                   </div>
                 </div>
               </div>

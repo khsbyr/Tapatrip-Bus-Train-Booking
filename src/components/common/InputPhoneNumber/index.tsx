@@ -14,36 +14,34 @@ export default function InputPhoneNumber() {
   const { customers, setCustomers } = useGlobalStore();
 
   function handleChange(value) {
-    if(customers) {
+    if (customers) {
       customers.dialNumber = value;
       setCustomers(customers);
-    }
-    else {
+    } else {
       let customer = {
         companyRegister: '',
         isCompany: true,
-        email:'',
+        email: '',
         dialNumber: value,
-        phoneNumber:''
-      }
-       setCustomers(customer);
+        phoneNumber: '',
+      };
+      setCustomers(customer);
     }
   }
 
   const handleCustomerPhone = e => {
-    if(customers) {
+    if (customers) {
       customers.phoneNumber = e.target.value;
       setCustomers(customers);
-    }
-    else {
+    } else {
       let customer = {
         companyRegister: '',
         isCompany: true,
-        email:'',
+        email: '',
         dialNumber: '',
         phoneNumber: e.target.value,
-      }
-       setCustomers(customer);
+      };
+      setCustomers(customer);
     }
   };
 
@@ -67,12 +65,12 @@ export default function InputPhoneNumber() {
                   height="12"
                   className="rounded-sm mr-2"
                 />{' '}
-                {' '+country.name}
+                {' ' + country.name}
               </p>
             </Option>
           ))}
         </Select>
-        <Input  onChange={handleCustomerPhone} className={s.input} />
+        <Input onChange={handleCustomerPhone} className={s.input} />
       </div>
     </ContentWrapper>
   );
