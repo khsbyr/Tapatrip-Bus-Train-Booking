@@ -4,6 +4,7 @@ import { Transition } from '@headlessui/react';
 import OrderModal from '@components/bus/OrderModal';
 import styles from './navbar.module.scss';
 import SelectLanguage from '@components/common/Selects/selectLanguage';
+import Link from 'next/link';
 
 interface Props {
   navbarData?: any;
@@ -47,15 +48,19 @@ const Navbar: FC<Props> = ({ navbarData }) => {
             <div className={styles.navbarBody}>
               <div className="flex items-center ">
                 <div className="flex-shrink-0">
-                  <img
-                    src={`${
-                      navbar
-                        ? '../assets/svgIcons/NewLogo.svg'
-                        : '../assets/svgIcons/NewLogoWhite.svg'
-                    } `}
-                    alt="Logo"
-                    className={styles.logo}
-                  />
+                  <Link href="/bus">
+                    <a>
+                      <img
+                        src={`${
+                          navbar
+                            ? '../assets/svgIcons/NewLogo.svg'
+                            : '../assets/svgIcons/NewLogoWhite.svg'
+                        } `}
+                        alt="Logo"
+                        className={styles.logo}
+                      />
+                    </a>
+                  </Link>
                 </div>
                 <div className={`${navbar ? 'hidden' : 'lg:block'} hidden`}>
                   <div className={styles.menuBody}>
