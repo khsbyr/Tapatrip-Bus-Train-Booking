@@ -10,7 +10,6 @@ const ContentWrapper = styled.div`
     border-radius: 100%;
     background-color: #f1f2f6;
     border: 1px solid #0a3761;
-    /* margin-right: 4px; */
   }
 `;
 
