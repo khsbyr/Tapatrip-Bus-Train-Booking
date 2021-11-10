@@ -1,7 +1,7 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
-import OrderModal from '@components/bus/OrderModal/OrderModal';
+import OrderModal from '@components/bus/OrderModal';
 import styles from './navbar.module.scss';
 import SelectLanguage from '@components/common/Selects/selectLanguage';
 
@@ -39,7 +39,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
     <>
       <div>
         <nav
-          className={`absolute top-5 md:mt-0 md:fixed w-screen 
+          className={`absolute top-5 md:mt-0 md:fixed w-full md:w-screen 
           ${navbar ? 'bg-white' : 'bg-none'}
           md:h-20 md:top-0 z-10 ${navbar ? 'shadow-lg' : 'shadow-none'}`}
         >
@@ -50,8 +50,8 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   <img
                     src={`${
                       navbar
-                        ? '../assets/logoBlue.png'
-                        : '../assets/logoWhite.png'
+                        ? '../assets/svgIcons/NewLogo.svg'
+                        : '../assets/svgIcons/NewLogoWhite.svg'
                     } `}
                     alt="Logo"
                     className={styles.logo}
@@ -103,7 +103,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
           </div>
           <Transition
             show={isOpen}
-            className="px-2 shadow-lg w-full absolute"
+            className="px-2 shadow-lg w-full absolute top-14"
             enter="transition ease-out duration-100 transform"
             enterFrom="opacity-0 scale-95"
             enterTo="opacity-100 scale-100"

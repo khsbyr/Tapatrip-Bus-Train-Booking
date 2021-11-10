@@ -6,7 +6,7 @@ import { useGlobalStore } from '@context/globalStore';
 import { useMutation } from '@apollo/client';
 import { BUS_PASSENGER } from '@graphql/mutation';
 
-const RegisterNumber = ({ registNo, seatNumber='', passengerNumber=0 }) => {
+const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const { customers, setCustomers } = useGlobalStore();
   const [isOpen1, setIsOpen1] = useState(false);
@@ -18,7 +18,7 @@ const RegisterNumber = ({ registNo, seatNumber='', passengerNumber=0 }) => {
   // console.log(data);
 
   // if (loading) return 'Submitting...';
- 
+
   // const passenger = data && data.busPassenger.passenger;
   // console.log(passenger);
   const handleReg1 = e => {
@@ -42,12 +42,11 @@ const RegisterNumber = ({ registNo, seatNumber='', passengerNumber=0 }) => {
   };
 
   const handleRegister = e => {
-    if(e.target.value.length===8) {
-      const registerNumber = values1+values2+e.target.value;
-      selectedSeats[passengerNumber-1].documentNumber=registerNumber
+    if (e.target.value.length === 8) {
+      const registerNumber = values1 + values2 + e.target.value;
+      selectedSeats[passengerNumber - 1].documentNumber = registerNumber;
       setSelectedSeats(selectedSeats);
-    }
-    else if(e.target.value.length>8) {
+    } else if (e.target.value.length > 8) {
       message.warning('Таны бичсэн регистерийн дугаарын урт хэтэрсэн байна!!!');
     }
   };
@@ -81,7 +80,13 @@ const RegisterNumber = ({ registNo, seatNumber='', passengerNumber=0 }) => {
             )}
           </h2>
         </button>
-        <Input id={'register'+seatNumber} type="number" onChange={handleRegister} maxLength={8} className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base;" />
+        <Input
+          id={'register' + seatNumber}
+          type="number"
+          onChange={handleRegister}
+          maxLength={8}
+          className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base;"
+        />
       </div>
       {!isOpen1 ? (
         <h1></h1>

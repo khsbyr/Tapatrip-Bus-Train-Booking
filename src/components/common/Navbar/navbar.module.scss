@@ -5,7 +5,7 @@
     @apply flex items-center justify-between h-12;
 
     .logo {
-      @apply w-40 md:w-full md:h-full;
+      @apply w-full;
     }
 
     .menuBody {
@@ -35,7 +35,7 @@
 }
 
 .mobileMenu {
-  @apply text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-light block;
+  @apply text-gray-800 hover:bg-gray-100 hover:text-gray-800 px-3 py-2 rounded-md text-base font-light block;
 }
 
 .bottomMenu {

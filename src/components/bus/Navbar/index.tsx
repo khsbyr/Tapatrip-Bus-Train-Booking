@@ -2,8 +2,10 @@ import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import SearchBus from '@components/bus/SearchInput';
-import logoBLue from '@public/assets/logoBlue.png';
+import logoBLue from '@public/assets/svgIcons/NewLogo.svg';
 import Image from 'next/image';
+import styles from '../../common/Navbar/navbar.module.scss';
+import Link from 'next/link';
 
 interface Props {
   navbarData?: any;
@@ -19,13 +21,17 @@ export default function BusNav({ navbarData, startLocations }) {
       >
         <div className="max-w-7xl mx-auto md:mt-3">
           <div className=" flex items-center justify-between h-12">
-            <div className="flex items-center ">
-              <div className="flex-shrink-0">
-                <Image
-                  src={logoBLue}
-                  alt="Logo"
-                  className="w-36 md:w-full md:h-full px-4"
-                />
+            <div className="flex items-center flex-shrink-0 ">
+              <div className="ml-2 mt-5">
+                <Link href="/bus">
+                  <a>
+                    <Image
+                      src={logoBLue}
+                      alt="Logo"
+                      className="w-full h-full"
+                    />{' '}
+                  </a>
+                </Link>
               </div>
               <div className="hidden">
                 <div className="ml-10 flex items-baseline space-x-4">
@@ -82,6 +88,7 @@ export default function BusNav({ navbarData, startLocations }) {
 
         <Transition
           show={isOpen}
+          className="px-2 shadow-lg w-full absolute top-14"
           enter="transition ease-out duration-100 transform"
           enterFrom="opacity-0 scale-95"
           enterTo="opacity-100 scale-100"
@@ -90,24 +97,18 @@ export default function BusNav({ navbarData, startLocations }) {
           leaveTo="opacity-0 scale-95"
         >
           {ref => (
-            <div className="md:hidden bg-white" id="mobile-menu">
+            <div
+              className="md:hidden bg-white w-full rounded-lg"
+              id="mobile-menu"
+            >
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                {navbarData.profile.map(z => (
+                {navbarData.profile.map(data => (
                   <a
-                    className="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium block"
-                    href={`${z.route}`}
-                    key={z.id}
+                    key={data.id}
+                    className={styles.mobileMenu}
+                    href={`${data.route}`}
                   >
-                    {z.text}
-                  </a>
-                ))}
-                {navbarData.generalList.map(z => (
-                  <a
-                    className="text-gray-800 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                    href={`${z.route}`}
-                    key={z.id}
-                  >
-                    {z.text}
+                    {data.text}
                   </a>
                 ))}
               </div>

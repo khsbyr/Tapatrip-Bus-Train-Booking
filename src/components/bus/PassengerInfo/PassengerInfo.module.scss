@@ -2,10 +2,10 @@
   @apply space-y-4;
 }
 .regist {
-  @apply flex justify-between px-4 py-2 font-medium items-center w-full rounded-lg bg-white;
+  @apply flex flex-wrap sm:flex-nowrap justify-between px-4 py-2 font-medium items-center w-full rounded-lg bg-white;
 }
 .registButton {
-  @apply flex justify-end border-2 items-center  rounded-lg text-cardDate font-medium py-2 px-6 hover:text-white hover:bg-register hover:border-seat;
+  @apply border-2 items-center my-2 rounded-lg text-cardDate font-medium py-2 px-6 w-full sm:w-32 hover:text-white hover:bg-register hover:border-seat;
 }
 .Information {
   @apply pb-2 w-full bg-white rounded-lg shadow-md text-base;
@@ -17,7 +17,7 @@
   @apply space-y-4 mt-4 sm:mt-2;
 }
 .customerSelect {
-  @apply z-10 relative w-full mt-9 font-medium sm:pr-2;
+  @apply z-10 relative w-full mt-0 sm:mt-9 font-medium sm:pr-2;
 }
 .customerRegisterNumber {
   @apply w-full space-y-3 sm:pl-2;

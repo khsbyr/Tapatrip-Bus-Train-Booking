@@ -30,7 +30,7 @@ export default function Payment() {
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
   const copyToAccNumber = () => {
-    navigator.clipboard.writeText("5057397049");
+    navigator.clipboard.writeText('5057397049');
     setCopyAccNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
   const [copyPhoneNumber, setCopyPhoneNumber] = useState(
