@@ -1,7 +1,10 @@
 import { MailIcon } from '@heroicons/react/solid';
 import React, { FC } from 'react';
 import styles from './subscribe.module.scss';
-
+import Image from 'next/image';
+import apple from '@public/assets/apple.png';
+import playStore from '@public/assets/playStore.png';
+import huawei from '@public/assets/huawei.png';
 const Subscribe: FC = () => {
   return (
     <div className={styles.body}>
@@ -17,14 +20,56 @@ const Subscribe: FC = () => {
               дороос захиалах боломжтой.
             </p>
             <div className={styles.download}>
-              <a href="https://apps.apple.com/mn/app/tapatrip-hotel-flight-travel/id1563199559?fbclid=IwAR3t5NGJY47n1B1yZA2VssPtRtdpZykA0dxF6yPLZBB-hZLHHYZ1eocNnhE">
-                <img src="assets/App store.png" className="h-8 md:h-10" />
+              <a
+                className="mr-1"
+                target="_blank"
+                href="https://apps.apple.com/mn/app/tapatrip-hotel-flight-travel/id1563199559?fbclid=IwAR3t5NGJY47n1B1yZA2VssPtRtdpZykA0dxF6yPLZBB-hZLHHYZ1eocNnhE"
+              >
+                <div className="flex justify-center rounded-md bg-black text-white w-full h-10 hover:bg-gray-400 mt-1 py-1 w-[7.75rem]">
+                  <div className="pr-1 pt-1">
+                    <Image src={apple} height="24" width="24" />
+                  </div>
+                  <div className="">
+                    <h1 className="text-[10px] text-white">Download on the</h1>
+                    <h1 className="text-base text-white font-medium -mt-1">
+                      App Store
+                    </h1>
+                  </div>
+                </div>
               </a>
-              <a href="https://play.google.com/store/apps/details?id=com.tapatrip">
-                <img src="assets/Google play.png" className="h-8 md:h-10" />
+              <a
+                className="mr-1"
+                target="_blank"
+                href="https://play.google.com/store/apps/details?id=com.tapatrip"
+              >
+                <div className="flex justify-center rounded-md bg-black text-white w-full h-10 hover:bg-gray-400 mt-1 py-1 w-[7.75rem]">
+                  <div className="pr-1 pt-1">
+                    <Image src={playStore} height="24" width="24" />
+                  </div>
+                  <div className="">
+                    <h1 className="text-[10px] text-white">GET IT ON</h1>
+                    <h1 className="text-base text-white font-medium -mt-1">
+                      Google Play
+                    </h1>
+                  </div>
+                </div>
               </a>
-              <a href="https://appgallery.huawei.com/?fbclid=IwAR1-w45U-mLLn7IC23ClYziQPiZWTRU7lqfC5ODJUpkiqaRHL9i08XCvVPc#/app/C104355437">
-                <img src="assets/App gallery.png" className="h-8 md:h-10" />
+              <a
+                className="mr-1"
+                target="_blank"
+                href="https://appgallery.huawei.com/?fbclid=IwAR1-w45U-mLLn7IC23ClYziQPiZWTRU7lqfC5ODJUpkiqaRHL9i08XCvVPc#/app/C104355437"
+              >
+                <div className="flex justify-center rounded-md bg-black text-white w-full h-10 hover:bg-gray-400 mt-1 py-1 w-[7.75rem]">
+                  <div className="pr-1 pt-1">
+                    <Image src={huawei} height="24" width="24" />
+                  </div>
+                  <div className="">
+                    <h1 className="text-[10px] text-white">EXPLORE IT ON</h1>
+                    <h1 className="text-base text-white font-medium -mt-1">
+                      AppGallery
+                    </h1>
+                  </div>
+                </div>
               </a>
             </div>
           </div>

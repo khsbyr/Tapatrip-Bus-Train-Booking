@@ -110,43 +110,41 @@ export default function Payment() {
             </Transition>
           </div>
         </Listbox>
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2">
-          <div className="space-y-3 sm:pr-2">
-            <div className="space-y-2">
-              <h1 className="text-cardDate ml-2">Захиалгын дугаар</h1>
-              <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                <h1 className="text-cardDate text-sm sm:text-base">00111111</h1>
+        <div className={s.body}>
+          <div className={s.leftContent}>
+            <div>
+              <h1>Захиалгын дугаар</h1>
+              <p>
+                <h1>00111111</h1>
                 <button onClick={() => copyToOrderNumber()}>
                   {copyOrderNumber}
                 </button>
               </p>
             </div>
-            <div className="space-y-2">
-              <h1 className="text-cardDate ml-2">Дансны дугаар</h1>
-              <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                <h1 className="text-cardDate text-sm sm:text-base">
-                  {banks[selected.id].accountNumber}
-                </h1>
+            <div>
+              <h1>Дансны дугаар</h1>
+              <p>
+                <h1>{banks[selected.id].accountNumber}</h1>
                 <button onClick={() => copyToAccNumber(banks[selected.id])}>
                   {copyAccNumber}
                 </button>
               </p>
             </div>
           </div>
-          <div className="space-y-3 sm:pl-2">
-            <div className="space-y-2">
-              <h1 className="text-cardDate ml-2">Холбогдох утас</h1>
-              <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                <h1 className="text-cardDate text-sm sm:text-base lg:pr-4">
+          <div className={s.rightContent}>
+            <div>
+              <h1>Холбогдох утас</h1>
+              <p>
+                <h1 className="text-cardDate text-sm sm:text-base">
                   Холбогдох утас
                 </h1>
                 <button onClick={copyToPhoneNumber}>{copyPhoneNumber}</button>
               </p>
             </div>
-            <div className="space-y-2">
-              <h1 className="text-cardDate ml-2">Хүлээн авагч</h1>
-              <p className="flex items-center justify-between bg-bg rounded-lg py-3 p-2">
-                <h1 className="text-cardDate text-sm sm:text-base lg:pr-4">
+            <div>
+              <h1>Хүлээн авагч</h1>
+              <p>
+                <h1 className="text-cardDate text-sm lg:pr-10">
                   {banks[selected.id].accountName}
                 </h1>
                 <button onClick={() => copyToAccName(banks[selected.id])}>

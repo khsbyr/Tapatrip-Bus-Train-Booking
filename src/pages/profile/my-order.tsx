@@ -3,7 +3,7 @@ import React, { FC, useState } from 'react';
 import TravelList from '@data/getTravelList.json';
 import Footer from '@components/common/Footer';
 import Navbar from '@components/common/Navbar/NavbarProfile';
-
+import styles from '@components/common/Layout/layout.module.scss';
 import { Table } from 'antd';
 
 export default function myOrders() {
@@ -14,8 +14,8 @@ export default function myOrders() {
       end_location: TravelList[0].end_location,
       start_date: TravelList[0].start_date,
       end_date: TravelList[0].end_date,
-      pass_num: 1,
-      seat_num: '15',
+      pass_num: 'Том хүн - 1, Хүүхэд - 1',
+      seat_num: '14, 15',
       payment_total: TravelList[0].price,
     },
     {
@@ -24,8 +24,8 @@ export default function myOrders() {
       end_location: TravelList[1].end_location,
       start_date: TravelList[1].start_date,
       end_date: TravelList[1].end_date,
-      pass_num: 1,
-      seat_num: '25',
+      pass_num: 'Том хүн - 2, Хүүхэд - 1',
+      seat_num: '25, 26, 27',
       payment_total: TravelList[1].price,
     },
   ];
@@ -70,7 +70,6 @@ export default function myOrders() {
   return (
     <div className=" bg-bg">
       <Navbar navbarData={NavData} />
-
       <div className="max-w-7xl mx-auto text-cardDate my-5 w-full">
         <div>
           <Table
@@ -80,7 +79,9 @@ export default function myOrders() {
           />
         </div>
       </div>
-      <Footer navbarData={NavData} />
+      <div className={styles.main}>
+        <Footer navbarData={NavData} />
+      </div>
     </div>
   );
 }

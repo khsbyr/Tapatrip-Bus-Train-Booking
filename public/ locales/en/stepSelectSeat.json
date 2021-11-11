@@ -1,0 +1,12 @@
+{
+    "selectSeatTitle": "Select Seat",
+    "busInfo": "Bus Information",
+    "businessFirms":"Business Firm",
+    "busModel":"Bus Model",
+    "busNumber":"Bus number",
+    "driverNumber":"Driver's Phone number",
+    "canBeOrdered":"Can be ordered",
+    "ordered":"Ordered",
+    "selectedSeats":"Selected Seats",
+    "stepButton":"Enter passenger information"
+} 

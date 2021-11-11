@@ -48,10 +48,8 @@ export default function InputPhoneNumber() {
 
   return (
     <Form validateMessages={validateMessages}>
-      <ContentWrapper className="space-y-3.5">
-        <label className={s.Label} htmlFor="pNumber">
-          Утасны дугаар
-        </label>
+      <ContentWrapper className="space-y-3">
+        <h1 className={s.Label}>Утасны дугаар</h1>
         <Form.Item
           name="phone"
           rules={[

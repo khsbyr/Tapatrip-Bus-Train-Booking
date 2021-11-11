@@ -52,15 +52,22 @@ const Footer: FC<Props> = ({ navbarData }) => {
             </h1>
             <div className="flex mt-4">
               <a
+                target="_blank"
                 href="https://www.facebook.com/TapaTripTravelAgency"
                 className="fill-current text-green-600"
               >
-                <img src="../../assets/Facebook.png" className="mr-5 h-8 w-8" />
+                <img
+                  src="../../assets/fb.png"
+                  className="mr-5 h-8 w-8 text-white"
+                />
               </a>
-              <a href="https://twitter.com/Tapatrip">
+              <a target="_blank" href="https://twitter.com/Tapatrip">
                 <img src="../../assets/twitter.png" className="mr-5 h-8 w-8" />
               </a>
-              <a href="https://www.instagram.com/tapatrip_official/">
+              <a
+                target="_blank"
+                href="https://www.instagram.com/tapatrip_official/"
+              >
                 <img
                   src="../../assets/instagram.png"
                   className="mr-5 h-8 w-8"

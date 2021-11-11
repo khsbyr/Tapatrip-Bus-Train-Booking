@@ -12,10 +12,12 @@ export default function SelectSeats({ datas }) {
   const { bus, driverPhone } = datas;
 
   const handleRemoveSeat = e => {
-    const index = selectedSeats.findIndex(item => item.seatNumber === e.target.value)
+    const index = selectedSeats.findIndex(
+      item => item.seatNumber === e.target.value
+    );
     if (index > -1) {
       selectedSeats.splice(index, 1);
-      isSelectedSeats[e.target.value]=false;
+      isSelectedSeats[e.target.value] = false;
       setSelectedSeats(selectedSeats);
       setIsSelectedSeats(isSelectedSeats);
     }
@@ -28,7 +30,7 @@ export default function SelectSeats({ datas }) {
       </div>
       <div className={s.body}>
         <div className="sm:w-7/12 space-y-6">
-          <h1 className={s.busInformationTitle}>Автобусын мэдээлэл</h1>
+          <h1 className={s.busInformationTitle}>Автобусны мэдээлэл</h1>
           <div className="flex space-x-4">
             <div>
               <Image src={busImg} width="180" height="180" />
@@ -58,22 +60,20 @@ export default function SelectSeats({ datas }) {
               <h1 className="text-cardDate">Захиалагдсан</h1>
             </div>
           </div>
-          <div className="">
-            <h1 className="text-cardDate font-bold text-base sm:text-lg">
+          <div className="flex flex-wrap">
+            <h1 className="text-cardDate font-bold text-base sm:text-lg md:pr-8 pr-12 pb-4 sm:pb-0">
               Сонгогдсон суудал
             </h1>
-            <div className="py-2 text-lg font-bold">
-              {selectedSeats &&
-                selectedSeats.map(seat => (
-                  <button
-                    value={seat.seatNumber}
-                    onClick={handleRemoveSeat}
-                    className={s.selectedSeats}
-                  >
-                    {seat.seatNumber}
-                  </button>
-                ))}
-            </div>
+            {selectedSeats &&
+              selectedSeats.map(seat => (
+                <button
+                  value={seat.seatNumber}
+                  onClick={handleRemoveSeat}
+                  className={s.selectedSeats}
+                >
+                  <span>{seat.seatNumber}</span>
+                </button>
+              ))}
           </div>
         </div>
         {bus.seatCount < 25 ? (

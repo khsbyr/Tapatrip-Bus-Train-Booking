@@ -51,12 +51,10 @@ export default function SearchBus({ startLocations }) {
   // if (stopLoading) return 'Loading...';
   // if (stopError) return `Error! ${stopError.message}`;
 
-  const formatEndLocation =
-    endData && endData.busAllLocationEnds.edges;
+  const formatEndLocation = endData && endData.busAllLocationEnds.edges;
   const endFormatLocation = endLocationFormat(formatEndLocation);
 
-  const formatStopLocation =
-    stopData && stopData.busAllLocationStops.edges;
+  const formatStopLocation = stopData && stopData.busAllLocationStops.edges;
   const stopFormatLocation = stopLocationFormat(formatStopLocation);
 
   const handleStartSelect = (key: string, options) => {
@@ -96,10 +94,9 @@ export default function SearchBus({ startLocations }) {
   }
 
   const handleSearchBus = async () => {
-    if(selectEndLocation.key===undefined || selectEndLocation.key == '') {
+    if (selectEndLocation.key === undefined || selectEndLocation.key == '') {
       message.warning('Та явах чиглэлээ сонгоно уу?');
-    }
-    else {
+    } else {
       router.push({
         pathname: '/bus/orders',
         query: {
@@ -107,7 +104,7 @@ export default function SearchBus({ startLocations }) {
           date: selectDate,
         },
       });
-    }   
+    }
   };
 
   function disabledDate(current) {

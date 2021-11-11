@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const ContentWrapper = styled.div`
   .styles_react-code-input__CRulA {
-    align-items: center;
   }
 
   .styles_react-code-input__CRulA input {

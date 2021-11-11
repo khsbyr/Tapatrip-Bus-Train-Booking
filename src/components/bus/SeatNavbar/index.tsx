@@ -101,15 +101,6 @@ export default function SeatNav({ navbarData }) {
                     {z.text}
                   </a>
                 ))}
-                {navbarData.generalList.map(z => (
-                  <a
-                    className="text-gray-800 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                    href={`${z.route}`}
-                    key={z.id}
-                  >
-                    {z.text}
-                  </a>
-                ))}
               </div>
             </div>
           )}
