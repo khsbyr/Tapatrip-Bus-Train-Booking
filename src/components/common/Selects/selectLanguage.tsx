@@ -1,10 +1,11 @@
-import mngIcon from 'public/assets/flagMongolia.png';
-import enIcon from 'public/assets/flagEng.png';
-import chinaIcon from 'public/assets/flagChina.png';
-import React, { FC, useState, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/solid';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
+import mngIcon from 'public/assets/flagMongolia.png';
+import enIcon from 'public/assets/flagEng.png';
+import chinaIcon from 'public/assets/flagChina.png';
+
 import Image from 'next/image';
 const languages = [
   { name: 'Mongolia', src: mngIcon },
@@ -25,7 +26,7 @@ export default function selectLanguage() {
   };
   return (
     <Listbox value={selectedLanguage} onChange={setSelectedLanguage}>
-      <button className="relative mt-1" onClick={onClick}>
+      <div className="relative mt-1" onClick={onClick}>
         <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
           <span className="block truncate">
             <Image
@@ -101,7 +102,7 @@ export default function selectLanguage() {
             ))}
           </Listbox.Options>
         </Transition>
-      </button>
+      </div>
     </Listbox>
   );
 }
