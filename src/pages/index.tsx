@@ -21,7 +21,6 @@ export default function Home({ NavData }) {
 
 export const getStaticProps = async () => {
   const res = NavData;
-
   return {
     props: {
       NavData: res,
