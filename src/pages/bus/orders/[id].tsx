@@ -20,7 +20,6 @@ import Loader from '@components/common/Loader';
 import AuthService from '@services/auth';
 
 export default function Payment() {
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter();
   const { current, setCurrent } = useGlobalStore();
   const { selectedSeats, customers } = useGlobalStore();
@@ -53,34 +52,13 @@ export default function Payment() {
     },
     {
       title: 'Төлбөр төлөх',
-      content: <Payments />,
+      content: <Payments datas={scheduleDataResult} />,
       button: 'Захиалгын мэдээлэл шалгах',
     },
   ];
 
-  const onSubmit = async () => {
-    const payload = {
-      phone: '88080482',
-      dialCode: '976',
-    };
-    const result = await AuthService.verifySms(payload);
-    console.log(result);
-    // if(!customers) message.warn('Захиалагчийн мэдээллээ оруулна уу?')
-    // console.log(customers);
-    // console.log(selectedSeats);
-    // console.log('submit');
-  };
-
-  // function checkOrder() {
-  //   setIsModalVisible(true);
-  // }
-
-  const onChange = current => {
-    if (current === 0) setCurrent(0);
-  };
-
-  const closeModal = () => {
-    setIsModalVisible(false);
+  const onChange = currentStep => {
+    if (currentStep === 0) setCurrent(0);
   };
 
   return (
@@ -108,9 +86,6 @@ export default function Payment() {
         </div>
         {loading ? <Loader /> : steps[current].content}
       </div>
-      {isModalVisible && (
-        <ConfirmModal isModalVisible={isModalVisible} close={closeModal} />
-      )}
     </Layout>
   );
 }

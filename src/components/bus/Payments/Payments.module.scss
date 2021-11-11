@@ -1,7 +1,13 @@
+.body {
+  @apply max-w-7xl mx-auto flex py-0 md:py-5 flex-wrap flex-col-reverse lg:flex-row;
+}
+.content {
+  @apply mt-3 lg:mt-0 w-full px-2 lg:w-3/5;
+}
 .root {
   @apply space-y-3 w-full text-cardDate;
 }
-.body {
+.bodyPayment {
   @apply rounded-lg bg-white py-2 shadow-md;
 }
 .instructions {
@@ -16,4 +22,10 @@
 }
 .paymentShape {
   @apply text-base sm:text-lg font-bold py-2 w-full text-cardDate;
+}
+.card {
+  @apply w-full lg:w-2/5;
+}
+.button {
+  @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white hidden lg:block;
 }
