@@ -22,10 +22,10 @@ import AuthService from '@services/auth';
 export default function Payment() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter();
-  const [current, setCurrent] = useState(0);
+  const { current, setCurrent } = useGlobalStore();
   const { selectedSeats, customers } = useGlobalStore();
   const { id } = router.query;
-  
+
   const {
     data: scheduleDataDetail,
     loading,
@@ -58,15 +58,11 @@ export default function Payment() {
     },
   ];
 
-  const onChange = current => {
-    setCurrent(current);
-  };
-
   const onSubmit = async () => {
     const payload = {
-      phone:'88080482',
-      dialCode:'976'
-    }
+      phone: '88080482',
+      dialCode: '976',
+    };
     const result = await AuthService.verifySms(payload);
     console.log(result);
     // if(!customers) message.warn('Захиалагчийн мэдээллээ оруулна уу?')
@@ -78,13 +74,15 @@ export default function Payment() {
   // function checkOrder() {
   //   setIsModalVisible(true);
   // }
+
+  const onChange = current => {
+    if (current === 0) setCurrent(0);
+  };
+
   const closeModal = () => {
     setIsModalVisible(false);
   };
 
-  const next = () => {
-    setCurrent(current + 1);
-  };
   return (
     <Layout>
       <div className="relative bg-bg">
@@ -108,39 +106,7 @@ export default function Payment() {
             </ContentWrapper>
           </div>
         </div>
-        {loading ? (
-          <Loader />
-        ) : (
-          <div className={s.body}>
-            <div className={s.content}>
-              {steps[current].content}
-              {current !== 1 ? (
-                <button className={s.buttonBlock} onClick={() => next()}>
-                  {steps[current].button}
-                </button>
-              ) : (
-                <button className={s.buttonBlock} onClick={onSubmit}>
-                  {steps[current].button}
-                </button>
-              )}
-            </div>
-            <div className={s.card}>
-              <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
-                <StepCard datas={scheduleDataResult} />
-                {current === steps.length - 1 ? <PaymentCard /> : ''}
-                {current !== 1 ? (
-                  <button className={s.button} onClick={() => next()}>
-                    {steps[current].button}
-                  </button>
-                ) : (
-                  <button className={s.button} onClick={onSubmit}>
-                    {steps[current].button}
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
+        {loading ? <Loader /> : steps[current].content}
       </div>
       {isModalVisible && (
         <ConfirmModal isModalVisible={isModalVisible} close={closeModal} />

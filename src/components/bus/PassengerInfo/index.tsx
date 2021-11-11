@@ -252,7 +252,7 @@ export default function PassengerIfo({ datas }) {
                         <Input
                           onChange={handlePassengerSurname}
                           id={i}
-                          // className={s.input}
+                          className={s.input}
                         />
                       </Form.Item>
                     </div>
