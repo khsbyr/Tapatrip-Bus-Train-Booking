@@ -6,6 +6,7 @@ import { Listbox } from '@headlessui/react';
 import s from './selectLanguage.module.scss';
 import { CheckIcon } from '@heroicons/react/solid';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
+
 import Image from 'next/image';
 const languages = [
   { name: 'Mongolia', src: mngIcon },

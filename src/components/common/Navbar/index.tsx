@@ -140,7 +140,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
 
           <nav className={styles.bottomMenu}>
             {navbarData.generalList.map(menu => (
-              <div className="">
+              <div key={menu.id}>
                 <a
                   className={
                     'text-xs pt-3 rounded-full block leading-normal ' +
