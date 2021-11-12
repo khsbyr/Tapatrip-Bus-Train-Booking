@@ -69,19 +69,6 @@ export default function InputPhoneNumber() {
           ]}
         >
           <div className="flex items-center rounded-lg bg-bg">
-            {/* <Select defaultValue={countries[0].name} onChange={handleChange}>
-              {countries.map(country => (
-                <option value={country.name}>
-                  <Image
-                    src={country.src}
-                    width="24"
-                    height="12"
-                    className="rounded-sm flex-shrink-0"
-                  />
-                  {'+' + country.name}
-                </option>
-              ))}
-            </Select> */}
             <Listbox value={selectedLanguage} onChange={setSelectedLanguage}>
               <div className={s.body}>
                 <Listbox.Button className={s.listboxButton}>
