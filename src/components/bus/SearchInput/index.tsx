@@ -15,6 +15,8 @@ import {
 } from '@helpers/array-format';
 import { useRouter } from 'next/router';
 import moment from 'moment';
+import locale from 'antd/lib/date-picker/locale/mn_MN';
+import 'moment/locale/mn';
 
 const dateFormat = 'YYYY-MM-DD';
 
@@ -200,6 +202,7 @@ export default function SearchBus({ startLocations }) {
           disabledDate={disabledDate}
           onChange={onChange}
           placeholder="Он, сар, өдөр"
+          locale={locale}
         />
         <button className={style.searchButton} onClick={handleSearchBus}>
           Хайх
