@@ -1,17 +1,23 @@
+import React, { useState } from 'react';
 import { Input, Select, Form } from 'antd';
+import { Listbox } from '@headlessui/react';
+import { CheckIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import mngIcon from 'public/assets/flagMongolia.png';
 import enIcon from 'public/assets/flagEng.png';
 import Image from 'next/image';
 import ContentWrapper from './style';
 import s from '@components/common/InputPhoneNumber/PhoneNumber.module.scss';
 import { useGlobalStore } from '@context/globalStore';
-import { PATTERN_PHONE, validateMessages } from '@helpers/constantValidation';
+import { PATTERN_PHONE } from '@helpers/constantValidation';
 const countries = [
-  { name: ' +976', src: mngIcon, value: 0 },
-  { name: ' +44', src: enIcon, value: 1 },
+  { name: ' 976', src: mngIcon, value: 0 },
+  { name: ' 44', src: enIcon, value: 1 },
 ];
 const { Option } = Select;
 export default function InputPhoneNumber() {
+  const [selectedLanguage, setSelectedLanguage] = useState(countries[0]);
+  const [isSelected, setIsSelected] = useState(false);
   const { customers, setCustomers } = useGlobalStore();
 
   function handleChange(value) {
@@ -47,8 +53,8 @@ export default function InputPhoneNumber() {
   };
 
   return (
-    <Form validateMessages={validateMessages}>
-      <ContentWrapper className="space-y-3.5">
+    <Form>
+      <ContentWrapper className="space-y-2">
         <label className={s.Label} htmlFor="pNumber">
           Утасны дугаар
         </label>
@@ -63,27 +69,73 @@ export default function InputPhoneNumber() {
           ]}
         >
           <div className="flex items-center rounded-lg bg-bg">
-            <Select
-              defaultValue={countries[0].name}
-              onChange={handleChange}
-              className="w-48 text-sm border-r-2 p-2 mx-2 text-cardDate"
-            >
+            {/* <Select defaultValue={countries[0].name} onChange={handleChange}>
               {countries.map(country => (
-                <Option value={country.name}>
-                  <p className="h-full w-full flex items-center ">
-                    <Image
-                      src={country.src}
-                      width="24"
-                      height="12"
-                      className="rounded-sm flex-shrink-0"
-                    />{' '}
-                    <p className="pl-3">{country.name}</p>
-                  </p>
-                </Option>
+                <option value={country.name}>
+                  <Image
+                    src={country.src}
+                    width="24"
+                    height="12"
+                    className="rounded-sm flex-shrink-0"
+                  />
+                  {'+' + country.name}
+                </option>
               ))}
-            </Select>
-
-            <Input onChange={handleCustomerPhone} />
+            </Select> */}
+            <Listbox value={selectedLanguage} onChange={setSelectedLanguage}>
+              <div className={s.body}>
+                <Listbox.Button className={s.listboxButton}>
+                  <Image
+                    className="rounded-sm flex-shrink-0"
+                    src={selectedLanguage.src}
+                    width="24"
+                    height="12"
+                  />
+                  {'+' + selectedLanguage.name}
+                  {isSelected ? (
+                    <ChevronUpIcon className={s.icon} />
+                  ) : (
+                    <ChevronDownIcon className={s.icon} />
+                  )}
+                </Listbox.Button>
+                <Listbox.Options className={s.listboxOption}>
+                  {countries.map((language, id) => (
+                    <Listbox.Option
+                      key={id}
+                      className={({ active }) =>
+                        `${
+                          active ? 'text-blue-500 ' : ''
+                        }relative py-2 pl-10 pr-4`
+                      }
+                      value={language}
+                    >
+                      {({ selected }) => (
+                        <span className={s.options}>
+                          <p className="mt-0.5">
+                            <Image
+                              className="rounded"
+                              src={language.src}
+                              height="18"
+                              width="36"
+                            />
+                            {language.name}
+                          </p>
+                          {selected ? (
+                            <span className={s.checkIcon}>
+                              <CheckIcon
+                                className="w-5 h-5"
+                                aria-hidden="true"
+                              />
+                            </span>
+                          ) : null}
+                        </span>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              </div>
+            </Listbox>
+            <Input className={s.input} onChange={handleCustomerPhone} />
           </div>
         </Form.Item>
       </ContentWrapper>

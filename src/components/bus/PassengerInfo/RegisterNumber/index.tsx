@@ -53,7 +53,7 @@ const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
   };
 
   return (
-    <Form validateMessages={validateMessages}>
+    <Form>
       <Form.Item
         name="phone"
         rules={[

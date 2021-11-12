@@ -1,9 +1,20 @@
 import styled from 'styled-components';
 
 const ContentWrapper = styled.div`
-  .ant-select-selector {
-    background-color: transparent !important;
+  .ant-select {
     border: none !important;
+    color: #0a3761 !important;
+  }
+  .ant-select-selector {
+    width: 4rem;
+    border: none !important;
+    background-color: #f1f2f6 !important;
+    height: 3rem !important;
+    border-radius: 0.5rem !important;
+    align-items: center !important;
+  }
+  .ant-select-selection-item {
+    margin-left: 5px !important;
   }
   .ant-select:focus {
     border: none !important;
