@@ -40,7 +40,7 @@ export default function OrderModal(props) {
               </div>
 
               <button
-                className="text-white bg-blue-500 text-base w-full font-medium py-3 rounded-lg"
+                className="text-white bg-button text-base w-full font-medium py-3 rounded-lg"
                 onClick={() => setIsActive(!isActive)}
               >
                 Шалгах

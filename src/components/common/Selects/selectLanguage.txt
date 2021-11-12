@@ -1,0 +1,34 @@
+import mngIcon from 'public/assets/flagMongolia.png';
+import enIcon from 'public/assets/flagEng.png';
+import chinaIcon from 'public/assets/flagChina.png';
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { Select } from 'antd';
+import ContentWrapper from './style';
+const { Option } = Select;
+const languages = [
+  { name: 'Mongolia', src: mngIcon },
+  { name: 'English(UK)', src: enIcon },
+  { name: 'China', src: chinaIcon },
+];
+
+export default function selectLanguage() {
+  return (
+    <ContentWrapper>
+      <Select defaultValue={0.1} className="text-white font-medium text-base">
+        {languages.map((language, id) => (
+          <Option value={id} className="">
+            {console.log(id)}
+            {language.name}
+            <Image
+              className="rounded"
+              src={language.src}
+              width="32"
+              height="15"
+            />
+          </Option>
+        ))}
+      </Select>
+    </ContentWrapper>
+  );
+}

@@ -19,8 +19,6 @@ export default function Bus({ guestToken }) {
     AuthTokenStorageService.guestStore(guestToken);
   }, []);
   const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
-
-  if (loading) return <Loader />;
   if (error) return `Error! ${error.message}`;
   const startLocations = arrayFormat(data);
   return (
@@ -28,6 +26,7 @@ export default function Bus({ guestToken }) {
       <HeaderBackground />
       <Navbar navbarData={NavData} />
       <Search navbarData={NavData} startLocations={startLocations} />
+      {loading && <Loader />}
       <Subscribe />
       <TapaService tapaServiceList={TapaServiceList} />
     </Layout>

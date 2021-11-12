@@ -57,7 +57,7 @@ const Footer: FC<Props> = ({ navbarData }) => {
                 className="fill-current text-green-600"
               >
                 <img
-                  src="../../assets/fb.png"
+                  src="../../assets/facebook.png"
                   className="mr-5 h-8 w-8 text-white"
                 />
               </a>
