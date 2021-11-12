@@ -22,21 +22,20 @@ export default function PassengerIfo({ datas }) {
 
   const handleCompany = data => {
     let company = data == 0 ? true : false;
-    console.log(company);
     setIsCompany(company);
-    // if (customers) {
-    //   customers.isCompany = data.value === 0 ? false : true;
-    //   setCustomers(customers);
-    // } else {
-    //   let customer = {
-    //     companyRegister: '',
-    //     isCompany: data.value === 0 ? false : true,
-    //     email: '',
-    //     dialNumber: '976',
-    //     phoneNumber: '',
-    //   };
-    //   setCustomers(customer);
-    // }
+    if (customers) {
+      customers.isCompany = data === 0 ? false : true;
+      setCustomers(customers);
+    } else {
+      let customer = {
+        companyRegister: '',
+        isCompany: data === 0 ? false : true,
+        email: '',
+        dialNumber: '976',
+        phoneNumber: '',
+      };
+      setCustomers(customer);
+    }
   };
 
   const handleCustomerEmail = e => {
@@ -194,10 +193,10 @@ export default function PassengerIfo({ datas }) {
                           <label className={style.Label} htmlFor="RegisterNo">
                             Регистрийн дугаар
                           </label>
-                          <RegisterNumber
-                            registNo={registNo}
-                            seatNumber={seat.seatNumber}
-                            passengerNumber={i}
+                          <Input
+                            onChange={handlePassengerSurname}
+                            id={i}
+                            className={style.input}
                           />
                         </div>
                         <div className={style.leftContent}>
@@ -209,7 +208,7 @@ export default function PassengerIfo({ datas }) {
                             rules={[
                               {
                                 required: true,
-                                message: 'Овог оруул',
+                                message: 'dsadsa',
                               },
                             ]}
                           >
@@ -232,11 +231,23 @@ export default function PassengerIfo({ datas }) {
                           <label className={style.Label} htmlFor="RegisterNo">
                             Нэр
                           </label>
-                          <Input
-                            onChange={handlePassengerFirstname}
-                            id={i}
-                            // className={s.input}
-                          />
+                          <Form.Item
+                            name="firstName"
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Нэрээ заавал бөглөнө үү!',
+                              },
+                            ]}
+                          >
+                            <Input
+                              value={seat.firstName}
+                              onChange={handlePassengerFirstname}
+                              id={i}
+                              className={style.input}
+                              placeholder="Зорчигчийн нэр"
+                            />
+                          </Form.Item>
                         </div>
                       </div>
                     </div>
