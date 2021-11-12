@@ -15,24 +15,34 @@ const Seat24 = ({ datas }) => {
   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
 
   const handleSelectSeat = e => {
-    let isArray = arrayFilterSeat(seats,e.target.value);
+    let isArray = arrayFilterSeat(seats, e.target.value);
+    console.log(isArray);
     if (isArray.length === 0) {
-      let passenger= {
-          id:'',
-          firstName:'',
-          lastName:'',
-          documentNumber:'',
-          gender:'',
-          isChild:'',
-          genderName: '',
-          seatNumber: e.target.value 
-      }
+      let passenger = {
+        id: '',
+        firstName: '',
+        lastName: '',
+        documentNumber: '',
+        gender: '',
+        isChild: '',
+        genderName: '',
+        seatNumber: e.target.value,
+      };
       seats.push(passenger);
-      isSelected[e.target.value]=true;
+      isSelected[e.target.value] = true;
       setSelectedSeats(seats);
       setIsSelectedSeats(isSelected);
     } else {
-      message.warning('Та энэ суудлыг сонгосон байна?');
+      const index = selectedSeats.findIndex(
+        item => item.seatNumber === e.target.value
+      );
+      console.log(index);
+      if (index > -1) {
+        selectedSeats.splice(index, 1);
+        isSelectedSeats[e.target.value] = false;
+        setIsSelectedSeats(isSelectedSeats);
+        setSelectedSeats(selectedSeats);
+      }
     }
   };
 
@@ -54,7 +64,9 @@ const Seat24 = ({ datas }) => {
                       className={
                         seat.isAvialable
                           ? style.seatButtonDisabled
-                          : (isSelectedSeats[seat.number]) ? style.seatButtonSelected : style.seatButton
+                          : isSelectedSeats[seat.number]
+                          ? style.seatButtonSelected
+                          : style.seatButton
                       }
                       value={seat.number}
                       onClick={handleSelectSeat}

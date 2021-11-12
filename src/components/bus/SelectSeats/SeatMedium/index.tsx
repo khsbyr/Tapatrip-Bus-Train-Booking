@@ -16,24 +16,32 @@ const SeatMedium = ({ datas }) => {
   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
 
   const handleSelectSeat = e => {
-    let isArray = arrayFilterSeat(seats,e.target.value);
+    let isArray = arrayFilterSeat(seats, e.target.value);
     if (isArray.length === 0) {
-      let passenger= {
-          id:'',
-          firstName:'',
-          lastName:'',
-          documentNumber:'',
-          gender:'',
-          isChild:'',
-          genderName: '',
-          seatNumber: e.target.value 
-      }
+      let passenger = {
+        id: '',
+        firstName: '',
+        lastName: '',
+        documentNumber: '',
+        gender: '',
+        isChild: '',
+        genderName: '',
+        seatNumber: e.target.value,
+      };
       seats.push(passenger);
-      isSelected[e.target.value]=true;
+      isSelected[e.target.value] = true;
       setSelectedSeats(seats);
       setIsSelectedSeats(isSelected);
     } else {
-      message.warning('Та энэ суудлыг сонгосон байна?');
+      const index = selectedSeats.findIndex(
+        item => item.seatNumber === e.target.value
+      );
+      if (index > -1) {
+        selectedSeats.splice(index, 1);
+        isSelectedSeats[e.target.value] = false;
+        setSelectedSeats(selectedSeats);
+        setIsSelectedSeats(isSelectedSeats);
+      }
     }
   };
   return (
@@ -54,7 +62,9 @@ const SeatMedium = ({ datas }) => {
                         className={
                           seat.isAvialable
                             ? style.seatButtonDisabled
-                            : (isSelectedSeats[seat.number]) ? style.seatButtonSelected : style.seatButton
+                            : isSelectedSeats[seat.number]
+                            ? style.seatButtonSelected
+                            : style.seatButton
                         }
                         value={seat.number}
                         onClick={handleSelectSeat}
@@ -70,7 +80,9 @@ const SeatMedium = ({ datas }) => {
                         className={
                           seat.isAvialable
                             ? style.seatButtonMarginLeftDisabled
-                            : (isSelectedSeats[seat.number]) ? style.seatButtonMarginLeftSelected : style.seatButtonMarginLeft
+                            : isSelectedSeats[seat.number]
+                            ? style.seatButtonMarginLeftSelected
+                            : style.seatButtonMarginLeft
                         }
                         value={seat.number}
                         onClick={handleSelectSeat}
@@ -92,7 +104,9 @@ const SeatMedium = ({ datas }) => {
                         className={
                           seat.isAvialable
                             ? style.seatButtonMarginRightDisabled
-                            : (isSelectedSeats[seat.number]) ? style.seatButtonMarginRightSelected : style.seatButtonMarginRight
+                            : isSelectedSeats[seat.number]
+                            ? style.seatButtonMarginRightSelected
+                            : style.seatButtonMarginRight
                         }
                         value={seat.number}
                         onClick={handleSelectSeat}
@@ -108,7 +122,9 @@ const SeatMedium = ({ datas }) => {
                         className={
                           seat.isAvialable
                             ? style.seatButtonDisabled
-                            : (isSelectedSeats[seat.number]) ? style.seatButtonSelected : style.seatButton
+                            : isSelectedSeats[seat.number]
+                            ? style.seatButtonSelected
+                            : style.seatButton
                         }
                         value={seat.number}
                         onClick={handleSelectSeat}

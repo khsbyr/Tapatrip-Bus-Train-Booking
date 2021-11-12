@@ -10,7 +10,7 @@
 .selecetSeatTitle {
   @apply px-3 sm:pl-6 text-cardDate font-bold text-base sm:text-lg pb-2 border-b-2;
 }
-.body {
+.information {
   @apply px-3 sm:pl-6 flex flex-wrap justify-between;
 }
 .busInformationTitle {
@@ -38,4 +38,7 @@
 }
 .button {
   @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white hidden lg:block;
+}
+.buttonBlock {
+  @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 my-3 md:-mb-2 text-white block lg:hidden;
 }
