@@ -2036,11 +2036,6 @@ ansi-styles@^5.0.0:
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-5.2.0.tgz#07449690ad45777d1924ac2abb2fc8895dba836b"
   integrity sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==
 
-antd-country-phone-input@^4.2.0-rc.0:
-  version "4.2.0-rc.0"
-  resolved "https://registry.yarnpkg.com/antd-country-phone-input/-/antd-country-phone-input-4.2.0-rc.0.tgz#9760638d88f076ab7083b59a3ad4dfe37d922cf7"
-  integrity sha512-HtQuPbm4cA+TcgWaTXJMkVumyH1mHlHWPvtVdOzsW/HDHBu2zTluXdoctUvT11+EBNz7u6qw3OTok4BNacRHbg==
-
 antd@^4.16.13:
   version "4.16.13"
   resolved "https://registry.yarnpkg.com/antd/-/antd-4.16.13.tgz#e9b9b4a590db28747aae1cab98981649a35880af"
@@ -9122,11 +9117,6 @@ word-wrap@^1.2.3, word-wrap@~1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
   integrity sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==
-
-world_countries_lists@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/world_countries_lists/-/world_countries_lists-2.3.0.tgz#8eca03dc6b77c5314cd43e01c2ba5c1c50f3910e"
-  integrity sha512-8ZaWCBBZyZ/hQjRgUMaifF2qt7XlVQseYMXozc/r6WO7ONZPo6xlcQmB7wTMUDM7paqZqvxUcvNSewY3LTrvrA==
 
 wrap-ansi@^3.0.1:
   version "3.0.1"
