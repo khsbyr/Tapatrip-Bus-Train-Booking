@@ -237,6 +237,7 @@ export default function PassengerIfo({ datas }) {
                             ]}
                           >
                             <Input
+                              id={i}
                               onChange={handlePassengerFirstname}
                               className={style.input}
                               placeholder="Зорчигчийн нэр"
