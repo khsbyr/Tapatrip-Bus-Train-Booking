@@ -29,10 +29,10 @@
   @apply text-cardDate text-sm sm:text-base px-2 font-medium;
 }
 .leftContent {
-  @apply w-full space-y-2 sm:pr-2;
+  @apply w-full space-y-2 sm:pr-2 h-24;
 }
 .rightContent {
-  @apply w-full space-y-2 sm:pl-2;
+  @apply w-full space-y-2 sm:pl-2 h-24;
 }
 .input {
   @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base;

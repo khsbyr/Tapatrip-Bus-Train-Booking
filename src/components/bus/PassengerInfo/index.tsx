@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Input, Select } from 'antd';
 import registNo from '@data/registerNumber.json';
-// import RegisterNumber from '@components/bus/PassengerInfo/RegisterNumber';
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
+import RegisterNumber from '@components/bus/PassengerInfo/RegisterNumber';
 import style from './PassengerInfo.module.scss';
 import { useGlobalStore } from '@context/globalStore';
-import {
-  PATTERN_COMPANY_REGISTER,
-  PATTERN_PHONE,
-} from '@helpers/constantValidation';
+import { PATTERN_COMPANY_REGISTER } from '@helpers/constantValidation';
 import ContentWrapper from './style';
 import StepCard from '../StepCard';
 import InputPhoneNumber from '@components/common/InputPhoneNumber';
@@ -19,35 +15,7 @@ export default function PassengerIfo({ datas }) {
   const [isCompoany, setIsCompany] = useState(true);
   const { customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
-  const [isOpen1, setIsOpen1] = useState(false);
-  const [isOpen2, setIsOpen2] = useState(false);
-  const [values1, setValues1] = useState('A');
-  const [values2, setValues2] = useState('A');
   const { current, setCurrent } = useGlobalStore();
-
-  const handleReg1 = e => {
-    setIsOpen1(!isOpen1);
-    setIsOpen2(false);
-  };
-
-  const handleReg2 = e => {
-    setIsOpen2(!isOpen2);
-    setIsOpen1(false);
-  };
-
-  const handleValue1 = e => {
-    setValues1(e.target.value);
-    setIsOpen1(false);
-  };
-
-  const handleValue2 = e => {
-    setValues2(e.target.value);
-    setIsOpen2(false);
-  };
-
-  const handleRegister = e => {
-    console.log(e);
-  };
 
   const handleCompany = data => {
     let company = data == 0 ? true : false;
@@ -110,7 +78,6 @@ export default function PassengerIfo({ datas }) {
   };
 
   const onFinish = async values => {
-    alert(values);
     console.log('Received values of form:', values);
     // setCurrent(current + 1);
   };
@@ -198,7 +165,7 @@ export default function PassengerIfo({ datas }) {
 
               {selectedSeats &&
                 selectedSeats.map((seat, i) => (
-                  <div className={style.Information}>
+                  <div key={i} className={style.Information}>
                     <div className={style.passengerInfoTitle}>
                       <h1 className="text-cardDate">Зорчигч {++i}</h1>
 
@@ -217,95 +184,18 @@ export default function PassengerIfo({ datas }) {
                           <label className={style.Label} htmlFor="RegisterNo">
                             Регистрийн дугаар
                           </label>
-                          <Form.Item
-                            name="register"
-                            rules={[
-                              {
-                                pattern: PATTERN_PHONE,
-                                message: 'Регистерийн дугаар буруу байна!',
-                              },
-                              {
-                                required: true,
-                                message:
-                                  'Регистерийн дугаараа заавал бөглөнө үү!',
-                              },
-                            ]}
-                          >
-                            <div className="w-full">
-                              <div className="flex w-full">
-                                <button
-                                  className="flex justify-center pl-3 pr-1 border-0 items-center rounded-lg bg-bg w-16"
-                                  onClick={handleReg1}
-                                >
-                                  <h2 className="flex items-center text-cardDate font-semibold">
-                                    {values1}
-                                    {!isOpen1 ? (
-                                      <ChevronDownIcon className="text-secondary h-6 w-6" />
-                                    ) : (
-                                      <ChevronUpIcon className="text-secondary h-6 w-6" />
-                                    )}
-                                  </h2>
-                                </button>
-                                <button
-                                  className="flex justify-center border-0 pl-3 pr-1 items-center rounded-lg bg-bg mx-2 w-16"
-                                  onClick={handleReg2}
-                                >
-                                  <h2 className="flex items-center text-cardDate font-semibold">
-                                    {values2}
-                                    {!isOpen2 ? (
-                                      <ChevronDownIcon className="text-secondary h-6 w-6" />
-                                    ) : (
-                                      <ChevronUpIcon className="text-secondary h-6 w-6" />
-                                    )}
-                                  </h2>
-                                </button>
-                                <Input
-                                  className={style.input}
-                                  onChange={handleRegister}
-                                  placeholder="Регистерийн дугаар"
-                                />
-                              </div>
-                              {!isOpen1 ? (
-                                ''
-                              ) : (
-                                <div className="z-10 flex flex-wrap mt-2 bg-white ml-1 w-64 absolute shadow-md rounded-xl px-2 py-3">
-                                  {registNo.map(k => (
-                                    <button
-                                      value={k.uniCode}
-                                      onClick={handleValue1}
-                                      className="bg-bg text-cardDate font-semibold rounded-md h-9 w-10 m-1 hover:bg-register hover:text-white "
-                                    >
-                                      {k.uniCode}
-                                    </button>
-                                  ))}
-                                </div>
-                              )}
-                              {!isOpen2 ? (
-                                <h1></h1>
-                              ) : (
-                                <div>
-                                  <div className="z-10 ml-14 mt-2 flex flex-wrap bg-white absolute w-64 shadow-md rounded-xl p-2 py-3">
-                                    {registNo.map(k1 => (
-                                      <button
-                                        value={k1.uniCode}
-                                        onClick={handleValue2}
-                                        className="bg-bg text-cardDate font-semibold rounded-md h-9 w-10 m-1 hover:bg-register hover:text-white"
-                                      >
-                                        {k1.uniCode}
-                                      </button>
-                                    ))}
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                          </Form.Item>
+                          <RegisterNumber
+                            registNo={registNo}
+                            seatNumber={seat.seatNumber}
+                            passengerNumber={i}
+                          />
                         </div>
                         <div className={style.leftContent}>
                           <label className={style.Label} htmlFor="lastName">
                             Овог
                           </label>
                           <Form.Item
-                            name="lastName"
+                            name={'lastName' + i}
                             rules={[
                               {
                                 required: true,
@@ -327,14 +217,18 @@ export default function PassengerIfo({ datas }) {
                           <label className={style.Label} htmlFor="Vaccine">
                             Вакцинд хамрагдсан эсэх
                           </label>
-                          <Input disabled className={style.input} />
+                          <Input
+                            disabled
+                            value={seat.seatNumber}
+                            className={style.input}
+                          />
                         </div>
                         <div className={style.rightContent}>
                           <label className={style.Label} htmlFor="firstName">
                             Нэр
                           </label>
                           <Form.Item
-                            name="firstName"
+                            name={'firstName' + i}
                             rules={[
                               {
                                 required: true,
@@ -343,9 +237,7 @@ export default function PassengerIfo({ datas }) {
                             ]}
                           >
                             <Input
-                              value={seat.firstName}
                               onChange={handlePassengerFirstname}
-                              id={i}
                               className={style.input}
                               placeholder="Зорчигчийн нэр"
                             />
