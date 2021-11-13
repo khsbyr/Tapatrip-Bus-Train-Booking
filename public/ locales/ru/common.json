@@ -1,5 +1,5 @@
 {
-  "h1": "A simple example",
+  "flight": "A simple example",
   "change-locale": "Change locale",
   "to-second-page": "To second page",
   "error-with-status": "A {{statusCode}} error occurred on server",

@@ -50,8 +50,8 @@
     }
   ],
   "profile": [
-    { "id": 1, "text": "Таны захиалга", "route": "my-order" },
-    { "id": 2, "text": "Нэвтрэх", "route": "login" }
+    { "id": 1, "text": "Таны захиалга", "route": "/profile/my-order" },
+    { "id": 2, "text": "Нэвтрэх", "route": "/login" }
   ],
   "companyList": [
     { "id": 1, "text": "Tapatrip.com - ын тухай", "route": "about" },

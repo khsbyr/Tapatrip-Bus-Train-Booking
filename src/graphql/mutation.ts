@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const CHECK_DOCUMENT = gql`
-  mutation busPassenger($documentNumber: String) {
+export const BUS_PASSENGER = gql`
+  mutation busPassenger($documentNumber: String!) {
     busPassenger(documentNumber: $documentNumber) {
       passenger {
         firstName

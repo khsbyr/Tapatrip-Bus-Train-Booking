@@ -5,7 +5,7 @@ import enIcon from 'public/assets/flagEng.png';
 import Image from 'next/image';
 
 const { Option } = Select;
-export default function PassengerInfo() {
+export default function PassengerInfo({ datas }) {
   return (
     <div className="p-2 space-y-2">
       <div className="flex flex-nowrap w-full rounded-lg bg-white">

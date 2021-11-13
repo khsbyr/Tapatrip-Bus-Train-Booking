@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
+    "@emotion/react": "^11.5.0",
     "@headlessui/react": "^1.4.1",
     "@heroicons/react": "^1.0.4",
     "antd": "^4.16.13",
@@ -31,6 +32,8 @@
     "postcss": "^8.3.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-spinners": "^0.11.0",
+    "react-verification-code-input": "^1.2.9",
     "sass": "^1.42.1",
     "styled-components": "^5.3.3",
     "tailwindcss": "^2.2.16"
@@ -54,7 +57,7 @@
     "babel-plugin-direct-import": "^0.9.2",
     "babel-plugin-import": "^1.13.3",
     "babel-plugin-module-resolver": "^4.1.0",
-    "eslint": "^8.0.1",
+    "eslint": "^8.2.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-next": "^11.1.2",

@@ -7,8 +7,8 @@ const Subscribe: FC = () => {
     <div className={styles.body}>
       <div className={styles.application}>
         <div className="flex">
-          <div className="flex items-center">
-            <img src="assets/Application.png" />
+          <div className={styles.image}>
+            <img src="assets/Application.png" className="h-32" />
           </div>
           <div className={styles.childBody}>
             <h1 className={styles.title}>Тапатрип аппликэйшн татах</h1>
@@ -16,21 +16,27 @@ const Subscribe: FC = () => {
               Нислэг, зочид буудал, аялал, автобус, галт тэрэгний тасалбарыг нэг
               дороос захиалах боломжтой.
             </p>
-            <div className="flex flex-wrap">
-              <img src="assets/App store.png" className="h-10 " />
-              <img src="assets/Google play.png" className="h-10 " />
-              <img src="assets/App gallery.png" className="h-10" />
+            <div className={styles.download}>
+              <a href="https://apps.apple.com/mn/app/tapatrip-hotel-flight-travel/id1563199559?fbclid=IwAR3t5NGJY47n1B1yZA2VssPtRtdpZykA0dxF6yPLZBB-hZLHHYZ1eocNnhE">
+                <img src="assets/App store.png" className="h-8 md:h-10" />
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.tapatrip">
+                <img src="assets/Google play.png" className="h-8 md:h-10" />
+              </a>
+              <a href="https://appgallery.huawei.com/?fbclid=IwAR1-w45U-mLLn7IC23ClYziQPiZWTRU7lqfC5ODJUpkiqaRHL9i08XCvVPc#/app/C104355437">
+                <img src="assets/App gallery.png" className="h-8 md:h-10" />
+              </a>
             </div>
           </div>
         </div>
       </div>
 
       <div className={styles.application}>
-        <div className="flex items-center">
-          <div className="flex items-center">
-            <img src="assets/mail.png" className="h-auto" />
+        <div className="flex">
+          <div className={styles.image}>
+            <img src="assets/mail1.png" className="h-28 px-5" />
           </div>
-          <div className="space-y-7">
+          <div className={styles.childBody}>
             <h1 className={styles.title}>
               Онцгой хөнгөлөлт, урамшуулал, шинчлэлийг имэйлээр авахыг хүсэж
               байна уу?
@@ -47,10 +53,9 @@ const Subscribe: FC = () => {
                   placeholder="И-Мэйл хаягаа оруулна уу"
                   aria-label="Full name"
                 />
-              </div>{' '}
-              <div>
                 <button className={styles.button}>Бүртгэх</button>
-              </div>
+              </div>{' '}
+              <div></div>
             </div>
           </div>
         </div>

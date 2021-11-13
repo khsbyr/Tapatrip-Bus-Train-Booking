@@ -2,7 +2,7 @@ import { Divider, Radio } from 'antd';
 import PayTransfer from '@components/bus/PayTransfer';
 import React from 'react';
 import s from './Payments.module.scss';
-export default function Payment() {
+export default function Payment({ datas }) {
   const [value, setValue] = React.useState(1);
   const onChange = e => {
     console.log('radio checked', e.target.value);

@@ -1,4 +1,4 @@
-import Autocomplete from '@components/ui/Autocomplete/Autocomplete';
+import Autocomplete from '@components/ui/Autocomplete/index';
 import { DatePicker } from 'antd';
 import React, { FC } from 'react';
 import ContentWrapper from './style';

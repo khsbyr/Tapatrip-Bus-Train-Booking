@@ -17,7 +17,7 @@ import Head from 'next/head';
 import React, { useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
-import { guestToken } from '@lib/api';
+// import { guestToken } from '@lib/api';
 const { TabPane } = Tabs;
 const TYPE = 'TRAVEL';
 

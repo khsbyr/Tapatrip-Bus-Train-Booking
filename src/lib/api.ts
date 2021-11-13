@@ -25,6 +25,7 @@ const postRequestNoToken = (url, data) => {
 };
 const postRequest = async (url, data) => {
   const response = await postRequestNoToken('/account/guest_jwt/', {});
+  console.log(response);
   const guestToken = response.result.JWToken;
 
   const resData = await fetch(`${baseUrl}${url}`, {

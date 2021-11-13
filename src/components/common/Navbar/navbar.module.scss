@@ -25,7 +25,19 @@
     }
 
     .loginButton {
-      @apply bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40;
+      @apply bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40 hover:bg-red-500;
     }
   }
+
+  .mobileButton {
+    @apply inline-flex items-center justify-center p-2 rounded-md text-white;
+  }
+}
+
+.mobileMenu {
+  @apply text-gray-800 hover:bg-gray-100 hover:text-gray-800 px-3 py-2 rounded-md text-base font-light block;
+}
+
+.bottomMenu {
+  @apply flex fixed bottom-0 inset-x-0 bg-white lg:hidden justify-around text-sm text-secondary shadow-2xl h-20;
 }

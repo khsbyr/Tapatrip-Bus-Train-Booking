@@ -21,9 +21,14 @@ module.exports = {
         ...theme('colors'),
         bg: '#F1F2F6',
         button: '#F1583C',
+        disabled: '#EAEDF4',
+        selected: '#0A3761',
+        hover: '#F06950',
+        down: '#EF5134',
         alert: '#FFF7ED',
         steps: '#177AD6',
         inactive: '#8AB1D5',
+        register: '#0A3761',
       }),
       theme: {
         screens: {
@@ -35,6 +40,8 @@ module.exports = {
         selected: '#177AD6',
         alert: '#F7B352',
         bg: '#F1F2F6',
+        seat: '#0A3761',
+        weather: '#8AB1D5',
       }),
       width: {
         98: '26rem',
@@ -47,6 +54,8 @@ module.exports = {
         cardDescColor: '#24C8A7',
         cardDate: '#0A3761',
         direction: '#8AB1D5',
+        copyText: '#BFC1DA',
+        mobileNav: '#BCC4CC',
       },
 
       placeholderColor: {

@@ -1,0 +1,46 @@
+image: docker:latest
+services:
+    - docker:dind
+
+stages:
+    - build
+    - deploy
+variables:
+    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+    AWS_REGION: $AWS_REGION
+    S3_BUCKET_NAME: $S3_BUCKET_NAME
+    CDN_DISTRIBUTION_ID: $CDN_DISTRIBUTION_ID
+
+cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+    - node_modules/
+
+######################
+## BUILD STAGE ##
+######################
+Build:
+    stage: build
+    image: node:14
+    script:
+        - yarn install
+        - yarn build
+    artifacts:
+        paths:
+        - .next/
+        expire_in: 1 day
+
+######################
+## DEPLOY STAGE ##
+######################
+Deploy:
+    stage: deploy
+    before_script:
+        - apk add --update curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev
+        - pip install awscli
+        - eval $(aws ecr get-login-password —-region $AWS_REGION | sed 's|https://||')
+
+    script:
+        - aws s3 sync .next/ s3://$S3_BUCKET_NAME/ --region $AWS_REGION
+        - aws cloudfront create-invalidation —-distribution-id $CDN_DISTRIBUTION_ID --paths '/*'
