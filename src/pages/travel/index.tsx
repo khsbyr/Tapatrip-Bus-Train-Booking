@@ -1,23 +1,28 @@
-import React from 'react';
-import Head from 'next/head';
-import NavData from '@data/navData.json';
-// import Layout from '@components/Layout/Layout';
-import Header from '@components/Header/Header';
+import Footer from '@components/common/Footer';
+import Navbar from '@components/common/Navbar';
 // import App from '@components/App/App';
 import App from '@components/common/Subscribe';
-import ContentWrapper from '@components/Search/style';
-// import style from '@components/Search/Search.module.scss';
-import { Tabs, Image, Carousel } from 'antd';
+// import Layout from '@components/Layout/Layout';
+import Header from '@components/Header/Header';
 import Search from '@components/Search/Search';
-import TravelCard from '@components/Travel-Card/TravelCard';
 import ServicesCard from '@components/Travel-Card/ServicesCard';
-import Footer from '@components/common/Footer';
 import Tips from '@components/Travel-Card/Tips';
-import Navbar from '@components/common/Navbar';
-
+import TravelCard from '@components/Travel-Card/TravelCard';
+import NavData from '@data/navData.json';
+import { postRequest } from '@lib/api';
+// import style from '@components/Search/Search.module.scss';
+import { Tabs } from 'antd';
+import { error } from 'console';
+import Head from 'next/head';
+import React, { useEffect } from 'react';
+import { GetStaticProps } from 'next';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
+import { guestToken } from '@lib/api';
 const { TabPane } = Tabs;
 const TYPE = 'TRAVEL';
-function Travel({ NavData }) {
+
+export default function Travel({ NavData, Packages, TipsFor }) {
+  console.log(TipsFor);
   return (
     <div>
       <Head>
@@ -25,11 +30,30 @@ function Travel({ NavData }) {
       </Head>
       <div className="bg-bg font-Roboto">
         <Header />
-        <Navbar navbarData={NavData} />
+        <Navbar navbarData={NavData} fixed={true} />
         <Search navbarData={NavData} type={TYPE} />
-        <TravelCard />
+        <TravelCard packages={Packages.package_tours} />
         <ServicesCard />
-        <Tips />
+        <div className="default-container">
+          <div className="px-2">
+            <h1
+              className="font-bold text-2xl max-w-7xl mx-auto mt-6 px-6"
+              style={{ color: '#0A3761' }}
+            >
+              Аялалын зөвлөмж
+            </h1>
+            <div className="grid grid-cols-1 gap-3 my-6 md:grid-cols-3 md:gap-8 lg:grid-cols-3 max-w-7xl mx-auto md:my-6 ">
+              {TipsFor.map(tipFor => (
+                <Tips
+                  title={tipFor.title}
+                  image={tipFor.image}
+                  description={tipFor.description}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* <Layout navbarData={NavData} /> */}
         <App />
         <Footer navbarData={NavData} />
@@ -37,17 +61,19 @@ function Travel({ NavData }) {
     </div>
   );
 }
-export const getStaticProps = async () => {
-  const res = NavData;
-  // const gridList = GridList;
-  // const commentList = CommentList;
+export const getStaticProps: GetStaticProps = async () => {
+  const navData = NavData;
 
+  const tour = await postRequest('/activity/package_tour/', {});
+  const tips = await postRequest('/activity/traveltips/', {});
   return {
     props: {
-      NavData: res,
+      NavData: navData,
+      Packages: tour.result,
+      TipsFor: tips.result,
+      // Packages: packages,
       // GridList: gridList,
       // CommentList: commentList,
     },
   };
 };
-export default Travel;

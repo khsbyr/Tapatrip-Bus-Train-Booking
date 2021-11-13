@@ -31,7 +31,7 @@ const Orders: FC = () => {
                 end_date={z.end_date}
                 date={z.date}
                 price={z.price}
-                passengers={z.passengers}
+                passengers={z.passengers} 
                 direction_name={z.direction_name}
                 start_location={z.start_location}
                 end_location={z.end_location}

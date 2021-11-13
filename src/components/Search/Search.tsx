@@ -8,6 +8,7 @@ const { TabPane } = Tabs;
 
 interface Props {
   navbarData?: any;
+  type?: string;
 }
 
 const Search: FC<Props> = ({ navbarData, type }) => {

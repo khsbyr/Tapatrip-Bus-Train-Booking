@@ -6,6 +6,7 @@ import styles from './navbar.module.scss';
 
 interface Props {
   navbarData?: any;
+  fixed: Boolean;
 }
 
 const Navbar: FC<Props> = ({ navbarData, fixed }) => {
@@ -48,10 +49,10 @@ const Navbar: FC<Props> = ({ navbarData, fixed }) => {
                   <img
                     src={`${
                       navbar
-                        ? '../assets/logoBlue.png'
+                        ? '/assets/logoBlue.png'
                         : fixed
-                        ? '../assets/logoBlue.png'
-                        : '../assets/logoWhite.png'
+                        ? '/assets/logoBlue.png'
+                        : '/assets/logoWhite.png'
                     } `}
                     alt="Logo"
                     className={styles.logo}

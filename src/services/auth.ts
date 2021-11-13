@@ -1,7 +1,7 @@
 import { isEmpty } from 'lodash';
 import Client from '@lib/apiClient';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
-
+import { guestToken } from '@lib/api';
 const AuthService = {
   async authenticate(payload) {
     const data = {
@@ -21,9 +21,6 @@ const AuthService = {
   },
 
   async guestToken() {
-    const response = await Client.post('/account/guest_jwt/');
-    const guestToken = response.data.result.JWToken;
-    AuthTokenStorageService.guestStore(guestToken);
     return guestToken;
   },
 

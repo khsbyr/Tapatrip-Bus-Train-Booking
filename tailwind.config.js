@@ -23,6 +23,7 @@ module.exports = {
         button: '#F1583C',
         alert: '#FFF7ED',
         steps: '#177AD6',
+        inactive: '#8AB1D5',
       }),
       theme: {
         screens: {
@@ -35,6 +36,9 @@ module.exports = {
         alert: '#F7B352',
         bg: '#F1F2F6',
       }),
+      width: {
+        98: '26rem',
+      },
       textColor: {
         primary: '#3490dc',
         secondary: '#8AB1D5',
