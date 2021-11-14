@@ -88,7 +88,7 @@ export default function Payment({ datas, scheduleId }) {
         </div>
         <div className={style.card}>
           <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
-            <StepCard datas={datas} />
+            <StepCard datas={datas} scheduleId={scheduleId} />
             <PaymentCard />
             <button className={style.button} onClick={handleCheck}>
               Захиалгын мэдээлэл шалгах
