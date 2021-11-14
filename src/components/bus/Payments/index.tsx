@@ -8,7 +8,7 @@ import StepCard from '../StepCard';
 import PaymentCard from '../PaymentCard';
 import OrderModal from '@components/bus/OrderModal';
 
-export default function Payment({ datas }) {
+export default function Payment({ datas, scheduleId }) {
   const [value, setValue] = React.useState(1);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { Countdown } = Statistic;
