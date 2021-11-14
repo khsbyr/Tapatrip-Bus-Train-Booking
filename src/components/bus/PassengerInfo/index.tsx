@@ -78,7 +78,7 @@ export default function PassengerIfo({ datas }) {
   };
 
   const onFinish = async values => {
-    console.log('Received values of form:', values);
+    //console.log('Received values of form:', values);
     // setCurrent(current + 1);
   };
 
@@ -171,7 +171,8 @@ export default function PassengerIfo({ datas }) {
 
                       <p>
                         <h1 className="text-cardDate">
-                          Том хүн {datas.adultTicket}
+                          Том хүн{' '}
+                          {seat.isChild ? datas.adultTicket : datas.childTicket}
                         </h1>
                         <h1 className="text-cardDate font-normal text-xs">
                           АМЬ ДААТГАЛ БАГТСАН
@@ -206,6 +207,7 @@ export default function PassengerIfo({ datas }) {
                             <Input
                               onChange={handlePassengerSurname}
                               id={i}
+                              value={seat.lastName}
                               className={style.input}
                               placeholder="Зорчигчийн овог"
                             />

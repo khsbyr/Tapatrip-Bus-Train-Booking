@@ -23,7 +23,7 @@ const Seat24 = ({ datas }) => {
         lastName: '',
         documentNumber: '',
         gender: '',
-        isChild: '',
+        isChild: true,
         genderName: '',
         seatNumber: e.target.value,
       };

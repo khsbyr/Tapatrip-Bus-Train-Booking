@@ -45,10 +45,14 @@ const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
   const handleRegister = e => {
     if (e.target.value.length === 8) {
       const registerNumber = values1 + values2 + e.target.value;
-      console.log(registerNumber);
-      addPassenger;
-      // selectedSeats[passengerNumber - 1].documentNumber = registerNumber;
-      // setSelectedSeats(selectedSeats);
+      addPassenger({
+        variables: {
+          documentNumber: registerNumber,
+        },
+      });
+      const passenger = data && data.busPassenger.passenger;
+      selectedSeats[passengerNumber - 1].isChild = passenger.isChild;
+      setSelectedSeats(selectedSeats);
     }
   };
 

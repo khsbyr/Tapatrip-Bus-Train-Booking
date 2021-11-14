@@ -1,5 +1,5 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
-import { onError } from "@apollo/client/link/error";
+import { onError } from '@apollo/client/link/error';
 import { setContext } from '@apollo/client/link/context';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
 
@@ -9,7 +9,9 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = AuthTokenStorageService.getAccessToken() ? AuthTokenStorageService.getAccessToken() : AuthTokenStorageService.getGuestToken();
+  const token = AuthTokenStorageService.getAccessToken()
+    ? AuthTokenStorageService.getAccessToken()
+    : AuthTokenStorageService.getGuestToken();
   // return the headers to the context so httpLink can read them
   return {
     headers: {

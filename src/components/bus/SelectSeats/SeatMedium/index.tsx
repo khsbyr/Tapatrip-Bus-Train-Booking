@@ -24,7 +24,7 @@ const SeatMedium = ({ datas }) => {
         lastName: '',
         documentNumber: '',
         gender: '',
-        isChild: '',
+        isChild: true,
         genderName: '',
         seatNumber: e.target.value,
       };
@@ -41,7 +41,6 @@ const SeatMedium = ({ datas }) => {
         isSelectedSeats[e.target.value] = false;
         setSelectedSeats(selectedSeats);
         setIsSelectedSeats(isSelectedSeats);
-        console.log(isSelectedSeats);
       }
     }
   };
