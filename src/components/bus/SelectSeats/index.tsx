@@ -7,27 +7,30 @@ import Image from 'next/image';
 import busImg from '@public/assets/busimg.jpg';
 import StepCard from '../StepCard';
 import { Modal } from 'antd';
+import { arrayFilterSchedule } from '@helpers/array-format';
 
-export default function SelectSeats({ datas }) {
+export default function SelectSeats({ datas, scheduleId }) {
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const { bus, driverPhone } = datas;
 
+  const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
+
   const handleRemoveSeat = e => {
-    const index = selectedSeats.findIndex(
+    const index = formatSelectedSeats.findIndex(
       item => item.seatNumber === e.target.value
     );
     if (index > -1) {
-      selectedSeats.splice(index, 1);
-      isSelectedSeats[e.target.value] = false;
-      setSelectedSeats(selectedSeats);
+      formatSelectedSeats.splice(index, 1);
+      isSelectedSeats[scheduleId + e.target.value] = false;
+      setSelectedSeats(formatSelectedSeats);
       setIsSelectedSeats(isSelectedSeats);
     }
   };
 
   const next = () => {
-    if (selectedSeats.length > 0) setCurrent(current + 1);
+    if (formatSelectedSeats.length > 0) setCurrent(current + 1);
     else {
       Modal.warning({
         title: 'Анхааруулга',
@@ -80,8 +83,8 @@ export default function SelectSeats({ datas }) {
                   Сонгогдсон суудал
                 </h1>
                 <div className="py-2 text-lg font-bold">
-                  {selectedSeats &&
-                    selectedSeats.map(seat => (
+                  {formatSelectedSeats &&
+                    formatSelectedSeats.map(seat => (
                       <button
                         key={seat.seatNumber}
                         value={seat.seatNumber}
@@ -95,16 +98,16 @@ export default function SelectSeats({ datas }) {
               </div>
             </div>
             {bus.seatCount < 25 ? (
-              <SeatSmall datas={datas} />
+              <SeatSmall datas={datas} scheduleId={scheduleId} />
             ) : (
-              <SeatMedium datas={datas} />
+              <SeatMedium datas={datas} scheduleId={scheduleId} />
             )}
           </div>
         </div>
       </div>
       <div className={style.card}>
         <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
-          <StepCard datas={datas} />
+          <StepCard datas={datas} scheduleId={scheduleId} />
           <button className={style.button} onClick={next}>
             Зорчигчийн мэдээлэл оруулах
           </button>

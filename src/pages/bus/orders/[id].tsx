@@ -35,12 +35,12 @@ export default function Payment() {
   const steps = [
     {
       title: 'Суудал сонгох',
-      content: <SelectSeats datas={scheduleDataResult} />,
+      content: <SelectSeats datas={scheduleDataResult} scheduleId={id} />,
       button: 'Зорчигчийн мэдээлэл оруулах',
     },
     {
       title: 'Зорчигчийн мэдээлэл',
-      content: <PassengerInfo datas={scheduleDataResult} />,
+      content: <PassengerInfo datas={scheduleDataResult} scheduleId={id} />,
       button: 'Төлбөр төлөх',
     },
     {

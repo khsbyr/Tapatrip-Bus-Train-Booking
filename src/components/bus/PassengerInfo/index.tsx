@@ -8,14 +8,17 @@ import { PATTERN_COMPANY_REGISTER } from '@helpers/constantValidation';
 import ContentWrapper from './style';
 import StepCard from '../StepCard';
 import InputPhoneNumber from '@components/common/InputPhoneNumber';
+import { arrayFilterSchedule } from '@helpers/array-format';
 
 const { Option } = Select;
 
-export default function PassengerIfo({ datas }) {
+export default function PassengerIfo({ datas, scheduleId }) {
   const [isCompoany, setIsCompany] = useState(true);
   const { customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
+
+  const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 
   const handleCompany = data => {
     let company = data == 0 ? true : false;
@@ -68,13 +71,13 @@ export default function PassengerIfo({ datas }) {
   };
 
   const handlePassengerSurname = e => {
-    selectedSeats[e.target.id - 1].lastName = e.target.value;
-    setSelectedSeats(selectedSeats);
+    formatSelectedSeats[e.target.id - 1].lastName = e.target.value;
+    setSelectedSeats(formatSelectedSeats);
   };
 
   const handlePassengerFirstname = e => {
-    selectedSeats[e.target.id - 1].firstName = e.target.value;
-    setSelectedSeats(selectedSeats);
+    formatSelectedSeats[e.target.id - 1].firstName = e.target.value;
+    setSelectedSeats(formatSelectedSeats);
   };
 
   const onFinish = async values => {
@@ -163,8 +166,8 @@ export default function PassengerIfo({ datas }) {
                 </div>
               </div>
 
-              {selectedSeats &&
-                selectedSeats.map((seat, i) => (
+              {formatSelectedSeats &&
+                formatSelectedSeats.map((seat, i) => (
                   <div key={i} className={style.Information}>
                     <div className={style.passengerInfoTitle}>
                       <h1 className="text-cardDate">Зорчигч {++i}</h1>
@@ -189,6 +192,7 @@ export default function PassengerIfo({ datas }) {
                             registNo={registNo}
                             seatNumber={seat.seatNumber}
                             passengerNumber={i}
+                            scheduleId={scheduleId}
                           />
                         </div>
                         <div className={style.leftContent}>
@@ -260,7 +264,7 @@ export default function PassengerIfo({ datas }) {
         </div>
         <div className={style.card}>
           <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
-            <StepCard datas={datas} />
+            <StepCard datas={datas} scheduleId={scheduleId} />
             <button className={style.button} type="submit">
               Төлбөр төлөх
             </button>

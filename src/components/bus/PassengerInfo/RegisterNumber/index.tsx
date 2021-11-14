@@ -5,15 +5,22 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import { useGlobalStore } from '@context/globalStore';
 import { useMutation } from '@apollo/client';
 import { BUS_PASSENGER } from '@graphql/mutation';
-import { PATTERN_PHONE, validateMessages } from '@helpers/constantValidation';
+import { PATTERN_PHONE } from '@helpers/constantValidation';
+import { arrayFilterSchedule } from '@helpers/array-format';
 
-const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
+const RegisterNumber = ({
+  registNo,
+  seatNumber = '',
+  passengerNumber = 0,
+  scheduleId = '',
+}) => {
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
-  const { customers, setCustomers } = useGlobalStore();
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [values1, setValues1] = useState('A');
   const [values2, setValues2] = useState('A');
+
+  const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 
   const [addPassenger, { data }] = useMutation(BUS_PASSENGER);
 
@@ -47,12 +54,13 @@ const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
           },
         });
         const passenger = data && data.busPassenger.passenger;
-        selectedSeats[passengerNumber - 1].isChild = passenger.isChild;
-        selectedSeats[passengerNumber - 1].isVaccine =
+        formatSelectedSeats[passengerNumber - 1].isChild = passenger.isChild;
+        formatSelectedSeats[passengerNumber - 1].isVaccine =
           passenger.firstName === '' ? false : true;
-        selectedSeats[passengerNumber - 1].firstName = passenger.firstName;
-        selectedSeats[passengerNumber - 1].lastName = passenger.lastName;
-        setSelectedSeats(selectedSeats);
+        formatSelectedSeats[passengerNumber - 1].firstName =
+          passenger.firstName;
+        formatSelectedSeats[passengerNumber - 1].lastName = passenger.lastName;
+        setSelectedSeats(formatSelectedSeats);
       } catch (e) {
         console.log(e);
       }
