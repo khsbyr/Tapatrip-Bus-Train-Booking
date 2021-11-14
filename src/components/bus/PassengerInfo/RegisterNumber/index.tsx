@@ -16,12 +16,7 @@ const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
   const [values2, setValues2] = useState('A');
 
   const [addPassenger, { data }] = useMutation(BUS_PASSENGER);
-  console.log(data);
 
-  // if (loading) return 'Submitting...';
-
-  // const passenger = data && data.busPassenger.passenger;
-  // console.log(passenger);
   const handleReg1 = e => {
     setIsOpen1(!isOpen1);
     setIsOpen2(false);
@@ -42,17 +37,25 @@ const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
     setIsOpen2(false);
   };
 
-  const handleRegister = e => {
+  const handleRegister = async e => {
     if (e.target.value.length === 8) {
       const registerNumber = values1 + values2 + e.target.value;
-      addPassenger({
-        variables: {
-          documentNumber: registerNumber,
-        },
-      });
-      const passenger = data && data.busPassenger.passenger;
-      selectedSeats[passengerNumber - 1].isChild = passenger.isChild;
-      setSelectedSeats(selectedSeats);
+      try {
+        const { data } = await addPassenger({
+          variables: {
+            documentNumber: registerNumber,
+          },
+        });
+        const passenger = data && data.busPassenger.passenger;
+        selectedSeats[passengerNumber - 1].isChild = passenger.isChild;
+        selectedSeats[passengerNumber - 1].isVaccine =
+          passenger.firstName === '' ? false : true;
+        selectedSeats[passengerNumber - 1].firstName = passenger.firstName;
+        selectedSeats[passengerNumber - 1].lastName = passenger.lastName;
+        setSelectedSeats(selectedSeats);
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 

@@ -172,7 +172,7 @@ export default function PassengerIfo({ datas }) {
                       <p>
                         <h1 className="text-cardDate">
                           Том хүн{' '}
-                          {seat.isChild ? datas.adultTicket : datas.childTicket}
+                          {seat.isChild ? datas.childTicket : datas.adultTicket}
                         </h1>
                         <h1 className="text-cardDate font-normal text-xs">
                           АМЬ ДААТГАЛ БАГТСАН
@@ -195,7 +195,7 @@ export default function PassengerIfo({ datas }) {
                           <label className={style.Label} htmlFor="lastName">
                             Овог
                           </label>
-                          <Form.Item
+                          {/* <Form.Item
                             name={'lastName' + i}
                             rules={[
                               {
@@ -203,15 +203,15 @@ export default function PassengerIfo({ datas }) {
                                 message: 'Зорчигчийн овгийг заавал бөглөнө үү!',
                               },
                             ]}
-                          >
-                            <Input
-                              onChange={handlePassengerSurname}
-                              id={i}
-                              value={seat.lastName}
-                              className={style.input}
-                              placeholder="Зорчигчийн овог"
-                            />
-                          </Form.Item>
+                          > */}
+                          <Input
+                            onChange={handlePassengerSurname}
+                            id={i}
+                            value={seat.lastName}
+                            className={style.input}
+                            placeholder="Зорчигчийн овог"
+                          />
+                          {/* </Form.Item> */}
                         </div>
                       </div>
                       <div className={style.InfoForm}>
@@ -221,7 +221,11 @@ export default function PassengerIfo({ datas }) {
                           </label>
                           <Input
                             disabled
-                            value={seat.seatNumber}
+                            value={
+                              seat.isVaccine
+                                ? 'Вакцинд хамрагдсан'
+                                : 'Вакцинд хамрагдаагүй'
+                            }
                             className={style.input}
                           />
                         </div>
@@ -229,7 +233,7 @@ export default function PassengerIfo({ datas }) {
                           <label className={style.Label} htmlFor="firstName">
                             Нэр
                           </label>
-                          <Form.Item
+                          {/* <Form.Item
                             name={'firstName' + i}
                             rules={[
                               {
@@ -237,14 +241,15 @@ export default function PassengerIfo({ datas }) {
                                 message: 'Зорчигчийн нэрийг заавал бөглөнө үү!',
                               },
                             ]}
-                          >
-                            <Input
-                              id={i}
-                              onChange={handlePassengerFirstname}
-                              className={style.input}
-                              placeholder="Зорчигчийн нэр"
-                            />
-                          </Form.Item>
+                          > */}
+                          <Input
+                            id={i}
+                            onChange={handlePassengerFirstname}
+                            className={style.input}
+                            value={seat.firstName}
+                            placeholder="Зорчигчийн нэр"
+                          />
+                          {/* </Form.Item> */}
                         </div>
                       </div>
                     </div>
