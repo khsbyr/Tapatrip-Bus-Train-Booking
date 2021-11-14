@@ -15,8 +15,8 @@ const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
   const [values1, setValues1] = useState('A');
   const [values2, setValues2] = useState('A');
 
-  // const [addPassenger, { data }] = useMutation(BUS_PASSENGER);
-  // console.log(data);
+  const [addPassenger, { data }] = useMutation(BUS_PASSENGER);
+  console.log(data);
 
   // if (loading) return 'Submitting...';
 
@@ -43,13 +43,13 @@ const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
   };
 
   const handleRegister = e => {
-    // if (e.target.value.length === 8) {
-    //   const registerNumber = values1 + values2 + e.target.value;
-    //   selectedSeats[passengerNumber - 1].documentNumber = registerNumber;
-    //   setSelectedSeats(selectedSeats);
-    // } else if (e.target.value.length > 8) {
-    //   message.warning('Таны бичсэн регистерийн дугаарын урт хэтэрсэн байна!!!');
-    // }
+    if (e.target.value.length === 8) {
+      const registerNumber = values1 + values2 + e.target.value;
+      console.log(registerNumber);
+      addPassenger;
+      // selectedSeats[passengerNumber - 1].documentNumber = registerNumber;
+      // setSelectedSeats(selectedSeats);
+    }
   };
 
   return (
