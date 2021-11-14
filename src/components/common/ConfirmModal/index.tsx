@@ -16,7 +16,7 @@ export default function OrderModal(props) {
       <div>
         <Modal
           visible={props.isModalVisible}
-          closable={false}
+          onCancel={() => props.close()}
           className={style.Modal}
           width={580}
           footer={null}

@@ -45,6 +45,10 @@ export default function PassengerIfo({ datas, scheduleId }) {
     }
   };
 
+  const close = () => {
+    setIsModalVisible(false);
+  };
+
   const handleCustomerEmail = e => {
     if (customers) {
       customers.email = e.target.value;
@@ -340,6 +344,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
           <ConfirmModal
             isModalVisible={isModalVisible}
             booking={handleBooking}
+            close={close}
           />
         )}
       </div>

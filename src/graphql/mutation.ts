@@ -16,6 +16,34 @@ export const BUS_PASSENGER = gql`
   }
 `;
 
+// mutation {
+//   busBookingCheck(refNumber:"202111090484", contactPhone:"99119911") {
+//     booking {
+//       id
+//       status
+//       statusName
+//       toPay
+//       toPaid
+//     }
+//   }
+// }
+
+// export const BUS_BOOKING_CHECK = gql`
+//   mutation busPassenger($documentNumber: String!) {
+//     busPassenger(documentNumber: $documentNumber) {
+//       passenger {
+//         firstName
+//         lastName
+//         gender
+//         genderName
+//         documentNumber
+//         isChild
+//         id
+//       }
+//     }
+//   }
+// `;
+
 export const BUS_BOOKING = gql`
   mutation busBookingCheck($id: String) {
     busBookingCheck(id: $id) {
