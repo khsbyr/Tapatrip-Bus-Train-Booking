@@ -23,6 +23,7 @@ const Search: FC<Props> = ({ navbarData, startLocations }) => {
         >
           {navbarData.generalList.map(menu => (
             <TabPane
+              tabKey={menu.id}
               tab={
                 <div className="tab-title">
                   <svg
@@ -40,6 +41,7 @@ const Search: FC<Props> = ({ navbarData, startLocations }) => {
                   <span className="text">{menu.text}</span>
                 </div>
               }
+              disabled={menu.id !== 4}
               key={menu.id}
             />
           ))}

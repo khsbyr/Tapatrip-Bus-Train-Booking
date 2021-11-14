@@ -1,9 +1,11 @@
-import { Input, Modal } from 'antd';
+import { Form, Input, Modal } from 'antd';
 import React, { useState, FC } from 'react';
 import TravelList from '@data/getTravelList[1].json';
 import TravelData from '@data/getTravelData.json';
 import { ArrowRightIcon } from '@heroicons/react/solid';
-import InputPhoneNumber from '@components/common/InputPhoneNumber';
+import { PATTERN_PHONE } from '@helpers/constantValidation';
+import { useMutation } from '@apollo/client';
+import { BUS_BOOKING_CHECK } from '@graphql/mutation';
 
 interface Props {
   isModalVisible?: any;
@@ -12,55 +14,99 @@ interface Props {
 
 export default function OrderModal(props) {
   const [isActive, setIsActive] = useState(false);
+
+  const [busBookingCheck, { data }] = useMutation(BUS_BOOKING_CHECK);
+
+  const onFinish = async values => {
+    try {
+      const { data } = await busBookingCheck({
+        variables: {
+          refNumber: values.refNumber,
+          contactPhone: values.phone,
+        },
+      });
+      setIsActive(true);
+    } catch (e) {
+      Modal.error({
+        title: 'Алдаа',
+        content: e.message,
+      });
+    }
+  };
+
   return (
     <div>
       <Modal
         visible={props.isModalVisible}
         onCancel={() => props.close()}
-        width={700}
+        width={650}
         footer={null}
       >
-        <div className="space-y-4">
-          <h1 className="text-cardDate text-xl font-bold border-b-2 pb-2">
+        <div className="sm:pt-3 pb-2 sm:pb-5 space-y-8">
+          <h1 className="text-cardDate text-xl font-bold border-b-2">
             Захиалгын мэдээлэл шалгах
           </h1>
-          <div className="flex justify-center">
-            <div className="sm:w-2/3 space-y-4">
-              <div className="space-y-3.5">
-                <label
-                  className="text-cardDate text-base px-2 font-medium"
-                  htmlFor=""
-                >
-                  Захиалгын дугаар
-                </label>
-                <Input
-                  className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base"
-                  placeholder="Захиалгын дугаар оруулна уу"
-                />
-              </div>
-              <InputPhoneNumber />
-              <div className="space-y-3.5">
-                <label
-                  className="text-cardDate text-base px-2 font-medium"
-                  htmlFor=""
-                >
-                  Баталгаажуулах
-                </label>
-                <p className="flex rounded-lg bg-bg border-0">
-                  <Input
-                    className="w-2/3 py-3 bg-bg border-0 border-r-2 rounded-l-lg text-cardDate text-base"
-                    placeholder="6 оронтой код оруулна уу"
-                  />
-                  <button
-                    className="text-cardDate font-medium w-1/3"
-                    onClick={() => setIsActive(!isActive)}
+          <Form name="busBookingCheck" onFinish={onFinish}>
+            <div className="flex justify-center">
+              <div className="sm:w-2/3 space-y-5">
+                <div className="space-y-2">
+                  <label
+                    className="text-cardDate text-base pl-2 font-medium"
+                    htmlFor=""
                   >
-                    CMC код илгээх
-                  </button>
-                </p>
+                    Захиалгын дугаар
+                  </label>
+                  <Form.Item
+                    name="refNumber"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Захиалгын дугаараа заавал бөглөнө үү!',
+                      },
+                    ]}
+                  >
+                    <Input
+                      className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base"
+                      placeholder="Захиалгын дугаар оруулна уу"
+                    />
+                  </Form.Item>
+                </div>
+                <div className="space-y-2">
+                  <label
+                    className="text-cardDate text-base pl-2 font-medium"
+                    htmlFor=""
+                  >
+                    Утасны дугаар
+                  </label>
+                  <Form.Item
+                    name="phone"
+                    rules={[
+                      {
+                        pattern: PATTERN_PHONE,
+                        message: 'Утасны дугаар буруу байна',
+                      },
+                      {
+                        required: true,
+                        message: 'Утасны дугаараа заавал бөглөнө үү!',
+                      },
+                    ]}
+                  >
+                    <Input
+                      className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base"
+                      placeholder=" Утасны дугаараа оруулна уу"
+                    />
+                  </Form.Item>
+                </div>
+
+                <button
+                  className="text-white bg-blue-500 text-base w-full font-medium py-3 rounded-lg hover:bg-blue-600 focus:bg-blue-700"
+                  type="submit"
+                >
+                  Шалгах
+                </button>
               </div>
             </div>
-          </div>
+          </Form>
           <div
             className={`${
               !isActive ? 'hidden' : 'block grid grid-cols-1 sm:grid-cols-2'
@@ -70,7 +116,7 @@ export default function OrderModal(props) {
               <h1 className="flex justify-center text-cardDate text-xl font-bold pb-4 border-b-2">
                 Захиалгын мэдээлэл
               </h1>
-              <div className="px-4 py-2 sm:border-r-2 space-y-3">
+              <div className="p-2 sm:border-r-2 space-y-5">
                 <p className="space-y-1">
                   <p className="flex font-bold">
                     {TravelList[0].start_location}
@@ -111,7 +157,7 @@ export default function OrderModal(props) {
               <h1 className="flex justify-center text-cardDate text-xl font-bold pb-4 border-b-2">
                 Автобусны мэдээлэл
               </h1>
-              <div className="px-4 py-2 text-base text-cardDate font-medium">
+              <div className="sm:pl-4 p-2 text-base text-cardDate font-medium">
                 <ul className="w-full space-y-2">
                   <li className="flex">
                     ААН:

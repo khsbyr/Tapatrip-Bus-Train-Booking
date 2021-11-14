@@ -1,3 +1,4 @@
+import React from 'react';
 import NavData from '@data/navData.json';
 import { useQuery } from '@apollo/client';
 import {
@@ -6,27 +7,19 @@ import {
 } from '@graphql/queries';
 import { SunIcon, CloudIcon, MoonIcon } from '@heroicons/react/outline';
 import { Result, Button } from 'antd';
-import React, { useState } from 'react';
 import Card from '@components/bus/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
 import BusNavbar from '@components/bus/Navbar';
 import Layout from '@components/common/Layout';
 import { useRouter } from 'next/router';
 import { arrayFormat } from '@helpers/array-format';
-import { css } from '@emotion/react';
-import ClipLoader from 'react-spinners/BeatLoader';
 import Loader from '@components/common/Loader';
-
-const override = css`
-  display: block;
-  margin: auto;
-  border-color: red;
-`;
 
 export default function Orders() {
   const router = useRouter();
   const { endLocation, date } = router.query;
   const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
+
   const {
     data: scheduleData,
     loading,
@@ -43,6 +36,7 @@ export default function Orders() {
   const scheduleResult =
     scheduleData === undefined ? '' : scheduleData.busAllSchedules.edges;
   const startLocations = arrayFormat(data);
+
   return (
     <Layout>
       <div className=" bg-bg">

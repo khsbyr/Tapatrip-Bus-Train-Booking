@@ -17,9 +17,15 @@ const Subscribe: FC = () => {
               дороос захиалах боломжтой.
             </p>
             <div className={styles.download}>
-              <img src="assets/App store.png" className="h-8 md:h-10" />
-              <img src="assets/Google play.png" className="h-8 md:h-10" />
-              <img src="assets/App gallery.png" className="h-8 md:h-10" />
+              <a href="https://apps.apple.com/mn/app/tapatrip-hotel-flight-travel/id1563199559?fbclid=IwAR3t5NGJY47n1B1yZA2VssPtRtdpZykA0dxF6yPLZBB-hZLHHYZ1eocNnhE">
+                <img src="assets/App store.png" className="h-8 md:h-10" />
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.tapatrip">
+                <img src="assets/Google play.png" className="h-8 md:h-10" />
+              </a>
+              <a href="https://appgallery.huawei.com/?fbclid=IwAR1-w45U-mLLn7IC23ClYziQPiZWTRU7lqfC5ODJUpkiqaRHL9i08XCvVPc#/app/C104355437">
+                <img src="assets/App gallery.png" className="h-8 md:h-10" />
+              </a>
             </div>
           </div>
         </div>

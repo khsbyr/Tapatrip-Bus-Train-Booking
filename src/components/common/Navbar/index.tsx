@@ -84,7 +84,9 @@ const Navbar: FC<Props> = ({ navbarData }) => {
               <div className="flex items-center ">
                 <div className="hidden md:block">
                   <div className={styles.loginBody}>
-                    <button className={styles.loginButton}>Нэвтрэх</button>
+                    <a href="/login">
+                      <button className={styles.loginButton}>Нэвтрэх</button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -138,7 +140,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
 
           <nav className={styles.bottomMenu}>
             {navbarData.generalList.map(menu => (
-              <div className="">
+              <div key={menu.id}>
                 <a
                   className={
                     'text-xs pt-3 rounded-full block leading-normal ' +

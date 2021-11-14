@@ -6,7 +6,6 @@ const ContentWrapper = styled.div`
     color: #0a3761 !important;
   }
   .ant-select-selector {
-    width: 4rem;
     border: none !important;
     background-color: #f1f2f6 !important;
     height: 3rem !important;
@@ -22,14 +21,14 @@ const ContentWrapper = styled.div`
   .ant-input:hover {
     border-right: none;
   }
-  .ant-input:focus {
-    background-color: transparent;
-  }
   .ant-input {
     padding: 0.75rem;
     border: none !important;
-    background-color: #f1f2f6;
+    background: #f1f2f6 !important;
     border-radius: 0.5rem !important;
+  }
+  .ant-form-item-explain-error {
+    padding-left: 5px;
   }
 
   .ant-form-item-has-error
@@ -40,7 +39,7 @@ const ContentWrapper = styled.div`
     :not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover,
   .ant-form-item-has-error
     :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
-    background-color: #f1f2f6;
+    background-color: #f1f2f6 !important;
   }
 `;
 
