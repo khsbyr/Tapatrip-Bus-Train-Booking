@@ -45,7 +45,7 @@ export default function Payment() {
     },
     {
       title: 'Төлбөр төлөх',
-      content: <Payments datas={scheduleDataResult} />,
+      content: <Payments datas={scheduleDataResult} scheduleId={id} />,
       button: 'Захиалгын мэдээлэл шалгах',
     },
   ];
