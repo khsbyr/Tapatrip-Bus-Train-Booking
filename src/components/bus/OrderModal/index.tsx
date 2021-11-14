@@ -1,9 +1,11 @@
-import { Input, Modal } from 'antd';
+import { Form, Input, Modal } from 'antd';
 import React, { useState, FC } from 'react';
 import TravelList from '@data/getTravelList[1].json';
 import TravelData from '@data/getTravelData.json';
 import { ArrowRightIcon } from '@heroicons/react/solid';
-import InputPhoneNumber from '@components/common/InputPhoneNumber';
+import { PATTERN_PHONE } from '@helpers/constantValidation';
+import { useMutation } from '@apollo/client';
+import { BUS_BOOKING_CHECK } from '@graphql/mutation';
 
 interface Props {
   isModalVisible?: any;
@@ -12,6 +14,26 @@ interface Props {
 
 export default function OrderModal(props) {
   const [isActive, setIsActive] = useState(false);
+
+  const [busBookingCheck, { data }] = useMutation(BUS_BOOKING_CHECK);
+
+  const onFinish = async values => {
+    try {
+      const { data } = await busBookingCheck({
+        variables: {
+          refNumber: values.refNumber,
+          contactPhone: values.phone,
+        },
+      });
+      setIsActive(true);
+    } catch (e) {
+      Modal.error({
+        title: 'Алдаа',
+        content: e.message,
+      });
+    }
+  };
+
   return (
     <div>
       <Modal
@@ -24,29 +46,67 @@ export default function OrderModal(props) {
           <h1 className="text-cardDate text-xl font-bold border-b-2">
             Захиалгын мэдээлэл шалгах
           </h1>
-          <div className="flex justify-center">
-            <div className="sm:w-2/3 space-y-5">
-              <div className="space-y-3">
-                <label
-                  className="text-cardDate text-base pl-2 font-medium"
-                  htmlFor=""
-                >
-                  Захиалгын дугаар
-                </label>
-                <Input
-                  className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base"
-                  placeholder="Захиалгын дугаар оруулна уу"
-                />
-              </div>
+          <Form name="busBookingCheck" onFinish={onFinish}>
+            <div className="flex justify-center">
+              <div className="sm:w-2/3 space-y-5">
+                <div className="space-y-2">
+                  <label
+                    className="text-cardDate text-base pl-2 font-medium"
+                    htmlFor=""
+                  >
+                    Захиалгын дугаар
+                  </label>
+                  <Form.Item
+                    name="refNumber"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Захиалгын дугаараа заавал бөглөнө үү!',
+                      },
+                    ]}
+                  >
+                    <Input
+                      className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base"
+                      placeholder="Захиалгын дугаар оруулна уу"
+                    />
+                  </Form.Item>
+                </div>
+                <div className="space-y-2">
+                  <label
+                    className="text-cardDate text-base pl-2 font-medium"
+                    htmlFor=""
+                  >
+                    Утасны дугаар
+                  </label>
+                  <Form.Item
+                    name="phone"
+                    rules={[
+                      {
+                        pattern: PATTERN_PHONE,
+                        message: 'Утасны дугаар буруу байна',
+                      },
+                      {
+                        required: true,
+                        message: 'Утасны дугаараа заавал бөглөнө үү!',
+                      },
+                    ]}
+                  >
+                    <Input
+                      className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base"
+                      placeholder=" Утасны дугаараа оруулна уу"
+                    />
+                  </Form.Item>
+                </div>
 
-              <button
-                className="text-white bg-blue-500 text-base w-full font-medium py-3 rounded-lg"
-                onClick={() => setIsActive(!isActive)}
-              >
-                Шалгах
-              </button>
+                <button
+                  className="text-white bg-blue-500 text-base w-full font-medium py-3 rounded-lg hover:bg-blue-600 focus:bg-blue-700"
+                  type="submit"
+                >
+                  Шалгах
+                </button>
+              </div>
             </div>
-          </div>
+          </Form>
           <div
             className={`${
               !isActive ? 'hidden' : 'block grid grid-cols-1 sm:grid-cols-2'
