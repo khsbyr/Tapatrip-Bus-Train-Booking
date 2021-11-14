@@ -12,8 +12,8 @@ import { useGlobalStore } from '@context/globalStore';
 import { PATTERN_PHONE } from '@helpers/constantValidation';
 
 const countries = [
-  { name: '976', src: mngIcon, value: 0 },
-  { name: '44', src: enIcon, value: 1 },
+  { name: 976, src: mngIcon, value: 0 },
+  { name: 44, src: enIcon, value: 1 },
 ];
 
 export default function InputPhoneNumber() {

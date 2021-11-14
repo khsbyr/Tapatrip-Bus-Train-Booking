@@ -20,20 +20,26 @@ const AuthService = {
     return response;
   },
 
-   async verifySms(payload) {
+  async verifySms(payload) {
     const data = {
       phone: payload.phone,
       dial_code: payload.dialCode,
     };
 
-    const response = await Client.post('/account/global_verification_code/phone/', data);
-    const result = response.data.status_code===200 ? true : false;
+    const response = await Client.post(
+      '/account/global_verification_code/phone/',
+      data
+    );
+    const result = response.data.status_code === 200 ? true : false;
     return result;
   },
 
-   async emailSubscribe(email) {
-    const response = await Client.post('/account/global_verification_code/phone/', email);
-    const result = response.data.status_code===200 ? true : false;
+  async emailSubscribe(email) {
+    const response = await Client.post(
+      '/account/global_verification_code/phone/',
+      email
+    );
+    const result = response.data.status_code === 200 ? true : false;
     return result;
   },
 
@@ -45,11 +51,12 @@ const AuthService = {
     };
 
     const response = await Client.post('/account/register/customer/', data);
-    const customerToken = response.data.result.token;
+    const result = response.data.status_code === 200 ? true : false;
+    const customerToken = result && response.data.result.token;
     AuthTokenStorageService.store(customerToken);
-    return customerToken;
+    return result;
   },
-  
+
   async guestToken() {
     const response = await Client.post('/account/guest_jwt/');
     const guestToken = response.data.result.JWToken;

@@ -60,6 +60,8 @@ const RegisterNumber = ({
         formatSelectedSeats[passengerNumber - 1].firstName =
           passenger.firstName;
         formatSelectedSeats[passengerNumber - 1].lastName = passenger.lastName;
+        formatSelectedSeats[passengerNumber - 1].documentNumber =
+          registerNumber;
         setSelectedSeats(formatSelectedSeats);
       } catch (e) {
         console.log(e);

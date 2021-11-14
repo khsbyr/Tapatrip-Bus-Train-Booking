@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { Form, Input, Select } from 'antd';
+import { Form, Input, Modal, Select } from 'antd';
 import registNo from '@data/registerNumber.json';
 import RegisterNumber from '@components/bus/PassengerInfo/RegisterNumber';
 import style from './PassengerInfo.module.scss';
 import { useGlobalStore } from '@context/globalStore';
+import { useMutation } from '@apollo/client';
+import { BUS_BOOKING_CREATE } from '@graphql/mutation';
 import { PATTERN_COMPANY_REGISTER } from '@helpers/constantValidation';
 import ContentWrapper from './style';
 import StepCard from '../StepCard';
 import InputPhoneNumber from '@components/common/InputPhoneNumber';
 import { arrayFilterSchedule } from '@helpers/array-format';
+import ConfirmModal from '@components/common/ConfirmModal';
+import AuthService from '@services/auth';
 
 const { Option } = Select;
 
@@ -17,8 +21,11 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const { customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
+
+  const [addBusBooking, { data }] = useMutation(BUS_BOOKING_CREATE);
 
   const handleCompany = data => {
     let company = data == 0 ? true : false;
@@ -31,7 +38,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
         companyRegister: '',
         isCompany: data === 0 ? false : true,
         email: '',
-        dialNumber: '976',
+        dialNumber: 976,
         phoneNumber: '',
       };
       setCustomers(customer);
@@ -47,7 +54,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
         companyRegister: '',
         isCompany: true,
         email: e.target.value,
-        dialNumber: '976',
+        dialNumber: 976,
         phoneNumber: '',
       };
       setCustomers(customer);
@@ -63,7 +70,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
         companyRegister: e.target.value,
         isCompany: true,
         email: '',
-        dialNumber: '976',
+        dialNumber: 976,
         phoneNumber: '',
       };
       setCustomers(customer);
@@ -81,8 +88,67 @@ export default function PassengerIfo({ datas, scheduleId }) {
   };
 
   const onFinish = async values => {
+    let payload = {
+      phone: customers.phoneNumber,
+      dialCode: customers.dialNumber,
+    };
+    const result = await AuthService.verifySms(payload);
+    if (result) setIsModalVisible(true);
+    else {
+      Modal.error({
+        title: 'Алдаа',
+        content: 'Тань руу баталгаажуулах код явуулахад алдаа гарлаа!!!',
+      });
+    }
     //console.log('Received values of form:', values);
     // setCurrent(current + 1);
+  };
+
+  const handleBooking = async pinCode => {
+    let payload = {
+      phone: customers.phoneNumber,
+      dialCode: customers.dialNumber,
+      code: pinCode,
+    };
+    const result = await AuthService.verifyCode(payload);
+    if (result) {
+      const passengers = [];
+      formatSelectedSeats.map(seat => {
+        let passenger = {
+          firstName: seat.firstName,
+          seat: parseInt(seat.seatNumber),
+          lastName: seat.lastName,
+          documentNumber: seat.documentNumber,
+        };
+        passengers.push(passenger);
+      });
+      try {
+        const { data } = await addBusBooking({
+          variables: {
+            schedule: scheduleId,
+            contactName: 'Erdenebileg',
+            contactDialNumber: parseInt(customers.dialNumber),
+            contactPhone: customers.phoneNumber,
+            contactEmail: customers.email,
+            isCompany: customers.isCompany,
+            companyRegister: customers.companyRegister,
+            pax: passengers,
+          },
+        });
+        console.log(data);
+      } catch (e) {
+        console.log(e);
+        Modal.error({
+          title: 'Алдаа',
+          content: e.message,
+        });
+      }
+    } else {
+      Modal.error({
+        title: 'Алдаа',
+        content: 'Таны оруулсан код буруу байна дахин оролдоно уу?',
+      });
+    }
   };
 
   return (
@@ -270,6 +336,12 @@ export default function PassengerIfo({ datas, scheduleId }) {
             </button>
           </div>
         </div>
+        {isModalVisible && (
+          <ConfirmModal
+            isModalVisible={isModalVisible}
+            booking={handleBooking}
+          />
+        )}
       </div>
     </Form>
   );
