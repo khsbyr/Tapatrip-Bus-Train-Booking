@@ -7,14 +7,16 @@ import {
 } from '@heroicons/react/outline';
 import { Listbox, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import Image from 'next/image';
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+import { CheckIcon } from '@heroicons/react/solid';
 import banks from '@data/bankInformation.json';
 import s from './PayTransfer.module.scss';
+import { useGlobalStore } from '@context/globalStore';
 
 export default function Payment() {
   const [selected, setSelected] = useState(banks[0]);
   const [isSelected, setIsSelected] = useState(false);
+  const { booking, setBooking } = useGlobalStore();
+  console.log(booking);
   const onClick = () => {
     setIsSelected(!isSelected);
   };
@@ -24,8 +26,8 @@ export default function Payment() {
   const [copyOrderNumber, setCopyOrderNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
-  const copyToOrderNumber = () => {
-    navigator.clipboard.writeText('num');
+  const copyToOrderNumber = orderNum => {
+    navigator.clipboard.writeText(orderNum);
     setCopyOrderNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
   const [copyAccNumber, setCopyAccNumber] = useState(
@@ -110,20 +112,22 @@ export default function Payment() {
             </Transition>
           </div>
         </Listbox>
-        <div className={s.body}>
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2">
           <div className={s.leftContent}>
-            <div>
-              <h1>Захиалгын дугаар</h1>
-              <p>
-                <h1>00111111</h1>
-                <button onClick={() => copyToOrderNumber()}>
+            <div className="space-y-2">
+              <h1 className="text-cardDate ml-2">Захиалгын дугаар</h1>
+              <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
+                <h1 className="text-cardDate text-sm sm:text-base">
+                  {booking.refNumber}
+                </h1>
+                <button onClick={() => copyToOrderNumber(booking.refNumber)}>
                   {copyOrderNumber}
                 </button>
               </p>
             </div>
-            <div>
+            <div className="">
               <h1>Дансны дугаар</h1>
-              <p>
+              <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
                 <h1>{banks[selected.id].accountNumber}</h1>
                 <button onClick={() => copyToAccNumber(banks[selected.id])}>
                   {copyAccNumber}

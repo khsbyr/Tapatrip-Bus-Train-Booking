@@ -20,6 +20,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const [isCompoany, setIsCompany] = useState(true);
   const { customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
+  const { booking, setBooking } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -28,7 +29,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const [addBusBooking, { data }] = useMutation(BUS_BOOKING_CREATE);
 
   const handleCompany = data => {
-    let company = data == 0 ? true : false;
+    let company = data == 0 ? false : true;
     setIsCompany(company);
     if (customers) {
       customers.isCompany = data === 0 ? false : true;
@@ -56,7 +57,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
     } else {
       let customer = {
         companyRegister: '',
-        isCompany: true,
+        isCompany: false,
         email: e.target.value,
         dialNumber: 976,
         phoneNumber: '',
@@ -72,7 +73,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
     } else {
       let customer = {
         companyRegister: e.target.value,
-        isCompany: true,
+        isCompany: false,
         email: '',
         dialNumber: 976,
         phoneNumber: '',
@@ -104,8 +105,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
         content: 'Тань руу баталгаажуулах код явуулахад алдаа гарлаа!!!',
       });
     }
-    //console.log('Received values of form:', values);
-    // setCurrent(current + 1);
   };
 
   const handleBooking = async pinCode => {
@@ -130,7 +129,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
         const { data } = await addBusBooking({
           variables: {
             schedule: scheduleId,
-            contactName: 'Erdenebileg',
+            contactName: passengers[0].firstName,
             contactDialNumber: parseInt(customers.dialNumber),
             contactPhone: customers.phoneNumber,
             contactEmail: customers.email,
@@ -139,7 +138,9 @@ export default function PassengerIfo({ datas, scheduleId }) {
             pax: passengers,
           },
         });
-        console.log(data);
+        if (data) setBooking(data.busBooking);
+        setCurrent(current + 1);
+        setIsModalVisible(false);
       } catch (e) {
         console.log(e);
         Modal.error({
@@ -278,15 +279,13 @@ export default function PassengerIfo({ datas, scheduleId }) {
                               },
                             ]}
                           > */}
-                          <p
+                          <Input
                             onChange={handlePassengerSurname}
                             id={i}
-                            // value={seat.lastName}
+                            value={seat.lastName}
                             className={style.input}
                             placeholder="Зорчигчийн овог"
-                          >
-                            {seat.lastName}
-                          </p>
+                          />
                           {/* </Form.Item> */}
                         </div>
                       </div>
@@ -295,19 +294,15 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           <label className={style.Label} htmlFor="Vaccine">
                             Вакцинд хамрагдсан эсэх
                           </label>
-                          <p
-                            // disabled
-                            // value={
-                            //   seat.isVaccine
-                            //     ? 'Вакцинд хамрагдсан'
-                            //     : 'Вакцинд хамрагдаагүй'
-                            // }
+                          <Input
+                            disabled
+                            value={
+                              seat.isVaccine
+                                ? 'Вакцинд хамрагдсан'
+                                : 'Вакцинд хамрагдаагүй'
+                            }
                             className={style.input}
-                          >
-                            {seat.isVaccine
-                              ? 'Вакцинд хамрагдсан'
-                              : 'Вакцинд хамрагдаагүй'}{' '}
-                          </p>
+                          />
                         </div>
                         <div className={style.rightContent}>
                           <label className={style.Label} htmlFor="firstName">
@@ -322,15 +317,13 @@ export default function PassengerIfo({ datas, scheduleId }) {
                               },
                             ]}
                           > */}
-                          <p
+                          <Input
                             id={i}
                             onChange={handlePassengerFirstname}
                             className={style.input}
-                            // value={seat.firstName}
+                            value={seat.firstName}
                             placeholder="Зорчигчийн нэр"
-                          >
-                            {seat.firstName}
-                          </p>
+                          />
                           {/* </Form.Item> */}
                         </div>
                       </div>

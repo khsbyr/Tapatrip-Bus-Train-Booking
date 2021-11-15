@@ -61,10 +61,10 @@ export default function Payment({ datas, scheduleId }) {
             </div>
 
             <div className={style.radioGroup}>
-              {/* <h1 className={style.paymentTitle}>
+              <h1 className={style.paymentTitle}>
                 Төлбөр төлөх хэлбэр сонгоно уу
-              </h1> */}
-              <div className="w-full">
+              </h1>
+              <div className="w-full px-6 pb-5">
                 <p className={style.paymentShape}>Шилжүүлэх</p>
                 <PayTransfer />
               </div>
@@ -92,7 +92,7 @@ export default function Payment({ datas, scheduleId }) {
         <div className={style.card}>
           <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
             <StepCard datas={datas} scheduleId={scheduleId} />
-            <PaymentCard />
+            <PaymentCard datas={datas} scheduleId={scheduleId} />
             <button className={style.button} onClick={handleCheck}>
               Захиалгын мэдээлэл шалгах
             </button>

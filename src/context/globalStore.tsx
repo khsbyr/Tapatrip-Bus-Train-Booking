@@ -12,6 +12,7 @@ export interface State {
   isSelectedSeats: any;
   customers: any;
   current: any;
+  booking: any;
 }
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   isSelectedSeats: '',
   customers: '',
   current: 0,
+  booking: '',
 };
 
 type Action =
@@ -72,6 +74,10 @@ type Action =
   | {
       type: 'SET_CURRENT';
       value: Int16Array;
+    }
+  | {
+      type: 'SET_BOOKING';
+      value: any;
     };
 
 export const GlobalContext = React.createContext<State | any>(initialState);
@@ -146,6 +152,12 @@ function uiReducer(state: State, action: Action) {
         current: action.value,
       };
     }
+    case 'SET_BOOKING': {
+      return {
+        ...state,
+        booking: action.value,
+      };
+    }
   }
 }
 
@@ -207,6 +219,11 @@ export const GlobalProvider: FC = props => {
     [dispatch]
   );
 
+  const setBooking = useCallback(
+    (value: any) => dispatch({ type: 'SET_BOOKING', value }),
+    [dispatch]
+  );
+
   const value = useMemo(
     () => ({
       ...state,
@@ -221,6 +238,7 @@ export const GlobalProvider: FC = props => {
       setIsSelectedSeats,
       setCustomers,
       setCurrent,
+      setBooking,
     }),
     [state]
   );
