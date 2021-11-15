@@ -44,6 +44,7 @@ export const BUS_BOOKING_CHECK = gql`
           bus {
             modelName
             seatCount
+            plateNumber
             transporter {
               name
             }
