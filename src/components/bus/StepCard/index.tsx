@@ -48,7 +48,11 @@ export default function StepCard({ datas, scheduleId }) {
                 </h1>
               </div>
             </div>
-
+            <div className="flex items-center pt-4 sm:pt-4">
+              <div className={style.rightRound}></div>
+              <div className="bg-bg w-full h-0.5 "></div>
+              <div className={style.leftRound}></div>
+            </div>
             <div className={style.rowDirection}>
               <div>
                 <h1 className="text-cardDate font-semibold text-xs md:text-sm ">
@@ -70,11 +74,6 @@ export default function StepCard({ datas, scheduleId }) {
               </div>
             </div>
           </div>
-          <div className={style.rightRound}></div>
-          <div className={style.leftRound}></div>
-          <div className={style.line} style={{ top: '129px' }}></div>
-          <div className={style.line1} style={{ top: '114px' }}></div>
-          <div className={style.line2} style={{ top: '110px' }}></div>
           <div className={`${!isActive ? 'hidden' : 'block'}`}>
             <div className="border border-dashed"></div>
             <div className="px-5 lg:px-20 py-5">

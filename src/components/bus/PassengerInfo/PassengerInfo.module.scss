@@ -11,7 +11,7 @@
   @apply flex flex-wrap sm:flex-nowrap justify-between px-4 py-2 font-medium items-center w-full rounded-lg bg-white;
 }
 .registButton {
-  @apply border-2 items-center my-2 rounded-lg text-cardDate font-medium py-2 px-6 w-full sm:w-32 hover:text-white hover:bg-register hover:border-seat;
+  @apply border-2 items-center my-2 rounded-lg text-cardDate font-medium py-2 px-6 w-full sm:w-32 hover:text-white hover:bg-button hover:border-seat;
 }
 .Information {
   @apply pb-2 w-full bg-white rounded-lg shadow-md text-sm sm:text-base;

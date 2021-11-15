@@ -1,0 +1,12 @@
+{
+    "selectSeatTitle": "Выбрать место",
+    "busInfo": "Информация об автобусе",
+    "businessFirms":"Деловая Фирма",
+    "busModel":"Модель автобуса",
+    "busNumber":"Номер автобуса",
+    "driverNumber":"Номер телефона водителя",
+    "canBeOrdered":"Можно заказать",
+    "ordered":"Заказал",
+    "selectedSeats":"Выбранные места",
+    "stepButton":"Введите информацию о пассажирах"
+} 

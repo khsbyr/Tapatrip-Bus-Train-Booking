@@ -7,13 +7,8 @@ export default function loginPhoneNumber() {
     <form action="" className="space-y-6">
       <InputPhoneNumber />
       <ContentWrapper>
-        <div className="space-y-3.5">
-          <label
-            className="text-base text-cardDate font-medium pl-2"
-            htmlFor=""
-          >
-            Нууц үг
-          </label>
+        <div className="space-y-4">
+          <h1 className="text-base text-cardDate font-medium pl-2">Нууц үг</h1>
           <Input.Password
             className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base"
             placeholder="Нууц үг оруулна уу"

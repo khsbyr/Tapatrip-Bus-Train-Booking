@@ -46,7 +46,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
         >
           <div className={styles.navbar}>
             <div className={styles.navbarBody}>
-              <div className="flex items-center ">
+              <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <Link href="/bus">
                     <a>
@@ -146,7 +146,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     'text-xs pt-3 rounded-full block leading-normal ' +
                     (openTab === menu.id
                       ? 'text-selected'
-                      : 'text-mobileNav bg-white')
+                      : 'text-mobileNav bg-white cursor-default pointer-events-none')
                   }
                   onClick={e => {
                     e.preventDefault();

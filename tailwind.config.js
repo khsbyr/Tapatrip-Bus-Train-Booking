@@ -58,6 +58,9 @@ module.exports = {
       placeholderColor: {
         primary: '#8AB1D5',
       },
+      fontSize: {
+        small: '10px',
+      },
     },
   },
   variants: {

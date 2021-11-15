@@ -13,16 +13,16 @@
     @apply text-cardDate font-bold text-sm sm:text-base lg:text-sm;
   }
   .rowDirection {
-    @apply pb-5 pt-8 flex justify-between items-center;
+    @apply pb-5 pt-4 flex justify-between items-center;
   }
   .orderButton {
     @apply bg-button text-white font-thin md:font-bold md:py-2 px-4 rounded-lg h-8 md:h-10 text-center w-full lg:w-40 hover:bg-hover focus:bg-down;
   }
   .rightRound {
-    @apply border-4 w-4 h-7 sm:w-5 sm:h-9 border-r-0 rounded-tl-full rounded-bl-full absolute top-24 lg:top-28 right-0 bg-bg border-bg;
+    @apply border-4 w-4 h-7 sm:w-6 sm:h-10 border-r-0 rounded-tl-full rounded-bl-full absolute right-0 bg-bg border-bg;
   }
   .leftRound {
-    @apply border-4 w-4 h-7 sm:w-5 sm:h-9 border-l-0 rounded-tr-full rounded-br-full absolute top-24 lg:top-28 left-0 bg-bg border-bg;
+    @apply border-4 w-4 h-7 sm:w-6 sm:h-10 border-l-0 rounded-tr-full rounded-br-full absolute left-0 bg-bg border-bg;
   }
   .line {
     @apply hidden lg:block bg-bg w-full h-0.5 absolute;
