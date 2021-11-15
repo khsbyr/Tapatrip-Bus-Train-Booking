@@ -35,7 +35,6 @@ const Search: FC<Props> = ({ navbarData, startLocations }) => {
                     <g>
                       {menu.path.map(value => (
                         <>
-                          {console.log(value)}
                           <path key={value} d={value} />
                         </>
                       ))}
