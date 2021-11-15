@@ -5,7 +5,7 @@
   @apply z-10 rounded-lg bg-gray-300 text-xl text-white w-9 h-12 font-medium mb-1 mr-0.5 disabled:opacity-50;
 }
 .seatButtonSelected {
-  @apply z-10 rounded-lg bg-selected text-xl text-white w-9 h-12 font-medium border-seat border-2 mb-1 mr-0.5 hover:bg-register hover:text-white focus:bg-register focus:text-white disabled:opacity-50;
+  @apply z-10 rounded-lg bg-selected text-xl text-white w-9 h-12 font-medium border-seat border-2 mb-1 mr-0.5 hover:text-white focus:bg-register focus:text-white disabled:opacity-50;
 }
 .seatButtonMarginLeft {
   @apply z-10 rounded-lg bg-white text-xl text-cardDate w-9 h-12 font-medium border-seat border-2 mr-0.5 mb-1 ml-11;
@@ -14,7 +14,7 @@
   @apply z-10 rounded-lg bg-gray-300 text-xl text-white w-9 h-12 font-medium mr-0.5 mb-1 ml-11 disabled:opacity-50;
 }
 .seatButtonMarginLeftSelected {
-  @apply z-10 rounded-lg bg-selected text-xl text-white w-9 h-12 font-medium border-seat border-2 mr-0.5 mb-1 ml-11 hover:bg-register hover:text-white focus:bg-register focus:text-white;
+  @apply z-10 rounded-lg bg-selected text-xl text-white w-9 h-12 font-medium border-seat border-2 mr-0.5 mb-1 ml-11 hover:text-white focus:bg-register focus:text-white;
 }
 .seatButtonMarginRight {
   @apply z-10 rounded-lg bg-white text-xl text-cardDate w-9 h-12 font-medium border-seat border-2 mr-0.5 mb-1 -ml-10;

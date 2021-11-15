@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import busSketch from '@public/assets/45.svg';
-import Image from 'next/image';
 import seatRangeMap from '@helpers/seatRangeMap';
 import { useGlobalStore } from '@context/globalStore';
 import style from './SeatMedium.module.scss';
@@ -48,7 +45,7 @@ const SeatMedium = ({ datas, scheduleId }) => {
   return (
     <div className="flex">
       <div className="z-0 relative w-full">
-        <Image src={busSketch} className="z-0" />
+        <img src="/assets/45.svg" className="z-0" />
       </div>
       <div className="absolute mt-40 ml-7">
         <table>
