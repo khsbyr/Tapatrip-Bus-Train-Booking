@@ -61,7 +61,7 @@ const Seat24 = ({ datas, scheduleId }) => {
                   <td key={k}>
                     <button
                       className={
-                        seat.isAvialable
+                        !seat.isAvialable
                           ? style.seatButtonDisabled
                           : isSelectedSeats[scheduleId + seat.number]
                           ? style.seatButtonSelected
@@ -69,7 +69,7 @@ const Seat24 = ({ datas, scheduleId }) => {
                       }
                       value={seat.number}
                       onClick={handleSelectSeat}
-                      disabled={seat.isAvialable}
+                      disabled={!seat.isAvialable}
                     >
                       {seat && seat.number}
                     </button>

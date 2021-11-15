@@ -2,7 +2,7 @@
   @apply max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 pt-5 md:pt-10 gap-2 px-2;
 
   .application {
-    @apply bg-white h-40 md:h-48 flex items-center justify-start lg:justify-center rounded-lg shadow-md py-0;
+    @apply bg-white px-2 py-4 flex items-center justify-start lg:justify-center rounded-lg shadow-md;
 
     .childBody {
       @apply max-w-3xl lg:max-w-sm ml-5 space-y-2;
@@ -25,7 +25,7 @@
     }
 
     .button {
-      @apply bg-button text-white py-2 px-4 rounded-lg h-10 md:h-12 w-32;
+      @apply bg-button text-white py-2 px-4 rounded-lg h-10 md:h-12 w-32 hover:bg-hover focus:bg-down;
     }
 
     .image {

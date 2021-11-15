@@ -35,12 +35,11 @@ const AuthService = {
   },
 
   async emailSubscribe(email) {
-    const response = await Client.post(
-      '/account/global_verification_code/phone/',
-      email
-    );
-    const result = response.data.status_code === 200 ? true : false;
-    return result;
+    const response = await Client.post('/gandan/air/subscription/', {
+      email: email,
+    });
+    // const result = response.data.status_code === 200 ? true : false;
+    return response;
   },
 
   async verifyCode(payload) {
