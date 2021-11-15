@@ -3,8 +3,6 @@ import style from './SelectSeats.module.scss';
 import SeatMedium from '@components/bus/SelectSeats/SeatMedium';
 import SeatSmall from '@components/bus/SelectSeats/SeatSmall';
 import { useGlobalStore } from '@context/globalStore';
-import Image from 'next/image';
-import busImg from '@public/assets/busimg.jpg';
 import StepCard from '../StepCard';
 import { Modal } from 'antd';
 import { arrayFilterSchedule } from '@helpers/array-format';
@@ -50,7 +48,7 @@ export default function SelectSeats({ datas, scheduleId }) {
             <div className="sm:w-7/12 space-y-6">
               <h1 className={style.busInformationTitle}>Автобусын мэдээлэл</h1>
               <div className="flex space-x-4">
-                <Image src={busImg} width="160" height="160" />
+                <img src="/assets/busimg.jpg" width="160" height="160" />
                 <div className={style.busInformation}>
                   <p>
                     ААН: <h1>{bus.transporter.name}</h1>
@@ -103,14 +101,14 @@ export default function SelectSeats({ datas, scheduleId }) {
           </div>
         </div>
         <button className={style.buttonBlock} onClick={next}>
-          Зорчигчийн мэдээлэл оруулах
+          Захиалах
         </button>
       </div>
       <div className={style.card}>
         <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
           <StepCard datas={datas} scheduleId={scheduleId} />
           <button className={style.button} onClick={next}>
-            Зорчигчийн мэдээлэл оруулах
+            Захиалах
           </button>
         </div>
       </div>

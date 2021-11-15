@@ -1,8 +1,6 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
-import Image from 'next/image';
-import BackgroundImage from '@public/assets/svgIcons/NewLogo.svg';
 
 interface Props {
   navbarData?: any;
@@ -21,8 +19,8 @@ const Navbar3: FC<Props> = ({ navbarData }) => {
               <div className="flex items-center ">
                 <div className="flex-shrink-0">
                   <a href="#">
-                    <Image
-                      src={BackgroundImage}
+                    <img
+                      src="/assets/svgIcons/NewLogo.svg"
                       alt="Logo"
                       className="w-36 md:w-full md:h-full px-4"
                     />

@@ -20,7 +20,7 @@
   @apply text-cardDate text-base sm:text-lg font-bold border-b-2 px-4 py-2;
 }
 .InfoForm {
-  @apply space-y-4 mt-4 sm:mt-2;
+  @apply sm:mt-4 sm:grid grid-cols-2;
 }
 .customerRegisterNumber {
   @apply w-full space-y-3 sm:pl-2;
@@ -35,7 +35,7 @@
   @apply w-full space-y-2 sm:pl-2 h-24;
 }
 .input {
-  @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base h-12;
+  @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base;
 }
 .passengerInfoTitle {
   @apply flex justify-between w-full items-center text-cardDate text-base sm:text-lg font-bold border-b-2 px-4 py-2;
@@ -45,4 +45,7 @@
 }
 .button {
   @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white hidden lg:block;
+}
+.buttonBlock {
+  @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white block lg:hidden;
 }
