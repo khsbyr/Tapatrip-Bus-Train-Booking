@@ -8,7 +8,7 @@ import StepCard from '../StepCard';
 import PaymentCard from '../PaymentCard';
 import OrderModal from '@components/bus/OrderModal';
 
-export default function Payment({ datas }) {
+export default function Payment({ datas, scheduleId }) {
   const [value, setValue] = React.useState(1);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { Countdown } = Statistic;
@@ -61,11 +61,14 @@ export default function Payment({ datas }) {
             </div>
 
             <div className={style.radioGroup}>
-              <h1 className={style.paymentTitle}>
+              {/* <h1 className={style.paymentTitle}>
                 Төлбөр төлөх хэлбэр сонгоно уу
-              </h1>
-
-              <Radio.Group onChange={onChange} value={value} className="w-full">
+              </h1> */}
+              <div className="w-full">
+                <p className={style.paymentShape}>Шилжүүлэх</p>
+                <PayTransfer />
+              </div>
+              {/* <Radio.Group onChange={onChange} value={value} className="w-full">
                 <div className="w-full ml-6">
                   <Space direction="vertical">
                     <Radio value={1}>
@@ -82,13 +85,13 @@ export default function Payment({ datas }) {
                     </Radio>
                   </Space>
                 </div>
-              </Radio.Group>
+              </Radio.Group> */}
             </div>
           </div>
         </div>
         <div className={style.card}>
           <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
-            <StepCard datas={datas} />
+            <StepCard datas={datas} scheduleId={scheduleId} />
             <PaymentCard />
             <button className={style.button} onClick={handleCheck}>
               Захиалгын мэдээлэл шалгах

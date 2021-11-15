@@ -4,41 +4,42 @@ import Image from 'next/image';
 import seatRangeMap from '@helpers/seatRangeMap';
 import { useGlobalStore } from '@context/globalStore';
 import style from './SeatMedium.module.scss';
-import { message } from 'antd';
 import { arrayFilterSeat } from '@helpers/array-format';
 
 const seats = [];
 const isSelected = [];
 
-const SeatMedium = ({ datas }) => {
+const SeatMedium = ({ datas, scheduleId }) => {
   const seatRanges = seatRangeMap(datas.seats);
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
 
   const handleSelectSeat = e => {
-    let isArray = arrayFilterSeat(seats, e.target.value);
+    let isArray = arrayFilterSeat(seats, e.target.value, scheduleId);
     if (isArray.length === 0) {
       let passenger = {
         id: '',
         firstName: '',
         lastName: '',
+        scheduleId: scheduleId,
         documentNumber: '',
         gender: '',
-        isChild: '',
-        genderName: '',
+        isChild: false,
+        isVaccine: false,
         seatNumber: e.target.value,
       };
       seats.push(passenger);
-      isSelected[e.target.value] = true;
+      isSelected[scheduleId + e.target.value] = true;
       setSelectedSeats(seats);
       setIsSelectedSeats(isSelected);
     } else {
       const index = selectedSeats.findIndex(
-        item => item.seatNumber === e.target.value
+        item =>
+          item.seatNumber === e.target.value && item.scheduleId === scheduleId
       );
       if (index > -1) {
         selectedSeats.splice(index, 1);
-        isSelectedSeats[e.target.value] = false;
+        isSelected[scheduleId + e.target.value] = false;
         setSelectedSeats(selectedSeats);
         setIsSelectedSeats(isSelectedSeats);
       }
@@ -62,7 +63,7 @@ const SeatMedium = ({ datas }) => {
                         className={
                           seat.isAvialable
                             ? style.seatButtonDisabled
-                            : isSelectedSeats[seat.number]
+                            : isSelectedSeats[scheduleId + seat.number]
                             ? style.seatButtonSelected
                             : style.seatButton
                         }
@@ -80,7 +81,7 @@ const SeatMedium = ({ datas }) => {
                         className={
                           seat.isAvialable
                             ? style.seatButtonMarginLeftDisabled
-                            : isSelectedSeats[seat.number]
+                            : isSelectedSeats[scheduleId + seat.number]
                             ? style.seatButtonMarginLeftSelected
                             : style.seatButtonMarginLeft
                         }
@@ -104,7 +105,7 @@ const SeatMedium = ({ datas }) => {
                         className={
                           seat.isAvialable
                             ? style.seatButtonMarginRightDisabled
-                            : isSelectedSeats[seat.number]
+                            : isSelectedSeats[scheduleId + seat.number]
                             ? style.seatButtonMarginRightSelected
                             : style.seatButtonMarginRight
                         }
@@ -122,7 +123,7 @@ const SeatMedium = ({ datas }) => {
                         className={
                           seat.isAvialable
                             ? style.seatButtonDisabled
-                            : isSelectedSeats[seat.number]
+                            : isSelectedSeats[scheduleId + seat.number]
                             ? style.seatButtonSelected
                             : style.seatButton
                         }

@@ -3,45 +3,44 @@ import Image from 'next/image';
 import seat24RangeMap from '@helpers/seat24RangeMap';
 import style from './SeatSmall.module.scss';
 import { useGlobalStore } from '@context/globalStore';
-import { message } from 'antd';
 import { arrayFilterSeat } from '@helpers/array-format';
 
 const seats = [];
 const isSelected = [];
 
-const Seat24 = ({ datas }) => {
+const Seat24 = ({ datas, scheduleId }) => {
   const seatRanges = seat24RangeMap(datas.seats);
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
 
   const handleSelectSeat = e => {
-    let isArray = arrayFilterSeat(seats, e.target.value);
-    console.log(isArray);
+    let isArray = arrayFilterSeat(seats, e.target.value, scheduleId);
     if (isArray.length === 0) {
       let passenger = {
         id: '',
         firstName: '',
         lastName: '',
+        scheduleId: scheduleId,
         documentNumber: '',
         gender: '',
-        isChild: '',
-        genderName: '',
+        isChild: false,
+        isVaccine: false,
         seatNumber: e.target.value,
       };
       seats.push(passenger);
-      isSelected[e.target.value] = true;
+      isSelected[scheduleId + e.target.value] = true;
       setSelectedSeats(seats);
       setIsSelectedSeats(isSelected);
     } else {
       const index = selectedSeats.findIndex(
-        item => item.seatNumber === e.target.value
+        item =>
+          item.seatNumber === e.target.value && item.scheduleId === scheduleId
       );
-      console.log(index);
       if (index > -1) {
         selectedSeats.splice(index, 1);
-        isSelectedSeats[e.target.value] = false;
-        setIsSelectedSeats(isSelectedSeats);
+        isSelected[scheduleId + e.target.value] = false;
         setSelectedSeats(selectedSeats);
+        setIsSelectedSeats(isSelectedSeats);
       }
     }
   };
@@ -64,7 +63,7 @@ const Seat24 = ({ datas }) => {
                       className={
                         seat.isAvialable
                           ? style.seatButtonDisabled
-                          : isSelectedSeats[seat.number]
+                          : isSelectedSeats[scheduleId + seat.number]
                           ? style.seatButtonSelected
                           : style.seatButton
                       }

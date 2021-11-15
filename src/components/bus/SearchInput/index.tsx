@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AutoComplete, DatePicker, message, Spin } from 'antd';
-import { useLazyQuery } from '@apollo/client';
+import { useApolloClient } from '@apollo/client';
 import {
   BUS_LOCATION_ENDS_QUERY,
   BUS_ALL_LOCATION_STOPS_QUERY,
@@ -19,6 +19,7 @@ import moment from 'moment';
 const dateFormat = 'YYYY-MM-DD';
 
 export default function SearchBus({ startLocations }) {
+  const client = useApolloClient();
   const { Option } = AutoComplete;
   const router = useRouter();
   const { date } = router.query;
@@ -37,52 +38,43 @@ export default function SearchBus({ startLocations }) {
   const { isUlaanbaatar, setIsUlaanbaatar } = useGlobalStore();
   const [selectDate, setSelectDate] = useState(currentDate);
 
-  const [getEndLocations, { loading, error, data: endData }] = useLazyQuery(
-    BUS_LOCATION_ENDS_QUERY
-  );
-  const [
-    getStopLocations,
-    { data: stopData, loading: stopLoading, error: stopError },
-  ] = useLazyQuery(BUS_ALL_LOCATION_STOPS_QUERY);
-
-  // if (loading) return 'Loading...';
-  // if (error) return `Error! ${error.message}`;
-
-  // if (stopLoading) return 'Loading...';
-  // if (stopError) return `Error! ${stopError.message}`;
-
-  const formatEndLocation = endData && endData.busAllLocationEnds.edges;
+  const formatEndLocation =
+    endLocationList && endLocationList.busAllLocationEnds.edges;
   const endFormatLocation = endLocationFormat(formatEndLocation);
 
-  const formatStopLocation = stopData && stopData.busAllLocationStops.edges;
+  const formatStopLocation =
+    stopLocationList && stopLocationList.busAllLocationStops.edges;
   const stopFormatLocation = stopLocationFormat(formatStopLocation);
 
-  const handleStartSelect = (key: string, options) => {
+  const handleStartSelect = async (key: string, options) => {
     setSelectStartLocation(options);
     if (options.key != 'QnVzQWxsTG9jYXRpb246MQ==') {
-      getStopLocations({
+      const { data: stopData } = await client.query({
+        query: BUS_ALL_LOCATION_STOPS_QUERY,
         variables: { location: options.key },
       });
       setIsUlaanbaatar(false);
-      setStopLocationList(stopData && stopData);
+      setStopLocationList(stopData);
     } else {
-      setIsUlaanbaatar(true);
-      getEndLocations({
+      const { data: endData } = await client.query({
+        query: BUS_LOCATION_ENDS_QUERY,
         variables: { locationStopLocation: options.key, locationStop: '' },
       });
-      setEndLocationList(endData && endData);
+      setIsUlaanbaatar(true);
+      setEndLocationList(endData);
     }
   };
 
-  const handleStopSelect = (key: string, options) => {
+  const handleStopSelect = async (key: string, options) => {
     setSelectStopLocation(options);
-    getEndLocations({
+    const { data: endData } = await client.query({
+      query: BUS_LOCATION_ENDS_QUERY,
       variables: {
         locationStopLocation: selectStartLocation.key,
         locationStop: options.key,
       },
     });
-    setEndLocationList(endData && endData);
+    setEndLocationList(endData);
   };
 
   const handleEndSelect = (key: string, options) => {

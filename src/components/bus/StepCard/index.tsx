@@ -8,12 +8,14 @@ import React, { FC, useState } from 'react';
 import { Steps } from 'antd';
 import { useGlobalStore } from '@context/globalStore';
 import style from './StepCard.module.scss';
-import Link from 'next/link';
+import { arrayFilterSchedule } from '@helpers/array-format';
 
 const { Step } = Steps;
-export default function StepCard({ datas }) {
+export default function StepCard({ datas, scheduleId }) {
   const { selectedSeats } = useGlobalStore();
   const [isActive, setIsActive] = useState(false);
+
+  const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
   return (
     <div>
       <div className="max-w-7xl mx-auto">
@@ -32,14 +34,16 @@ export default function StepCard({ datas }) {
               <div className="space-y-1 lg:space-y-2">
                 <h1 className={style.priceText}>
                   {/* {datas.adultTicket * selectedSeats.length} MNT */}
-                  {selectedSeats.length > 0
-                    ? datas.adultTicket * selectedSeats.length
+                  {formatSelectedSeats.length > 0
+                    ? datas.adultTicket * formatSelectedSeats.length
                     : datas.adultTicket}{' '}
                   MNT
                 </h1>
                 <h1 className="flex items-center text-xs md:text-sm lg:text-base">
                   <UserIcon className="w-3 md:w-4 h-3 md:h-4 " />
-                  {selectedSeats.length > 0 ? selectedSeats.length : 1}{' '}
+                  {formatSelectedSeats.length > 0
+                    ? formatSelectedSeats.length
+                    : 1}{' '}
                   зорчигчийн үнэ
                 </h1>
               </div>

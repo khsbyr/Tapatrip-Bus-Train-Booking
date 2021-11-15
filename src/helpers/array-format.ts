@@ -47,9 +47,23 @@ export function endLocationFormat(data: any) {
   return arr;
 }
 
-export function arrayFilterSeat(data: any, value: String) {
-  let result = data.filter(function (currentElement) {
-    return currentElement.seatNumber.indexOf(value) > -1;
-  });
+export function arrayFilterSeat(data: any, value: String, scheduleId: String) {
+  let result =
+    data &&
+    data.filter(function (currentElement) {
+      return (
+        currentElement.seatNumber.indexOf(value) > -1 &&
+        currentElement.scheduleId.indexOf(scheduleId) > -1
+      );
+    });
+  return result;
+}
+
+export function arrayFilterSchedule(data: any, value: String) {
+  let result =
+    data &&
+    data.filter(function (currentElement) {
+      return currentElement.scheduleId.indexOf(value) > -1;
+    });
   return result;
 }

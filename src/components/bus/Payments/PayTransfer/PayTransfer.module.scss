@@ -1,5 +1,5 @@
 .root {
-  @apply w-screen pr-16 lg:w-full -ml-6 lg:ml-0 text-sm sm:text-base;
+  @apply w-screen pr-16 lg:w-full lg:ml-0 text-sm sm:text-base;
 }
 .body {
   @apply mt-4 grid grid-cols-1 sm:grid-cols-2;
