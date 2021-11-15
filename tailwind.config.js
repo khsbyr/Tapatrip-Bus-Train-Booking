@@ -42,6 +42,7 @@ module.exports = {
         bg: '#F1F2F6',
         seat: '#0A3761',
         weather: '#8AB1D5',
+        register: '#F1583C',
       }),
       textColor: {
         primary: '#3490dc',

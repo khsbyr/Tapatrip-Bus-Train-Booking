@@ -26,8 +26,8 @@ export default function Payment() {
   const [copyOrderNumber, setCopyOrderNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
-  const copyToOrderNumber = () => {
-    navigator.clipboard.writeText('num');
+  const copyToOrderNumber = orderNum => {
+    navigator.clipboard.writeText(orderNum);
     setCopyOrderNumber(<CheckIcon className="text-secondary h-6 w-6" />);
   };
   const [copyAccNumber, setCopyAccNumber] = useState(
@@ -113,21 +113,21 @@ export default function Payment() {
           </div>
         </Listbox>
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2">
-          <div className="space-y-3 sm:pr-2">
+          <div className={s.leftContent}>
             <div className="space-y-2">
               <h1 className="text-cardDate ml-2">Захиалгын дугаар</h1>
               <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
                 <h1 className="text-cardDate text-sm sm:text-base">
                   {booking.refNumber}
                 </h1>
-                <button onClick={() => copyToOrderNumber()}>
+                <button onClick={() => copyToOrderNumber(booking.refNumber)}>
                   {copyOrderNumber}
                 </button>
               </p>
             </div>
-            <div>
+            <div className="">
               <h1>Дансны дугаар</h1>
-              <p>
+              <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
                 <h1>{banks[selected.id].accountNumber}</h1>
                 <button onClick={() => copyToAccNumber(banks[selected.id])}>
                   {copyAccNumber}

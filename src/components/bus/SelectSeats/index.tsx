@@ -46,11 +46,11 @@ export default function SelectSeats({ datas, scheduleId }) {
           <div>
             <h1 className={style.selecetSeatTitle}>Суудал сонгох</h1>
           </div>
-          <div className={style.body}>
+          <div className={style.information}>
             <div className="sm:w-7/12 space-y-6">
               <h1 className={style.busInformationTitle}>Автобусын мэдээлэл</h1>
               <div className="flex space-x-4">
-                <Image src={busImg} width="180" height="180" />
+                <Image src={busImg} width="160" height="160" />
                 <div className={style.busInformation}>
                   <p>
                     ААН: <h1>{bus.transporter.name}</h1>
@@ -102,6 +102,9 @@ export default function SelectSeats({ datas, scheduleId }) {
             )}
           </div>
         </div>
+        <button className={style.buttonBlock} onClick={next}>
+          Зорчигчийн мэдээлэл оруулах
+        </button>
       </div>
       <div className={style.card}>
         <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">

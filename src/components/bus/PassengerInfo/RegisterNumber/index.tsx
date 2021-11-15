@@ -112,7 +112,7 @@ const RegisterNumber = ({
             </h2>
           </button>
           <Input
-            className="z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base;"
+            className="z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base"
             onChange={handleRegister}
             placeholder="Регистерийн дугаар"
           />

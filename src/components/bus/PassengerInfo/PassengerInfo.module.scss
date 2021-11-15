@@ -11,7 +11,7 @@
   @apply flex flex-wrap sm:flex-nowrap justify-between px-4 py-2 font-medium items-center w-full rounded-lg bg-white;
 }
 .registButton {
-  @apply border-2 items-center my-2 rounded-lg text-cardDate font-medium py-2 px-6 w-full sm:w-32 hover:text-white hover:bg-button hover:border-seat;
+  @apply border-2 items-center my-2 rounded-lg text-cardDate font-medium py-2 px-6 w-full sm:w-32 hover:text-white hover:bg-button hover:border-register;
 }
 .Information {
   @apply pb-2 w-full bg-white rounded-lg shadow-md text-sm sm:text-base;
@@ -35,7 +35,7 @@
   @apply w-full space-y-2 sm:pl-2 h-24;
 }
 .input {
-  @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base;
+  @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base h-12;
 }
 .passengerInfoTitle {
   @apply flex justify-between w-full items-center text-cardDate text-base sm:text-lg font-bold border-b-2 px-4 py-2;
