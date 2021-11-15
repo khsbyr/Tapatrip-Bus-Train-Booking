@@ -1,4 +1,4 @@
-const { i18n } = require('./next-i18next.config');
+//const { i18n } = require('./next-i18next.config');
 const {
   PHASE_DEVELOPMENT_SERVER,
   PHASE_PRODUCTION_BUILD,
@@ -18,7 +18,7 @@ module.exports = phase => {
 
   // next.config.js object
   return {
-    i18n,
+    // i18n,
     reactStrictMode: true,
     async redirects() {
       return [
@@ -28,6 +28,10 @@ module.exports = phase => {
           permanent: true,
         },
       ];
+    },
+    images: {
+      loader: 'imgix',
+      path: 'https://noop/',
     },
   };
 };
