@@ -1,7 +1,6 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
-import Profile from '@components/common/Navbar/Profile';
 import Image from 'next/image';
 import BackgroundImage from '@public/assets/svgIcons/NewLogo.svg';
 
@@ -44,11 +43,6 @@ const Navbar3: FC<Props> = ({ navbarData }) => {
                 </div>
               </div>
               <div className="w-32 text-gray-700"></div>
-              <div className="flex items-center ">
-                <div className="hidden md:block">
-                  <Profile />
-                </div>
-              </div>
               <div className="-mr-2 flex md:hidden">
                 <button
                   onClick={() => setIsOpen(!isOpen)}
@@ -80,9 +74,6 @@ const Navbar3: FC<Props> = ({ navbarData }) => {
             {ref => (
               <div className="md:hidden rounded bg-white" id="mobile-menu">
                 <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                  <div className="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium block">
-                    <Profile />
-                  </div>
                   {navbarData.profile.map(z => (
                     <a
                       className="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium block"
