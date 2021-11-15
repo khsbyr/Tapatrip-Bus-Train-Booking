@@ -7,14 +7,16 @@ import {
 } from '@heroicons/react/outline';
 import { Listbox, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import Image from 'next/image';
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+import { CheckIcon } from '@heroicons/react/solid';
 import banks from '@data/bankInformation.json';
 import s from './PayTransfer.module.scss';
+import { useGlobalStore } from '@context/globalStore';
 
 export default function Payment() {
   const [selected, setSelected] = useState(banks[0]);
   const [isSelected, setIsSelected] = useState(false);
+  const { booking, setBooking } = useGlobalStore();
+  console.log(booking);
   const onClick = () => {
     setIsSelected(!isSelected);
   };
@@ -115,7 +117,9 @@ export default function Payment() {
             <div className="space-y-2">
               <h1 className="text-cardDate ml-2">Захиалгын дугаар</h1>
               <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                <h1 className="text-cardDate text-sm sm:text-base">00111111</h1>
+                <h1 className="text-cardDate text-sm sm:text-base">
+                  {booking.refNumber}
+                </h1>
                 <button onClick={() => copyToOrderNumber()}>
                   {copyOrderNumber}
                 </button>
