@@ -36,7 +36,7 @@ export default function Payment() {
     {
       title: 'Суудал сонгох',
       content: <SelectSeats datas={scheduleDataResult} scheduleId={id} />,
-      button: 'Зорчигчийн мэдээлэл оруулах',
+      button: 'Захиалах',
     },
     {
       title: 'Зорчигчийн мэдээлэл',

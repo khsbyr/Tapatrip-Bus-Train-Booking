@@ -1,17 +1,13 @@
-import mngIcon from 'public/assets/flagMongolia.png';
-import enIcon from 'public/assets/flagEng.png';
-import chinaIcon from 'public/assets/flagChina.png';
 import React, { useState } from 'react';
 import { Listbox } from '@headlessui/react';
 import s from './selectLanguage.module.scss';
 import { CheckIcon } from '@heroicons/react/solid';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 
-import Image from 'next/image';
 const languages = [
-  { name: 'Mongolia', src: mngIcon },
-  { name: 'English(UK)', src: enIcon },
-  { name: 'China', src: chinaIcon },
+  { name: 'Mongolia', src: '/assets/flagMongolia.png' },
+  { name: 'English(UK)', src: '/assets/flagEng.png' },
+  { name: 'China', src: '/assets/flagChina.png' },
 ];
 export default function selectLanguage() {
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
@@ -26,11 +22,11 @@ export default function selectLanguage() {
     <Listbox value={selectedLanguage} onChange={setSelectedLanguage}>
       <div className={s.body} onClick={onClick}>
         <Listbox.Button className={s.listboxButton}>
-          <Image
+          <img
             className="rounded"
             src={selectedLanguage.src}
-            width="40"
-            height="21"
+            width="36"
+            height="18"
           />
           {isSelected ? (
             <ChevronUpIcon className={s.icon} />
@@ -51,7 +47,7 @@ export default function selectLanguage() {
                 <span className={s.options}>
                   {language.name}
                   <p className="mt-0.5">
-                    <Image
+                    <img
                       className="rounded"
                       src={language.src}
                       height="18"
