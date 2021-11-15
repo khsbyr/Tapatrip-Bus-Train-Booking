@@ -16,6 +16,7 @@ export default function Payment() {
   const [selected, setSelected] = useState(banks[0]);
   const [isSelected, setIsSelected] = useState(false);
   const { booking, setBooking } = useGlobalStore();
+  const { customers } = useGlobalStore();
   console.log(booking);
   const onClick = () => {
     setIsSelected(!isSelected);
@@ -140,7 +141,7 @@ export default function Payment() {
               <h1>Холбогдох утас</h1>
               <p>
                 <h1 className="text-cardDate text-sm sm:text-base">
-                  Холбогдох утас
+                  {customers.phoneNumber}
                 </h1>
                 <button onClick={copyToPhoneNumber}>{copyPhoneNumber}</button>
               </p>

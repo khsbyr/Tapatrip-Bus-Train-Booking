@@ -58,7 +58,6 @@ export default function Payment() {
     <Layout>
       <div className="relative bg-bg">
         <SeatNav navbarData={NavData} />
-
         <div className="bg-steps w-full">
           <div className="max-w-7xl mx-auto">
             <ContentWrapper>

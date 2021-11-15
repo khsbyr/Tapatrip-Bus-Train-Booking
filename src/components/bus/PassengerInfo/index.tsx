@@ -47,6 +47,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
   };
 
   const close = () => {
+    console.log('sadsad');
     setIsModalVisible(false);
   };
 
