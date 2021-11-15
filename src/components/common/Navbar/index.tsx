@@ -146,7 +146,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     'text-xs pt-3 rounded-full block leading-normal ' +
                     (openTab === menu.id
                       ? 'text-selected'
-                      : 'text-mobileNav bg-white')
+                      : 'text-mobileNav bg-white cursor-default pointer-events-none')
                   }
                   onClick={e => {
                     e.preventDefault();

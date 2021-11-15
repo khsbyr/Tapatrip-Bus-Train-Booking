@@ -67,8 +67,14 @@ export default function Orders() {
             )}
           </div>
           <div className="hidden lg:block">
-            <div className="sticky top-0 bg-white py-5 px-5 rounded-xl divide-y-2">
-              <div className="mt-0 space-y-2">
+            {/* <div className="sticky top-0 bg-white py-5 px-5 rounded-xl divide-y-2"> */}
+            <a
+              href="https://www.facebook.com/TapaTripTravelAgency/"
+              target="_blank"
+            >
+              <img src="/assets/Thailand.jpg" className="rounded-lg" />{' '}
+            </a>
+            {/* <div className="mt-0 space-y-2">
                 <h1 className="text-cardDate font-bold text-2xl">Тосох цаг</h1>
                 <div className="flex justify-center flex-wrap space-x-4">
                   <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
@@ -143,8 +149,8 @@ export default function Orders() {
                     </p>
                   </button>
                 </div>
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
           </div>
         </div>
       </div>
