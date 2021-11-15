@@ -8,7 +8,7 @@ import StepCard from '../StepCard';
 import PaymentCard from '../PaymentCard';
 import OrderModal from '@components/bus/OrderModal';
 
-export default function Payment({ datas }) {
+export default function Payment({ datas, scheduleId }) {
   const [value, setValue] = React.useState(1);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { Countdown } = Statistic;
@@ -88,7 +88,7 @@ export default function Payment({ datas }) {
         </div>
         <div className={style.card}>
           <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
-            <StepCard datas={datas} />
+            <StepCard datas={datas} scheduleId={scheduleId} />
             <PaymentCard />
             <button className={style.button} onClick={handleCheck}>
               Захиалгын мэдээлэл шалгах

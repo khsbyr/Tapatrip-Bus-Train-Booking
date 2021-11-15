@@ -22,9 +22,6 @@
 .InfoForm {
   @apply space-y-4 mt-4 sm:mt-2;
 }
-.customerSelect {
-  @apply z-10 relative w-full mt-0 sm:mt-9 font-medium sm:pr-2;
-}
 .customerRegisterNumber {
   @apply w-full space-y-3 sm:pl-2;
 }
@@ -32,10 +29,10 @@
   @apply text-cardDate text-sm sm:text-base px-2 font-medium;
 }
 .leftContent {
-  @apply w-full space-y-3 sm:pr-2;
+  @apply w-full space-y-2 sm:pr-2 h-24;
 }
 .rightContent {
-  @apply w-full space-y-3 sm:pl-2;
+  @apply w-full space-y-2 sm:pl-2 h-24;
 }
 .input {
   @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base;

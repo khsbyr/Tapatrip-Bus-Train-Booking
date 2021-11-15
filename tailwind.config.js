@@ -28,6 +28,7 @@ module.exports = {
         alert: '#FFF7ED',
         steps: '#177AD6',
         register: '#0A3761',
+        seatHover: '#1575CE',
       }),
       theme: {
         screens: {
