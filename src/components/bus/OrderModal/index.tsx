@@ -17,6 +17,8 @@ export default function OrderModal(props) {
 
   const [busBookingCheck, { data }] = useMutation(BUS_BOOKING_CHECK);
 
+  console.log(data);
+
   const onFinish = async values => {
     try {
       const { data } = await busBookingCheck({

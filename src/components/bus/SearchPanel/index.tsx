@@ -34,7 +34,10 @@ const Search: FC<Props> = ({ navbarData, startLocations }) => {
                   >
                     <g>
                       {menu.path.map(value => (
-                        <path key={value} d={value} />
+                        <>
+                          {console.log(value)}
+                          <path key={value} d={value} />
+                        </>
                       ))}
                     </g>
                   </svg>
