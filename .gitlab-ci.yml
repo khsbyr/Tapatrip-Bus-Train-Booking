@@ -1,0 +1,27 @@
+.only-default: &only-default
+  only:
+    - master
+
+stages:
+  - deploy
+
+variables:
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+  AWS_REGION: $AWS_REGION
+  S3_BUCKET_NAME: $S3_BUCKET_NAME
+  CDN_DISTRIBUTION_ID: $CDN_DISTRIBUTION_ID
+
+
+deploy:
+  stage: deploy
+  before_script:
+    - echo "Deploying app"
+    - apk add --update curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev
+    - pip install awscli
+    - eval $(aws ecr get-login-password —-region $AWS_REGION | sed 's|https://||')
+
+  script:
+    - serverless config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
+    - serverless deploy -v
+
