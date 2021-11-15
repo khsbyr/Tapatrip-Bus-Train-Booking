@@ -172,7 +172,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                 <h1 className={style.customerInfoTitle}>
                   Захиалагчийн мэдээлэл
                 </h1>
-                <div className="w-full sm:grid grid-cols-2 px-4 pt-2 pb-4">
+                <div className="w-full px-4 pt-2 pb-4">
                   <div className={style.InfoForm}>
                     <div className={style.leftContent}>
                       <label className={style.Label} htmlFor="type"></label>
@@ -183,6 +183,29 @@ export default function PassengerIfo({ datas, scheduleId }) {
                         </Select>
                       </Form.Item>
                     </div>
+                    <div className={style.rightContent}>
+                      <label className={style.Label} htmlFor="companyRegister">
+                        Регистрийн дугаар
+                      </label>
+                      <Form.Item
+                        name="companyRegister"
+                        rules={[
+                          {
+                            pattern: PATTERN_COMPANY_REGISTER,
+                            message: 'Компаний регистерийн дугаар буруу байна',
+                          },
+                        ]}
+                      >
+                        <Input
+                          disabled={isCompoany}
+                          className={style.input}
+                          onChange={handleCustomerRegister}
+                          placeholder="Компаний регистерийн дугаар"
+                        />
+                      </Form.Item>
+                    </div>
+                  </div>
+                  <div className={style.InfoForm}>
                     <div className={style.leftContent}>
                       <label className={style.Label} htmlFor="email">
                         И-мэйл хаяг
@@ -204,29 +227,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           className={style.input}
                           onChange={handleCustomerEmail}
                           placeholder="Таны тасалбарыг илгээх болно"
-                        />
-                      </Form.Item>
-                    </div>
-                  </div>
-                  <div className={style.InfoForm}>
-                    <div className={style.rightContent}>
-                      <label className={style.Label} htmlFor="companyRegister">
-                        Регистрийн дугаар
-                      </label>
-                      <Form.Item
-                        name="companyRegister"
-                        rules={[
-                          {
-                            pattern: PATTERN_COMPANY_REGISTER,
-                            message: 'Компаний регистерийн дугаар буруу байна',
-                          },
-                        ]}
-                      >
-                        <Input
-                          disabled={isCompoany}
-                          className={style.input}
-                          onChange={handleCustomerRegister}
-                          placeholder="Компаний регистерийн дугаар"
                         />
                       </Form.Item>
                     </div>
@@ -253,7 +253,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                         </h1>
                       </p>
                     </div>
-                    <div className="w-full sm:grid grid-cols-2 px-4 py-2">
+                    <div className="w-full px-4 py-2">
                       <div className={style.InfoForm}>
                         <div className={style.leftContent}>
                           <label className={style.Label} htmlFor="RegisterNo">
@@ -266,6 +266,20 @@ export default function PassengerIfo({ datas, scheduleId }) {
                             scheduleId={scheduleId}
                           />
                         </div>
+                        <div className={style.rightContent}>
+                          <label className={style.Label} htmlFor="Vaccine">
+                            Вакцинд хамрагдсан эсэх
+                          </label>
+                          <Input
+                            disabled
+                            value={
+                              seat.isVaccine ? 'Дархлаажсан' : 'Дархлаажаагүй'
+                            }
+                            className={style.input}
+                          />
+                        </div>
+                      </div>
+                      <div className={style.InfoForm}>
                         <div className={style.leftContent}>
                           <label className={style.Label} htmlFor="lastName">
                             Овог
@@ -287,22 +301,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
                             placeholder="Зорчигчийн овог"
                           />
                           {/* </Form.Item> */}
-                        </div>
-                      </div>
-                      <div className={style.InfoForm}>
-                        <div className={style.rightContent}>
-                          <label className={style.Label} htmlFor="Vaccine">
-                            Вакцинд хамрагдсан эсэх
-                          </label>
-                          <Input
-                            disabled
-                            value={
-                              seat.isVaccine
-                                ? 'Вакцинд хамрагдсан'
-                                : 'Вакцинд хамрагдаагүй'
-                            }
-                            className={style.input}
-                          />
                         </div>
                         <div className={style.rightContent}>
                           <label className={style.Label} htmlFor="firstName">
@@ -330,6 +328,10 @@ export default function PassengerIfo({ datas, scheduleId }) {
                     </div>
                   </div>
                 ))}
+
+              <button className={style.buttonBlock} type="submit">
+                Төлбөр төлөх
+              </button>
             </div>
           </ContentWrapper>
         </div>

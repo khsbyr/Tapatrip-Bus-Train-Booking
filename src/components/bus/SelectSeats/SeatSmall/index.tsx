@@ -1,5 +1,3 @@
-import busSketch from '@public/assets/24.svg';
-import Image from 'next/image';
 import seat24RangeMap from '@helpers/seat24RangeMap';
 import style from './SeatSmall.module.scss';
 import { useGlobalStore } from '@context/globalStore';
@@ -48,7 +46,7 @@ const Seat24 = ({ datas, scheduleId }) => {
   return (
     <div className="flex">
       <div className="z-0 relative w-full">
-        <Image src={busSketch} className="z-0" />
+        <img src="/assets/24.svg" className="z-0" />
       </div>
       <div className="absolute mt-40 ml-7">
         <table>

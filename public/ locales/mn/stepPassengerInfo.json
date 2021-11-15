@@ -10,8 +10,8 @@
     "passengerAge18-":"Хүүхэд", 
     "lifeInsurance":"АМЬ ДААТГАЛ БАГТСАН",
     "checkVaccine":"Вакцинд хамрагдсан эсэх",
-    "yesVaccine":"Вакцинд хамрагдсан",
-    "noVaccine":"Вакцинд хамрагдаагүй",
+    "yesVaccine":"Дархлаажсан",
+    "noVaccine":"Дархлаажаагүй",
     "lastName":"Овог",
     "firstName":"Нэр",
     "stepButton":"Төлбөр төлөх"

@@ -3,7 +3,6 @@ import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import SearchBus from '@components/bus/SearchInput';
 import logoBLue from '@public/assets/svgIcons/NewLogo.svg';
-import Image from 'next/image';
 import styles from '../../common/Navbar/navbar.module.scss';
 import Link from 'next/link';
 
@@ -25,8 +24,8 @@ export default function BusNav({ navbarData, startLocations }) {
               <div className="ml-2 mt-5">
                 <Link href="/bus">
                   <a>
-                    <Image
-                      src={logoBLue}
+                    <img
+                      src="/assets/svgIcons/NewLogo.svg"
                       alt="Logo"
                       className="w-full h-full"
                     />{' '}

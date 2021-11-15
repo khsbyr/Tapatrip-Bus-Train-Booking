@@ -5,15 +5,14 @@ import { CheckIcon } from '@heroicons/react/solid';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import mngIcon from 'public/assets/flagMongolia.png';
 import enIcon from 'public/assets/flagEng.png';
-import Image from 'next/image';
 import ContentWrapper from './style';
 import style from '@components/common/InputPhoneNumber/PhoneNumber.module.scss';
 import { useGlobalStore } from '@context/globalStore';
 import { PATTERN_PHONE } from '@helpers/constantValidation';
 
 const countries = [
-  { name: 976, src: mngIcon, value: 0 },
-  { name: 44, src: enIcon, value: 1 },
+  { name: 976, src: '/assets/flagMongolia.png', value: 0 },
+  { name: 44, src: '/assets/flagEng.png', value: 1 },
 ];
 
 export default function InputPhoneNumber() {
@@ -83,18 +82,18 @@ export default function InputPhoneNumber() {
                 onClick={onClick}
                 className="cursor-pointer flex items-center relative text-cardDate"
               >
-                <Image
+                <img
                   className="rounded flex-shrink-0"
                   src={selectedCountry.src}
                   width="32"
                   height="16"
                 />
-                <h1 className="pl-2 text-cardDate">
+                <h1 className="pl-2 text-cardDate w-10">
                   {'+' + selectedCountry.name}
                 </h1>
                 <ChevronDownIcon className="text-gray-400 h-5 w-5" />
               </Listbox.Button>
-              <Listbox.Options className="mt-28 -ml-3.5 absolute w-28 overflow-auto text-base bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;">
+              <Listbox.Options className="mt-28 -ml-3.5 absolute w-32 overflow-auto text-base bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;">
                 {countries.map((country, id) => (
                   <Listbox.Option
                     key={id}
@@ -106,7 +105,7 @@ export default function InputPhoneNumber() {
                     {({ selected }) => (
                       <span className="truncate">
                         <p className="flex items-center text-sm">
-                          <Image
+                          <img
                             className="rounded mr-2"
                             src={country.src}
                             height="16"
@@ -117,7 +116,7 @@ export default function InputPhoneNumber() {
                           </h1>
                         </p>
                         {selected ? (
-                          <span className="absolute inset-y-0 left-0 flex items-center ml-20 pl-2 text-blue-400;">
+                          <span className="absolute inset-y-0 left-0 flex items-center ml-20 pl-5 text-blue-400;">
                             <CheckIcon
                               className="w-5 h-5 text-blue-400"
                               aria-hidden="true"

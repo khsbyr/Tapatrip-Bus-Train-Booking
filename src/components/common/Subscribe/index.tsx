@@ -1,10 +1,6 @@
 import { MailIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import styles from './subscribe.module.scss';
-import Image from 'next/image';
-import apple from '@public/assets/apple.png';
-import playStore from '@public/assets/playStore.png';
-import huawei from '@public/assets/huawei.png';
 import AuthService from '@services/auth';
 import { message, Input, Form } from 'antd';
 import ContentWrapper from './style';
@@ -55,7 +51,7 @@ const Subscribe: FC = () => {
                   >
                     <div className="flex justify-center rounded-md bg-black text-white w-28 h-10 hover:bg-gray-700 mt-1 py-1">
                       <div className="pr-1 pt-1">
-                        <Image src={apple} height="24" width="24" />
+                        <img src="/assets/apple.png" height="24" width="24" />
                       </div>
                       <div className="">
                         <h1 className="text-small text-white">
@@ -74,7 +70,11 @@ const Subscribe: FC = () => {
                   >
                     <div className="flex justify-center rounded-md bg-black text-white w-28 h-10 hover:bg-gray-700 mt-1 py-1">
                       <div className="pr-1 pt-1">
-                        <Image src={playStore} height="24" width="24" />
+                        <img
+                          src="/assets/playStore.png"
+                          height="24"
+                          width="24"
+                        />
                       </div>
                       <div className="">
                         <h1 className="text-small text-white">GET IT ON</h1>
@@ -91,7 +91,7 @@ const Subscribe: FC = () => {
                   >
                     <div className="flex justify-center rounded-md bg-black text-white w-28 h-10 hover:bg-gray-700 mt-1 py-1">
                       <div className="pr-1 pt-1">
-                        <Image src={huawei} height="24" width="24" />
+                        <img src="/assets/huawei.png" height="24" width="24" />
                       </div>
                       <div className="">
                         <h1 className="text-small text-white">EXPLORE IT ON</h1>
