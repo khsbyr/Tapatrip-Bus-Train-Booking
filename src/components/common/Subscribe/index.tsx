@@ -53,7 +53,7 @@ const Subscribe: FC = () => {
                     target="_blank"
                     href="https://apps.apple.com/mn/app/tapatrip-hotel-flight-travel/id1563199559?fbclid=IwAR3t5NGJY47n1B1yZA2VssPtRtdpZykA0dxF6yPLZBB-hZLHHYZ1eocNnhE"
                   >
-                    <div className="flex justify-center rounded-md bg-black text-white w-28 h-10 hover:bg-gray-700 mt-1 py-1">
+                    <div className="flex justify-center rounded-md bg-black text-white w-28 h-10 hover:bg-gray-700 mt-1 py-1 items-center">
                       <div className="pr-1 pt-1">
                         <Image src={apple} height="24" width="24" />
                       </div>
@@ -61,7 +61,7 @@ const Subscribe: FC = () => {
                         <h1 className="text-small text-white">
                           Download on the
                         </h1>
-                        <h1 className="text-sm text-white font-medium -mt-1">
+                        <h1 className="text-xs text-white font-medium -mt-1">
                           App Store
                         </h1>
                       </div>
@@ -72,13 +72,13 @@ const Subscribe: FC = () => {
                     target="_blank"
                     href="https://play.google.com/store/apps/details?id=com.tapatrip"
                   >
-                    <div className="flex justify-center rounded-md bg-black text-white w-28 h-10 hover:bg-gray-700 mt-1 py-1">
+                    <div className="flex justify-center rounded-md bg-black text-white w-28 h-10 hover:bg-gray-700 mt-1 py-1 items-center">
                       <div className="pr-1 pt-1">
                         <Image src={playStore} height="24" width="24" />
                       </div>
                       <div className="">
                         <h1 className="text-small text-white">GET IT ON</h1>
-                        <h1 className="text-sm text-white font-medium -mt-1">
+                        <h1 className="text-xs text-white font-medium -mt-1">
                           Google Play
                         </h1>
                       </div>
@@ -89,13 +89,13 @@ const Subscribe: FC = () => {
                     target="_blank"
                     href="https://appgallery.huawei.com/?fbclid=IwAR1-w45U-mLLn7IC23ClYziQPiZWTRU7lqfC5ODJUpkiqaRHL9i08XCvVPc#/app/C104355437"
                   >
-                    <div className="flex justify-center rounded-md bg-black text-white w-28 h-10 hover:bg-gray-700 mt-1 py-1">
+                    <div className="flex justify-center rounded-md bg-black text-white w-28 h-10 hover:bg-gray-700 mt-1 py-1 items-center">
                       <div className="pr-1 pt-1">
                         <Image src={huawei} height="24" width="24" />
                       </div>
                       <div className="">
                         <h1 className="text-small text-white">EXPLORE IT ON</h1>
-                        <h1 className="text-sm text-white font-medium -mt-1">
+                        <h1 className="text-xs text-white font-medium -mt-1">
                           AppGallery
                         </h1>
                       </div>
