@@ -61,7 +61,7 @@ const SeatMedium = ({ datas, scheduleId }) => {
                       <button
                         key={seat.number}
                         className={
-                          seat.isAvialable
+                          !seat.isAvialable
                             ? style.seatButtonDisabled
                             : isSelectedSeats[scheduleId + seat.number]
                             ? style.seatButtonSelected
@@ -69,7 +69,7 @@ const SeatMedium = ({ datas, scheduleId }) => {
                         }
                         value={seat.number}
                         onClick={handleSelectSeat}
-                        disabled={seat.isAvialable}
+                        disabled={!seat.isAvialable}
                       >
                         {seat && seat.number}
                       </button>
@@ -79,7 +79,7 @@ const SeatMedium = ({ datas, scheduleId }) => {
                       <button
                         key={seat.number}
                         className={
-                          seat.isAvialable
+                          !seat.isAvialable
                             ? style.seatButtonMarginLeftDisabled
                             : isSelectedSeats[scheduleId + seat.number]
                             ? style.seatButtonMarginLeftSelected
@@ -87,7 +87,7 @@ const SeatMedium = ({ datas, scheduleId }) => {
                         }
                         value={seat.number}
                         onClick={handleSelectSeat}
-                        disabled={seat.isAvialable}
+                        disabled={!seat.isAvialable}
                       >
                         {seat && seat.number}
                       </button>
@@ -103,7 +103,7 @@ const SeatMedium = ({ datas, scheduleId }) => {
                       <button
                         key={seat.number}
                         className={
-                          seat.isAvialable
+                          !seat.isAvialable
                             ? style.seatButtonMarginRightDisabled
                             : isSelectedSeats[scheduleId + seat.number]
                             ? style.seatButtonMarginRightSelected
@@ -111,7 +111,7 @@ const SeatMedium = ({ datas, scheduleId }) => {
                         }
                         value={seat.number}
                         onClick={handleSelectSeat}
-                        disabled={seat.isAvialable}
+                        disabled={!seat.isAvialable}
                       >
                         {seat && seat.number}
                       </button>
@@ -121,7 +121,7 @@ const SeatMedium = ({ datas, scheduleId }) => {
                       <button
                         key={seat.number}
                         className={
-                          seat.isAvialable
+                          !seat.isAvialable
                             ? style.seatButtonDisabled
                             : isSelectedSeats[scheduleId + seat.number]
                             ? style.seatButtonSelected
@@ -129,7 +129,7 @@ const SeatMedium = ({ datas, scheduleId }) => {
                         }
                         value={seat.number}
                         onClick={handleSelectSeat}
-                        disabled={seat.isAvialable}
+                        disabled={!seat.isAvialable}
                       >
                         {seat && seat.number}
                       </button>

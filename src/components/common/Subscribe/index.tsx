@@ -131,14 +131,6 @@ const Subscribe: FC = () => {
                         className="w-8 h-8 ml-4"
                         style={{ color: '#8AB1D5' }}
                       />
-                      {/* <input
-                    className={styles.input}
-                    type="text"
-                    placeholder="И-Мэйл хаягаа оруулна уу"
-                    aria-label="Full name"
-                    onChange={email}
-                    /> */}
-
                       <Input
                         placeholder="И-Мэйл хаягаа оруулна уу"
                         onChange={email}
