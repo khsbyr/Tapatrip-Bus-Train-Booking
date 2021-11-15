@@ -49,10 +49,7 @@
       ]
     }
   ],
-  "profile": [
-    { "id": 1, "text": "Таны захиалга", "route": "/profile/my-order" },
-    { "id": 2, "text": "Нэвтрэх", "route": "/login" }
-  ],
+  "profile": [{ "id": 1, "text": "Нэвтрэх", "route": "/login" }],
   "companyList": [
     { "id": 1, "text": "Tapatrip.com - ын тухай", "route": "about" },
     { "id": 2, "text": "Үйлчилгээний нөхцөл", "route": "terms-of-use" },
