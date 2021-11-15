@@ -2,7 +2,6 @@ service: ${self:custom.name}
 provider:
   name: aws
   runtime: nodejs14.x
-  stage: ${opt:stage, 'dev'}
   region: ap-east-1
 plugins: # <- add here
   - serverless-nextjs-plugin
