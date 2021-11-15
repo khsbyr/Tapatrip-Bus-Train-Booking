@@ -85,7 +85,7 @@ const RegisterNumber = ({
     >
       <div className="w-full mt-0.5">
         <div className="flex w-full">
-          <button
+          <div
             className="flex justify-center pl-3 pr-1 border-0 items-center rounded-lg bg-bg w-16"
             onClick={handleReg1}
           >
@@ -97,8 +97,8 @@ const RegisterNumber = ({
                 <ChevronUpIcon className="text-secondary h-6 w-6" />
               )}
             </h2>
-          </button>
-          <button
+          </div>
+          <div
             className="flex justify-center border-0 pl-3 pr-1 items-center rounded-lg bg-bg mx-2 w-16"
             onClick={handleReg2}
           >
@@ -110,7 +110,7 @@ const RegisterNumber = ({
                 <ChevronUpIcon className="text-secondary h-6 w-6" />
               )}
             </h2>
-          </button>
+          </div>
           <Input
             className="z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base"
             onChange={handleRegister}
