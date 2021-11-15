@@ -1,6 +1,8 @@
 .only-default: &only-default
   only:
     - master
+    
+image: node:latest
 
 stages:
   - deploy
