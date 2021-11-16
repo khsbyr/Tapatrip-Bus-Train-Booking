@@ -23,6 +23,8 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const { booking, setBooking } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [loading, setLoading] = useState('');
+  const [loading1, setLoading1] = useState('');
 
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 
@@ -94,12 +96,13 @@ export default function PassengerIfo({ datas, scheduleId }) {
   };
 
   const onFinish = async values => {
+    setLoading('true');
     let payload = {
       phone: customers.phoneNumber,
       dialCode: customers.dialNumber,
     };
     const result = await AuthService.verifySms(payload);
-    if (result) setIsModalVisible(true);
+    if (result) setIsModalVisible(true), setLoading('false');
     else {
       Modal.error({
         title: 'Алдаа',
@@ -109,6 +112,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
   };
 
   const handleBooking = async pinCode => {
+    setLoading1('true');
     let payload = {
       phone: customers.phoneNumber,
       dialCode: customers.dialNumber,
@@ -116,6 +120,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
     };
     const result = await AuthService.verifyCode(payload);
     if (result) {
+      setLoading1('false');
       const passengers = [];
       formatSelectedSeats.map(seat => {
         let passenger = {
@@ -340,7 +345,11 @@ export default function PassengerIfo({ datas, scheduleId }) {
           <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
             <StepCard datas={datas} scheduleId={scheduleId} />
             <button className={style.button} type="submit">
-              Төлбөр төлөх
+              {loading === 'true' ? (
+                <div className={style.ldsDualRing}></div>
+              ) : (
+                'Төлбөр төлөх'
+              )}
             </button>
           </div>
         </div>
@@ -349,6 +358,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
             isModalVisible={isModalVisible}
             booking={handleBooking}
             close={close}
+            loading={loading1}
           />
         )}
       </div>
