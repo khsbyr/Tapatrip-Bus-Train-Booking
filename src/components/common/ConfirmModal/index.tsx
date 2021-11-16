@@ -44,7 +44,11 @@ export default function OrderModal(props) {
               onClick={() => props.booking(pinCode)}
               className={style.button}
             >
-              Баталгаажуулах
+              {props.loading === 'true' ? (
+                <div className={style.ldsDualRing}></div>
+              ) : (
+                'Баталгаажуулах'
+              )}
             </button>
           </div>
         </Modal>
