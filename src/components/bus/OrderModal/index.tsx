@@ -28,9 +28,10 @@ export default function OrderModal(props) {
       });
       setIsActive(true);
     } catch (e) {
+      setIsActive(false);
       Modal.error({
         title: 'Алдаа',
-        content: e.message,
+        content: 'Таны захиалга олдсонгүй',
       });
     }
   };
