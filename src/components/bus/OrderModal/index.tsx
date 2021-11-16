@@ -1,11 +1,11 @@
 import { Form, Input, Modal } from 'antd';
 import React, { useState, FC } from 'react';
 import TravelList from '@data/getTravelList[1].json';
-import TravelData from '@data/getTravelData.json';
 import { ArrowRightIcon } from '@heroicons/react/solid';
 import { PATTERN_PHONE } from '@helpers/constantValidation';
 import { useMutation } from '@apollo/client';
 import { BUS_BOOKING_CHECK } from '@graphql/mutation';
+import moment from 'moment';
 
 interface Props {
   isModalVisible?: any;
@@ -16,6 +16,7 @@ export default function OrderModal(props) {
   const [isActive, setIsActive] = useState(false);
 
   const [busBookingCheck, { data }] = useMutation(BUS_BOOKING_CHECK);
+  // console.log(data);
 
   const onFinish = async values => {
     try {
@@ -33,7 +34,9 @@ export default function OrderModal(props) {
       });
     }
   };
+  const datas = data && data.busBookingCheck.booking;
 
+  console.log(datas);
   return (
     <div>
       <Modal
@@ -112,42 +115,49 @@ export default function OrderModal(props) {
               !isActive ? 'hidden' : 'block grid grid-cols-1 sm:grid-cols-2'
             }`}
           >
-            <div className="text-sm font-medium text-cardDate">
+            <div className="text-base font-medium text-cardDate">
               <h1 className="flex justify-center text-cardDate text-xl font-bold pb-4 border-b-2">
                 Захиалгын мэдээлэл
               </h1>
-              <div className="p-2 sm:border-r-2 space-y-5">
-                <p className="space-y-1">
-                  <p className="flex font-bold">
-                    {TravelList[0].start_location}
-                    <h1 className="text-red-400 px-4 sm:px-8">-аас </h1>
-                    {TravelList[0].end_location}
+              <div className="p-2 sm:border-r-2 space-y-2">
+                <p className="space-y-2">
+                  <p className="flex flex-wrap font-bold">
+                    {datas?.schedule?.locationEnd?.locationStop?.location?.name}
+                    , {datas?.schedule?.startStopName}
+                    <h1 className="text-red-400 px-2">-аас </h1>
+                    {datas?.schedule?.locationEnd?.locationEnd?.location?.name}
+                    {', '}
+                    {datas?.schedule?.endStopName}
                   </p>
-                  <p className="flex font-bold text-lg">
-                    {TravelList[0].start_date}
-                    <ArrowRightIcon className="px-4 sm:px-10 h-7 text-direction" />
-                    {TravelList[0].end_date}
+                  <p className="flex justify-between">
+                    Хөдлөх огноо:{' '}
+                    <h1 className="font-bold text-cardDate">
+                      {datas?.schedule?.leaveDate}
+                    </h1>
+                    {/* <ArrowRightIcon className="px-4 sm:px-10 h-7 text-direction" /> */}
+                    <h1 className="font-bold text-cardDate">
+                      {datas?.schedule?.leaveTime}
+                    </h1>
                   </p>
-                  {TravelList[0].date}, {TravelList[0].is_start_stop} зогсолт
                 </p>
 
                 <p className="text-base space-y-2">
                   <p className="flex">
                     Захиалга хийсэн огноо:
                     <h1 className="px-2 font-bold text-base text-cardDate">
-                      2021-09-10 10:59AM
+                      {moment(datas?.createdAt).format('YYYY-MM-DD')}
                     </h1>
                   </p>
                   <p className="flex">
                     Суудлын дугаар:
                     <h1 className="px-2 font-bold text-base text-cardDate">
-                      1, 8
+                      {datas?.status}
                     </h1>
                   </p>
                   <p className="flex">
                     Төлбөр төлөгдсөн эсэх:{' '}
                     <h1 className="px-2 font-bold text-base text-cardDate">
-                      Төлөгдсөн
+                      {datas?.statusName}
                     </h1>
                   </p>
                 </p>
@@ -162,28 +172,26 @@ export default function OrderModal(props) {
                   <li className="flex">
                     ААН:
                     <p className="font-bold pl-2">
-                      {TravelData.insurance.company_name}
+                      {datas?.schedule?.bus?.transporter.name}
                     </p>
                   </li>
                   <li className="flex">
                     Марк загвар:
                     <p className="font-bold pl-2">
-                      {TravelData.bus.model_name}
+                      {datas?.schedule?.bus?.modelName}
                     </p>
                   </li>
                   <li className="flex">
                     Улсын дугаар:
                     <p className="font-bold pl-2">
-                      {TravelData.bus.plate_number}
+                      {datas?.schedule?.bus?.plateNumber}
                     </p>
                   </li>
                   <li className="flex">
-                    Жолооч:
-                    <p className="font-bold pl-2">Жолооч нэр</p>
-                  </li>
-                  <li className="flex">
                     Утасны дугаар:
-                    <p className="font-bold pl-2">{TravelData.driver.phone}</p>
+                    <p className="font-bold pl-2">
+                      {datas?.schedule?.driverPhone}
+                    </p>
                   </li>
                 </ul>
               </div>

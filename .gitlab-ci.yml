@@ -20,6 +20,6 @@ production:
     - npm config set prefix /usr/local
     - npm install -g serverless
   script:
-    - serverless deploy --stage production --verbose
+    - serverless deploy -v --stage production
   environment: production
 
