@@ -1,9 +1,11 @@
 import axios from 'axios';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
 
-const token = AuthTokenStorageService.getAccessToken()
-  ? AuthTokenStorageService.getAccessToken()
-  : AuthTokenStorageService.getGuestToken();
+const token =
+  AuthTokenStorageService.getAccessToken() === undefined ||
+  AuthTokenStorageService.getAccessToken() === 'false'
+    ? AuthTokenStorageService.getGuestToken()
+    : AuthTokenStorageService.getAccessToken();
 
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
