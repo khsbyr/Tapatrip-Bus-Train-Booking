@@ -22,12 +22,7 @@ export default function selectLanguage() {
     <Listbox value={selectedLanguage} onChange={setSelectedLanguage}>
       <div className={s.body} onClick={onClick}>
         <Listbox.Button className={s.listboxButton}>
-          <img
-            className="rounded"
-            src={selectedLanguage.src}
-            width="36"
-            height="18"
-          />
+          <img className="rounded" src={selectedLanguage.src} width="34" />
           {isSelected ? (
             <ChevronUpIcon className={s.icon} />
           ) : (
@@ -47,12 +42,7 @@ export default function selectLanguage() {
                 <span className={s.options}>
                   {language.name}
                   <p className="mt-0.5">
-                    <img
-                      className="rounded"
-                      src={language.src}
-                      height="18"
-                      width="36"
-                    />
+                    <img className="rounded" src={language.src} width="34" />
                   </p>
                   {selected ? (
                     <span className={s.checkIcon}>

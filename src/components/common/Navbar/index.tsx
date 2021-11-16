@@ -73,17 +73,28 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                         {menu.text}
                       </a>
                     ))}
+                    {/* <button className={styles.orderButton} onClick={checkOrder}>
+                      Захиалга шалгах
+                    </button> */}
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center ">
+                <div className="hidden md:block">
+                  <div className={styles.loginBody}>
+                    {/* <button className={styles.orderButton} onClick={checkOrder}>
+                      Захиалга шалгах
+                    </button> */}
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center ">
+                <div className="hidden md:block">
+                  <div className={styles.loginBody}>
                     <button className={styles.orderButton} onClick={checkOrder}>
                       Захиалга шалгах
                     </button>
                     <SelectLanguage />
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center ">
-                <div className="hidden md:block">
-                  <div className={styles.loginBody}>
                     <a href="/login">
                       <button className={styles.loginButton}>Нэвтрэх</button>
                     </a>
@@ -110,7 +121,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
           </div>
           <Transition
             show={isOpen}
-            className="px-2 shadow-lg w-full absolute top-14"
+            className="flex justify-end w-full px-2 absolute top-14"
             enter="transition ease-out duration-100 transform"
             enterFrom="opacity-0 scale-95"
             enterTo="opacity-100 scale-100"
@@ -120,19 +131,33 @@ const Navbar: FC<Props> = ({ navbarData }) => {
           >
             {ref => (
               <div
-                className="md:hidden bg-white w-full rounded-lg"
+                className="flex justify-center px-6 py-3 md:hidden bg-white rounded-xl shadow-lg"
                 id="mobile-menu"
               >
-                <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                  {navbarData.profile.map(data => (
-                    <a
-                      key={data.id}
-                      className={styles.mobileMenu}
-                      href={`${data.route}`}
-                    >
-                      {data.text}
+                <div
+                  ref={ref}
+                  className="px-2 pt-2 pb-3 space-y-1 sm:px-3 space-y-4"
+                >
+                  <p className="flex">
+                    <h1 className="text-cardDate font-medium pr-4">
+                      Хэл сонгох
+                    </h1>
+                    <SelectLanguage />
+                  </p>
+
+                  <button
+                    className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-60"
+                    onClick={checkOrder}
+                  >
+                    Захиалга шалгах
+                  </button>
+                  <p>
+                    <a href="/login">
+                      <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-60 hover:bg-red-500">
+                        Нэвтрэх
+                      </button>
                     </a>
-                  ))}
+                  </p>
                 </div>
               </div>
             )}
