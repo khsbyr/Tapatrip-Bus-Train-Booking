@@ -16,11 +16,7 @@ const Footer: FC<Props> = ({ navbarData }) => {
             </h1>
             <div className="mt-6">
               {navbarData.companyList.map(company => (
-                <a
-                  key={company.id}
-                  href={'#'}
-                  // href={company.route}
-                >
+                <a key={company.id} href={company.route} target="_blank">
                   <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
                     {company.text}
                   </p>
