@@ -40,7 +40,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
     <>
       <div>
         <nav
-          className={`absolute top-5 md:mt-0 md:fixed w-full md:w-screen 
+          className={`absolute top-5 md:mt-0 md:fixed w-screen 
           ${navbar ? 'bg-white' : 'bg-none'}
           md:h-20 md:top-0 z-10 ${navbar ? 'shadow-lg' : 'shadow-none'}`}
         >
@@ -75,19 +75,12 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     ))}
                     {/* <button className={styles.orderButton} onClick={checkOrder}>
                       Захиалга шалгах
-                    </button> */}
+                    </button> 
+                    <SelectLanguage />*/}
                   </div>
                 </div>
               </div>
-              <div className="flex items-center ">
-                <div className="hidden md:block">
-                  <div className={styles.loginBody}>
-                    {/* <button className={styles.orderButton} onClick={checkOrder}>
-                      Захиалга шалгах
-                    </button> */}
-                  </div>
-                </div>
-              </div>
+
               <div className="flex items-center ">
                 <div className="hidden md:block">
                   <div className={styles.loginBody}>
@@ -134,30 +127,30 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 className="flex justify-center px-6 py-3 md:hidden bg-white rounded-xl shadow-lg"
                 id="mobile-menu"
               >
-                <div
-                  ref={ref}
-                  className="px-2 pt-2 pb-3 space-y-1 sm:px-3 space-y-4"
-                >
-                  <p className="flex">
+                <div ref={ref} className="p-3 space-y-4">
+                  {console.log(ref)}
+                  <div className="flex">
                     <h1 className="text-cardDate font-medium pr-4">
                       Хэл сонгох
                     </h1>
                     <SelectLanguage />
-                  </p>
+                  </div>
 
                   <button
-                    className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-60"
+                    className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-56"
                     onClick={checkOrder}
                   >
                     Захиалга шалгах
                   </button>
-                  <p>
-                    <a href="/login">
-                      <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-60 hover:bg-red-500">
-                        Нэвтрэх
-                      </button>
-                    </a>
-                  </p>
+                  <div>
+                    <Link href="/login">
+                      <a>
+                        <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
+                          Нэвтрэх
+                        </button>
+                      </a>
+                    </Link>
+                  </div>
                 </div>
               </div>
             )}

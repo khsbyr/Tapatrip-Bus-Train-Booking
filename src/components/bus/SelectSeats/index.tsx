@@ -78,8 +78,8 @@ export default function SelectSeats({ datas, scheduleId }) {
                   <h1 className="text-cardDate">Захиалагдсан</h1>
                 </div>
               </div>
-              <div className="">
-                <h1 className="text-cardDate font-bold text-base sm:text-lg">
+              <div className="flex flex-wrap">
+                <h1 className="h-full text-cardDate font-bold text-base sm:text-lg pr-4">
                   Сонгогдсон суудал
                 </h1>
                 <div className="py-2 text-lg font-bold">
