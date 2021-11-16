@@ -22,7 +22,7 @@ const { TabPane } = Tabs;
 const TYPE = 'TRAVEL';
 
 export default function Travel({ NavData, Packages, TipsFor }) {
-  console.log(TipsFor);
+  console.log('hey : ', Packages);
   return (
     <div>
       <Head>
@@ -32,7 +32,14 @@ export default function Travel({ NavData, Packages, TipsFor }) {
         <Header />
         <Navbar navbarData={NavData} fixed={true} />
         <Search navbarData={NavData} type={TYPE} />
-        <TravelCard packages={Packages.package_tours} />
+        {Packages.map((packageFrom, index) => (
+          <TravelCard
+            key={index}
+            title={packageFrom.package_tour_type_name}
+            packages={packageFrom.package_tours}
+          />
+        ))}
+
         <ServicesCard />
         <div className="default-container">
           <div className="px-2">

@@ -1,8 +1,5 @@
-import apiClient from './apiClient';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
-import { Token } from 'graphql';
-import { resolve } from 'path/posix';
-import { reject } from 'lodash';
+import apiClient from './apiClient';
 const baseUrl = 'http://47.243.62.69:8000/api';
 const guestToken = async () => {
   const response = await apiClient.post('/account/guest_jwt/');
@@ -23,6 +20,7 @@ const postRequestNoToken = (url, data) => {
       err[1];
     });
 };
+
 const postRequest = async (url, data) => {
   const response = await postRequestNoToken('/account/guest_jwt/', {});
   console.log(response);

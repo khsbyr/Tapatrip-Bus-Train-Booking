@@ -3,19 +3,19 @@ import { Carousel } from 'antd';
 import ContentWrapper from './style';
 import Link from 'next/link';
 import { MediaUrl } from '@lib/constantMediaUrls';
+import CurrencyFormat from 'react-currency-format';
 interface Props {
   packages?: any;
+  title: string;
 }
-const id = 1;
-const TravelCard: FC<Props> = ({ packages }) => {
-  console.log(packages);
+const TravelCard: FC<Props> = ({ packages, title }) => {
   return (
     <div className="default-container">
       <h1
         className="font-bold text-2xl max-w-7xl mx-auto mt-6 px-6"
         style={{ color: '#0A3761' }}
       >
-        Багц аялал
+        {title}
       </h1>
       <div className="px-2">
         <div className="grid grid-cols-1 gap-3 my-6 md:grid-cols-2 md:gap-8 lg:grid-cols-2 max-w-7xl mx-auto md:my-6">
@@ -31,9 +31,12 @@ const TravelCard: FC<Props> = ({ packages }) => {
                   src={`${MediaUrl}${tourpackage.image}`}
                 />
                 <div className="items-center grid grid-cols-2 md:block divide-y divide-gray-300">
-                  <h2 className="text-left font-bold text-md md:text-md m-3 text-lg">
-                    {tourpackage.title}
-                  </h2>
+                  <div className="flex justify-between">
+                    <h2 className="text-left font-bold text-md md:text-md m-3 text-lg ">
+                      {tourpackage.title}
+                    </h2>
+                    <h2>{!tourpackage.is_sell ? 'out of stock' : ''}</h2>
+                  </div>
                   <div className="m-3 justify-between flex">
                     <div>
                       <span className="text-gray-400 text-sm">Хугацаа</span>
@@ -42,7 +45,12 @@ const TravelCard: FC<Props> = ({ packages }) => {
                     <div>
                       <span className="text-gray-400 text-sm">Эхлэх үнэ</span>
                       <p className="font-bold text-sm">
-                        {tourpackage.start_price}
+                        <CurrencyFormat
+                          value={tourpackage.start_price}
+                          displayType={'text'}
+                          thousandSeparator={true}
+                          suffix={` ₮`}
+                        />
                       </p>
                     </div>
                   </div>

@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { isEmpty, result } from 'lodash';
 import PriceDetails from '@components/Travel-Card/PriceDetails';
 import { postRequest } from '@lib/api';
+import CurrencyFormat from 'react-currency-format';
 const { Step } = Steps;
 const steps = [
   {
@@ -35,15 +36,16 @@ let adults = 0;
 let childs = 0;
 
 const Register: FC<Props> = props => {
-  const [current, setCurrent] = useState(0);
   const router = useRouter();
+  const [current, setCurrent] = useState(0);
   const [packData, setPackData] = useState(null);
+  const [refNumber, setRefNumber] = useState(null);
 
   useEffect(() => {
     const queries = router.query;
     let packs = [];
     packs =
-      queries &&
+      queries.subPack &&
       queries.subPack
         .toString()
         .trim()
@@ -153,7 +155,20 @@ const Register: FC<Props> = props => {
       '/activity/package_tour_booking/',
       bookingData
     );
-    console.log(data);
+    if (data.message.toLowerCase().trim() === 'success') {
+      setRefNumber(data.result.ref_number);
+      console.log(refNumber);
+      router.push({
+        pathname: '/payment/[refNumber]',
+        query: {
+          refNumber: data.result.ref_number,
+          totalPrice: router.query.totalPrice,
+          totalPassenger: adults + childs,
+          tourName: router.query.tourName,
+        },
+      });
+      // router.push(`/payment/${data.result.ref_number}`);
+    }
   };
 
   return (
@@ -189,9 +204,9 @@ const Register: FC<Props> = props => {
                 onFinish={sendButton}
                 className="p-4  grid grid-cols-3 gap-4 "
               >
-                <div className="mr-2 col-span-2 grid grid-cols-2 bg-white rounded-md">
+                <div className="mr-2 col-span-2 grid grid-cols-2 ">
                   <h1 className="font-bold my-2 text-2xl">
-                    Захиалагчын мэдээлэл
+                    Захиалагчийн мэдээлэл
                   </h1>
                   {/* <div className="grid grid-cols-2 col-span-2 gap-4 mb-2">
                   <div className="col-span-1  bg-white rounded-lg p-2">
@@ -201,7 +216,7 @@ const Register: FC<Props> = props => {
                     Байгууллага
                   </div>
                 </div> */}
-                  <div className="col-span-2 gap-4 p-4 grid grid-cols-2">
+                  <div className="col-span-2 gap-4 p-4 grid grid-cols-2 bg-white rounded-md">
                     <Form.Item
                       label={'Овог'}
                       name="lastName"
@@ -230,8 +245,7 @@ const Register: FC<Props> = props => {
                     >
                       <Input className=" bg-bg rounded-md border-0" />
                     </Form.Item>
-                  </div>
-                  <div className="col-span-2 gap-4 p-4 grid grid-cols-2">
+
                     <Form.Item
                       label={'Email'}
                       name="email"
@@ -287,13 +301,16 @@ const Register: FC<Props> = props => {
                         </div>
                         <div className="col-span-1">
                           <p className="text-right font-bold">
-                            {router.query.totalPrice} ₮
+                            <CurrencyFormat
+                              value={router.query.totalPrice}
+                              displayType={'text'}
+                              thousandSeparator={true}
+                              suffix={` ₮`}
+                            />
                           </p>
                         </div>
                       </div>
                     </div>
-
-                    {/* <Link href="[packageTourId]/register" as={`${id}/register`}> */}
                     <Form.Item className="mb-1">
                       <button
                         className="mb-2 col-span-1 w-full bg-button text-white font-bold py-3 px-4 rounded-lg"
@@ -302,7 +319,6 @@ const Register: FC<Props> = props => {
                         Төлбөр төлөх
                       </button>
                     </Form.Item>
-                    {/* </Link> */}
                     <button
                       type="submit"
                       className="col-span-1 w-full bg-steps text-white font-bold py-3 px-4 rounded-lg"
