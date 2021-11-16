@@ -46,7 +46,7 @@ const Seat24 = ({ datas, scheduleId }) => {
   return (
     <div className="flex">
       <div className="z-0 relative w-full">
-        <img src="/assets/24.svg" className="z-0" />
+        <img src="/assets/24Circle.svg" className="z-0" />
       </div>
       <div className="absolute mt-40 ml-7">
         <table>

@@ -6,7 +6,7 @@ import style from './Payments.module.scss';
 import ContentWrapper from './style';
 import StepCard from '../StepCard';
 import PaymentCard from '../PaymentCard';
-import OrderModal from '@components/bus/OrderModal';
+import EndModal from '@components/common/EndModal';
 
 export default function Payment({ datas, scheduleId }) {
   const [value, setValue] = React.useState(1);
@@ -61,9 +61,7 @@ export default function Payment({ datas, scheduleId }) {
             </div>
 
             <div className={style.radioGroup}>
-              <h1 className={style.paymentTitle}>
-                Төлбөр төлөх хэлбэр сонгоно уу
-              </h1>
+              <h1 className={style.paymentTitle}>Төлбөр төлөх</h1>
               <div className="w-full px-6 pb-5">
                 <p className={style.paymentShape}>Шилжүүлэх</p>
                 <PayTransfer />
@@ -94,13 +92,13 @@ export default function Payment({ datas, scheduleId }) {
             <StepCard datas={datas} scheduleId={scheduleId} />
             <PaymentCard datas={datas} scheduleId={scheduleId} />
             <button className={style.button} onClick={handleCheck}>
-              Захиалгын мэдээлэл шалгах
+              Дуусгах
             </button>
           </div>
         </div>
       </div>
       {isModalVisible && (
-        <OrderModal isModalVisible={isModalVisible} close={closeModal} />
+        <EndModal isModalVisible={isModalVisible} close={closeModal} />
       )}
     </ContentWrapper>
   );
