@@ -54,11 +54,14 @@ const Footer: FC<Props> = ({ navbarData }) => {
               >
                 <img
                   src="../../assets/Facebook.png"
-                  className="mr-5 h-8 w-8 text-white"
+                  className="mr-5 h-8 w-8 text-white hover:scale-105"
                 />
               </a>
               <a target="_blank" href="https://twitter.com/Tapatrip">
-                <img src="../../assets/twitter.png" className="mr-5 h-8 w-8" />
+                <img
+                  src="../../assets/twitter.png"
+                  className="mr-5 h-8 w-8 hover:scale-105"
+                />
               </a>
               <a
                 target="_blank"
@@ -66,7 +69,7 @@ const Footer: FC<Props> = ({ navbarData }) => {
               >
                 <img
                   src="../../assets/instagram.png"
-                  className="mr-5 h-8 w-8"
+                  className="mr-5 h-8 w-8 transform hover:scale-105"
                 />
               </a>
             </div>
