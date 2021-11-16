@@ -38,8 +38,6 @@ export default function Orders() {
     scheduleData === undefined ? '' : scheduleData.busAllSchedules.edges;
   const startLocations = arrayFormat(data);
 
-  console.log(scheduleResult);
-
   return (
     <Layout>
       <div className=" bg-bg">

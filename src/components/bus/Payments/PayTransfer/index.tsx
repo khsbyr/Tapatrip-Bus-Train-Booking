@@ -17,7 +17,6 @@ export default function Payment() {
   const [isSelected, setIsSelected] = useState(false);
   const { booking, setBooking } = useGlobalStore();
   const { customers } = useGlobalStore();
-  console.log(booking);
   const onClick = () => {
     setIsSelected(!isSelected);
   };
