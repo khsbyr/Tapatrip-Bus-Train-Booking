@@ -1,6 +1,7 @@
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid';
 import React, { FC, useState, useEffect } from 'react';
 import PriceDetails from './PriceDetails';
+import CurrencyFormat from 'react-currency-format';
 interface Props {
   subPackageId: number;
   title: string;
