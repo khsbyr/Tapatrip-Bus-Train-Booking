@@ -73,6 +73,9 @@ export const BUS_BOOKING_CHECK = gql`
             }
           }
         }
+        pax {
+          seat
+        }
         refNumber
       }
     }
