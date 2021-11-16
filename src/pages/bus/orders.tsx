@@ -38,8 +38,6 @@ export default function Orders() {
     scheduleData === undefined ? '' : scheduleData.busAllSchedules.edges;
   const startLocations = arrayFormat(data);
 
-  console.log(scheduleResult);
-
   return (
     <Layout>
       <div className=" bg-bg">
@@ -64,18 +62,21 @@ export default function Orders() {
               <Result
                 status="404"
                 title="Уучлаарай"
-                subTitle="Энэ хайлтад тохирох үр дүн олдсонгүй"
+                subTitle="Энэ хайлтад тохирох үр дүн олдсонгүй. Дахин оролдоно уу?"
+                // extra={<Button type="primary">Дахин оролдох</Button>}
               />
             )}
           </div>
           <div className="hidden lg:block">
             {/* <div className="sticky top-0 bg-white py-5 px-5 rounded-xl divide-y-2"> */}
-            <a
-              href="https://www.facebook.com/TapaTripTravelAgency/"
-              target="_blank"
-            >
-              <img src="/assets/Thailand.jpg" className="rounded-lg" />{' '}
-            </a>
+            <div className="sticky top-0 ">
+              <a
+                href="https://www.facebook.com/TapaTripTravelAgency/"
+                target="_blank"
+              >
+                <img src="/assets/Thailand.jpg" className="rounded-lg" />{' '}
+              </a>
+            </div>
             {/* <div className="mt-0 space-y-2">
                 <h1 className="text-cardDate font-bold text-2xl">Тосох цаг</h1>
                 <div className="flex justify-center flex-wrap space-x-4">

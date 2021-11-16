@@ -49,7 +49,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
   };
 
   const close = () => {
-    console.log('sadsad');
     setIsModalVisible(false);
   };
 
@@ -108,6 +107,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
         title: 'Алдаа',
         content: 'Тань руу баталгаажуулах код явуулахад алдаа гарлаа!!!',
       });
+      setLoading('false');
     }
   };
 
@@ -153,6 +153,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
           title: 'Алдаа',
           content: e.message,
         });
+        setLoading1('false');
       }
     } else {
       Modal.error({
