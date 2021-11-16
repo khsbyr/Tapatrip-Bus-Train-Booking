@@ -12,6 +12,7 @@ import {
   startLocationFormat,
   stopLocationFormat,
   endLocationFormat,
+  stopLocationUBFormat,
 } from '@helpers/array-format';
 import { useRouter } from 'next/router';
 import moment from 'moment';
@@ -46,7 +47,9 @@ export default function SearchBus({ startLocations }) {
 
   const formatStopLocation =
     stopLocationList && stopLocationList.busAllLocationStops.edges;
-  const stopFormatLocation = stopLocationFormat(formatStopLocation);
+  const stopFormatLocation = isUlaanbaatar
+    ? stopLocationUBFormat(formatStopLocation)
+    : stopLocationFormat(formatStopLocation);
 
   const handleStartSelect = async (key: string, options) => {
     setSelectStartLocation(options);
@@ -58,12 +61,11 @@ export default function SearchBus({ startLocations }) {
       setIsUlaanbaatar(false);
       setStopLocationList(stopData);
     } else {
-      const { data: endData } = await client.query({
-        query: BUS_LOCATION_ENDS_QUERY,
-        variables: { locationStopLocation: options.key, locationStop: '' },
+      const { data: endUBData } = await client.query({
+        query: BUS_ALL_LOCATION_STOPS_QUERY,
       });
       setIsUlaanbaatar(true);
-      setEndLocationList(endData);
+      setStopLocationList(endUBData);
     }
   };
 
@@ -91,12 +93,18 @@ export default function SearchBus({ startLocations }) {
     if (selectEndLocation.key === undefined || selectEndLocation.key == '') {
       message.warning('Та явах чиглэлээ сонгоно уу?');
     } else {
+      const params = {
+        endLocation: selectEndLocation.key,
+        date: selectDate,
+      };
+      const ubParams = {
+        startLocation: selectStartLocation.key,
+        stopLocation: selectEndLocation.key,
+        date: selectDate,
+      };
       router.push({
         pathname: '/bus/orders',
-        query: {
-          endLocation: selectEndLocation.key,
-          date: selectDate,
-        },
+        query: isUlaanbaatar ? ubParams : params,
       });
     }
   };
@@ -170,18 +178,31 @@ export default function SearchBus({ startLocations }) {
             onSelect={handleEndSelect}
             placeholder="Хаашаа: хот байршил..."
           >
-            {endFormatLocation &&
-              endFormatLocation.map((location, value) => (
-                <Option key={location.id} value={location.name}>
-                  <div className="flex items-center">
-                    <img
-                      className="w-7 h-7 text-direction pr-3"
-                      src="../../assets/svgIcons/stopLocation.svg"
-                    />
-                    {location.name}
-                  </div>
-                </Option>
-              ))}
+            {!isUlaanbaatar
+              ? endFormatLocation &&
+                endFormatLocation.map((location, value) => (
+                  <Option key={location.id} value={location.name}>
+                    <div className="flex items-center">
+                      <img
+                        className="w-7 h-7 text-direction pr-3"
+                        src="../../assets/svgIcons/stopLocation.svg"
+                      />
+                      {location.name}
+                    </div>
+                  </Option>
+                ))
+              : stopFormatLocation &&
+                stopFormatLocation.map((location, value) => (
+                  <Option key={location.id} value={location.name}>
+                    <div className="flex items-center">
+                      <img
+                        className="w-7 h-7 text-direction pr-3"
+                        src="../../assets/svgIcons/stopLocation.svg"
+                      />
+                      {location.name}
+                    </div>
+                  </Option>
+                ))}
           </AutoComplete>
           <img
             className={style.currentIcon}

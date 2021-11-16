@@ -31,6 +31,26 @@ export function stopLocationFormat(data: any) {
   return arr;
 }
 
+export function stopLocationUBFormat(data: any) {
+  let result =
+    data &&
+    data.filter(function (currentElement) {
+      return (
+        currentElement.node.location.id.indexOf('QnVzQWxsTG9jYXRpb246MQ==') ===
+        -1
+      );
+    });
+  const arr = [];
+  result &&
+    result.map(element =>
+      arr.push({
+        id: element.node.id,
+        name: element.node.name + ' /' + element.node.location.name + '/',
+      })
+    );
+  return arr;
+}
+
 export function endLocationFormat(data: any) {
   const arr = [];
   data &&

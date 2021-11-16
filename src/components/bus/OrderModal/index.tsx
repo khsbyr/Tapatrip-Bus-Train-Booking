@@ -1,11 +1,11 @@
 import { Form, Input, Modal } from 'antd';
 import React, { useState, FC } from 'react';
 import TravelList from '@data/getTravelList[1].json';
-import TravelData from '@data/getTravelData.json';
 import { ArrowRightIcon } from '@heroicons/react/solid';
 import { PATTERN_PHONE } from '@helpers/constantValidation';
 import { useMutation } from '@apollo/client';
 import { BUS_BOOKING_CHECK } from '@graphql/mutation';
+import moment from 'moment';
 
 interface Props {
   isModalVisible?: any;
@@ -27,13 +27,14 @@ export default function OrderModal(props) {
       });
       setIsActive(true);
     } catch (e) {
+      setIsActive(false);
       Modal.error({
         title: 'Алдаа',
-        content: e.message,
+        content: 'Таны захиалга олдсонгүй',
       });
     }
   };
-
+  const datas = data && data.busBookingCheck.booking;
   return (
     <div>
       <Modal
@@ -48,7 +49,7 @@ export default function OrderModal(props) {
           </h1>
           <Form name="busBookingCheck" onFinish={onFinish}>
             <div className="flex justify-center">
-              <div className="sm:w-2/3 space-y-5">
+              <div className="w-full sm:w-2/3 space-y-5">
                 <div className="space-y-2">
                   <label
                     className="text-cardDate text-base pl-2 font-medium"
@@ -106,89 +107,102 @@ export default function OrderModal(props) {
                 </button>
               </div>
             </div>
-          </Form>
-          <div
-            className={`${
-              !isActive ? 'hidden' : 'block grid grid-cols-1 sm:grid-cols-2'
-            }`}
-          >
-            <div className="text-sm font-medium text-cardDate">
-              <h1 className="flex justify-center text-cardDate text-xl font-bold pb-4 border-b-2">
-                Захиалгын мэдээлэл
-              </h1>
-              <div className="p-2 sm:border-r-2 space-y-5">
-                <p className="space-y-1">
-                  <p className="flex font-bold">
-                    {TravelList[0].start_location}
-                    <h1 className="text-red-400 px-4 sm:px-8">-аас </h1>
-                    {TravelList[0].end_location}
+            <div
+              className={`${
+                !isActive || data === undefined
+                  ? 'hidden'
+                  : 'block grid grid-cols-1 sm:grid-cols-2 mt-4'
+              }`}
+            >
+              <div className="text-base font-medium text-cardDate">
+                <h1 className="flex justify-center text-cardDate text-xl font-bold pb-4 border-b-2">
+                  Захиалгын мэдээлэл
+                </h1>
+                <div className="p-2 sm:border-r-2 space-y-2">
+                  <p className="space-y-2">
+                    <p className="flex flex-wrap font-bold">
+                      {
+                        datas?.schedule?.locationEnd?.locationStop?.location
+                          ?.name
+                      }
+                      , {datas?.schedule?.startStopName}
+                      <h1 className="text-red-400 px-2">-аас </h1>
+                      {
+                        datas?.schedule?.locationEnd?.locationEnd?.location
+                          ?.name
+                      }
+                      {', '}
+                      {datas?.schedule?.endStopName}
+                    </p>
+                    <p className="flex justify-between">
+                      Хөдлөх огноо:{' '}
+                      <h1 className="font-bold text-cardDate">
+                        {datas?.schedule?.leaveDate}
+                      </h1>
+                      {/* <ArrowRightIcon className="px-4 sm:px-10 h-7 text-direction" /> */}
+                      <h1 className="font-bold text-cardDate">
+                        {datas?.schedule?.leaveTime}
+                      </h1>
+                    </p>
                   </p>
-                  <p className="flex font-bold text-lg">
-                    {TravelList[0].start_date}
-                    <ArrowRightIcon className="px-4 sm:px-10 h-7 text-direction" />
-                    {TravelList[0].end_date}
-                  </p>
-                  {TravelList[0].date}, {TravelList[0].is_start_stop} зогсолт
-                </p>
 
-                <p className="text-base space-y-2">
-                  <p className="flex">
-                    Захиалга хийсэн огноо:
-                    <h1 className="px-2 font-bold text-base text-cardDate">
-                      2021-09-10 10:59AM
-                    </h1>
+                  <p className="text-base space-y-2">
+                    <p className="flex">
+                      Захиалга хийсэн огноо:
+                      <h1 className="px-2 font-bold text-base text-cardDate">
+                        {moment(datas?.createdAt).format('YYYY-MM-DD')}
+                      </h1>
+                    </p>
+                    <p className="flex">
+                      Суудлын дугаар:
+                      <h1 className="px-2 font-bold text-base text-cardDate">
+                        {datas?.status}
+                      </h1>
+                    </p>
+                    <p className="flex">
+                      Төлбөр төлөгдсөн эсэх:{' '}
+                      <h1 className="px-2 font-bold text-base text-cardDate">
+                        {datas?.statusName}
+                      </h1>
+                    </p>
                   </p>
-                  <p className="flex">
-                    Суудлын дугаар:
-                    <h1 className="px-2 font-bold text-base text-cardDate">
-                      1, 8
-                    </h1>
-                  </p>
-                  <p className="flex">
-                    Төлбөр төлөгдсөн эсэх:{' '}
-                    <h1 className="px-2 font-bold text-base text-cardDate">
-                      Төлөгдсөн
-                    </h1>
-                  </p>
-                </p>
+                </div>
+              </div>
+              <div>
+                <h1 className="flex justify-center text-cardDate text-xl font-bold pb-4 border-b-2">
+                  Автобусны мэдээлэл
+                </h1>
+                <div className="sm:pl-4 p-2 text-base text-cardDate font-medium">
+                  <ul className="w-full space-y-2">
+                    <li className="flex">
+                      ААН:
+                      <p className="font-bold pl-2">
+                        {datas?.schedule?.bus?.transporter.name}
+                      </p>
+                    </li>
+                    <li className="flex">
+                      Марк загвар:
+                      <p className="font-bold pl-2">
+                        {datas?.schedule?.bus?.modelName}
+                      </p>
+                    </li>
+                    <li className="flex">
+                      Улсын дугаар:
+                      <p className="font-bold pl-2">
+                        {datas?.schedule?.bus?.plateNumber}
+                      </p>
+                    </li>
+                    <li className="flex">
+                      Утасны дугаар:
+                      <p className="font-bold pl-2">
+                        {datas?.schedule?.driverPhone}
+                      </p>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-            <div>
-              <h1 className="flex justify-center text-cardDate text-xl font-bold pb-4 border-b-2">
-                Автобусны мэдээлэл
-              </h1>
-              <div className="sm:pl-4 p-2 text-base text-cardDate font-medium">
-                <ul className="w-full space-y-2">
-                  <li className="flex">
-                    ААН:
-                    <p className="font-bold pl-2">
-                      {TravelData.insurance.company_name}
-                    </p>
-                  </li>
-                  <li className="flex">
-                    Марк загвар:
-                    <p className="font-bold pl-2">
-                      {TravelData.bus.model_name}
-                    </p>
-                  </li>
-                  <li className="flex">
-                    Улсын дугаар:
-                    <p className="font-bold pl-2">
-                      {TravelData.bus.plate_number}
-                    </p>
-                  </li>
-                  <li className="flex">
-                    Жолооч:
-                    <p className="font-bold pl-2">Жолооч нэр</p>
-                  </li>
-                  <li className="flex">
-                    Утасны дугаар:
-                    <p className="font-bold pl-2">{TravelData.driver.phone}</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          </Form>
         </div>
       </Modal>
     </div>
