@@ -16,13 +16,14 @@ export default function SelectSeats({ datas, scheduleId }) {
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 
   const handleRemoveSeat = e => {
-    const index = formatSelectedSeats.findIndex(
-      item => item.seatNumber === e.target.value
+    const index = selectedSeats.findIndex(
+      item =>
+        item.seatNumber === e.target.value && item.scheduleId === scheduleId
     );
     if (index > -1) {
-      formatSelectedSeats.splice(index, 1);
+      selectedSeats.splice(index, 1);
       isSelectedSeats[scheduleId + e.target.value] = false;
-      setSelectedSeats(formatSelectedSeats);
+      setSelectedSeats(selectedSeats);
       setIsSelectedSeats(isSelectedSeats);
     }
   };

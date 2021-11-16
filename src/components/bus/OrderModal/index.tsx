@@ -16,7 +16,6 @@ export default function OrderModal(props) {
   const [isActive, setIsActive] = useState(false);
 
   const [busBookingCheck, { data }] = useMutation(BUS_BOOKING_CHECK);
-  // console.log(data);
 
   const onFinish = async values => {
     try {
@@ -28,9 +27,10 @@ export default function OrderModal(props) {
       });
       setIsActive(true);
     } catch (e) {
+      setIsActive(false);
       Modal.error({
         title: 'Алдаа',
-        content: e.message,
+        content: 'Таны захиалга олдсонгүй',
       });
     }
   };
