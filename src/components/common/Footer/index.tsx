@@ -16,11 +16,7 @@ const Footer: FC<Props> = ({ navbarData }) => {
             </h1>
             <div className="mt-6">
               {navbarData.companyList.map(company => (
-                <a
-                  key={company.id}
-                  href={'#'}
-                  // href={company.route}
-                >
+                <a key={company.id} href={company.route} target="_blank">
                   <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
                     {company.text}
                   </p>
@@ -58,11 +54,14 @@ const Footer: FC<Props> = ({ navbarData }) => {
               >
                 <img
                   src="../../assets/Facebook.png"
-                  className="mr-5 h-8 w-8 text-white"
+                  className="mr-5 h-8 w-8 text-white hover:scale-105"
                 />
               </a>
               <a target="_blank" href="https://twitter.com/Tapatrip">
-                <img src="../../assets/twitter.png" className="mr-5 h-8 w-8" />
+                <img
+                  src="../../assets/twitter.png"
+                  className="mr-5 h-8 w-8 hover:scale-105"
+                />
               </a>
               <a
                 target="_blank"
@@ -70,7 +69,7 @@ const Footer: FC<Props> = ({ navbarData }) => {
               >
                 <img
                   src="../../assets/instagram.png"
-                  className="mr-5 h-8 w-8"
+                  className="mr-5 h-8 w-8 transform hover:scale-105"
                 />
               </a>
             </div>
