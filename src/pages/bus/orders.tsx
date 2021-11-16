@@ -5,7 +5,6 @@ import {
   BUS_ALL_LOCATIONS_QUERY,
   BUS_ALL_SCHEDULES_QUERY,
 } from '@graphql/queries';
-import { SunIcon, CloudIcon, MoonIcon } from '@heroicons/react/outline';
 import { Result, Button } from 'antd';
 import Card from '@components/bus/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
@@ -17,7 +16,7 @@ import Loader from '@components/common/Loader';
 
 export default function Orders() {
   const router = useRouter();
-  const { endLocation, date } = router.query;
+  const { startLocation, stopLocation, endLocation, date } = router.query;
   const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
 
   const {
@@ -26,7 +25,9 @@ export default function Orders() {
     error,
   } = useQuery(BUS_ALL_SCHEDULES_QUERY, {
     variables: {
-      locationEnd: endLocation,
+      startLocation: startLocation ? startLocation : '',
+      stopLocation: stopLocation ? stopLocation : '',
+      locationEnd: endLocation ? endLocation : '',
       leaveDate: date ? date + ',' + date : '',
     },
   });
@@ -36,6 +37,8 @@ export default function Orders() {
   const scheduleResult =
     scheduleData === undefined ? '' : scheduleData.busAllSchedules.edges;
   const startLocations = arrayFormat(data);
+
+  console.log(scheduleResult);
 
   return (
     <Layout>

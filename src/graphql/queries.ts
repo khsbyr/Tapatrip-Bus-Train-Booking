@@ -19,7 +19,7 @@ export const BUS_ALL_LOCATIONS_QUERY = gql`
 `;
 
 export const BUS_ALL_LOCATION_STOPS_QUERY = gql`
-  query busAllLocationStops($location: ID!, $type: String) {
+  query busAllLocationStops($location: ID, $type: String) {
     busAllLocationStops(location: $location, type: $type) {
       edges {
         node {
@@ -68,8 +68,18 @@ export const BUS_LOCATION_ENDS_QUERY = gql`
 `;
 
 export const BUS_ALL_SCHEDULES_QUERY = gql`
-  query busAllSchedules($locationEnd: ID!, $leaveDate: String) {
-    busAllSchedules(locationEnd: $locationEnd, leaveDate: $leaveDate) {
+  query busAllSchedules(
+    $startLocation: ID
+    $stopLocation: ID
+    $locationEnd: ID
+    $leaveDate: String
+  ) {
+    busAllSchedules(
+      locationEnd_LocationStop_Location: $startLocation
+      locationEnd_LocationEnd: $stopLocation
+      locationEnd: $locationEnd
+      leaveDate: $leaveDate
+    ) {
       edges {
         node {
           id
