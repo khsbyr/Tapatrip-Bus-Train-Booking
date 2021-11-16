@@ -16,7 +16,7 @@ const Footer: FC<Props> = ({ navbarData }) => {
             </h1>
             <div className="mt-6">
               {navbarData.companyList.map(company => (
-                <a key={company.id} href={company.route}>
+                <a key={company.id} href={company.route} target="_blank">
                   <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
                     {company.text}
                   </p>
@@ -42,10 +42,32 @@ const Footer: FC<Props> = ({ navbarData }) => {
             <h1 style={{ color: '#0A3761' }} className="font-bold text-lg">
               Биднийг дагаарай
             </h1>
-            <div className="flex mt-6">
-              <img src="/assets/Facebook.png" className="mr-5" />
-              <img src="/assets/twitter.png" className="mr-5" />
-              <img src="/assets/instagram.png" />
+            <div className="flex mt-4">
+              <a
+                target="_blank"
+                href="https://www.facebook.com/TapaTripTravelAgency"
+                className="fill-current text-green-600"
+              >
+                <img
+                  src="../../assets/Facebook.png"
+                  className="mr-5 h-8 w-8 text-white hover:scale-105"
+                />
+              </a>
+              <a target="_blank" href="https://twitter.com/Tapatrip">
+                <img
+                  src="../../assets/twitter.png"
+                  className="mr-5 h-8 w-8 hover:scale-105"
+                />
+              </a>
+              <a
+                target="_blank"
+                href="https://www.instagram.com/tapatrip_official/"
+              >
+                <img
+                  src="../../assets/instagram.png"
+                  className="mr-5 h-8 w-8 transform hover:scale-105"
+                />
+              </a>
             </div>
           </div>
           <div>

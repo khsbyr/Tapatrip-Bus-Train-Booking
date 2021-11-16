@@ -1,45 +1,52 @@
-import busSketch from '@public/assets/24.svg';
-import Image from 'next/image';
 import seat24RangeMap from '@helpers/seat24RangeMap';
 import style from './SeatSmall.module.scss';
 import { useGlobalStore } from '@context/globalStore';
-import { message } from 'antd';
 import { arrayFilterSeat } from '@helpers/array-format';
 
 const seats = [];
 const isSelected = [];
 
-const Seat24 = ({ datas }) => {
+const Seat24 = ({ datas, scheduleId }) => {
   const seatRanges = seat24RangeMap(datas.seats);
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
 
   const handleSelectSeat = e => {
-    let isArray = arrayFilterSeat(seats,e.target.value);
+    let isArray = arrayFilterSeat(seats, e.target.value, scheduleId);
     if (isArray.length === 0) {
-      let passenger= {
-          id:'',
-          firstName:'',
-          lastName:'',
-          documentNumber:'',
-          gender:'',
-          isChild:'',
-          genderName: '',
-          seatNumber: e.target.value 
-      }
+      let passenger = {
+        id: '',
+        firstName: '',
+        lastName: '',
+        scheduleId: scheduleId,
+        documentNumber: '',
+        gender: '',
+        isChild: false,
+        isVaccine: false,
+        seatNumber: e.target.value,
+      };
       seats.push(passenger);
-      isSelected[e.target.value]=true;
+      isSelected[scheduleId + e.target.value] = true;
       setSelectedSeats(seats);
       setIsSelectedSeats(isSelected);
     } else {
-      message.warning('Та энэ суудлыг сонгосон байна?');
+      const index = selectedSeats.findIndex(
+        item =>
+          item.seatNumber === e.target.value && item.scheduleId === scheduleId
+      );
+      if (index > -1) {
+        selectedSeats.splice(index, 1);
+        isSelected[scheduleId + e.target.value] = false;
+        setSelectedSeats(selectedSeats);
+        setIsSelectedSeats(isSelectedSeats);
+      }
     }
   };
 
   return (
     <div className="flex">
       <div className="z-0 relative w-full">
-        <Image src={busSketch} className="z-0" />
+        <img src="/assets/24Circle.svg" className="z-0" />
       </div>
       <div className="absolute mt-40 ml-7">
         <table>
@@ -52,13 +59,15 @@ const Seat24 = ({ datas }) => {
                   <td key={k}>
                     <button
                       className={
-                        seat.isAvialable
+                        !seat.isAvialable
                           ? style.seatButtonDisabled
-                          : (isSelectedSeats[seat.number]) ? style.seatButtonSelected : style.seatButton
+                          : isSelectedSeats[scheduleId + seat.number]
+                          ? style.seatButtonSelected
+                          : style.seatButton
                       }
                       value={seat.number}
                       onClick={handleSelectSeat}
-                      disabled={seat.isAvialable}
+                      disabled={!seat.isAvialable}
                     >
                       {seat && seat.number}
                     </button>

@@ -11,7 +11,7 @@
   @apply flex flex-wrap sm:flex-nowrap justify-between px-4 py-2 font-medium items-center w-full rounded-lg bg-white;
 }
 .registButton {
-  @apply border-2 items-center my-2 rounded-lg text-cardDate font-medium py-2 px-6 w-full sm:w-32 hover:text-white hover:bg-register hover:border-seat;
+  @apply border-2 items-center my-2 rounded-lg text-cardDate font-medium py-2 px-6 w-full sm:w-32 hover:text-white hover:bg-button hover:border-register;
 }
 .Information {
   @apply pb-2 w-full bg-white rounded-lg shadow-md text-sm sm:text-base;
@@ -20,7 +20,7 @@
   @apply text-cardDate text-base sm:text-lg font-bold border-b-2 px-4 py-2;
 }
 .InfoForm {
-  @apply space-y-4 mt-4 sm:mt-2;
+  @apply sm:mt-4 sm:grid grid-cols-2;
 }
 .customerRegisterNumber {
   @apply w-full space-y-3 sm:pl-2;
@@ -45,4 +45,30 @@
 }
 .button {
   @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white hidden lg:block;
+}
+.buttonBlock {
+  @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white block lg:hidden;
+}
+
+.ldsDualRing {
+  display: flex;
+  justify-content: center;
+}
+.ldsDualRing:after {
+  content: ' ';
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: ldsDualRing 1.2s linear infinite;
+}
+@keyframes ldsDualRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

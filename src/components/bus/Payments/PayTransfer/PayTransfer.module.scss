@@ -1,7 +1,40 @@
 .root {
-  @apply w-screen pr-16 lg:w-full -ml-6 text-sm sm:text-base;
+  @apply w-full lg:w-full lg:ml-0 text-sm sm:text-base;
+}
+.body {
+  @apply mt-4 grid grid-cols-1 sm:grid-cols-2;
+}
+.leftContent {
+  @apply space-y-3 sm:pr-2;
+  div {
+    @apply space-y-2;
+    h1 {
+      @apply text-cardDate ml-2;
+    }
+    p {
+      @apply flex justify-between items-center bg-bg rounded-lg py-3 p-2;
+      h1 {
+        @apply text-cardDate text-base lg:pr-4;
+      }
+    }
+  }
 }
 
+.rightContent {
+  @apply space-y-3 sm:pl-2 mt-4 sm:mt-0;
+  div {
+    @apply space-y-2;
+    h1 {
+      @apply text-cardDate ml-2;
+    }
+    p {
+      @apply flex justify-between items-center bg-bg rounded-lg py-3 p-2;
+      // h1 {
+      //   @apply text-cardDate text-sm sm:text-base lg:pr-10;
+      // }
+    }
+  }
+}
 .ListBoxIcon {
   @apply absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none;
 }

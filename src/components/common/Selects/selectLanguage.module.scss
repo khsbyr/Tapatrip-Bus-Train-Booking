@@ -1,0 +1,18 @@
+.body {
+  @apply cursor-pointer relative md:pl-2 xl:pl-8;
+}
+.listboxButton {
+  @apply cursor-pointer flex items-center relative;
+}
+.icon {
+  @apply text-cardDate md:text-white h-6 w-6;
+}
+.listboxOption {
+  @apply absolute w-44 py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
+}
+.checkIcon {
+  @apply absolute inset-y-0 left-0 flex items-center pl-3 text-blue-500;
+}
+.options {
+  @apply truncate flex items-center justify-between;
+}

@@ -31,6 +31,26 @@ export function stopLocationFormat(data: any) {
   return arr;
 }
 
+export function stopLocationUBFormat(data: any) {
+  let result =
+    data &&
+    data.filter(function (currentElement) {
+      return (
+        currentElement.node.location.id.indexOf('QnVzQWxsTG9jYXRpb246MQ==') ===
+        -1
+      );
+    });
+  const arr = [];
+  result &&
+    result.map(element =>
+      arr.push({
+        id: element.node.id,
+        name: element.node.name + ' /' + element.node.location.name + '/',
+      })
+    );
+  return arr;
+}
+
 export function endLocationFormat(data: any) {
   const arr = [];
   data &&
@@ -47,9 +67,23 @@ export function endLocationFormat(data: any) {
   return arr;
 }
 
-export function arrayFilterSeat(data: any, value: String) {
-  let result = data.filter(function (currentElement) {
-    return currentElement.seatNumber.indexOf(value) > -1;
-  });
+export function arrayFilterSeat(data: any, value: String, scheduleId: String) {
+  let result =
+    data &&
+    data.filter(function (currentElement) {
+      return (
+        currentElement.seatNumber.indexOf(value) > -1 &&
+        currentElement.scheduleId.indexOf(scheduleId) > -1
+      );
+    });
+  return result;
+}
+
+export function arrayFilterSchedule(data: any, value: String) {
+  let result =
+    data &&
+    data.filter(function (currentElement) {
+      return currentElement.scheduleId.indexOf(value) > -1;
+    });
   return result;
 }

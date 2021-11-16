@@ -29,6 +29,7 @@ module.exports = {
         steps: '#177AD6',
         inactive: '#8AB1D5',
         register: '#0A3761',
+        seatHover: '#1575CE',
       }),
       theme: {
         screens: {
@@ -42,6 +43,7 @@ module.exports = {
         bg: '#F1F2F6',
         seat: '#0A3761',
         weather: '#8AB1D5',
+        register: '#F1583C',
       }),
       width: {
         98: '26rem',
@@ -60,6 +62,9 @@ module.exports = {
 
       placeholderColor: {
         primary: '#8AB1D5',
+      },
+      fontSize: {
+        small: '8px',
       },
     },
   },

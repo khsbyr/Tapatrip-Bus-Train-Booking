@@ -5,23 +5,25 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import { useGlobalStore } from '@context/globalStore';
 import { useMutation } from '@apollo/client';
 import { BUS_PASSENGER } from '@graphql/mutation';
-import { PATTERN_PHONE, validateMessages } from '@helpers/constantValidation';
+import { PATTERN_PHONE } from '@helpers/constantValidation';
+import { arrayFilterSchedule } from '@helpers/array-format';
 
-const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
+const RegisterNumber = ({
+  registNo,
+  seatNumber = '',
+  passengerNumber = 0,
+  scheduleId = '',
+}) => {
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
-  const { customers, setCustomers } = useGlobalStore();
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [values1, setValues1] = useState('A');
   const [values2, setValues2] = useState('A');
 
-  // const [addPassenger, { data }] = useMutation(BUS_PASSENGER);
-  // console.log(data);
+  const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 
-  // if (loading) return 'Submitting...';
+  const [addPassenger, { data }] = useMutation(BUS_PASSENGER);
 
-  // const passenger = data && data.busPassenger.passenger;
-  // console.log(passenger);
   const handleReg1 = e => {
     setIsOpen1(!isOpen1);
     setIsOpen2(false);
@@ -42,14 +44,29 @@ const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
     setIsOpen2(false);
   };
 
-  const handleRegister = e => {
-    // if (e.target.value.length === 8) {
-    //   const registerNumber = values1 + values2 + e.target.value;
-    //   selectedSeats[passengerNumber - 1].documentNumber = registerNumber;
-    //   setSelectedSeats(selectedSeats);
-    // } else if (e.target.value.length > 8) {
-    //   message.warning('Таны бичсэн регистерийн дугаарын урт хэтэрсэн байна!!!');
-    // }
+  const handleRegister = async e => {
+    if (e.target.value.length === 8) {
+      const registerNumber = values1 + values2 + e.target.value;
+      try {
+        const { data } = await addPassenger({
+          variables: {
+            documentNumber: registerNumber,
+          },
+        });
+        const passenger = data && data.busPassenger.passenger;
+        formatSelectedSeats[passengerNumber - 1].isChild = passenger.isChild;
+        formatSelectedSeats[passengerNumber - 1].isVaccine =
+          passenger.firstName === '' ? false : true;
+        formatSelectedSeats[passengerNumber - 1].firstName =
+          passenger.firstName;
+        formatSelectedSeats[passengerNumber - 1].lastName = passenger.lastName;
+        formatSelectedSeats[passengerNumber - 1].documentNumber =
+          registerNumber;
+        setSelectedSeats(formatSelectedSeats);
+      } catch (e) {
+        console.log(e);
+      }
+    }
   };
 
   return (
@@ -68,7 +85,7 @@ const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
     >
       <div className="w-full mt-0.5">
         <div className="flex w-full">
-          <button
+          <div
             className="flex justify-center pl-3 pr-1 border-0 items-center rounded-lg bg-bg w-16"
             onClick={handleReg1}
           >
@@ -80,8 +97,8 @@ const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
                 <ChevronUpIcon className="text-secondary h-6 w-6" />
               )}
             </h2>
-          </button>
-          <button
+          </div>
+          <div
             className="flex justify-center border-0 pl-3 pr-1 items-center rounded-lg bg-bg mx-2 w-16"
             onClick={handleReg2}
           >
@@ -93,9 +110,9 @@ const RegisterNumber = ({ registNo, seatNumber = '', passengerNumber = 0 }) => {
                 <ChevronUpIcon className="text-secondary h-6 w-6" />
               )}
             </h2>
-          </button>
+          </div>
           <Input
-            className="z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base;"
+            className="z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base"
             onChange={handleRegister}
             placeholder="Регистерийн дугаар"
           />

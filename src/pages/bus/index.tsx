@@ -34,7 +34,7 @@ export default function Bus({ guestToken }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const guestToken = await AuthService.guestToken();
   return {
     props: {

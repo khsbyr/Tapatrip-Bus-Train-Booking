@@ -2,12 +2,23 @@ import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { useState } from 'react';
 import { Transition } from '@headlessui/react';
 import style from './SeatNavbar.module.scss';
-
+import OrderModal from '@components/bus/OrderModal';
+import SelectLanguage from '@components/common/Selects/selectLanguage';
+import Link from 'next/link';
 interface Props {
   navbarData?: any;
 }
 
 export default function SeatNav({ navbarData }) {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  function checkOrder() {
+    setIsModalVisible(true);
+  }
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
@@ -42,16 +53,23 @@ export default function SeatNav({ navbarData }) {
             <div className="flex items-center ">
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  {navbarData.profile.map(data => (
-                    <a
-                      className={` text-selected
-                         hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
-                      href={`${data.route}`}
-                      key={data.id}
-                    >
-                      {data.text}
-                    </a>
-                  ))}
+                  <button
+                    className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-56"
+                    onClick={checkOrder}
+                  >
+                    Захиалга шалгах
+                  </button>
+                  <SelectLanguage />
+
+                  <div>
+                    <Link href="/login">
+                      <a>
+                        <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
+                          Нэвтрэх
+                        </button>
+                      </a>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -73,9 +91,9 @@ export default function SeatNav({ navbarData }) {
             </div>
           </div>
         </div>
-
         <Transition
           show={isOpen}
+          className="flex justify-end w-full px-2 absolute top-14"
           enter="transition ease-out duration-100 transform"
           enterFrom="opacity-0 scale-95"
           enterTo="opacity-100 scale-100"
@@ -85,36 +103,39 @@ export default function SeatNav({ navbarData }) {
         >
           {ref => (
             <div
-              className="md:hidden bg-white flex justify-end"
+              className="flex justify-center px-6 py-3 md:hidden bg-white rounded-xl shadow-lg"
               id="mobile-menu"
             >
-              <div
-                ref={ref}
-                className="absolute bg-white px-2 pt-2 pb-3 space-y-1 shadow-lg rounded-lg sm:px-3"
-              >
-                {navbarData.profile.map(z => (
-                  <a
-                    className="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium block"
-                    href={`${z.route}`}
-                    key={z.id}
-                  >
-                    {z.text}
-                  </a>
-                ))}
-                {navbarData.generalList.map(z => (
-                  <a
-                    className="text-gray-800 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                    href={`${z.route}`}
-                    key={z.id}
-                  >
-                    {z.text}
-                  </a>
-                ))}
+              <div ref={ref} className="p-3 space-y-4">
+                {console.log(ref)}
+                <div className="flex">
+                  <h1 className="text-cardDate font-medium pr-4">Хэл сонгох</h1>
+                  <SelectLanguage />
+                </div>
+
+                <button
+                  className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-56"
+                  onClick={checkOrder}
+                >
+                  Захиалга шалгах
+                </button>
+                <div>
+                  <Link href="/login">
+                    <a>
+                      <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
+                        Нэвтрэх
+                      </button>
+                    </a>
+                  </Link>
+                </div>
               </div>
             </div>
           )}
         </Transition>
       </nav>
+      {isModalVisible && (
+        <OrderModal isModalVisible={isModalVisible} close={closeModal} />
+      )}
     </div>
   );
 }

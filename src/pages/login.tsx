@@ -1,7 +1,5 @@
-import NavbarProfile from '@components/common/Navbar/NavbarProfile';
+import NavbarProfile from '@components/bus/SeatNavbar';
 import LoginPhoneNumber from '@components/common/Login/loginPhoneNumber';
-import Img from '@public/assets/loginImg.gif';
-import Image from 'next/image';
 import NavData from '@data/navData.json';
 import { Tabs } from 'antd';
 
@@ -14,9 +12,9 @@ const Login = () => {
       <div className="flex justify-center">
         <div className="flex flex-wrap max-w-7xl sm:my-32">
           <div className="w-full md:w-3/5">
-            <Image
+            <img
               className="rounded-lg"
-              src={Img}
+              src="assets/loginImg.gif"
               alt="Picture of the author"
             />
           </div>

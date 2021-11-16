@@ -35,17 +35,17 @@ export default function Payment() {
   const steps = [
     {
       title: 'Суудал сонгох',
-      content: <SelectSeats datas={scheduleDataResult} />,
-      button: 'Зорчигчийн мэдээлэл оруулах',
+      content: <SelectSeats datas={scheduleDataResult} scheduleId={id} />,
+      button: 'Захиалах',
     },
     {
       title: 'Зорчигчийн мэдээлэл',
-      content: <PassengerInfo datas={scheduleDataResult} />,
+      content: <PassengerInfo datas={scheduleDataResult} scheduleId={id} />,
       button: 'Төлбөр төлөх',
     },
     {
       title: 'Төлбөр төлөх',
-      content: <Payments datas={scheduleDataResult} />,
+      content: <Payments datas={scheduleDataResult} scheduleId={id} />,
       button: 'Захиалгын мэдээлэл шалгах',
     },
   ];
@@ -58,7 +58,6 @@ export default function Payment() {
     <Layout>
       <div className="relative bg-bg">
         <SeatNav navbarData={NavData} />
-
         <div className="bg-steps w-full">
           <div className="max-w-7xl mx-auto">
             <ContentWrapper>
