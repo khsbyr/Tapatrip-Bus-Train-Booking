@@ -25,7 +25,7 @@ const Search: FC<Props> = ({ navbarData, startLocations }) => {
             <TabPane
               tabKey={menu.id}
               tab={
-                <div className="tab-title">
+                <div key={menu.id} className="tab-title">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="40"
@@ -34,9 +34,7 @@ const Search: FC<Props> = ({ navbarData, startLocations }) => {
                   >
                     <g>
                       {menu.path.map(value => (
-                        <>
-                          <path key={value} d={value} />
-                        </>
+                        <path key={value} d={value} />
                       ))}
                     </g>
                   </svg>
