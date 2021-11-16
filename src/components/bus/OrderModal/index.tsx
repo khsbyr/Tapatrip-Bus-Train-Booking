@@ -16,7 +16,6 @@ export default function OrderModal(props) {
   const [isActive, setIsActive] = useState(false);
 
   const [busBookingCheck, { data }] = useMutation(BUS_BOOKING_CHECK);
-  // console.log(data);
 
   const onFinish = async values => {
     try {
@@ -37,7 +36,6 @@ export default function OrderModal(props) {
   };
   const datas = data && data.busBookingCheck.booking;
 
-  console.log(datas);
   return (
     <div>
       <Modal
