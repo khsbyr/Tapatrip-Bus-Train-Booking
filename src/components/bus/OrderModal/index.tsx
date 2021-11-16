@@ -1,23 +1,20 @@
 import { Form, Input, Modal } from 'antd';
-import React, { useState, FC } from 'react';
-import TravelList from '@data/getTravelList[1].json';
-import { ArrowRightIcon } from '@heroicons/react/solid';
+import React, { useState } from 'react';
 import { PATTERN_PHONE } from '@helpers/constantValidation';
 import { useMutation } from '@apollo/client';
 import { BUS_BOOKING_CHECK } from '@graphql/mutation';
 import moment from 'moment';
-
-interface Props {
-  isModalVisible?: any;
-  close?: any;
-}
+import style from './style.module.scss';
+import ContentWrapper from './style';
 
 export default function OrderModal(props) {
   const [isActive, setIsActive] = useState(false);
+  const [loading, setLoading] = useState('');
 
   const [busBookingCheck, { data }] = useMutation(BUS_BOOKING_CHECK);
 
   const onFinish = async values => {
+    setLoading('true');
     try {
       const { data } = await busBookingCheck({
         variables: {
@@ -26,23 +23,26 @@ export default function OrderModal(props) {
         },
       });
       setIsActive(true);
+      setLoading('false');
     } catch (e) {
       setIsActive(false);
       Modal.error({
         title: 'Алдаа',
         content: 'Таны захиалга олдсонгүй',
       });
+      setLoading('false');
     }
   };
   const datas = data && data.busBookingCheck.booking;
+
   return (
-    <div>
-      <Modal
-        visible={props.isModalVisible}
-        onCancel={() => props.close()}
-        width={650}
-        footer={null}
-      >
+    <Modal
+      visible={props.isModalVisible}
+      onCancel={() => props.close()}
+      width={650}
+      footer={null}
+    >
+      <ContentWrapper>
         <div className="sm:pt-3 pb-2 sm:pb-5 space-y-8">
           <h1 className="text-cardDate text-xl font-bold border-b-2">
             Захиалгын мэдээлэл шалгах
@@ -66,10 +66,7 @@ export default function OrderModal(props) {
                       },
                     ]}
                   >
-                    <Input
-                      className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base"
-                      placeholder="Захиалгын дугаар оруулна уу"
-                    />
+                    <Input placeholder="Захиалгын дугаар оруулна уу" />
                   </Form.Item>
                 </div>
                 <div className="space-y-2">
@@ -92,10 +89,7 @@ export default function OrderModal(props) {
                       },
                     ]}
                   >
-                    <Input
-                      className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base"
-                      placeholder=" Утасны дугаараа оруулна уу"
-                    />
+                    <Input placeholder=" Утасны дугаараа оруулна уу" />
                   </Form.Item>
                 </div>
 
@@ -103,7 +97,11 @@ export default function OrderModal(props) {
                   className="text-white bg-blue-500 text-base w-full font-medium py-3 rounded-lg hover:bg-blue-600 focus:bg-blue-700"
                   type="submit"
                 >
-                  Шалгах
+                  {loading === 'true' ? (
+                    <div className={style.ldsDualRing}></div>
+                  ) : (
+                    'Шалгах'
+                  )}
                 </button>
               </div>
             </div>
@@ -111,7 +109,7 @@ export default function OrderModal(props) {
               className={`${
                 !isActive || data === undefined
                   ? 'hidden'
-                  : 'block grid grid-cols-1 sm:grid-cols-2 mt-4'
+                  : 'grid grid-cols-1 sm:grid-cols-2 mt-4'
               }`}
             >
               <div className="text-base font-medium text-cardDate">
@@ -156,7 +154,7 @@ export default function OrderModal(props) {
                     <p className="flex">
                       Суудлын дугаар:
                       <h1 className="px-2 font-bold text-base text-cardDate">
-                        {datas?.status}
+                        {datas?.pax?.map(z => z.seat).join(', ')}
                       </h1>
                     </p>
                     <p className="flex">
@@ -204,7 +202,7 @@ export default function OrderModal(props) {
             </div>
           </Form>
         </div>
-      </Modal>
-    </div>
+      </ContentWrapper>
+    </Modal>
   );
 }
