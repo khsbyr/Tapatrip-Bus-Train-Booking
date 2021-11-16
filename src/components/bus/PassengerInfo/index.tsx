@@ -120,7 +120,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
     };
     const result = await AuthService.verifyCode(payload);
     if (result) {
-      setLoading1('false');
       const passengers = [];
       formatSelectedSeats.map(seat => {
         let passenger = {
@@ -147,6 +146,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
         if (data) setBooking(data.busBooking);
         setCurrent(current + 1);
         setIsModalVisible(false);
+        setLoading1('false');
       } catch (e) {
         console.log(e);
         Modal.error({
@@ -334,10 +334,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
                     </div>
                   </div>
                 ))}
-
-              <button className={style.buttonBlock} type="submit">
-                Төлбөр төлөх
-              </button>
             </div>
           </ContentWrapper>
         </div>
