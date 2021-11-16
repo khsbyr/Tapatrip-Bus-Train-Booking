@@ -1,12 +1,12 @@
 import seatRangeMap from '@helpers/seatRangeMap';
 import { useGlobalStore } from '@context/globalStore';
-import style from './SeatMedium.module.scss';
+import style from './SeatLarge.module.scss';
 import { arrayFilterSeat } from '@helpers/array-format';
 
 const seats = [];
 const isSelected = [];
 
-const SeatMedium = ({ datas, scheduleId }) => {
+const SeatLarge = ({ datas, scheduleId }) => {
   const seatRanges = seatRangeMap(datas.seats);
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
@@ -45,7 +45,7 @@ const SeatMedium = ({ datas, scheduleId }) => {
   return (
     <div className="flex">
       <div className="z-0 relative w-full">
-        <img src="/assets/45Circle.svg" className="z-0" />
+        <img src="/assets/53.svg" className="z-0" />
       </div>
       <div className="absolute mt-40 ml-7">
         <table>
@@ -141,4 +141,4 @@ const SeatMedium = ({ datas, scheduleId }) => {
     </div>
   );
 };
-export default SeatMedium;
+export default SeatLarge;

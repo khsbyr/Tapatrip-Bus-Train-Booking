@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import style from './SelectSeats.module.scss';
+import SeatLarge from '@components/bus/SelectSeats/SeatLarge';
 import SeatMedium from '@components/bus/SelectSeats/SeatMedium';
 import SeatSmall from '@components/bus/SelectSeats/SeatSmall';
 import { useGlobalStore } from '@context/globalStore';
@@ -48,8 +49,13 @@ export default function SelectSeats({ datas, scheduleId }) {
           <div className={style.information}>
             <div className="sm:w-7/12 space-y-6">
               <h1 className={style.busInformationTitle}>Автобусын мэдээлэл</h1>
-              <div className="flex space-x-4">
-                <img src="/assets/busimg.jpg" width="150" height="150" />
+              <div className="flex">
+                <img
+                  src="/assets/busimg.jpg"
+                  width="150"
+                  height="150"
+                  className="pr-4"
+                />
                 <div className={style.busInformation}>
                   <p>
                     <h1>ААН: </h1>
@@ -100,8 +106,10 @@ export default function SelectSeats({ datas, scheduleId }) {
             </div>
             {bus.seatCount < 25 ? (
               <SeatSmall datas={datas} scheduleId={scheduleId} />
-            ) : (
+            ) : bus.seatCount < 46 ? (
               <SeatMedium datas={datas} scheduleId={scheduleId} />
+            ) : (
+              <SeatLarge datas={datas} scheduleId={scheduleId} />
             )}
           </div>
         </div>
