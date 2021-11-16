@@ -70,7 +70,7 @@ export const BUS_LOCATION_ENDS_QUERY = gql`
 export const BUS_ALL_SCHEDULES_QUERY = gql`
   query busAllSchedules(
     $startLocation: ID
-    $stopLocation: ID
+    $stopLocation: String
     $locationEnd: ID
     $leaveDate: String
   ) {
