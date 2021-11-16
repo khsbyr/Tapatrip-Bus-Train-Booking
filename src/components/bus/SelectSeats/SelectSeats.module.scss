@@ -17,13 +17,13 @@
   @apply text-cardDate font-bold text-base sm:text-lg;
 }
 .busInformation {
-  @apply text-cardDate space-y-1 sm:space-y-3 font-medium xl:text-base;
+  @apply text-cardDate space-y-1 sm:space-y-3 text-base;
 
   p {
     @apply flex flex-wrap sm:flex-nowrap;
 
     h1 {
-      @apply pl-0 sm:pl-2 font-normal text-cardDate;
+      @apply text-cardDate font-medium pr-2 text-base;
     }
   }
 }
