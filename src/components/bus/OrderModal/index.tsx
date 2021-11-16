@@ -1,18 +1,11 @@
 import { Form, Input, Modal } from 'antd';
-import React, { useState, FC } from 'react';
-import TravelList from '@data/getTravelList[1].json';
-import { ArrowRightIcon } from '@heroicons/react/solid';
+import React, { useState } from 'react';
 import { PATTERN_PHONE } from '@helpers/constantValidation';
 import { useMutation } from '@apollo/client';
 import { BUS_BOOKING_CHECK } from '@graphql/mutation';
 import moment from 'moment';
 import style from './style.module.scss';
-import { zip } from 'lodash';
-
-interface Props {
-  isModalVisible?: any;
-  close?: any;
-}
+import ContentWrapper from './style';
 
 export default function OrderModal(props) {
   const [isActive, setIsActive] = useState(false);
@@ -43,13 +36,13 @@ export default function OrderModal(props) {
   const datas = data && data.busBookingCheck.booking;
 
   return (
-    <div>
-      <Modal
-        visible={props.isModalVisible}
-        onCancel={() => props.close()}
-        width={650}
-        footer={null}
-      >
+    <Modal
+      visible={props.isModalVisible}
+      onCancel={() => props.close()}
+      width={650}
+      footer={null}
+    >
+      <ContentWrapper>
         <div className="sm:pt-3 pb-2 sm:pb-5 space-y-8">
           <h1 className="text-cardDate text-xl font-bold border-b-2">
             Захиалгын мэдээлэл шалгах
@@ -73,10 +66,7 @@ export default function OrderModal(props) {
                       },
                     ]}
                   >
-                    <Input
-                      className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base"
-                      placeholder="Захиалгын дугаар оруулна уу"
-                    />
+                    <Input placeholder="Захиалгын дугаар оруулна уу" />
                   </Form.Item>
                 </div>
                 <div className="space-y-2">
@@ -99,10 +89,7 @@ export default function OrderModal(props) {
                       },
                     ]}
                   >
-                    <Input
-                      className="rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-base"
-                      placeholder=" Утасны дугаараа оруулна уу"
-                    />
+                    <Input placeholder=" Утасны дугаараа оруулна уу" />
                   </Form.Item>
                 </div>
 
@@ -215,7 +202,7 @@ export default function OrderModal(props) {
             </div>
           </Form>
         </div>
-      </Modal>
-    </div>
+      </ContentWrapper>
+    </Modal>
   );
 }
