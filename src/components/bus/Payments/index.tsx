@@ -86,6 +86,9 @@ export default function Payment({ datas, scheduleId }) {
               </Radio.Group> */}
             </div>
           </div>
+          <button className={style.buttonBlock} onClick={handleCheck}>
+            Дуусгах
+          </button>
         </div>
         <div className={style.card}>
           <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">

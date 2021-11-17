@@ -334,6 +334,13 @@ export default function PassengerIfo({ datas, scheduleId }) {
                 ))}
             </div>
           </ContentWrapper>
+          <button className={style.buttonBlock} type="submit">
+            {loading === 'true' ? (
+              <div className={style.ldsDualRing}></div>
+            ) : (
+              'Төлбөр төлөх'
+            )}
+          </button>
         </div>
         <div className={style.card}>
           <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">

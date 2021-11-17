@@ -61,7 +61,7 @@ export default function BusNav({ navbarData, startLocations }) {
                   <div>
                     <Link href="/login">
                       <a>
-                        <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
+                        <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40 hover:bg-red-500">
                           Нэвтрэх
                         </button>
                       </a>
