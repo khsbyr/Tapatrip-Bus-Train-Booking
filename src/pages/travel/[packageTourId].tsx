@@ -199,13 +199,15 @@ export default function packageDetail({ NavData, PackTour }) {
     </Layout>
   );
 }
+
 export async function getServerStaticPaths() {
   return {
     paths: [],
     fallback: 'blocking',
   };
 }
-export const getServerSideProps = async ({ params }) => {
+
+export const getStaticProps = async ({ params }) => {
   const data = await postRequest('/activity/package_tour_view/', {
     id: params.packageTourId,
   });
