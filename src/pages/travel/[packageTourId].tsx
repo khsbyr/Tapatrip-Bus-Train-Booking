@@ -207,7 +207,7 @@ export async function getServerStaticPaths() {
   };
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getServerSideProps = async ({ params }) => {
   const data = await postRequest('/activity/package_tour_view/', {
     id: params.packageTourId,
   });
