@@ -73,21 +73,21 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                         {menu.text}
                       </a>
                     ))}
-                    {/* <button className={styles.orderButton} onClick={checkOrder}>
+                    <button className={styles.orderButton} onClick={checkOrder}>
                       Захиалга шалгах
-                    </button> 
-                    <SelectLanguage />*/}
+                    </button>
+                    <SelectLanguage />
                   </div>
                 </div>
               </div>
 
               <div className="flex items-center ">
-                <div className="hidden md:block">
+                <div className="hidden lg:block">
                   <div className={styles.loginBody}>
-                    <button className={styles.orderButton} onClick={checkOrder}>
+                    {/* <button className={styles.orderButton} onClick={checkOrder}>
                       Захиалга шалгах
                     </button>
-                    <SelectLanguage />
+                    <SelectLanguage /> */}
                     <a href="/login">
                       <button className={styles.loginButton}>Нэвтрэх</button>
                     </a>
@@ -95,7 +95,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 </div>
               </div>
 
-              <div className="-mr-2 flex md:hidden">
+              <div className="-mr-2 flex lg:hidden">
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   type="button"
@@ -124,7 +124,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
           >
             {ref => (
               <div
-                className="flex justify-center px-6 py-3 md:hidden bg-white rounded-xl shadow-lg"
+                className="flex justify-center px-6 py-3 lg:hidden bg-white rounded-xl shadow-lg"
                 id="mobile-menu"
               >
                 <div ref={ref} className="p-3 space-y-4">

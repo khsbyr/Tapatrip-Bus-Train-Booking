@@ -50,7 +50,6 @@ const Footer: FC<Props> = ({ navbarData }) => {
               <a
                 target="_blank"
                 href="https://www.facebook.com/TapaTripTravelAgency"
-                className="fill-current text-green-600"
               >
                 <img
                   src="../../assets/Facebook.png"
