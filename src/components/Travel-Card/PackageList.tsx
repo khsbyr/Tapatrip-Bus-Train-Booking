@@ -77,10 +77,12 @@ const PackageList: FC<Props> = ({
         <div className="col-span-2">
           <h1 className="font-bold text-lg">{title}</h1>
           <p className="text-base">{`hotel : ${hotel_name}`}</p>
-          <p className="text-base">{`avialable stock :  ${stocks}`}</p>
         </div>
         <div className="col-span-1">
           <img className="h-20 w-full rounded-md" src={`${hotel_image}`} />
+          <p className="text-cardDate border-l-0 my-1 text-center font-bold">
+            сонгох
+          </p>
         </div>
       </div>
       {package_prices.map((price, index) => {
