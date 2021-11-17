@@ -62,7 +62,8 @@ export default function Orders() {
               <Result
                 status="404"
                 title="Уучлаарай"
-                subTitle="Энэ хайлтад тохирох үр дүн олдсонгүй"
+                subTitle="Энэ хайлтад тохирох үр дүн олдсонгүй. Дахин оролдоно уу?"
+                // extra={<Button type="primary">Дахин оролдох</Button>}
               />
             )}
           </div>
@@ -76,83 +77,6 @@ export default function Orders() {
                 <img src="/assets/Thailand.jpg" className="rounded-lg" />{' '}
               </a>
             </div>
-            {/* <div className="mt-0 space-y-2">
-                <h1 className="text-cardDate font-bold text-2xl">Тосох цаг</h1>
-                <div className="flex justify-center flex-wrap space-x-4">
-                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
-                    <p className="flex justify-center">
-                      <SunIcon className="w-10" />
-                    </p>
-                    <p className="flex justify-center text-base font-medium">
-                      Өглөө
-                    </p>
-                    <p className="flex justify-center font-medium">
-                      06:00-10:00
-                    </p>
-                  </button>
-                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
-                    <p className="flex justify-center">
-                      <CloudIcon className="w-10" />
-                    </p>
-                    <p className="flex justify-center text-base font-medium">
-                      Өдөр
-                    </p>
-                    <p className="flex justify-center font-medium">
-                      06:00-10:00
-                    </p>
-                  </button>
-                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
-                    <p className="flex justify-center">
-                      <MoonIcon className="w-10" />
-                    </p>
-                    <p className="flex justify-center text-base font-medium">
-                      Орой
-                    </p>
-                    <p className="flex justify-center font-medium">
-                      06:00-10:00
-                    </p>
-                  </button>
-                </div>
-              </div>
-              <div className="mt-8 pt-4 space-y-2 ">
-                <h1 className="text-cardDate font-bold text-2xl">Хүргэх цаг</h1>
-                <div className="flex justify-center flex-wrap space-x-4">
-                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
-                    <p className="flex justify-center">
-                      <SunIcon className="w-10" />
-                    </p>
-                    <p className="flex justify-center text-base font-medium">
-                      Өглөө
-                    </p>
-                    <p className="flex justify-center font-medium">
-                      06:00-10:00
-                    </p>
-                  </button>
-                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
-                    <p className="flex justify-center">
-                      <CloudIcon className="w-10" />
-                    </p>
-                    <p className="flex justify-center text-base font-medium">
-                      Өдөр
-                    </p>
-                    <p className="flex justify-center font-medium">
-                      06:00-10:00
-                    </p>
-                  </button>
-                  <button className="rounded-xl shadow-md text-cardDate px-4 py-3 border-2 border-white hover:border-weather">
-                    <p className="flex justify-center">
-                      <MoonIcon className="w-10" />
-                    </p>
-                    <p className="flex justify-center text-base font-medium">
-                      Орой
-                    </p>
-                    <p className="flex justify-center font-medium">
-                      06:00-10:00
-                    </p>
-                  </button>
-                </div>
-              </div> */}
-            {/* </div> */}
           </div>
         </div>
       </div>

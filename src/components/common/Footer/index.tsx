@@ -30,7 +30,11 @@ const Footer: FC<Props> = ({ navbarData }) => {
             </h1>
             <div className="mt-6">
               {navbarData.contactList.map(contact => (
-                <a key={contact.id} href={contact.route}>
+                <a
+                  key={contact.id}
+                  href={'#'}
+                  //  href={contact.route}
+                >
                   <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
                     {contact.text}
                   </p>
