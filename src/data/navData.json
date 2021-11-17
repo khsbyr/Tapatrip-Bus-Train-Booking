@@ -53,27 +53,27 @@
   ],
   "profile": [{ "id": 1, "text": "Нэвтрэх", "route": "/login" }],
   "companyList": [
-    { "id": 1, "text": "Tapatrip.com - ын тухай", "route": "/Footers/about" },
+    { "id": 1, "text": "Tapatrip.com - ын тухай", "route": "/Company/about" },
     {
       "id": 2,
       "text": "Үйлчилгээний нөхцөл",
-      "route": "/Footers/terms-of-use"
+      "route": "/Company/terms-of-use"
     },
     {
       "id": 3,
       "text": "Нууцлалын бодлого",
-      "route": "/Footers/privacy-policy"
+      "route": "/Company/privacy-policy"
     },
-    { "id": 4, "text": "Түгээмэл асуултууд", "route": "/Footers/FAQ" },
-    { "id": 5, "text": "Ажлын байр", "route": "/Footers/Workplace" },
-    { "id": 6, "text": "Мэдээлэл", "route": "/Footers/Information" }
+    { "id": 4, "text": "Түгээмэл асуултууд", "route": "/Company/FAQ" },
+    { "id": 5, "text": "Ажлын байр", "route": "/Company/Workplace" },
+    { "id": 6, "text": "Мэдээлэл", "route": "/Company/Information" }
   ],
   "contactList": [
-    { "id": 1, "text": "Онлайн туслах", "route": "/Footers/Online-help" },
+    { "id": 1, "text": "Онлайн туслах", "route": "/Company/Online-help" },
     {
       "id": 2,
       "text": "Харилцагчийн туслах",
-      "route": "/Footers/Customer-Assistant"
+      "route": "/Company/Customer-Assistant"
     }
   ],
   "currency": [

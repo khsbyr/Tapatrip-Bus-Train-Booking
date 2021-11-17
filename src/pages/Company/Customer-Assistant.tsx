@@ -1,12 +1,12 @@
-import FooterBackground from '@components/common/HeaderBackground/FooterBackground';
+import HeaderBackground from '@components/common/HeaderBackground/';
 import Navbar from '@components/common/Navbar';
 import Footer from '@components/common/Footer';
 import NavData from '@data/navData.json';
 
-export default function privacyPolicy() {
+export default function customerAssistant() {
   return (
     <div className="">
-      <FooterBackground />
+      <HeaderBackground />
       <Navbar navbarData={NavData} />
       <div className="bg-bg py-5 px-7 lg:py-10 sm:px-20">
         <div className="max-w-7xl mx-auto text-cardDate space-y-5">

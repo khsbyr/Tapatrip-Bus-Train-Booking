@@ -56,7 +56,7 @@ export default function BusNav({ navbarData, startLocations }) {
                   <OrderCheck />
 
                   <div className="z-20">
-                    <SelectLanguage />
+                    <SelectLanguage isBlack={true} />
                   </div>
                   <div>
                     <Link href="/login">

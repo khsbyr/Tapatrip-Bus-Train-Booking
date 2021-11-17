@@ -45,7 +45,7 @@ export default function SeatNav({ navbarData }) {
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <OrderCheck />
-                  <SelectLanguage />
+                  <SelectLanguage isBlack={true} />
 
                   <div>
                     <Link href="/login">

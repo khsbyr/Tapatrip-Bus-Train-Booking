@@ -64,7 +64,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                       </a>
                     ))}
                     <OrderCheck />
-                    <SelectLanguage />
+                    <SelectLanguage isBlack={false} />
                   </div>
                 </div>
               </div>
