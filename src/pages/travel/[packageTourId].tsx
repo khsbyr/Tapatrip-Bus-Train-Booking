@@ -8,7 +8,6 @@ import { postRequest } from '@lib/api';
 import { Carousel, Timeline } from 'antd';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 const breadcrumbRoutes = [
   {
     path: '/',
@@ -20,7 +19,6 @@ const breadcrumbRoutes = [
 ];
 
 export default function packageDetail({ NavData, PackTour }) {
-  const { t } = useTranslation();
   const [totalPrice, setTotalPrice] = useState(0);
   const [collectedPackages, setCollectedPackages] = useState([]);
   const [subPack, setSubPack] = useState('');
