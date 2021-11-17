@@ -1,26 +1,14 @@
 import Layout from '@components/common/Layout';
-import React, { useEffect, useState } from 'react';
-import NavData from '@data/navData.json';
 import Navbar from '@components/common/Navbar';
-import { Carousel } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { Timeline } from 'antd';
-import {
-  ArrowRightIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-  UserIcon,
-  CheckCircleIcon,
-  LocationMarkerIcon,
-  MapIcon,
-  MinusIcon,
-  PlusIcon,
-} from '@heroicons/react/solid';
-import Link from 'next/link';
-import { postRequest } from '@lib/api';
-import PriceDetails from '@components/Travel-Card/PriceDetails';
 import DaysDetail from '@components/Travel-Card/DaysDetail';
 import PackageList from '@components/Travel-Card/PackageList';
+import NavData from '@data/navData.json';
+import { MapIcon } from '@heroicons/react/solid';
+import { postRequest } from '@lib/api';
+import { Carousel, Timeline } from 'antd';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 const breadcrumbRoutes = [
   {
     path: '/',
@@ -54,7 +42,7 @@ export default function packageDetail({ NavData, PackTour }) {
     });
     setTotalPrice(totPrice);
   };
-
+  console.log('add : ', PackTour.package_tour_additional);
   return (
     <Layout>
       <Navbar navbarData={NavData} fixed={true} />
@@ -147,34 +135,17 @@ export default function packageDetail({ NavData, PackTour }) {
                 </div>
               </div>
               <div className="gap-2 my-4 col-span-2 grid grid-cols-3 px-8 bg-white rounded-lg p-2">
-                <div className="m-4 items-center">
-                  {PackTour.package_tour_additional.map((additional, index) => (
-                    <div key={index}>
-                      <h2 className="font-bold ml-4">{additional.title}</h2>
-                      <ul className="list-disc">
-                        <li className="m-2">oin the only tour to go th</li>
-                        <li className="m-2">Enjoy long relaxing beach bre</li>
-                        <li className="m-2">Avoid the crowds for a ligh</li>
-                      </ul>
+                {PackTour.package_tour_additional.map((additional, index) => (
+                  <Carousel className={`md:px-2`} arrows dots={true}>
+                    <div className="m-4 items-center">
+                      <div key={index}>
+                        <h2 className="font-bold ml-4 list-disc">
+                          {additional.title}
+                        </h2>
+                      </div>
                     </div>
-                  ))}
-                </div>
-                <div className="m-4 items-center">
-                  <h2 className="font-bold ml-4">Higlights</h2>
-                  <ul className="list-disc">
-                    <li className="m-2">oin the only tour to go th</li>
-                    <li className="m-2">Enjoy long relaxing beach bre</li>
-                    <li className="m-2">Avoid the crowds for a ligh</li>
-                  </ul>
-                </div>
-                <div className="m-4 items-center">
-                  <h2 className="font-bold ml-4">Higlights</h2>
-                  <ul className="list-disc">
-                    <li className="m-2">oin the only tour to go th</li>
-                    <li className="m-2">Enjoy long relaxing beach bre</li>
-                    <li className="m-2">Avoid the crowds for a ligh</li>
-                  </ul>
-                </div>
+                  </Carousel>
+                ))}
               </div>
             </div>
 
