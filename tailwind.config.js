@@ -27,7 +27,6 @@ module.exports = {
         down: '#EF5134',
         alert: '#FFF7ED',
         steps: '#177AD6',
-        inactive: '#8AB1D5',
         register: '#0A3761',
         seatHover: '#1575CE',
       }),
@@ -45,9 +44,6 @@ module.exports = {
         weather: '#8AB1D5',
         register: '#F1583C',
       }),
-      width: {
-        98: '26rem',
-      },
       textColor: {
         primary: '#3490dc',
         secondary: '#8AB1D5',

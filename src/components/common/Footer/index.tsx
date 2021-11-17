@@ -30,7 +30,11 @@ const Footer: FC<Props> = ({ navbarData }) => {
             </h1>
             <div className="mt-6">
               {navbarData.contactList.map(contact => (
-                <a key={contact.id} href={contact.route}>
+                <a
+                  key={contact.id}
+                  href={'#'}
+                  //  href={contact.route}
+                >
                   <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
                     {contact.text}
                   </p>
@@ -70,15 +74,44 @@ const Footer: FC<Props> = ({ navbarData }) => {
               </a>
             </div>
           </div>
-          <div>
-            <div className="flex flex-wrap">
-              <img src="/assets/IATA_logo.png" className="p-3" />
-              <img src="/assets/veri.png" className="p-3" />
-              <img src="/assets/mastercard.png" className="p-3" />
-              <img src="/assets/visa.png" className="p-3" />
-              <img src="/assets/securteTrust.png" />
-            </div>
+          <div className="hidden md:block">
+            <ul className="flex flex-wrap items-center ">
+              <li>
+                <img src="../../assets/IATA_logo.png" className="p-2" />
+              </li>
+              <li>
+                <img src="../../assets/veri.png" className="p-2" />
+              </li>
+              <li>
+                <img src="../../assets/mastercard.png" className="p-2" />
+              </li>
+              <li>
+                <img src="../../assets/visa.png" className="p-2" />
+              </li>
+              <li>
+                <img src="../../assets/securteTrust.png" className="p-2" />
+              </li>
+            </ul>
           </div>
+        </div>
+        <div className="md:hidden pt-5 pb-10">
+          <ul className="flex items-center justify-around">
+            <li>
+              <img src="../../assets/IATA_logo.png" className="p-2" />
+            </li>
+            <li>
+              <img src="../../assets/veri.png" className="p-2" />
+            </li>
+            <li>
+              <img src="../../assets/mastercard.png" className="p-2" />
+            </li>
+            <li>
+              <img src="../../assets/visa.png" className="p-2" />
+            </li>
+            <li>
+              <img src="../../assets/securteTrust.png" className="p-2" />
+            </li>
+          </ul>
         </div>
       </div>
     </div>
