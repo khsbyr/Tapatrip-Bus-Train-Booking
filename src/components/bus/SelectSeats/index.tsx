@@ -59,15 +59,15 @@ export default function SelectSeats({ datas, scheduleId }) {
                 <div className={style.busInformation}>
                   <p>
                     <h1>ААН: </h1>
-                    {bus.transporter.name}
+                    {bus?.transporter?.name}
                   </p>
                   <p>
                     <h1>Загвар: </h1>
-                    {bus.modelName}
+                    {bus?.modelName}
                   </p>
                   <p>
                     <h1>Улсын дугаар: </h1>
-                    {bus.plateNumber}
+                    {bus?.plateNumber}
                   </p>
                   <p>
                     <h1>Жолоочийн дугаар: </h1>
@@ -104,9 +104,9 @@ export default function SelectSeats({ datas, scheduleId }) {
                 </div>
               </div>
             </div>
-            {bus.seatCount < 25 ? (
+            {bus?.seatCount < 25 ? (
               <SeatSmall datas={datas} scheduleId={scheduleId} />
-            ) : bus.seatCount < 46 ? (
+            ) : bus?.seatCount < 46 ? (
               <SeatMedium datas={datas} scheduleId={scheduleId} />
             ) : (
               <SeatLarge datas={datas} scheduleId={scheduleId} />
