@@ -50,6 +50,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
 
   const close = () => {
     setIsModalVisible(false);
+    setLoading1('false');
   };
 
   const handleCustomerEmail = e => {
@@ -160,6 +161,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
         title: 'Алдаа',
         content: 'Таны оруулсан код буруу байна дахин оролдоно уу?',
       });
+      setLoading1('false');
     }
   };
 
