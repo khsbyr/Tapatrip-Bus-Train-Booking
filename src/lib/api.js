@@ -1,6 +1,6 @@
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import apiClient from './apiClient';
-const baseUrl = 'http://47.243.62.69:8000/api';
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 const guestToken = async () => {
   const response = await apiClient.post('/account/guest_jwt/');
 

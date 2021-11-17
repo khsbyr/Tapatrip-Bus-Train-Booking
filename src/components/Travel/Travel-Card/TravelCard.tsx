@@ -28,7 +28,7 @@ const TravelCard: FC<Props> = ({ packages, title }) => {
               <div className="bg-white h-auto rounded-2xl shadow-xl">
                 <img
                   className="object-contain md:object-scale-down rounded-t-2xl"
-                  src={`${MediaUrl}${tourpackage.image}`}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}${tourpackage.image}`}
                 />
                 <div className="items-center grid grid-cols-2 md:block divide-y divide-gray-300">
                   <div className="flex justify-between">
