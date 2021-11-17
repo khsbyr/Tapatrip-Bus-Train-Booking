@@ -2,7 +2,7 @@ import { MailIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import styles from './subscribe.module.scss';
 import AuthService from '@services/auth';
-import { message, Input, Form } from 'antd';
+import { message, Input, Form, Modal } from 'antd';
 import ContentWrapper from './style';
 import { validateMessages } from '@helpers/constantValidation';
 
@@ -14,16 +14,22 @@ const Subscribe: FC = () => {
   };
 
   const emailRegister = async () => {
-    if (emailInput === undefined || emailInput === ' ' || emailInput === '') {
+    if (emailInput === undefined || emailInput === '') {
       message.warning('Мэйл хаяг хоосон байх боломжгүй!');
     } else {
-      const result = await AuthService.emailSubscribe(emailInput);
-
-      if (result.status === 200) {
-        message.info('Мэйл хаяг бүртгэлтэй байна!');
-      }
-      if (result.status === 201) {
-        message.success('Амжилттай бүртгэгдлээ!');
+      try {
+        const result = await AuthService.emailSubscribe(emailInput);
+        if (result.status === 200) {
+          message.info('Мэйл хаяг бүртгэлтэй байна!');
+        }
+        if (result.status === 201) {
+          message.success('Амжилттай бүртгэгдлээ!');
+        }
+      } catch (e) {
+        Modal.error({
+          title: 'Алдаа',
+          content: e.message,
+        });
       }
     }
   };

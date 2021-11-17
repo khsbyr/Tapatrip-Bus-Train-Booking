@@ -58,7 +58,7 @@
     { "id": 3, "text": "Нууцлалын бодлого", "route": "privacy-policy" },
     { "id": 4, "text": "Түгээмэл асуултууд", "route": "#" },
     { "id": 5, "text": "Ажлын байр", "route": "#" },
-    { "id": 6, "text": "Мэдээлэл", "route": "https://blog.tapatrip.com/" }
+    { "id": 6, "text": "Мэдээлэл", "route": "https://news.tapatrip.com/" }
   ],
   "contactList": [
     { "id": 1, "text": "Онлайн туслах", "route": "#" },
