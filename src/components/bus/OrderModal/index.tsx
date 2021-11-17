@@ -148,7 +148,7 @@ export default function OrderModal(props) {
                     <p className="flex">
                       Захиалга хийсэн огноо:
                       <h1 className="px-2 font-bold text-base text-cardDate">
-                        {moment(datas?.createdAt).format('YYYY-MM-DD')}
+                        {moment(datas?.createdAt).format('YYYY-MM-DD HH:mm:ss')}
                       </h1>
                     </p>
                     <p className="flex">

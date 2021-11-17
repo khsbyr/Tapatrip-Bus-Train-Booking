@@ -1,0 +1,20 @@
+{
+    "paymentInstroductionsTitle": "Payment instructions",
+    "payInstroductionsBody1": "Customers will be able to transfer their ticket payment to the following account of the National Center for Road Transport within 20 minutes and enter the ORDER CODE and relevant phone number in the transaction value field.",
+    "payInstroductionsBody2":"Please note that your order will be canceled in the following cases.",
+    "payInstroductionsBody3li1":"No payment within the specified time",
+    "payInstroductionsBody3li2":"Incomplete payment",
+    "payInstroductionsBody3li3":"You did not write the order code incorrectly (do not write any extra signs and symbols (!., -)) or incompletely",
+    "paymentFormTitle":"Please select a payment form",
+    "Transfer":"Transfer",
+    "QPay":"QPay",
+    "orderNumber":"Order number",
+    "phoneNumber":"Contact phone",
+    "accountNumber":"Account number",
+    "accountName":"Recipient",
+    "adult":"Adult",
+    "children":"Children",
+    "totalPrice":"Total price",
+    "lifeInsurance":"Price including life insurance",
+    "stepButton":"Check order information"
+} 
