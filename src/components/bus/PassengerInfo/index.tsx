@@ -254,7 +254,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
 
                       <p>
                         <h1 className="text-cardDate">
-                          {seat.isChild ? 'Хүүхэд' : 'Том хүн'}
+                          {seat.isChild ? 'Хүүхэд ' : 'Том хүн '}
                           {seat.isChild ? datas.childTicket : datas.adultTicket}
                         </h1>
                       </p>
