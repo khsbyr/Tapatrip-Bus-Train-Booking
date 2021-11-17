@@ -13,7 +13,7 @@ export default function Home({ NavData }) {
         <title>Tapatrip - Online Travel Platform</title>
       </Head>
       <HeaderBackground />
-      <Navbar navbarData={NavData} />
+      <Navbar navbarData={NavData} fixed={true} />
       <Subscribe />
     </Layout>
   );

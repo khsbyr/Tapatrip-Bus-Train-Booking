@@ -17,6 +17,7 @@ import Loader from '@components/common/Loader';
 export default function Bus({ guestToken }) {
   useEffect(() => {
     AuthTokenStorageService.guestStore(guestToken);
+    console.log('bus home');
   }, []);
   const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
   if (error) return `Error! ${error.message}`;
@@ -24,7 +25,7 @@ export default function Bus({ guestToken }) {
   return (
     <Layout>
       <HeaderBackground />
-      <Navbar navbarData={NavData} />
+      <Navbar navbarData={NavData} fixed={true} />
       <Search navbarData={NavData} startLocations={startLocations} />
       {loading && <Loader />}
       <Subscribe />

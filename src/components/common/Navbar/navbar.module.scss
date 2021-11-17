@@ -5,7 +5,7 @@
     @apply flex items-center justify-between h-12;
 
     .logo {
-      @apply w-full;
+      @apply w-36 md:w-full md:h-full;
     }
 
     .menuBody {

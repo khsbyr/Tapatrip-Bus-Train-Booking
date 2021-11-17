@@ -1,5 +1,5 @@
 .body {
-  @apply md:block;
+  @apply hidden  md:block;
 
   .image {
     @apply h-96 object-cover mx-auto;

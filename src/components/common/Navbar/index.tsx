@@ -1,16 +1,16 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
-import OrderModal from '@components/bus/OrderModal';
+import OrderModal from '@components/bus/OrderModal/OrderModal';
 import styles from './navbar.module.scss';
-import SelectLanguage from '@components/common/Selects/selectLanguage';
 import Link from 'next/link';
-
+import SelectLanguage from '@components/common/Selects/selectLanguage';
 interface Props {
   navbarData?: any;
+  fixed: Boolean;
 }
 
-const Navbar: FC<Props> = ({ navbarData }) => {
+const Navbar: FC<Props> = ({ navbarData, fixed }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [navbar, setNavbar] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -48,19 +48,17 @@ const Navbar: FC<Props> = ({ navbarData }) => {
             <div className={styles.navbarBody}>
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Link href="/bus">
-                    <a>
-                      <img
-                        src={`${
-                          navbar
-                            ? '../assets/svgIcons/NewLogo.svg'
-                            : '../assets/svgIcons/NewLogoWhite.svg'
-                        } `}
-                        alt="Logo"
-                        className={styles.logo}
-                      />
-                    </a>
-                  </Link>
+                  <img
+                    src={`${
+                      navbar
+                        ? '/assets/logoBlue.png'
+                        : fixed
+                        ? '/assets/logoBlue.png'
+                        : '/assets/logoWhite.png'
+                    } `}
+                    alt="Logo"
+                    className={styles.logo}
+                  />
                 </div>
                 <div className={`${navbar ? 'hidden' : 'lg:block'} hidden`}>
                   <div className={styles.menuBody}>
@@ -95,7 +93,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   type="button"
-                  className={styles.mobileButton}
+                  className=" inline-flex items-center justify-center p-2 rounded-md text-gray-400 "
                   aria-controls="mobile-menu"
                   aria-expanded="false"
                 >
@@ -108,6 +106,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
               </div>
             </div>
           </div>
+
           <Transition
             show={isOpen}
             className="flex justify-end w-full px-2 absolute top-14"

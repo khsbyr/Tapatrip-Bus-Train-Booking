@@ -62,8 +62,7 @@ export default function Orders() {
               <Result
                 status="404"
                 title="Уучлаарай"
-                subTitle="Энэ хайлтад тохирох үр дүн олдсонгүй. Дахин оролдоно уу?"
-                // extra={<Button type="primary">Дахин оролдох</Button>}
+                subTitle="Энэ хайлтад тохирох үр дүн олдсонгүй"
               />
             )}
           </div>
