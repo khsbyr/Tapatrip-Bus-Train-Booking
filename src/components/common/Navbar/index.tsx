@@ -73,10 +73,6 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                         {menu.text}
                       </a>
                     ))}
-                    {/* <button className={styles.orderButton} onClick={checkOrder}>
-                      Захиалга шалгах
-                    </button> 
-                    <SelectLanguage />*/}
                   </div>
                 </div>
               </div>
