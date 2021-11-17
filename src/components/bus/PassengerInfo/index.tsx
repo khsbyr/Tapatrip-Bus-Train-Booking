@@ -17,10 +17,10 @@ import AuthService from '@services/auth';
 const { Option } = Select;
 
 export default function PassengerIfo({ datas, scheduleId }) {
-  const [isCompoany, setIsCompany] = useState(true);
+  const [isCompoany, setIsCompany] = useState(false);
   const { customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
-  const { booking, setBooking } = useGlobalStore();
+  const { setBooking } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState('');
@@ -204,7 +204,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                         ]}
                       >
                         <Input
-                          disabled={isCompoany}
+                          disabled={!isCompoany}
                           className={style.input}
                           onChange={handleCustomerRegister}
                           placeholder="Компаний регистерийн дугаар"
@@ -254,9 +254,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
                         <h1 className="text-cardDate">
                           Том хүн{' '}
                           {seat.isChild ? datas.childTicket : datas.adultTicket}
-                        </h1>
-                        <h1 className="text-cardDate font-normal text-xs">
-                          АМЬ ДААТГАЛ БАГТСАН
                         </h1>
                       </p>
                     </div>
