@@ -1,0 +1,18 @@
+{
+    "registerText":"Та бүртгэл үүсгэснээр хялбар, хурдан захиалга хийх боломжтой.",
+    "registerButton":"Бүртгүүлэх",
+    "customerInfo":"Захиалагчийн мэдээлэл",
+    "registerNumber":"Регистрийн дугаар", 
+    "eMail":"И-мэйл хаяг", 
+    "phoneNumber": "Утасны дугаар",
+    "passengerInfo":"Зорчигч",
+    "passengerAge18+":"Том хүн",
+    "passengerAge18-":"Хүүхэд", 
+    "lifeInsurance":"АМЬ ДААТГАЛ БАГТСАН",
+    "checkVaccine":"Вакцинд хамрагдсан эсэх",
+    "yesVaccine":"Дархлаажсан",
+    "noVaccine":"Дархлаажаагүй",
+    "lastName":"Овог",
+    "firstName":"Нэр",
+    "stepButton":"Төлбөр төлөх"
+}

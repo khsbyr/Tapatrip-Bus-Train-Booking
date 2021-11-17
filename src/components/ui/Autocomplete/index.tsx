@@ -15,7 +15,7 @@ interface Props {
 const Autocomplete: FC<Props> = props => {
   const { data, disabled, defaultValue, size, placeholder, onChange } = props;
   const { Option } = Select;
-
+  console.log('data : ', data);
   return (
     <ContentWrapper>
       <Select
@@ -31,10 +31,10 @@ const Autocomplete: FC<Props> = props => {
       >
         {data &&
           data.map((data, value) => (
-            <Option key={value} value={data.node.id}>
+            <Option key={value} value={data.id}>
               <div className="flex items-center">
                 <LocationMarkerIcon className="w-9 h-9 text-direction pr-3" />
-                {data.node.name}
+                {data.name}
               </div>
             </Option>
           ))}

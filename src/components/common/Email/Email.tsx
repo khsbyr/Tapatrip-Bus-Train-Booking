@@ -29,7 +29,7 @@ const Email: FC = () => {
               placeholder="И-Мэйл хаягаа оруулна уу"
               aria-label="Full name"
             />
-            <button className="bg-button text-white font-bold py-2 px-4 rounded-2xl h-14 w-96">
+           <button className="bg-button text-white font-bold py-2 px-4 rounded-2xl h-14 w-96">
               Бүртгэх
             </button>
           </div>
