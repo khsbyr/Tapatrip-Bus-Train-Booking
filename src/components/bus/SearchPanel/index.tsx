@@ -3,6 +3,8 @@ import { Tabs } from 'antd';
 import ContentWrapper from './style';
 import style from './search.module.scss';
 import SearchBus from '@components/bus/SearchInput';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const { TabPane } = Tabs;
 
@@ -12,6 +14,12 @@ interface Props {
 }
 
 const Search: FC<Props> = ({ navbarData, startLocations }) => {
+  const router = useRouter();
+
+  const handleTabChange = key => {
+    const route = key === 4 ? 'bus' : 'travel';
+    router.push(`/${route}`);
+  };
   return (
     <ContentWrapper>
       <div className={style.searchBody}>
@@ -19,6 +27,7 @@ const Search: FC<Props> = ({ navbarData, startLocations }) => {
           defaultActiveKey="4"
           centered
           tabBarGutter={160}
+          onChange={handleTabChange}
           className="hidden lg:block"
         >
           {navbarData.generalList.map(menu => (
@@ -41,7 +50,7 @@ const Search: FC<Props> = ({ navbarData, startLocations }) => {
                   <span className="text">{menu.text}</span>
                 </div>
               }
-              disabled={menu.id !== 4}
+              disabled={menu.id !== 4 && menu.id !== 3 ? true : false}
               key={menu.id}
             />
           ))}
