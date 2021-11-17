@@ -9,7 +9,7 @@ const languages = [
   { name: 'English(UK)', src: '/assets/flagEng.png' },
   { name: 'China', src: '/assets/flagChina.png' },
 ];
-export default function selectLanguage() {
+export default function selectLanguage(props) {
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
   const [isSelected, setIsSelected] = useState(false);
   const onClick = () => {
@@ -18,15 +18,18 @@ export default function selectLanguage() {
   const select = () => {
     setIsSelected(!isSelected);
   };
+
   return (
     <Listbox value={selectedLanguage} onChange={setSelectedLanguage}>
       <div className={s.body} onClick={onClick}>
         <Listbox.Button className={s.listboxButton}>
           <img className="rounded" src={selectedLanguage.src} width="34" />
           {isSelected ? (
-            <ChevronUpIcon className={s.icon} />
+            <ChevronUpIcon className={`${props.isBlack ? s.icon1 : s.icon} `} />
           ) : (
-            <ChevronDownIcon className={s.icon} />
+            <ChevronDownIcon
+              className={`${props.isBlack ? s.icon1 : s.icon} `}
+            />
           )}
         </Listbox.Button>
         <Listbox.Options onClick={select} className={s.listboxOption}>

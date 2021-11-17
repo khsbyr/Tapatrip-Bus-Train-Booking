@@ -33,7 +33,7 @@
     }
 
     .download {
-      @apply flex flex-wrap gap-0 justify-center md:justify-start;
+      @apply flex flex-wrap gap-1 md:gap-0 justify-center md:justify-start;
     }
   }
 }

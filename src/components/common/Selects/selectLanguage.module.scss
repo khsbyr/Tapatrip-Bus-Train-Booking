@@ -1,11 +1,14 @@
 .body {
-  @apply cursor-pointer relative md:pl-2 xl:pl-8;
+  @apply cursor-pointer relative xl:pl-8;
 }
 .listboxButton {
   @apply cursor-pointer flex items-center relative;
 }
 .icon {
-  @apply text-cardDate md:text-white h-6 w-6;
+  @apply text-cardDate lg:text-white h-6 w-6;
+}
+.icon1 {
+  @apply text-cardDate h-6 w-6;
 }
 .listboxOption {
   @apply absolute w-44 py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
