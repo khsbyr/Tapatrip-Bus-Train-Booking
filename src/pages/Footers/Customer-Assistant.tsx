@@ -3,12 +3,12 @@ import Navbar from '@components/common/Navbar';
 import Footer from '@components/common/Footer';
 import NavData from '@data/navData.json';
 
-export default function about() {
+export default function customerAssistant() {
   return (
     <div className="">
       <FooterBackground />
       <Navbar navbarData={NavData} />
-      <div className="bg-bg py-8 px-5 sm:px-20">
+      <div className="bg-bg py-5 px-7 lg:py-10 sm:px-20">
         <div className="max-w-7xl mx-auto text-cardDate space-y-5">
           <div className="text-center font-bold text-xl">About us </div>
           <div className="text-base font-medium space-y-4">

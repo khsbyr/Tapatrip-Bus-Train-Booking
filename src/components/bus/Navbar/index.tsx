@@ -1,10 +1,11 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
+import OrderCheck from '@components/bus/OrderCheck';
 import { Transition } from '@headlessui/react';
 import SearchBus from '@components/bus/SearchInput';
-import logoBLue from '@public/assets/svgIcons/NewLogo.svg';
 import styles from '../../common/Navbar/navbar.module.scss';
 import Link from 'next/link';
+import SelectLanguage from '@components/common/Selects/selectLanguage';
 
 interface Props {
   navbarData?: any;
@@ -52,16 +53,20 @@ export default function BusNav({ navbarData, startLocations }) {
             <div className="flex items-center ">
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  {navbarData.profile.map(z => (
-                    <a
-                      className={` text-selected
-                         hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
-                      href={`${z.route}`}
-                      key={z.id}
-                    >
-                      {z.text}
-                    </a>
-                  ))}
+                  <OrderCheck />
+
+                  <div className="z-20">
+                    <SelectLanguage />
+                  </div>
+                  <div>
+                    <Link href="/login">
+                      <a>
+                        <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
+                          Нэвтрэх
+                        </button>
+                      </a>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -87,7 +92,7 @@ export default function BusNav({ navbarData, startLocations }) {
 
         <Transition
           show={isOpen}
-          className="px-2 shadow-lg w-full absolute top-14"
+          className="flex justify-end w-full px-2 absolute top-14"
           enter="transition ease-out duration-100 transform"
           enterFrom="opacity-0 scale-95"
           enterTo="opacity-100 scale-100"
@@ -97,19 +102,27 @@ export default function BusNav({ navbarData, startLocations }) {
         >
           {ref => (
             <div
-              className="md:hidden bg-white w-full rounded-lg"
+              className="flex justify-center px-6 py-3 md:hidden bg-white rounded-xl shadow-lg"
               id="mobile-menu"
             >
-              <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                {navbarData.profile.map(data => (
-                  <a
-                    key={data.id}
-                    className={styles.mobileMenu}
-                    href={`${data.route}`}
-                  >
-                    {data.text}
-                  </a>
-                ))}
+              <div ref={ref} className="p-3 space-y-4">
+                {console.log(ref)}
+                <div className="flex">
+                  <h1 className="text-cardDate font-medium pr-4">Хэл сонгох</h1>
+                  <SelectLanguage />
+                </div>
+                <div>
+                  <OrderCheck />
+                </div>
+                <div>
+                  <Link href="/login">
+                    <a>
+                      <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
+                        Нэвтрэх
+                      </button>
+                    </a>
+                  </Link>
+                </div>
               </div>
             </div>
           )}

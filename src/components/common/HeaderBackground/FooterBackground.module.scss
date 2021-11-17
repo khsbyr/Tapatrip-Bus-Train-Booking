@@ -2,17 +2,17 @@
   //   @apply md:block;
 
   .image {
-    @apply h-48 lg:h-56 w-full mx-auto md:rounded-b-full object-cover object-left;
+    @apply h-56 lg:h-72 w-full mx-auto md:rounded-b-full object-cover object-left;
   }
 
   .card {
-    @apply mb-5 md:mb-16 lg:mb-12 max-w-7xl mx-auto -mt-28 lg:-mt-28 px-10;
+    @apply max-w-7xl mx-auto px-10 h-28 lg:h-36 -mt-28 lg:-mt-36;
 
     .title {
-      @apply text-center text-white text-3xl lg:text-4xl font-bold;
+      @apply text-center text-white text-2xl lg:text-4xl font-bold;
     }
     .description {
-      @apply text-center text-white text-xl lg:text-2xl font-light mt-2;
+      @apply text-center text-white text-lg lg:text-2xl font-light mt-2;
     }
   }
 }

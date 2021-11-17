@@ -70,7 +70,7 @@ export const BUS_LOCATION_ENDS_QUERY = gql`
 export const BUS_ALL_SCHEDULES_QUERY = gql`
   query busAllSchedules(
     $startLocation: ID
-    $stopLocation: ID
+    $stopLocation: String
     $locationEnd: ID
     $leaveDate: String
   ) {
@@ -84,9 +84,7 @@ export const BUS_ALL_SCHEDULES_QUERY = gql`
         node {
           id
           code
-          distance
           leaveDate
-          estimatedTime
           driverPhone
           adultTicket
           childTicket
@@ -107,6 +105,8 @@ export const BUS_ALL_SCHEDULES_QUERY = gql`
           }
           locationEnd {
             id
+            distance
+            estimatedDuration
             locationStop {
               id
               name
@@ -135,7 +135,6 @@ export const BUS_SCHEDULES_DETAIL_QUERY = gql`
   query busSchedule($id: ID!) {
     busSchedule(id: $id) {
       id
-      distance
       leaveDate
       leaveTime
       driverPhone
@@ -145,6 +144,8 @@ export const BUS_SCHEDULES_DETAIL_QUERY = gql`
       directionName
       locationEnd {
         id
+        distance
+        estimatedDuration
         locationStop {
           id
           name

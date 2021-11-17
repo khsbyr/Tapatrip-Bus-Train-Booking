@@ -1,7 +1,7 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
-import OrderModal from '@components/bus/OrderModal';
+import OrderCheck from '@components/bus/OrderCheck';
 import styles from './navbar.module.scss';
 import SelectLanguage from '@components/common/Selects/selectLanguage';
 import Link from 'next/link';
@@ -13,17 +13,7 @@ interface Props {
 const Navbar: FC<Props> = ({ navbarData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [navbar, setNavbar] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [openTab, setOpenTab] = React.useState(4);
-
-  function checkOrder() {
-    setIsModalVisible(true);
-  }
-
-  const closeModal = () => {
-    setIsModalVisible(false);
-  };
-
   const changeBackground = () => {
     if (window.scrollY >= 80) {
       setNavbar(true);
@@ -73,21 +63,14 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                         {menu.text}
                       </a>
                     ))}
-                    <button className={styles.orderButton} onClick={checkOrder}>
-                      Захиалга шалгах
-                    </button>
+                    <OrderCheck />
                     <SelectLanguage />
                   </div>
                 </div>
               </div>
-
               <div className="flex items-center ">
                 <div className="hidden lg:block">
                   <div className={styles.loginBody}>
-                    {/* <button className={styles.orderButton} onClick={checkOrder}>
-                      Захиалга шалгах
-                    </button>
-                    <SelectLanguage /> */}
                     <a href="/login">
                       <button className={styles.loginButton}>Нэвтрэх</button>
                     </a>
@@ -135,12 +118,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     <SelectLanguage />
                   </div>
 
-                  <button
-                    className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-56"
-                    onClick={checkOrder}
-                  >
-                    Захиалга шалгах
-                  </button>
+                  <OrderCheck />
                   <div>
                     <Link href="/login">
                       <a>
@@ -195,9 +173,6 @@ const Navbar: FC<Props> = ({ navbarData }) => {
           </nav>
         </nav>
       </div>
-      {isModalVisible && (
-        <OrderModal isModalVisible={isModalVisible} close={closeModal} />
-      )}
     </>
   );
 };
