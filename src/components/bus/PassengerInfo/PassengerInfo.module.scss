@@ -47,7 +47,7 @@
   @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white hidden lg:block;
 }
 .buttonBlock {
-  @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white block lg:hidden;
+  @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 my-3 md:-mb-2 text-white block lg:hidden;
 }
 
 .ldsDualRing {
