@@ -30,9 +30,7 @@ export const BUS_BOOKING_CHECK = gql`
         schedule {
           id
           code
-          distance
           leaveDate
-          estimatedTime
           driverPhone
           adultTicket
           childTicket
@@ -54,6 +52,8 @@ export const BUS_BOOKING_CHECK = gql`
           }
           locationEnd {
             id
+            distance
+            estimatedDuration
             locationStop {
               id
               name
