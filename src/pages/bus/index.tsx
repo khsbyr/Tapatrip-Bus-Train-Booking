@@ -17,6 +17,7 @@ import Loader from '@components/common/Loader';
 export default function Bus({ guestToken }) {
   useEffect(() => {
     AuthTokenStorageService.guestStore(guestToken);
+    console.log('bus home');
   }, []);
   const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
   if (error) return `Error! ${error.message}`;
