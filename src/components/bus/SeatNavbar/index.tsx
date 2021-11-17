@@ -2,7 +2,7 @@ import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { useState } from 'react';
 import { Transition } from '@headlessui/react';
 import style from './SeatNavbar.module.scss';
-import OrderModal from '@components/bus/OrderModal';
+import OrderCheck from '@components/bus/OrderCheck';
 import SelectLanguage from '@components/common/Selects/selectLanguage';
 import Link from 'next/link';
 interface Props {
@@ -10,15 +10,6 @@ interface Props {
 }
 
 export default function SeatNav({ navbarData }) {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  function checkOrder() {
-    setIsModalVisible(true);
-  }
-
-  const closeModal = () => {
-    setIsModalVisible(false);
-  };
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
@@ -53,13 +44,8 @@ export default function SeatNav({ navbarData }) {
             <div className="flex items-center ">
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  <button
-                    className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-56"
-                    onClick={checkOrder}
-                  >
-                    Захиалга шалгах
-                  </button>
-                  <SelectLanguage />
+                  <OrderCheck />
+                  <SelectLanguage isBlack={true} />
 
                   <div>
                     <Link href="/login">
@@ -112,13 +98,9 @@ export default function SeatNav({ navbarData }) {
                   <h1 className="text-cardDate font-medium pr-4">Хэл сонгох</h1>
                   <SelectLanguage />
                 </div>
-
-                <button
-                  className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-56"
-                  onClick={checkOrder}
-                >
-                  Захиалга шалгах
-                </button>
+                <div>
+                  <OrderCheck />
+                </div>
                 <div>
                   <Link href="/login">
                     <a>
@@ -133,9 +115,6 @@ export default function SeatNav({ navbarData }) {
           )}
         </Transition>
       </nav>
-      {isModalVisible && (
-        <OrderModal isModalVisible={isModalVisible} close={closeModal} />
-      )}
     </div>
   );
 }
