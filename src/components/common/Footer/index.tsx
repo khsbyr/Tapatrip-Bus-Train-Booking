@@ -74,7 +74,7 @@ const Footer: FC<Props> = ({ navbarData }) => {
               </a>
             </div>
           </div>
-          <div>
+          <div className="hidden md:block">
             <div className="flex flex-wrap">
               <img src="/assets/IATA_logo.png" className="p-3" />
               <img src="/assets/veri.png" className="p-3" />
@@ -82,6 +82,35 @@ const Footer: FC<Props> = ({ navbarData }) => {
               <img src="/assets/visa.png" className="p-3" />
               <img src="/assets/securteTrust.png" />
             </div>
+          </div>
+        </div>
+        <div className="block md:hidden mb-10 mt-5">
+          <div className="flex flex-wrap gap-2">
+            <img
+              src="/assets/IATA_logo.png"
+              className="pr-5"
+              width="70"
+              height="25"
+            />
+            <img
+              src="/assets/veri.png"
+              className="pr-5"
+              width="70"
+              height="25"
+            />
+            <img
+              src="/assets/mastercard.png"
+              className="pr-5"
+              width="70"
+              height="25"
+            />
+            <img
+              src="/assets/visa.png"
+              className="pr-5"
+              width="70"
+              height="25"
+            />
+            <img src="/assets/securteTrust.png" width="70" height="25" />
           </div>
         </div>
       </div>

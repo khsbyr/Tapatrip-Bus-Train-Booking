@@ -6,7 +6,7 @@ import NavData from '@data/navData.json';
 export default function customerAssistant() {
   return (
     <div className="">
-      <HeaderBackground />
+      <HeaderBackground isBorderRadius={true} />
       <Navbar navbarData={NavData} />
       <div className="bg-bg py-5 px-7 lg:py-10 sm:px-20">
         <div className="max-w-7xl mx-auto text-cardDate space-y-5">
