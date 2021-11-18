@@ -1,3 +1,4 @@
+import SeatNav from '@components/bus/SeatNavbar';
 import Layout from '@components/common/Layout';
 import Navbar from '@components/common/Navbar';
 import DaysDetail from '@components/Travel/Travel-Card/DaysDetail';
@@ -45,8 +46,8 @@ export default function packageDetail({ NavData, PackTour }) {
 
   return (
     <Layout>
-      <Navbar navbarData={NavData} />
-      <div className="bg-bg font-Roboto mt-20">
+      <SeatNav navbarData={NavData} />
+      <div className="bg-bg font-Roboto mt-2">
         <div className="default-container pt-1">
           <div>
             <h1 className="font-bold text-2xl max-w-7xl mx-auto mt-6 px-6 mb-4">
