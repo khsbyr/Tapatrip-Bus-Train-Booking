@@ -32,7 +32,9 @@ export default function Card({ datas }) {
                 <div className="flex space-x-4 items-center">
                   <div className="">
                     <h1 className={style.startTitle}>{datas.node.leaveDate}</h1>
-                    <h1 className={style.timeText}>{datas.node.leaveTime}</h1>
+                    <h1 className={style.timeText}>
+                      {datas.node.leaveTime.slice(0, 5)}
+                    </h1>
                   </div>
                   <div>
                     <p className="flex justify-center">
@@ -54,7 +56,7 @@ export default function Card({ datas }) {
                       {moment.unix(unixDates).format('YYYY-MM-DD')}
                     </h1>
                     <h1 className={style.timeText}>
-                      {moment.unix(unixDates).format('HH:mm:ss')}
+                      {moment.unix(unixDates).format('HH:mm')}
                     </h1>
                   </div>
                 </div>
@@ -93,7 +95,7 @@ export default function Card({ datas }) {
             </div>
             <div className="flex items-center pt-4 sm:pt-4">
               <div className={style.rightRound}></div>
-              <div className="bg-bg w-full h-0.5 "></div>
+              <div className="bg-bg w-full h-0.5"></div>
               <div className={style.leftRound}></div>
             </div>
             <div className={style.rowDirection}>
