@@ -1,15 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
-import Layout from '@components/common/Layout';
-import NavData from '@data/navData.json';
-import Navbar3 from '@components/common/Navbar/Navbar3';
-import { Steps, Form, Input, Button } from 'antd';
-import Link from 'next/link';
-import ContentWrapper from '@components/Travel/Search/style';
 import Footer from '@components/common/Footer';
-import { useRouter } from 'next/router';
-import { isEmpty, result } from 'lodash';
-import PriceDetails from '@components/Travel/Travel-Card/PriceDetails';
+import Navbar from '@components/common/Navbar/index';
+import ContentWrapper from '@components/Travel/Search/style';
+import NavData from '@data/navData.json';
 import { postRequest } from '@lib/api';
+import { Form, Input, Steps } from 'antd';
+import { useRouter } from 'next/router';
+import React, { FC, useEffect, useState } from 'react';
 import CurrencyFormat from 'react-currency-format';
 const { Step } = Steps;
 const steps = [
@@ -172,7 +168,7 @@ const Register: FC<Props> = props => {
   return (
     <ContentWrapper>
       <div className="relative bg-bg">
-        <Navbar3 navbarData={NavData} />
+        <Navbar navbarData={NavData} />
         <Steps
           type="navigation"
           current={current}

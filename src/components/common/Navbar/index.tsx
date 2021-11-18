@@ -68,7 +68,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center ">
+              <div className="flex items-center">
                 <div className="hidden lg:block">
                   <div className={styles.loginBody}>
                     <a href="/login">
@@ -117,7 +117,6 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     </h1>
                     <SelectLanguage />
                   </div>
-
                   <OrderCheck />
                   <div>
                     <Link href="/login">

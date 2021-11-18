@@ -65,15 +65,15 @@
       "route": "/Company/privacy-policy"
     },
     { "id": 4, "text": "Түгээмэл асуултууд", "route": "/Company/FAQ" },
-    { "id": 5, "text": "Ажлын байр", "route": "/Company/Workplace" },
-    { "id": 6, "text": "Мэдээлэл", "route": "https://news.tapatrip.com/" }
+    { "id": 5, "text": "Ажлын байр", "route": "#" },
+    { "id": 6, "text": "Мэдээлэл", "route": "#" }
   ],
   "contactList": [
-    { "id": 1, "text": "Онлайн туслах", "route": "/Company/Online-help" },
+    { "id": 1, "text": "Онлайн туслах", "route": "#" },
     {
       "id": 2,
       "text": "Харилцагчийн туслах",
-      "route": "/Company/Customer-Assistant"
+      "route": "#"
     }
   ],
   "currency": [

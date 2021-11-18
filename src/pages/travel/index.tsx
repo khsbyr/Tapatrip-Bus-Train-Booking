@@ -4,7 +4,7 @@ import Navbar from '@components/common/Navbar';
 import App from '@components/common/Subscribe';
 // import Layout from '@components/Layout/Layout';
 import HeaderBackground from '@components/common/HeaderBackground';
-import Search from '@components/Travel/Search/Search';
+// import Search from '@components/Travel/Search/Search';
 import ServicesCard from '@components/Travel/Travel-Card/ServicesCard';
 import Tips from '@components/Travel/Travel-Card/Tips';
 import TravelCard from '@components/Travel/Travel-Card/TravelCard';
@@ -17,6 +17,7 @@ import Head from 'next/head';
 import React, { useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
+import Search from '@components/bus/SearchPanel';
 // import { guestToken } from '@lib/api';
 const { TabPane } = Tabs;
 const TYPE = 'TRAVEL';
@@ -30,7 +31,7 @@ export default function Travel({ NavData, Packages, TipsFor }) {
       <div className="bg-bg font-Roboto">
         <HeaderBackground />
         <Navbar navbarData={NavData} />
-        <Search navbarData={NavData} type={TYPE} />
+        <Search navbarData={NavData} />
         {Packages.map((packageFrom, index) => (
           <TravelCard
             key={index}

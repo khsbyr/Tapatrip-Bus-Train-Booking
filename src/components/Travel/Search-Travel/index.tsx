@@ -1,7 +1,7 @@
 import { Carousel } from 'antd';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
-import ContentWrapper from '@components/Travel/Search/style';
+import ContentWrapper from './style';
 
 interface Props {
   navbarData?: any;
