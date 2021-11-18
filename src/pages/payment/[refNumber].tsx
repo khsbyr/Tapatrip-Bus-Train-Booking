@@ -1,7 +1,7 @@
 import Navbar from '@components/common/Navbar/index';
 import Banks from '@components/common/payments/banks';
 import Corporate from '@components/common/payments/corporates';
-import ContentWrapper from '@components/Travel/Search/style';
+import ContentWrapper from '@components/Travel/Search-Travel';
 import NavData from '@data/navData.json';
 import {
   CheckIcon,
@@ -224,7 +224,7 @@ export default function payment({ NavData, refNumber, payments }) {
   };
 
   return (
-    <ContentWrapper className={'bg-bg'}>
+    <ContentWrapper>
       <div className="relative">
         <Navbar navbarData={NavData} />
         <div className="default-container">
