@@ -12,17 +12,17 @@ export default function HeaderBackground(props) {
       <img
         src="/assets/Header.png"
         alt="Logo"
-        className={`${pathname === '/bus' ? styles.image : styles.image1} `}
+        className={`${props.isBorderRadius ? styles.image1 : styles.image} `}
       />
-      <div className={`${pathname === '/bus' ? styles.card : styles.card1} `}>
+      <div className={`${props.isBorderRadius ? styles.card1 : styles.card} `}>
         <h1
-          className={`${pathname === '/bus' ? styles.title : styles.title1} `}
+          className={`${props.isBorderRadius ? styles.title1 : styles.title} `}
         >
           Аяллын цогц шийдэл
         </h1>
         <p
           className={`${
-            pathname === '/bus' ? styles.description : styles.description1
+            props.isBorderRadius ? styles.description1 : styles.description
           } `}
         >
           Онлайн аяллын платформ

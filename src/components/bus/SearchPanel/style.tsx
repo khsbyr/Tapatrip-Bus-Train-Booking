@@ -24,6 +24,7 @@ const ContentWrapper = styled.div`
       }
     }
   }
+
   .ant-tabs-tab-active {
     .tab-title {
       svg {
