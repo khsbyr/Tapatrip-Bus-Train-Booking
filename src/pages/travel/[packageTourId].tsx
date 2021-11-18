@@ -41,7 +41,7 @@ export default function packageDetail({ NavData, PackTour }) {
     });
     setTotalPrice(totPrice);
   };
-
+  console.log(PackTour);
   return (
     <Layout>
       <SeatNav navbarData={NavData} />
@@ -133,16 +133,63 @@ export default function packageDetail({ NavData, PackTour }) {
                   </div>
                 </div>
               </div>
-              <div className="gap-2 my-4 col-span-2 grid grid-cols-3 px-8 bg-white rounded-lg p-2">
-                {PackTour.package_tour_additional.map((additional, index) => (
-                  <div className="m-4 items-center">
-                    <div key={index}>
-                      <h2 className="font-bold ml-4 list-disc">
-                        {additional.title}
-                      </h2>
-                    </div>
-                  </div>
-                ))}
+              <div className="gap-2 my-4 col-span-2 grid grid-cols-4 px-8 bg-white rounded-lg p-2">
+                <div className="m-4">
+                  <h2 className="font-bold ml-2 mt-1 text-lg">
+                    {PackTour.package_tour_additionals.Highlight[0].type_name}
+                  </h2>
+                  {PackTour.package_tour_additionals.Highlight.map(
+                    (additional, index) => (
+                      <div className="m-2">
+                        <ul key={index}>
+                          <li className="ml-2 list-disc">{additional.name}</li>
+                        </ul>
+                      </div>
+                    )
+                  )}
+                </div>
+                <div className="m-4">
+                  <h2 className="font-bold ml-2 mt-1 text-lg">
+                    {PackTour.package_tour_additionals.Include[0].type_name}
+                  </h2>
+                  {PackTour.package_tour_additionals.Include.map(
+                    (additional, index) => (
+                      <div className="m-2">
+                        <ul key={index}>
+                          <li className="ml-2 list-disc">{additional.name}</li>
+                        </ul>
+                      </div>
+                    )
+                  )}
+                </div>
+                <div className="m-4">
+                  <h2 className="font-bold ml-2 mt-1 text-lg">
+                    {PackTour.package_tour_additionals.NotInclude[0].type_name}
+                  </h2>
+                  {PackTour.package_tour_additionals.NotInclude.map(
+                    (additional, index) => (
+                      <div className="m-2">
+                        <ul key={index}>
+                          <li className="ml-2 list-disc">{additional.name}</li>
+                        </ul>
+                      </div>
+                    )
+                  )}
+                </div>
+                <div className="m-4">
+                  <h2 className="font-bold ml-2 mt-1 text-lg">
+                    {PackTour.package_tour_additionals.GoodToKnow[0].type_name}
+                  </h2>
+                  {PackTour.package_tour_additionals.GoodToKnow.map(
+                    (additional, index) => (
+                      <div className="m-2">
+                        <ul key={index}>
+                          <li className="ml-2 list-disc">{additional.name}</li>
+                        </ul>
+                      </div>
+                    )
+                  )}
+                </div>
               </div>
             </div>
             <div className="relative col-span-1 grid grid-cols-1">
