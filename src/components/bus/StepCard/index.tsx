@@ -37,7 +37,7 @@ export default function StepCard({ datas, scheduleId }) {
                     <h1 className={style.startTitle}>{datas.leaveDate}</h1>
                     <h1 className={style.timeText}>{datas.leaveTime}</h1>
                   </div>
-                  {/* <div>
+                  <div>
                     <p className="flex justify-center">
                       <ArrowRightIcon className="h-5 text-direction" />
                     </p>
@@ -53,7 +53,7 @@ export default function StepCard({ datas, scheduleId }) {
                     <h1 className={style.timeText}>
                       {moment.unix(unixDates).format('HH:mm:ss')}
                     </h1>
-                  </div> */}
+                  </div>
                 </div>
               </div>
 
