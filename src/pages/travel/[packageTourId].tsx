@@ -8,6 +8,7 @@ import { postRequest } from '@lib/api';
 import { Carousel, Timeline } from 'antd';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 const breadcrumbRoutes = [
   {
     path: '/',
@@ -19,6 +20,7 @@ const breadcrumbRoutes = [
 ];
 
 export default function packageDetail({ NavData, PackTour }) {
+  const { t } = useTranslation();
   const [totalPrice, setTotalPrice] = useState(0);
   const [collectedPackages, setCollectedPackages] = useState([]);
   const [subPack, setSubPack] = useState('');
@@ -134,21 +136,18 @@ export default function packageDetail({ NavData, PackTour }) {
               </div>
               <div className="gap-2 my-4 col-span-2 grid grid-cols-3 px-8 bg-white rounded-lg p-2">
                 {PackTour.package_tour_additional.map((additional, index) => (
-                  <Carousel className={`md:px-2`} arrows dots={true}>
-                    <div className="m-4 items-center">
-                      <div key={index}>
-                        <h2 className="font-bold ml-4 list-disc">
-                          {additional.title}
-                        </h2>
-                      </div>
+                  <div className="m-4 items-center">
+                    <div key={index}>
+                      <h2 className="font-bold ml-4 list-disc">
+                        {additional.title}
+                      </h2>
                     </div>
-                  </Carousel>
+                  </div>
                 ))}
               </div>
             </div>
-
             <div className="relative col-span-1 grid grid-cols-1">
-              <div className=" col-span-1 w-96">
+              <div className=" col-span-1 w-98">
                 <div className="bg-white rounded-lg mb-4 py-2 px-4 ">
                   <h1 className="font-bold text-2xl">Багц сонгох</h1>
                   {PackTour.package_tour_packages.map((subPackages, index) => (
