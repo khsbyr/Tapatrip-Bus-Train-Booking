@@ -44,12 +44,12 @@ export default function OrderModal(props) {
     >
       <ContentWrapper>
         <div className="sm:pt-3 pb-2 sm:pb-5 space-y-8">
-          <h1 className="text-cardDate text-xl font-bold border-b-2">
+          <h1 className="text-cardDate text-lg  md:text-xl font-bold border-b-2 pb-3 -mt-3">
             Захиалгын мэдээлэл шалгах
           </h1>
           <Form name="busBookingCheck" onFinish={onFinish}>
             <div className="flex justify-center">
-              <div className="w-full sm:w-2/3 space-y-5">
+              <div className="w-full sm:w-4/5 space-y-5">
                 <div className="space-y-2">
                   <label
                     className="text-cardDate text-base pl-2 font-medium"

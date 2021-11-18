@@ -13,6 +13,10 @@ const ContentWrapper = styled.div`
   .ant-form-item-has-error .ant-input {
     background-color: #f1f2f6 !important;
   }
+
+  .ant-modal-title {
+    color: #0a3761 !important;
+  }
 `;
 
 export default ContentWrapper;
