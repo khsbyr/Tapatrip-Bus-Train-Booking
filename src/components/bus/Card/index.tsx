@@ -98,7 +98,6 @@ export default function Card({ datas }) {
               </div>
             </div>
           </div>
-
           <div className={`${!isActive ? 'hidden' : 'block'}`}>
             <div className="border border-dashed "></div>
             <div className="px-5 lg:px-20 py-5">
