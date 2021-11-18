@@ -1,4 +1,4 @@
-import Navbar3 from '@components/common/Navbar/Navbar3';
+import Navbar from '@components/common/Navbar/index';
 import Banks from '@components/common/payments/banks';
 import Corporate from '@components/common/payments/corporates';
 import ContentWrapper from '@components/Travel/Search/style';
@@ -226,7 +226,7 @@ export default function payment({ NavData, refNumber, payments }) {
   return (
     <ContentWrapper className={'bg-bg'}>
       <div className="relative">
-        <Navbar3 navbarData={NavData} />
+        <Navbar navbarData={NavData} />
         <div className="default-container">
           <div className=" px-2 grid grid-cols-3 gap-2">
             <div className="p-4 col-span-2">
