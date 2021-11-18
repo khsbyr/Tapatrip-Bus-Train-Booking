@@ -1,7 +1,7 @@
 import Navbar from '@components/common/Navbar/index';
 import Banks from '@components/common/payments/banks';
 import Corporate from '@components/common/payments/corporates';
-import ContentWrapper from '@components/Travel/Search-Travel';
+import ContentWrapper from '@components/Travel/style';
 import NavData from '@data/navData.json';
 import {
   CheckIcon,
@@ -14,6 +14,7 @@ import React, { useState } from 'react';
 import Footer from '@components/common/Footer';
 import router, { useRouter } from 'next/router';
 import CurrencyFormat from 'react-currency-format';
+import HeaderBackground from '@components/common/HeaderBackground';
 export default function payment({ NavData, refNumber, payments }) {
   const [visible, setVisible] = useState(false);
   const [selectPayment, setSelectPayment] = useState(false);
@@ -225,7 +226,7 @@ export default function payment({ NavData, refNumber, payments }) {
 
   return (
     <ContentWrapper>
-      <div className="relative">
+      <div className="relative mt-20">
         <Navbar navbarData={NavData} />
         <div className="default-container">
           <div className=" px-2 grid grid-cols-3 gap-2">

@@ -43,8 +43,8 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                       <img
                         src={`${
                           navbar
-                            ? '../assets/svgIcons/NewLogo.svg'
-                            : '../assets/svgIcons/NewLogoWhite.svg'
+                            ? '/assets/svgIcons/NewLogo.svg'
+                            : '/assets/svgIcons/NewLogoWhite.svg'
                         } `}
                         alt="Logo"
                         className={styles.logo}

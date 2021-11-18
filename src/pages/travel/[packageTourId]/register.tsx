@@ -1,6 +1,6 @@
 import Footer from '@components/common/Footer';
 import Navbar from '@components/common/Navbar/index';
-import ContentWrapper from '@components/Travel/Search-Travel';
+import ContentWrapper from '@components/Travel/style';
 import NavData from '@data/navData.json';
 import { postRequest } from '@lib/api';
 import { Form, Input, Steps } from 'antd';
@@ -167,7 +167,7 @@ const Register: FC<Props> = props => {
 
   return (
     <ContentWrapper>
-      <div className="relative bg-bg">
+      <div className="relative bg-bg mt-20">
         <Navbar navbarData={NavData} />
         <Steps
           type="navigation"

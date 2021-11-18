@@ -1,24 +1,23 @@
+import Search from '@components/bus/SearchPanel';
 import Footer from '@components/common/Footer';
+// import Layout from '@components/Layout/Layout';
+import HeaderBackground from '@components/common/HeaderBackground';
 import Navbar from '@components/common/Navbar';
 // import App from '@components/App/App';
 import App from '@components/common/Subscribe';
-// import Layout from '@components/Layout/Layout';
-import HeaderBackground from '@components/common/HeaderBackground';
+import TapaService from '@components/common/TapaService';
 // import Search from '@components/Travel/Search/Search';
 import ServicesCard from '@components/Travel/Travel-Card/ServicesCard';
 import Tips from '@components/Travel/Travel-Card/Tips';
 import TravelCard from '@components/Travel/Travel-Card/TravelCard';
 import NavData from '@data/navData.json';
+import TapaServiceList from '@data/tapaServiceList.json';
 import { postRequest } from '@lib/api';
 // import style from '@components/Search/Search.module.scss';
 import { Tabs } from 'antd';
-import { error } from 'console';
-import Head from 'next/head';
-import React, { useEffect } from 'react';
 import { GetStaticProps } from 'next';
-import AuthTokenStorageService from '@services/AuthTokenStorageService';
-import Search from '@components/bus/SearchPanel';
-// import { guestToken } from '@lib/api';
+import Head from 'next/head';
+import React from 'react';
 const { TabPane } = Tabs;
 const TYPE = 'TRAVEL';
 
@@ -41,7 +40,7 @@ export default function Travel({ NavData, Packages, TipsFor }) {
         ))}
 
         <ServicesCard />
-        <div className="default-container">
+        <div className="default-container mb-10">
           <div className="px-2">
             <h1
               className="font-bold text-2xl max-w-7xl mx-auto mt-6 px-6"
@@ -49,7 +48,7 @@ export default function Travel({ NavData, Packages, TipsFor }) {
             >
               Аялалын зөвлөмж
             </h1>
-            <div className="grid grid-cols-1 gap-3 my-6 md:grid-cols-3 md:gap-8 lg:grid-cols-3 max-w-7xl mx-auto md:my-6 ">
+            <div className="cursor-pointer grid grid-cols-1 gap-3 my-6 md:grid-cols-3 md:gap-8 lg:grid-cols-3 max-w-7xl mx-auto md:my-6 ">
               {TipsFor.map(tipFor => (
                 <Tips
                   title={tipFor.title}
@@ -60,9 +59,8 @@ export default function Travel({ NavData, Packages, TipsFor }) {
             </div>
           </div>
         </div>
-
-        {/* <Layout navbarData={NavData} /> */}
         <App />
+        <TapaService tapaServiceList={TapaServiceList} />
         <Footer navbarData={NavData} />
       </div>
     </div>
