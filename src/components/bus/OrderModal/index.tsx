@@ -147,13 +147,13 @@ export default function OrderModal(props) {
                           {datas?.schedule?.leaveDate}
                         </h1>
                         <h1 className="font-bold text-cardDate">
-                          {datas?.schedule?.leaveTime}
+                          {datas?.schedule?.leaveTime.slice(0, 5)}
                         </h1>
                       </p>
                       <ArrowRightIcon className="h-7 text-direction" />
                       <p className="font-bold text-cardDate">
                         {moment.unix(unixDates).format('YYYY-MM-DD')}
-                        {moment.unix(unixDates).format('HH:mm:ss')}
+                        {moment.unix(unixDates).format('HH:mm')}
                       </p>
                     </p>
                     {format(datas?.schedule?.locationEnd?.estimatedDuration)}
@@ -169,7 +169,7 @@ export default function OrderModal(props) {
                     <p className="flex">
                       Захиалга хийсэн огноо:
                       <h1 className="px-2 font-bold text-base text-cardDate">
-                        {moment(datas?.createdAt).format('YYYY-MM-DD HH:mm:ss')}
+                        {moment(datas?.createdAt).format('YYYY-MM-DD HH:mm')}
                       </h1>
                     </p>
                     <p className="flex">
