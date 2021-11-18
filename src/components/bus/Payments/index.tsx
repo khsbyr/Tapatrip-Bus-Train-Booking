@@ -7,12 +7,14 @@ import ContentWrapper from './style';
 import StepCard from '../StepCard';
 import PaymentCard from '../PaymentCard';
 import EndModal from '@components/common/EndModal';
+import { useGlobalStore } from '@context/globalStore';
 
 export default function Payment({ datas, scheduleId }) {
   const [value, setValue] = React.useState(1);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { Countdown } = Statistic;
   const deadline = Date.now() + 60 * 60 * 333.3;
+  const { booking } = useGlobalStore();
 
   const onChange = e => {
     setValue(e.target.value);
@@ -62,11 +64,11 @@ export default function Payment({ datas, scheduleId }) {
 
             <div className={style.radioGroup}>
               <h1 className={style.paymentTitle}>Төлбөр төлөх</h1>
-              <div className="w-full px-6 pb-5">
+              {/* <div className="w-full px-6 pb-5">
                 <p className={style.paymentShape}>Шилжүүлэх</p>
                 <PayTransfer />
-              </div>
-              {/* <Radio.Group onChange={onChange} value={value} className="w-full">
+              </div> */}
+              <Radio.Group onChange={onChange} value={value} className="w-full">
                 <div className="w-full ml-6">
                   <Space direction="vertical">
                     <Radio value={1}>
@@ -83,7 +85,7 @@ export default function Payment({ datas, scheduleId }) {
                     </Radio>
                   </Space>
                 </div>
-              </Radio.Group> */}
+              </Radio.Group>
             </div>
           </div>
           <button className={style.buttonBlock} onClick={handleCheck}>

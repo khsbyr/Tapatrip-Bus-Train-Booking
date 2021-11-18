@@ -82,19 +82,16 @@ export const BUS_BOOKING_CHECK = gql`
   }
 `;
 
-// export const BUS_BOOKING = gql`
-//   mutation busBookingCheck($id: String) {
-//     busBookingCheck(id: $id) {
-//       booking {
-//         id
-//         status
-//         statusName
-//         toPay
-//         toPaid
-//       }
-//     }
-//   }
-// `;
+export const BUS_BOOKING_CHECK_ID = gql`
+  mutation busBookingCheckById($id: ID!) {
+    busBookingCheckById(id: $id) {
+      booking {
+        id
+        payment
+      }
+    }
+  }
+`;
 
 export const BUS_BOOKING_CREATE = gql`
   mutation busBooking(
