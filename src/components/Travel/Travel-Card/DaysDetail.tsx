@@ -33,7 +33,7 @@ const DaysDetail: FC<Props> = ({ isLast, title, image, description }) => {
           )
         }
       >
-        <div className="border rounded-lg px-4 py-2">
+        <div className="border rounded-lg px-4 py-2 cursor-pointer">
           <div
             className=" flex justify-between"
             onClick={() => setIsActive(!isActive)}
@@ -41,13 +41,7 @@ const DaysDetail: FC<Props> = ({ isLast, title, image, description }) => {
             <div className="inline-flex items-center">
               <div className="items-center">
                 <h2 className="font-bold text-center">{title}</h2>
-                {/* <span className="bg-gray-300 text-center rounded-md p-1">
-                                    2021-11-01
-                                  </span> */}
               </div>
-              {/* <h2 className="font-bold mx-6 my-2">
-                                  {`Ulaanbaatar - Phuket`}
-                                </h2> */}
             </div>
             {isActive ? (
               <ChevronUpIcon className="h-10" />

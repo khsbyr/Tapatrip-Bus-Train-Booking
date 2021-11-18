@@ -8,13 +8,21 @@ import React, { FC, useState } from 'react';
 import { Steps } from 'antd';
 import { useGlobalStore } from '@context/globalStore';
 import style from './StepCard.module.scss';
+import moment from 'moment';
 import { arrayFilterSchedule } from '@helpers/array-format';
+import { unixDate } from '@helpers/array-format';
 
 const { Step } = Steps;
 export default function StepCard({ datas, scheduleId }) {
+  console.log(datas);
+  const unixDates = unixDate(datas);
   const { selectedSeats } = useGlobalStore();
   const [isActive, setIsActive] = useState(false);
-
+  let format = n =>
+    `0${(n / 60) ^ 0}`.slice(-2) +
+    ' цаг ' +
+    ('0' + (n % 60)).slice(-2) +
+    ' минут';
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
   return (
     <div>
@@ -24,13 +32,31 @@ export default function StepCard({ datas, scheduleId }) {
             <h1 className={style.leaveTitle}>{datas.leaveDate}</h1>
             <div className="flex flex-wrap justify-between ">
               <div className="mb-4 sm:mb-0 space-y-0 sm:space-y-2">
-                <div className="flex space-x-4 items-center">
-                  <h1 className={style.startTitle}>{datas.leaveDate}</h1>
-                  <ArrowRightIcon className="h-6 mt-1 text-direction" />
-                  <h1 className={style.startTitle}>{datas.leaveDate}</h1>
+                <div className="flex space-x-8 items-center">
+                  <div className="">
+                    <h1 className={style.startTitle}>{datas.leaveDate}</h1>
+                    <h1 className={style.timeText}>{datas.leaveTime}</h1>
+                  </div>
+                  <div>
+                    <p className="flex justify-center">
+                      <ArrowRightIcon className="h-5 text-direction" />
+                    </p>
+                    <h1 className={style.timeText}>
+                      {datas.locationEnd.distance}
+                      {' км'}
+                    </h1>
+                  </div>
+                  <div className="">
+                    <h1 className={style.startTitle}>
+                      {moment.unix(unixDates).format('YYYY-MM-DD')}
+                    </h1>
+                    <h1 className={style.timeText}>
+                      {moment.unix(unixDates).format('HH:mm:ss')}
+                    </h1>
+                  </div>
                 </div>
-                <h1 className={style.timeText}>{datas.leaveTime}</h1>
               </div>
+
               <div className="space-y-1 lg:space-y-2">
                 <h1 className={style.priceText}>
                   {/* {datas.adultTicket * selectedSeats.length} MNT */}
@@ -48,6 +74,9 @@ export default function StepCard({ datas, scheduleId }) {
                 </h1>
               </div>
             </div>
+            <h1 className="flex text-sm text-cardDate">
+              {format(datas.locationEnd.estimatedDuration)}
+            </h1>
             <div className="flex items-center pt-4 sm:pt-4">
               <div className={style.rightRound}></div>
               <div className="bg-bg w-full h-0.5 "></div>

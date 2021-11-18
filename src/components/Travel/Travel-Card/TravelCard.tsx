@@ -24,7 +24,7 @@ const TravelCard: FC<Props> = ({ packages, title }) => {
               as={`travel/${tourpackage.id}`}
               key={index}
             >
-              <div className="bg-white h-auto rounded-2xl shadow-xl">
+              <div className="hover:scale-105 cursor-pointer bg-white h-auto rounded-2xl shadow-xl">
                 <img
                   className="object-contain md:object-scale-down rounded-t-2xl"
                   src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${tourpackage.image}`}

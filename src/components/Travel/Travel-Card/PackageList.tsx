@@ -1,7 +1,13 @@
-import { MinusIcon, PlusIcon } from '@heroicons/react/solid';
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  MinusIcon,
+  PlusIcon,
+} from '@heroicons/react/solid';
 import React, { FC, useState, useEffect } from 'react';
 import PriceDetails from './PriceDetails';
 import CurrencyFormat from 'react-currency-format';
+import style from '@components/bus/Card/Card.module.scss';
 interface Props {
   subPackageId: number;
   title: string;
@@ -25,7 +31,7 @@ const PackageList: FC<Props> = ({
 }) => {
   const [showPrices, setShowPrices] = useState(false);
   const [selectedPrices, setSelectedPrices] = useState([]);
-
+  const [isActive, setIsActive] = useState(false);
   useEffect(() => {
     return function cleanup() {
       selectedPrices.length = 0;
@@ -71,18 +77,28 @@ const PackageList: FC<Props> = ({
   return (
     <>
       <div
-        className="grid grid-cols-3 my-6 gap-2 p-2 shadow-md"
-        onClick={() => setShowPrices(!showPrices)}
+        className={`grid grid-cols-3 my-6 gap-2 border rounded-md hover:shadow-md cursor-pointer`}
+        onClick={() => {
+          setShowPrices(!showPrices);
+          setIsActive(!isActive);
+        }}
       >
-        <div className="col-span-2">
+        <div className="col-span-2 p-2">
           <h1 className="font-bold text-lg">{title}</h1>
-          <p className="text-base">{`hotel : ${hotel_name}`}</p>
         </div>
-        <div className="col-span-1">
-          <img className="h-20 w-full rounded-md" src={`${hotel_image}`} />
-          <p className="text-cardDate border-l-0 my-1 text-center font-bold">
-            сонгох
-          </p>
+        <div className="col-span-1 p-2">
+          <img className="h-20 w-full " src={`${hotel_image}`} />
+        </div>
+        <div className="flex border-t border-dashed col-span-3  space-x-8 p-2">
+          <p className="text-base">{`Hotel name : ${hotel_name}`}</p>
+          <button className="text-direction font-medium flex text-xs md:text-base">
+            Сонгох
+            {isActive ? (
+              <ChevronUpIcon className="md:w-6 md:h-6 w-4 h-4" />
+            ) : (
+              <ChevronDownIcon className="md:w-6 md:h-6 w-4 h-4" />
+            )}
+          </button>
         </div>
       </div>
       {package_prices.map((price, index) => {
