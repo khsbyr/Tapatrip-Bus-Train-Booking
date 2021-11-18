@@ -4,7 +4,7 @@ import ContentWrapper from './style';
 import style from './search.module.scss';
 import SearchBus from '@components/bus/SearchInput';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+import SearchTravel from '@components/Travel/Search-Travel';
 
 const { TabPane } = Tabs;
 
@@ -13,18 +13,19 @@ interface Props {
   startLocations?: any;
 }
 
-const Search: FC<Props> = ({ navbarData, startLocations }) => {
+const Search: FC<Props> = ({ navbarData, startLocations = '' }) => {
   const router = useRouter();
+  const activePath = router.route == '/travel' ? '3' : '4';
 
   const handleTabChange = key => {
-    const route = key === 4 ? 'bus' : 'travel';
+    const route = key == 4 ? 'bus' : 'travel';
     router.push(`/${route}`);
   };
   return (
     <ContentWrapper>
       <div className={style.searchBody}>
         <Tabs
-          defaultActiveKey="4"
+          activeKey={activePath}
           centered
           tabBarGutter={160}
           onChange={handleTabChange}
@@ -55,7 +56,11 @@ const Search: FC<Props> = ({ navbarData, startLocations }) => {
             />
           ))}
         </Tabs>
-        <SearchBus startLocations={startLocations} />
+        {startLocations ? (
+          <SearchBus startLocations={startLocations} />
+        ) : (
+          <SearchTravel navbarData={navbarData} />
+        )}
       </div>
     </ContentWrapper>
   );
