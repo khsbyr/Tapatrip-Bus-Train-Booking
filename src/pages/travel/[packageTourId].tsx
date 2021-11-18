@@ -6,8 +6,9 @@ import PackageList from '@components/Travel/Travel-Card/PackageList';
 import NavData from '@data/navData.json';
 import { MapIcon } from '@heroicons/react/solid';
 import { postRequest } from '@lib/api';
-import { Carousel, Timeline } from 'antd';
+import { Carousel, Timeline, message } from 'antd';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 const breadcrumbRoutes = [
   {
@@ -24,7 +25,7 @@ export default function packageDetail({ NavData, PackTour }) {
   const [collectedPackages, setCollectedPackages] = useState([]);
   const [subPack, setSubPack] = useState('');
   let urlStr = '';
-
+  const router = useRouter();
   const collectedPrices = subPrices => {
     let totPrice = 0;
 
@@ -41,7 +42,22 @@ export default function packageDetail({ NavData, PackTour }) {
     });
     setTotalPrice(totPrice);
   };
-
+  const toRegister = () => {
+    if (subPack.length <= 0) {
+      message.warning('Багц сонгоно уу!');
+    } else {
+      router.push({
+        pathname: `[packageTourId]/register`,
+        query: {
+          packageTourId: PackTour.id,
+          totalPrice: totalPrice,
+          tripCode: PackTour.trip_code,
+          tourName: PackTour.title,
+          subPack,
+        },
+      });
+    }
+  };
   return (
     <Layout>
       <SeatNav navbarData={NavData} />
@@ -133,16 +149,63 @@ export default function packageDetail({ NavData, PackTour }) {
                   </div>
                 </div>
               </div>
-              <div className="gap-2 my-4 col-span-2 grid grid-cols-3 px-8 bg-white rounded-lg p-2">
-                {PackTour.package_tour_additional.map((additional, index) => (
-                  <div className="m-4 items-center">
-                    <div key={index}>
-                      <h2 className="font-bold ml-4 list-disc">
-                        {additional.title}
-                      </h2>
-                    </div>
-                  </div>
-                ))}
+              <div className="gap-2 my-4 col-span-2 grid grid-cols-4 px-8 bg-white rounded-lg p-2">
+                <div className="m-4">
+                  <h2 className="font-bold ml-2 mt-1 text-lg">
+                    {PackTour.package_tour_additionals.Highlight[0].type_name}
+                  </h2>
+                  {PackTour.package_tour_additionals.Highlight.map(
+                    (additional, index) => (
+                      <div className="m-2">
+                        <ul key={index}>
+                          <li className="ml-2 list-disc">{additional.name}</li>
+                        </ul>
+                      </div>
+                    )
+                  )}
+                </div>
+                <div className="m-4">
+                  <h2 className="font-bold ml-2 mt-1 text-lg">
+                    {PackTour.package_tour_additionals.Include[0].type_name}
+                  </h2>
+                  {PackTour.package_tour_additionals.Include.map(
+                    (additional, index) => (
+                      <div className="m-2">
+                        <ul key={index}>
+                          <li className="ml-2 list-disc">{additional.name}</li>
+                        </ul>
+                      </div>
+                    )
+                  )}
+                </div>
+                <div className="m-4">
+                  <h2 className="font-bold ml-2 mt-1 text-lg">
+                    {PackTour.package_tour_additionals.NotInclude[0].type_name}
+                  </h2>
+                  {PackTour.package_tour_additionals.NotInclude.map(
+                    (additional, index) => (
+                      <div className="m-2">
+                        <ul key={index}>
+                          <li className="ml-2 list-disc">{additional.name}</li>
+                        </ul>
+                      </div>
+                    )
+                  )}
+                </div>
+                <div className="m-4">
+                  <h2 className="font-bold ml-2 mt-1 text-lg">
+                    {PackTour.package_tour_additionals.GoodToKnow[0].type_name}
+                  </h2>
+                  {PackTour.package_tour_additionals.GoodToKnow.map(
+                    (additional, index) => (
+                      <div className="m-2">
+                        <ul key={index}>
+                          <li className="ml-2 list-disc">{additional.name}</li>
+                        </ul>
+                      </div>
+                    )
+                  )}
+                </div>
               </div>
             </div>
             <div className="relative col-span-1 grid grid-cols-1">
@@ -173,22 +236,12 @@ export default function packageDetail({ NavData, PackTour }) {
                     </h1>
                   </div>
                 </div>
-                <Link
-                  href={{
-                    pathname: `[packageTourId]/register`,
-                    query: {
-                      packageTourId: PackTour.id,
-                      totalPrice: totalPrice,
-                      tripCode: PackTour.trip_code,
-                      tourName: PackTour.title,
-                      subPack,
-                    },
-                  }}
+                <button
+                  className="col-span-1 w-full bg-button text-white font-bold py-2 px-4 rounded-lg"
+                  onClick={() => toRegister()}
                 >
-                  <button className="col-span-1 w-full bg-button text-white font-bold py-2 px-4 rounded-lg">
-                    Бүртгэх
-                  </button>
-                </Link>
+                  Худалдаж авах
+                </button>
               </div>
             </div>
           </div>

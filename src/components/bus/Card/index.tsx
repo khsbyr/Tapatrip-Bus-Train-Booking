@@ -25,11 +25,11 @@ export default function Card({ datas }) {
     <div className="px-2">
       <div className="max-w-7xl mx-auto">
         <div className={style.card}>
-          <div className="px-5 lg:px-12 space-y-2 lg:space-y-4">
+          <div className="px-7 md:px-12 space-y-2 lg:space-y-4">
             <h1 className={style.leaveTitle}>{datas.node.leaveDate}</h1>
             <div className="flex justify-between flex-wrap">
               <div className="mb-4 sm:mb-0 space-y-0 sm:space-y-2">
-                <div className="flex space-x-8 items-center">
+                <div className="flex space-x-4 items-center">
                   <div className="">
                     <h1 className={style.startTitle}>{datas.node.leaveDate}</h1>
                     <h1 className={style.timeText}>{datas.node.leaveTime}</h1>
@@ -38,7 +38,13 @@ export default function Card({ datas }) {
                     <p className="flex justify-center">
                       <ArrowRightIcon className="h-5 text-direction" />
                     </p>
-                    <h1 className={style.timeText}>
+                    <h1
+                      className={`${
+                        datas.node.locationEnd.distance === 0
+                          ? 'hidden'
+                          : style.timeText
+                      }`}
+                    >
                       {datas.node.locationEnd.distance}
                       {' км'}
                     </h1>
@@ -54,7 +60,7 @@ export default function Card({ datas }) {
                 </div>
               </div>
 
-              <div className="space-y-1 lg:space-y-2">
+              <div className="hidden xs:block space-y-1 lg:space-y-2">
                 <h1 className={style.priceText}>
                   {datas.node.adultTicket} MNT
                 </h1>
@@ -64,9 +70,27 @@ export default function Card({ datas }) {
                 </h1>
               </div>
             </div>
-            <h1 className="flex text-sm text-cardDate">
-              {format(datas.node.locationEnd.estimatedDuration)}
-            </h1>
+
+            <div className="flex justify-between">
+              <h1
+                className={`${
+                  datas.node.locationEnd.distance === 0
+                    ? 'hidden'
+                    : 'flex text-sm text-cardDate items-center xs:items-start'
+                }`}
+              >
+                {format(datas.node.locationEnd.estimatedDuration)}
+              </h1>
+              <div className="xs:hidden space-y-1 lg:space-y-2">
+                <h1 className={style.priceText}>
+                  {datas.node.adultTicket} MNT
+                </h1>
+                <h1 className="flex items-center text-xs md:text-sm lg:text-base">
+                  <UserIcon className="w-3 md:w-4 h-3 md:h-4 " /> 1 зорчигчийн
+                  үнэ
+                </h1>
+              </div>
+            </div>
             <div className="flex items-center pt-4 sm:pt-4">
               <div className={style.rightRound}></div>
               <div className="bg-bg w-full h-0.5 "></div>
@@ -111,7 +135,7 @@ export default function Card({ datas }) {
                   }
                 />
                 <Step
-                  title={datas.node.leaveDate}
+                  title={moment.unix(unixDates).format('YYYY-MM-DD')}
                   description={
                     datas.node.locationEnd.locationEnd.name +
                     '-' +

@@ -66,6 +66,10 @@ module.exports = {
       fontSize: {
         small: '8px',
       },
+
+      screens: {
+        xs: '430px',
+      },
     },
   },
   variants: {

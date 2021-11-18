@@ -8,7 +8,7 @@ export default function Information() {
   return (
     <>
       <Head>
-        <title>Tapatrip - FAQ</title>
+        <title>Tapatrip - Information</title>
       </Head>
       <div className="">
         <HeaderBackground isBorderRadius={true} />
