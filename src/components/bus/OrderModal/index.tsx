@@ -6,6 +6,8 @@ import { BUS_BOOKING_CHECK } from '@graphql/mutation';
 import moment from 'moment';
 import style from './style.module.scss';
 import ContentWrapper from './style';
+import { ArrowRightIcon } from '@heroicons/react/solid';
+import { unixDate } from '@helpers/array-format';
 
 export default function OrderModal(props) {
   const [isActive, setIsActive] = useState(false);
@@ -34,12 +36,19 @@ export default function OrderModal(props) {
     }
   };
   const datas = data && data.busBookingCheck.booking;
+  const unixDates = unixDate(datas?.schedule);
 
+  let format = n =>
+    `0${(n / 60) ^ 0}`.slice(-2) +
+    ' цаг ' +
+    ('0' + (n % 60)).slice(-2) +
+    ' минут';
+  console.log(data);
   return (
     <Modal
       visible={props.isModalVisible}
       onCancel={() => props.close()}
-      width={650}
+      width={900}
       footer={null}
     >
       <ContentWrapper>
@@ -132,18 +141,30 @@ export default function OrderModal(props) {
                       {', '}
                       {datas?.schedule?.endStopName}
                     </p>
-                    <p className="flex justify-between">
-                      Хөдлөх огноо:{' '}
-                      <h1 className="font-bold text-cardDate">
-                        {datas?.schedule?.leaveDate}
-                      </h1>
-                      {/* <ArrowRightIcon className="px-4 sm:px-10 h-7 text-direction" /> */}
-                      <h1 className="font-bold text-cardDate">
-                        {datas?.schedule?.leaveTime}
-                      </h1>
+                    <p className="flex">
+                      <p>
+                        <h1 className="font-bold text-cardDate">
+                          {datas?.schedule?.leaveDate}
+                        </h1>
+                        <h1 className="font-bold text-cardDate">
+                          {datas?.schedule?.leaveTime}
+                        </h1>
+                      </p>
+                      <ArrowRightIcon className="h-7 text-direction" />
+                      <p className="font-bold text-cardDate">
+                        {moment.unix(unixDates).format('YYYY-MM-DD')}
+                        {moment.unix(unixDates).format('HH:mm:ss')}
+                      </p>
                     </p>
+                    {format(datas?.schedule?.locationEnd?.estimatedDuration)}
                   </p>
-
+                  <div className="flex">
+                    Хоорондох зай:{' '}
+                    <h1 className="pl-2 font-bold text-base text-cardDate">
+                      {datas?.schedule?.locationEnd?.distance}
+                      {' км'}
+                    </h1>
+                  </div>
                   <p className="text-base space-y-2">
                     <p className="flex">
                       Захиалга хийсэн огноо:
