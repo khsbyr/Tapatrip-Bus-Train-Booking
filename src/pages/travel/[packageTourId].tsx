@@ -6,8 +6,9 @@ import PackageList from '@components/Travel/Travel-Card/PackageList';
 import NavData from '@data/navData.json';
 import { MapIcon } from '@heroicons/react/solid';
 import { postRequest } from '@lib/api';
-import { Carousel, Timeline } from 'antd';
+import { Carousel, Timeline, message } from 'antd';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 const breadcrumbRoutes = [
   {
@@ -24,7 +25,7 @@ export default function packageDetail({ NavData, PackTour }) {
   const [collectedPackages, setCollectedPackages] = useState([]);
   const [subPack, setSubPack] = useState('');
   let urlStr = '';
-
+  const router = useRouter();
   const collectedPrices = subPrices => {
     let totPrice = 0;
 
@@ -41,7 +42,22 @@ export default function packageDetail({ NavData, PackTour }) {
     });
     setTotalPrice(totPrice);
   };
-  console.log(PackTour);
+  const toRegister = () => {
+    if (subPack.length <= 0) {
+      message.warning('Багц сонгоно уу!');
+    } else {
+      router.push({
+        pathname: `[packageTourId]/register`,
+        query: {
+          packageTourId: PackTour.id,
+          totalPrice: totalPrice,
+          tripCode: PackTour.trip_code,
+          tourName: PackTour.title,
+          subPack,
+        },
+      });
+    }
+  };
   return (
     <Layout>
       <SeatNav navbarData={NavData} />
@@ -220,22 +236,12 @@ export default function packageDetail({ NavData, PackTour }) {
                     </h1>
                   </div>
                 </div>
-                <Link
-                  href={{
-                    pathname: `[packageTourId]/register`,
-                    query: {
-                      packageTourId: PackTour.id,
-                      totalPrice: totalPrice,
-                      tripCode: PackTour.trip_code,
-                      tourName: PackTour.title,
-                      subPack,
-                    },
-                  }}
+                <button
+                  className="col-span-1 w-full bg-button text-white font-bold py-2 px-4 rounded-lg"
+                  onClick={() => toRegister()}
                 >
-                  <button className="col-span-1 w-full bg-button text-white font-bold py-2 px-4 rounded-lg">
-                    Бүртгэх
-                  </button>
-                </Link>
+                  Худалдаж авах
+                </button>
               </div>
             </div>
           </div>
