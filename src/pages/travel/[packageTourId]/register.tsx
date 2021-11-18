@@ -1,6 +1,6 @@
 import Footer from '@components/common/Footer';
 import Navbar from '@components/common/Navbar/index';
-import ContentWrapper from '@components/Travel/style';
+import ContentWrapper from '@components/Travel/Search-Travel';
 import NavData from '@data/navData.json';
 import { postRequest } from '@lib/api';
 import { Form, Input, Steps } from 'antd';
