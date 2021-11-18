@@ -8,27 +8,52 @@ import React, { useState } from 'react';
 import { Steps } from 'antd';
 import style from './Card.module.scss';
 import Link from 'next/link';
+import { unixDate } from '@helpers/array-format';
+import moment from 'moment';
 
 const { Step } = Steps;
 
 export default function Card({ datas }) {
+  const unixDates = unixDate(datas.node);
   const [isActive, setIsActive] = useState(false);
+  let format = n =>
+    `0${(n / 60) ^ 0}`.slice(-2) +
+    ' цаг ' +
+    ('0' + (n % 60)).slice(-2) +
+    ' минут';
   return (
     <div className="px-2">
       <div className="max-w-7xl mx-auto">
         <div className={style.card}>
           <div className="px-5 lg:px-12 space-y-2 lg:space-y-4">
             <h1 className={style.leaveTitle}>{datas.node.leaveDate}</h1>
-            <div className="flex justify-between ">
-              <div className="space-y-2">
-                <div className="flex space-x-4">
-                  <h1 className={style.startTitle}>{datas.node.leaveDate}</h1>
-                  <ArrowRightIcon className="h-6 mt-1 text-direction hidden md:block" />
-                  <h1 className="md:hidden">-</h1>
-                  <h1 className={style.startTitle}>{datas.node.leaveDate}</h1>
+            <div className="flex justify-between flex-wrap">
+              <div className="mb-4 sm:mb-0 space-y-0 sm:space-y-2">
+                <div className="flex space-x-8 items-center">
+                  <div className="">
+                    <h1 className={style.startTitle}>{datas.node.leaveDate}</h1>
+                    <h1 className={style.timeText}>{datas.node.leaveTime}</h1>
+                  </div>
+                  <div>
+                    <p className="flex justify-center">
+                      <ArrowRightIcon className="h-5 text-direction" />
+                    </p>
+                    <h1 className={style.timeText}>
+                      {datas.node.locationEnd.distance}
+                      {' км'}
+                    </h1>
+                  </div>
+                  <div className="">
+                    <h1 className={style.startTitle}>
+                      {moment.unix(unixDates).format('YYYY-MM-DD')}
+                    </h1>
+                    <h1 className={style.timeText}>
+                      {moment.unix(unixDates).format('HH:mm:ss')}
+                    </h1>
+                  </div>
                 </div>
-                <h1 className={style.timeText}>{datas.node.leaveTime}</h1>
               </div>
+
               <div className="space-y-1 lg:space-y-2">
                 <h1 className={style.priceText}>
                   {datas.node.adultTicket} MNT
@@ -39,7 +64,14 @@ export default function Card({ datas }) {
                 </h1>
               </div>
             </div>
-
+            <h1 className="flex text-sm text-cardDate">
+              {format(datas.node.locationEnd.estimatedDuration)}
+            </h1>
+            <div className="flex items-center pt-4 sm:pt-4">
+              <div className={style.rightRound}></div>
+              <div className="bg-bg w-full h-0.5 "></div>
+              <div className={style.leftRound}></div>
+            </div>
             <div className={style.rowDirection}>
               <div>
                 <h1 className="text-cardDate font-semibold text-xs md:text-sm lg:text-md">
@@ -66,11 +98,7 @@ export default function Card({ datas }) {
               </div>
             </div>
           </div>
-          <div className={style.rightRound}></div>
-          <div className={style.leftRound}></div>
-          <div className={style.line} style={{ top: '135px' }}></div>
-          <div className={style.line1} style={{ top: '117px' }}></div>
-          {/* <div className={style.line2} style={{ top: '110px' }}></div> */}
+
           <div className={`${!isActive ? 'hidden' : 'block'}`}>
             <div className="border border-dashed "></div>
             <div className="px-5 lg:px-20 py-5">

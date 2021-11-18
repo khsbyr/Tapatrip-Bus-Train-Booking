@@ -1,3 +1,6 @@
+import { EFAULT } from 'constants';
+import { AnyMxRecord } from 'dns';
+
 export function arrayFormat(data: any) {
   const result = data === undefined ? '' : data.busAllLocations.edges;
   return result;
@@ -85,5 +88,11 @@ export function arrayFilterSchedule(data: any, value: String) {
     data.filter(function (currentElement) {
       return currentElement.scheduleId.indexOf(value) > -1;
     });
+  return result;
+}
+export function unixDate(data: any) {
+  let result =
+    new Date(data?.leaveDate + ' ' + data?.leaveTime).getTime() / 1000 +
+    data?.locationEnd?.estimatedDuration * 60;
   return result;
 }
