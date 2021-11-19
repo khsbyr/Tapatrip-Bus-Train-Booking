@@ -18,7 +18,7 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import locale from 'antd/lib/date-picker/locale/mn_MN';
 import 'moment/locale/mn';
-import latinToCyrillic from '@helpers/latin-to-cyrillic';
+// import latinToCyrillic from '@helpers/latin-to-cyrillic';
 
 const dateFormat = 'YYYY-MM-DD';
 
