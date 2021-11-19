@@ -53,7 +53,7 @@
   ],
   "profile": [{ "id": 1, "text": "Нэвтрэх", "route": "/login" }],
   "companyList": [
-    { "id": 1, "text": "Бидний тухай", "route": "/Company/about" },
+    { "id": 1, "text": "Бидний тухай", "route": "/company/about" },
     {
       "id": 2,
       "text": "Үйлчилгээний нөхцөл",
