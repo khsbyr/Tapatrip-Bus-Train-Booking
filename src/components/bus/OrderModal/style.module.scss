@@ -22,9 +22,9 @@
 }
 
 .card {
-  @apply relative bg-[#f7f7f7] w-full h-auto rounded-2xl;
-  .leaveTitle {
-    @apply pt-4 font-bold text-cardDescColor text-xs;
+  @apply relative bg-cardOrder w-full h-auto rounded-2xl;
+  .location {
+    @apply flex justify-center pt-4 font-medium text-cardDate text-xs sm:text-base;
   }
   .startTitle {
     @apply text-cardDate font-bold text-sm;
@@ -36,7 +36,7 @@
     @apply text-cardDate font-bold text-sm sm:text-base lg:text-sm;
   }
   .rowDirection {
-    @apply pb-5 pt-4 flex justify-between items-center;
+    @apply pb-5 pt-4 flex justify-between;
   }
   .orderButton {
     @apply bg-button text-white font-thin md:font-bold md:py-2 px-4 rounded-lg h-8 md:h-10 text-center w-full lg:w-40 hover:bg-hover focus:bg-down;
