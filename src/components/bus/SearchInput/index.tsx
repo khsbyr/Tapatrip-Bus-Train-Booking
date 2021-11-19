@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { AutoComplete, DatePicker, message, Spin } from 'antd';
+import React, { useState } from 'react';
+import { AutoComplete, DatePicker, message } from 'antd';
 import { useApolloClient } from '@apollo/client';
 import {
   BUS_LOCATION_ENDS_QUERY,
@@ -18,6 +18,7 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import locale from 'antd/lib/date-picker/locale/mn_MN';
 import 'moment/locale/mn';
+import latinToCyrillic from '@helpers/latin-to-cyrillic';
 
 const dateFormat = 'YYYY-MM-DD';
 
@@ -108,6 +109,10 @@ export default function SearchBus({ startLocations }) {
       });
     }
   };
+
+  // const handleStartSearch = (value: string) => {
+  //   console.log(latinToCyrillic(value));
+  // };
 
   function disabledDate(current) {
     return current && current < moment().subtract(1, 'days');
