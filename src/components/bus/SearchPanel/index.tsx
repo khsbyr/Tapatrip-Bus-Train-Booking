@@ -56,7 +56,7 @@ const Search: FC<Props> = ({ navbarData, startLocations = '' }) => {
             />
           ))}
         </Tabs>
-        {startLocations ? (
+        {activePath === '4' ? (
           <SearchBus startLocations={startLocations} />
         ) : (
           <SearchTravel navbarData={navbarData} />
