@@ -30,6 +30,7 @@ module.exports = {
         inactive: '#8AB1D5',
         register: '#0A3761',
         seatHover: '#1575CE',
+        cardOrder: '#f7f7f7',
       }),
       theme: {
         screens: {
