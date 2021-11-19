@@ -12,7 +12,8 @@ export default function Payment({ datas, scheduleId }) {
   const [value, setValue] = React.useState(1);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { Countdown } = Statistic;
-  const deadline = Date.now() + 60 * 60 * 333.3;
+  const deadline = Date.now() + 60 * 60;
+  //  * 60 * 333.3;
 
   const onChange = e => {
     setValue(e.target.value);
@@ -33,10 +34,9 @@ export default function Payment({ datas, scheduleId }) {
           <div className={style.root}>
             <div className={style.bodyPayment}>
               <div className={style.instructions}>
-                <p>Төлбөр төлөх зааварчилгаа</p>
-                <p>
-                  <Countdown value={deadline} />
-                </p>
+                {/* <p>Төлбөр төлөх зааварчилгаа</p> */}
+                <p>{<Countdown format="MM:ss" value={deadline} />}</p>
+                {console.log(<Countdown format="MM:ss" value={deadline} />)}
               </div>
               <ul className="p-4 text-sm sm:text-base px-10">
                 <li>

@@ -25,11 +25,7 @@ export default function OrderModal(props) {
             <h1 className="text-lg md:text-xl text-cardDate font-bold">
               Танд илгээсэн 4 оронтой тоог оруулна уу?
             </h1>
-            <h1 className="text-cardDate text-sm sm:text-base pt-6">
-              Баталгаажуулах код
-            </h1>
-
-            <p className="flex justify-center">
+            <p className="flex justify-center py-4">
               <ReactCodeInput
                 fields={4}
                 fieldWidth={46}
@@ -37,9 +33,6 @@ export default function OrderModal(props) {
                 onChange={handlePinChange}
               />
             </p>
-            <h1 className="text-cardDate text-sm sm:text-base pb-4">
-              Баталгаажуулах кодыг оруулна уу?
-            </h1>
             <button
               onClick={() => props.booking(pinCode)}
               className={style.button}

@@ -10,6 +10,7 @@ import style from './Card.module.scss';
 import Link from 'next/link';
 import { unixDate } from '@helpers/array-format';
 import moment from 'moment';
+import CurrencyFormat from 'react-currency-format';
 
 const { Step } = Steps;
 
@@ -26,8 +27,8 @@ export default function Card({ datas }) {
       <div className="max-w-7xl mx-auto">
         <div className={style.card}>
           <div className="px-7 md:px-12 space-y-2 lg:space-y-4">
-            <h1 className={style.leaveTitle}>{datas.node.leaveDate}</h1>
-            <div className="flex justify-between flex-wrap">
+            {/* <h1 className={style.leaveTitle}>{datas.node.leaveDate}</h1> */}
+            <div className="flex justify-between flex-wrap pt-5">
               <div className="mb-4 sm:mb-0 space-y-0 sm:space-y-2">
                 <div className="flex space-x-4 items-center">
                   <div className="">
@@ -55,7 +56,7 @@ export default function Card({ datas }) {
                     <h1 className={style.startTitle}>
                       {moment.unix(unixDates).format('YYYY-MM-DD')}
                     </h1>
-                    <h1 className={style.timeText}>
+                    <h1 className="flex justify-end font-light text-cardDate text-xs md:text-sm lg:text-lg">
                       {moment.unix(unixDates).format('HH:mm')}
                     </h1>
                   </div>
@@ -63,8 +64,14 @@ export default function Card({ datas }) {
               </div>
 
               <div className="hidden xs:block space-y-1 lg:space-y-2">
-                <h1 className={style.priceText}>
-                  {datas.node.adultTicket} MNT
+                <h1 className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
+                  <CurrencyFormat
+                    value={datas.node.adultTicket}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    renderText={value => <div>{value}</div>}
+                  />
+                  <h1 className={style.priceText}>{' MNT'}</h1>
                 </h1>
                 <h1 className="flex items-center text-xs md:text-sm lg:text-base">
                   <UserIcon className="w-3 md:w-4 h-3 md:h-4 " /> 1 зорчигчийн
@@ -84,8 +91,14 @@ export default function Card({ datas }) {
                 {format(datas.node.locationEnd.estimatedDuration)}
               </h1>
               <div className="xs:hidden space-y-1 lg:space-y-2">
-                <h1 className={style.priceText}>
-                  {datas.node.adultTicket} MNT
+                <h1 className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
+                  <CurrencyFormat
+                    value={datas.node.adultTicket}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    renderText={value => <div>{value}</div>}
+                  />
+                  <h1 className={style.priceText}>{' MNT'}</h1>
                 </h1>
                 <h1 className="flex items-center text-xs md:text-sm lg:text-base">
                   <UserIcon className="w-3 md:w-4 h-3 md:h-4 " /> 1 зорчигчийн
@@ -132,16 +145,18 @@ export default function Card({ datas }) {
                   title={datas.node.leaveDate}
                   description={
                     datas.node.startStopName +
-                    '-' +
-                    datas.node.locationEnd.locationStop.location.name
+                    ' /' +
+                    datas.node.locationEnd.locationStop.location.name +
+                    '/'
                   }
                 />
                 <Step
                   title={moment.unix(unixDates).format('YYYY-MM-DD')}
                   description={
                     datas.node.locationEnd.locationEnd.name +
-                    '-' +
-                    datas.node.locationEnd.locationEnd.location.name
+                    ' /' +
+                    datas.node.locationEnd.locationEnd.location.name +
+                    '/'
                   }
                 />
               </Steps>
