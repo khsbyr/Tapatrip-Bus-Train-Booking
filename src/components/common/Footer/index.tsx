@@ -45,7 +45,7 @@ const Footer: FC<Props> = ({ navbarData }) => {
           </div>
           <div>
             <h1 style={{ color: '#0A3761' }} className="font-bold text-lg">
-              Биднийг дагаарай
+              Биднийг дагах
             </h1>
             <div className="flex mt-4">
               <a

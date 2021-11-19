@@ -1,4 +1,4 @@
-import { MenuIcon, XIcon } from '@heroicons/react/solid';
+import { MenuIcon, XIcon, PhoneIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import OrderCheck from '@components/bus/OrderCheck';
@@ -63,8 +63,18 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                         {menu.text}
                       </a>
                     ))}
-                    <OrderCheck />
-                    <SelectLanguage isBlack={false} />
+                    <div className="flex items-center space-x-5 pl-6 xl:space-x-10 xl:pl-8">
+                      <OrderCheck />
+                      <SelectLanguage isBlack={false} />
+                      <div
+                        className={`${
+                          navbar ? 'text-cardDate' : 'text-white'
+                        } flex text-lg font-bold pl-1 cursor-pointer`}
+                      >
+                        <PhoneIcon className="w-5" />
+                        <p className="pl-2">7514-4444</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -126,6 +136,10 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                         </button>
                       </a>
                     </Link>
+                  </div>
+                  <div className="flex items-center text-base sm:text-lg font-bold px-4 cursor-pointer text-cardDate">
+                    <PhoneIcon className="w-4 sm:w-5" />
+                    <p className="pl-2">(976)-7514-4444</p>
                   </div>
                 </div>
               </div>
