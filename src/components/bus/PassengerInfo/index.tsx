@@ -13,10 +13,12 @@ import InputPhoneNumber from '@components/common/InputPhoneNumber';
 import { arrayFilterSchedule } from '@helpers/array-format';
 import ConfirmModal from '@components/common/ConfirmModal';
 import AuthService from '@services/auth';
+import { useRouter } from 'next/router';
 
 const { Option } = Select;
 
 export default function PassengerIfo({ datas, scheduleId }) {
+  const router = useRouter();
   const [isCompoany, setIsCompany] = useState(false);
   const { customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
@@ -29,6 +31,11 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 
   const [addBusBooking, { data }] = useMutation(BUS_BOOKING_CREATE);
+
+  window.onpopstate = () => {
+    router.push(`/bus/orders/${scheduleId}`);
+    setCurrent(0);
+  };
 
   const handleCompany = data => {
     let company = data == 0 ? false : true;

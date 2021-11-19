@@ -1,4 +1,4 @@
-import { Statistic, Radio, Space, Input } from 'antd';
+import { Statistic, Radio, Space, Modal } from 'antd';
 import PayTransfer from '@components/bus/Payments/PayTransfer';
 import React, { useState } from 'react';
 import style from './Payments.module.scss';
@@ -7,15 +7,27 @@ import StepCard from '../StepCard';
 import PaymentCard from '../PaymentCard';
 import EndModal from '@components/common/EndModal';
 import { useGlobalStore } from '@context/globalStore';
+import { useRouter } from 'next/router';
 
 export default function Payment({ datas, scheduleId }) {
+  const router = useRouter();
   const [value, setValue] = React.useState(1);
+  const { setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { Countdown } = Statistic;
   const deadline = Date.now() + 60 * 60 * 333.3;
   const { booking } = useGlobalStore();
   const qrImage =
     booking && JSON.parse(booking.payment)[0].invoice.qPay_QRimage;
+
+  window.onpopstate = () => {
+    Modal.warning({
+      title: 'Анхааруулга',
+      content: ' Та төлбөрөө төлнө үү?',
+    });
+    router.push(`/bus/orders/${scheduleId}`);
+    setCurrent(2);
+  };
 
   const onChange = e => {
     setValue(e.target.value);
