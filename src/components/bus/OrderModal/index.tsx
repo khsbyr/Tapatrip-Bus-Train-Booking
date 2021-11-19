@@ -15,6 +15,15 @@ export default function OrderModal(props) {
 
   const [busBookingCheck, { data }] = useMutation(BUS_BOOKING_CHECK);
 
+  const datas = data && data.busBookingCheck.booking;
+  const unixDates = unixDate(datas?.schedule);
+
+  const format = n =>
+    `0${(n / 60) ^ 0}`.slice(-2) +
+    ' цаг ' +
+    ('0' + (n % 60)).slice(-2) +
+    ' минут';
+
   const onFinish = async values => {
     setLoading('true');
     try {
@@ -35,15 +44,7 @@ export default function OrderModal(props) {
       setLoading('false');
     }
   };
-  const datas = data && data.busBookingCheck.booking;
-  const unixDates = unixDate(datas?.schedule);
 
-  let format = n =>
-    `0${(n / 60) ^ 0}`.slice(-2) +
-    ' цаг ' +
-    ('0' + (n % 60)).slice(-2) +
-    ' минут';
-  console.log(data);
   return (
     <Modal
       visible={props.isModalVisible}

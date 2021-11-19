@@ -15,7 +15,6 @@ import CurrencyFormat from 'react-currency-format';
 
 const { Step } = Steps;
 export default function StepCard({ datas, scheduleId }) {
-  console.log(datas);
   const unixDates = unixDate(datas);
   const { selectedSeats } = useGlobalStore();
   const [isActive, setIsActive] = useState(false);

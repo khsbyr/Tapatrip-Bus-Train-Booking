@@ -106,7 +106,6 @@ export default function BusNav({ navbarData, startLocations }) {
               id="mobile-menu"
             >
               <div ref={ref} className="p-3 space-y-4">
-                {console.log(ref)}
                 <div className="flex">
                   <h1 className="text-cardDate font-medium pr-4">Хэл сонгох</h1>
                   <SelectLanguage />

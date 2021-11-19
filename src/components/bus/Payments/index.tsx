@@ -36,9 +36,7 @@ export default function Payment({ datas, scheduleId }) {
           <div className={style.root}>
             <div className={style.bodyPayment}>
               <div className={style.instructions}>
-                {/* <p>Төлбөр төлөх зааварчилгаа</p> */}
                 <p>{<Countdown format="MM:ss" value={deadline} />}</p>
-                {console.log(<Countdown format="MM:ss" value={deadline} />)}
               </div>
               <ul className="p-4 text-sm sm:text-base px-10">
                 <li>
