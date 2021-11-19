@@ -1,6 +1,5 @@
 import { Statistic, Radio, Space, Input } from 'antd';
 import PayTransfer from '@components/bus/Payments/PayTransfer';
-import QPay from '@components/bus/Payments/QPay';
 import React, { useState } from 'react';
 import style from './Payments.module.scss';
 import ContentWrapper from './style';
@@ -15,6 +14,8 @@ export default function Payment({ datas, scheduleId }) {
   const { Countdown } = Statistic;
   const deadline = Date.now() + 60 * 60 * 333.3;
   const { booking } = useGlobalStore();
+  const qrImage =
+    booking && JSON.parse(booking.payment)[0].invoice.qPay_QRimage;
 
   const onChange = e => {
     setValue(e.target.value);
@@ -80,7 +81,14 @@ export default function Payment({ datas, scheduleId }) {
                     <Radio value={2}>
                       <div>
                         <p className={style.paymentShape}>QPay</p>
-                        {value === 2 && <QPay />}
+                        {value === 2 && (
+                          <img
+                            src={`data:image/png;base64,${qrImage}`}
+                            alt="Qpay code"
+                            width={150}
+                            height={150}
+                          />
+                        )}
                       </div>
                     </Radio>
                   </Space>
