@@ -11,6 +11,7 @@ import style from './StepCard.module.scss';
 import moment from 'moment';
 import { arrayFilterSchedule } from '@helpers/array-format';
 import { unixDate } from '@helpers/array-format';
+import CurrencyFormat from 'react-currency-format';
 
 const { Step } = Steps;
 export default function StepCard({ datas, scheduleId }) {
@@ -29,8 +30,7 @@ export default function StepCard({ datas, scheduleId }) {
       <div className="max-w-7xl mx-auto">
         <div className={style.card}>
           <div className="px-3 md:px-6 space-y-2 lg:space-y-4">
-            <h1 className={style.leaveTitle}>{datas.leaveDate}</h1>
-            <div className="flex flex-wrap justify-between ">
+            <div className="flex flex-wrap justify-between pt-5">
               <div className="mb-4 sm:mb-0 space-y-0 sm:space-y-2">
                 <div className="flex space-x-8 items-center">
                   <div className="">
@@ -52,7 +52,7 @@ export default function StepCard({ datas, scheduleId }) {
                     <h1 className={style.startTitle}>
                       {moment.unix(unixDates).format('YYYY-MM-DD')}
                     </h1>
-                    <h1 className={style.timeText}>
+                    <h1 className="flex justify-end font-light text-cardDate text-xs">
                       {moment.unix(unixDates).format('HH:mm')}
                     </h1>
                   </div>
@@ -61,11 +61,19 @@ export default function StepCard({ datas, scheduleId }) {
 
               <div className="space-y-1 lg:space-y-2">
                 <h1 className={style.priceText}>
-                  {/* {datas.adultTicket * selectedSeats.length} MNT */}
-                  {formatSelectedSeats.length > 0
-                    ? datas.adultTicket * formatSelectedSeats.length
-                    : datas.adultTicket}{' '}
-                  MNT
+                  <h1 className="flex text-cardDate font-bold text-sm sm:text-base lg:text-sm space-x-2">
+                    <CurrencyFormat
+                      value={
+                        formatSelectedSeats.length > 0
+                          ? datas.adultTicket * formatSelectedSeats.length
+                          : datas.adultTicket
+                      }
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      renderText={value => <div>{value}</div>}
+                    />
+                    <h1 className={style.priceText}>{' MNT'}</h1>
+                  </h1>
                 </h1>
                 <h1 className="flex items-center text-xs md:text-sm lg:text-base">
                   <UserIcon className="w-3 md:w-4 h-3 md:h-4 " />
@@ -113,16 +121,18 @@ export default function StepCard({ datas, scheduleId }) {
                   title={datas.leaveDate}
                   description={
                     datas.startStopName +
-                    '-' +
-                    datas.locationEnd.locationStop.location.name
+                    ' /' +
+                    datas.locationEnd.locationStop.location.name +
+                    '/'
                   }
                 />
                 <Step
-                  title={datas.leaveDate}
+                  title={moment.unix(unixDates).format('YYYY-MM-DD')}
                   description={
                     datas.locationEnd.locationEnd.name +
-                    '-' +
-                    datas.locationEnd.locationEnd.location.name
+                    ' /' +
+                    datas.locationEnd.locationEnd.location.name +
+                    '/'
                   }
                 />
               </Steps>

@@ -16,7 +16,7 @@ const Email: FC = () => {
           className="text-center font-bold text-5xl mt-12"
           style={{ color: '#177AD6' }}
         >
-          Онцгой хөнгөлөлт, урамшуулал шинчлэлийг <br /> имэйлээр авахыг хүсэж
+          Онцгой хөнгөлөлт, урамшуулал шинэчлэлийг <br /> и-мэйлээр авахыг хүсч
           байна уу?
         </h1>
 
@@ -29,7 +29,7 @@ const Email: FC = () => {
               placeholder="И-Мэйл хаягаа оруулна уу"
               aria-label="Full name"
             />
-           <button className="bg-button text-white font-bold py-2 px-4 rounded-2xl h-14 w-96">
+            <button className="bg-button text-white font-bold py-2 px-4 rounded-2xl h-14 w-96">
               Бүртгэх
             </button>
           </div>

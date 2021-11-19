@@ -48,7 +48,7 @@ export default function SelectSeats({ datas, scheduleId }) {
           </div>
           <div className={style.information}>
             <div className="sm:w-7/12 space-y-6">
-              <h1 className={style.busInformationTitle}>Автобусын мэдээлэл</h1>
+              <h1 className={style.busInformationTitle}>Автобусны мэдээлэл</h1>
               <div className="flex">
                 <img
                   src="/assets/busimg.jpg"

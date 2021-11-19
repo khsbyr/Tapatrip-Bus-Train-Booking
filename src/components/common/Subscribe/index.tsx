@@ -119,8 +119,8 @@ const Subscribe: FC = () => {
               </div>
               <div className={styles.childBody}>
                 <h1 className={styles.title}>
-                  Онцгой хөнгөлөлт, урамшуулал, шинчлэлийг имэйлээр авахыг хүсэж
-                  байна уу?
+                  Онцгой хөнгөлөлт, урамшуулал, шинэчлэлийг и-мэйлээр авахыг
+                  хүсч байна уу?
                 </h1>
                 <div className="flex flex-wrap gap-1">
                   <Form.Item
