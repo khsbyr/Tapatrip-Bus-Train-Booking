@@ -198,7 +198,7 @@ export default function OrderModal(props) {
                 </div>
                 <div className={`${!isActive1 ? 'hidden' : 'block'}`}>
                   <div className="border border-dashed "></div>
-                  <div className="px-3 md:px-6 flex justify-around py-5">
+                  <div className="px-3 md:px-6 flex flex-col xs:flex-row justify-around py-5 space-y-3 xs:space-y-0">
                     <div className="space-y-3">
                       <h1 className="text-cardDate font-medium text-xs sm:text-sm">
                         ААН: {datas?.schedule?.bus?.transporter.name}
