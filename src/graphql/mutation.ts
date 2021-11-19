@@ -121,6 +121,7 @@ export const BUS_BOOKING_CREATE = gql`
       statusName
       refNumber
       clientMutationId
+      payment
     }
   }
 `;
