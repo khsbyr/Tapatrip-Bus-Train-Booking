@@ -20,6 +20,7 @@ export default function OrderModal(props) {
           className={style.Modal}
           width={580}
           footer={null}
+          maskClosable={false}
         >
           <div className={style.root}>
             <h1 className="text-lg md:text-xl text-cardDate font-bold">
