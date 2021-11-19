@@ -57,14 +57,14 @@
     {
       "id": 2,
       "text": "Үйлчилгээний нөхцөл",
-      "route": "/Company/terms-of-use"
+      "route": "/company/terms-of-use"
     },
     {
       "id": 3,
       "text": "Нууцлалын бодлого",
-      "route": "/Company/privacy-policy"
+      "route": "/company/privacy-policy"
     },
-    { "id": 4, "text": "Түгээмэл асуултууд", "route": "/Company/FAQ" },
+    { "id": 4, "text": "Түгээмэл асуултууд", "route": "/company/FAQ" },
     { "id": 5, "text": "Ажлын байр", "route": "#" },
     { "id": 6, "text": "Мэдээ", "route": "#" }
   ],
