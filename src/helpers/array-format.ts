@@ -1,3 +1,5 @@
+import cyrillicToLatin from '@helpers/cyrillic-to-latin';
+
 export function arrayFormat(data: any) {
   const result = data === undefined ? '' : data.busAllLocations.edges;
   return result;
@@ -10,6 +12,7 @@ export function startLocationFormat(data: any) {
       arr.push({
         id: element.node.id,
         name: element.node.name,
+        latinName: cyrillicToLatin(element.node.name),
         region: element.node.region,
         regionName: element.node.regionName,
         type: element.node.type,
@@ -46,6 +49,11 @@ export function stopLocationUBFormat(data: any) {
       arr.push({
         id: element.node.id,
         name: element.node.name + ' /' + element.node.location.name + '/',
+        latinName:
+          cyrillicToLatin(element.node.name) +
+          ' /' +
+          cyrillicToLatin(element.node.location.name) +
+          '/',
       })
     );
   return arr;
@@ -61,6 +69,11 @@ export function endLocationFormat(data: any) {
           element.node.locationEnd.name +
           ' /' +
           element.node.locationEnd.location.name +
+          '/',
+        latinName:
+          cyrillicToLatin(element.node.locationEnd.name) +
+          ' /' +
+          cyrillicToLatin(element.node.locationEnd.location.name) +
           '/',
       })
     );

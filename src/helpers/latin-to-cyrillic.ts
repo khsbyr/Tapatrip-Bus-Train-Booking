@@ -16,7 +16,6 @@ export default function latinToCyrillic(value: String) {
   a['L'] = 'Л';
   a['M'] = 'М';
   a['N'] = 'Н';
-  //   a['O'] = 'О';
   a['P'] = 'П';
   a['R'] = 'Р';
   a['S'] = 'С';
@@ -48,7 +47,6 @@ export default function latinToCyrillic(value: String) {
   a['l'] = 'л';
   a['m'] = 'м';
   a['n'] = 'н';
-  //   a['o'] = 'о';
   a['p'] = 'п';
   a['r'] = 'р';
   a['s'] = 'с';

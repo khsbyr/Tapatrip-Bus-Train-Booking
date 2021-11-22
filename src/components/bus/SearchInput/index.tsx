@@ -18,7 +18,6 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import locale from 'antd/lib/date-picker/locale/mn_MN';
 import 'moment/locale/mn';
-// import latinToCyrillic from '@helpers/latin-to-cyrillic';
 
 const dateFormat = 'YYYY-MM-DD';
 
@@ -31,6 +30,7 @@ export default function SearchBus({ startLocations }) {
     ? date
     : moment().endOf('day').format(dateFormat).toString();
   const startFormatLocation = startLocationFormat(startLocations);
+  console.log(startFormatLocation);
 
   const { selectStartLocation, setSelectStartLocation } = useGlobalStore();
   const { selectStopLocation, setSelectStopLocation } = useGlobalStore();
