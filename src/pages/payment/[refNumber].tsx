@@ -1,4 +1,4 @@
-import Navbar from '@components/common/Navbar/index';
+import SeatNav from '@components/bus/SeatNavbar';
 import Banks from '@components/common/payments/banks';
 import Corporate from '@components/common/payments/corporates';
 import ContentWrapper from '@components/Travel/style';
@@ -227,106 +227,108 @@ export default function payment({ NavData, refNumber, payments }) {
 
   return (
     <ContentWrapper>
-      <div className="relative mt-20">
-        <Navbar navbarData={NavData} />
-        <div className="default-container">
-          <div className=" px-2 grid grid-cols-3 gap-2">
-            <div className="p-4 col-span-2">
-              <div>
-                <h1
-                  className="font-bold text-2xl max-w-7xl mx-auto my-6 px-6"
-                  style={{ color: '#0A3761' }}
-                >
-                  Төлбөр төлөх хэлбэрүүд
-                </h1>
-              </div>
-              <div className="shadow-md border rounded-md px-4 py-2 bg-white mb-4">
-                <div
-                  className=" flex justify-between"
-                  onClick={() => setIsActive(!isActive)}
-                >
-                  <div className=" items-center">
-                    <div className="items-center inline-flex">
-                      <h2 className="font-bold text-center text-lg">
-                        Pay by card info
-                      </h2>
-                      <span className="m-2 bg-gray-200 text-center rounded-md p-1">
-                        Pay by filling your card info
-                      </span>
+      <div className="relative">
+        <SeatNav navbarData={NavData} />
+        <div style={{ minHeight: '500px' }} className="bg-bg font-Roboto ">
+          <div className="default-container pt-1">
+            <div className=" px-2 grid grid-cols-3 gap-2">
+              <div className="p-4 col-span-2">
+                <div>
+                  <h1
+                    className="font-bold text-2xl max-w-7xl mx-auto my-6 px-6"
+                    style={{ color: '#0A3761' }}
+                  >
+                    Төлбөр төлөх хэлбэрүүд
+                  </h1>
+                </div>
+                <div className="shadow-md border rounded-md px-4 py-2 bg-white mb-4">
+                  <div
+                    className=" flex justify-between"
+                    onClick={() => setIsActive(!isActive)}
+                  >
+                    <div className=" items-center">
+                      <div className="items-center inline-flex">
+                        <h2 className="font-bold text-center text-lg">
+                          Pay by card info
+                        </h2>
+                        <span className="m-2 bg-gray-200 text-center rounded-md p-1">
+                          Pay by filling your card info
+                        </span>
+                      </div>
                     </div>
+                    {isActive ? (
+                      <ChevronUpIcon className="h-10" />
+                    ) : (
+                      <ChevronDownIcon className="h-10" />
+                    )}
                   </div>
-                  {isActive ? (
-                    <ChevronUpIcon className="h-10" />
-                  ) : (
-                    <ChevronDownIcon className="h-10" />
-                  )}
+                  <div className={`${!isActive ? 'hidden' : 'block'}`}>
+                    {renderBanks()}
+                    {paymentName === 'HIPAY' || paymentName === 'STATEBANK'
+                      ? paymentHiPayModal()
+                      : paymentModal()}
+                  </div>
                 </div>
-                <div className={`${!isActive ? 'hidden' : 'block'}`}>
-                  {renderBanks()}
-                  {paymentName === 'HIPAY' || paymentName === 'STATEBANK'
-                    ? paymentHiPayModal()
-                    : paymentModal()}
-                </div>
-              </div>
-              <div className="shadow-md border rounded-md px-4 py-2 bg-white">
-                <div
-                  className=" flex justify-between"
-                  onClick={() => setIsActiveCorp(!isActiveCorp)}
-                >
-                  <div className=" items-center">
-                    <div className="items-center inline-flex">
-                      <h2 className="font-bold text-center text-lg">
-                        Transfer to bank account
-                      </h2>
-                      {/* <span className="m-2 bg-gray-200 text-center rounded-md p-1">
+                <div className="shadow-md border rounded-md px-4 py-2 bg-white">
+                  <div
+                    className=" flex justify-between"
+                    onClick={() => setIsActiveCorp(!isActiveCorp)}
+                  >
+                    <div className=" items-center">
+                      <div className="items-center inline-flex">
+                        <h2 className="font-bold text-center text-lg">
+                          Transfer to bank account
+                        </h2>
+                        {/* <span className="m-2 bg-gray-200 text-center rounded-md p-1">
                         Pay by filling your card info
                       </span> */}
+                      </div>
                     </div>
+                    {isActiveCorp ? (
+                      <ChevronUpIcon className="h-10" />
+                    ) : (
+                      <ChevronDownIcon className="h-10" />
+                    )}
                   </div>
-                  {isActiveCorp ? (
-                    <ChevronUpIcon className="h-10" />
-                  ) : (
-                    <ChevronDownIcon className="h-10" />
-                  )}
-                </div>
-                <div className={`${!isActiveCorp ? 'hidden' : 'block'}`}>
-                  {renderCorporate()}
+                  <div className={`${!isActiveCorp ? 'hidden' : 'block'}`}>
+                    {renderCorporate()}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-span-1 p-4 ">
-              <div>
-                <h1
-                  className="font-bold text-2xl max-w-7xl mx-auto my-6 px-6"
-                  style={{ color: '#0A3761' }}
-                >
-                  Your payment information
-                </h1>
-              </div>
-
-              <div className=" bg-white border rounded-md shadow-lg">
-                <div className="flex items-center text-center">
-                  <h1 className=" py-2 mx-4 my-1 font-bold">
-                    {`${queries.tourName}`}
-                  </h1>
-                </div>
-                <div className="flex justify-between">
-                  <h1 className=" py-2 mx-4 my-1">Total passengers:</h1>
-                  <h1 className=" py-2 mx-4 my-1 font-bold">
-                    {queries.totalPassenger}
+              <div className="col-span-1 p-4 ">
+                <div>
+                  <h1
+                    className="font-bold text-2xl max-w-7xl mx-auto my-6 px-6"
+                    style={{ color: '#0A3761' }}
+                  >
+                    Your payment information
                   </h1>
                 </div>
 
-                <div className="bg-bg py-2 flex justify-between">
-                  <h1 className="text-lg-16px mx-4 my-1">total price :</h1>
-                  <h1 className="text-lg-16px mx-4 my-1 font-bold">
-                    <CurrencyFormat
-                      value={queries.totalPrice}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                      suffix={` ₮`}
-                    />
-                  </h1>
+                <div className=" bg-white border rounded-md shadow-lg">
+                  <div className="flex items-center text-center">
+                    <h1 className=" py-2 mx-4 my-1 font-bold">
+                      {`${queries.tourName}`}
+                    </h1>
+                  </div>
+                  <div className="flex justify-between">
+                    <h1 className=" py-2 mx-4 my-1">Total passengers:</h1>
+                    <h1 className=" py-2 mx-4 my-1 font-bold">
+                      {queries.totalPassenger}
+                    </h1>
+                  </div>
+
+                  <div className="bg-bg py-2 flex justify-between">
+                    <h1 className="text-lg-16px mx-4 my-1">total price :</h1>
+                    <h1 className="text-lg-16px mx-4 my-1 font-bold">
+                      <CurrencyFormat
+                        value={queries.totalPrice}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                        suffix={` ₮`}
+                      />
+                    </h1>
+                  </div>
                 </div>
               </div>
             </div>

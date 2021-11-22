@@ -17,6 +17,7 @@ const Footer: FC<Props> = ({ companyInfo }) => {
               Компаний тухай
             </h1>
             <div className="mt-6">
+<<<<<<< HEAD
               {companyInfo?.map(company => (
                 <Link key={company.id} href={company.path}>
                   <a
@@ -31,6 +32,14 @@ const Footer: FC<Props> = ({ companyInfo }) => {
                     </p>
                   </a>
                 </Link>
+=======
+              {navbarData.companyList.map(company => (
+                <a key={company.id} href={company.route} target="_blank">
+                  <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
+                    {company.text}
+                  </p>
+                </a>
+>>>>>>> 9a156f93c461c17a555ac853a85382348f0eac90
               ))}
             </div>
           </div>
@@ -38,7 +47,7 @@ const Footer: FC<Props> = ({ companyInfo }) => {
             <h1 style={{ color: '#0A3761' }} className="font-bold text-lg">
               Холбоо барих
             </h1>
-            <div className="mt-5 mt-2 text-cardDate mr-0 md:mr-8 xl:mr-10 space-y-1">
+            <div className="mt-5 text-cardDate mr-0 md:mr-8 xl:mr-10 space-y-1">
               <p>
                 <b>Хаяг:</b> Хан-Уул дүүрэг, 11 хороо, Их монгол улсын гудамж,
                 Ривер Гарден хотхон 308 байр, Улаанбаатар хот, Монгол Улс
@@ -47,7 +56,7 @@ const Footer: FC<Props> = ({ companyInfo }) => {
                 <b>Утасны дугаар:</b> (976)-75154444
               </p>
               <p>
-                <b>И-мэйл хаяг:</b> Crm@tapatrip.com
+                <b>И-мэйл хаяг:</b> crm@tapatrip.com
               </p>
             </div>
           </div>

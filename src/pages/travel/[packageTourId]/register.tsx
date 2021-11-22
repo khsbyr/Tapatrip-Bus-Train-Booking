@@ -1,10 +1,13 @@
+import SeatNav from '@components/bus/SeatNavbar';
+import ConfirmModal from '@components/common/ConfirmModal';
 import Footer from '@components/common/Footer';
-import Navbar from '@components/common/Navbar/index';
+import InputPhoneNumber from '@components/common/InputPhoneNumber';
 import ContentWrapper from '@components/Travel/style';
 import Company from '@data/company.json';
 import NavData from '@data/navData.json';
 import { postRequest } from '@lib/api';
-import { Form, Input, Steps } from 'antd';
+import AuthService from '@services/auth';
+import { Form, Input, Modal, Steps } from 'antd';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect, useState } from 'react';
 import CurrencyFormat from 'react-currency-format';
@@ -37,7 +40,16 @@ const Register: FC<Props> = props => {
   const [current, setCurrent] = useState(0);
   const [packData, setPackData] = useState(null);
   const [refNumber, setRefNumber] = useState(null);
-
+  const [loading, setLoading] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [verified, setVerified] = useState(false);
+  const [contactInfo, setContactInfo] = useState({
+    dialNumber: 976,
+    phoneNumber: null,
+    contact_name: null,
+    first_name: null,
+    contact_email: null,
+  });
   useEffect(() => {
     const queries = router.query;
     let packs = [];
@@ -87,89 +99,164 @@ const Register: FC<Props> = props => {
   const next = () => {
     setCurrent(current + 1);
   };
-  const sendButton = async v => {
-    const filteredArr = packData.reduce((acc, current) => {
-      const x = acc.find(
-        item =>
-          item.subPackId === current.subPackId &&
-          item.priceId === current.priceId
-      );
-
-      if (!x) {
-        acc && (current.stock = current.stock + 1);
-        return acc.concat([current]);
+  const close = () => {
+    setIsModalVisible(false);
+    setLoading(false);
+  };
+  const handleSmsVerify = async code => {
+    setLoading(true);
+    if (code!) {
+      if (
+        await AuthService.verifyCode({
+          dialCode: contactInfo.dialNumber,
+          phone: contactInfo.phoneNumber,
+          code: code,
+        })
+      ) {
+        await setVerified(code);
+        handleBooking();
       } else {
-        acc.map(dup => {
-          if (dup.subPackId === x.subPackId && dup.priceId === x.priceId) {
-            dup.stock = dup.stock + 1;
-          }
+        Modal.error({
+          title: 'Алдаа',
+          content: 'Таны оруулсан код буруу байна дахин оролдоно уу?',
         });
-        return acc;
+        setLoading(false);
       }
-    }, []);
-    const newPackages = [];
-
-    for (let i = 0; i < filteredArr.length; i++) {
-      newPackages.push({
-        id: Number(filteredArr[i].subPackId),
-        package_code: filteredArr[i].packageCode,
-        prices: [],
-      });
     }
+  };
 
-    for (let j = 0; j < filteredArr.length; j++) {
-      for (let i = 0; i < newPackages.length; i++) {
-        if (Number(newPackages[i].id) === Number(filteredArr[j].subPackId)) {
-          newPackages[i].prices.push({
-            id: Number(filteredArr[j].priceId),
-            name: filteredArr[j].priceType === 'C' ? 'Хүүхэд' : 'Том хүн',
-            stock: filteredArr[j].stock,
+  const smsSender = async values => {
+    setLoading(true);
+    let payload = {
+      phone: values.phoneNumber,
+      dialCode: values.dialCode,
+    };
+    const result = await AuthService.verifySms(payload);
+    if (result) return true;
+    else {
+      Modal.error({
+        title: 'Алдаа',
+        content: 'Тань руу баталгаажуулах код явуулахад алдаа гарлаа!!!',
+      });
+      setLoading(false);
+    }
+  };
+
+  const handleBooking = async () => {
+    try {
+      const filteredArr = packData.reduce((acc, current) => {
+        const x = acc.find(
+          item =>
+            item.subPackId === current.subPackId &&
+            item.priceId === current.priceId
+        );
+
+        if (!x) {
+          acc && (current.stock = current.stock + 1);
+          return acc.concat([current]);
+        } else {
+          acc.map(dup => {
+            if (dup.subPackId === x.subPackId && dup.priceId === x.priceId) {
+              dup.stock = dup.stock + 1;
+            }
           });
+          return acc;
+        }
+      }, []);
+      const newPackages = [];
+
+      for (let i = 0; i < filteredArr.length; i++) {
+        newPackages.push({
+          id: Number(filteredArr[i].subPackId),
+          package_code: filteredArr[i].packageCode,
+          prices: [],
+        });
+      }
+
+      for (let j = 0; j < filteredArr.length; j++) {
+        for (let i = 0; i < newPackages.length; i++) {
+          if (Number(newPackages[i].id) === Number(filteredArr[j].subPackId)) {
+            newPackages[i].prices.push({
+              id: Number(filteredArr[j].priceId),
+              name: filteredArr[j].priceType === 'C' ? 'Хүүхэд' : 'Том хүн',
+              stock: filteredArr[j].stock,
+            });
+          }
         }
       }
-    }
 
-    var uniq = newPackages.reduce((unique, o) => {
-      if (!unique.some(obj => obj.id === o.id)) {
-        unique.push(o);
+      var uniq = newPackages.reduce((unique, o) => {
+        if (!unique.some(obj => obj.id === o.id)) {
+          unique.push(o);
+        }
+        return unique;
+      }, []);
+
+      const bookingData = {
+        id: Number(router.query.packageTourId),
+        trip_code: router.query.tripCode,
+        date: router.query.tourDate,
+        contact_name: contactInfo.contact_name,
+        contact_email: contactInfo.contact_email,
+        contact_dial_number: 976,
+        contact_phone: contactInfo.phoneNumber,
+        packages: uniq,
+      };
+      const data = await postRequest(
+        '/activity/package_tour_booking/',
+        bookingData
+      );
+      if (data.message.toLowerCase().trim() === 'success') {
+        setRefNumber(data.result.ref_number);
+
+        router.push({
+          pathname: '/payment/[refNumber]',
+          query: {
+            refNumber: data.result.ref_number,
+            totalPrice: router.query.totalPrice,
+            totalPassenger: adults + childs,
+            tourName: router.query.tourName,
+          },
+        });
       }
-      return unique;
-    }, []);
-
-    const bookingData = {
-      id: Number(router.query.packageTourId),
-      trip_code: router.query.tripCode,
-      date: '2021-11-09',
-      contact_name: v.lastName,
-      contact_email: v.email,
-      contact_dial_number: 976,
-      contact_phone: v.phone,
-      packages: uniq,
-    };
-    const data = await postRequest(
-      '/activity/package_tour_booking/',
-      bookingData
-    );
-    if (data.message.toLowerCase().trim() === 'success') {
-      setRefNumber(data.result.ref_number);
-
-      router.push({
-        pathname: '/payment/[refNumber]',
-        query: {
-          refNumber: data.result.ref_number,
-          totalPrice: router.query.totalPrice,
-          totalPassenger: adults + childs,
-          tourName: router.query.tourName,
-        },
+    } catch (e) {
+      console.log(e);
+      Modal.error({
+        title: 'Алдаа',
+        content: e.message,
       });
-      // router.push(`/payment/${data.result.ref_number}`);
+      setLoading(false);
+    }
+  };
+
+  const sendButton = async v => {
+    setContactInfo({
+      dialNumber: 976,
+      phoneNumber: v.phone,
+      contact_name: v.lastName,
+      first_name: v.firstname,
+      contact_email: v.email,
+    });
+
+    const isSmsSucces = smsSender({
+      dialCode: 976,
+      phoneNumber: v.phone,
+    });
+    if (isSmsSucces) {
+      setIsModalVisible(true), setLoading(false);
+    } else {
+      Modal.error({
+        title: 'Алдаа',
+        content: 'Тань руу баталгаажуулах код явуулахад алдаа гарлаа!!!',
+      });
+      setLoading(false);
     }
   };
 
   return (
     <ContentWrapper>
-      <div className="relative bg-bg mt-20">
-        <Navbar navbarData={NavData} />
+      <div className="relative">
+        <SeatNav navbarData={NavData} />
         <Steps
           type="navigation"
           current={current}
@@ -247,25 +334,18 @@ const Register: FC<Props> = props => {
                       rules={[
                         {
                           type: 'email',
-                          message: 'should be string',
+                          message: 'И-мэйл буруу байна!',
                         },
-                        { required: true, message: 'required' },
+                        {
+                          required: true,
+                          message: 'И-мэйл хаягаа заавал бөглөнө үү!',
+                        },
                       ]}
                       className="mb-0 col-span-1"
                     >
                       <Input className=" bg-bg rounded-md border-0" />
                     </Form.Item>
-                    <Form.Item
-                      label={'Phone'}
-                      name="phone"
-                      rules={[{ required: true, message: 'required' }]}
-                      className="mb-0 col-span-1"
-                    >
-                      <Input
-                        type="number"
-                        className=" bg-bg rounded-md border-0"
-                      />
-                    </Form.Item>
+                    <InputPhoneNumber />
                   </div>
                 </div>
                 <div className="relative col-span-1">
@@ -328,6 +408,14 @@ const Register: FC<Props> = props => {
         </div>
       </div>
       <Footer companyInfo={Company} />
+      {isModalVisible && (
+        <ConfirmModal
+          isModalVisible={isModalVisible}
+          booking={handleSmsVerify}
+          close={close}
+          loading={loading}
+        />
+      )}
     </ContentWrapper>
   );
 };
