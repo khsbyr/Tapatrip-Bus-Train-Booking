@@ -44,7 +44,7 @@ const Footer: FC<Props> = ({ navbarData }) => {
             <h1 style={{ color: '#0A3761' }} className="font-bold text-lg">
               Холбоо барих
             </h1>
-            <div className="mt-5 mt-2 text-cardDate mr-0 md:mr-8 xl:mr-10 space-y-1">
+            <div className="mt-5 text-cardDate mr-0 md:mr-8 xl:mr-10 space-y-1">
               <p>
                 <b>Хаяг:</b> Хан-Уул дүүрэг, 11 хороо, Их монгол улсын гудамж,
                 Ривер Гарден хотхон 308 байр, Улаанбаатар хот, Монгол Улс
