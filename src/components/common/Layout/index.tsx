@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import styles from './layout.module.scss';
-import NavData from '@data/navData.json';
+import Company from '@data/company.json';
 import Footer from '@components/common/Footer';
-
+import NavData from '@data/navData.json';
 export default function Layout({ children }) {
   return (
     <>

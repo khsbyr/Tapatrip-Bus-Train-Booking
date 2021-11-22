@@ -208,7 +208,8 @@ export default function PassengerIfo({ datas, scheduleId }) {
                         rules={[
                           {
                             pattern: PATTERN_COMPANY_REGISTER,
-                            message: 'Компаний регистерийн дугаар буруу байна',
+                            message:
+                              'Байгууллагын регистрийн дугаар буруу байна',
                           },
                         ]}
                       >
@@ -216,7 +217,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           disabled={!isCompoany}
                           className={style.input}
                           onChange={handleCustomerRegister}
-                          placeholder="Компаний регистерийн дугаар"
+                          placeholder="Байгууллагын регистрийн дугаар"
                         />
                       </Form.Item>
                     </div>

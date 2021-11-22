@@ -1,5 +1,5 @@
 .navbar {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:mt-3;
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-0 md:mt-3;
 
   .navbarBody {
     @apply flex items-center justify-between h-12;
@@ -21,7 +21,7 @@
     }
 
     .loginBody {
-      @apply ml-10 flex items-baseline space-x-4;
+      @apply flex items-baseline space-x-4 ml-5;
     }
 
     .loginButton {
