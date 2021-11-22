@@ -29,6 +29,7 @@ export function stopLocationFormat(data: any) {
       arr.push({
         id: element.node.id,
         name: element.node.name,
+        latinName: cyrillicToLatin(element.node.name),
       })
     );
   return arr;
