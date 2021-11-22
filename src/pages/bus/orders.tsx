@@ -19,6 +19,8 @@ export default function Orders() {
   const { startLocation, stopLocation, endLocation, date } = router.query;
   const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
 
+  console.log(date);
+
   const {
     data: scheduleData,
     loading,
