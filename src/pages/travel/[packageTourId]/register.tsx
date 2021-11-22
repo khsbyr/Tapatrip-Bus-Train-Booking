@@ -1,6 +1,7 @@
 import Footer from '@components/common/Footer';
 import Navbar from '@components/common/Navbar/index';
 import ContentWrapper from '@components/Travel/style';
+import Company from '@data/company.json';
 import NavData from '@data/navData.json';
 import { postRequest } from '@lib/api';
 import { Form, Input, Steps } from 'antd';
@@ -326,7 +327,7 @@ const Register: FC<Props> = props => {
           </div>
         </div>
       </div>
-      <Footer navbarData={NavData} />
+      <Footer companyInfo={Company} />
     </ContentWrapper>
   );
 };

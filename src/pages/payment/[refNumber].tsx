@@ -14,6 +14,7 @@ import React, { useState } from 'react';
 import Footer from '@components/common/Footer';
 import router, { useRouter } from 'next/router';
 import CurrencyFormat from 'react-currency-format';
+import Company from '@data/company.json';
 import HeaderBackground from '@components/common/HeaderBackground';
 export default function payment({ NavData, refNumber, payments }) {
   const [visible, setVisible] = useState(false);
@@ -332,7 +333,7 @@ export default function payment({ NavData, refNumber, payments }) {
           </div>
         </div>
       </div>
-      <Footer navbarData={NavData} />
+      <Footer companyInfo={Company} />
     </ContentWrapper>
   );
 }
