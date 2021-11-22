@@ -21,6 +21,21 @@ const postRequestNoToken = (url, data) => {
     });
 };
 
+const getRequestNoToken = async url => {
+  console.log('url', url);
+  return apiClient
+    .get(url)
+    .then(response => {
+      // console.log('res ', response);
+      if (response.status === 400 || response.status === 500)
+        throw response.data;
+      return response.data;
+    })
+    .catch(err => {
+      err[1];
+    });
+};
+
 const postRequest = async (url, data) => {
   const response = await postRequestNoToken('/account/guest_jwt/', {});
 
@@ -38,4 +53,4 @@ const postRequest = async (url, data) => {
   return res;
 };
 
-export { postRequest, guestToken, postRequestNoToken };
+export { postRequest, guestToken, postRequestNoToken, getRequestNoToken };
