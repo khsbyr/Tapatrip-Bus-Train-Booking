@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styles from './footer.module.scss';
+import Link from 'next/link';
 
 interface Props {
   navbarData?: any;
@@ -16,12 +17,27 @@ const Footer: FC<Props> = ({ navbarData }) => {
             </h1>
             <div className="mt-6">
               {navbarData.companyList.map(company => (
-                <a key={company.id} href="#" target="_blank">
+                <a key={company.id} href={company.route} target="_blank">
                   <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
                     {company.text}
                   </p>
                 </a>
               ))}
+              {/* {companyInfo.map(company => (
+                <Link key={company.id} href={company.head}>
+                  <a
+                    target="_blank"
+                    className="hover:underline hover:text-cardDate"
+                  >
+                    <p
+                      className="mt-2 font-light "
+                      style={{ color: '#0A3761' }}
+                    >
+                      {company.title}
+                    </p>
+                  </a>
+                </Link>
+              ))} */}
             </div>
           </div>
           <div>
