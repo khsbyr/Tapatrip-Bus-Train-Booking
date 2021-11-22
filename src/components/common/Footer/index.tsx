@@ -23,21 +23,6 @@ const Footer: FC<Props> = ({ navbarData }) => {
                   </p>
                 </a>
               ))}
-              {/* {companyInfo.map(company => (
-                <Link key={company.id} href={company.head}>
-                  <a
-                    target="_blank"
-                    className="hover:underline hover:text-cardDate"
-                  >
-                    <p
-                      className="mt-2 font-light "
-                      style={{ color: '#0A3761' }}
-                    >
-                      {company.title}
-                    </p>
-                  </a>
-                </Link>
-              ))} */}
             </div>
           </div>
           <div>
@@ -53,7 +38,7 @@ const Footer: FC<Props> = ({ navbarData }) => {
                 <b>Утасны дугаар:</b> (976)-75154444
               </p>
               <p>
-                <b>И-мэйл хаяг:</b> Crm@tapatrip.com
+                <b>И-мэйл хаяг:</b> crm@tapatrip.com
               </p>
             </div>
           </div>
