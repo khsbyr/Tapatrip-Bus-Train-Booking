@@ -15,7 +15,6 @@ import CurrencyFormat from 'react-currency-format';
 const { Step } = Steps;
 
 export default function Card({ datas }) {
-  console.log(datas);
   const unixDates = unixDate(datas.node);
   const [isActive, setIsActive] = useState(false);
   let format = n =>

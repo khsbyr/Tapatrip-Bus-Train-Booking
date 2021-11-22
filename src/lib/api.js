@@ -22,7 +22,6 @@ const postRequestNoToken = (url, data) => {
 };
 
 const getRequestNoToken = async url => {
-  console.log('url', url);
   return apiClient
     .get(url)
     .then(response => {

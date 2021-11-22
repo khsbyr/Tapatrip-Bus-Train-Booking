@@ -13,10 +13,12 @@ import Layout from '@components/common/Layout';
 import { useRouter } from 'next/router';
 import { arrayFormat } from '@helpers/array-format';
 import Loader from '@components/common/Loader';
+import moment from 'moment';
 
 export default function Orders() {
   const router = useRouter();
-  const { startLocation, stopLocation, endLocation, date } = router.query;
+  const { startLocation, stopLocation, endLocation, date, endDate } =
+    router.query;
   const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
 
   const {
@@ -28,7 +30,7 @@ export default function Orders() {
       startLocation: startLocation ? startLocation : '',
       stopLocation: stopLocation ? stopLocation : '',
       locationEnd: endLocation ? endLocation : '',
-      leaveDate: date ? date + ',' + date : '',
+      leaveDate: date ? date + ',' + endDate : '',
     },
   });
 
