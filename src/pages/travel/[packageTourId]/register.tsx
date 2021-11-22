@@ -3,6 +3,7 @@ import ConfirmModal from '@components/common/ConfirmModal';
 import Footer from '@components/common/Footer';
 import InputPhoneNumber from '@components/common/InputPhoneNumber';
 import ContentWrapper from '@components/Travel/style';
+import Company from '@data/company.json';
 import NavData from '@data/navData.json';
 import { postRequest } from '@lib/api';
 import AuthService from '@services/auth';
@@ -406,7 +407,7 @@ const Register: FC<Props> = props => {
           </div>
         </div>
       </div>
-      <Footer navbarData={NavData} />
+      <Footer companyInfo={Company} />
       {isModalVisible && (
         <ConfirmModal
           isModalVisible={isModalVisible}

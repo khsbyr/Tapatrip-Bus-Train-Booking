@@ -97,9 +97,17 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   aria-expanded="false"
                 >
                   {!isOpen ? (
-                    <MenuIcon className="h-6 w-6" />
+                    <MenuIcon
+                      className={`${
+                        navbar ? 'h-6 w-6 text-cardDate' : 'h-6 w-6 text-white'
+                      } `}
+                    />
                   ) : (
-                    <XIcon className="h-6 w-6" />
+                    <XIcon
+                      className={`${
+                        navbar ? 'h-6 w-6 text-cardDate' : 'h-6 w-6 text-white'
+                      } `}
+                    />
                   )}
                 </button>
               </div>
@@ -107,7 +115,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
           </div>
           <Transition
             show={isOpen}
-            className="flex justify-end w-full px-2 absolute top-14"
+            className="flex justify-end w-full px-2 absolute top-16"
             enter="transition ease-out duration-100 transform"
             enterFrom="opacity-0 scale-95"
             enterTo="opacity-100 scale-100"
