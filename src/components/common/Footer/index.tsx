@@ -17,7 +17,6 @@ const Footer: FC<Props> = ({ companyInfo }) => {
               Компаний тухай
             </h1>
             <div className="mt-6">
-<<<<<<< HEAD
               {companyInfo?.map(company => (
                 <Link key={company.id} href={company.path}>
                   <a
@@ -32,14 +31,6 @@ const Footer: FC<Props> = ({ companyInfo }) => {
                     </p>
                   </a>
                 </Link>
-=======
-              {navbarData.companyList.map(company => (
-                <a key={company.id} href={company.route} target="_blank">
-                  <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
-                    {company.text}
-                  </p>
-                </a>
->>>>>>> 9a156f93c461c17a555ac853a85382348f0eac90
               ))}
             </div>
           </div>

@@ -22,27 +22,6 @@ export async function getStaticProps({ params }) {
 }
 
 const About = company => {
-  // let data1 = '';
-
-  // fetch(
-  //   'https://apitest.tapatrip.com/api/account/static_content/terms_of_service_flight/',
-  //   {
-  //     method: 'GET',
-  //     headers: {
-  //       'content-language': 'mn',
-  //       'content-type': 'application/json',
-  //     },
-  //   }
-  // )
-  //   .then(function (response) {
-  //     console.log(response.json());
-  //     return response.json();
-  //   })
-  //   .then(function (myJson) {
-  //     data1 = myJson;
-  //     console.log(data1);
-  //   });
-  // console.log(data1);
   return (
     <div className="">
       {data.map(post =>
