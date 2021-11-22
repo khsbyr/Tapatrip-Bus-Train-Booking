@@ -3,10 +3,10 @@ import styles from './footer.module.scss';
 import Link from 'next/link';
 
 interface Props {
-  companyInfo?: any;
+  navbarData?: any;
 }
 
-const Footer: FC<Props> = ({ companyInfo }) => {
+const Footer: FC<Props> = ({ navbarData }) => {
   return (
     <div className={styles.footer}>
       <div className={styles.subFooter}>
@@ -16,9 +16,19 @@ const Footer: FC<Props> = ({ companyInfo }) => {
               Компаний тухай
             </h1>
             <div className="mt-6">
-              {companyInfo.map(company => (
-                <Link key={company.id} href={'/company/' + company.title}>
-                  <a target="_blank">
+              {navbarData.companyList.map(company => (
+                <a key={company.id} href={company.route} target="_blank">
+                  <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
+                    {company.text}
+                  </p>
+                </a>
+              ))}
+              {/* {companyInfo.map(company => (
+                <Link key={company.id} href={company.head}>
+                  <a
+                    target="_blank"
+                    className="hover:underline hover:text-cardDate"
+                  >
                     <p
                       className="mt-2 font-light "
                       style={{ color: '#0A3761' }}
@@ -27,7 +37,7 @@ const Footer: FC<Props> = ({ companyInfo }) => {
                     </p>
                   </a>
                 </Link>
-              ))}
+              ))} */}
             </div>
           </div>
           <div>

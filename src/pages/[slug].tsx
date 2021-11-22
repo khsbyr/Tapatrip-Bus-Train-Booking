@@ -1,7 +1,7 @@
 import data from '@data/company.json';
 export async function getStaticPaths() {
   const paths = data.map(post => ({
-    params: { title: post.title }, // keep in mind if post.id is a number you need to stringify post.id
+    params: { slug: post.head }, // keep in mind if post.id is a number you need to stringify post.id
   }));
   console.log(paths);
   return {
@@ -12,15 +12,17 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   console.log(params);
-  // return {
-  //   props: { company: datas },
-  // };
+  return {
+    props: { info: params },
+  };
 }
 
-const About = () => {
+const About = info => {
+  console.log(info);
   return (
     <div>
       <h1>About Page</h1>
+      <h1>{info.content}</h1>
       <p></p>
     </div>
   );

@@ -1,26 +1,26 @@
 [
   {
     "id": 0,
-    "head": "Ө.Батмөнх",
-    "title": "test1",
-    "content": "sadasda"
+    "head": "about",
+    "title": "Бидний тухай",
+    "content": "Бидний тухай мэдээлэл"
   },
   {
     "id": 1,
-    "head": "Ө",
-    "title": "test2",
-    "content": "2"
+    "head": "terms-conditions",
+    "title": "Үйлчилгээний нөхцөл",
+    "content": "Үйлчилгээний нөхцлийн мэдээлэл"
   },
   {
     "id": 2,
-    "head": "мөнх",
-    "title": "test3",
-    "content": "3"
+    "head": "privacy-policy",
+    "title": "Нууцлалын баталгаа",
+    "content": "Нууцлалын баталгааны мэдээлэл"
   },
   {
     "id": 3,
-    "head": "Ө.Бат",
-    "title": "test4",
-    "content": "4"
+    "head": "faq",
+    "title": "Түгээмэл асуултууд",
+    "content": "Түгээмэл асуултуудын мэдээлэл"
   }
 ]
