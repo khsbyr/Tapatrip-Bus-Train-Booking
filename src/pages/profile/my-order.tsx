@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react';
 import TravelList from '@data/getTravelList.json';
 import Footer from '@components/common/Footer';
 import Navbar from '@components/bus/SeatNavbar';
+import Company from '@data/company.json';
 
 import styles from '@components/common/Layout/layout.module.scss';
 import { Table } from 'antd';
@@ -81,7 +82,7 @@ export default function myOrders() {
         </div>
       </div>
       <div className={styles.main}>
-        <Footer navbarData={NavData} />
+        <Footer companyInfo={Company} />
       </div>
     </div>
   );
