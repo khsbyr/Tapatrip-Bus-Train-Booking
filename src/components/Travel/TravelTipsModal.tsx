@@ -15,9 +15,10 @@ const TravelTipsModal: FC<Props> = props => {
         title={`${props.title}`}
         visible={props.isModalVisible}
         onCancel={() => props.close()}
+        footer={null}
       >
-        <div className="mt-0">
-          <img src={props.image} />
+        <div className="p-2">
+          {props.image ? <img src={props.image} /> : null}
           <div
             className="font-normal text-sm"
             dangerouslySetInnerHTML={{

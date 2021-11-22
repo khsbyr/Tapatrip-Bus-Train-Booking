@@ -4,7 +4,6 @@ import ContentWrapper from './style';
 import style from './search.module.scss';
 import SearchBus from '@components/bus/SearchInput';
 import { useRouter } from 'next/router';
-import SearchTravel from '@components/Travel/Search-Travel';
 
 const { TabPane } = Tabs;
 
@@ -56,11 +55,7 @@ const Search: FC<Props> = ({ navbarData, startLocations = '' }) => {
             />
           ))}
         </Tabs>
-        {startLocations ? (
-          <SearchBus startLocations={startLocations} />
-        ) : (
-          <SearchTravel navbarData={navbarData} />
-        )}
+        <SearchBus startLocations={startLocations} />
       </div>
     </ContentWrapper>
   );
