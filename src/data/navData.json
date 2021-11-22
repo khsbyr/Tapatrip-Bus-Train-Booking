@@ -53,20 +53,18 @@
   ],
   "profile": [{ "id": 1, "text": "Нэвтрэх", "route": "/login" }],
   "companyList": [
-    { "id": 1, "text": "Бидний тухай", "route": "/company/about" },
+    { "id": 1, "text": "Бидний тухай", "route": "/about" },
     {
       "id": 2,
       "text": "Үйлчилгээний нөхцөл",
-      "route": "/company/terms-of-use"
+      "route": "/terms-of-use"
     },
     {
       "id": 3,
       "text": "Нууцлалын бодлого",
-      "route": "/company/privacy-policy"
+      "route": "/privacy-policy"
     },
-    { "id": 4, "text": "Түгээмэл асуултууд", "route": "/company/FAQ" },
-    { "id": 5, "text": "Ажлын байр", "route": "#" },
-    { "id": 6, "text": "Мэдээ", "route": "#" }
+    { "id": 4, "text": "Түгээмэл асуултууд", "route": "/FAQ" }
   ],
   "contactList": [
     {

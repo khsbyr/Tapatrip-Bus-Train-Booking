@@ -9,6 +9,7 @@ import { Modal } from 'antd';
 import { arrayFilterSchedule } from '@helpers/array-format';
 
 export default function SelectSeats({ datas, scheduleId }) {
+  console.log(datas);
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
@@ -55,6 +56,10 @@ export default function SelectSeats({ datas, scheduleId }) {
                   <p>
                     <h1>ААН: </h1>
                     {bus?.transporter?.name}
+                  </p>
+                  <p>
+                    <h1>Даатгал: </h1>
+                    {datas?.insurance?.name}
                   </p>
                   <p>
                     <h1>Загвар: </h1>

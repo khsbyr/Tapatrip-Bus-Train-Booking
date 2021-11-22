@@ -1,9 +1,8 @@
-import React, { FC } from 'react';
 import { Tabs } from 'antd';
-import ContentWrapper from './style';
-import style from './search.module.scss';
-import SearchBus from '@components/bus/SearchInput';
 import { useRouter } from 'next/router';
+import React, { FC } from 'react';
+import style from './search.module.scss';
+import ContentWrapper from './style';
 import TravelSlider from './travelSlider';
 
 const { TabPane } = Tabs;
