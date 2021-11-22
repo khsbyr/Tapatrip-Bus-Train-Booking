@@ -1,4 +1,4 @@
-import { MenuIcon, XIcon, PhoneIcon } from '@heroicons/react/solid';
+import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import OrderCheck from '@components/bus/OrderCheck';
@@ -10,29 +10,16 @@ interface Props {
   navbarData?: any;
 }
 
-const Navbar: FC<Props> = ({ navbarData }) => {
+const travelNavbar: FC<Props> = ({ navbarData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [navbar, setNavbar] = useState(false);
   const [openTab, setOpenTab] = React.useState(4);
-  const changeBackground = () => {
-    if (window.scrollY >= 80) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
-  };
-
-  if (typeof window !== 'undefined') {
-    window.addEventListener('scroll', changeBackground);
-  }
 
   return (
     <>
       <div>
         <nav
-          className={`absolute top-5 md:mt-0 md:fixed w-screen 
-          ${navbar ? 'bg-white' : 'bg-none'}
-          md:h-20 md:top-0 z-10 ${navbar ? 'shadow-lg' : 'shadow-none'}`}
+          className={`absolute top-5 md:mt-0 md:fixed w-screen bg-white md:h-20 md:top-0 z-10 shadow-lg`}
         >
           <div className={styles.navbar}>
             <div className={styles.navbarBody}>
@@ -41,18 +28,14 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   <Link href="/bus">
                     <a>
                       <img
-                        src={`${
-                          navbar
-                            ? '/assets/svgIcons/NewLogo.svg'
-                            : '/assets/svgIcons/NewLogoWhite.svg'
-                        } `}
+                        src={'/assets/svgIcons/NewLogoWhite.svg'}
                         alt="Logo"
                         className={styles.logo}
                       />
                     </a>
                   </Link>
                 </div>
-                <div className={`${navbar ? 'hidden' : 'lg:block'} hidden`}>
+                <div className={`lg:block`}>
                   <div className={styles.menuBody}>
                     {navbarData.generalList.map(menu => (
                       <a
@@ -63,23 +46,13 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                         {menu.text}
                       </a>
                     ))}
-                    <div className="flex items-center space-x-5 justify-center lg:pl-5 xl:pl-10">
-                      <OrderCheck />
-                      <SelectLanguage isBlack={false} />
-                    </div>
+                    <OrderCheck />
+                    <SelectLanguage isBlack={false} />
                   </div>
                 </div>
               </div>
               <div className="flex items-center">
-                <div className="hidden lg:flex items-center">
-                  <div
-                    className={`${
-                      navbar ? 'text-cardDate' : 'text-white'
-                    } flex text-lg font-bold cursor-pointer`}
-                  >
-                    <PhoneIcon className="w-5" />
-                    <p className="pl-2">7515-4444</p>
-                  </div>
+                <div className="hidden lg:block">
                   <div className={styles.loginBody}>
                     <a href="/login">
                       <button className={styles.loginButton}>Нэвтрэх</button>
@@ -137,10 +110,6 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                       </a>
                     </Link>
                   </div>
-                  <div className="flex items-center text-base sm:text-lg font-bold px-4 cursor-pointer text-cardDate">
-                    <PhoneIcon className="w-4 sm:w-5" />
-                    <p className="pl-2">(976)-7514-4444</p>
-                  </div>
                 </div>
               </div>
             )}
@@ -190,4 +159,4 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   );
 };
 
-export default Navbar;
+export default travelNavbar;

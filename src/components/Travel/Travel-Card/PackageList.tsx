@@ -89,7 +89,7 @@ const PackageList: FC<Props> = ({
         <div className="col-span-1 p-2">
           <img className="h-20 w-full " src={`${hotel_image}`} />
         </div>
-        <div className="flex border-t border-dashed col-span-3  space-x-8 p-2">
+        <div className="flex border-t border-dashed col-span-3  justify-between p-2">
           <p className="text-base">{`Hotel name : ${hotel_name}`}</p>
           <button className="text-direction font-medium flex text-xs md:text-base">
             Сонгох

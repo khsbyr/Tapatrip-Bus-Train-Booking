@@ -1,15 +1,22 @@
 import SeatNav from '@components/bus/SeatNavbar';
 import Layout from '@components/common/Layout';
-import Navbar from '@components/common/Navbar';
 import DaysDetail from '@components/Travel/Travel-Card/DaysDetail';
 import PackageList from '@components/Travel/Travel-Card/PackageList';
 import NavData from '@data/navData.json';
-import { MapIcon } from '@heroicons/react/solid';
+import {
+  CalendarIcon,
+  DocumentTextIcon,
+  InformationCircleIcon,
+  MapIcon,
+  OfficeBuildingIcon,
+  PaperAirplaneIcon,
+  UserIcon,
+} from '@heroicons/react/solid';
 import { postRequest } from '@lib/api';
-import { Carousel, Timeline, message } from 'antd';
-import Link from 'next/link';
+import { Carousel, message, Timeline } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import TravelTipsModal from '@components/Travel/TravelTipsModal';
 const breadcrumbRoutes = [
   {
     path: '/',
@@ -24,6 +31,8 @@ export default function packageDetail({ NavData, PackTour }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [collectedPackages, setCollectedPackages] = useState([]);
   const [subPack, setSubPack] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [visibleVisa, setVisibleVisa] = useState(false);
   let urlStr = '';
   const router = useRouter();
   const collectedPrices = subPrices => {
@@ -54,9 +63,22 @@ export default function packageDetail({ NavData, PackTour }) {
           tripCode: PackTour.trip_code,
           tourName: PackTour.title,
           subPack,
+          tourDate: PackTour.package_tour_dates[0].date,
         },
       });
     }
+  };
+
+  const showModal = str => {
+    if (str === 'visa') {
+      setVisibleVisa(true);
+    } else {
+      setVisible(true);
+    }
+  };
+  const closeModal = () => {
+    setVisible(false);
+    setVisibleVisa(false);
   };
   return (
     <Layout>
@@ -82,33 +104,48 @@ export default function packageDetail({ NavData, PackTour }) {
               <div className="bg-white rounded-lg col-span-2 p-8">
                 <div className="grid grid-cols-2 items-center px-16">
                   <div className="col-span-1 py-2 inline-flex">
-                    <img className="mr-4 h-6" src="/assets/24-hours.png" />
+                    <CalendarIcon className="mr-4 h-6" />
                     <h2 className="font-bold">{`${PackTour.duration_days} өдөр ${PackTour.duration_nights} шөнө`}</h2>
                   </div>
                   <div className="col-span-1 py-2 inline-flex">
-                    <img className="mr-4 h-6" src="/assets/24-hours.png" />
-                    <h2 className="font-bold">{PackTour.total_stocks}</h2>
+                    <UserIcon className="mr-4 h-6" />
+                    <h2 className="font-bold">{`${PackTour.total_stocks} захиалах`}</h2>
                   </div>
                   <div className="col-span-1 py-2 inline-flex">
-                    <img className="mr-4 h-6" src="/assets/24-hours.png" />
-                    {/* <h2 className="font-bold">4 {t('day')} 3 шөнө</h2> */}
+                    <PaperAirplaneIcon className="mr-4 h-6" />
                     <h2 className="font-bold">
                       {PackTour.trip_transport_name}
                     </h2>
                   </div>
-                  <div className="col-span-1 py-2 grid">
-                    <div className="inline-flex">
-                      <img className="mr-4 h-6" src="/assets/24-hours.png" />
-                      <h2 className="font-bold">Can be canceled</h2>
-                    </div>
-                    <h2 className="ml-10 mt-0.5">Cancellation Policy</h2>
+                  <div className="col-span-1 py-2 inline-flex">
+                    <OfficeBuildingIcon className="mr-4 h-6" />
+                    <h2 className="font-bold">
+                      {PackTour.package_tour_packages[0].hotel_name}
+                    </h2>
                   </div>
                   <div className="col-span-1 py-2 grid">
                     <div className="inline-flex">
-                      <img className="mr-4 h-6" src="/assets/24-hours.png" />
-                      <h2 className="font-bold">Visa required'</h2>
+                      <InformationCircleIcon className="mr-4 h-6" />
+                      <h2 className="font-bold">Can be canceled</h2>
                     </div>
-                    <h2 className="ml-10 mt-0.5">Visa information</h2>
+                    <h2
+                      className="ml-10 mt-0.5 cursor-pointer hover:scale-105"
+                      onClick={() => showModal('cancel')}
+                    >
+                      Cancellation Policy
+                    </h2>
+                  </div>
+                  <div className="col-span-1 py-2 grid">
+                    <div className="inline-flex">
+                      <DocumentTextIcon className="mr-4 h-6" />
+                      <h2 className="font-bold">Visa required</h2>
+                    </div>
+                    <h2
+                      className="ml-10 mt-0.5 cursor-pointer hover:scale-105"
+                      onClick={() => showModal('visa')}
+                    >
+                      Visa information
+                    </h2>
                   </div>
                 </div>
                 <div className="my-8 col-span-2">
@@ -123,8 +160,6 @@ export default function packageDetail({ NavData, PackTour }) {
                 </div>
                 <div className="my-4 col-span-2">
                   <div className="inline-flex mb-4">
-                    {/* <img className="mr-2 h-8" src="/assets/24-hours.png" />
-                     */}
                     <MapIcon className="-ml-2 h-8 opacity-20" />
                     <h2 className="font-bold ml-2 mt-1 text-lg">
                       Аялалын хөтөлбөр
@@ -247,6 +282,24 @@ export default function packageDetail({ NavData, PackTour }) {
           </div>
         </div>
       </div>
+      {visible && (
+        <TravelTipsModal
+          title={'Цуглах нөхцөл'}
+          description={PackTour.cancelation_policy}
+          image={null}
+          isModalVisible={visible}
+          close={closeModal}
+        />
+      )}
+      {visibleVisa && (
+        <TravelTipsModal
+          title={'Виза мэдээлэл'}
+          description={PackTour.visa_requirement}
+          image={null}
+          isModalVisible={visibleVisa}
+          close={closeModal}
+        />
+      )}
     </Layout>
   );
 }
