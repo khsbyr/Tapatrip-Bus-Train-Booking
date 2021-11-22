@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from './layout.module.scss';
-import NavData from '@data/navData.json';
+import Company from '@data/company.json';
 import Footer from '@components/common/Footer';
 
 export default function Layout({ children }) {
@@ -11,7 +11,7 @@ export default function Layout({ children }) {
       </Head>
       <main className={styles.main}>
         {children}
-        <Footer navbarData={NavData} />
+        <Footer companyInfo={Company} />
       </main>
     </>
   );

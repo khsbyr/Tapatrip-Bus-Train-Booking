@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import styles from './footer.module.scss';
+import Link from 'next/link';
 
 interface Props {
-  navbarData?: any;
+  companyInfo?: any;
 }
 
-const Footer: FC<Props> = ({ navbarData }) => {
+const Footer: FC<Props> = ({ companyInfo }) => {
   return (
     <div className={styles.footer}>
       <div className={styles.subFooter}>
@@ -15,12 +16,17 @@ const Footer: FC<Props> = ({ navbarData }) => {
               Компаний тухай
             </h1>
             <div className="mt-6">
-              {navbarData.companyList.map(company => (
-                <a key={company.id} href="#" target="_blank">
-                  <p className="mt-2 font-light " style={{ color: '#0A3761' }}>
-                    {company.text}
-                  </p>
-                </a>
+              {companyInfo.map(company => (
+                <Link key={company.id} href={'/company/' + company.title}>
+                  <a target="_blank">
+                    <p
+                      className="mt-2 font-light "
+                      style={{ color: '#0A3761' }}
+                    >
+                      {company.title}
+                    </p>
+                  </a>
+                </Link>
               ))}
             </div>
           </div>
