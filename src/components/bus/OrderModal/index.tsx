@@ -142,7 +142,7 @@ export default function OrderModal(props) {
                       {format(datas?.schedule?.locationEnd?.estimatedDuration)}
                     </h1>
                     <h1 className="hidden sm:block">-</h1>
-                    <h1 className="sm:hidden p-1">&#8593;</h1>
+                    <h1 className="sm:hidden p-1">&darr;</h1>
                     <h1 className="text-cardDate font-medium">
                       Хүрэх огноо: {moment.unix(unixDates).format('YYYY-MM-DD')}{' '}
                       {moment.unix(unixDates).format('HH:mm')}{' '}
