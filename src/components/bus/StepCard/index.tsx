@@ -43,8 +43,15 @@ export default function StepCard({ datas, scheduleId }) {
                       <ArrowRightIcon className="h-5 text-direction" />
                     </p>
                     <h1 className={style.timeText}>
-                      {datas.locationEnd.distance}
-                      {' км'}
+                      <div className="flex items-center">
+                        <CurrencyFormat
+                          value={datas.locationEnd.distance}
+                          displayType={'text'}
+                          thousandSeparator={true}
+                          renderText={value => <div>{value}</div>}
+                        />
+                        {' км'}
+                      </div>
                     </h1>
                   </div>
                   <div className="">
@@ -114,7 +121,7 @@ export default function StepCard({ datas, scheduleId }) {
           </div>
           <div className={`${!isActive ? 'hidden' : 'block'}`}>
             <div className="border border-dashed"></div>
-            <div className="px-5 lg:px-20 py-5">
+            <div className="px-5 lg:px-20 py-5 grid sm:grid-cols-2 lg:grid-cols-1">
               <Steps progressDot direction="vertical">
                 <Step
                   title={datas.leaveDate}
@@ -135,6 +142,12 @@ export default function StepCard({ datas, scheduleId }) {
                   }
                 />
               </Steps>
+              <div className="w-full col-span-1 flex flex-wrap items-end sm:justify-end lg:justify-start font-medium text-base text-cardDate">
+                <h1 className="text-base text-cardDate font-normal pr-2">
+                  Даатгалын компани:
+                </h1>
+                <p>{datas.insurance.name}</p>
+              </div>
             </div>
           </div>
         </div>

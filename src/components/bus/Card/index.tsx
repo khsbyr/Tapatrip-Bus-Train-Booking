@@ -15,6 +15,7 @@ import CurrencyFormat from 'react-currency-format';
 const { Step } = Steps;
 
 export default function Card({ datas }) {
+  console.log(datas);
   const unixDates = unixDate(datas.node);
   const [isActive, setIsActive] = useState(false);
   let format = n =>
@@ -48,8 +49,15 @@ export default function Card({ datas }) {
                           : style.timeText
                       }`}
                     >
-                      {datas.node.locationEnd.distance}
-                      {' км'}
+                      <div className="flex items-center">
+                        <CurrencyFormat
+                          value={datas.node.locationEnd.distance}
+                          displayType={'text'}
+                          thousandSeparator={true}
+                          renderText={value => <div>{value}</div>}
+                        />
+                        {' км'}
+                      </div>
                     </h1>
                   </div>
                   <div className="">
@@ -139,8 +147,8 @@ export default function Card({ datas }) {
           </div>
           <div className={`${!isActive ? 'hidden' : 'block'}`}>
             <div className="border border-dashed "></div>
-            <div className="px-5 lg:px-20 py-5">
-              <Steps progressDot direction="vertical">
+            <div className="px-5 lg:px-20 py-5 grid sm:grid-cols-2">
+              <Steps progressDot direction="vertical" className="col-span-1">
                 <Step
                   title={datas.node.leaveDate}
                   description={
@@ -160,6 +168,14 @@ export default function Card({ datas }) {
                   }
                 />
               </Steps>
+              <div className="w-full col-span-1 flex items-end md:justify-end font-medium text-base text-cardDate lg:ml-12">
+                {/* <div className="flex items-center"> */}
+                <h1 className="text-base text-cardDate font-normal pr-2">
+                  Даатгалын компани:
+                </h1>
+                <p>{datas.node.insurance.name}</p>
+                {/* </div> */}
+              </div>
             </div>
           </div>
         </div>

@@ -63,23 +63,23 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                         {menu.text}
                       </a>
                     ))}
-                    <div className="flex items-center space-x-5 pl-6 xl:space-x-10 xl:pl-8">
+                    <div className="flex items-center space-x-5 justify-center lg:pl-5 xl:pl-10">
                       <OrderCheck />
                       <SelectLanguage isBlack={false} />
-                      <div
-                        className={`${
-                          navbar ? 'text-cardDate' : 'text-white'
-                        } flex text-lg font-bold pl-1 cursor-pointer`}
-                      >
-                        <PhoneIcon className="w-5" />
-                        <p className="pl-2">7514-4444</p>
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="flex items-center">
-                <div className="hidden lg:block">
+                <div className="hidden lg:flex items-center block">
+                  <div
+                    className={`${
+                      navbar ? 'text-cardDate' : 'text-white'
+                    } flex text-lg font-bold cursor-pointer`}
+                  >
+                    <PhoneIcon className="w-5" />
+                    <p className="pl-2">7514-4444</p>
+                  </div>
                   <div className={styles.loginBody}>
                     <a href="/login">
                       <button className={styles.loginButton}>Нэвтрэх</button>

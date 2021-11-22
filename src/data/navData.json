@@ -64,9 +64,7 @@
       "text": "Нууцлалын бодлого",
       "route": "/company/privacy-policy"
     },
-    { "id": 4, "text": "Түгээмэл асуултууд", "route": "/company/FAQ" },
-    { "id": 5, "text": "Ажлын байр", "route": "#" },
-    { "id": 6, "text": "Мэдээ", "route": "#" }
+    { "id": 4, "text": "Түгээмэл асуултууд", "route": "/company/FAQ" }
   ],
   "contactList": [
     {
