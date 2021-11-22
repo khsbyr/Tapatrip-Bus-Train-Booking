@@ -1,6 +1,3 @@
-import { EFAULT } from 'constants';
-import { AnyMxRecord } from 'dns';
-
 export function arrayFormat(data: any) {
   const result = data === undefined ? '' : data.busAllLocations.edges;
   return result;
