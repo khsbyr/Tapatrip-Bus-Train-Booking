@@ -71,14 +71,14 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 </div>
               </div>
               <div className="flex items-center">
-                <div className="hidden lg:flex items-center block">
+                <div className="hidden lg:flex items-center">
                   <div
                     className={`${
                       navbar ? 'text-cardDate' : 'text-white'
                     } flex text-lg font-bold cursor-pointer`}
                   >
                     <PhoneIcon className="w-5" />
-                    <p className="pl-2">7514-4444</p>
+                    <p className="pl-2">7515-4444</p>
                   </div>
                   <div className={styles.loginBody}>
                     <a href="/login">
