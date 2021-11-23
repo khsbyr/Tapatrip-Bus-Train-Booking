@@ -1,19 +1,19 @@
-import Search from '@components/Travel/Search-Travel';
 import Footer from '@components/common/Footer';
 // import Layout from '@components/Layout/Layout';
 import HeaderBackground from '@components/common/HeaderBackground';
 import Navbar from '@components/common/Navbar';
-// import App from '@components/App/App';
 import App from '@components/common/Subscribe';
 import TapaService from '@components/common/TapaService';
-// import Search from '@components/Travel/Search/Search';
+import Search from '@components/Travel/Search-Travel';
 import ServicesCard from '@components/Travel/Travel-Card/ServicesCard';
 import Tips from '@components/Travel/Travel-Card/Tips';
 import TravelCard from '@components/Travel/Travel-Card/TravelCard';
 import NavData from '@data/navData.json';
 import TapaServiceList from '@data/tapaServiceList.json';
-import { postRequest, getRequestNoToken } from '@lib/api';
-// import style from '@components/Search/Search.module.scss';
+import {
+  postRequest,
+  getRequestNoToken,
+} from '@services/travel/travelServices';
 import { Tabs } from 'antd';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
@@ -80,9 +80,6 @@ export const getStaticProps: GetStaticProps = async () => {
       Packages: tour.result,
       TipsFor: tips.result,
       BannerItems: bannerItems,
-      // Packages: packages,
-      // GridList: gridList,
-      // CommentList: commentList,
     },
   };
 };

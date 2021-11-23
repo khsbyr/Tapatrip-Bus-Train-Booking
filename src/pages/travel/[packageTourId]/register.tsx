@@ -4,8 +4,8 @@ import Footer from '@components/common/Footer';
 import InputPhoneNumber from '@components/common/InputPhoneNumber';
 import ContentWrapper from '@components/Travel/style';
 import NavData from '@data/navData.json';
-import { postRequest } from '@lib/api';
 import AuthService from '@services/auth';
+import { postRequest } from '@services/travel/travelServices';
 import { Form, Input, Modal, Steps } from 'antd';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect, useState } from 'react';
@@ -50,6 +50,7 @@ const Register: FC<Props> = props => {
     contact_email: null,
   });
   useEffect(() => {
+    // router.replace(router.asPath);
     const queries = router.query;
     let packs = [];
     packs =

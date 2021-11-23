@@ -1,4 +1,5 @@
 import SeatNav from '@components/bus/SeatNavbar';
+import Footer from '@components/common/Footer';
 import Banks from '@components/common/payments/banks';
 import Corporate from '@components/common/payments/corporates';
 import ContentWrapper from '@components/Travel/style';
@@ -8,13 +9,11 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
 } from '@heroicons/react/solid';
-import { postRequest } from '@lib/api';
+import { postRequest } from '@services/travel/travelServices';
 import { message, Modal } from 'antd';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import Footer from '@components/common/Footer';
-import router, { useRouter } from 'next/router';
 import CurrencyFormat from 'react-currency-format';
-import HeaderBackground from '@components/common/HeaderBackground';
 export default function payment({ NavData, refNumber, payments }) {
   const [visible, setVisible] = useState(false);
   const [selectPayment, setSelectPayment] = useState(false);

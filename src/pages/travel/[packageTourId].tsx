@@ -12,10 +12,10 @@ import {
   PaperAirplaneIcon,
   UserIcon,
 } from '@heroicons/react/solid';
-import { postRequest } from '@lib/api';
+import { postRequest } from '@services/travel/travelServices';
 import { Carousel, message, Timeline } from 'antd';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TravelTipsModal from '@components/Travel/TravelTipsModal';
 const breadcrumbRoutes = [
   {
@@ -167,19 +167,20 @@ export default function packageDetail({ NavData, PackTour }) {
                   </div>
                   <div className="my-4">
                     <Timeline>
-                      {PackTour.package_tour_days.map((tourDay, index) => (
-                        <DaysDetail
-                          key={index}
-                          isLast={
-                            PackTour.package_tour_days.length - 1 === index
-                              ? true
-                              : false
-                          }
-                          title={tourDay.title}
-                          image={tourDay.image}
-                          description={tourDay.description}
-                        />
-                      ))}
+                      {PackTour.package_tour_days &&
+                        PackTour.package_tour_days.map((tourDay, index) => (
+                          <DaysDetail
+                            key={index}
+                            isLast={
+                              PackTour.package_tour_days.length - 1 === index
+                                ? true
+                                : false
+                            }
+                            title={tourDay.title}
+                            image={tourDay.image}
+                            description={tourDay.description}
+                          />
+                        ))}
                     </Timeline>
                   </div>
                 </div>
@@ -187,59 +188,75 @@ export default function packageDetail({ NavData, PackTour }) {
               <div className="gap-2 my-4 col-span-2 grid grid-cols-4 px-8 bg-white rounded-lg p-2">
                 <div className="m-4">
                   <h2 className="font-bold ml-2 mt-1 text-lg">
-                    {PackTour.package_tour_additionals.Highlight[0].type_name}
+                    {/* {PackTour.package_tour_additionals.Highlight[0].type_name} */}
+                    Онцлох
                   </h2>
-                  {PackTour.package_tour_additionals.Highlight.map(
-                    (additional, index) => (
-                      <div className="m-2">
-                        <ul key={index}>
-                          <li className="ml-2 list-disc">{additional.name}</li>
-                        </ul>
-                      </div>
-                    )
-                  )}
+                  {PackTour.package_tour_additionals.Highlight &&
+                    PackTour.package_tour_additionals.Highlight.map(
+                      (additional, index) => (
+                        <div className="m-2">
+                          <ul key={index}>
+                            <li className="ml-2 list-disc">
+                              {additional.name}
+                            </li>
+                          </ul>
+                        </div>
+                      )
+                    )}
                 </div>
                 <div className="m-4">
                   <h2 className="font-bold ml-2 mt-1 text-lg">
-                    {PackTour.package_tour_additionals.Include[0].type_name}
+                    {/* {PackTour.package_tour_additionals.Include[0].type_name} */}
+                    Аялалд багтсан
                   </h2>
-                  {PackTour.package_tour_additionals.Include.map(
-                    (additional, index) => (
-                      <div className="m-2">
-                        <ul key={index}>
-                          <li className="ml-2 list-disc">{additional.name}</li>
-                        </ul>
-                      </div>
-                    )
-                  )}
+                  {PackTour.package_tour_additionals.Include &&
+                    PackTour.package_tour_additionals.Include.map(
+                      (additional, index) => (
+                        <div className="m-2">
+                          <ul key={index}>
+                            <li className="ml-2 list-disc">
+                              {additional.name}
+                            </li>
+                          </ul>
+                        </div>
+                      )
+                    )}
                 </div>
                 <div className="m-4">
                   <h2 className="font-bold ml-2 mt-1 text-lg">
-                    {PackTour.package_tour_additionals.NotInclude[0].type_name}
+                    {/* {PackTour.package_tour_additionals.NotInclude[0].type_name} */}
+                    Аялалд багтаагүй
                   </h2>
-                  {PackTour.package_tour_additionals.NotInclude.map(
-                    (additional, index) => (
-                      <div className="m-2">
-                        <ul key={index}>
-                          <li className="ml-2 list-disc">{additional.name}</li>
-                        </ul>
-                      </div>
-                    )
-                  )}
+                  {PackTour.package_tour_additionals.NotInclude &&
+                    PackTour.package_tour_additionals.NotInclude.map(
+                      (additional, index) => (
+                        <div className="m-2">
+                          <ul key={index}>
+                            <li className="ml-2 list-disc">
+                              {additional.name}
+                            </li>
+                          </ul>
+                        </div>
+                      )
+                    )}
                 </div>
                 <div className="m-4">
                   <h2 className="font-bold ml-2 mt-1 text-lg">
-                    {PackTour.package_tour_additionals.GoodToKnow[0].type_name}
+                    {/* {PackTour.package_tour_additionals.GoodToKnow[0].type_name} */}
+                    Мэдвэл зохих
                   </h2>
-                  {PackTour.package_tour_additionals.GoodToKnow.map(
-                    (additional, index) => (
-                      <div className="m-2">
-                        <ul key={index}>
-                          <li className="ml-2 list-disc">{additional.name}</li>
-                        </ul>
-                      </div>
-                    )
-                  )}
+                  {PackTour.package_tour_additionals.GoodToKnow &&
+                    PackTour.package_tour_additionals.GoodToKnow.map(
+                      (additional, index) => (
+                        <div className="m-2">
+                          <ul key={index}>
+                            <li className="ml-2 list-disc">
+                              {additional.name}
+                            </li>
+                          </ul>
+                        </div>
+                      )
+                    )}
                 </div>
               </div>
             </div>
@@ -247,19 +264,20 @@ export default function packageDetail({ NavData, PackTour }) {
               <div className=" col-span-1 w-98">
                 <div className="bg-white rounded-lg mb-4 py-2 px-4 ">
                   <h1 className="font-bold text-2xl">Багц сонгох</h1>
-                  {PackTour.package_tour_packages.map((subPackages, index) => (
-                    <PackageList
-                      key={index}
-                      subPackageId={subPackages.id}
-                      title={subPackages.title}
-                      hotel_name={subPackages.hotel_name}
-                      stocks={subPackages.stocks}
-                      hotel_image={subPackages.hotel_image}
-                      package_prices={subPackages.package_tour_package_prices}
-                      package_code={subPackages.package_code}
-                      collectPrices={collectedPrices}
-                    />
-                  ))}
+                  {PackTour.package_tour_packages &&
+                    PackTour.package_tour_packages.map((subPackages, index) => (
+                      <PackageList
+                        key={index}
+                        subPackageId={subPackages.id}
+                        title={subPackages.title}
+                        hotel_name={subPackages.hotel_name}
+                        stocks={subPackages.stocks}
+                        hotel_image={subPackages.hotel_image}
+                        package_prices={subPackages.package_tour_package_prices}
+                        package_code={subPackages.package_code}
+                        collectPrices={collectedPrices}
+                      />
+                    ))}
                 </div>
                 <div className="grid grid-cols-2 my-6">
                   <div className="col-span-1">
