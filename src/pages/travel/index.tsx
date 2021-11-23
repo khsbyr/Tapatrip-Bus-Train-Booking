@@ -17,13 +17,18 @@ import { postRequest, getRequestNoToken } from '@lib/api';
 import { Tabs } from 'antd';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import React from 'react';
+import React, { useState } from 'react';
 import Company from '@data/company.json';
+import Loader from '@components/common/Loader';
 
 const { TabPane } = Tabs;
 const TYPE = 'TRAVEL';
 
 export default function Travel({ NavData, Packages, TipsFor, BannerItems }) {
+  const [loader, setloader] = useState(false);
+  function clickHandler() {
+    setloader(true);
+  }
   return (
     <div>
       <Head>
@@ -33,13 +38,16 @@ export default function Travel({ NavData, Packages, TipsFor, BannerItems }) {
         <HeaderBackground />
         <Navbar navbarData={NavData} />
         <Search navbarData={NavData} bannerItems={BannerItems} />
-        {Packages.map((packageFrom, index) => (
-          <TravelCard
-            key={index}
-            title={packageFrom.package_tour_type_name}
-            packages={packageFrom.package_tours}
-          />
-        ))}
+        {loader && <Loader />}
+        {!loader &&
+          Packages.map((packageFrom, index) => (
+            <TravelCard
+              key={index}
+              title={packageFrom.package_tour_type_name}
+              packages={packageFrom.package_tours}
+              ClickHandler={clickHandler}
+            />
+          ))}
 
         <ServicesCard />
         <div className="default-container mb-10">

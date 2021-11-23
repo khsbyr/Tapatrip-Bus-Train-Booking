@@ -6,8 +6,9 @@ import CurrencyFormat from 'react-currency-format';
 interface Props {
   packages?: any;
   title: string;
+  ClickHandler: () => void;
 }
-const TravelCard: FC<Props> = ({ packages, title }) => {
+const TravelCard: FC<Props> = ({ packages, title, ClickHandler }) => {
   return (
     <div className="default-container">
       <h1
@@ -24,7 +25,10 @@ const TravelCard: FC<Props> = ({ packages, title }) => {
               as={`travel/${tourpackage.id}`}
               key={index}
             >
-              <div className="hover:shadow-2xl cursor-pointer bg-white h-auto rounded-2xl shadow-xl">
+              <div
+                onClick={ClickHandler}
+                className="hover:shadow-2xl cursor-pointer bg-white h-auto rounded-2xl shadow-xl"
+              >
                 <img
                   className="object-contain md:object-scale-down rounded-t-2xl"
                   src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${tourpackage.image}`}
