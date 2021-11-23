@@ -17,6 +17,8 @@ import { Carousel, message, Timeline } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import TravelTipsModal from '@components/Travel/TravelTipsModal';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 const breadcrumbRoutes = [
   {
     path: '/',
@@ -28,11 +30,15 @@ const breadcrumbRoutes = [
 ];
 
 export default function packageDetail({ NavData, PackTour }) {
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 24, color: 'white' }} spin />
+  );
   const [totalPrice, setTotalPrice] = useState(0);
   const [collectedPackages, setCollectedPackages] = useState([]);
   const [subPack, setSubPack] = useState('');
   const [visible, setVisible] = useState(false);
   const [visibleVisa, setVisibleVisa] = useState(false);
+  const [loading, setloading] = useState(false);
   let urlStr = '';
   const router = useRouter();
   const collectedPrices = subPrices => {
@@ -55,6 +61,7 @@ export default function packageDetail({ NavData, PackTour }) {
     if (subPack.length <= 0) {
       message.warning('Багц сонгоно уу!');
     } else {
+      setloading(true);
       router.push({
         pathname: `[packageTourId]/register`,
         query: {
@@ -274,8 +281,9 @@ export default function packageDetail({ NavData, PackTour }) {
                 <button
                   className="col-span-1 w-full bg-button text-white font-bold py-2 px-4 rounded-lg"
                   onClick={() => toRegister()}
+                  disabled={loading ? true : false}
                 >
-                  Худалдаж авах
+                  {loading ? <Spin indicator={antIcon} /> : 'Худалдаж авах'}
                 </button>
               </div>
             </div>
