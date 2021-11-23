@@ -307,11 +307,11 @@ const Register: FC<Props> = props => {
                           type: 'string',
                           message: 'should be string',
                         },
-                        { required: true, message: 'required' },
+                        { required: true, message: 'Овгоо заавал бөглөнө үү!' },
                       ]}
                       className="mb-0 col-span-1"
                     >
-                      <Input className=" bg-bg rounded-md border-0" />
+                      <Input />
                     </Form.Item>
                     <Form.Item
                       label={'Нэр'}
@@ -321,11 +321,11 @@ const Register: FC<Props> = props => {
                           type: 'string',
                           message: 'should be string',
                         },
-                        { required: true, message: 'required' },
+                        { required: true, message: 'Нэрээ заавал бөглөнө үү!' },
                       ]}
                       className="mb-0 col-span-1"
                     >
-                      <Input className=" bg-bg rounded-md border-0" />
+                      <Input />
                     </Form.Item>
 
                     <Form.Item
@@ -343,7 +343,7 @@ const Register: FC<Props> = props => {
                       ]}
                       className="mb-0 col-span-1"
                     >
-                      <Input className=" bg-bg rounded-md border-0" />
+                      <Input />
                     </Form.Item>
                     <InputPhoneNumber />
                   </div>

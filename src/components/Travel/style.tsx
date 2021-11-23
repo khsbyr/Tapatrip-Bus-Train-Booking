@@ -6,7 +6,7 @@ const ContentWrapper = styled.div`
     width: 100%;
   }
   .ant-input {
-    padding: 0.5rem;
+    padding: 0.7rem;
     border: none;
     background-color: #f1f2f6;
     color: #0a3761;
@@ -16,10 +16,6 @@ const ContentWrapper = styled.div`
 
   .ant-form-item-has-error .ant-input {
     background-color: #f1f2f6 !important;
-  }
-
-  .ant-modal-title {
-    color: #0a3761 !important;
   }
 `;
 
