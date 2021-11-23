@@ -60,7 +60,7 @@ export default function selectLanguage() {
                     <span
                       className={`${
                         selected ? 'font-medium' : 'font-normal'
-                      } block truncate flex justify-between text-sm text-cardDate font-medium`}
+                      } block truncate justify-between text-sm text-cardDate font-medium`}
                     >
                       <label className="" htmlFor="">
                         {rate.name}
