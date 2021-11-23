@@ -9,13 +9,14 @@ import {
   ChevronUpIcon,
 } from '@heroicons/react/solid';
 import { postRequest } from '@lib/api';
-import { message, Modal } from 'antd';
+import { message, Modal, Steps } from 'antd';
 import React, { useState } from 'react';
 import Footer from '@components/common/Footer';
 import router, { useRouter } from 'next/router';
 import CurrencyFormat from 'react-currency-format';
 import Company from '@data/company.json';
 import HeaderBackground from '@components/common/HeaderBackground';
+const { Step } = Steps;
 export default function payment({ NavData, refNumber, payments }) {
   const [visible, setVisible] = useState(false);
   const [selectPayment, setSelectPayment] = useState(false);
@@ -229,6 +230,11 @@ export default function payment({ NavData, refNumber, payments }) {
     <ContentWrapper>
       <div className="relative">
         <SeatNav navbarData={NavData} />
+        <Steps className="my-5 px-6" size="small" current={2}>
+          <Step title="Сонгох" />
+          <Step title="Захиалах" />
+          <Step title="Төлбөр төлөх" />
+        </Steps>
         <div style={{ minHeight: '500px' }} className="bg-bg font-Roboto ">
           <div className="default-container pt-1">
             <div className=" px-2 grid grid-cols-3 gap-2">

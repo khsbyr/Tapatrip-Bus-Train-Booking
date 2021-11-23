@@ -12,23 +12,6 @@ import { useRouter } from 'next/router';
 import React, { FC, useEffect, useState } from 'react';
 import CurrencyFormat from 'react-currency-format';
 const { Step } = Steps;
-const steps = [
-  {
-    title: 'Суудал сонгох',
-    // content: <SelectSeats travelData={travelData} />,
-    button: 'Зорчигчийн мэдээлэл оруулах',
-  },
-  {
-    title: 'Зорчигчийн мэдээлэл',
-    // content: <PassengerInfo />,
-    button: 'Төлбөр төлөх',
-  },
-  {
-    title: 'Төлбөр төлөх',
-    // content: <Payments />,
-    button: 'Дуусгах',
-  },
-];
 interface Props {
   data?: any;
 }
@@ -257,20 +240,12 @@ const Register: FC<Props> = props => {
     <ContentWrapper>
       <div className="relative">
         <SeatNav navbarData={NavData} />
-        {/*       <Steps size="small" style={{ marginTop: 15 }} current={1} percent={60}>
-          <Step
-            style={{ fontSize: 12 }}
-            title="Болсон"
-            description="Аялал сонгох"
-          />
-          <Step
-            title="Явагдаж байна"
-            subTitle="1 үйлдэл үлдсэн"
-            description="Захиалга оруулах"
-          />
-          <Step title="Хүлээгдэж байна" description="Төлбөр төлөх" />
-         </Steps>*/}
-        <Steps
+        <Steps className="my-5 px-6" size="small" current={1}>
+          <Step title="Сонгох" />
+          <Step title="Захиалах" />
+          <Step title="Төлбөр төлөх" />
+        </Steps>
+        {/*        <Steps
           type="navigation"
           current={current}
           onChange={onChange}
@@ -286,7 +261,7 @@ const Register: FC<Props> = props => {
               className="text-xs text-white"
             />
           ))}
-        </Steps>
+          </Steps>*/}
         <div style={{ minHeight: '500px' }} className="bg-bg font-Roboto h-96">
           <div className="default-container pt-1">
             <div className="md:col-span-2  gap-2 my-4">
@@ -362,7 +337,7 @@ const Register: FC<Props> = props => {
                   </div>
                 </div>
                 <div className="relative col-span-1">
-                  <div className="fixed col-span-1 w-98 p-2">
+                  <div className="col-span-1 w-98 p-2">
                     <h1 className="font-bold pb-2 text-2xl">
                       Захиалгын дэлгэрэнгүй
                     </h1>
@@ -374,12 +349,12 @@ const Register: FC<Props> = props => {
                       </div>
                       <div className="grid grid-cols-2 p-1 mb-1 px-4">
                         <p>
-                          Насанд хүрэгч &nbsp;
-                          <span className="bg-gray-200 p-1 rounded-sm">{`x${adults}`}</span>
+                          Насанд хүрэгч: &nbsp;
+                          <span className="bg-gray-200 p-1 rounded-sm">{`${adults}`}</span>
                         </p>
                         <p>
-                          Хүүхэд &nbsp;
-                          <span className="bg-gray-200 p-1 rounded-sm">{`x${childs}`}</span>
+                          Хүүхэд: &nbsp;
+                          <span className="bg-gray-200 p-1 rounded-sm">{`${childs}`}</span>
                         </p>
                       </div>
                       <div className="grid grid-cols-2 py-2 px-4 border-t-2">
