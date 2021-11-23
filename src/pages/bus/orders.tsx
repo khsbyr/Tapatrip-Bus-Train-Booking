@@ -5,7 +5,7 @@ import {
   BUS_ALL_LOCATIONS_QUERY,
   BUS_ALL_SCHEDULES_QUERY,
 } from '@graphql/queries';
-import { Result, Button } from 'antd';
+import { Result } from 'antd';
 import Card from '@components/bus/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
 import BusNavbar from '@components/bus/Navbar';
@@ -13,7 +13,6 @@ import Layout from '@components/common/Layout';
 import { useRouter } from 'next/router';
 import { arrayFormat } from '@helpers/array-format';
 import Loader from '@components/common/Loader';
-import moment from 'moment';
 
 export default function Orders() {
   const router = useRouter();
