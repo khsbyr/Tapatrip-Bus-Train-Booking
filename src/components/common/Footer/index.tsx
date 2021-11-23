@@ -17,7 +17,7 @@ const Footer: FC<Props> = ({ companyInfo }) => {
             </h1>
             <div className="mt-6">
               {companyInfo?.map(company => (
-                <Link key={company.id} href={company.head}>
+                <Link key={company.id} href={`/` + company.head}>
                   <a
                     target="_blank"
                     className="hover:underline hover:text-cardDate"
