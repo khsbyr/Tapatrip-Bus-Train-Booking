@@ -367,20 +367,19 @@ const Register: FC<Props> = props => {
                       Захиалгын дэлгэрэнгүй
                     </h1>
                     <div className="bg-white rounded-md mb-4">
-                      <hr className="divide divide-gray-400" />
-                      <div className="p-2  inline-flex">
+                      <div className="p-2 inline-flex">
                         <h1 className="font-bold mb-1 px-2">
                           {router.query.tourName}
                         </h1>
                       </div>
                       <div className="grid grid-cols-2 p-1 mb-1 px-4">
                         <p>
-                          Насанд хүрэгч
-                          <span className="bg-gray-200 p-0.5">{` x${adults}`}</span>
+                          Насанд хүрэгч &nbsp;
+                          <span className="bg-gray-200 p-1 rounded-sm">{`x${adults}`}</span>
                         </p>
                         <p>
-                          Хүүхэд
-                          <span className="bg-gray-200 p-0.5">{` x${childs}`}</span>
+                          Хүүхэд &nbsp;
+                          <span className="bg-gray-200 p-1 rounded-sm">{`x${childs}`}</span>
                         </p>
                       </div>
                       <div className="grid grid-cols-2 py-2 px-4 border-t-2">
