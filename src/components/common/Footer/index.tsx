@@ -7,7 +7,6 @@ interface Props {
 }
 
 const Footer: FC<Props> = ({ companyInfo }) => {
-  console.log(companyInfo);
   return (
     <div className={styles.footer}>
       <div className={styles.subFooter}>

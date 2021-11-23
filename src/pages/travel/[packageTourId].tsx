@@ -33,6 +33,29 @@ export default function packageDetail({ NavData, PackTour }) {
   const [subPack, setSubPack] = useState('');
   const [visible, setVisible] = useState(false);
   const [visibleVisa, setVisibleVisa] = useState(false);
+  // const [PackTour, setPackTour] = useState({
+  //   id: 0,
+  //   totalPrice: 0,
+  //   trip_code: 0,
+  //   title: '',
+  //   package_tour_dates: [],
+  //   package_tour_images: [],
+  //   trip_transport_name: '',
+  //   duration_days: 0,
+  //   total_stocks: 0,
+  //   package_tour_packages: [],
+  //   package_tour_days: [],
+  //   description: '',
+  //   duration_nights: 0,
+  //   package_tour_additionals: {
+  //     Highlight: [],
+  //     Include: [],
+  //     GoodToKnow: [],
+  //     NotInclude: [],
+  //   },
+  //   cancelation_policy: '',
+  //   visa_requirement: '',
+  // });
   let urlStr = '';
   const router = useRouter();
   const collectedPrices = subPrices => {
@@ -51,6 +74,10 @@ export default function packageDetail({ NavData, PackTour }) {
     });
     setTotalPrice(totPrice);
   };
+  useEffect(() => {
+    collectedPrices(collectedPackages);
+  }, [collectedPrices]);
+
   const toRegister = () => {
     if (subPack.length <= 0) {
       message.warning('Багц сонгоно уу!');
@@ -64,6 +91,7 @@ export default function packageDetail({ NavData, PackTour }) {
           tourName: PackTour.title,
           subPack,
           tourDate: PackTour.package_tour_dates[0].date,
+          cancelation_policy: '',
         },
       });
     }

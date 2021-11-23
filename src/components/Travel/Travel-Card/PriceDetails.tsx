@@ -20,11 +20,9 @@ const PriceDetails: FC<Props> = ({
   useEffect(() => {
     if (clickBait === 'plus') {
       setTotalPrice(totalPrice + price);
-
       getBackPriceId(priceId, clickBait);
     } else if (clickBait === 'minus') {
       setTotalPrice(totalPrice - price);
-
       getBackPriceId(priceId, clickBait);
     }
   }, [stock]);
@@ -33,7 +31,8 @@ const PriceDetails: FC<Props> = ({
     <>
       <div className={`grid grid-cols-3 my-2 gap-2 rounded-md border p-2`}>
         <div className="col-span-2">
-          <div>
+          <div className="flex">
+            <p className="mr-2">{`${priceName}`} </p>
             <CurrencyFormat
               value={price}
               displayType={'text'}
@@ -63,7 +62,7 @@ const PriceDetails: FC<Props> = ({
               name="addStock"
               className="h-6"
               fill="#FFFFFF"
-              onClick={e => {
+              onClick={() => {
                 setStock(stock + 1);
                 setClickBait('plus');
               }}

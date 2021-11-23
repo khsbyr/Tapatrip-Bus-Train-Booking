@@ -8,20 +8,16 @@ import Search from '@components/Travel/Search-Travel';
 import ServicesCard from '@components/Travel/Travel-Card/ServicesCard';
 import Tips from '@components/Travel/Travel-Card/Tips';
 import TravelCard from '@components/Travel/Travel-Card/TravelCard';
+import Company from '@data/company.json';
 import NavData from '@data/navData.json';
 import TapaServiceList from '@data/tapaServiceList.json';
 import {
-  postRequest,
   getRequestNoToken,
+  postRequest,
 } from '@services/travel/travelServices';
-import { Tabs } from 'antd';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import React from 'react';
-import Company from '@data/company.json';
-
-const { TabPane } = Tabs;
-const TYPE = 'TRAVEL';
 
 export default function Travel({ NavData, Packages, TipsFor, BannerItems }) {
   return (
