@@ -257,6 +257,19 @@ const Register: FC<Props> = props => {
     <ContentWrapper>
       <div className="relative">
         <SeatNav navbarData={NavData} />
+        {/*       <Steps size="small" style={{ marginTop: 15 }} current={1} percent={60}>
+          <Step
+            style={{ fontSize: 12 }}
+            title="Болсон"
+            description="Аялал сонгох"
+          />
+          <Step
+            title="Явагдаж байна"
+            subTitle="1 үйлдэл үлдсэн"
+            description="Захиалга оруулах"
+          />
+          <Step title="Хүлээгдэж байна" description="Төлбөр төлөх" />
+         </Steps>*/}
         <Steps
           type="navigation"
           current={current}
@@ -329,7 +342,7 @@ const Register: FC<Props> = props => {
                     </Form.Item>
 
                     <Form.Item
-                      label={'Email'}
+                      label={'Цахим шуудан'}
                       name="email"
                       rules={[
                         {
