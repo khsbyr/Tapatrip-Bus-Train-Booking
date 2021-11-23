@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Listbox } from '@headlessui/react';
-import s from './selectLanguage.module.scss';
+import s from './language.module.scss';
 import { CheckIcon } from '@heroicons/react/solid';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 
@@ -9,7 +9,7 @@ const languages = [
   { name: 'English(UK)', src: '/assets/flagEng.png' },
   { name: 'China', src: '/assets/flagChina.png' },
 ];
-export default function selectLanguage(props) {
+export default function selectedLanguage(props) {
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
   const [isSelected, setIsSelected] = useState(false);
   const onClick = () => {
