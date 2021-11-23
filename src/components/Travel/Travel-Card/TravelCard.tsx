@@ -29,13 +29,13 @@ const TravelCard: FC<Props> = ({ packages, title, ClickHandler }) => {
                 onClick={ClickHandler}
                 className="hover:shadow-2xl cursor-pointer bg-white h-auto rounded-2xl shadow-xl"
               >
-                <div className="w-full" style={{ height: 570 }}>
+                <div className="w-full h-60 xs:h-96 sm:h-80 md:h-96">
                   <img
                     className="w-full h-full object-cover rounded-t-2xl"
                     src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${tourpackage.image}`}
                   />
                 </div>
-                <div className="items-center grid grid-cols-2 md:block">
+                <div className="items-center">
                   <h2 className="text-left font-bold text-md md:text-md m-3 text-lg ">
                     {tourpackage.title}
                   </h2>
