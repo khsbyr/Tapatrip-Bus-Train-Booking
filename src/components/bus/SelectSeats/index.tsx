@@ -9,7 +9,6 @@ import { Modal } from 'antd';
 import { arrayFilterSchedule } from '@helpers/array-format';
 
 export default function SelectSeats({ datas, scheduleId }) {
-  console.log(datas);
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();

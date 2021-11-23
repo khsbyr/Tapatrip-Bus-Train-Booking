@@ -99,14 +99,21 @@ export default function SearchBus({ startLocations }) {
     if (selectEndLocation.key === undefined || selectEndLocation.key == '') {
       message.warning('Та явах чиглэлээ сонгоно уу?');
     } else {
+      const endDate = moment(selectDate)
+        .add(7, 'days')
+        .format(dateFormat)
+        .toString();
+
       const params = {
         endLocation: selectEndLocation.key,
         date: selectDate,
+        endDate: endDate,
       };
       const ubParams = {
         startLocation: selectStartLocation.key,
         stopLocation: selectEndLocation.key,
         date: selectDate,
+        endDate: endDate,
       };
       router.push({
         pathname: '/bus/orders',

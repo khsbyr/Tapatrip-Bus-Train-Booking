@@ -18,6 +18,8 @@ import { Tabs } from 'antd';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import React from 'react';
+import Company from '@data/company.json';
+
 const { TabPane } = Tabs;
 const TYPE = 'TRAVEL';
 
@@ -61,7 +63,7 @@ export default function Travel({ NavData, Packages, TipsFor, BannerItems }) {
         </div>
         <App />
         <TapaService tapaServiceList={TapaServiceList} />
-        <Footer navbarData={NavData} />
+        <Footer companyInfo={Company} />
       </div>
     </div>
   );

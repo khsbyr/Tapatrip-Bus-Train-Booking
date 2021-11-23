@@ -3,6 +3,7 @@ import Footer from '@components/common/Footer';
 import Banks from '@components/common/payments/banks';
 import Corporate from '@components/common/payments/corporates';
 import ContentWrapper from '@components/Travel/style';
+import Company from '@data/company.json';
 import NavData from '@data/navData.json';
 import {
   CheckIcon,
@@ -333,7 +334,7 @@ export default function payment({ NavData, refNumber, payments }) {
           </div>
         </div>
       </div>
-      <Footer navbarData={NavData} />
+      <Footer companyInfo={Company} />
     </ContentWrapper>
   );
 }
