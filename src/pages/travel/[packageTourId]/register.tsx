@@ -284,7 +284,7 @@ const Register: FC<Props> = props => {
                   remember: true,
                 }}
                 onFinish={sendButton}
-                className="p-4  grid grid-cols-3 gap-4 "
+                className="p-4 grid grid-cols-3 gap-4"
               >
                 <div className="mr-2 col-span-2 grid grid-cols-2 ">
                   <h1 className="font-bold my-2 text-2xl">
