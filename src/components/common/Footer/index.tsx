@@ -7,7 +7,6 @@ interface Props {
 }
 
 const Footer: FC<Props> = ({ companyInfo }) => {
-  console.log(companyInfo);
   return (
     <div className={styles.footer}>
       <div className={styles.subFooter}>
@@ -18,7 +17,7 @@ const Footer: FC<Props> = ({ companyInfo }) => {
             </h1>
             <div className="mt-6">
               {companyInfo?.map(company => (
-                <Link key={company.id} href={company.path}>
+                <Link key={company.id} href={company.head.replace(/[ ]/g, '')}>
                   <a
                     target="_blank"
                     className="hover:underline hover:text-cardDate"

@@ -7,7 +7,7 @@ import Footer from '@components/common/Footer';
 
 export async function getStaticPaths() {
   const paths = data.map(post => ({
-    params: { slug: post.path },
+    params: { slug: post.head },
   }));
   return {
     paths,
@@ -25,7 +25,7 @@ const About = company => {
   return (
     <div className="">
       {data.map(post =>
-        post.path === company.info.slug ? (
+        post.head === company.info.slug ? (
           <div>
             <Head>
               <title>{post.head}</title>

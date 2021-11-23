@@ -14,7 +14,7 @@ export default function index() {
   return (
     <>
       <button
-        className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-56 lg:w-48 hover:bg-gray-200"
+        className="bg-bg text-cardDate font-medium py-2 px-4 rounded-lg h-auto w-56 lg:w-40 hover:bg-gray-200 xl:ml-10"
         onClick={checkOrder}
       >
         Захиалга шалгах
