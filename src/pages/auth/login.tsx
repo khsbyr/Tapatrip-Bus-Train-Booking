@@ -1,8 +1,8 @@
 import NavbarProfile from '@components/bus/SeatNavbar';
-import LoginPhoneNumber from '@components/common/Auth/loginPhoneNumber';
-import Registration from '@components/common/Auth/registration';
-import RegistrationConfirm from '@components/common/Auth/registrationConfirm';
-import CreatePass from '@components/common/Auth/createPass';
+import LoginPhoneNumber from '@components/common/Auth/LoginPhoneNumber';
+import Registration from '@components/common/Auth/Registration';
+import RegistrationConfirm from '@components/common/Auth/RegistrationConfirm';
+import CreatePass from '@components/common/Auth/CreatePass';
 import NavData from '@data/navData.json';
 import { Tabs } from 'antd';
 import Footer from '@components/common/Footer';
