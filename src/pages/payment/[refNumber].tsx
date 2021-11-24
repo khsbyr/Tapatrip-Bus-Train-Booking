@@ -237,8 +237,43 @@ export default function payment({ NavData, refNumber, payments }) {
         </Steps>
         <div style={{ minHeight: '500px' }} className="bg-bg font-Roboto ">
           <div className="default-container pt-1">
-            <div className=" px-2 grid grid-cols-3 gap-2">
-              <div className="p-4 col-span-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3">
+              <div className="p-4 sm:col-span-1">
+                <div>
+                  <h1
+                    className="font-bold text-2xl max-w-7xl mx-auto my-6 px-6"
+                    style={{ color: '#0A3761' }}
+                  >
+                    Your payment information
+                  </h1>
+                </div>
+                <div className=" bg-white border rounded-md shadow-lg">
+                  <div className="flex items-center text-center">
+                    <h1 className=" py-2 mx-4 my-1 font-bold">
+                      {`${queries.tourName}`}
+                    </h1>
+                  </div>
+                  <div className="flex justify-between">
+                    <h1 className=" py-2 mx-4 my-1">Total passengers:</h1>
+                    <h1 className=" py-2 mx-4 my-1 font-bold">
+                      {queries.totalPassenger}
+                    </h1>
+                  </div>
+
+                  <div className="bg-bg py-2 flex justify-between">
+                    <h1 className="text-lg-16px mx-4 my-1">total price :</h1>
+                    <h1 className="text-lg-16px mx-4 my-1 font-bold">
+                      <CurrencyFormat
+                        value={queries.totalPrice}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                        suffix={` ₮`}
+                      />
+                    </h1>
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 sm:col-span-2">
                 <div>
                   <h1
                     className="font-bold text-2xl max-w-7xl mx-auto my-6 px-6"
@@ -298,42 +333,6 @@ export default function payment({ NavData, refNumber, payments }) {
                   </div>
                   <div className={`${!isActiveCorp ? 'hidden' : 'block'}`}>
                     {renderCorporate()}
-                  </div>
-                </div>
-              </div>
-              <div className="col-span-1 p-4 ">
-                <div>
-                  <h1
-                    className="font-bold text-2xl max-w-7xl mx-auto my-6 px-6"
-                    style={{ color: '#0A3761' }}
-                  >
-                    Your payment information
-                  </h1>
-                </div>
-
-                <div className=" bg-white border rounded-md shadow-lg">
-                  <div className="flex items-center text-center">
-                    <h1 className=" py-2 mx-4 my-1 font-bold">
-                      {`${queries.tourName}`}
-                    </h1>
-                  </div>
-                  <div className="flex justify-between">
-                    <h1 className=" py-2 mx-4 my-1">Total passengers:</h1>
-                    <h1 className=" py-2 mx-4 my-1 font-bold">
-                      {queries.totalPassenger}
-                    </h1>
-                  </div>
-
-                  <div className="bg-bg py-2 flex justify-between">
-                    <h1 className="text-lg-16px mx-4 my-1">total price :</h1>
-                    <h1 className="text-lg-16px mx-4 my-1 font-bold">
-                      <CurrencyFormat
-                        value={queries.totalPrice}
-                        displayType={'text'}
-                        thousandSeparator={true}
-                        suffix={` ₮`}
-                      />
-                    </h1>
                   </div>
                 </div>
               </div>
