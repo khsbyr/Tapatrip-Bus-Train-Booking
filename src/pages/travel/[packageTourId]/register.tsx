@@ -239,47 +239,29 @@ const Register: FC<Props> = props => {
 
   return (
     <ContentWrapper>
-      <div className="relative">
+      <div>
         <StaticNavbar navbarData={NavData} />
         <Steps className="my-5 px-6" size="small" current={1}>
           <Step title="Сонгох" />
           <Step title="Захиалах" />
           <Step title="Төлбөр төлөх" />
         </Steps>
-        {/*        <Steps
-          type="navigation"
-          current={current}
-          onChange={onChange}
-          size="small"
-          responsive={true}
-          className="site-navigation-steps bg-steps"
-        >
-          {steps.map(item => (
-            <Step
-              key={item.title}
-              icon=" "
-              title={item.title}
-              className="text-xs text-white"
-            />
-          ))}
-          </Steps>*/}
-        <div style={{ minHeight: '500px' }} className="bg-bg font-Roboto h-96">
+        <div style={{ minHeight: '500px' }} className="bg-bg font-Roboto">
           <div className="default-container pt-1">
-            <div className="md:col-span-2  gap-2 my-4">
-              <Form
-                name="Guests register"
-                layout="vertical"
-                initialValues={{
-                  remember: true,
-                }}
-                onFinish={sendButton}
-                className="p-4 grid grid-cols-3 gap-4"
-              >
-                <div className="mr-2 col-span-2 grid grid-cols-2 ">
-                  <h1 className="font-bold my-2 text-2xl">
-                    Захиалагчийн мэдээлэл
-                  </h1>
-                  {/* <div className="grid grid-cols-2 col-span-2 gap-4 mb-2">
+            <Form
+              name="Guests register"
+              layout="vertical"
+              initialValues={{
+                remember: true,
+              }}
+              onFinish={sendButton}
+              className="grid grid-cols-1 md:grid-cols-3"
+            >
+              <div className="col-span-2">
+                <h1 className="font-bold my-2 text-2xl">
+                  Захиалагчийн мэдээлэл
+                </h1>
+                {/* <div className="grid grid-cols-2 col-span-2 gap-4 mb-2">
                   <div className="col-span-1  bg-white rounded-lg p-2">
                     Хувь хүн
                   </div>
@@ -287,111 +269,110 @@ const Register: FC<Props> = props => {
                     Байгууллага
                   </div>
                 </div> */}
-                  <div className="col-span-2 gap-4 p-4 grid grid-cols-2 bg-white rounded-md">
-                    <Form.Item
-                      label={'Овог'}
-                      name="lastName"
-                      rules={[
-                        {
-                          type: 'string',
-                          message: 'should be string',
-                        },
-                        { required: true, message: 'Овгоо заавал бөглөнө үү!' },
-                      ]}
-                      className="mb-0 col-span-1"
-                    >
-                      <Input />
-                    </Form.Item>
-                    <Form.Item
-                      label={'Нэр'}
-                      name="firtsName"
-                      rules={[
-                        {
-                          type: 'string',
-                          message: 'should be string',
-                        },
-                        { required: true, message: 'Нэрээ заавал бөглөнө үү!' },
-                      ]}
-                      className="mb-0 col-span-1"
-                    >
-                      <Input />
-                    </Form.Item>
+                <div className=" bg-white rounded-md grid grid-cols-1 pb-4 sm:grid-cols-2 p-4 gap-4">
+                  <Form.Item
+                    label={'Овог'}
+                    name="lastName"
+                    rules={[
+                      {
+                        type: 'string',
+                        message: 'should be string',
+                      },
+                      { required: true, message: 'Овгоо заавал бөглөнө үү!' },
+                    ]}
+                    className="mb-0"
+                  >
+                    <Input />
+                  </Form.Item>
+                  <Form.Item
+                    label={'Нэр'}
+                    name="firtsName"
+                    rules={[
+                      {
+                        type: 'string',
+                        message: 'should be string',
+                      },
+                      { required: true, message: 'Нэрээ заавал бөглөнө үү!' },
+                    ]}
+                    className="mb-0"
+                  >
+                    <Input />
+                  </Form.Item>
 
-                    <Form.Item
-                      label={'Цахим шуудан'}
-                      name="email"
-                      rules={[
-                        {
-                          type: 'email',
-                          message: 'И-мэйл буруу байна!',
-                        },
-                        {
-                          required: true,
-                          message: 'И-мэйл хаягаа заавал бөглөнө үү!',
-                        },
-                      ]}
-                      className="mb-0 col-span-1"
-                    >
-                      <Input />
-                    </Form.Item>
-                    <InputPhoneNumber />
-                  </div>
+                  <Form.Item
+                    label={'Цахим шуудан'}
+                    name="email"
+                    rules={[
+                      {
+                        type: 'email',
+                        message: 'И-мэйл буруу байна!',
+                      },
+                      {
+                        required: true,
+                        message: 'И-мэйл хаягаа заавал бөглөнө үү!',
+                      },
+                    ]}
+                    className="mb-0"
+                  >
+                    <Input />
+                  </Form.Item>
+                  <InputPhoneNumber />
                 </div>
-                <div className="relative col-span-1">
-                  <div className="col-span-1 w-98 p-2">
-                    <h1 className="font-bold pb-2 text-2xl">
-                      Захиалгын дэлгэрэнгүй
-                    </h1>
-                    <div className="bg-white rounded-md mb-4">
-                      <div className="p-2 inline-flex">
-                        <h1 className="font-bold mb-1 px-2">
-                          {router.query.tourName}
-                        </h1>
+              </div>
+              <div className="">
+                <div className="col-span-1 w-full p-2">
+                  <h1 className="font-bold pb-2 text-2xl">
+                    Захиалгын дэлгэрэнгүй
+                  </h1>
+                  <div className="bg-white rounded-md mb-4">
+                    <div className="p-2 inline-flex">
+                      <h1 className="font-bold mb-1 px-2">
+                        {router.query.tourName}
+                      </h1>
+                    </div>
+                    <div className="grid grid-cols-2 p-1 mb-1 px-4">
+                      <p>
+                        Насанд хүрэгч: &nbsp;
+                        <span className="bg-gray-200 p-1 rounded-sm">{`${adults}`}</span>
+                      </p>
+                      <p>
+                        Хүүхэд: &nbsp;
+                        <span className="bg-gray-200 p-1 rounded-sm">{`${childs}`}</span>
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-2 py-2 px-4 border-t-2">
+                      <div className="col-span-1">
+                        <p className="font-bold">Нийт</p>
                       </div>
-                      <div className="grid grid-cols-2 p-1 mb-1 px-4">
-                        <p>
-                          Насанд хүрэгч: &nbsp;
-                          <span className="bg-gray-200 p-1 rounded-sm">{`${adults}`}</span>
+                      <div className="col-span-1">
+                        <p className="text-right font-bold">
+                          <CurrencyFormat
+                            value={router.query.totalPrice}
+                            displayType={'text'}
+                            thousandSeparator={true}
+                            suffix={` ₮`}
+                          />
                         </p>
-                        <p>
-                          Хүүхэд: &nbsp;
-                          <span className="bg-gray-200 p-1 rounded-sm">{`${childs}`}</span>
-                        </p>
-                      </div>
-                      <div className="grid grid-cols-2 py-2 px-4 border-t-2">
-                        <div className="col-span-1">
-                          <p className="font-bold">Нийт</p>
-                        </div>
-                        <div className="col-span-1">
-                          <p className="text-right font-bold">
-                            <CurrencyFormat
-                              value={router.query.totalPrice}
-                              displayType={'text'}
-                              thousandSeparator={true}
-                              suffix={` ₮`}
-                            />
-                          </p>
-                        </div>
                       </div>
                     </div>
-                    <Form.Item className="mb-1">
-                      <button
-                        className="mb-2 col-span-1 w-full bg-button text-white font-bold py-3 px-4 rounded-lg"
-                        type="submit"
-                      >
-                        Төлбөр төлөх
-                      </button>
-                    </Form.Item>
-                    <button
-                      type="submit"
-                      className="col-span-1 w-full bg-steps text-white font-bold py-3 px-4 rounded-lg"
-                    >
-                      Зээлээр худалдан авах
-                    </button>
                   </div>
+                  <Form.Item className="mb-1">
+                    <button
+                      className="mb-2 col-span-1 w-full bg-button text-white font-bold py-3 px-4 rounded-lg"
+                      type="submit"
+                    >
+                      Төлбөр төлөх
+                    </button>
+                  </Form.Item>
+                  <button
+                    type="submit"
+                    className="col-span-1 w-full bg-steps text-white font-bold py-3 px-4 rounded-lg"
+                  >
+                    Зээлээр худалдан авах
+                  </button>
                 </div>
-              </Form>
-            </div>
+              </div>
+            </Form>
           </div>
         </div>
       </div>

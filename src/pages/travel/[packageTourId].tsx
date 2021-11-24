@@ -131,7 +131,7 @@ export default function packageDetail({ NavData, PackTour }) {
             ))}
           </Carousel>
         </div>
-        <div className="my-4 grid grid-cols-1 sm:grid-cols-3">
+        <div className="my-4 grid grid-cols-1 md:grid-cols-3">
           <div className="mr-2 col-span-2 grid grid-cols-2">
             <div className="bg-white rounded-lg col-span-2 p-8">
               <div className="grid grid-cols-1 items-center sm:grid-cols-3">
@@ -178,8 +178,6 @@ export default function packageDetail({ NavData, PackTour }) {
                   </h2>
                 </div>
               </div>
-
-              {'   '}
 
               <div className="my-8 col-span-2">
                 <h2 className="font-bold text-lg">Travel information</h2>
