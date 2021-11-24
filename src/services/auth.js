@@ -38,7 +38,6 @@ const AuthService = {
     const response = await Client.post('/gandan/air/subscription/', {
       email: email,
     });
-    // const result = response.data.status_code === 200 ? true : false;
     return response;
   },
 
