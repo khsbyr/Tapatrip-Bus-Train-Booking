@@ -49,7 +49,11 @@ const DaysDetail: FC<Props> = ({ isLast, title, image, description }) => {
               <ChevronDownIcon className="h-10" />
             )}
           </div>
-          <div className={`${!isActive ? 'hidden' : 'block'} flex`}>
+          <div
+            className={`${
+              !isActive ? 'hidden' : 'block grid grid-cols-1 xs:flex'
+            }`}
+          >
             <img className="max-h-28 mr-2 mt-2 rounded-md" src={`${image}`} />
             <div
               className={'text-justify mr-2'}
