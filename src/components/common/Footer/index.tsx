@@ -34,7 +34,7 @@ const Footer: FC<Props> = ({ companyInfo }) => {
             </h1>
             <div className="mt-6">
               {companyInfo?.map(company => (
-                <Link key={company.id} href={company.head.replace(/[ ]/g, '')}>
+                <Link key={company.id} href={`/` + company.head}>
                   <a
                     target="_blank"
                     className="hover:underline hover:text-cardDate"
@@ -105,7 +105,7 @@ const Footer: FC<Props> = ({ companyInfo }) => {
           </div>
         </div>
         <p
-          className="text-center py-8"
+          className="text-center py-8 mb-16 lg:mb-0"
           style={{ color: 'rgba(2, 48, 71, 0.5)' }}
         >
           © Зохиогчийн эрхийг хуулийн дагуу Тапатрип ХХК эзэмшинэ.

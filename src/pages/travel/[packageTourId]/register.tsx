@@ -5,8 +5,8 @@ import InputPhoneNumber from '@components/common/InputPhoneNumber';
 import ContentWrapper from '@components/Travel/style';
 import Company from '@data/company.json';
 import NavData from '@data/navData.json';
-import { postRequest } from '@lib/api';
 import AuthService from '@services/auth';
+import { postRequest } from '@services/travel/travelServices';
 import { Form, Input, Modal, Steps } from 'antd';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect, useState } from 'react';
@@ -29,13 +29,10 @@ const steps = [
     button: 'Дуусгах',
   },
 ];
-interface Props {
-  data?: any;
-}
 let adults = 0;
 let childs = 0;
 
-const Register: FC<Props> = props => {
+const Register = props => {
   const router = useRouter();
   const [current, setCurrent] = useState(0);
   const [packData, setPackData] = useState(null);
@@ -51,7 +48,7 @@ const Register: FC<Props> = props => {
     contact_email: null,
   });
   useEffect(() => {
-    const queries = router.query;
+    const queries = props.query;
     let packs = [];
     packs =
       queries.subPack &&
@@ -424,6 +421,12 @@ const Register: FC<Props> = props => {
       )}
     </ContentWrapper>
   );
+};
+
+export const getServerSideProps = async ({ query }) => {
+  return {
+    props: { query },
+  };
 };
 
 export default Register;

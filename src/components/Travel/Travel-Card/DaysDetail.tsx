@@ -52,6 +52,7 @@ const DaysDetail: FC<Props> = ({ isLast, title, image, description }) => {
           <div className={`${!isActive ? 'hidden' : 'block'} flex`}>
             <img className="max-h-28 mr-2 mt-2 rounded-md" src={`${image}`} />
             <div
+              className={'text-justify mr-2'}
               dangerouslySetInnerHTML={{
                 __html: description,
               }}

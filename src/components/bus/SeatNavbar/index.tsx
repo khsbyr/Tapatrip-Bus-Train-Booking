@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Transition } from '@headlessui/react';
 import style from './SeatNavbar.module.scss';
 import OrderCheck from '@components/bus/OrderCheck';
-import SelectLanguage from '@components/common/Selects/selectLanguage';
+import SelectLanguage from '@components/common/Language';
 import Link from 'next/link';
 interface Props {
   navbarData?: any;

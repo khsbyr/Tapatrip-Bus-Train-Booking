@@ -1,22 +1,35 @@
 import React, { useState } from 'react';
 import { Listbox } from '@headlessui/react';
-import s from './selectLanguage.module.scss';
+import s from './language.module.scss';
 import { CheckIcon } from '@heroicons/react/solid';
+import { useRouter } from 'next/router';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 
 const languages = [
-  { name: 'Mongolia', src: '/assets/flagMongolia.png' },
-  { name: 'English(UK)', src: '/assets/flagEng.png' },
-  { name: 'China', src: '/assets/flagChina.png' },
+  { name: 'Mongolia', src: '/assets/flagMongolia.png', route: 'mn' },
+  { name: 'English(UK)', src: '/assets/flagEng.png', route: 'en' },
+  { name: 'China', src: '/assets/flagChina.png', route: 'zh' },
 ];
-export default function selectLanguage(props) {
+export default function selectedLanguage(props) {
+  const router = useRouter();
+  const { locale } = router;
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
   const [isSelected, setIsSelected] = useState(false);
+
+  // console.log(locale);
+
   const onClick = () => {
     setIsSelected(!isSelected);
   };
+
   const select = () => {
     setIsSelected(!isSelected);
+  };
+
+  const changeLanguage = value => {
+    // console.log(value);
+    // const locale = value.route;
+    // router.push(router.pathname, router.asPath, { locale });
   };
 
   return (
