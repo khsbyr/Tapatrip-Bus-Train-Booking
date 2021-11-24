@@ -3,7 +3,7 @@ import { useGlobalStore } from '@context/globalStore';
 import { useRouter } from 'next/router';
 import { Statistic, Radio, Space, Modal } from 'antd';
 import PayTransfer from '@components/bus/payTransfer';
-import style from './payments.module.scss';
+import style from './payment.module.scss';
 import ContentWrapper from './style';
 import StepCard from '../stepCard';
 import PaymentCard from '../paymentCard';
