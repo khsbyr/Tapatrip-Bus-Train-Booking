@@ -5,7 +5,7 @@ import { Transition } from '@headlessui/react';
 import SearchBus from '@components/bus/SearchInput';
 import styles from '../../common/Navbar/navbar.module.scss';
 import Link from 'next/link';
-import SelectLanguage from '@components/common/Selects/selectLanguage';
+import SelectLanguage from '@components/common/Language';
 
 interface Props {
   navbarData?: any;

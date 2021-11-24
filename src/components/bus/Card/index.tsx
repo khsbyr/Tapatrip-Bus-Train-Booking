@@ -15,7 +15,6 @@ import CurrencyFormat from 'react-currency-format';
 const { Step } = Steps;
 
 export default function Card({ datas }) {
-  console.log(datas);
   const unixDates = unixDate(datas.node);
   const [isActive, setIsActive] = useState(false);
   let format = n =>
@@ -23,19 +22,21 @@ export default function Card({ datas }) {
     ' цаг ' +
     ('0' + (n % 60)).slice(-2) +
     ' минут';
+
   return (
     <div className="px-2">
       <div className="max-w-7xl mx-auto">
         <div className={style.card}>
           <div className="px-7 md:px-12 space-y-2 lg:space-y-4">
-            {/* <h1 className={style.leaveTitle}>{datas.node.leaveDate}</h1> */}
             <div className="flex justify-between flex-wrap pt-5">
               <div className="mb-4 sm:mb-0 space-y-0 sm:space-y-2">
                 <div className="flex space-x-4 items-center">
                   <div className="">
-                    <h1 className={style.startTitle}>{datas.node.leaveDate}</h1>
+                    <h1 className={style.startTitle}>
+                      {datas?.node.leaveDate}
+                    </h1>
                     <h1 className={style.timeText}>
-                      {datas.node.leaveTime.slice(0, 5)}
+                      {datas?.node.leaveTime.slice(0, 5)}
                     </h1>
                   </div>
                   <div>
@@ -44,14 +45,14 @@ export default function Card({ datas }) {
                     </p>
                     <h1
                       className={`${
-                        datas.node.locationEnd.distance === 0
+                        datas?.node.locationEnd.distance === 0
                           ? 'hidden'
                           : style.timeText
                       }`}
                     >
                       <div className="flex items-center">
                         <CurrencyFormat
-                          value={datas.node.locationEnd.distance}
+                          value={datas?.node.locationEnd.distance}
                           displayType={'text'}
                           thousandSeparator={true}
                           renderText={value => <div>{value}</div>}
@@ -72,7 +73,7 @@ export default function Card({ datas }) {
               </div>
 
               <div className="hidden xs:block space-y-1 lg:space-y-2">
-                <h1 className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
+                <div className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
                   <CurrencyFormat
                     value={datas.node.adultTicket}
                     displayType={'text'}
@@ -80,7 +81,7 @@ export default function Card({ datas }) {
                     renderText={value => <div>{value}</div>}
                   />
                   <h1 className={style.priceText}>{' MNT'}</h1>
-                </h1>
+                </div>
                 <h1 className="flex items-center text-xs md:text-sm lg:text-base">
                   <UserIcon className="w-3 md:w-4 h-3 md:h-4 " /> 1 зорчигчийн
                   үнэ
@@ -91,15 +92,15 @@ export default function Card({ datas }) {
             <div className="flex justify-between">
               <h1
                 className={`${
-                  datas.node.locationEnd.distance === 0
+                  datas?.node.locationEnd.distance === 0
                     ? 'hidden'
                     : 'flex text-sm text-cardDate items-center xs:items-start'
                 }`}
               >
-                {format(datas.node.locationEnd.estimatedDuration)}
+                {format(datas?.node.locationEnd.estimatedDuration)}
               </h1>
               <div className="xs:hidden space-y-1 lg:space-y-2">
-                <h1 className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
+                <div className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
                   <CurrencyFormat
                     value={datas.node.adultTicket}
                     displayType={'text'}
@@ -107,7 +108,7 @@ export default function Card({ datas }) {
                     renderText={value => <div>{value}</div>}
                   />
                   <h1 className={style.priceText}>{' MNT'}</h1>
-                </h1>
+                </div>
                 <h1 className="flex items-center text-xs md:text-sm lg:text-base">
                   <UserIcon className="w-3 md:w-4 h-3 md:h-4 " /> 1 зорчигчийн
                   үнэ
@@ -139,7 +140,7 @@ export default function Card({ datas }) {
                 </button>
               </div>
               <div className="col-span-2 mt-5 lg:mt-0 lg:col-span-1">
-                <Link href={`/bus/orders/${datas.node.id}`}>
+                <Link href={`/bus/orders/${datas?.node.id}`}>
                   <button className={style.orderButton}>Захиалах</button>
                 </Link>
               </div>
@@ -152,29 +153,27 @@ export default function Card({ datas }) {
                 <Step
                   title={datas.node.leaveDate}
                   description={
-                    datas.node.startStopName +
+                    datas?.node.startStopName +
                     ' /' +
-                    datas.node.locationEnd.locationStop.location.name +
+                    datas?.node.locationEnd.locationStop.location.name +
                     '/'
                   }
                 />
                 <Step
                   title={moment.unix(unixDates).format('YYYY-MM-DD')}
                   description={
-                    datas.node.locationEnd.locationEnd.name +
+                    datas?.node.locationEnd.locationEnd.name +
                     ' /' +
-                    datas.node.locationEnd.locationEnd.location.name +
+                    datas?.node.locationEnd.locationEnd.location.name +
                     '/'
                   }
                 />
               </Steps>
               <div className="w-full col-span-1 flex items-end md:justify-end font-medium text-base text-cardDate lg:ml-12">
-                {/* <div className="flex items-center"> */}
                 <h1 className="text-base text-cardDate font-normal pr-2">
                   Даатгалын компани:
                 </h1>
-                <p>{datas.node.insurance.name}</p>
-                {/* </div> */}
+                <p>{datas?.node.insurance.name}</p>
               </div>
             </div>
           </div>

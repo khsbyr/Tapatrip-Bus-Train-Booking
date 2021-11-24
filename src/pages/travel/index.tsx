@@ -1,25 +1,23 @@
-import Search from '@components/Travel/Search-Travel';
 import Footer from '@components/common/Footer';
 // import Layout from '@components/Layout/Layout';
 import HeaderBackground from '@components/common/HeaderBackground';
 import Navbar from '@components/common/Navbar';
-// import App from '@components/App/App';
 import App from '@components/common/Subscribe';
 import TapaService from '@components/common/TapaService';
-// import Search from '@components/Travel/Search/Search';
+import Search from '@components/Travel/Search-Travel';
 import ServicesCard from '@components/Travel/Travel-Card/ServicesCard';
 import Tips from '@components/Travel/Travel-Card/Tips';
 import TravelCard from '@components/Travel/Travel-Card/TravelCard';
+import Company from '@data/company.json';
 import NavData from '@data/navData.json';
 import TapaServiceList from '@data/tapaServiceList.json';
-import { postRequest, getRequestNoToken } from '@lib/api';
-// import style from '@components/Search/Search.module.scss';
-import { Tabs } from 'antd';
+import {
+  getRequestNoToken,
+  postRequest,
+} from '@services/travel/travelServices';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import React from 'react';
-const { TabPane } = Tabs;
-const TYPE = 'TRAVEL';
 
 export default function Travel({ NavData, Packages, TipsFor, BannerItems }) {
   return (
@@ -61,7 +59,7 @@ export default function Travel({ NavData, Packages, TipsFor, BannerItems }) {
         </div>
         <App />
         <TapaService tapaServiceList={TapaServiceList} />
-        <Footer navbarData={NavData} />
+        <Footer companyInfo={Company} />
       </div>
     </div>
   );
@@ -80,9 +78,6 @@ export const getStaticProps: GetStaticProps = async () => {
       Packages: tour.result,
       TipsFor: tips.result,
       BannerItems: bannerItems,
-      // Packages: packages,
-      // GridList: gridList,
-      // CommentList: commentList,
     },
   };
 };

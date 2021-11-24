@@ -5,7 +5,7 @@ import {
   BUS_ALL_LOCATIONS_QUERY,
   BUS_ALL_SCHEDULES_QUERY,
 } from '@graphql/queries';
-import { Result, Button } from 'antd';
+import { Result } from 'antd';
 import Card from '@components/bus/Card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
 import BusNavbar from '@components/bus/Navbar';
@@ -16,7 +16,8 @@ import Loader from '@components/common/Loader';
 
 export default function Orders() {
   const router = useRouter();
-  const { startLocation, stopLocation, endLocation, date } = router.query;
+  const { startLocation, stopLocation, endLocation, date, endDate } =
+    router.query;
   const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
 
   const {
@@ -28,7 +29,7 @@ export default function Orders() {
       startLocation: startLocation ? startLocation : '',
       stopLocation: stopLocation ? stopLocation : '',
       locationEnd: endLocation ? endLocation : '',
-      leaveDate: date ? date + ',' + date : '',
+      leaveDate: date ? date + ',' + endDate : '',
     },
   });
 
