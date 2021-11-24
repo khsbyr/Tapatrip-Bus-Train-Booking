@@ -1,7 +1,7 @@
 import SeatNav from '@components/bus/seatNavbar';
 import Layout from '@components/common/layout';
-import DaysDetail from '@components/Travel/Travel-Card/DaysDetail';
-import PackageList from '@components/Travel/Travel-Card/PackageList';
+import DaysDetail from '@components/travel/Travel-Card/DaysDetail';
+import PackageList from '@components/travel/Travel-Card/PackageList';
 import NavData from '@data/navData.json';
 import {
   CalendarIcon,
@@ -16,7 +16,7 @@ import { postRequest } from '@services/travel/travelServices';
 import { Carousel, message, Timeline } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import TravelTipsModal from '@components/Travel/TravelTipsModal';
+import TravelTipsModal from '@components/travel/TravelTipsModal';
 const breadcrumbRoutes = [
   {
     path: '/',

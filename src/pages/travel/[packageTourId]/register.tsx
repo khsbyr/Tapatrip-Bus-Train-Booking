@@ -2,7 +2,7 @@ import SeatNav from '@components/bus/seatNavbar';
 import ConfirmModal from '@components/common/confirmModal';
 import Footer from '@components/common/footer';
 import InputPhoneNumber from '@components/common/phoneNumber';
-import ContentWrapper from '@components/Travel/style';
+import ContentWrapper from '@components/travel/style';
 import Company from '@data/company.json';
 import NavData from '@data/navData.json';
 import AuthService from '@services/auth';

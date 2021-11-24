@@ -1,8 +1,8 @@
 import SeatNav from '@components/bus/seatNavbar';
 import Footer from '@components/common/footer';
-import Banks from '@components/Travel/payments/banks';
-import Corporate from '@components/Travel/payments/corporates';
-import ContentWrapper from '@components/Travel/style';
+import Banks from '@components/travel/payments/banks';
+import Corporate from '@components/travel/payments/corporates';
+import ContentWrapper from '@components/travel/style';
 import Company from '@data/company.json';
 import NavData from '@data/navData.json';
 import {
