@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import { Transition } from '@headlessui/react';
 import OrderCheck from '@components/bus/orderCheck';
-import SelectLanguage from '@components/common/Language';
+import SelectLanguage from '@components/common/language';
 import Link from 'next/link';
 
 interface Props {

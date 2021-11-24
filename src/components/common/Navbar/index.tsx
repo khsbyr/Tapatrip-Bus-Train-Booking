@@ -3,7 +3,7 @@ import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import OrderCheck from '@components/bus/orderCheck';
 import styles from './navbar.module.scss';
-import SelectLanguage from '@components/common/Language';
+import SelectLanguage from '@components/common/language';
 import Link from 'next/link';
 
 interface Props {
@@ -14,6 +14,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [navbar, setNavbar] = useState(false);
   const [openTab, setOpenTab] = React.useState(4);
+
   const changeBackground = () => {
     if (window.scrollY >= 80) {
       setNavbar(true);

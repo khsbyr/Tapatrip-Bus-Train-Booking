@@ -4,7 +4,7 @@ import { Listbox } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/solid';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import ContentWrapper from './style';
-import style from '@components/common/InputPhoneNumber/PhoneNumber.module.scss';
+import style from './phoneNumber.module.scss';
 import { useGlobalStore } from '@context/globalStore';
 import { PATTERN_PHONE } from '@helpers/constantValidation';
 
@@ -13,7 +13,7 @@ const countries = [
   { name: 44, src: '/assets/flagEng.png', value: 1 },
 ];
 
-export default function InputPhoneNumber() {
+export default function PhoneNumber() {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [isSelected, setIsSelected] = useState(false);
   const { customers, setCustomers } = useGlobalStore();
@@ -57,9 +57,6 @@ export default function InputPhoneNumber() {
 
   return (
     <ContentWrapper className="space-y-2">
-      {/* <label className={style.Label} htmlFor="pNumber">
-        Утасны дугаар
-      </label> */}
       <Form.Item
         name="phone"
         rules={[

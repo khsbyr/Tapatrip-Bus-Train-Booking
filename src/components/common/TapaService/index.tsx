@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import styles from './TapaService.module.scss';
+import styles from './tapaService.module.scss';
 
 interface Props {
   tapaServiceList?: any;

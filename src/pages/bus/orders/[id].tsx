@@ -7,11 +7,11 @@ import { Steps } from 'antd';
 import NavData from '@data/navData.json';
 import SelectSeats from '@components/bus/selectSeats';
 import ContentWrapper from './style';
-import Layout from '@components/common/Layout';
+import Layout from '@components/common/layout';
 import SeatNav from '@components/bus/seatNavbar';
 import { useRouter } from 'next/router';
 import { useGlobalStore } from '@context/globalStore';
-import Loader from '@components/common/Loader';
+import Loader from '@components/common/loader';
 
 const { Step } = Steps;
 

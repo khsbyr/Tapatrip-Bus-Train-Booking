@@ -1,5 +1,5 @@
 import SeatNav from '@components/bus/seatNavbar';
-import Layout from '@components/common/Layout';
+import Layout from '@components/common/layout';
 import DaysDetail from '@components/Travel/Travel-Card/DaysDetail';
 import PackageList from '@components/Travel/Travel-Card/PackageList';
 import NavData from '@data/navData.json';

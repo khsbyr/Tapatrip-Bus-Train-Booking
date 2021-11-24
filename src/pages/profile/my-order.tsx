@@ -1,7 +1,7 @@
 import NavData from '@data/navData.json';
 import React, { FC, useState } from 'react';
 import TravelList from '@data/getTravelList.json';
-import Footer from '@components/common/Footer';
+import Footer from '@components/common/footer';
 import Navbar from '@components/bus/seatNavbar';
 import Company from '@data/company.json';
 

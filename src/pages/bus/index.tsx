@@ -3,16 +3,16 @@ import { useQuery } from '@apollo/client';
 import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
 import NavData from '@data/navData.json';
 import TapaServiceList from '@data/tapaServiceList.json';
-import Layout from '@components/common/Layout';
+import Layout from '@components/common/layout';
 import Search from '@components/bus/searchPanel';
-import Navbar from '@components/common/Navbar';
-import HeaderBackground from '@components/common/HeaderBackground';
-import TapaService from '@components/common/TapaService';
-import Subscribe from '@components/common/Subscribe';
+import Navbar from '@components/common/navbar';
+import HeaderBackground from '@components/common/headerBackground';
+import TapaService from '@components/common/tapaService';
+import Subscribe from '@components/common/subscribe';
 import AuthService from '@services/auth';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import { arrayFormat } from '@helpers/array-format';
-import Loader from '@components/common/Loader';
+import Loader from '@components/common/loader';
 
 export default function Bus({ guestToken }) {
   useEffect(() => {

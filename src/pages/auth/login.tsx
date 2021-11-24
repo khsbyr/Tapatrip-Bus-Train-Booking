@@ -5,7 +5,7 @@ import RegistrationConfirm from '@components/common/Auth/RegistrationConfirm';
 import CreatePass from '@components/common/Auth/CreatePass';
 import NavData from '@data/navData.json';
 import { Tabs } from 'antd';
-import Footer from '@components/common/Footer';
+import Footer from '@components/common/footer';
 import Company from '@data/company.json';
 import styles from '@components/common/Layout/layout.module.scss';
 import { useState } from 'react';

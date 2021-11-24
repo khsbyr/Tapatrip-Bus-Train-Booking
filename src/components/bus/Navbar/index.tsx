@@ -4,7 +4,7 @@ import OrderCheck from '@components/bus/orderCheck';
 import { Transition } from '@headlessui/react';
 import SearchInput from '@components/bus/searchInput';
 import Link from 'next/link';
-import SelectLanguage from '@components/common/Language';
+import SelectLanguage from '@components/common/language';
 
 interface Props {
   navbarData?: any;

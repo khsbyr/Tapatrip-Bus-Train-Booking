@@ -1,9 +1,9 @@
 import data from '@data/company.json';
 import Head from 'next/head';
-import HeaderBackground from '@components/common/HeaderBackground/';
+import HeaderBackground from '@components/common/headerBackground';
 import NavData from '@data/navData.json';
-import Navbar from '@components/common/Navbar';
-import Footer from '@components/common/Footer';
+import Navbar from '@components/common/navbar';
+import Footer from '@components/common/footer';
 
 export default function About({ info }) {
   return (

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from './layout.module.scss';
 import Company from '@data/company.json';
-import Footer from '@components/common/Footer';
+import Footer from '@components/common/footer';
 
 export default function Layout({ children }) {
   return (

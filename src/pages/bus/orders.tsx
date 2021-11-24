@@ -9,10 +9,10 @@ import { Result } from 'antd';
 import Card from '@components/bus/card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
 import BusNavbar from '@components/bus/navbar';
-import Layout from '@components/common/Layout';
+import Layout from '@components/common/layout';
 import { useRouter } from 'next/router';
 import { arrayFormat } from '@helpers/array-format';
-import Loader from '@components/common/Loader';
+import Loader from '@components/common/loader';
 
 export default function Orders() {
   const router = useRouter();

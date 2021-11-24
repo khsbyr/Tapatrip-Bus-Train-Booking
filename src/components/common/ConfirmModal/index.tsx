@@ -4,7 +4,7 @@ import ReactCodeInput from 'react-verification-code-input';
 import style from './ConfirmModal.module.scss';
 import ContentWrapper from './style';
 
-export default function OrderModal(props) {
+export default function ConfirmModal(props) {
   const [pinCode, setPinCode] = useState('');
 
   const handlePinChange = pinCode => {

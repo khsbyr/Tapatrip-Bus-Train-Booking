@@ -7,7 +7,7 @@ import style from './payment.module.scss';
 import ContentWrapper from './style';
 import StepCard from '../stepCard';
 import PaymentCard from '../paymentCard';
-import EndModal from '@components/common/EndModal';
+import EndModal from '@components/common/endModal';
 
 export default function Payment({ datas, scheduleId }) {
   const router = useRouter();

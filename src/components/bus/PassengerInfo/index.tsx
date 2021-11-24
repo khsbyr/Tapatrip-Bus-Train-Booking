@@ -9,9 +9,9 @@ import { BUS_BOOKING_CREATE } from '@graphql/mutation';
 import { PATTERN_COMPANY_REGISTER } from '@helpers/constantValidation';
 import ContentWrapper from './style';
 import StepCard from '../stepCard';
-import InputPhoneNumber from '@components/common/InputPhoneNumber';
+import InputPhoneNumber from '@components/common/phoneNumber';
 import { arrayFilterSchedule } from '@helpers/array-format';
-import ConfirmModal from '@components/common/ConfirmModal';
+import ConfirmModal from '@components/common/confirmModal';
 import AuthService from '@services/auth';
 import { useRouter } from 'next/router';
 

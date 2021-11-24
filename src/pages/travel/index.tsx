@@ -1,9 +1,9 @@
-import Footer from '@components/common/Footer';
+import Footer from '@components/common/footer';
 // import Layout from '@components/Layout/Layout';
-import HeaderBackground from '@components/common/HeaderBackground';
-import Navbar from '@components/common/Navbar';
-import App from '@components/common/Subscribe';
-import TapaService from '@components/common/TapaService';
+import HeaderBackground from '@components/common/headerBackground';
+import Navbar from '@components/common/navbar';
+import App from '@components/common/subscribe';
+import TapaService from '@components/common/tapaService';
 import Search from '@components/Travel/Search-Travel';
 import ServicesCard from '@components/Travel/Travel-Card/ServicesCard';
 import Tips from '@components/Travel/Travel-Card/Tips';
