@@ -20,9 +20,6 @@ import Head from 'next/head';
 import React, { useState } from 'react';
 import Loader from '@components/common/Loader';
 
-const { TabPane } = Tabs;
-const TYPE = 'TRAVEL';
-
 export default function Travel({ NavData, Packages, TipsFor, BannerItems }) {
   const [loader, setloader] = useState(false);
   function clickHandler() {
