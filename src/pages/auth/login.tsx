@@ -1,5 +1,5 @@
 import NavbarProfile from '@components/bus/SeatNavbar';
-import LoginPhoneNumber from '@components/common/Auth/LoginPhoneNumber';
+import LoginPhoneNumber from '@components/common/Auth/loginPhoneNumber';
 import Registration from '@components/common/Auth/Registration';
 import RegistrationConfirm from '@components/common/Auth/RegistrationConfirm';
 import CreatePass from '@components/common/Auth/CreatePass';
