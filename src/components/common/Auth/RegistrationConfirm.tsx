@@ -3,7 +3,7 @@ import ContentWrapper from '@components/bus/OrderModal/style';
 import { useState } from 'react';
 import ReactCodeInput from 'react-verification-code-input';
 
-export default function loginPhoneNumber() {
+export default function registrationConfirm() {
   const onFinish = async () => {};
   const { Countdown } = Statistic;
   const deadline = Date.now() + 60 * 60 * 83.3;
@@ -33,9 +33,6 @@ export default function loginPhoneNumber() {
             />
           </div>
         </div>
-        {/* <button className="w-full bg-button py-4 font-medium text-white text-xs rounded hover:shadow-xl">
-          БАТАЛГААЖУУЛАХ
-        </button> */}
       </div>
     </Form>
   );
