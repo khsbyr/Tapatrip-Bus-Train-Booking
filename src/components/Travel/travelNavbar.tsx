@@ -3,7 +3,7 @@ import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import OrderCheck from '@components/bus/OrderCheck';
 import styles from './navbar.module.scss';
-import SelectLanguage from '@components/common/Selects/selectLanguage';
+import SelectLanguage from '@components/common/Language';
 import Link from 'next/link';
 
 interface Props {
