@@ -29,13 +29,10 @@ const steps = [
     button: 'Дуусгах',
   },
 ];
-interface Props {
-  data?: any;
-}
 let adults = 0;
 let childs = 0;
 
-const Register: FC<Props> = props => {
+const Register = props => {
   const router = useRouter();
   const [current, setCurrent] = useState(0);
   const [packData, setPackData] = useState(null);
@@ -51,8 +48,7 @@ const Register: FC<Props> = props => {
     contact_email: null,
   });
   useEffect(() => {
-    // router.replace(router.asPath);
-    const queries = router.query;
+    const queries = props.query;
     let packs = [];
     packs =
       queries.subPack &&
@@ -346,6 +342,12 @@ const Register: FC<Props> = props => {
                     >
                       <Input className=" bg-bg rounded-md border-0" />
                     </Form.Item>
+                    <label
+                      className="text-cardDate px-2 font-medium"
+                      htmlFor="pNumber"
+                    >
+                      Утасны дугаар
+                    </label>
                     <InputPhoneNumber />
                   </div>
                 </div>
@@ -419,6 +421,12 @@ const Register: FC<Props> = props => {
       )}
     </ContentWrapper>
   );
+};
+
+export const getServerSideProps = async ({ query }) => {
+  return {
+    props: { query },
+  };
 };
 
 export default Register;

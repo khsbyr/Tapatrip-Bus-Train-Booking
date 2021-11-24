@@ -74,13 +74,13 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 <div
                   className={`${
                     navbar ? 'text-cardDate' : 'text-white'
-                  } flex text-lg font-bold cursor-pointer`}
+                  } flex text-lg font-bold cursor-pointer pr-5`}
                 >
                   <PhoneIcon className="w-5" />
                   <p className="pl-2">7515-4444</p>
                 </div>
                 <div className={styles.loginBody}>
-                  <a href="/login">
+                  <a href="/auth/login">
                     <button className={styles.loginButton}>Нэвтрэх</button>
                   </a>
                 </div>
@@ -134,7 +134,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 </div>
                 <OrderCheck />
                 <div>
-                  <Link href="/login">
+                  <Link href="/auth/login">
                     <a>
                       <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
                         Нэвтрэх

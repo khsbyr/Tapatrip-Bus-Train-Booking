@@ -6,7 +6,7 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import { Form, Input, Modal } from 'antd';
 import moment from 'moment';
 import React, { useState } from 'react';
-import ContentWrapper from './style';
+import ContentWrapper from '@components/bus/OrderModal/style';
 import style from './style.module.scss';
 
 export default function OrderModal(props) {
