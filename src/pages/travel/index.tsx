@@ -1,7 +1,7 @@
 import Footer from '@components/common/Footer';
 // import Layout from '@components/Layout/Layout';
 import HeaderBackground from '@components/common/HeaderBackground';
-import Navbar from '@components/common/Navbar';
+import Navbar from '@components/Travel/NavBar/index';
 import App from '@components/common/Subscribe';
 import TapaService from '@components/common/TapaService';
 import Search from '@components/Travel/Search-Travel';

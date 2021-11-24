@@ -1,4 +1,4 @@
-import SeatNav from '@components/bus/SeatNavbar';
+import StaticNavbar from '@components/Travel/StaticNavbar';
 import ConfirmModal from '@components/common/ConfirmModal';
 import Footer from '@components/common/Footer';
 import InputPhoneNumber from '@components/common/InputPhoneNumber';
@@ -240,7 +240,7 @@ const Register: FC<Props> = props => {
   return (
     <ContentWrapper>
       <div className="relative">
-        <SeatNav navbarData={NavData} />
+        <StaticNavbar navbarData={NavData} />
         <Steps className="my-5 px-6" size="small" current={1}>
           <Step title="Сонгох" />
           <Step title="Захиалах" />

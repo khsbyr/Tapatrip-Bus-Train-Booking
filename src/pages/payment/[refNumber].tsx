@@ -1,4 +1,4 @@
-import SeatNav from '@components/bus/SeatNavbar';
+import StaticNavbar from '@components/Travel/StaticNavbar';
 import Banks from '@components/common/payments/banks';
 import Corporate from '@components/common/payments/corporates';
 import ContentWrapper from '@components/Travel/style';
@@ -229,7 +229,7 @@ export default function payment({ NavData, refNumber, payments }) {
   return (
     <ContentWrapper>
       <div className="relative">
-        <SeatNav navbarData={NavData} />
+        <StaticNavbar navbarData={NavData} />
         <Steps className="my-5 px-6" size="small" current={2}>
           <Step title="Сонгох" />
           <Step title="Захиалах" />
