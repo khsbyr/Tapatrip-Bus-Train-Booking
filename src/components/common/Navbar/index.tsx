@@ -76,13 +76,13 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   <div
                     className={`${
                       navbar ? 'text-cardDate' : 'text-white'
-                    } flex text-xl font-bold cursor-pointer mr-2 xl:mr-10`}
+                    } flex text-lg font-medium cursor-pointer mr-2 xl:mr-10`}
                   >
-                    <PhoneIcon className="w-6" />
-                    <p className="pl-2">7515-4444</p>
+                    <PhoneIcon className="w-5 font-bold" />
+                    <p className="pl-2">7515 4444</p>
                   </div>
                   <div className={styles.loginBody}>
-                    <a href="/login">
+                    <a href="/auth/login">
                       <button className={styles.loginButton}>Нэвтрэх</button>
                     </a>
                   </div>
@@ -90,6 +90,14 @@ const Navbar: FC<Props> = ({ navbarData }) => {
               </div>
 
               <div className="-mr-2 flex lg:hidden">
+                <div
+                  className={`${
+                    navbar ? 'text-cardDate' : 'text-white'
+                  } flex items-center text-lg font-medium cursor-pointer mr-2 xl:mr-10`}
+                >
+                  <PhoneIcon className="w-5 font-bold" />
+                  <p className="pl-2">7515 4444</p>
+                </div>
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   type="button"
@@ -138,17 +146,13 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   </div>
                   <OrderCheck />
                   <div>
-                    <Link href="/login">
+                    <Link href="/auth/login">
                       <a>
                         <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
                           Нэвтрэх
                         </button>
                       </a>
                     </Link>
-                  </div>
-                  <div className="flex items-center text-base sm:text-lg font-bold px-4 cursor-pointer text-cardDate">
-                    <PhoneIcon className="w-4 sm:w-5" />
-                    <p className="pl-2">(976)-7514-4444</p>
                   </div>
                 </div>
               </div>

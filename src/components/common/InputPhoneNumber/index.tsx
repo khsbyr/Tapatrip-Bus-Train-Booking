@@ -3,8 +3,6 @@ import { Input, Form } from 'antd';
 import { Listbox } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/solid';
 import { ChevronDownIcon } from '@heroicons/react/solid';
-import mngIcon from 'public/assets/flagMongolia.png';
-import enIcon from 'public/assets/flagEng.png';
 import ContentWrapper from './style';
 import style from '@components/common/InputPhoneNumber/PhoneNumber.module.scss';
 import { useGlobalStore } from '@context/globalStore';
@@ -59,9 +57,9 @@ export default function InputPhoneNumber() {
 
   return (
     <ContentWrapper className="space-y-2">
-      <label className={style.Label} htmlFor="pNumber">
+      {/* <label className={style.Label} htmlFor="pNumber">
         Утасны дугаар
-      </label>
+      </label> */}
       <Form.Item
         name="phone"
         rules={[

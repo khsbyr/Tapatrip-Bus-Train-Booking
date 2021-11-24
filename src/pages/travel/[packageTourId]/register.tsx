@@ -345,6 +345,12 @@ const Register: FC<Props> = props => {
                     >
                       <Input className=" bg-bg rounded-md border-0" />
                     </Form.Item>
+                    <label
+                      className="text-cardDate px-2 font-medium"
+                      htmlFor="pNumber"
+                    >
+                      Утасны дугаар
+                    </label>
                     <InputPhoneNumber />
                   </div>
                 </div>

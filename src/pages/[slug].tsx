@@ -25,7 +25,7 @@ const About = company => {
   return (
     <div className="">
       {data.map(post =>
-        post.head === company.info.slug ? (
+        post.head.replace(/[ ]/g, '') === company?.info?.slug ? (
           <div>
             <Head>
               <title>{post.head}</title>

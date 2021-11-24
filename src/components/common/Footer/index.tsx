@@ -11,6 +11,23 @@ const Footer: FC<Props> = ({ companyInfo }) => {
     <div className={styles.footer}>
       <div className={styles.subFooter}>
         <div className={styles.subBody}>
+          <div className="col-span-2 md:col-span-1">
+            <h1 style={{ color: '#0A3761' }} className="font-bold text-lg">
+              Холбоо барих
+            </h1>
+            <div className="mt-5 text-cardDate mr-0 md:mr-10 space-y-1">
+              <p>
+                <b>Хаяг:</b> Хан-Уул дүүрэг, 11 хороо, Их монгол улсын гудамж,
+                Ривер Гарден хотхон 308 байр, Улаанбаатар хот, Монгол Улс
+              </p>
+              <p>
+                <b>Утасны дугаар:</b> (976)-75154444
+              </p>
+              <p>
+                <b>И-мэйл хаяг:</b> crm@tapatrip.com
+              </p>
+            </div>
+          </div>
           <div>
             <h1 style={{ color: '#0A3761' }} className="font-bold text-lg">
               Компаний тухай
@@ -33,23 +50,7 @@ const Footer: FC<Props> = ({ companyInfo }) => {
               ))}
             </div>
           </div>
-          <div>
-            <h1 style={{ color: '#0A3761' }} className="font-bold text-lg">
-              Холбоо барих
-            </h1>
-            <div className="mt-5 text-cardDate mr-0 md:mr-8 xl:mr-10 space-y-1">
-              <p>
-                <b>Хаяг:</b> Хан-Уул дүүрэг, 11 хороо, Их монгол улсын гудамж,
-                Ривер Гарден хотхон 308 байр, Улаанбаатар хот, Монгол Улс
-              </p>
-              <p>
-                <b>Утасны дугаар:</b> (976)-75154444
-              </p>
-              <p>
-                <b>И-мэйл хаяг:</b> crm@tapatrip.com
-              </p>
-            </div>
-          </div>
+
           <div>
             <h1 style={{ color: '#0A3761' }} className="font-bold text-lg">
               Биднийг дагах
@@ -81,45 +82,34 @@ const Footer: FC<Props> = ({ companyInfo }) => {
               </a>
             </div>
           </div>
-          <div className="hidden md:block">
-            <div className="flex flex-wrap">
-              <img src="/assets/IATA_logo.png" className="p-3" />
-              <img src="/assets/veri.png" className="p-3" />
-              <img src="/assets/mastercard.png" className="p-3" />
-              <img src="/assets/visa.png" className="p-3" />
-              <img src="/assets/securteTrust.png" />
+          <div className="col-span-2 md:col-span-1">
+            <div className="flex flex-wrap justify-center items-center md:justify-start gap-3 md:gap-1">
+              <img
+                src="/assets/IATA_logo.png"
+                className="h-8 p-0 md:p-3 md:h-full"
+              />
+              <img
+                src="/assets/veri.png"
+                className="h-8 p-0 md:p-3  md:h-full"
+              />
+              <img
+                src="/assets/mastercard.png"
+                className="h-8 p-0 md:p-3 md:h-full"
+              />
+              <img
+                src="/assets/visa.png"
+                className="h-6 p-0 md:p-3 md:h-full"
+              />
+              <img src="/assets/securteTrust.png" className="h-8 md:h-full" />
             </div>
           </div>
         </div>
-        <div className="block md:hidden mb-10 mt-5">
-          <div className="flex flex-wrap gap-2">
-            <img
-              src="/assets/IATA_logo.png"
-              className="pr-5"
-              width="70"
-              height="25"
-            />
-            <img
-              src="/assets/veri.png"
-              className="pr-5"
-              width="70"
-              height="25"
-            />
-            <img
-              src="/assets/mastercard.png"
-              className="pr-5"
-              width="70"
-              height="25"
-            />
-            <img
-              src="/assets/visa.png"
-              className="pr-5"
-              width="70"
-              height="25"
-            />
-            <img src="/assets/securteTrust.png" width="70" height="25" />
-          </div>
-        </div>
+        <p
+          className="text-center py-8"
+          style={{ color: 'rgba(2, 48, 71, 0.5)' }}
+        >
+          © Зохиогчийн эрхийг хуулийн дагуу Тапатрип ХХК эзэмшинэ.
+        </p>
       </div>
     </div>
   );
