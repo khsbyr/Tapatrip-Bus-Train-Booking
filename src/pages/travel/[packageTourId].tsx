@@ -38,9 +38,7 @@ export default function packageDetail({ NavData, PackTour }) {
   const [subPack, setSubPack] = useState('');
   const [visible, setVisible] = useState(false);
   const [visibleVisa, setVisibleVisa] = useState(false);
-<<<<<<< HEAD
   const [loading, setloading] = useState(false);
-=======
   // const [PackTour, setPackTour] = useState({
   //   id: 0,
   //   totalPrice: 0,
@@ -64,7 +62,6 @@ export default function packageDetail({ NavData, PackTour }) {
   //   cancelation_policy: '',
   //   visa_requirement: '',
   // });
->>>>>>> b388097d54209210cbf4bc4959b342afcd83161c
   let urlStr = '';
   const router = useRouter();
   const collectedPrices = subPrices => {
