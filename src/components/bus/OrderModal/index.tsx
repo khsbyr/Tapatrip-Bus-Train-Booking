@@ -6,8 +6,8 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import { Form, Input, Modal } from 'antd';
 import moment from 'moment';
 import React, { useState } from 'react';
-import ContentWrapper from '@components/bus/OrderModal/style';
-import style from './style.module.scss';
+import ContentWrapper from '@components/bus/orderModal/style';
+import style from './orderModal.module.scss';
 
 export default function OrderModal(props) {
   const [isActive, setIsActive] = useState(false);

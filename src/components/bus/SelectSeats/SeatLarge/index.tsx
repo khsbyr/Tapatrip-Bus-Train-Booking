@@ -1,6 +1,6 @@
 import seatRangeMap from '@helpers/seatRangeMap';
 import { useGlobalStore } from '@context/globalStore';
-import style from './SeatLarge.module.scss';
+import style from './seatLarge.module.scss';
 import { arrayFilterSeat } from '@helpers/array-format';
 
 const seats = [];

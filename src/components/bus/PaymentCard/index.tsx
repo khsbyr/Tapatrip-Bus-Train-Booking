@@ -4,8 +4,8 @@ import { arrayFilterSchedule, arrayFilterSeat } from '@helpers/array-format';
 const persons = [];
 const childs = [];
 
-export default function paymentCard({ datas, scheduleId }) {
-  const { booking, setBooking } = useGlobalStore();
+export default function PaymentCard({ datas, scheduleId }) {
+  const { booking } = useGlobalStore();
   const { selectedSeats } = useGlobalStore();
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 

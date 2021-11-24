@@ -1,17 +1,17 @@
-import { Statistic, Radio, Space, Modal } from 'antd';
-import PayTransfer from '@components/bus/Payments/PayTransfer';
 import React, { useState } from 'react';
-import style from './Payments.module.scss';
-import ContentWrapper from './style';
-import StepCard from '../StepCard';
-import PaymentCard from '../PaymentCard';
-import EndModal from '@components/common/EndModal';
 import { useGlobalStore } from '@context/globalStore';
 import { useRouter } from 'next/router';
+import { Statistic, Radio, Space, Modal } from 'antd';
+import PayTransfer from '@components/bus/payTransfer';
+import style from './payments.module.scss';
+import ContentWrapper from './style';
+import StepCard from '../stepCard';
+import PaymentCard from '../paymentCard';
+import EndModal from '@components/common/EndModal';
 
 export default function Payment({ datas, scheduleId }) {
   const router = useRouter();
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = useState(1);
   const { setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { Countdown } = Statistic;
@@ -31,11 +31,11 @@ export default function Payment({ datas, scheduleId }) {
     setCurrent(2);
   };
 
-  const onChange = e => {
+  const onChange = (e: any) => {
     setValue(e.target.value);
   };
 
-  const handleCheck = e => {
+  const handleCheck = () => {
     setIsModalVisible(true);
   };
 
@@ -77,10 +77,6 @@ export default function Payment({ datas, scheduleId }) {
 
             <div className={style.radioGroup}>
               <h1 className={style.paymentTitle}>Төлбөр төлөх</h1>
-              {/* <div className="w-full px-6 pb-5">
-                <p className={style.paymentShape}>Шилжүүлэх</p>
-                <PayTransfer />
-              </div> */}
               <Radio.Group onChange={onChange} value={value} className="w-full">
                 <div className="w-full ml-6">
                   <Space direction="vertical">

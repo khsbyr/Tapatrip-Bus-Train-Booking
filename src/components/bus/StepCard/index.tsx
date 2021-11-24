@@ -7,7 +7,7 @@ import {
 import React, { FC, useState } from 'react';
 import { Steps } from 'antd';
 import { useGlobalStore } from '@context/globalStore';
-import style from './StepCard.module.scss';
+import style from './stepCard.module.scss';
 import moment from 'moment';
 import { arrayFilterSchedule } from '@helpers/array-format';
 import { unixDate } from '@helpers/array-format';

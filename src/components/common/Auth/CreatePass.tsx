@@ -1,5 +1,5 @@
 import { Input, Form } from 'antd';
-import ContentWrapper from '@components/bus/OrderModal/style';
+import ContentWrapper from '@components/bus/orderModal/style';
 
 export default function createPassword() {
   return (

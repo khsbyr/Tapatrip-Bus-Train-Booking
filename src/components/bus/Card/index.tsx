@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/solid';
 import React, { useState } from 'react';
 import { Steps } from 'antd';
-import style from './Card.module.scss';
+import style from './card.module.scss';
 import Link from 'next/link';
 import { unixDate } from '@helpers/array-format';
 import moment from 'moment';

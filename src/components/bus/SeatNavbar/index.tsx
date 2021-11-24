@@ -1,10 +1,10 @@
-import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { useState } from 'react';
+import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import { Transition } from '@headlessui/react';
-import style from './SeatNavbar.module.scss';
-import OrderCheck from '@components/bus/OrderCheck';
+import OrderCheck from '@components/bus/orderCheck';
 import SelectLanguage from '@components/common/Language';
 import Link from 'next/link';
+
 interface Props {
   navbarData?: any;
 }

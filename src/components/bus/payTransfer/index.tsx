@@ -1,15 +1,14 @@
-import { Statistic, Input, Button, Popover } from 'antd';
+import { Statistic } from 'antd';
 import {
   ChevronDownIcon,
   ChevronUpIcon,
-  DocumentDuplicateIcon,
   DuplicateIcon,
 } from '@heroicons/react/outline';
 import { Listbox, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { CheckIcon } from '@heroicons/react/solid';
 import banks from '@data/bankInformation.json';
-import s from './PayTransfer.module.scss';
+import s from './payTransfer.module.scss';
 import { useGlobalStore } from '@context/globalStore';
 
 export default function Payment() {
@@ -18,18 +17,19 @@ export default function Payment() {
   const [isSelected, setIsSelected] = useState(false);
   const { booking, setBooking } = useGlobalStore();
   const { customers } = useGlobalStore();
+
   const onClick = () => {
     setIsSelected(!isSelected);
   };
+
   const select = () => {
     setIsSelected(!isSelected);
   };
+
   const [copyOrderNumber, setCopyOrderNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
-  function delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+
   const copyToOrderNumber = orderNum => {
     navigator.clipboard.writeText(orderNum);
     (async () => {
@@ -38,9 +38,11 @@ export default function Payment() {
       setCopyOrderNumber(<DuplicateIcon className="text-secondary h-6 w-6" />);
     })();
   };
+
   const [copyAccNumber, setCopyAccNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
+
   const copyToAccNumber = bank => {
     navigator.clipboard.writeText(bank.accountNumber);
     (async () => {
@@ -49,9 +51,11 @@ export default function Payment() {
       setCopyAccNumber(<DuplicateIcon className="text-secondary h-6 w-6" />);
     })();
   };
+
   const [copyPhoneNumber, setCopyPhoneNumber] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
+
   const copyToPhoneNumber = phoneNumber => {
     navigator.clipboard.writeText(phoneNumber);
     (async () => {
@@ -60,9 +64,11 @@ export default function Payment() {
       setCopyPhoneNumber(<DuplicateIcon className="text-secondary h-6 w-6" />);
     })();
   };
+
   const [copyAccName, setCopyAccName] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6" />
   );
+
   const copyToAccName = bank => {
     navigator.clipboard.writeText(bank.accountName);
     (async () => {
@@ -71,6 +77,10 @@ export default function Payment() {
       setCopyAccName(<DuplicateIcon className="text-secondary h-6 w-6" />);
     })();
   };
+
+  function delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
   return (
     <>

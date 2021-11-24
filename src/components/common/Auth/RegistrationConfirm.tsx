@@ -1,5 +1,5 @@
 import { Statistic, Form } from 'antd';
-import ContentWrapper from '@components/bus/OrderModal/style';
+import ContentWrapper from '@components/bus/orderModal/style';
 import { useState } from 'react';
 import ReactCodeInput from 'react-verification-code-input';
 

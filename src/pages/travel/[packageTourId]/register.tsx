@@ -1,4 +1,4 @@
-import SeatNav from '@components/bus/SeatNavbar';
+import SeatNav from '@components/bus/seatNavbar';
 import ConfirmModal from '@components/common/ConfirmModal';
 import Footer from '@components/common/Footer';
 import InputPhoneNumber from '@components/common/InputPhoneNumber';

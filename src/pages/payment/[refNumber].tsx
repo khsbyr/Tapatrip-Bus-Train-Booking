@@ -1,4 +1,4 @@
-import SeatNav from '@components/bus/SeatNavbar';
+import SeatNav from '@components/bus/seatNavbar';
 import Footer from '@components/common/Footer';
 import Banks from '@components/common/payments/banks';
 import Corporate from '@components/common/payments/corporates';

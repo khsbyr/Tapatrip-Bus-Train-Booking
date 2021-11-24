@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import style from './SelectSeats.module.scss';
-import SeatLarge from '@components/bus/SelectSeats/SeatLarge';
-import SeatMedium from '@components/bus/SelectSeats/SeatMedium';
-import SeatSmall from '@components/bus/SelectSeats/SeatSmall';
+import style from './selectSeats.module.scss';
+import SeatLarge from '@components/bus/selectSeats/seatLarge';
+import SeatMedium from '@components/bus/selectSeats/seatMedium';
+import SeatSmall from '@components/bus/selectSeats/seatSmall';
 import { useGlobalStore } from '@context/globalStore';
-import StepCard from '../StepCard';
+import StepCard from '../stepCard';
 import { Modal } from 'antd';
 import { arrayFilterSchedule } from '@helpers/array-format';
 

@@ -1,14 +1,14 @@
 import React from 'react';
-import PassengerInfo from '@components/bus/PassengerInfo';
-import Payments from '@components/bus/Payments';
+import PassengerInfo from '@components/bus/passengerInfo';
+import Payments from '@components/bus/payment';
 import { useQuery } from '@apollo/client';
 import { BUS_SCHEDULES_DETAIL_QUERY } from '@graphql/queries';
 import { Steps } from 'antd';
 import NavData from '@data/navData.json';
-import SelectSeats from '@components/bus/SelectSeats';
+import SelectSeats from '@components/bus/selectSeats';
 import ContentWrapper from './style';
 import Layout from '@components/common/Layout';
-import SeatNav from '@components/bus/SeatNavbar';
+import SeatNav from '@components/bus/seatNavbar';
 import { useRouter } from 'next/router';
 import { useGlobalStore } from '@context/globalStore';
 import Loader from '@components/common/Loader';

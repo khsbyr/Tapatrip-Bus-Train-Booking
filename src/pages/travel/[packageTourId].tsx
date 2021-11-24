@@ -1,4 +1,4 @@
-import SeatNav from '@components/bus/SeatNavbar';
+import SeatNav from '@components/bus/seatNavbar';
 import Layout from '@components/common/Layout';
 import DaysDetail from '@components/Travel/Travel-Card/DaysDetail';
 import PackageList from '@components/Travel/Travel-Card/PackageList';
