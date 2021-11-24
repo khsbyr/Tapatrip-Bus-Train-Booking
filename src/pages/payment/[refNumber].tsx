@@ -8,6 +8,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
 } from '@heroicons/react/solid';
+import { postRequest } from '@services/travel/travelServices';
 import { message, Modal, Steps } from 'antd';
 import React, { useState } from 'react';
 import Footer from '@components/common/Footer';
