@@ -54,7 +54,7 @@ const travelNavbar: FC<Props> = ({ navbarData }) => {
               <div className="flex items-center">
                 <div className="hidden lg:block">
                   <div className={styles.loginBody}>
-                    <a href="/login">
+                    <a href="/auth/login">
                       <button className={styles.loginButton}>Нэвтрэх</button>
                     </a>
                   </div>
@@ -102,7 +102,7 @@ const travelNavbar: FC<Props> = ({ navbarData }) => {
                   </div>
                   <OrderCheck />
                   <div>
-                    <Link href="/login">
+                    <Link href="/auth/login">
                       <a>
                         <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
                           Нэвтрэх

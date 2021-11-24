@@ -248,6 +248,12 @@ export default function PassengerIfo({ datas, scheduleId }) {
                       </Form.Item>
                     </div>
                     <div className={style.rightContent}>
+                      <label
+                        className="text-cardDate px-2 font-medium"
+                        htmlFor="pNumber"
+                      >
+                        Утасны дугаар
+                      </label>
                       <InputPhoneNumber />
                     </div>
                   </div>
