@@ -83,7 +83,7 @@ export default function packageDetail({ NavData, PackTour }) {
       message.warning('Багц сонгоно уу!');
     } else {
       router.push({
-        pathname: `[packageTourId]/register`,
+        pathname: `[packageTourId]/register/`,
         query: {
           packageTourId: PackTour.id,
           totalPrice: totalPrice,
@@ -176,6 +176,7 @@ export default function packageDetail({ NavData, PackTour }) {
                     </h2>
                   </div>
                 </div>
+                <hr className="divide divide-gray-400" />
                 <div className="my-8 col-span-2">
                   <h2 className="font-bold text-lg">Travel information</h2>
                   <div className="my-2">
@@ -357,15 +358,20 @@ export async function getServerStaticPaths() {
   };
 }
 
-export const getServerSideProps = async ({ params }) => {
+const callAPi = async params => {
   const data = await postRequest('/activity/package_tour_view/', {
     id: params.packageTourId,
   });
+  return data.result;
+};
+
+export const getServerSideProps = async ({ params }) => {
+  const result = await callAPi(params);
   const res = NavData;
   return {
     props: {
       NavData: res,
-      PackTour: data.result,
+      PackTour: result,
     },
   };
 };
