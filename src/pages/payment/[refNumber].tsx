@@ -158,8 +158,9 @@ export default function payment({ NavData, refNumber, payments }) {
     );
   };
 
-  /*rendering popupAlowed banks */
+  /*rendering popupAllowed banks */
   const renderPayment = () => {
+    console.log('paymentResponse : ', paymentResponse);
     if (
       paymentName === 'XACBANK' ||
       paymentName === 'GOLOMT' ||
