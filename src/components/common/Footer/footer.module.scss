@@ -1,9 +1,0 @@
-.footer {
-  @apply bg-white;
-  .subFooter {
-    @apply max-w-7xl mx-auto pt-8 pb-12 px-3 md:pb-24 lg:mb-0 md:px-6;
-    .subBody {
-      @apply grid grid-cols-2 gap-10 md:gap-0 md:grid-cols-4;
-    }
-  }
-}

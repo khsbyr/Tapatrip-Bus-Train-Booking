@@ -5,18 +5,19 @@ import {
   BUS_ALL_LOCATIONS_QUERY,
   BUS_ALL_SCHEDULES_QUERY,
 } from '@graphql/queries';
-import { Result, Button } from 'antd';
-import Card from '@components/bus/Card';
+import { Result } from 'antd';
+import Card from '@components/bus/card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
-import BusNavbar from '@components/bus/Navbar';
-import Layout from '@components/common/Layout';
+import BusNavbar from '@components/bus/navbar';
+import Layout from '@components/common/layout';
 import { useRouter } from 'next/router';
 import { arrayFormat } from '@helpers/array-format';
-import Loader from '@components/common/Loader';
+import Loader from '@components/common/loader';
 
 export default function Orders() {
   const router = useRouter();
-  const { startLocation, stopLocation, endLocation, date } = router.query;
+  const { startLocation, stopLocation, endLocation, date, endDate } =
+    router.query;
   const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
 
   const {
@@ -28,7 +29,7 @@ export default function Orders() {
       startLocation: startLocation ? startLocation : '',
       stopLocation: stopLocation ? stopLocation : '',
       locationEnd: endLocation ? endLocation : '',
-      leaveDate: date ? date + ',' + date : '',
+      leaveDate: date ? date + ',' + endDate : '',
     },
   });
 
@@ -63,12 +64,10 @@ export default function Orders() {
                 status="404"
                 title="Уучлаарай"
                 subTitle="Энэ хайлтад тохирох үр дүн олдсонгүй. Дахин оролдоно уу?"
-                // extra={<Button type="primary">Дахин оролдох</Button>}
               />
             )}
           </div>
           <div className="hidden lg:block">
-            {/* <div className="sticky top-0 bg-white py-5 px-5 rounded-xl divide-y-2"> */}
             <div className="sticky top-0 ">
               <a
                 href="https://www.facebook.com/TapaTripTravelAgency/"
