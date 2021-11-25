@@ -37,7 +37,6 @@ export default function Bus({ guestToken }) {
 }
 
 export async function getStaticProps({ locale }) {
-  console.log(locale);
   const guestToken = await AuthService.guestToken();
   return {
     props: {
