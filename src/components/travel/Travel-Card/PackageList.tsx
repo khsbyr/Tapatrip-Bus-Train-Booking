@@ -87,7 +87,7 @@ const PackageList: FC<Props> = ({
           <h1 className="font-bold text-lg">{title}</h1>
         </div>
         <div className="col-span-1 p-2">
-          <img className="h-20 w-full " src={`${hotel_image}`} />
+          <img className="h-20 w-full object-cover" src={`${hotel_image}`} />
         </div>
         <div className="flex border-t border-dashed col-span-3  justify-between p-2">
           <p className="text-base">{`Hotel name : ${hotel_name}`}</p>
