@@ -1,5 +1,4 @@
 import Footer from '@components/common/footer';
-// import Layout from '@components/Layout/Layout';
 import HeaderBackground from '@components/common/headerBackground';
 import Navbar from '@components/common/navbar';
 import App from '@components/common/subscribe';
