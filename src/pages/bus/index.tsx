@@ -20,7 +20,7 @@ export default function Bus({ guestToken }) {
   useEffect(() => {
     AuthTokenStorageService.guestStore(guestToken);
   }, []);
-  const { t } = useTranslation('footer');
+  const { t } = useTranslation(['common', 'footer']);
   const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
   if (error) return `Error! ${error.message}`;
   const startLocations = arrayFormat(data);
@@ -41,7 +41,7 @@ export async function getStaticProps({ locale }) {
   return {
     props: {
       guestToken: guestToken,
-      ...(await serverSideTranslations(locale, ['common'])),
+      ...(await serverSideTranslations(locale, ['common', 'footer'])),
     },
   };
 }
