@@ -7,7 +7,7 @@ import {
 } from '@graphql/queries';
 import { useGlobalStore } from '@context/globalStore';
 import ContentWrapper from './style';
-import style from './SearchBus.module.scss';
+import style from './searchBus.module.scss';
 import {
   startLocationFormat,
   stopLocationFormat,
@@ -18,11 +18,10 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import locale from 'antd/lib/date-picker/locale/mn_MN';
 import 'moment/locale/mn';
-import { result } from 'lodash';
 
 const dateFormat = 'YYYY-MM-DD';
 
-export default function SearchBus({ startLocations }) {
+export default function SearchInput({ startLocations }) {
   const client = useApolloClient();
   const { Option } = AutoComplete;
   const router = useRouter();

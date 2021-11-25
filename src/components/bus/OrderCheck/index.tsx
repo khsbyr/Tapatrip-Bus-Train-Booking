@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import OrderModal from '@components/bus/OrderModal';
+import OrderModal from '@components/bus/orderModal';
 
-export default function index() {
+export default function OrderCheck() {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   function checkOrder() {
@@ -11,6 +11,7 @@ export default function index() {
   const closeModal = () => {
     setIsModalVisible(false);
   };
+
   return (
     <>
       <button

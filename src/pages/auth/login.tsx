@@ -1,13 +1,13 @@
-import NavbarProfile from '@components/bus/SeatNavbar';
+import NavbarProfile from '@components/bus/seatNavbar';
 import LoginPhoneNumber from '@components/common/Auth/loginPhoneNumber';
 import Registration from '@components/common/Auth/Registration';
 import RegistrationConfirm from '@components/common/Auth/RegistrationConfirm';
 import CreatePass from '@components/common/Auth/CreatePass';
 import NavData from '@data/navData.json';
 import { Tabs } from 'antd';
-import Footer from '@components/common/Footer';
+import Footer from '@components/common/footer';
 import Company from '@data/company.json';
-import styles from '@components/common/Layout/layout.module.scss';
+import styles from '@components/common/layout/layout.module.scss';
 import { useState } from 'react';
 
 const Login = () => {

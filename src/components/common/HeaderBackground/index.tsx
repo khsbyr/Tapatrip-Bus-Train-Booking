@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './background.module.scss';
+import styles from './headerBackground.module.scss';
 
 export default function HeaderBackground(props) {
   return (

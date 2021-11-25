@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Form, Input, Modal, Select } from 'antd';
 import registNo from '@data/registerNumber.json';
-import RegisterNumber from '@components/bus/PassengerInfo/RegisterNumber';
-import style from './PassengerInfo.module.scss';
+import RegisterNumber from '@components/bus/registerNumber';
+import style from './passengerInfo.module.scss';
 import { useGlobalStore } from '@context/globalStore';
 import { useMutation } from '@apollo/client';
 import { BUS_BOOKING_CREATE } from '@graphql/mutation';
 import { PATTERN_COMPANY_REGISTER } from '@helpers/constantValidation';
 import ContentWrapper from './style';
-import StepCard from '../StepCard';
-import InputPhoneNumber from '@components/common/InputPhoneNumber';
+import StepCard from '../stepCard';
+import InputPhoneNumber from '@components/common/phoneNumber';
 import { arrayFilterSchedule } from '@helpers/array-format';
-import ConfirmModal from '@components/common/ConfirmModal';
+import ConfirmModal from '@components/common/confirmModal';
 import AuthService from '@services/auth';
 import { useRouter } from 'next/router';
 

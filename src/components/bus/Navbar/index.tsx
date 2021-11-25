@@ -1,18 +1,17 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
-import OrderCheck from '@components/bus/OrderCheck';
+import OrderCheck from '@components/bus/orderCheck';
 import { Transition } from '@headlessui/react';
-import SearchBus from '@components/bus/SearchInput';
-import styles from '../../common/Navbar/navbar.module.scss';
+import SearchInput from '@components/bus/searchInput';
 import Link from 'next/link';
-import SelectLanguage from '@components/common/Language';
+import SelectLanguage from '@components/common/language';
 
 interface Props {
   navbarData?: any;
   startLocations?: any;
 }
 
-export default function BusNav({ navbarData, startLocations }) {
+export default function BusNavbar({ navbarData, startLocations }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
@@ -87,7 +86,7 @@ export default function BusNav({ navbarData, startLocations }) {
               </button>
             </div>
           </div>
-          <SearchBus startLocations={startLocations} />
+          <SearchInput startLocations={startLocations} />
         </div>
 
         <Transition

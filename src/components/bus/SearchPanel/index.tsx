@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Tabs } from 'antd';
 import ContentWrapper from './style';
-import style from './search.module.scss';
-import SearchBus from '@components/bus/SearchInput';
+import style from './searchPanel.module.scss';
+import SearchInput from '@components/bus/searchInput';
 import { useRouter } from 'next/router';
 
 const { TabPane } = Tabs;
@@ -12,7 +12,7 @@ interface Props {
   startLocations?: any;
 }
 
-const Search: FC<Props> = ({ navbarData, startLocations = '' }) => {
+const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
   const router = useRouter();
   const activePath = router.route == '/travel' ? '3' : '4';
 
@@ -20,6 +20,7 @@ const Search: FC<Props> = ({ navbarData, startLocations = '' }) => {
     const route = key == 4 ? 'bus' : 'travel';
     router.push(`/${route}`);
   };
+
   return (
     <ContentWrapper>
       <div className={style.searchBody}>
@@ -55,10 +56,10 @@ const Search: FC<Props> = ({ navbarData, startLocations = '' }) => {
             />
           ))}
         </Tabs>
-        <SearchBus startLocations={startLocations} />
+        <SearchInput startLocations={startLocations} />
       </div>
     </ContentWrapper>
   );
 };
 
-export default Search;
+export default SearchPanel;

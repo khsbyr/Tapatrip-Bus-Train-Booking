@@ -1,6 +1,6 @@
-import InputPhoneNumber from '@components/common/InputPhoneNumber';
+import InputPhoneNumber from '@components/common/phoneNumber';
 import { Form } from 'antd';
-import ContentWrapper from '@components/bus/OrderModal/style';
+import ContentWrapper from '@components/bus/orderModal/style';
 
 export default function registration() {
   return (

@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
+import React, { useState } from 'react';
 import { Transition } from '@headlessui/react';
-import OrderCheck from '@components/bus/orderCheck';
-import SelectLanguage from '@components/common/language';
+import Language from '@components/common/language';
 import Link from 'next/link';
-
 interface Props {
   navbarData?: any;
 }
 
-export default function SeatNav({ navbarData }) {
+export default function StaticNavbar({ navbarData }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
@@ -44,11 +42,10 @@ export default function SeatNav({ navbarData }) {
             <div className="flex items-center ">
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  <OrderCheck />
-                  <SelectLanguage isBlack={true} />
+                  <Language isBlack={true} />
 
                   <div>
-                    <Link href="/auth/login">
+                    <Link href="/login">
                       <a>
                         <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40 hover:bg-red-500">
                           Нэвтрэх
@@ -95,13 +92,10 @@ export default function SeatNav({ navbarData }) {
               <div ref={ref} className="p-3 space-y-4">
                 <div className="flex">
                   <h1 className="text-cardDate font-medium pr-4">Хэл сонгох</h1>
-                  <SelectLanguage />
+                  <Language />
                 </div>
                 <div>
-                  <OrderCheck />
-                </div>
-                <div>
-                  <Link href="/auth/login">
+                  <Link href="/login">
                     <a>
                       <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
                         Нэвтрэх

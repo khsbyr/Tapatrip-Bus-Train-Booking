@@ -1,9 +1,9 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
-import OrderCheck from '@components/bus/OrderCheck';
+import OrderCheck from '@components/bus/orderCheck';
 import styles from './navbar.module.scss';
-import SelectLanguage from '@components/common/Language';
+import SelectLanguage from '@components/common/language';
 import Link from 'next/link';
 
 interface Props {

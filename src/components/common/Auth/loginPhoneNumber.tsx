@@ -1,6 +1,6 @@
 import { Form, Input } from 'antd';
-import InputPhoneNumber from '@components/common/InputPhoneNumber';
-import ContentWrapper from '@components/bus/OrderModal/style';
+import InputPhoneNumber from '@components/common/phoneNumber';
+import ContentWrapper from '@components/bus/orderModal/style';
 import { useState } from 'react';
 
 export default function loginPhoneNumber() {

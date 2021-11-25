@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Carousel } from 'antd';
 import ContentWrapper from './style';
-import TravelTipsModal from '@components/Travel/TravelTipsModal';
+import TravelTipsModal from '@components/travel/TravelTipsModal';
 interface Props {
   title: string;
   image: string;

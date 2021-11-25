@@ -1,9 +1,8 @@
 import { MenuIcon, XIcon, PhoneIcon } from '@heroicons/react/solid';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
-import OrderCheck from '@components/bus/orderCheck';
 import styles from './navbar.module.scss';
-import SelectLanguage from '@components/common/language';
+import Language from '@components/common/language';
 import Link from 'next/link';
 
 interface Props {
@@ -14,7 +13,6 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [navbar, setNavbar] = useState(false);
   const [openTab, setOpenTab] = React.useState(4);
-
   const changeBackground = () => {
     if (window.scrollY >= 80) {
       setNavbar(true);
@@ -64,8 +62,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     </a>
                   ))}
                   <div className="flex items-center space-x-5 justify-center lg:pl-5 xl:pl-10">
-                    <OrderCheck />
-                    <SelectLanguage isBlack={false} />
+                    <Language isBlack={false} />
                   </div>
                 </div>
               </div>
@@ -75,13 +72,13 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 <div
                   className={`${
                     navbar ? 'text-cardDate' : 'text-white'
-                  } flex text-lg font-bold cursor-pointer pr-5`}
+                  } flex text-lg font-bold cursor-pointer`}
                 >
                   <PhoneIcon className="w-5" />
                   <p className="pl-2">7515-4444</p>
                 </div>
                 <div className={styles.loginBody}>
-                  <a href="/auth/login">
+                  <a href="/login">
                     <button className={styles.loginButton}>Нэвтрэх</button>
                   </a>
                 </div>
@@ -131,11 +128,10 @@ const Navbar: FC<Props> = ({ navbarData }) => {
               <div ref={ref} className="p-3 space-y-4">
                 <div className="flex">
                   <h1 className="text-cardDate font-medium pr-4">Хэл сонгох</h1>
-                  <SelectLanguage />
+                  <Language />
                 </div>
-                <OrderCheck />
                 <div>
-                  <Link href="/auth/login">
+                  <Link href="/login">
                     <a>
                       <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
                         Нэвтрэх
