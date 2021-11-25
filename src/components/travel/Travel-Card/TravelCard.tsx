@@ -6,8 +6,9 @@ import CurrencyFormat from 'react-currency-format';
 interface Props {
   packages?: any;
   title: string;
+  ClickHandler: () => void;
 }
-const TravelCard: FC<Props> = ({ packages, title }) => {
+const TravelCard: FC<Props> = ({ packages, title, ClickHandler }) => {
   return (
     <div className="default-container">
       <h1
@@ -24,33 +25,39 @@ const TravelCard: FC<Props> = ({ packages, title }) => {
               as={`travel/${tourpackage.id}`}
               key={index}
             >
-              <div className="hover:shadow-2xl cursor-pointer bg-white h-auto rounded-2xl shadow-xl">
-                <img
-                  className="object-contain md:object-scale-down rounded-t-2xl"
-                  src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${tourpackage.image}`}
-                />
-                <div className="items-center grid grid-cols-2 md:block divide-y divide-gray-300">
-                  <div className="flex justify-between">
-                    <h2 className="text-left font-bold text-md md:text-md m-3 text-lg ">
-                      {tourpackage.title}
-                    </h2>
-                    <h2>{!tourpackage.is_sell ? 'out of stock' : ''}</h2>
-                  </div>
-                  <div className="m-3 justify-between flex">
-                    <div>
-                      <span className="text-gray-400 text-sm">Хугацаа</span>
-                      <p className="font-bold text-sm">{`${tourpackage.duration_days} өдөр, ${tourpackage.duration_nights} Шөнө`}</p>
+              <div
+                onClick={ClickHandler}
+                className="hover:shadow-2xl cursor-pointer bg-white h-auto rounded-2xl shadow-xl"
+              >
+                <div className="w-full h-60 xs:h-96 sm:h-80 md:h-96">
+                  <img
+                    className="w-full h-full object-cover rounded-t-2xl"
+                    src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${tourpackage.image}`}
+                  />
+                </div>
+                <div className="items-center">
+                  <h2 className="text-left font-bold text-md md:text-md m-3 text-lg ">
+                    {tourpackage.title}
+                  </h2>
+                  <div className="pl-4 pb-5">
+                    <div className="flex">
+                      <div className="text-gray-600 text-base w-1/3">
+                        Хугацаа:
+                      </div>
+                      <div className="font-bold text-base">{`${tourpackage.duration_days} өдөр, ${tourpackage.duration_nights} Шөнө`}</div>
                     </div>
-                    <div>
-                      <span className="text-gray-400 text-sm">Эхлэх үнэ</span>
-                      <p className="font-bold text-sm">
+                    <div className="flex">
+                      <div className="text-gray-600 text-base w-1/3">
+                        Эхлэх үнэ:
+                      </div>
+                      <div className="font-bold text-base">
                         <CurrencyFormat
                           value={tourpackage.start_price}
                           displayType={'text'}
                           thousandSeparator={true}
                           suffix={` ₮`}
                         />
-                      </p>
+                      </div>
                     </div>
                   </div>
                 </div>

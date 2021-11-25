@@ -1,7 +1,7 @@
 import { Modal } from 'antd';
 import { useState } from 'react';
 import ReactCodeInput from 'react-verification-code-input';
-import style from './ConfirmModal.module.scss';
+import style from './confirmModal.module.scss';
 import ContentWrapper from './style';
 
 export default function ConfirmModal(props) {
