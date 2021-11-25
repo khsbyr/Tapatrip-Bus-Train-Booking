@@ -13,10 +13,10 @@ const languages = [
 export default function Language(props) {
   const router = useRouter();
   const { locale } = router;
-  const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
-  const [isSelected, setIsSelected] = useState(false);
+  const index = languages.findIndex(item => item.route === locale);
+  const [selectedLanguage, setSelectedLanguage] = useState(languages[index]);
 
-  // console.log(locale);
+  const [isSelected, setIsSelected] = useState(false);
 
   const onClick = () => {
     setIsSelected(!isSelected);
@@ -27,13 +27,14 @@ export default function Language(props) {
   };
 
   const changeLanguage = value => {
-    // console.log(value);
-    // const locale = value.route;
-    // router.push(router.pathname, router.asPath, { locale });
+    const locale = value.route;
+    const index = languages.findIndex(item => item.route === locale);
+    setSelectedLanguage(languages[index]);
+    router.push(router.pathname, router.asPath, { locale });
   };
 
   return (
-    <Listbox value={selectedLanguage} onChange={setSelectedLanguage}>
+    <Listbox value={selectedLanguage} onChange={changeLanguage}>
       <div className={s.body} onClick={onClick}>
         <Listbox.Button className={s.listboxButton}>
           <img className="rounded" src={selectedLanguage.src} width="34" />

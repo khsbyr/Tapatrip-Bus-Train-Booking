@@ -13,6 +13,7 @@ import Layout from '@components/common/layout';
 import { useRouter } from 'next/router';
 import { arrayFormat } from '@helpers/array-format';
 import Loader from '@components/common/loader';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function Orders() {
   const router = useRouter();
@@ -81,4 +82,13 @@ export default function Orders() {
       </div>
     </Layout>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  console.log(locale);
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'footer'])),
+    },
+  };
 }
