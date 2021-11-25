@@ -7,7 +7,7 @@ import NavData from '@data/navData.json';
 import { Tabs } from 'antd';
 import Footer from '@components/common/footer';
 import Company from '@data/company.json';
-import styles from '@components/common/Layout/layout.module.scss';
+import styles from '@components/common/layout/layout.module.scss';
 import { useState } from 'react';
 
 const Login = () => {
