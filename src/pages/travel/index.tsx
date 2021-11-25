@@ -1,12 +1,13 @@
 import Footer from '@components/common/footer';
 import HeaderBackground from '@components/common/headerBackground';
-import Navbar from '@components/common/navbar';
+import Navbar from '@components/travel/NavBar';
 import App from '@components/common/subscribe';
 import TapaService from '@components/common/tapaService';
 import Search from '@components/travel/Search-Travel';
 import ServicesCard from '@components/travel/Travel-Card/ServicesCard';
 import Tips from '@components/travel/Travel-Card/Tips';
 import TravelCard from '@components/travel/Travel-Card/TravelCard';
+
 import Company from '@data/company.json';
 import NavData from '@data/navData.json';
 import TapaServiceList from '@data/tapaServiceList.json';
@@ -16,9 +17,14 @@ import {
 } from '@services/travel/travelServices';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import React from 'react';
+import React, { useState } from 'react';
+import Loader from '@components/common/loader';
 
 export default function Travel({ NavData, Packages, TipsFor, BannerItems }) {
+  const [loader, setloader] = useState(false);
+  function clickHandler() {
+    setloader(true);
+  }
   return (
     <div>
       <Head>
@@ -28,13 +34,16 @@ export default function Travel({ NavData, Packages, TipsFor, BannerItems }) {
         <HeaderBackground />
         <Navbar navbarData={NavData} />
         <Search navbarData={NavData} bannerItems={BannerItems} />
-        {Packages.map((packageFrom, index) => (
-          <TravelCard
-            key={index}
-            title={packageFrom.package_tour_type_name}
-            packages={packageFrom.package_tours}
-          />
-        ))}
+        {loader && <Loader />}
+        {!loader &&
+          Packages.map((packageFrom, index) => (
+            <TravelCard
+              key={index}
+              title={packageFrom.package_tour_type_name}
+              packages={packageFrom.package_tours}
+              ClickHandler={clickHandler}
+            />
+          ))}
 
         <ServicesCard />
         <div className="default-container mb-10">
