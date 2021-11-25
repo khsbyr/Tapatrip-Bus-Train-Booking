@@ -1,0 +1,38 @@
+.card {
+  @apply relative bg-white w-full h-auto rounded-2xl;
+  .leaveTitle {
+    @apply pt-4 font-bold text-cardDescColor text-xs md:text-sm lg:text-base;
+  }
+  .startTitle {
+    @apply text-cardDate font-bold text-sm md:text-lg lg:text-xl;
+  }
+  .timeText {
+    @apply font-light text-cardDate text-xs md:text-sm lg:text-lg;
+  }
+  .priceText {
+    @apply text-cardDate font-bold text-sm md:text-lg lg:text-2xl;
+  }
+  .rowDirection {
+    @apply py-5 grid grid-cols-2 lg:grid-cols-3 items-center text-center;
+  }
+  .orderButton {
+    @apply bg-button text-white font-thin md:font-bold md:py-1 px-4 rounded-lg h-8 md:h-10 text-center w-full lg:w-40 hover:bg-hover focus:bg-down;
+  }
+  .rightRound {
+    @apply border-4 w-4 h-7 sm:w-6 sm:h-10 border-r-0 rounded-tl-full rounded-bl-full absolute right-0 bg-bg border-bg;
+  }
+  .leftRound {
+    @apply border-4 w-4 h-7 sm:w-6 sm:h-10 border-l-0 rounded-tr-full rounded-br-full absolute left-0 bg-bg border-bg;
+  }
+  .line {
+    @apply hidden lg:block bg-bg w-full h-0.5 absolute;
+  }
+
+  .line1 {
+    @apply hidden md:block lg:hidden bg-bg w-full h-0.5 absolute;
+  }
+
+  .line2 {
+    @apply md:hidden bg-bg w-full h-0.5 absolute;
+  }
+}

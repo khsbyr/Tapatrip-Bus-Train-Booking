@@ -1,0 +1,32 @@
+.Modal {
+  @apply text-cardDate;
+}
+.root {
+  @apply text-center text-base space-y-3 py-6 md:py-8;
+}
+.button {
+  @apply bg-blue-500 text-white font-medium text-sm sm:text-base rounded py-2.5 w-full sm:w-7/12 hover:bg-blue-700 focus:bg-blue-900;
+}
+
+.ldsDualRing {
+  display: flex;
+  justify-content: center;
+}
+.ldsDualRing:after {
+  content: ' ';
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: ldsDualRing 1.2s linear infinite;
+}
+@keyframes ldsDualRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

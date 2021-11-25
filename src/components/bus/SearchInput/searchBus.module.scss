@@ -1,0 +1,21 @@
+.container {
+  @apply px-2 md:px-8 py-5 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-5;
+
+  .startLocation {
+    @apply w-full relative;
+  }
+  .stopLocation {
+    @apply col-start-3 col-end-5 relative;
+  }
+  .endLocation {
+    @apply col-start-5 col-end-7 relative;
+  }
+
+  .searchButton {
+    @apply bg-button text-white font-bold rounded-xl relative hover:bg-hover focus:bg-down h-14;
+  }
+
+  .currentIcon {
+    @apply w-6 h-6 absolute bottom-4 left-2;
+  }
+}
