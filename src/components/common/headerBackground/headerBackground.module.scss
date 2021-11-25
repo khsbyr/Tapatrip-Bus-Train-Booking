@@ -1,0 +1,33 @@
+.body {
+  @apply md:block;
+
+  .image {
+    @apply h-96 object-cover mx-auto;
+  }
+
+  .card {
+    @apply hidden md:block md:mb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-60;
+
+    .title {
+      @apply text-white text-4xl font-bold;
+    }
+
+    .description {
+      @apply text-white  text-2xl font-light mt-2;
+    }
+  }
+  .image1 {
+    @apply h-56 lg:h-72 w-full mx-auto md:rounded-b-full object-cover object-left;
+  }
+
+  .card1 {
+    @apply max-w-7xl mx-auto px-10 h-28 lg:h-36 -mt-28 lg:-mt-36;
+
+    .title1 {
+      @apply text-center text-white text-2xl lg:text-4xl font-bold;
+    }
+    .description1 {
+      @apply text-center text-white text-lg lg:text-2xl font-light mt-2;
+    }
+  }
+}

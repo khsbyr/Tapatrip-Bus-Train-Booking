@@ -1,0 +1,11 @@
+.body {
+  @apply px-2 grid grid-cols-1 gap-3 my-6 md:grid-cols-2 max-w-7xl mx-auto md:my-10 lg:grid-cols-3;
+
+  .card {
+    @apply bg-white h-auto rounded-lg flex p-3 shadow-lg items-center;
+
+    .title {
+      @apply text-selected font-bold text-sm;
+    }
+  }
+}
