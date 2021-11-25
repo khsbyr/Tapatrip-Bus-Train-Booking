@@ -6,13 +6,13 @@ import {
   BUS_ALL_SCHEDULES_QUERY,
 } from '@graphql/queries';
 import { Result } from 'antd';
-import Card from '@components/bus/Card';
+import Card from '@components/bus/card';
 import { ShieldExclamationIcon } from '@heroicons/react/solid';
-import BusNavbar from '@components/bus/Navbar';
-import Layout from '@components/common/Layout';
+import BusNavbar from '@components/bus/navbar';
+import Layout from '@components/common/layout';
 import { useRouter } from 'next/router';
 import { arrayFormat } from '@helpers/array-format';
-import Loader from '@components/common/Loader';
+import Loader from '@components/common/loader';
 
 export default function Orders() {
   const router = useRouter();
@@ -64,12 +64,10 @@ export default function Orders() {
                 status="404"
                 title="Уучлаарай"
                 subTitle="Энэ хайлтад тохирох үр дүн олдсонгүй. Дахин оролдоно уу?"
-                // extra={<Button type="primary">Дахин оролдох</Button>}
               />
             )}
           </div>
           <div className="hidden lg:block">
-            {/* <div className="sticky top-0 bg-white py-5 px-5 rounded-xl divide-y-2"> */}
             <div className="sticky top-0 ">
               <a
                 href="https://www.facebook.com/TapaTripTravelAgency/"

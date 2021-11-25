@@ -1,7 +1,7 @@
-import StaticNavbar from '@components/Travel/StaticNavbar';
-import Layout from '@components/common/Layout';
-import DaysDetail from '@components/Travel/Travel-Card/DaysDetail';
-import PackageList from '@components/Travel/Travel-Card/PackageList';
+import StaticNavbar from '@components/travel/StaticNavbar';
+import Layout from '@components/common/layout';
+import DaysDetail from '@components/travel/Travel-Card/DaysDetail';
+import PackageList from '@components/travel/Travel-Card/PackageList';
 import NavData from '@data/navData.json';
 import {
   CalendarIcon,
@@ -16,9 +16,9 @@ import { postRequest } from '@services/travel/travelServices';
 import { Carousel, message, Timeline } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import TravelTipsModal from '@components/Travel/TravelTipsModal';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import TravelTipsModal from '@components/travel/TravelTipsModal';
 const breadcrumbRoutes = [
   {
     path: '/',
@@ -90,7 +90,7 @@ export default function packageDetail({ NavData, PackTour }) {
     } else {
       setloading(true);
       router.push({
-        pathname: `[packageTourId]/register`,
+        pathname: `[packageTourId]/register/`,
         query: {
           packageTourId: PackTour.id,
           totalPrice: totalPrice,
@@ -351,15 +351,20 @@ export async function getServerStaticPaths() {
   };
 }
 
-export const getServerSideProps = async ({ params }) => {
+const callAPi = async params => {
   const data = await postRequest('/activity/package_tour_view/', {
     id: params.packageTourId,
   });
+  return data.result;
+};
+
+export const getServerSideProps = async ({ params }) => {
+  const result = await callAPi(params);
   const res = NavData;
   return {
     props: {
       NavData: res,
-      PackTour: data.result,
+      PackTour: result,
     },
   };
 };

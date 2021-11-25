@@ -1,7 +1,10 @@
-import StaticNavbar from '@components/Travel/StaticNavbar';
-import Banks from '@components/common/payments/banks';
-import Corporate from '@components/common/payments/corporates';
-import ContentWrapper from '@components/Travel/style';
+import StaticNavbar from '@components/travel/StaticNavbar';
+import Footer from '@components/common/footer';
+import Banks from '@components/travel/payments/banks';
+import Corporate from '@components/travel/payments/corporates';
+import ContentWrapper from '@components/travel/style';
+import Company from '@data/company.json';
+
 import NavData from '@data/navData.json';
 import {
   CheckIcon,
@@ -11,11 +14,9 @@ import {
 import { postRequest } from '@services/travel/travelServices';
 import { message, Modal, Steps } from 'antd';
 import React, { useState } from 'react';
-import Footer from '@components/common/Footer';
 import router, { useRouter } from 'next/router';
 import CurrencyFormat from 'react-currency-format';
-import Company from '@data/company.json';
-import HeaderBackground from '@components/common/HeaderBackground';
+
 const { Step } = Steps;
 export default function payment({ NavData, refNumber, payments }) {
   const [visible, setVisible] = useState(false);
@@ -160,8 +161,9 @@ export default function payment({ NavData, refNumber, payments }) {
     );
   };
 
-  /*rendering popupAlowed banks */
+  /*rendering popupAllowed banks */
   const renderPayment = () => {
+    console.log('paymentResponse : ', paymentResponse);
     if (
       paymentName === 'XACBANK' ||
       paymentName === 'GOLOMT' ||

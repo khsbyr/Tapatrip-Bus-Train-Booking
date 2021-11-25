@@ -1,8 +1,8 @@
-import StaticNavbar from '@components/Travel/StaticNavbar';
-import ConfirmModal from '@components/common/ConfirmModal';
-import Footer from '@components/common/Footer';
-import InputPhoneNumber from '@components/common/InputPhoneNumber';
-import ContentWrapper from '@components/Travel/style';
+import StaticNavbar from '@components/travel/StaticNavbar';
+import ConfirmModal from '@components/common/confirmModal';
+import Footer from '@components/common/footer';
+import InputPhoneNumber from '@components/common/phoneNumber';
+import ContentWrapper from '@components/travel/style';
 import Company from '@data/company.json';
 import NavData from '@data/navData.json';
 import AuthService from '@services/auth';
@@ -18,7 +18,7 @@ interface Props {
 let adults = 0;
 let childs = 0;
 
-const Register: FC<Props> = props => {
+const Register = props => {
   const router = useRouter();
   const [current, setCurrent] = useState(0);
   const [packData, setPackData] = useState(null);
@@ -34,8 +34,7 @@ const Register: FC<Props> = props => {
     contact_email: null,
   });
   useEffect(() => {
-    // router.replace(router.asPath);
-    const queries = router.query;
+    const queries = props.query;
     let packs = [];
     packs =
       queries.subPack &&
@@ -387,6 +386,12 @@ const Register: FC<Props> = props => {
       )}
     </ContentWrapper>
   );
+};
+
+export const getServerSideProps = async ({ query }) => {
+  return {
+    props: { query },
+  };
 };
 
 export default Register;

@@ -1,13 +1,13 @@
-import Footer from '@components/common/Footer';
-// import Layout from '@components/Layout/Layout';
-import HeaderBackground from '@components/common/HeaderBackground';
-import Navbar from '@components/Travel/NavBar/index';
-import App from '@components/common/Subscribe';
-import TapaService from '@components/common/TapaService';
-import Search from '@components/Travel/Search-Travel';
-import ServicesCard from '@components/Travel/Travel-Card/ServicesCard';
-import Tips from '@components/Travel/Travel-Card/Tips';
-import TravelCard from '@components/Travel/Travel-Card/TravelCard';
+import Footer from '@components/common/footer';
+import HeaderBackground from '@components/common/headerBackground';
+import Navbar from '@components/common/navbar';
+import App from '@components/common/subscribe';
+import TapaService from '@components/common/tapaService';
+import Search from '@components/travel/Search-Travel';
+import ServicesCard from '@components/travel/Travel-Card/ServicesCard';
+import Tips from '@components/travel/Travel-Card/Tips';
+import TravelCard from '@components/travel/Travel-Card/TravelCard';
+
 import Company from '@data/company.json';
 import NavData from '@data/navData.json';
 import TapaServiceList from '@data/tapaServiceList.json';
@@ -18,7 +18,7 @@ import {
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import React, { useState } from 'react';
-import Loader from '@components/common/Loader';
+import Loader from '@components/common/loader';
 
 export default function Travel({ NavData, Packages, TipsFor, BannerItems }) {
   const [loader, setloader] = useState(false);
