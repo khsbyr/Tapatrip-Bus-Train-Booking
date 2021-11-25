@@ -315,7 +315,10 @@ const Register = props => {
                   >
                     <Input />
                   </Form.Item>
-                  <InputPhoneNumber />
+                  <div className="space-y-2">
+                    <label htmlFor="">Утасны дугаар</label>
+                    <InputPhoneNumber />
+                  </div>
                 </div>
               </div>
               <div className="">
