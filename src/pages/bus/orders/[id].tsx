@@ -12,6 +12,7 @@ import SeatNav from '@components/bus/seatNavbar';
 import { useRouter } from 'next/router';
 import { useGlobalStore } from '@context/globalStore';
 import Loader from '@components/common/loader';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const { Step } = Steps;
 
@@ -80,4 +81,12 @@ export default function Payment() {
       </div>
     </Layout>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
 }

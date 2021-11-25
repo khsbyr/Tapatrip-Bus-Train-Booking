@@ -4,6 +4,7 @@ import HeaderBackground from '@components/common/headerBackground';
 import NavData from '@data/navData.json';
 import Navbar from '@components/common/navbar';
 import Footer from '@components/common/footer';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function About({ info }) {
   return (
@@ -48,8 +49,11 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ locale, params }) {
   return {
-    props: { info: params },
+    props: { 
+      info: params
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
   };
 }
