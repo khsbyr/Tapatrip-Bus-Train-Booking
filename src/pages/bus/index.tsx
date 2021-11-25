@@ -41,7 +41,7 @@ export async function getStaticProps({ locale }) {
   return {
     props: {
       guestToken: guestToken,
-      ...(await serverSideTranslations(locale, ['common', 'footer'])),
+      ...(await serverSideTranslations(locale, ['common'])),
     },
   };
 }
