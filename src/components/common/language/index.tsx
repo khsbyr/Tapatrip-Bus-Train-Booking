@@ -10,7 +10,7 @@ const languages = [
   { name: 'English(UK)', src: '/assets/flagEng.png', route: 'en' },
   { name: 'China', src: '/assets/flagChina.png', route: 'zh' },
 ];
-export default function selectedLanguage(props) {
+export default function Language(props) {
   const router = useRouter();
   const { locale } = router;
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
