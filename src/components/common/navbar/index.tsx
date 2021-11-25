@@ -16,6 +16,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   const [openTab, setOpenTab] = React.useState(4);
 
   const changeBackground = () => {
+    console.log('dd');
     if (window.scrollY >= 80) {
       setNavbar(true);
     } else {
