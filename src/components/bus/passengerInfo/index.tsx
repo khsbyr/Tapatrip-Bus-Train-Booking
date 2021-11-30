@@ -14,10 +14,12 @@ import { arrayFilterSchedule } from '@helpers/array-format';
 import ConfirmModal from '@components/common/confirmModal';
 import AuthService from '@services/auth';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
 const { Option } = Select;
 
 export default function PassengerIfo({ datas, scheduleId }) {
+  const { t } = useTranslation(['steps']);
   const router = useRouter();
   const [isCompoany, setIsCompany] = useState(false);
   const { customers, setCustomers } = useGlobalStore();
@@ -112,8 +114,8 @@ export default function PassengerIfo({ datas, scheduleId }) {
     if (result) setIsModalVisible(true), setLoading('false');
     else {
       Modal.error({
-        title: 'Алдаа',
-        content: 'Тань руу баталгаажуулах код явуулахад алдаа гарлаа!!!',
+        title: t('errorTitle'),
+        content: t('errorContent'),
       });
       setLoading('false');
     }
@@ -158,15 +160,15 @@ export default function PassengerIfo({ datas, scheduleId }) {
       } catch (e) {
         console.log(e);
         Modal.error({
-          title: 'Алдаа',
+          title: t('errorTitle'),
           content: e.message,
         });
         setLoading1('false');
       }
     } else {
       Modal.error({
-        title: 'Алдаа',
-        content: 'Таны оруулсан код буруу байна дахин оролдоно уу?',
+        title: t('errorTitle'),
+        content: t('errorContentCode'),
       });
       setLoading1('false');
     }
@@ -179,14 +181,14 @@ export default function PassengerIfo({ datas, scheduleId }) {
           <ContentWrapper>
             <div className={style.root}>
               <div className={style.regist}>
-                <p className="text-cardDate">
-                  Та бүртгэл үүсгэснээр хялбар, хурдан захиалга хийх боломжтой.
-                </p>
-                <button className={style.registButton}>Бүртгүүлэх</button>
+                <p className="text-cardDate">{t('registrationContent')}</p>
+                <button className={style.registButton}>
+                  {t('registrationButton')}
+                </button>
               </div>
               <div className={style.Information}>
                 <h1 className={style.customerInfoTitle}>
-                  Захиалагчийн мэдээлэл
+                  {t('passengerInformationTitle')}
                 </h1>
                 <div className="w-full px-4 pt-2 pb-4">
                   <div className={style.InfoForm}>
@@ -194,22 +196,21 @@ export default function PassengerIfo({ datas, scheduleId }) {
                       <label className={style.Label} htmlFor="type"></label>
                       <Form.Item name="type">
                         <Select onChange={handleCompany} defaultValue="0">
-                          <Option value="0">Хувь хүн</Option>
-                          <Option value="1">Байгууллага</Option>
+                          <Option value="0">{t('individual')}</Option>
+                          <Option value="1">{t('organization')}</Option>
                         </Select>
                       </Form.Item>
                     </div>
                     <div className={style.rightContent}>
                       <label className={style.Label} htmlFor="companyRegister">
-                        Регистрийн дугаар
+                        {t(`registerNumber`)}
                       </label>
                       <Form.Item
                         name="companyRegister"
                         rules={[
                           {
                             pattern: PATTERN_COMPANY_REGISTER,
-                            message:
-                              'Байгууллагын регистрийн дугаар буруу байна',
+                            message: t('registerNumberWarning'),
                           },
                         ]}
                       >
@@ -217,7 +218,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           disabled={!isCompoany}
                           className={style.input}
                           onChange={handleCustomerRegister}
-                          placeholder="Байгууллагын регистрийн дугаар"
+                          placeholder={t('organizationRNumberPlaceholder')}
                         />
                       </Form.Item>
                     </div>
@@ -225,25 +226,25 @@ export default function PassengerIfo({ datas, scheduleId }) {
                   <div className={style.InfoForm}>
                     <div className={style.leftContent}>
                       <label className={style.Label} htmlFor="email">
-                        И-мэйл хаяг
+                        {t('mailAddressTitle')}
                       </label>
                       <Form.Item
                         name="email"
                         rules={[
                           {
                             type: 'email',
-                            message: 'И-мэйл буруу байна!',
+                            message: t('mailAddressCheck'),
                           },
                           {
                             required: true,
-                            message: 'И-мэйл хаягаа заавал бөглөнө үү!',
+                            message: t('mailAddressWarning'),
                           },
                         ]}
                       >
                         <Input
                           className={style.input}
                           onChange={handleCustomerEmail}
-                          placeholder="Таны тасалбарыг илгээх болно"
+                          placeholder={t('mailAddressPlaceholder')}
                         />
                       </Form.Item>
                     </div>
@@ -252,7 +253,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                         className="text-cardDate px-2 font-medium"
                         htmlFor="pNumber"
                       >
-                        Утасны дугаар
+                        {t('passengerPhoneNumber')}
                       </label>
                       <InputPhoneNumber />
                     </div>
@@ -264,11 +265,15 @@ export default function PassengerIfo({ datas, scheduleId }) {
                 formatSelectedSeats.map((seat, i) => (
                   <div key={i} className={style.Information}>
                     <div className={style.passengerInfoTitle}>
-                      <h1 className="text-cardDate">Зорчигч {++i}</h1>
+                      <h1 className="text-cardDate">
+                        {t('passengerIndex')} {++i}
+                      </h1>
 
                       <p>
                         <h1 className="text-cardDate">
-                          {seat.isChild ? 'Хүүхэд ' : 'Том хүн '}
+                          {seat.isChild
+                            ? t('passengerChild')
+                            : t('passengerAdults')}{' '}
                           {seat.isChild ? datas.childTicket : datas.adultTicket}
                         </h1>
                       </p>
@@ -277,7 +282,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                       <div className={style.InfoForm}>
                         <div className={style.leftContent}>
                           <label className={style.Label} htmlFor="RegisterNo">
-                            Регистрийн дугаар
+                            {t('registerNumber')}
                           </label>
                           <RegisterNumber
                             registNo={registNo}
@@ -288,12 +293,14 @@ export default function PassengerIfo({ datas, scheduleId }) {
                         </div>
                         <div className={style.rightContent}>
                           <label className={style.Label} htmlFor="Vaccine">
-                            Вакцинд хамрагдсан эсэх
+                            {t('checkVaccineTitle')}
                           </label>
                           <Input
                             disabled
                             value={
-                              seat.isVaccine ? 'Дархлаажсан' : 'Дархлаажаагүй'
+                              seat.isVaccine
+                                ? '' + t('yesVaccine') + ''
+                                : '' + t('noVaccine') + ''
                             }
                             className={style.input}
                           />
@@ -302,7 +309,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                       <div className={style.InfoForm}>
                         <div className={style.leftContent}>
                           <label className={style.Label} htmlFor="lastName">
-                            Овог
+                            {t('passengerLastName')}
                           </label>
                           {/* <Form.Item
                             name={'lastName' + i}
@@ -318,13 +325,13 @@ export default function PassengerIfo({ datas, scheduleId }) {
                             id={i}
                             value={seat.lastName}
                             className={style.input}
-                            placeholder="Зорчигчийн овог"
+                            placeholder={t('passengerLastNamePlaceholder')}
                           />
                           {/* </Form.Item> */}
                         </div>
                         <div className={style.rightContent}>
                           <label className={style.Label} htmlFor="firstName">
-                            Нэр
+                            {t('passengerFirstName')}
                           </label>
                           {/* <Form.Item
                             name={'firstName' + i}
@@ -340,7 +347,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                             onChange={handlePassengerFirstname}
                             className={style.input}
                             value={seat.firstName}
-                            placeholder="Зорчигчийн нэр"
+                            placeholder={t('passengerFirstNamePlaceholder')}
                           />
                           {/* </Form.Item> */}
                         </div>
@@ -354,7 +361,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
             {loading === 'true' ? (
               <div className={style.ldsDualRing}></div>
             ) : (
-              'Төлбөр төлөх'
+              t('stepPassengerInfoButton')
             )}
           </button>
         </div>
@@ -365,7 +372,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
               {loading === 'true' ? (
                 <div className={style.ldsDualRing}></div>
               ) : (
-                'Төлбөр төлөх'
+                t('stepPassengerInfoButton')
               )}
             </button>
           </div>

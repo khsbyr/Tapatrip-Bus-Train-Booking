@@ -1,0 +1,12 @@
+{
+    "covid19TripInformation":"单击此处获取最新的 COVID-19 旅行信息",
+    "ordersSearchResult": "抱歉",
+    "ordersSearchResultBody": "未找到此搜索的结果。 请再试一次。",
+    "passengerPrice": "客运价格",
+    "directionInformation": "方向信息",
+    "orderButton": "命令",
+    "insuranceCompany": "保险公司",
+    "orderHours":"小时",
+    "orderMinutes":"分钟",
+    "measurement":"公里"
+}

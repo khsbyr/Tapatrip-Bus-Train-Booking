@@ -5,6 +5,7 @@ import { Transition } from '@headlessui/react';
 import SearchInput from '@components/bus/searchInput';
 import Link from 'next/link';
 import SelectLanguage from '@components/common/language';
+import { useTranslation } from 'next-i18next';
 
 interface Props {
   navbarData?: any;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export default function BusNavbar({ navbarData, startLocations }) {
+  const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
@@ -51,17 +53,16 @@ export default function BusNavbar({ navbarData, startLocations }) {
 
             <div className="flex items-center ">
               <div className="hidden md:block">
-                <div className="ml-10 flex items-baseline space-x-4">
+                <div className="ml-10 flex items-center space-x-5">
                   <OrderCheck />
-
                   <div className="z-20">
                     <SelectLanguage isBlack={true} />
                   </div>
                   <div>
                     <Link href="/auth/login">
                       <a>
-                        <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
-                          Нэвтрэх
+                        <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40 hover:bg-red-500">
+                          {t('login')}
                         </button>
                       </a>
                     </Link>
@@ -106,7 +107,9 @@ export default function BusNavbar({ navbarData, startLocations }) {
             >
               <div ref={ref} className="p-3 space-y-4">
                 <div className="flex">
-                  <h1 className="text-cardDate font-medium pr-4">Хэл сонгох</h1>
+                  <h1 className="text-cardDate font-medium pr-4">
+                    {t('chooselanguage')}
+                  </h1>
                   <SelectLanguage />
                 </div>
                 <div>
@@ -116,7 +119,7 @@ export default function BusNavbar({ navbarData, startLocations }) {
                   <Link href="/auth/login">
                     <a>
                       <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
-                        Нэвтрэх
+                        {t('login')}
                       </button>
                     </a>
                   </Link>

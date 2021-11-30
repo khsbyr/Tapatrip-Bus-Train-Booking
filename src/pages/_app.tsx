@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import { ApolloProvider } from '@apollo/client';
 import { client } from '@lib/apollo';
 import { ManagedGlobalContext } from '@context/globalStore';
+import { appWithTranslation } from 'next-i18next';
 
 import 'antd/dist/antd.css';
 import '@assets/chrome-bug.scss';
@@ -18,4 +19,4 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default MyApp;
+export default appWithTranslation(MyApp);

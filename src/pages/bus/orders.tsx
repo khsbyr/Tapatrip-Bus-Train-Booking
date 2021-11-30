@@ -13,8 +13,11 @@ import Layout from '@components/common/layout';
 import { useRouter } from 'next/router';
 import { arrayFormat } from '@helpers/array-format';
 import Loader from '@components/common/loader';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 export default function Orders() {
+  const { t } = useTranslation(['order']);
   const router = useRouter();
   const { startLocation, stopLocation, endLocation, date, endDate } =
     router.query;
@@ -49,8 +52,7 @@ export default function Orders() {
               <div className="bg-alert border border-alert h-auto flex items-center rounded-2xl space-x-5 px-2">
                 <ShieldExclamationIcon className="w-7 h-7 ml-2 lg:ml-12 text-alert flex-shrink-0" />
                 <p className="text-alert font-bold text-md md:text-lg py-3">
-                  Хамгийн сүүлийн үеийн COVID-19 аяллын мэдээллийг эндээс үзнэ
-                  үү
+                  {t('covid19TripInformation')}
                 </p>
               </div>
             </div>
@@ -62,8 +64,8 @@ export default function Orders() {
             ) : (
               <Result
                 status="404"
-                title="Уучлаарай"
-                subTitle="Энэ хайлтад тохирох үр дүн олдсонгүй. Дахин оролдоно уу?"
+                title={t('ordersSearchResult')}
+                subTitle={t('ordersSearchResultBody')}
               />
             )}
           </div>
@@ -81,4 +83,12 @@ export default function Orders() {
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'footer', 'order'])),
+    },
+  };
 }

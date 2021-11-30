@@ -1,5 +1,5 @@
 import seat24RangeMap from '@helpers/seat24RangeMap';
-import style from './seatSmall.module.scss';
+import style from './SeatSmall.module.scss';
 import { useGlobalStore } from '@context/globalStore';
 import { arrayFilterSeat } from '@helpers/array-format';
 

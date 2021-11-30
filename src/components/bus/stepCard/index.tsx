@@ -12,17 +12,22 @@ import moment from 'moment';
 import { arrayFilterSchedule } from '@helpers/array-format';
 import { unixDate } from '@helpers/array-format';
 import CurrencyFormat from 'react-currency-format';
+import { useTranslation } from 'next-i18next';
 
 const { Step } = Steps;
 export default function StepCard({ datas, scheduleId }) {
+  const { t } = useTranslation(['order']);
   const unixDates = unixDate(datas);
   const { selectedSeats } = useGlobalStore();
   const [isActive, setIsActive] = useState(false);
   let format = n =>
     `0${(n / 60) ^ 0}`.slice(-2) +
-    ' цаг ' +
+    ' ' +
+    t('orderHours') +
+    ' ' +
     ('0' + (n % 60)).slice(-2) +
-    ' минут';
+    ' ' +
+    t('orderMinutes');
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
   return (
     <div>
@@ -50,7 +55,7 @@ export default function StepCard({ datas, scheduleId }) {
                           thousandSeparator={true}
                           renderText={value => <div>{value}</div>}
                         />
-                        {' км'}
+                        {t('measurement')}
                       </div>
                     </h1>
                   </div>
@@ -86,7 +91,7 @@ export default function StepCard({ datas, scheduleId }) {
                   {formatSelectedSeats.length > 0
                     ? formatSelectedSeats.length
                     : 1}{' '}
-                  зорчигчийн үнэ
+                  {t('passengerPrice')}
                 </h1>
               </div>
             </div>
@@ -109,7 +114,7 @@ export default function StepCard({ datas, scheduleId }) {
                   className="text-direction font-medium flex text-xs md:text-sm"
                   onClick={() => setIsActive(!isActive)}
                 >
-                  Чиглэлийн мэдээлэл
+                  {t('directionInformation')}
                   {isActive ? (
                     <ChevronUpIcon className="md:w-6 md:h-6 w-5 h-5" />
                   ) : (
@@ -144,7 +149,7 @@ export default function StepCard({ datas, scheduleId }) {
               </Steps>
               <div className="w-full col-span-1 flex flex-wrap items-end sm:justify-end lg:justify-start font-medium text-base text-cardDate">
                 <h1 className="text-base text-cardDate font-normal pr-2">
-                  Даатгалын компани:
+                  {t('insuranceCompany')}:
                 </h1>
                 <p>{datas.insurance.name}</p>
               </div>

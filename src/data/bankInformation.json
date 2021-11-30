@@ -1,14 +1,14 @@
 [
   {
     "id": 0,
-    "name": "Хаан банк",
+    "name": "khaan",
     "accountNumber": "5057397049",
-    "accountName": "АВТО ТЭЭВРИЙН ҮНДЭСНИЙ ТӨВ"
+    "accountName": "atut"
   },
   {
     "id": 1,
-    "name": "Голомт банк",
+    "name": "golomt",
     "accountNumber": "1605186111",
-    "accountName": "АВТО ТЭЭВРИЙН ҮНДЭСНИЙ ТӨВ"
+    "accountName": "atut"
   }
 ]

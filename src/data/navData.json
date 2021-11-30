@@ -2,7 +2,7 @@
   "generalList": [
     {
       "id": 1,
-      "text": "Нислэг",
+      "text": "flight",
       "route": "#",
       "icon": "../assets/svgIcons/Flight.svg",
       "path": [
@@ -11,7 +11,7 @@
     },
     {
       "id": 2,
-      "text": "Буудал",
+      "text": "hotel",
       "route": "#",
       "icon": "/assets/svgIcons/Hotel.svg",
       "path": [
@@ -20,7 +20,7 @@
     },
     {
       "id": 3,
-      "text": "Аялал",
+      "text": "trip",
       "route": "travel",
       "icon": "/assets/svgIcons/Trip.svg",
       "path": [
@@ -32,7 +32,7 @@
     },
     {
       "id": 4,
-      "text": "Автобус",
+      "text": "bus",
       "route": "/bus",
       "icon": "../assets/svgIcons/Bus.svg",
       "path": [
@@ -43,7 +43,7 @@
     },
     {
       "id": 5,
-      "text": "Галт тэрэг",
+      "text": "train",
       "route": "#",
       "icon": "../assets/svgIcons/Flight.svg",
       "path": [

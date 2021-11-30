@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from './headerBackground.module.scss';
+import { useTranslation } from 'next-i18next';
 
 export default function HeaderBackground(props) {
+  const { t } = useTranslation();
   return (
     <div className={styles.body}>
       <img
@@ -13,14 +15,14 @@ export default function HeaderBackground(props) {
         <h1
           className={`${props.isBorderRadius ? styles.title1 : styles.title} `}
         >
-          Аяллын цогц шийдэл
+          {t('hometitle')}
         </h1>
         <p
           className={`${
             props.isBorderRadius ? styles.description1 : styles.description
           } `}
         >
-          Онлайн аяллын платформ
+          {t('homesubtitle')}
         </p>
       </div>
     </div>
