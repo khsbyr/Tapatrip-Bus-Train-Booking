@@ -14,14 +14,14 @@ export const AuthProvider = ({ children }) => {
       const token = Cookies.get('tapatrip_token');
       if (token) {
         try {
-          const { data } = await new AuthApi(token).getCurrentUser();
-          if (data && data?.status_code === 200) {
-            if (!isEmpty(data?.result?.user)) {
-              setUser(data?.result?.user);
-            }
-          } else {
-            return null;
-          }
+          //const { data } = await new AuthApi(token).getCurrentUser();
+          // if (data && data?.status_code === 200) {
+          //   if (!isEmpty(data?.result?.user)) {
+          //     setUser(data?.result?.user);
+          //   }
+          // } else {
+          //   return null;
+          // }
         } catch (err) {
           console.log('token finish');
         }
@@ -43,18 +43,18 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const setLogin = async token => {
-    try {
-      const { data: result } = await new AuthApi(token).getCurrentUser();
-      if (result && result?.status_code === 200) {
-        console.log('orson');
-        setUser(result?.result?.user);
-      } else {
-        return null;
-      }
-    } catch (err) {
-      // noop
-      console.log('Login hiihed aldaa garlaa');
-    }
+    // try {
+    //   const { data: result } = await new AuthApi(token).getCurrentUser();
+    //   if (result && result?.status_code === 200) {
+    //     console.log('orson');
+    //     setUser(result?.result?.user);
+    //   } else {
+    //     return null;
+    //   }
+    // } catch (err) {
+    //   // noop
+    //   console.log('Login hiihed aldaa garlaa');
+    // }
   };
 
   const setLogout = () => {

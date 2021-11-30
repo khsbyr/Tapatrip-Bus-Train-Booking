@@ -23,7 +23,6 @@ const dateFormat = 'YYYY-MM-DD';
 
 export default function SearchInput({ startLocations }) {
   const { t } = useTranslation();
-  console.log(t(`companyList`));
   const client = useApolloClient();
   const { Option } = AutoComplete;
   const router = useRouter();
