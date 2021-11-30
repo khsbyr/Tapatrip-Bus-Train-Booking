@@ -37,7 +37,7 @@ export default function Language(props) {
     <Listbox value={selectedLanguage} onChange={changeLanguage}>
       <div className={s.body} onClick={onClick}>
         <Listbox.Button className={s.listboxButton}>
-          <img className="rounded" src={selectedLanguage.src} width="34" />
+          <img className="rounded-sm" src={selectedLanguage.src} width="34" />
           {isSelected ? (
             <ChevronUpIcon className={`${props.isBlack ? s.icon1 : s.icon} `} />
           ) : (
@@ -59,7 +59,7 @@ export default function Language(props) {
                 <span className={s.options}>
                   {language.name}
                   <p className="mt-0.5">
-                    <img className="rounded" src={language.src} width="34" />
+                    <img className="rounded-sm" src={language.src} width="32" />
                   </p>
                   {selected ? (
                     <span className={s.checkIcon}>
