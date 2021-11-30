@@ -4,6 +4,7 @@ import ContentWrapper from './style';
 import style from './searchPanel.module.scss';
 import SearchInput from '@components/bus/searchInput';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
 const { TabPane } = Tabs;
 
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
+  const { t } = useTranslation();
   const router = useRouter();
   const activePath = router.route == '/travel' ? '3' : '4';
 
@@ -48,7 +50,7 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
                       ))}
                     </g>
                   </svg>
-                  <span className="text">{menu.text}</span>
+                  <span className="text">{t(`${menu.text}`)}</span>
                 </div>
               }
               disabled={menu.id !== 4 && menu.id !== 3 ? true : false}

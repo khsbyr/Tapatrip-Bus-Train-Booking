@@ -5,12 +5,14 @@ import OrderCheck from '@components/bus/orderCheck';
 import styles from './navbar.module.scss';
 import SelectLanguage from '@components/common/language';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 
 interface Props {
   navbarData?: any;
 }
 
 const Navbar: FC<Props> = ({ navbarData }) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [navbar, setNavbar] = useState(false);
   const [openTab, setOpenTab] = React.useState(4);
@@ -60,17 +62,21 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                       className={styles.menu}
                       href={`${menu.route}`}
                     >
-                      {menu.text}
+                      {t(`${menu.text}`)}
                     </a>
                   ))}
-                  <div className="flex items-center space-x-5 justify-center lg:pl-5 xl:pl-10">
-                    <OrderCheck />
-                    <SelectLanguage isBlack={false} />
-                  </div>
                 </div>
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center space-x-5">
+              <div
+                className={`${
+                  navbar ? 'hidden' : 'lg:flex items-center space-x-5'
+                } hidden`}
+              >
+                <OrderCheck />
+                <SelectLanguage isBlack={false} />
+              </div>
               <div className="hidden lg:flex items-center">
                 <div
                   className={`${
@@ -82,7 +88,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 </div>
                 <div className={styles.loginBody}>
                   <a href="/auth/login">
-                    <button className={styles.loginButton}>Нэвтрэх</button>
+                    <button className={styles.loginButton}>{t('login')}</button>
                   </a>
                 </div>
               </div>
@@ -129,8 +135,10 @@ const Navbar: FC<Props> = ({ navbarData }) => {
               id="mobile-menu"
             >
               <div ref={ref} className="p-3 space-y-4">
-                <div className="flex">
-                  <h1 className="text-cardDate font-medium pr-4">Хэл сонгох</h1>
+                <div className="flex flex-wrap">
+                  <h1 className="text-cardDate font-medium pr-4">
+                    {t('chooselanguage')}
+                  </h1>
                   <SelectLanguage />
                 </div>
                 <OrderCheck />
@@ -138,12 +146,12 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   <Link href="/auth/login">
                     <a>
                       <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
-                        Нэвтрэх
+                        {t('login')}
                       </button>
                     </a>
                   </Link>
                 </div>
-                <div className="flex items-center text-base sm:text-lg font-bold px-4 cursor-pointer text-cardDate">
+                <div className="flex justify-center items-center text-base sm:text-lg font-bold px-4 cursor-pointer text-cardDate">
                   <PhoneIcon className="w-4 sm:w-5" />
                   <p className="pl-2">(976)-7514-4444</p>
                 </div>
@@ -157,10 +165,10 @@ const Navbar: FC<Props> = ({ navbarData }) => {
             <div key={menu.id}>
               <a
                 className={
-                  'text-xs pt-3 rounded-full block leading-normal ' +
+                  'text-xs pt-3 rounded-full block leading-normal' +
                   (openTab === menu.id
                     ? 'text-selected'
-                    : 'text-mobileNav bg-white cursor-default pointer-events-none')
+                    : 'text-mobileNav bg-white cursor-default pointer-events-none ')
                 }
                 onClick={e => {
                   e.preventDefault();
@@ -185,7 +193,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     ))}
                   </g>
                 </svg>
-                <span>{menu.text}</span>
+                <span className="flex justify-center">{t(`${menu.text}`)}</span>
               </a>
             </div>
           ))}
