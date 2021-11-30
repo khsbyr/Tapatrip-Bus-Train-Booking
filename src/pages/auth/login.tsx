@@ -13,9 +13,11 @@ import { useState } from 'react';
 const Login = () => {
   const { TabPane } = Tabs;
   const [current, setCurrent] = useState(0);
+
   const next = () => {
     setCurrent(current + 1);
   };
+
   const clicked = current => {
     switch (current) {
       case 1:
@@ -52,6 +54,19 @@ const Login = () => {
     }
   };
 
+  // function renderRegister(param) {
+  //   switch (param) {
+  //     case 0:
+  //       return getLoginForm();
+  //     case 1:
+  //       return getConfirmationCodeForm();
+  //     case 4:
+  //       return getRePasswordForm();
+  //     case 3:
+  //       return getPasswordForm();
+  //   }
+  // }
+
   return (
     <div>
       <div className="fixed z-20 w-screen top-0">
@@ -72,6 +87,7 @@ const Login = () => {
             <div className="w-full sm:w-96 lg:w-2/5 z-2 sm:mx-auto rounded-lg bg-white p-7 sm:p-10">
               {current === 0 ? (
                 <Tabs
+                  tabBarGutter={80}
                   defaultActiveKey="1"
                   className="flex text-lg text-cardDate"
                   centered
