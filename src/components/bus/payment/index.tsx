@@ -8,8 +8,10 @@ import ContentWrapper from './style';
 import StepCard from '../stepCard';
 import PaymentCard from '../paymentCard';
 import EndModal from '@components/common/endModal';
+import { useTranslation } from 'next-i18next';
 
 export default function Payment({ datas, scheduleId }) {
+  const { t } = useTranslation(['steps']);
   const router = useRouter();
   const [value, setValue] = useState(1);
   const { setCurrent } = useGlobalStore();
@@ -24,8 +26,8 @@ export default function Payment({ datas, scheduleId }) {
 
   window.onpopstate = () => {
     Modal.warning({
-      title: 'Анхааруулга',
-      content: ' Та төлбөрөө төлнө үү?',
+      title: t('warningTitlePayment'),
+      content: t('warningContentPayment'),
     });
     router.push(`/bus/orders/${scheduleId}`);
     setCurrent(2);
@@ -50,39 +52,28 @@ export default function Payment({ datas, scheduleId }) {
           <div className={style.root}>
             <div className={style.bodyPayment}>
               <div className={style.instructions}>
-                <p>Төлбөр төлөх зааварчилгаа</p>
+                <p>{t('paymentInstructions')}</p>
                 <p>{<Countdown format="mm:ss" value={deadline} />}</p>
               </div>
               <ul className="p-4 text-sm sm:text-base px-10">
-                <li>
-                  Хэрэглэгч та Авто тээврийн үндэсний төвийн дор дурдсан дансруу
-                  билетийн төлбөрөө 20 минутын дотор шилжүүлэх ба гүйлгээний
-                  утга хэсэгт ЗАХИАЛГЫН КОД болон холбогдох утасны дугаараа
-                  заавал бичиж шилжүүлэг хийнэ.
-                </li>
-                <li className="py-6">
-                  Дараах тохиолдлуудад таны захиалга хүчингүй болно гэдгийг
-                  анхаарна уу.
-                </li>
+                <li>{t('paymentInstructionsContent1')}</li>
+                <li className="py-6">{t('paymentInstructionsContent2')}</li>
                 <ul>
-                  <li>-Заагдсан хугацаанд төлбөр хийгээгүй</li>
-                  <li>-Дутуу төлбөр хийх</li>
-                  <li>
-                    -Захиалгын кодыг буруу /ямар нэгэн илүү тэмдэг, тэмдэглэгээ
-                    бичихгүй(!.,-)/ эсвэл дутуу бичих
-                  </li>
+                  <li>-{t('paymentInstructionsContent3')}</li>
+                  <li>-{t('paymentInstructionsContent4')}</li>
+                  <li>-{t('paymentInstructionsContent5')}</li>
                 </ul>
               </ul>
             </div>
 
             <div className={style.radioGroup}>
-              <h1 className={style.paymentTitle}>Төлбөр төлөх</h1>
+              <h1 className={style.paymentTitle}>{t('paymentTitle')}</h1>
               <Radio.Group onChange={onChange} value={value} className="w-full">
                 <div className="w-full ml-6">
                   <Space direction="vertical">
                     <Radio value={1}>
                       <div className="w-full">
-                        <p className={style.paymentShape}>Шилжүүлэх</p>
+                        <p className={style.paymentShape}>{t('transfer')}</p>
                         {value === 1 && <PayTransfer />}
                       </div>
                     </Radio>
@@ -105,7 +96,7 @@ export default function Payment({ datas, scheduleId }) {
             </div>
           </div>
           <button className={style.buttonBlock} onClick={handleCheck}>
-            Дуусгах
+            {t('endButton')}
           </button>
         </div>
         <div className={style.card}>
@@ -113,7 +104,7 @@ export default function Payment({ datas, scheduleId }) {
             <StepCard datas={datas} scheduleId={scheduleId} />
             <PaymentCard datas={datas} scheduleId={scheduleId} />
             <button className={style.button} onClick={handleCheck}>
-              Дуусгах
+              {t('endButton')}
             </button>
           </div>
         </div>

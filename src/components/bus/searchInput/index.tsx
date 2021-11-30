@@ -18,10 +18,12 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import locale from 'antd/lib/date-picker/locale/mn_MN';
 import 'moment/locale/mn';
-
+import { useTranslation } from 'next-i18next';
 const dateFormat = 'YYYY-MM-DD';
 
 export default function SearchInput({ startLocations }) {
+  const { t } = useTranslation();
+  console.log(t(`companyList`));
   const client = useApolloClient();
   const { Option } = AutoComplete;
   const router = useRouter();
@@ -96,7 +98,7 @@ export default function SearchInput({ startLocations }) {
 
   const handleSearchBus = async () => {
     if (selectEndLocation.key === undefined || selectEndLocation.key == '') {
-      message.warning('Та явах чиглэлээ сонгоно уу?');
+      message.warning(t('warningDirectionSelect'));
     } else {
       const endDate = moment(selectDate)
         .add(7, 'days')
@@ -182,10 +184,10 @@ export default function SearchInput({ startLocations }) {
           <AutoComplete
             allowClear
             defaultValue={selectStartLocation.value}
-            notFoundContent="Хайлт илэрцгүй"
+            notFoundContent={t('warningResult')}
             onSearch={handleStartSearch}
             onSelect={handleStartSelect}
-            placeholder="Хаанаас: хот байршил..."
+            placeholder={t('startCity')}
           >
             {startLocationList
               ? startLocationList &&
@@ -225,7 +227,7 @@ export default function SearchInput({ startLocations }) {
             onSearch={handleStopSearch}
             defaultValue={selectStopLocation.value}
             disabled={isUlaanbaatar}
-            placeholder="Хаанаас: сум байршил..."
+            placeholder={t('startSoum')}
           >
             {stopSearchLocationList.length > 0
               ? stopSearchLocationList &&
@@ -262,10 +264,10 @@ export default function SearchInput({ startLocations }) {
           <AutoComplete
             allowClear
             defaultValue={selectEndLocation.value}
-            notFoundContent="Хайлт илэрцгүй"
+            notFoundContent={t('warningResult')}
             onSelect={handleEndSelect}
             onSearch={handleEndSearch}
-            placeholder="Хаашаа: хот байршил..."
+            placeholder={t('endCity')}
           >
             {!isUlaanbaatar
               ? endFormatLocation &&
@@ -316,11 +318,11 @@ export default function SearchInput({ startLocations }) {
           format={dateFormat}
           disabledDate={disabledDate}
           onChange={onChange}
-          placeholder="Он, сар, өдөр"
+          placeholder={t('selectDate')}
           locale={locale}
         />
         <button className={style.searchButton} onClick={handleSearchBus}>
-          Хайх
+          {t('searchButton')}
         </button>
       </div>
     </ContentWrapper>

@@ -13,10 +13,12 @@ import { useRouter } from 'next/router';
 import { useGlobalStore } from '@context/globalStore';
 import Loader from '@components/common/loader';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 const { Step } = Steps;
 
 export default function Payment() {
+  const { t } = useTranslation(['steps']);
   const router = useRouter();
   const { current, setCurrent } = useGlobalStore();
   const { id } = router.query;
@@ -35,19 +37,19 @@ export default function Payment() {
 
   const steps = [
     {
-      title: 'Суудал сонгох',
+      title: t('stepSelectSeat'),
       content: <SelectSeats datas={scheduleDataResult} scheduleId={id} />,
-      button: 'Захиалах',
+      button: t('stepSelectSeatButton'),
     },
     {
-      title: 'Зорчигчийн мэдээлэл',
+      title: t('stepPassengerInfo'),
       content: <PassengerInfo datas={scheduleDataResult} scheduleId={id} />,
-      button: 'Төлбөр төлөх',
+      button: t('stepPassengerInfoButton'),
     },
     {
-      title: 'Төлбөр төлөх',
+      title: t('stepPayment'),
       content: <Payments datas={scheduleDataResult} scheduleId={id} />,
-      button: 'Захиалгын мэдээлэл шалгах',
+      button: t('stepPaymentButton'),
     },
   ];
 
@@ -83,10 +85,15 @@ export default function Payment() {
   );
 }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common'])),
+      ...(await serverSideTranslations(locale, [
+        'common',
+        'footer',
+        'steps',
+        'order',
+      ])),
     },
   };
 }

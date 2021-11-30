@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/client';
 import { BUS_PASSENGER } from '@graphql/mutation';
 import { PATTERN_PHONE } from '@helpers/constantValidation';
 import { arrayFilterSchedule } from '@helpers/array-format';
+import { useTranslation } from 'next-i18next';
 
 const RegisterNumber = ({
   registNo,
@@ -43,6 +44,7 @@ const RegisterNumber = ({
     setValues2(e.target.value);
     setIsOpen2(false);
   };
+  const { t } = useTranslation(['steps']);
 
   const handleRegister = async e => {
     if (e.target.value.length === 8) {
@@ -75,11 +77,11 @@ const RegisterNumber = ({
       rules={[
         {
           pattern: PATTERN_PHONE,
-          message: 'Регистерийн дугаар буруу байна!',
+          message: t('registerNumberError'),
         },
         {
           required: true,
-          message: 'Регистерийн дугаараа заавал бөглөнө үү!',
+          message: t('registerWarning'),
         },
       ]}
     >
@@ -114,7 +116,7 @@ const RegisterNumber = ({
           <Input
             className="z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base"
             onChange={handleRegister}
-            placeholder="Регистерийн дугаар"
+            placeholder={t('registerNumber')}
           />
         </div>
         {!isOpen1 ? (

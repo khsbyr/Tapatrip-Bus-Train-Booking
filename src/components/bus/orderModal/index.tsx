@@ -8,8 +8,10 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import ContentWrapper from '@components/bus/orderModal/style';
 import style from './orderModal.module.scss';
+import { useTranslation } from 'next-i18next';
 
 export default function OrderModal(props) {
+  const { t } = useTranslation();
   const [isActive, setIsActive] = useState(false);
   const [isActive1, setIsActive1] = useState(false);
   const [loading, setLoading] = useState('');
@@ -21,9 +23,11 @@ export default function OrderModal(props) {
 
   const format = n =>
     `0${(n / 60) ^ 0}`.slice(-2) +
-    ' цаг ' +
+    ' ' +
+    t('orderHours') +
     ('0' + (n % 60)).slice(-2) +
-    ' минут';
+    ' ' +
+    t('orderMinutes');
 
   const onFinish = async values => {
     setLoading('true');
@@ -39,8 +43,8 @@ export default function OrderModal(props) {
     } catch (e) {
       setIsActive(false);
       Modal.error({
-        title: 'Алдаа',
-        content: 'Таны захиалга олдсонгүй',
+        title: t('errorOrderTitle'),
+        content: t('errorOrderContent'),
       });
       setLoading('false');
     }
@@ -52,7 +56,7 @@ export default function OrderModal(props) {
       onCancel={() => props.close()}
       width={700}
       footer={null}
-      title="Захиалгын мэдээлэл"
+      title={t('orderInformationTitle')}
     >
       <ContentWrapper>
         <div className="sm:pt-3 pb-2 sm:pb-5 space-y-8">
@@ -64,18 +68,18 @@ export default function OrderModal(props) {
                     className="text-cardDate text-base pl-2 font-medium"
                     htmlFor=""
                   >
-                    Захиалгын дугаар
+                    {t('orderNumber')}
                   </label>
                   <Form.Item
                     name="refNumber"
                     rules={[
                       {
                         required: true,
-                        message: 'Захиалгын дугаараа заавал бөглөнө үү!',
+                        message: t('warningOrderNumber'),
                       },
                     ]}
                   >
-                    <Input placeholder="Захиалгын дугаар оруулна уу" />
+                    <Input placeholder={t('orderNumberPlaceholder')} />
                   </Form.Item>
                 </div>
                 <div className="space-y-2">
@@ -83,22 +87,22 @@ export default function OrderModal(props) {
                     className="text-cardDate text-base pl-2 font-medium"
                     htmlFor=""
                   >
-                    Утасны дугаар
+                    {t('phoneNumber')}
                   </label>
                   <Form.Item
                     name="phone"
                     rules={[
                       {
                         pattern: PATTERN_PHONE,
-                        message: 'Утасны дугаар буруу байна',
+                        message: t('errorPhoneNumber'),
                       },
                       {
                         required: true,
-                        message: 'Утасны дугаараа заавал бөглөнө үү!',
+                        message: t('warningPhoneNumber'),
                       },
                     ]}
                   >
-                    <Input placeholder=" Утасны дугаараа оруулна уу" />
+                    <Input placeholder={t('warningPhoneNumber')} />
                   </Form.Item>
                 </div>
 
@@ -109,7 +113,7 @@ export default function OrderModal(props) {
                   {loading === 'true' ? (
                     <div className={style.ldsDualRing}></div>
                   ) : (
-                    'Шалгах'
+                    t('checkButton')
                   )}
                 </button>
               </div>
@@ -122,7 +126,7 @@ export default function OrderModal(props) {
                   <h1 className={style.location}>
                     {datas?.schedule?.locationEnd?.locationStop?.location?.name}{' '}
                     /{datas?.schedule?.startStopName}/
-                    <p className="mr-3 text-red-400">-аас </p>
+                    <p className="mr-3 text-red-400"> - </p>
                     {
                       datas?.schedule?.locationEnd?.locationEnd?.location?.name
                     }{' '}
@@ -131,32 +135,35 @@ export default function OrderModal(props) {
 
                   <div className="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-between pt-4">
                     <h1 className="text-cardDate font-medium">
-                      Хөдлөх огноо: {datas?.schedule?.leaveDate}{' '}
+                      {t('startDate')}: {datas?.schedule?.leaveDate}{' '}
                       {datas?.schedule?.leaveTime}
                     </h1>
                     <h1 className="hidden sm:block">-</h1>
                     <h1 className="sm:hidden p-1">&darr;</h1>
                     <h1 className="text-cardDate text-center -mt-2">
-                      {datas?.schedule?.locationEnd?.distance}км
+                      {datas?.schedule?.locationEnd?.distance}
+                      {t('measurement')}
                       <br />
                       {format(datas?.schedule?.locationEnd?.estimatedDuration)}
                     </h1>
                     <h1 className="hidden sm:block">-</h1>
                     <h1 className="sm:hidden p-1">&darr;</h1>
                     <h1 className="text-cardDate font-medium">
-                      Хүрэх огноо: {moment.unix(unixDates).format('YYYY-MM-DD')}{' '}
+                      {t('endDate')}:{' '}
+                      {moment.unix(unixDates).format('YYYY-MM-DD')}{' '}
                       {moment.unix(unixDates).format('HH:mm')}{' '}
                     </h1>
                   </div>
 
                   <div className="flex justify-between flex-wrap">
                     <h1 className="text-cardDate ">
-                      Захиалга хийсэн:{' '}
+                      {t('dateOrder')}:{' '}
                       {moment(datas?.createdAt).format('YYYY-MM-DD HH:mm')}
                     </h1>
 
                     <h1 className="font-medium text-cardDate text-center">
-                      Суудлын дугаар: {datas?.pax?.map(z => z.seat).join(', ')}
+                      {t('seatNumber')}:{' '}
+                      {datas?.pax?.map(z => z.seat).join(', ')}
                     </h1>
                   </div>
                   <div className="flex items-center pt-4 sm:pt-4">
@@ -167,7 +174,7 @@ export default function OrderModal(props) {
                   <div className={style.rowDirection}>
                     <div className="flex">
                       <h1 className="text-cardDate font-semibold text-xs md:text-sm mr-1">
-                        Төлбөр:
+                        {t('payment')}:
                       </h1>
                       <h1
                         className={`font-semibold text-xs md:text-sm ${
@@ -186,7 +193,7 @@ export default function OrderModal(props) {
                         className="text-direction font-medium flex text-xs md:text-sm"
                         onClick={() => setIsActive1(!isActive1)}
                       >
-                        Автобусны мэдээлэл
+                        {t('busInformation')}
                         {isActive1 ? (
                           <ChevronUpIcon className="md:w-6 md:h-6 w-5 h-5" />
                         ) : (
@@ -201,18 +208,19 @@ export default function OrderModal(props) {
                   <div className="px-3 md:px-6 flex flex-col xs:flex-row justify-around py-5 space-y-3 xs:space-y-0">
                     <div className="space-y-3">
                       <h1 className="text-cardDate font-medium text-xs sm:text-sm">
-                        ААН: {datas?.schedule?.bus?.transporter.name}
+                        {t('businessFirms')}:{' '}
+                        {datas?.schedule?.bus?.transporter.name}
                       </h1>
                       <h1 className="text-cardDate font-medium text-xs sm:text-sm">
-                        Марк, загвар: {datas?.schedule?.bus?.modelName}
+                        {t('busModel')}: {datas?.schedule?.bus?.modelName}
                       </h1>
                     </div>
                     <div className="space-y-3">
                       <h1 className="text-cardDate font-medium text-xs sm:text-sm">
-                        Улсын дугаар: {datas?.schedule?.bus?.plateNumber}
+                        {t('busModel')}: {datas?.schedule?.bus?.plateNumber}
                       </h1>
                       <h1 className="text-cardDate font-medium text-xs sm:text-sm">
-                        Жолоочийн утасны дугаар: {datas?.schedule?.driverPhone}
+                        {t('driverPhoneNumber')}: {datas?.schedule?.driverPhone}
                       </h1>
                     </div>
                   </div>
