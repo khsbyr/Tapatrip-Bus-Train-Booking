@@ -3,10 +3,11 @@ import { useState } from 'react';
 import ReactCodeInput from 'react-verification-code-input';
 import style from './confirmModal.module.scss';
 import ContentWrapper from './style';
+import { useTranslation } from 'next-i18next';
 
 export default function ConfirmModal(props) {
   const [pinCode, setPinCode] = useState('');
-
+  const { t } = useTranslation(['steps']);
   const handlePinChange = pinCode => {
     setPinCode(pinCode);
   };
@@ -24,7 +25,7 @@ export default function ConfirmModal(props) {
         >
           <div className={style.root}>
             <h1 className="text-lg md:text-xl text-cardDate font-bold">
-              Танд илгээсэн 4 оронтой тоог оруулна уу?
+              {t('confirmModalTitle')}
             </h1>
             <p className="flex justify-center py-4">
               <ReactCodeInput
@@ -41,7 +42,7 @@ export default function ConfirmModal(props) {
               {props.loading === 'true' ? (
                 <div className={style.ldsDualRing}></div>
               ) : (
-                'Баталгаажуулах'
+                t('confirmModalButton')
               )}
             </button>
           </div>

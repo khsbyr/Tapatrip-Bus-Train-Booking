@@ -1,36 +1,38 @@
 import React, { FC } from 'react';
 import styles from './footer.module.scss';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 
 interface Props {
   companyInfo?: any;
 }
 
 const Footer: FC<Props> = ({ companyInfo }) => {
+  const { t } = useTranslation(['footer']);
   return (
     <div className={styles.footer}>
       <div className={styles.subFooter}>
         <div className={styles.subBody}>
           <div className="col-span-2 md:col-span-1">
             <h1 style={{ color: '#0A3761' }} className="font-bold text-lg">
-              Холбоо барих
+              {t('contactUsTitle')}
             </h1>
             <div className="mt-5 text-cardDate mr-0 md:mr-10 space-y-1">
               <p>
-                <b>Хаяг:</b> Хан-Уул дүүрэг, 11 хороо, Их монгол улсын гудамж,
-                Ривер Гарден хотхон 308 байр, Улаанбаатар хот, Монгол Улс
+                <b>{t('addressTitle')}:</b>
+                {t('addressBody')}
               </p>
               <p>
-                <b>Утасны дугаар:</b> (976)-75154444
+                <b>{t('addressPhonenumber')}:</b> (976)-75154444
               </p>
               <p>
-                <b>И-мэйл хаяг:</b> crm@tapatrip.com
+                <b>{t('addressEmail')}:</b> crm@tapatrip.com
               </p>
             </div>
           </div>
           <div>
             <h1 style={{ color: '#0A3761' }} className="font-bold text-lg">
-              Компаний тухай
+              {t('aboutCompanyTitle')}
             </h1>
             <div className="mt-6">
               {companyInfo?.map(company => (
@@ -43,7 +45,7 @@ const Footer: FC<Props> = ({ companyInfo }) => {
                       className="mt-2 font-light "
                       style={{ color: '#0A3761' }}
                     >
-                      {company.title}
+                      {t(`${company.title}`)}
                     </p>
                   </a>
                 </Link>
@@ -53,7 +55,7 @@ const Footer: FC<Props> = ({ companyInfo }) => {
 
           <div>
             <h1 style={{ color: '#0A3761' }} className="font-bold text-lg">
-              Биднийг дагах
+              {t(`followUsTitle`)}
             </h1>
             <div className="flex mt-4">
               <a
@@ -108,7 +110,7 @@ const Footer: FC<Props> = ({ companyInfo }) => {
           className="text-center py-8 mb-16 lg:mb-0"
           style={{ color: 'rgba(2, 48, 71, 0.5)' }}
         >
-          © Зохиогчийн эрхийг хуулийн дагуу Тапатрип ХХК эзэмшинэ.
+          {t('footerCopyright')}
         </p>
       </div>
     </div>

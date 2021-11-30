@@ -31,6 +31,7 @@ module.exports = {
         register: '#0A3761',
         seatHover: '#1575CE',
         cardOrder: '#f7f7f7',
+        homeLogin: '#1679D5',
       }),
       theme: {
         screens: {

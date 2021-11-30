@@ -10,8 +10,10 @@ import { CheckIcon } from '@heroicons/react/solid';
 import banks from '@data/bankInformation.json';
 import s from './payTransfer.module.scss';
 import { useGlobalStore } from '@context/globalStore';
+import { useTranslation } from 'next-i18next';
 
 export default function Payment() {
+  const { t } = useTranslation(['steps']);
   const { Countdown } = Statistic;
   const [selected, setSelected] = useState(banks[0]);
   const [isSelected, setIsSelected] = useState(false);
@@ -90,7 +92,7 @@ export default function Payment() {
             <button className="w-full" onClick={onClick}>
               <Listbox.Button className="w-full py-4 pl-3 text-left text-cardDate bg-bg rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500">
                 <span className="block truncate font-medium">
-                  {selected.name}
+                  {t(`${selected.name}`)}
                 </span>
                 <span className={s.ListBoxIcon}>
                   {isSelected ? (
@@ -124,7 +126,7 @@ export default function Payment() {
                             selected ? '' : ''
                           } block truncate text-sm sm:text-base`}
                         >
-                          {bank.name}
+                          {t(`${bank.name}`)}
                         </span>
                         {selected ? (
                           <span
@@ -145,7 +147,7 @@ export default function Payment() {
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 text-base">
           <div className={s.leftContent}>
             <div className="space-y-2">
-              <h1 className="text-cardDate ml-2">Захиалгын дугаар</h1>
+              <h1 className="text-cardDate ml-2">{t('orderNumber')}</h1>
 
               <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
                 <h1 className="text-cardDate text-base">{booking.refNumber}</h1>
@@ -155,7 +157,7 @@ export default function Payment() {
               </p>
             </div>
             <div className="">
-              <h1>Дансны дугаар</h1>
+              <h1>{t('accountNumber')}</h1>
               <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
                 <h1 className="text-cardDate text-base">
                   {banks[selected.id].accountNumber}
@@ -168,7 +170,7 @@ export default function Payment() {
           </div>
           <div className={s.rightContent}>
             <div>
-              <h1>Холбогдох утас</h1>
+              <h1>{t('contactPhone')}</h1>
               <p>
                 <h1 className="text-cardDate text-base">
                   {customers.phoneNumber}
@@ -181,10 +183,10 @@ export default function Payment() {
               </p>
             </div>
             <div>
-              <h1>Хүлээн авагч</h1>
+              <h1>{t('accountName')}</h1>
               <p>
                 <h1 className="text-cardDate text-sm lg:pr-10">
-                  {banks[selected.id].accountName}
+                  {t(`${banks[selected.id].accountName}`)}
                 </h1>
                 <button onClick={() => copyToAccName(banks[selected.id])}>
                   {copyAccName}

@@ -5,25 +5,26 @@ import AuthService from '@services/auth';
 import { message, Input, Form, Modal } from 'antd';
 import ContentWrapper from './style';
 import { validateMessages } from '@helpers/constantValidation';
+import { useTranslation } from 'next-i18next';
 
 const Subscribe: FC = () => {
   const [emailInput, setEmailInput] = useState();
-
+  const { t } = useTranslation(['common']);
   const email = e => {
     setEmailInput(e.target.value);
   };
 
   const emailRegister = async () => {
     if (emailInput === undefined || emailInput === '') {
-      message.warning('Мэйл хаяг хоосон байх боломжгүй!');
+      message.warning(t('messageWarningEmail'));
     } else {
       try {
         const result = await AuthService.emailSubscribe(emailInput);
         if (result.status === 200) {
-          message.info('Мэйл хаяг бүртгэлтэй байна!');
+          message.info(t('messageWarningInfo'));
         }
         if (result.status === 201) {
-          message.success('Амжилттай бүртгэгдлээ!');
+          message.success(t('messageWarningSuccess'));
         }
       } catch (e) {
         Modal.error({
@@ -44,11 +45,8 @@ const Subscribe: FC = () => {
                 <img src="assets/Application.png" className="h-32" />
               </div>
               <div className={styles.childBody}>
-                <h1 className={styles.title}>Тапатрип аппликэйшн татах</h1>
-                <p className={styles.description}>
-                  Нислэг, зочид буудал, аялал, автобус, галт тэрэгний тасалбарыг
-                  нэг дороос захиалах боломжтой.
-                </p>
+                <h1 className={styles.title}>{t('appDownloadTitle')}</h1>
+                <p className={styles.description}>{t('appDownloadBody')}</p>
                 <div className={styles.download}>
                   <a
                     className="mr-1"
@@ -118,17 +116,14 @@ const Subscribe: FC = () => {
                 <img src="assets/mail1.png" className="h-28 px-5" />
               </div>
               <div className={styles.childBody}>
-                <h1 className={styles.title}>
-                  Онцгой хөнгөлөлт, урамшуулал, шинэчлэлийг и-мэйлээр авахыг
-                  хүсч байна уу?
-                </h1>
+                <h1 className={styles.title}>{t('getIncentivesGmail')}</h1>
                 <div className="flex flex-wrap gap-1">
                   <Form.Item
                     name="password"
                     rules={[
                       {
                         type: 'email',
-                        message: 'И-мэйл хаяг буруу байна!',
+                        message: t('getIncentivesError'),
                       },
                     ]}
                   >
@@ -138,12 +133,12 @@ const Subscribe: FC = () => {
                         style={{ color: '#8AB1D5' }}
                       />
                       <Input
-                        placeholder="И-Мэйл хаягаа оруулна уу"
+                        placeholder={t('getIncentivesWarning')}
                         onChange={email}
                       />
 
                       <button className={styles.button} onClick={emailRegister}>
-                        Бүртгэх
+                        {t('registrationButton')}
                       </button>
                     </div>
                   </Form.Item>

@@ -139,7 +139,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     </a>
                   </Link>
                 </div>
-                <div className="flex items-center text-base sm:text-lg font-bold px-4 cursor-pointer text-cardDate">
+                <div className="flex justify-center items-center text-base sm:text-lg font-bold px-4 cursor-pointer text-cardDate">
                   <PhoneIcon className="w-4 sm:w-5" />
                   <p className="pl-2">(976)-7514-4444</p>
                 </div>

@@ -7,6 +7,7 @@ import ContentWrapper from './style';
 import style from './phoneNumber.module.scss';
 import { useGlobalStore } from '@context/globalStore';
 import { PATTERN_PHONE } from '@helpers/constantValidation';
+import { useTranslation } from 'next-i18next';
 
 const countries = [
   { name: 976, src: '/assets/flagMongolia.png', value: 0 },
@@ -14,6 +15,7 @@ const countries = [
 ];
 
 export default function PhoneNumber() {
+  const { t } = useTranslation(['steps']);
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [isSelected, setIsSelected] = useState(false);
   const { customers, setCustomers } = useGlobalStore();
@@ -62,11 +64,11 @@ export default function PhoneNumber() {
         rules={[
           {
             pattern: PATTERN_PHONE,
-            message: 'Утасны дугаар буруу байна',
+            message: t('passengerPhoneNumberError'),
           },
           {
             required: true,
-            message: 'Утасны дугаараа заавал бөглөнө үү!',
+            message: t('passengerPhoneNumberWarning'),
           },
         ]}
       >

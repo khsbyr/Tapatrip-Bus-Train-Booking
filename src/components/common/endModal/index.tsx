@@ -4,6 +4,7 @@ import { PATTERN_PHONE } from '@helpers/constantValidation';
 import { useMutation } from '@apollo/client';
 import { BUS_BOOKING_CHECK } from '@graphql/mutation';
 import moment from 'moment';
+import { useTranslation } from 'next-i18next';
 
 interface Props {
   isModalVisible?: any;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export default function EndModal(props) {
+  const { t } = useTranslation(['steps']);
   return (
     <Modal
       visible={props.isModalVisible}
@@ -24,20 +26,16 @@ export default function EndModal(props) {
         </div>
         <p className="space-y-5">
           <h1 className=" text-center text-cardDate text-lg font-bold">
-            Манайхаар үйлчлүүлсэнд баярлалаа
+            {t('endModalTitle')}
           </h1>
           <h1 className="text-cardDate text-base text-center">
-            Таны захиалгыг хүлээн авлаа. Баталгаажуулалтын мэдээллийг таны гар
-            утасруу SMS-р илгээх болно. Онлайн захиалгатай холбоотой мэдээллийг
-            7515-4444 Тапатрип ХХК-ний утаснаас, төлбөр болон захиалга
-            баталгаажуулалтын мэдээллийг 1900-1949 Авто тээврийн үндэсний төвийн
-            утаснаас лавлана уу.
+            {t('endModalBody')}
           </h1>
         </p>
         <div className="flex justify-center">
           <a href="/">
             <button className="px-10 bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white">
-              Захиалгын мэдээлэл шалгах
+              {t('endModalButton')}
             </button>
           </a>
         </div>

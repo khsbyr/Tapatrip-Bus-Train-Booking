@@ -15,14 +15,14 @@ export default function HeaderBackground(props) {
         <h1
           className={`${props.isBorderRadius ? styles.title1 : styles.title} `}
         >
-          {t('title')}
+          {t('hometitle')}
         </h1>
         <p
           className={`${
             props.isBorderRadius ? styles.description1 : styles.description
           } `}
         >
-          Онлайн аяллын платформ
+          {t('homesubtitle')}
         </p>
       </div>
     </div>

@@ -11,17 +11,22 @@ import Link from 'next/link';
 import { unixDate } from '@helpers/array-format';
 import moment from 'moment';
 import CurrencyFormat from 'react-currency-format';
+import { useTranslation } from 'next-i18next';
 
 const { Step } = Steps;
 
 export default function Card({ datas }) {
+  const { t } = useTranslation(['order']);
   const unixDates = unixDate(datas.node);
   const [isActive, setIsActive] = useState(false);
-  let format = n =>
+  const format = n =>
     `0${(n / 60) ^ 0}`.slice(-2) +
-    ' цаг ' +
+    ' ' +
+    t('orderHours') +
+    ' ' +
     ('0' + (n % 60)).slice(-2) +
-    ' минут';
+    ' ' +
+    t('orderMinutes');
 
   return (
     <div className="px-2">
@@ -57,7 +62,7 @@ export default function Card({ datas }) {
                           thousandSeparator={true}
                           renderText={value => <div>{value}</div>}
                         />
-                        {' км'}
+                        {t('measurement')}
                       </div>
                     </h1>
                   </div>
@@ -83,8 +88,8 @@ export default function Card({ datas }) {
                   <h1 className={style.priceText}>{' MNT'}</h1>
                 </div>
                 <h1 className="flex items-center text-xs md:text-sm lg:text-base">
-                  <UserIcon className="w-3 md:w-4 h-3 md:h-4 " /> 1 зорчигчийн
-                  үнэ
+                  <UserIcon className="w-3 md:w-4 h-3 md:h-4 " /> 1{' '}
+                  {t('passengerPrice')}
                 </h1>
               </div>
             </div>
@@ -110,8 +115,8 @@ export default function Card({ datas }) {
                   <h1 className={style.priceText}>{' MNT'}</h1>
                 </div>
                 <h1 className="flex items-center text-xs md:text-sm lg:text-base">
-                  <UserIcon className="w-3 md:w-4 h-3 md:h-4 " /> 1 зорчигчийн
-                  үнэ
+                  <UserIcon className="w-3 md:w-4 h-3 md:h-4 " /> 1{' '}
+                  {t('passengerPrice')}
                 </h1>
               </div>
             </div>
@@ -131,7 +136,7 @@ export default function Card({ datas }) {
                   className="text-direction font-medium flex text-xs md:text-base"
                   onClick={() => setIsActive(!isActive)}
                 >
-                  Чиглэлийн мэдээлэл
+                  {t('directionInformation')}
                   {isActive ? (
                     <ChevronUpIcon className="md:w-6 md:h-6 w-4 h-4" />
                   ) : (
@@ -141,7 +146,9 @@ export default function Card({ datas }) {
               </div>
               <div className="col-span-2 mt-5 lg:mt-0 lg:col-span-1">
                 <Link href={`/bus/orders/${datas?.node.id}`}>
-                  <button className={style.orderButton}>Захиалах</button>
+                  <button className={style.orderButton}>
+                    {t('orderButton')}
+                  </button>
                 </Link>
               </div>
             </div>
@@ -169,9 +176,9 @@ export default function Card({ datas }) {
                   }
                 />
               </Steps>
-              <div className="w-full col-span-1 flex items-end md:justify-end font-medium text-base text-cardDate lg:ml-12">
-                <h1 className="text-base text-cardDate font-normal pr-2">
-                  Даатгалын компани:
+              <div className="w-full col-span-1 flex items-end md:justify-end font-medium text-sm sm:text-base text-cardDate lg:ml-12">
+                <h1 className="text-sm sm:text-base text-cardDate font-normal pr-2">
+                  {t('insuranceCompany')}:
                 </h1>
                 <p>{datas?.node.insurance.name}</p>
               </div>
