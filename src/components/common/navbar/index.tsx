@@ -78,14 +78,16 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 <SelectLanguage isBlack={false} />
               </div>
               <div className="hidden lg:flex items-center">
-                <div
-                  className={`${
-                    navbar ? 'text-cardDate' : 'text-white'
-                  } flex text-lg font-bold cursor-pointer pr-5`}
-                >
-                  <PhoneIcon className="w-5" />
-                  <p className="pl-2">7515-4444</p>
-                </div>
+                <a href="tel:97675154444">
+                  <div
+                    className={`${
+                      navbar ? 'text-cardDate' : 'text-white'
+                    } flex text-lg font-bold cursor-pointer mr-5 hover:bg-onlineSupport hover:text-white hover:rounded py-1 px-2`}
+                  >
+                    <PhoneIcon className="w-5" />
+                    <p className="pl-2">7515-4444</p>
+                  </div>
+                </a>
                 <div className={styles.loginBody}>
                   <a href="/auth/login">
                     <button className={styles.loginButton}>{t('login')}</button>
@@ -95,6 +97,12 @@ const Navbar: FC<Props> = ({ navbarData }) => {
             </div>
 
             <div className="-mr-2 flex lg:hidden">
+              <div className="flex items-center justify-center">
+                <span className="animate-ping absolute inline-flex h-8 w-8 bg-onlineSupport rounded-lg"></span>
+                <button className="z-40 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-2 rounded-lg">
+                  <PhoneIcon className="w-5" />
+                </button>
+              </div>
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
@@ -119,6 +127,16 @@ const Navbar: FC<Props> = ({ navbarData }) => {
             </div>
           </div>
         </div>
+        <div className="hidden max-w-7xl mx-auto justify-end pr-4 lg:flex">
+          <div className="flex justify-center items-center mt-7">
+            <span className="animate-ping absolute inline-flex h-8 w-28 bg-onlineSupport rounded-lg"></span>
+            <button className="z-40 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-3 rounded-lg">
+              <PhoneIcon className="w-4" />
+              <p className="pl-1 w-36">{t('onlineHelp')}</p>
+            </button>
+          </div>
+        </div>
+
         <Transition
           show={isOpen}
           className="flex justify-end w-full px-2 absolute top-16"
@@ -151,10 +169,12 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     </a>
                   </Link>
                 </div>
-                <div className="flex justify-center items-center text-base sm:text-lg font-bold px-4 cursor-pointer text-cardDate">
-                  <PhoneIcon className="w-4 sm:w-5" />
-                  <p className="pl-2">(976)-7514-4444</p>
-                </div>
+                <a href="tel:97675154444">
+                  <div className="flex justify-center items-center text-base sm:text-lg mt-4 font-bold px-4 py-2 cursor-pointer text-cardDate hover:bg-onlineSupport hover:text-white hover:rounded">
+                    <PhoneIcon className="w-4 sm:w-5" />
+                    <p className="pl-2">(976)-7514-4444</p>
+                  </div>
+                </a>
               </div>
             </div>
           )}

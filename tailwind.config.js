@@ -32,6 +32,7 @@ module.exports = {
         seatHover: '#1575CE',
         cardOrder: '#f7f7f7',
         homeLogin: '#1679D5',
+        onlineSupport: '#8bc34a',
       }),
       theme: {
         screens: {

@@ -1,5 +1,6 @@
 {
   "hometitle":"A comprehensive travel solution",
+  "onlineHelp":"ONLINE DIRECT HELP",
   "homesubtitle":"Online travel platform",
   "login":"Log In",  
   "flight":"Flight",
@@ -8,7 +9,7 @@
   "bus":"Bus",
   "train":"Train",
   "chooselanguage": "Choose Language",
-  "ordercheck": "Check the order",
+  "ordercheck": "Check orders",
   "orderInformationTitle":"Order Information",
   "orderNumber":"Order number",
   "orderNumberPlaceholder":"Please enter your order number",
