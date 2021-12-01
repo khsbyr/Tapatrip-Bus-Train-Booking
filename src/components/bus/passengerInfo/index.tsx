@@ -298,7 +298,9 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           <Input
                             disabled
                             value={
-                              seat.isVaccine ? t('yesVaccine') : t('noVaccine')
+                              seat.isVaccine
+                                ? '' + t('yesVaccine') + ''
+                                : '' + t('noVaccine') + ''
                             }
                             className={style.input}
                           />
