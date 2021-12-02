@@ -18,6 +18,7 @@ const { Step } = Steps;
 export default function Card({ datas }) {
   const { t } = useTranslation(['order']);
   const unixDates = unixDate(datas.node);
+
   const [isActive, setIsActive] = useState(false);
   const format = n =>
     `0${(n / 60) ^ 0}`.slice(-2) +
@@ -71,7 +72,7 @@ export default function Card({ datas }) {
                       {moment.unix(unixDates).format('YYYY-MM-DD')}
                     </h1>
                     <h1 className="flex justify-end font-light text-cardDate text-xs md:text-sm lg:text-lg">
-                      {moment.unix(unixDates).format('HH:mm')}
+                      {moment.unix(unixDates).format('hh:mm')}
                     </h1>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import PassengerInfo from '@components/bus/passengerInfo';
-import Payments from '@components/bus/payment';
+// import Payments from '@components/bus/payment';
+import Payments from '@components/bus/paymentTapatrip';
 import { useQuery } from '@apollo/client';
 import { BUS_SCHEDULES_DETAIL_QUERY } from '@graphql/queries';
 import { Steps } from 'antd';
