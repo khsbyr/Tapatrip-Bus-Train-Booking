@@ -179,7 +179,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 </div>
                 <hr />
                 <div className="text-cardDate">
-                  <a className="flex items-center text-base border-4 border-white  hover:border-blue-200 p-4 rounded hover:text-cardDate">
+                  <a className="flex items-center text-base border-4 border-white  hover:border-blue-200 p-2 rounded hover:text-cardDate">
                     <img
                       src="/assets/profile1.png"
                       alt=""
@@ -191,14 +191,14 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     </p>
                   </a>
                   <a
-                    className="flex items-center border-2 border-4 border-white  hover:border-blue-200 rounded p-4 hover:text-cardDate"
+                    className="flex items-center border-2 border-4 border-white  hover:border-blue-200 rounded p-2 hover:text-cardDate"
                     href=""
                   >
                     <CheckIcon className="pr-2 h-5" />
                     Миний захиалгууд
                   </a>
                   <a
-                    className="flex items-center rounded border-4 border-white  hover:border-blue-200 p-4 text-red-600 hover:text-red-600"
+                    className="flex items-center rounded border-4 border-white  hover:border-blue-200 p-2 text-red-600 hover:text-red-600"
                     href=""
                   >
                     <LogoutIcon className="pr-2 h-5" />
