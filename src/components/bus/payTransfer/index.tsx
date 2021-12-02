@@ -186,7 +186,7 @@ export default function Payment() {
               <h1>{t('accountName')}</h1>
               <p>
                 <h1 className="text-cardDate text-sm lg:pr-10">
-                  {t(`${banks[selected.id].accountName}`)}
+                  {banks[selected.id].accountName}
                 </h1>
                 <button onClick={() => copyToAccName(banks[selected.id])}>
                   {copyAccName}

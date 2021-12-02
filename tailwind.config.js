@@ -32,6 +32,9 @@ module.exports = {
         seatHover: '#1575CE',
         cardOrder: '#f7f7f7',
         homeLogin: '#1679D5',
+        onlineSupport: '#8bc34a',
+        registHover: '#1669d5',
+        profile: '#f5f3f4',
       }),
       theme: {
         screens: {
@@ -46,6 +49,8 @@ module.exports = {
         seat: '#0A3761',
         weather: '#8AB1D5',
         register: '#F1583C',
+        homeLogin: '#1679D5',
+        profile: '#f5f3f4',
       }),
       width: {
         98: '26rem',

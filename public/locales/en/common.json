@@ -1,5 +1,6 @@
 {
   "hometitle":"A comprehensive travel solution",
+  "onlineHelp":"ONLINE DIRECT HELP",
   "homesubtitle":"Online travel platform",
   "login":"Log In",  
   "flight":"Flight",
@@ -8,7 +9,7 @@
   "bus":"Bus",
   "train":"Train",
   "chooselanguage": "Choose Language",
-  "ordercheck": "Check the order",
+  "ordercheck": "Check orders",
   "orderInformationTitle":"Order Information",
   "orderNumber":"Order number",
   "orderNumberPlaceholder":"Please enter your order number",
@@ -52,5 +53,9 @@
   "appDownloadTitle": "Download the Tapatrip application",
   "appDownloadBody": "Flight, hotel, tour, bus and train tickets can be ordered from one place.",
   "motivationTripTitle": "Motivation to travel",
-  "motivationTripBody": "Travel information and sights."
+  "motivationTripBody": "Travel information and sights.",
+  "logout": "Log out",
+  "myOrders": "My orders",
+  "customerSection": "Customer section"
+
 }

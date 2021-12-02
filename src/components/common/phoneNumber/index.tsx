@@ -11,7 +11,8 @@ import { useTranslation } from 'next-i18next';
 
 const countries = [
   { name: 976, src: '/assets/flagMongolia.png', value: 0 },
-  { name: 44, src: '/assets/flagEng.png', value: 1 },
+  // { name: 44, src: '/assets/flagEng.png', value: 1 },
+  // { name: 86, src: '/assets/flagChina.png', value: 2 },
 ];
 
 export default function PhoneNumber() {
@@ -73,7 +74,16 @@ export default function PhoneNumber() {
         ]}
       >
         <div className="flex rounded-lg bg-bg">
-          <Listbox value={selectedCountry} onChange={handleChange}>
+          <div className="flex items-center z-10 cursor-pointer relative pl-4 w-44 border-r-2">
+            <img
+              className="rounded flex-shrink-0"
+              src="/assets/flagMongolia.png"
+              width="32"
+              height="16"
+            />
+            <h1 className="pl-2 text-cardDate w-10">{'+' + 976}</h1>
+          </div>
+          {/* <Listbox value={selectedCountry} onChange={handleChange}>
             <div className="flex items-center z-10 cursor-pointer relative pl-4 w-44 border-r-2">
               <Listbox.Button
                 onClick={onClick}
@@ -126,7 +136,7 @@ export default function PhoneNumber() {
                 ))}
               </Listbox.Options>
             </div>
-          </Listbox>
+          </Listbox> */}
           <Input className={style.input} onChange={handleCustomerPhone} />
         </div>
       </Form.Item>
