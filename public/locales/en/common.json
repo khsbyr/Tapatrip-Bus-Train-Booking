@@ -53,5 +53,9 @@
   "appDownloadTitle": "Download the Tapatrip application",
   "appDownloadBody": "Flight, hotel, tour, bus and train tickets can be ordered from one place.",
   "motivationTripTitle": "Motivation to travel",
-  "motivationTripBody": "Travel information and sights."
+  "motivationTripBody": "Travel information and sights.",
+  "logout": "Log out",
+  "myOrders": "My orders",
+  "customerSection": "Customer section"
+
 }

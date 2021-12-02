@@ -187,7 +187,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                       className="rounded-full"
                     />
                     <p className="space-y-1 pl-4 text-sm">
-                      99331137 <p>Хэрэглэгчийн хэсэг</p>
+                      99331137 <p>{t('customerSection')}</p>
                     </p>
                   </a>
                   <a
@@ -195,14 +195,14 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     href=""
                   >
                     <CheckIcon className="pr-2 h-5" />
-                    Миний захиалгууд
+                    {t('myOrders')}
                   </a>
                   <a
                     className="flex items-center rounded border-4 border-white  hover:border-blue-200 p-2 text-red-600 hover:text-red-600"
                     href=""
                   >
                     <LogoutIcon className="pr-2 h-5" />
-                    Системээс гарах
+                    {t('logout')}
                   </a>
                 </div>
               </div>

@@ -53,5 +53,8 @@
     "appDownloadTitle": "下载 Tapatrip 应用程序",
     "appDownloadBody": "可以从一个地方订购机票、酒店、旅游、汽车和火车票。",
     "motivationTripTitle": "旅行的动机",
-    "motivationTripBody": "旅游信息和景点。"
+    "motivationTripBody": "旅游信息和景点。",
+    "logout": "登出",
+    "myOrders": "我的订单",
+    "customerSection": "客户板块"
   }
