@@ -4,20 +4,46 @@ import AuthTokenStorageService from '@services/AuthTokenStorageService';
 
 const AuthService = {
   async authenticate(payload) {
+    const response = await Client.post('/account/login/', payload);
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    return datas;
+  },
+
+  async getConfirmationCode(payload) {
+    const response = await Client.post('/account/verify_code/phone/', payload);
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    return datas;
+  },
+
+  async createNewPassword(payload) {
+    const response = await Client.post('/account/forgot_password/', payload);
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    return datas;
+  },
+
+  async createUserCheck(payload) {
     const data = {
-      email: payload.email,
-      dialCode: payload.dialCode,
       phone: payload.phone,
-      password: payload.password,
-      remember: payload.remember,
+      dial_code: payload.dialCode,
     };
 
-    const response = await Client.post('/account/login', data);
-    const accessToken = response.data;
-
-    AuthTokenStorageService.store(accessToken);
-
-    return response;
+    const response = await Client.post(
+      '/account/verification_code/phone/',
+      data
+    );
+    return response?.data?.result;
   },
 
   async verifySms(payload) {

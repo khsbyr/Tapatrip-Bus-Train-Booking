@@ -255,7 +255,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                       >
                         {t('passengerPhoneNumber')}
                       </label>
-                      <InputPhoneNumber />
+                      <InputPhoneNumber name="customerNumber" />
                     </div>
                   </div>
                 </div>

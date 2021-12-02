@@ -14,7 +14,7 @@ const countries = [
   { name: 44, src: '/assets/flagEng.png', value: 1 },
 ];
 
-export default function PhoneNumber() {
+export default function PhoneNumber({ name }) {
   const { t } = useTranslation(['steps']);
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [isSelected, setIsSelected] = useState(false);
@@ -60,7 +60,7 @@ export default function PhoneNumber() {
   return (
     <ContentWrapper className="space-y-2">
       <Form.Item
-        name="phone"
+        name={name}
         rules={[
           {
             pattern: PATTERN_PHONE,
@@ -127,7 +127,11 @@ export default function PhoneNumber() {
               </Listbox.Options>
             </div>
           </Listbox>
-          <Input className={style.input} onChange={handleCustomerPhone} />
+          <Input
+            className={style.input}
+            type="number"
+            onChange={handleCustomerPhone}
+          />
         </div>
       </Form.Item>
     </ContentWrapper>

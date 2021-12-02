@@ -4,7 +4,6 @@ import { Form, Statistic, Input, Modal } from 'antd';
 import InputPhoneNumber from '@components/common/phoneNumber';
 import ContentWrapper from '@components/bus/orderModal/style';
 import NavData from '@data/navData.json';
-import { Tabs } from 'antd';
 import Footer from '@components/common/footer';
 import Company from '@data/company.json';
 import styles from '@components/common/layout/layout.module.scss';
@@ -19,89 +18,41 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import style from './login.module.scss';
 
-const Login = () => {
+const PasswordRecovery = () => {
   const { t } = useTranslation(['steps']);
   const { user, setUser } = useGlobalStore();
   const router = useRouter();
-  const { TabPane } = Tabs;
   const [code, setCode] = useState(0);
-  const [current, setCurrent] = useState(0);
   const { Countdown } = Statistic;
   const deadline = Date.now() + 60 * 60 * 83.3;
   const [pinCode, setPinCode] = useState('');
   const [loading, setLoading] = useState('');
   const [userPhoneNumber, setUserPhoneNumber] = useState(null);
-  const [loginError, setLoginError] = useState(null);
-  const [passwordError, setPasswordError] = useState(null);
+  const [error, setError] = useState(null);
   const [rePasswordError, setRePasswordError] = useState(null);
   const [confirmError, setConfirmError] = useState(null);
-  const [currentPassword, setCurrentPassword] = useState('');
 
   function reset() {
     setCode(0);
-    setPasswordError(null);
-    setCurrentPassword('');
   }
 
-  const handleLogin = async values => {
+  const handleForgot = async values => {
     setLoading('true');
-    const phoneNumber = values.loginNumber
-      ? values.loginNumber
-      : values.registerNumber;
     let payload = {
-      phone: phoneNumber.toString(),
+      phone: values.loginNumber.toString(),
       dialCode: 976,
     };
-    setUserPhoneNumber(phoneNumber);
+    setUserPhoneNumber(values.loginNumber);
     try {
-      const res = await AuthService.createUserCheck(payload);
-      if (res?.code === 1) {
-        setCode(1);
+      const res = await AuthService.verifySms(payload);
+      if (res) {
+        setCode(2);
       } else {
-        setCode(3);
+        setError('Баталгаажуулах код явуулахад алдаа гарлаа!!!');
       }
       setLoading('false');
     } catch (e) {
-      Modal.error({
-        title: t('errorTitle'),
-        content: e.message,
-      });
-      setLoading('false');
-    }
-  };
-
-  const handlePassword = async () => {
-    if (!currentPassword) setPasswordError('Та нууц үгээ оруулна уу?');
-    setLoading('true');
-    let data = {};
-    data = {
-      phone: userPhoneNumber.toString(),
-      password: currentPassword.toString(),
-      dial_code: 976,
-    };
-    try {
-      if (currentPassword) {
-        const res = await AuthService.authenticate(data);
-        if (res && res.status === 200) {
-          AuthTokenStorageService.store(res?.result?.token);
-          setUser(res?.result?.user);
-          setPasswordError(null);
-          if (router.query && router.query.from) {
-            router.push('/bus' + router.query.from);
-          } else {
-            router.push('/bus');
-          }
-        } else {
-          setPasswordError(res?.message);
-        }
-        setLoading('false');
-      }
-      setLoading('false');
-    } catch (e) {
-      Modal.error({
-        title: t('errorTitle'),
-        content: e.message,
-      });
+      setConfirmError(e.message);
       setLoading('false');
     }
   };
@@ -139,24 +90,23 @@ const Login = () => {
 
   const handleRePassword = async values => {
     setLoading('true');
-    const { password } = values;
+    const { password, rePassword } = values;
     let data = {};
     data = {
       phone: userPhoneNumber.toString(),
       dial_code: 976,
-      password: password.toString(),
+      new_password: password.toString(),
+      reapet_password: rePassword.toString(),
     };
     try {
-      if (password) {
-        const res = await AuthService.authenticate(data);
+      if (password && rePassword) {
+        const res = await AuthService.createNewPassword(data);
         if (res && res.status === 200) {
-          AuthTokenStorageService.store(res?.result?.token);
-          setUser(res?.result?.user);
           setRePasswordError(null);
           if (router.query && router.query.from) {
-            router.push('/bus' + router.query.from);
+            router.push('/auth/login' + router.query.from);
           } else {
-            router.push('/bus');
+            router.push('/auth/login');
           }
         } else {
           setRePasswordError(res?.message);
@@ -175,62 +125,26 @@ const Login = () => {
     setPinCode(pinCode);
   };
 
-  const handleForgetPaasword = () => {
-    router.push(`/auth/password-recovery`);
-  };
-
-  const handleCurrentPassword = e => {
-    e.preventDefault();
-    setCurrentPassword(e.target.value);
-  };
-
-  function getLoginForm() {
+  function getForgotForm() {
     return (
       <>
         <ContentWrapper>
-          <Tabs
-            tabBarGutter={80}
-            defaultActiveKey="1"
-            className="flex text-lg text-cardDate"
-            centered
-          >
-            <TabPane tab="НЭВТРЭХ" key="1">
-              <Form name="login" onFinish={handleLogin} className="space-y-4">
+          <Form name="forgot" onFinish={handleForgot}>
+            <div className="text-cardDate space-y-6">
+              <p className="text-lg font-semibold">Нууц үг Сэргээх</p>
+              <div className="space-y-2">
                 <InputPhoneNumber name="loginNumber" />
-                <div className="flex justify-end">
-                  <button
-                    onClick={handleForgetPaasword}
-                    className="w-32 bg-bg py-4 font-medium text-cardDate text-xs rounded hover:bg-gray-200"
-                  >
-                    Нууц үг мартсан
-                  </button>
-                </div>
-                <button className={style.button} type="submit">
-                  {loading === 'true' ? (
-                    <div className={style.ldsDualRing}></div>
-                  ) : (
-                    'НЭВТРЭХ'
-                  )}
-                </button>
-              </Form>
-            </TabPane>
-            <TabPane tab="БҮРТГҮҮЛЭХ" key="2">
-              <Form
-                name="register"
-                onFinish={handleLogin}
-                className="space-y-8"
-              >
-                <InputPhoneNumber name="registerNumber" />
-                <button className={style.button} type="submit">
-                  {loading === 'true' ? (
-                    <div className={style.ldsDualRing}></div>
-                  ) : (
-                    'БҮРТГҮҮЛЭХ'
-                  )}
-                </button>
-              </Form>
-            </TabPane>
-          </Tabs>
+                {error && <span className="text-red-500">{error}</span>}
+              </div>
+            </div>
+            <button className={style.loginButton} type="submit">
+              {loading === 'true' ? (
+                <div className={style.ldsDualRing}></div>
+              ) : (
+                'ИЛГЭЭХ'
+              )}
+            </button>
+          </Form>
         </ContentWrapper>
       </>
     );
@@ -277,7 +191,7 @@ const Login = () => {
           </button>
           <div className="flex justify-end mt-2">
             <span className="mr-2">Эхнээс нь эхлэх бол? </span>
-            <Link href={'/auth/login'}>
+            <Link href={'/auth/password-recovery'}>
               <a onClick={reset} className="font-medium underline">
                 ЭНД ДАРНА УУ
               </a>
@@ -357,68 +271,21 @@ const Login = () => {
     );
   }
 
-  function getPasswordForm() {
-    return (
-      <>
-        <Form name="password" onFinish={handlePassword}>
-          <div className="text-cardDate space-y-6">
-            <p className="text-lg font-semibold">Нууц үг оруулах</p>
-            <div className="space-y-2">
-              <Input
-                placeholder="Нууц үг оруулах"
-                type="password"
-                name="currentPassword"
-                defaultValue={currentPassword}
-                onChange={handleCurrentPassword}
-                className="rounded-lg h-12"
-              />
-              {passwordError && (
-                <span className="text-red-500">{passwordError}</span>
-              )}
-              {!passwordError && (
-                <p>
-                  Таны дугаар бүртгэлтэй байна, та нууц үгээ хийж нэвтэрнэ үү.
-                </p>
-              )}
-            </div>
-          </div>
-          <button className={style.loginButton} type="submit">
-            {loading === 'true' ? (
-              <div className={style.ldsDualRing}></div>
-            ) : (
-              'НЭВТРЭХ'
-            )}
-          </button>
-          <div className="flex justify-end mt-2">
-            <span className="mr-2">Эхнээс нь эхлэх бол? </span>
-            <Link href={'/auth/login'}>
-              <a onClick={reset} className="font-medium underline">
-                ЭНД ДАРНА УУ
-              </a>
-            </Link>
-          </div>
-        </Form>
-      </>
-    );
-  }
-
   function renderRegister(code: number) {
     switch (code) {
       case 0:
-        return getLoginForm();
-      case 1:
+        return getForgotForm();
+      case 2:
         return getConfirmationCodeForm();
       case 4:
         return getRePasswordForm();
-      case 3:
-        return getPasswordForm();
     }
   }
 
   return (
     <div>
       <Head>
-        <title>Нэвтрэх</title>
+        <title>Нууц үг сэргээх</title>
       </Head>
       <div className="fixed z-20 w-screen top-0">
         <NavbarProfile navbarData={NavData} />
@@ -433,14 +300,6 @@ const Login = () => {
         </div> */}
         <div className="relative z-10 py-36 px-4 max-w-7xl mx-auto ">
           <div className="flex flex-col-reverse lg:flex-row lg:space-x-16 xl:space-x-20">
-            <div className="w-full lg:w-3/5 lg:pr-5 mt-10 lg:mt-0">
-              <img
-                className="rounded-lg object-cover"
-                src="/assets/loginImage.jpg"
-                alt="Picture of the author"
-              />
-            </div>
-
             <div className="w-full sm:w-96 lg:w-2/5 z-2 sm:mx-auto rounded-lg bg-white p-7 sm:p-10">
               {renderRegister(code)}
               <div className="text-left text-sm font-light pt-4">
@@ -463,7 +322,7 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+export default PasswordRecovery;
 
 export async function getServerSideProps({ locale }) {
   return {
