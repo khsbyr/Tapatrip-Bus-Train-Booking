@@ -21,17 +21,15 @@ import style from './login.module.scss';
 
 const Login = () => {
   const { t } = useTranslation(['steps']);
-  const { user, setUser } = useGlobalStore();
+  const { setUser } = useGlobalStore();
   const router = useRouter();
   const { TabPane } = Tabs;
   const [code, setCode] = useState(0);
-  const [current, setCurrent] = useState(0);
   const { Countdown } = Statistic;
   const deadline = Date.now() + 60 * 60 * 83.3;
   const [pinCode, setPinCode] = useState('');
   const [loading, setLoading] = useState('');
   const [userPhoneNumber, setUserPhoneNumber] = useState(null);
-  const [loginError, setLoginError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const [rePasswordError, setRePasswordError] = useState(null);
   const [confirmError, setConfirmError] = useState(null);

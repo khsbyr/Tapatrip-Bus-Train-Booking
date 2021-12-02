@@ -33,6 +33,16 @@ const AuthService = {
     return datas;
   },
 
+  async getCurrentUser() {
+    const response = await Client.get('/account/profile/');
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    return datas;
+  },
+
   async createUserCheck(payload) {
     const data = {
       phone: payload.phone,
@@ -90,7 +100,6 @@ const AuthService = {
 
   logout() {
     AuthTokenStorageService.clear();
-    resolve();
   },
 
   isAuthenticated() {

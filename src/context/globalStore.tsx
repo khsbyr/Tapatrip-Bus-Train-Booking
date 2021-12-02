@@ -167,7 +167,7 @@ function uiReducer(state: State, action: Action) {
     case 'SET_USER': {
       return {
         ...state,
-        customers: action.value,
+        user: action.value,
       };
     }
   }

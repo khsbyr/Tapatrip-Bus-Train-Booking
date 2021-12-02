@@ -74,15 +74,6 @@ export default function PhoneNumber({ name }) {
         ]}
       >
         <div className="flex rounded-lg bg-bg">
-          <div className="flex items-center z-10 cursor-pointer relative pl-4 w-44 border-r-2">
-            <img
-              className="rounded flex-shrink-0"
-              src="/assets/flagMongolia.png"
-              width="32"
-              height="16"
-            />
-            <h1 className="pl-2 text-cardDate w-10">{'+' + 976}</h1>
-          </div>
           <Listbox value={selectedCountry} onChange={handleChange}>
             <div className="flex items-center z-10 cursor-pointer relative pl-4 w-44 border-r-2">
               <Listbox.Button

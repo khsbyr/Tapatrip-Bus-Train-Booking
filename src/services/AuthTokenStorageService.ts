@@ -19,7 +19,6 @@ const AuthTokenStorageService = {
 
   clear() {
     cookie.remove('user-token');
-    cookie.remove('guest-token');
   },
 };
 

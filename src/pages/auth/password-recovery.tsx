@@ -20,7 +20,7 @@ import style from './login.module.scss';
 
 const PasswordRecovery = () => {
   const { t } = useTranslation(['steps']);
-  const { user, setUser } = useGlobalStore();
+  const { user } = useGlobalStore();
   const router = useRouter();
   const [code, setCode] = useState(0);
   const { Countdown } = Statistic;
@@ -31,6 +31,15 @@ const PasswordRecovery = () => {
   const [error, setError] = useState(null);
   const [rePasswordError, setRePasswordError] = useState(null);
   const [confirmError, setConfirmError] = useState(null);
+  const isAuth = user ? true : false;
+
+  if (isAuth === true) {
+    if (router.query && router.query.from) {
+      router.push('/bus' + router.query.from);
+    } else {
+      router.push('/bus');
+    }
+  }
 
   function reset() {
     setCode(0);

@@ -39,6 +39,10 @@ export default function PassengerIfo({ datas, scheduleId }) {
     setCurrent(0);
   };
 
+  const handleRegister = () => {
+    router.push('/auth/login');
+  };
+
   const handleCompany = data => {
     let company = data == 0 ? false : true;
     setIsCompany(company);
@@ -158,7 +162,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
         setIsModalVisible(false);
         setLoading1('false');
       } catch (e) {
-        console.log(e);
         Modal.error({
           title: t('errorTitle'),
           content: e.message,
@@ -182,7 +185,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
             <div className={style.root}>
               <div className={style.regist}>
                 <p className="text-cardDate">{t('registrationContent')}</p>
-                <button className={style.registButton}>
+                <button onClick={handleRegister} className={style.registButton}>
                   {t('registrationButton')}
                 </button>
               </div>

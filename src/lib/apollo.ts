@@ -9,7 +9,6 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  console.log(AuthTokenStorageService.getAccessToken());
   const token =
     AuthTokenStorageService.getAccessToken() === undefined
       ? AuthTokenStorageService.getGuestToken()
