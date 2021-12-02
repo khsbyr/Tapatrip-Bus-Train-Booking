@@ -8,6 +8,7 @@ import SelectLanguage from '@components/common/language';
 import Link from 'next/link';
 import Profile from './profile';
 import { useTranslation } from 'next-i18next';
+import { useGlobalStore } from '@context/globalStore';
 
 interface Props {
   navbarData?: any;
@@ -17,6 +18,8 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [navbar, setNavbar] = useState(false);
   const [openTab, setOpenTab] = React.useState(4);
+  const { user } = useGlobalStore();
+  const isAuth = user ? true : false;
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
@@ -90,10 +93,15 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   </div>
                 </a>
                 <div className={styles.loginBody}>
-                  {/* <a href="/auth/login">
-                    <button className={styles.loginButton}>{t('login')}</button>
-                  </a> */}
-                  <Profile />
+                  {isAuth ? (
+                    <Profile data={user} />
+                  ) : (
+                    <a href="/auth/login">
+                      <button className={styles.loginButton}>
+                        {t('login')}
+                      </button>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

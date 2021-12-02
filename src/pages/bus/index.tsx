@@ -15,12 +15,32 @@ import { arrayFormat } from '@helpers/array-format';
 import Loader from '@components/common/loader';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import isEmpty from '@utils/isEmpty';
+import { useGlobalStore } from '@context/globalStore';
 
 export default function Bus({ guestToken }) {
+  const { t } = useTranslation(['common', 'footer']);
+  const { setUser } = useGlobalStore();
   useEffect(() => {
     AuthTokenStorageService.guestStore(guestToken);
+    async function loadUserFromCookies() {
+      const token = AuthTokenStorageService.getAccessToken();
+      if (token) {
+        try {
+          const res = await AuthService.getCurrentUser();
+          if (res && res?.status === 200) {
+            if (!isEmpty(res?.result?.user)) {
+              setUser(res?.result?.user);
+            }
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+    loadUserFromCookies();
   }, []);
-  const { t } = useTranslation(['common', 'footer']);
+
   const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
   if (error) return `Error! ${error.message}`;
   const startLocations = arrayFormat(data);

@@ -103,7 +103,7 @@ export function arrayFilterSchedule(data: any, value: String) {
 }
 export function unixDate(data: any) {
   const result =
-    new Date(data.leaveDate + 'T' + data.leaveTime).getTime() / 1000 +
+    new Date(data?.leaveDate + 'T' + data?.leaveTime).getTime() / 1000 +
     data?.locationEnd?.estimatedDuration * 60;
   return result;
 }

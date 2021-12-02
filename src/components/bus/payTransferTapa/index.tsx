@@ -100,16 +100,18 @@ export default function payTransferTapa() {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   const [isClick, setIsClick] = useState(0);
+
   const onclick = () => {
     setIsClick(0);
   };
+
   const onclick1 = () => {
     setIsClick(1);
   };
+
   const onclick2 = () => {
     setIsClick(2);
   };
-  console.log(isClick);
 
   return (
     <div className="space-y-6">
