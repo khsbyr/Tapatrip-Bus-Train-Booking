@@ -1,16 +1,17 @@
 import { MenuIcon, XIcon, PhoneIcon } from '@heroicons/react/solid';
+import { LogoutIcon, CheckIcon } from '@heroicons/react/outline';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import OrderCheck from '@components/bus/orderCheck';
 import styles from './navbar.module.scss';
 import SelectLanguage from '@components/common/language';
 import Link from 'next/link';
+import Profile from './profile';
 import { useTranslation } from 'next-i18next';
 
 interface Props {
   navbarData?: any;
 }
-
 const Navbar: FC<Props> = ({ navbarData }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
@@ -82,25 +83,26 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   <div
                     className={`${
                       navbar ? 'text-cardDate' : 'text-white'
-                    } flex text-lg font-bold cursor-pointer mr-5 hover:bg-onlineSupport hover:text-white hover:rounded py-1 px-2`}
+                    } flex text-base font-bold cursor-pointer mr-5 hover:bg-onlineSupport hover:text-white hover:rounded px-3 py-2`}
                   >
-                    <PhoneIcon className="w-5" />
+                    <PhoneIcon className="w-4" />
                     <p className="pl-2">7515-4444</p>
                   </div>
                 </a>
                 <div className={styles.loginBody}>
-                  <a href="/auth/login">
+                  {/* <a href="/auth/login">
                     <button className={styles.loginButton}>{t('login')}</button>
-                  </a>
+                  </a> */}
+                  <Profile />
                 </div>
               </div>
             </div>
 
-            <div className="-mr-2 flex lg:hidden">
+            <div className="-mr-2 flex space-x-5 lg:hidden">
               <div className="flex items-center justify-center">
                 <span className="animate-ping absolute inline-flex h-8 w-8 bg-onlineSupport rounded-lg"></span>
-                <button className="z-40 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-2 rounded-lg">
-                  <PhoneIcon className="w-5" />
+                <button className="z-10 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-2 rounded-lg">
+                  <PhoneIcon className="w-6" />
                 </button>
               </div>
               <button
@@ -113,13 +115,13 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 {!isOpen ? (
                   <MenuIcon
                     className={`${
-                      navbar ? 'h-6 w-6 text-cardDate' : 'h-6 w-6 text-white'
+                      navbar ? 'h-6 w-6 text-cardDate' : 'h-6 w-6 text-cardDate'
                     } `}
                   />
                 ) : (
                   <XIcon
                     className={`${
-                      navbar ? 'h-6 w-6 text-cardDate' : 'h-6 w-6 text-white'
+                      navbar ? 'h-6 w-6 text-cardDate' : 'h-6 w-6 text-cardDate'
                     } `}
                   />
                 )}
@@ -130,7 +132,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
         <div className="hidden max-w-7xl mx-auto justify-end pr-4 lg:flex">
           <div className="flex justify-center items-center mt-7">
             <span className="animate-ping absolute inline-flex h-8 w-28 bg-onlineSupport rounded-lg"></span>
-            <button className="z-40 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-3 rounded-lg">
+            <button className="z-10 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-3 rounded-lg">
               <PhoneIcon className="w-4" />
               <p className="pl-1 w-36">{t('onlineHelp')}</p>
             </button>
@@ -160,6 +162,12 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   <SelectLanguage />
                 </div>
                 <OrderCheck />
+                <a href="tel:97675154444">
+                  <div className="flex justify-center items-center text-base sm:text-lg mt-4 font-bold px-4 py-2 cursor-pointer text-cardDate hover:bg-onlineSupport hover:text-white hover:rounded">
+                    <PhoneIcon className="w-4 sm:w-5" />
+                    <p className="pl-2">(976)-7514-4444</p>
+                  </div>
+                </a>
                 <div>
                   <Link href="/auth/login">
                     <a>
@@ -169,12 +177,34 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     </a>
                   </Link>
                 </div>
-                <a href="tel:97675154444">
-                  <div className="flex justify-center items-center text-base sm:text-lg mt-4 font-bold px-4 py-2 cursor-pointer text-cardDate hover:bg-onlineSupport hover:text-white hover:rounded">
-                    <PhoneIcon className="w-4 sm:w-5" />
-                    <p className="pl-2">(976)-7514-4444</p>
-                  </div>
-                </a>
+                <hr />
+                <div className="text-cardDate">
+                  <a className="flex items-center text-base border-4 border-white  hover:border-blue-200 p-4 rounded hover:text-cardDate">
+                    <img
+                      src="/assets/profile1.png"
+                      alt=""
+                      width="30"
+                      className="rounded-full"
+                    />
+                    <p className="space-y-1 pl-4 text-sm">
+                      99331137 <p>Хэрэглэгчийн хэсэг</p>
+                    </p>
+                  </a>
+                  <a
+                    className="flex items-center border-2 border-4 border-white  hover:border-blue-200 rounded p-4 hover:text-cardDate"
+                    href=""
+                  >
+                    <CheckIcon className="pr-2 h-5" />
+                    Миний захиалгууд
+                  </a>
+                  <a
+                    className="flex items-center rounded border-4 border-white  hover:border-blue-200 p-4 text-red-600 hover:text-red-600"
+                    href=""
+                  >
+                    <LogoutIcon className="pr-2 h-5" />
+                    Системээс гарах
+                  </a>
+                </div>
               </div>
             </div>
           )}
