@@ -1,5 +1,5 @@
 .card {
-  @apply relative bg-white w-full h-auto rounded-2xl;
+  @apply relative bg-white w-full h-auto rounded-2xl py-5 sm:py-10;
   .leaveTitle {
     @apply pt-4 font-bold text-cardDescColor text-xs md:text-sm lg:text-base;
   }
@@ -13,7 +13,7 @@
     @apply text-cardDate font-bold text-sm md:text-lg lg:text-2xl;
   }
   .rowDirection {
-    @apply py-5 grid grid-cols-2 lg:grid-cols-3 items-center text-center;
+    @apply px-5 md:px-12 pt-5 grid grid-cols-2 lg:grid-cols-3 items-center text-center;
   }
   .orderButton {
     @apply bg-button text-white md:font-bold md:py-1 px-4 rounded-lg h-8 md:h-10 text-center w-full lg:w-40 hover:bg-hover focus:bg-down;

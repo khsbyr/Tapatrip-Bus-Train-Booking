@@ -21,7 +21,7 @@ export default function Orders() {
       <div className=" bg-bg">
         <TrainNavbar navbarData={NavData} />
         <div className="max-w-7xl mx-auto my-5 grid grid-cols-1 lg:grid-cols-3">
-          <div className="md:col-span-2 space-y-5 lg:pr-20">
+          <div className="md:col-span-2 space-y-5 lg:pr-5">
             <div className="px-2">
               <div className="bg-alert border border-alert h-auto flex items-center rounded-2xl space-x-5 px-2">
                 <ShieldExclamationIcon className="w-7 h-7 ml-2 lg:ml-12 text-alert flex-shrink-0" />
@@ -42,7 +42,7 @@ export default function Orders() {
           <div className="bg-white p-8 text-cardDate rounded-2xl space-y-4 text-lg">
             <div className="space-y-3">
               <p className="font-medium">Төрөл</p>
-              <div className="space-y-1 px-2">
+              <div className="space-y-1 px-2 text-base">
                 <div className="flex justify-between">
                   <p className="text-secondary">Нийтийн</p>
                   <Checkbox></Checkbox>
