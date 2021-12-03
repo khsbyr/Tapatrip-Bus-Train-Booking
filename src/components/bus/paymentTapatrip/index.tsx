@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGlobalStore } from '@context/globalStore';
 import { useRouter } from 'next/router';
 import { Statistic, Radio, Space, Modal } from 'antd';
-import PayTransfer from '@components/bus/payTransfer';
+// import PayTransfer from '@components/bus/payTransfer';
 import PayTransferTapa from '@components/bus/payTransferTapa';
 import style from './payment.module.scss';
 import ContentWrapper from './style';
@@ -11,15 +11,33 @@ import PaymentCard from '../paymentCard';
 import EndModal from '@components/common/endModal';
 import { useTranslation } from 'next-i18next';
 import { CheckIcon } from '@heroicons/react/solid';
+// import PaymentService from '@services/payment';
+// import isEmpty from '@utils/isEmpty';
 
 export default function PaymentTapatrip({ datas, scheduleId }) {
   const { t } = useTranslation(['steps']);
   const router = useRouter();
-  const [value, setValue] = useState(1);
-  const { setCurrent } = useGlobalStore();
+  const { setCurrent, booking, payment } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { Countdown } = Statistic;
   const deadline = Date.now() + 60 * 60 * 333.3;
+
+  // useEffect(() => {
+  //   async function loadPaymentFromCookies() {
+  //     try {
+  //       const res = await PaymentService.paymentMethods();
+  //       console.log(res);
+  //       if (res && res?.status === 200) {
+  //         if (!isEmpty(res?.result)) {
+  //           setPayment(res?.result);
+  //         }
+  //       }
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+  //   loadPaymentFromCookies();
+  // }, []);
 
   window.onpopstate = () => {
     Modal.warning({
@@ -37,28 +55,7 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
   const closeModal = () => {
     setIsModalVisible(false);
   };
-  const banks = [
-    {
-      name: t('golomtBank'),
-      src: '/assets/golomt.png',
-      value: 0,
-      accNum: '5858585858',
-    },
-    {
-      name: t('khasBank'),
-      src: '/assets/khas.png',
-      value: 1,
-      accNum: '1258585858',
-    },
-    {
-      name: t('turiinBank'),
-      src: '/assets/turiin.png',
-      value: 2,
-      accNum: '2258585858',
-    },
-    { name: 'HiPay', src: '/assets/hipay.png', value: 3 },
-    { name: 'QPay', src: '/assets/qpay.png', value: 4 },
-  ];
+
   return (
     <ContentWrapper>
       <div className={style.body}>
@@ -95,17 +92,18 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
                 defaultValue={0}
                 className="grid gap-3 sm:grid-cols-2 sm:gap-4"
               >
-                {banks.map(bank => (
-                  <Radio
-                    value={bank.value}
-                    className="w-full flex-row-reverse justify-between items-start border rounded p-2 hover:bg-gray-50"
-                  >
-                    <div className="flex items-center font-medium space-x-3 w-56 md:w-72 lg:w-52 xl:w-72">
-                      <img src={bank.src} alt="" width="45" />
-                      <h1>{bank.name}</h1>
-                    </div>
-                  </Radio>
-                ))}
+                {payment?.ecommerce &&
+                  payment?.ecommerce.map(bank => (
+                    <Radio
+                      value={bank.name}
+                      className="w-full flex-row-reverse justify-between items-start border rounded p-2 hover:bg-gray-50"
+                    >
+                      <div className="flex items-center font-medium space-x-3 w-56 md:w-72 lg:w-52 xl:w-72">
+                        <img src={bank.logo} alt="" width="45" />
+                        <h1>{bank.description}</h1>
+                      </div>
+                    </Radio>
+                  ))}
               </Radio.Group>
               <div className="flex justify-center">
                 <button className="bg-homeLogin flex justify-center text-white space-x-3 py-2 rounded w-full sm:w-1/3 hover:bg-blue-900">
@@ -114,7 +112,7 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
                 </button>
               </div>
             </div>
-            <PayTransferTapa />
+            <PayTransferTapa corporate={payment?.corporate} />
           </div>
           <button className={style.buttonBlock} onClick={handleCheck}>
             {t('endButton')}

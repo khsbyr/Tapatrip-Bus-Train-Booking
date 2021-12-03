@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PassengerInfo from '@components/bus/passengerInfo';
 // import Payments from '@components/bus/payment';
 import Payments from '@components/bus/paymentTapatrip';
@@ -15,14 +15,35 @@ import { useGlobalStore } from '@context/globalStore';
 import Loader from '@components/common/loader';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
+import AuthService from '@services/auth';
+import isEmpty from '@utils/isEmpty';
 
 const { Step } = Steps;
 
 export default function Payment() {
   const { t } = useTranslation(['steps']);
   const router = useRouter();
-  const { current, setCurrent } = useGlobalStore();
+  const { current, setCurrent, setUser } = useGlobalStore();
   const { id } = router.query;
+  useEffect(() => {
+    async function loadUserFromCookies() {
+      const token = AuthTokenStorageService.getAccessToken();
+      if (token) {
+        try {
+          const res = await AuthService.getCurrentUser();
+          if (res && res?.status === 200) {
+            if (!isEmpty(res?.result?.user)) {
+              setUser(res?.result?.user);
+            }
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+    loadUserFromCookies();
+  }, []);
 
   const { data: scheduleDataDetail, loading } = useQuery(
     BUS_SCHEDULES_DETAIL_QUERY,

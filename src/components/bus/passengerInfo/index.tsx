@@ -15,6 +15,8 @@ import ConfirmModal from '@components/common/confirmModal';
 import AuthService from '@services/auth';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import PaymentService from '@services/payment';
+import isEmpty from '@utils/isEmpty';
 
 const { Option } = Select;
 
@@ -24,7 +26,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const [isCompoany, setIsCompany] = useState(false);
   const { user, customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
-  const { setBooking } = useGlobalStore();
+  const { setBooking, setPayment } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState('');
@@ -33,7 +35,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
 
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 
-  const [addBusBooking, { data }] = useMutation(BUS_BOOKING_CREATE);
+  const [addBusBooking] = useMutation(BUS_BOOKING_CREATE);
 
   window.onpopstate = () => {
     router.push(`/bus/orders/${scheduleId}`);
@@ -158,7 +160,21 @@ export default function PassengerIfo({ datas, scheduleId }) {
             pax: passengers,
           },
         });
-        if (data) setBooking(data.busBooking);
+        if (data) {
+          try {
+            setBooking(data.busBooking);
+            const res = await PaymentService.paymentMethods();
+            console.log(res);
+            if (res && res?.status === 200) {
+              if (!isEmpty(res?.result)) {
+                setPayment(res?.result);
+              }
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        }
+
         setCurrent(current + 1);
         setIsModalVisible(false);
         setLoading1('false');

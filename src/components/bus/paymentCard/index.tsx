@@ -23,10 +23,7 @@ export default function PaymentCard({ datas, scheduleId }) {
     <div className="max-w-7xl mx-auto bg-white rounded-2xl p-4 text-cardDate text-base sm:text-lg">
       {persons.length > 0 && (
         <div className="flex justify-between">
-          <p>
-            {persons.length}
-            {t('adult')}
-          </p>
+          <p>{persons.length + ' ' + t('adult')}</p>
           <p>{datas.adultTicket * persons.length}₮</p>
         </div>
       )}
