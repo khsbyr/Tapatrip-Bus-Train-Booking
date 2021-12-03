@@ -81,7 +81,7 @@ export default function BusNavbar({ navbarData, startLocations }) {
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
-                className=" inline-flex items-center justify-center p-2 rounded-md text-gray-400 "
+                className=" inline-flex items-center justify-center p-2 rounded-md text-gray-400 mr-2"
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >

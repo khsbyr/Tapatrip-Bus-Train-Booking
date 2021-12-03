@@ -1,0 +1,44 @@
+.body {
+  @apply max-w-7xl mx-auto flex py-0 md:py-5 flex-wrap flex-col-reverse lg:flex-row;
+}
+.content {
+  @apply mt-3 lg:mt-0 w-full px-2 lg:w-3/5;
+}
+.root {
+  @apply bg-white h-auto rounded-lg shadow-lg py-3 space-y-4;
+}
+.selecetSeatTitle {
+  @apply px-3 sm:pl-6 text-cardDate font-bold text-base sm:text-lg pb-2 border-b-2;
+}
+.information {
+  @apply px-3 sm:pl-6 flex flex-wrap justify-between;
+}
+.busInformationTitle {
+  @apply text-cardDate font-bold text-base sm:text-lg;
+}
+.busInformation {
+  @apply text-cardDate space-y-1 sm:space-y-2 text-sm sm:text-base;
+
+  p {
+    @apply flex flex-wrap sm:flex-nowrap;
+
+    h1 {
+      @apply text-cardDate font-medium pr-2 text-sm sm:text-base;
+    }
+  }
+}
+.seatButton {
+  @apply z-10 rounded-lg bg-white text-sm text-cardDate w-9 h-12 font-medium border-seat border-2 mb-1 mr-0.5 hover:bg-register hover:text-white focus:bg-register focus:text-white;
+}
+.selectedSeats {
+  @apply rounded-lg bg-register text-white w-9 h-12 text-xl mr-3 mb-2 hover:bg-button;
+}
+.card {
+  @apply w-full lg:w-2/5;
+}
+.button {
+  @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white hidden lg:block;
+}
+.buttonBlock {
+  @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 my-3 md:-mb-2 text-white block lg:hidden;
+}

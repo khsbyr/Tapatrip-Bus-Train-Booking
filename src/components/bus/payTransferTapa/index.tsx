@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import { useGlobalStore } from '@context/globalStore';
-import { Radio } from 'antd';
 import banks from '@data/bankInformation.json';
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  DuplicateIcon,
-} from '@heroicons/react/outline';
+import { DuplicateIcon } from '@heroicons/react/outline';
 import { CheckIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'next-i18next';
 

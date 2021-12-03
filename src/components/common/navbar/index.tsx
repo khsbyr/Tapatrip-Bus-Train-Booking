@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Profile from './profile';
 import { useTranslation } from 'next-i18next';
 import { useGlobalStore } from '@context/globalStore';
+import { delay } from 'lodash';
 
 interface Props {
   navbarData?: any;
@@ -139,7 +140,8 @@ const Navbar: FC<Props> = ({ navbarData }) => {
         </div>
         <div className="hidden max-w-7xl mx-auto justify-end pr-4 lg:flex">
           <div className="flex justify-center items-center mt-7">
-            <span className="animate-ping absolute inline-flex h-8 w-28 bg-onlineSupport rounded-lg"></span>
+            <span className="animate-ping absolute inline-flex h-7 w-28 bg-green-200 rounded-lg"></span>
+            <span className="animate-ping absolute inline-flex h-7 w-28 bg-onlineSupport rounded-lg z-8"></span>
             <button className="z-10 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-3 rounded-lg">
               <PhoneIcon className="w-4" />
               <p className="pl-1 w-36">{t('onlineHelp')}</p>

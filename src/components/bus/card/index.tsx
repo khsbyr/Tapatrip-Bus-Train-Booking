@@ -18,7 +18,7 @@ const { Step } = Steps;
 export default function Card({ datas }) {
   const { t } = useTranslation(['order']);
   const unixDates = unixDate(datas.node);
-
+  console.log(datas?.node);
   const [isActive, setIsActive] = useState(false);
   const format = n =>
     `0${(n / 60) ^ 0}`.slice(-2) +
@@ -46,7 +46,13 @@ export default function Card({ datas }) {
                     </h1>
                   </div>
                   <div>
-                    <p className="flex justify-center">
+                    <p
+                      className={
+                        datas?.node?.locationEnd?.estimatedDuration === 0
+                          ? 'hidden'
+                          : 'block flex justify-center'
+                      }
+                    >
                       <ArrowRightIcon className="h-5 text-direction" />
                     </p>
                     <h1
@@ -67,7 +73,14 @@ export default function Card({ datas }) {
                       </div>
                     </h1>
                   </div>
-                  <div className="">
+
+                  <div
+                    className={
+                      datas?.node?.locationEnd?.estimatedDuration === 0
+                        ? 'hidden'
+                        : 'block'
+                    }
+                  >
                     <h1 className={style.startTitle}>
                       {moment.unix(unixDates).format('YYYY-MM-DD')}
                     </h1>
