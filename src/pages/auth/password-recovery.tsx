@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
 import style from './login.module.scss';
 
 const PasswordRecovery = () => {
-  const { t } = useTranslation(['steps']);
+  const { t } = useTranslation(['common']);
   const { user } = useGlobalStore();
   const router = useRouter();
   const [code, setCode] = useState(0);
@@ -57,7 +57,7 @@ const PasswordRecovery = () => {
       if (res) {
         setCode(2);
       } else {
-        setError('Баталгаажуулах код явуулахад алдаа гарлаа!!!');
+        setError(t('confirmationCodeError'));
       }
       setLoading('false');
     } catch (e) {
@@ -67,11 +67,8 @@ const PasswordRecovery = () => {
   };
 
   const handleVerifyCode = async () => {
-    if (!pinCode) setConfirmError('Та баталгаажуулах кодоо оруулна уу?');
-    else if (pinCode.length < 4)
-      setConfirmError(
-        'Таны оруулсан баталгаажуулах код 4 оронтой байх ёстой!!!'
-      );
+    if (!pinCode) setConfirmError(t('enterConfirmationCode'));
+    else if (pinCode.length < 4) setConfirmError(t('confirmCodeError'));
     setLoading('true');
     let data = {};
     data = {
@@ -140,7 +137,9 @@ const PasswordRecovery = () => {
         <ContentWrapper>
           <Form name="forgot" onFinish={handleForgot}>
             <div className="text-cardDate space-y-6">
-              <p className="text-lg font-semibold">Нууц үг Сэргээх</p>
+              <p className="text-lg font-semibold">
+                {t('passwordRecoveryTitle')}
+              </p>
               <div className="space-y-2">
                 <InputPhoneNumber name="loginNumber" />
                 {error && <span className="text-red-500">{error}</span>}
@@ -150,7 +149,7 @@ const PasswordRecovery = () => {
               {loading === 'true' ? (
                 <div className={style.ldsDualRing}></div>
               ) : (
-                'ИЛГЭЭХ'
+                t('sendButton')
               )}
             </button>
           </Form>
@@ -168,11 +167,8 @@ const PasswordRecovery = () => {
           className="space-y-8 py-6"
         >
           <div className="text-cardDate space-y-6">
-            <p className="text-lg font-medium">БАТАЛГААЖУУЛАХ</p>
-            <p>
-              Таны утасруу баталгаажуулах 4 оронтой тоо явууллаа. Тухайн кодыг
-              оруулж утасны дугаараа баталгаажуулна уу. Баярлалаа
-            </p>
+            <p className="text-lg font-medium">{t('confirmationButton')}</p>
+            <p>{t('confirmationBody')}</p>
             <div className="bg-bg py-4 space-y-2 rounded-lg">
               <div className="text-center">
                 {<Countdown format="mm:ss" value={deadline} />}
@@ -195,14 +191,14 @@ const PasswordRecovery = () => {
             {loading === 'true' ? (
               <div className={style.ldsDualRing}></div>
             ) : (
-              'БАТАЛГААЖУУЛАХ'
+              t('confirmationButton')
             )}
           </button>
           <div className="flex justify-end mt-2">
-            <span className="mr-2">Эхнээс нь эхлэх бол? </span>
+            <span className="mr-2">{t('startQuiz')}</span>
             <Link href={'/auth/password-recovery'}>
               <a onClick={reset} className="font-medium underline">
-                ЭНД ДАРНА УУ
+                {t('thisClick')}
               </a>
             </Link>
           </div>
@@ -220,19 +216,19 @@ const PasswordRecovery = () => {
           className="space-y-8"
         >
           <div className="text-cardDate space-y-6">
-            <p className="text-lg font-semibold">Нууц үг үүсгэх</p>
+            <p className="text-lg font-semibold">{t('createPassword')}</p>
             <div className="space-y-6">
               <Form.Item
                 name="password"
                 rules={[
                   {
                     required: true,
-                    message: 'Та нууц үгээ оруулна уу?',
+                    message: t('passwordWarning'),
                   },
                 ]}
               >
                 <Input.Password
-                  placeholder="Нууц үг"
+                  placeholder={t('password')}
                   type="password"
                   className="rounded-lg h-12"
                 />
@@ -243,22 +239,20 @@ const PasswordRecovery = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Та нууц үгээ давтаж оруулна уу?',
+                    message: t('rePasswordMessage'),
                   },
                   ({ getFieldValue }) => ({
                     validator(_, value) {
                       if (!value || getFieldValue('password') === value) {
                         return Promise.resolve();
                       }
-                      return Promise.reject(
-                        new Error('Нууц үг хоёулаа ижил байх ёстой!')
-                      );
+                      return Promise.reject(new Error(t('passwordError')));
                     },
                   }),
                 ]}
               >
                 <Input.Password
-                  placeholder="Нууц үг давтах"
+                  placeholder={t('passwordInputPlaceholder')}
                   type="password"
                   className="rounded-lg h-12"
                 />
@@ -272,7 +266,7 @@ const PasswordRecovery = () => {
             {loading === 'true' ? (
               <div className={style.ldsDualRing}></div>
             ) : (
-              'ХАДГАЛАХ'
+              t('saveButton')
             )}
           </button>
         </Form>
@@ -294,7 +288,7 @@ const PasswordRecovery = () => {
   return (
     <div>
       <Head>
-        <title>Нууц үг сэргээх</title>
+        <title>{t('passwordRecoveryTitle')}</title>
       </Head>
       <div className="fixed z-20 w-screen top-0">
         <NavbarProfile navbarData={NavData} />
@@ -308,16 +302,27 @@ const PasswordRecovery = () => {
           />{' '}
         </div> */}
         <div className="relative z-10 py-36 px-4 max-w-7xl mx-auto ">
-          <div className="flex flex-col-reverse lg:flex-row lg:space-x-16 xl:space-x-20">
-            <div className="w-full sm:w-96 lg:w-2/5 z-2 sm:mx-auto rounded-lg bg-white p-7 sm:p-10">
+          <div className="flex flex-col-reverse lg:flex-row lg:space-x-16 xl:space-x-20 max-w-xl">
+            <div className="w-full  z-2 sm:mx-auto rounded-lg bg-white p-7 sm:p-10">
               {renderRegister(code)}
               <div className="text-left text-sm font-light pt-4">
-                Бүртгүүлэх товчийг дарж, Facebook эрхээрээ нэвтрэх болон бүртгэл
-                үүсгэснээр Та tapatrip.com-н{' '}
-                <a className="font-medium underline">Үйлчилгээний нөхцөл</a>{' '}
-                болон{' '}
-                <a className="font-medium underline">Нууцлалын баталгааг</a>{' '}
-                хүлээн зөвшөөрч буй болно.
+                {t('registerInstructionsBody1')}{' '}
+                <a
+                  href="/term-condition"
+                  className="font-medium underline"
+                  target="_blank"
+                >
+                  {t(`termsConditions`)}
+                </a>{' '}
+                {t('registerInstructionsBody2')}{' '}
+                <a
+                  href="/privacy-policy"
+                  className="font-medium underline"
+                  target="_blank"
+                >
+                  {t(`privacyPolicy`)}
+                </a>{' '}
+                {t('registerInstructionsBody3')}
               </div>
             </div>
           </div>

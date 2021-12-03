@@ -24,8 +24,7 @@ export default function PaymentCard({ datas, scheduleId }) {
       {persons.length > 0 && (
         <div className="flex justify-between">
           <p>
-            {persons.length}
-            {t('adult')}
+            {persons.length} {t('adult')}
           </p>
           <p>{datas.adultTicket * persons.length}₮</p>
         </div>
