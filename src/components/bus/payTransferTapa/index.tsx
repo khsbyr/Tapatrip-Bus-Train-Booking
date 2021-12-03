@@ -91,7 +91,7 @@ export default function payTransferTapa() {
       setCopyAccName(<CheckIcon className="text-secondary h-6 w-6" />);
       await delay(500);
       setCopyAccName(
-        <DuplicateIcon className="text-secondary h-6 w-6  hover:text-indigo-300 hover:text-indigo-300" />
+        <DuplicateIcon className="text-secondary h-6 w-6 hover:text-indigo-300" />
       );
     })();
   };

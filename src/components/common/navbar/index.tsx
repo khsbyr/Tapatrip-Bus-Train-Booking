@@ -199,7 +199,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     </p>
                   </a>
                   <a
-                    className="flex items-center border-2 border-4 border-white  hover:border-blue-200 rounded p-2 hover:text-cardDate"
+                    className="flex items-center border-2 border-white  hover:border-blue-200 rounded p-2 hover:text-cardDate"
                     href=""
                   >
                     <CheckIcon className="pr-2 h-5" />

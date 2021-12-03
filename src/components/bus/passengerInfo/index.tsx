@@ -22,13 +22,14 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const { t } = useTranslation(['steps']);
   const router = useRouter();
   const [isCompoany, setIsCompany] = useState(false);
-  const { customers, setCustomers } = useGlobalStore();
+  const { user, customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const { setBooking } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState('');
   const [loading1, setLoading1] = useState('');
+  const isAuth = user ? true : false;
 
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 
@@ -108,7 +109,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
     setSelectedSeats(formatSelectedSeats);
   };
 
-  const onFinish = async values => {
+  const onFinish = async () => {
     setLoading('true');
     let payload = {
       phone: customers.phoneNumber,
@@ -183,12 +184,17 @@ export default function PassengerIfo({ datas, scheduleId }) {
         <div className={style.content}>
           <ContentWrapper>
             <div className={style.root}>
-              <div className={style.regist}>
-                <p className="text-cardDate">{t('registrationContent')}</p>
-                <button onClick={handleRegister} className={style.registButton}>
-                  {t('registrationButton')}
-                </button>
-              </div>
+              {!isAuth && (
+                <div className={style.regist}>
+                  <p className="text-cardDate">{t('registrationContent')}</p>
+                  <button
+                    onClick={handleRegister}
+                    className={style.registButton}
+                  >
+                    {t('registrationButton')}
+                  </button>
+                </div>
+              )}
               <div className={style.Information}>
                 <h1 className={style.customerInfoTitle}>
                   {t('passengerInformationTitle')}
