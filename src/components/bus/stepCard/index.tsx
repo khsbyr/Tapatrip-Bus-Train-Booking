@@ -54,9 +54,9 @@ export default function StepCard({ datas, scheduleId }) {
                       Хөдлөх огноо:
                     </p>
                     <p>
-                      <h1 className={style.startTitle}>{datas.leaveDate}</h1>
+                      <h1 className={style.startTitle}>{datas?.leaveDate}</h1>
                       <h1 className={style.timeText}>
-                        {datas.leaveTime.slice(0, 5)}
+                        {datas?.leaveTime.slice(0, 5)}
                       </h1>
                     </p>
                   </div>
@@ -80,7 +80,7 @@ export default function StepCard({ datas, scheduleId }) {
                     >
                       <div className="flex items-center">
                         <CurrencyFormat
-                          value={datas.locationEnd.distance}
+                          value={datas?.locationEnd.distance}
                           displayType={'text'}
                           thousandSeparator={true}
                           renderText={value => <div>{value}</div>}
@@ -112,8 +112,8 @@ export default function StepCard({ datas, scheduleId }) {
                     <CurrencyFormat
                       value={
                         formatSelectedSeats.length > 0
-                          ? datas.adultTicket * formatSelectedSeats.length
-                          : datas.adultTicket
+                          ? datas?.adultTicket * formatSelectedSeats.length
+                          : datas?.adultTicket
                       }
                       displayType={'text'}
                       thousandSeparator={true}
@@ -140,12 +140,12 @@ export default function StepCard({ datas, scheduleId }) {
                     : 'flex text-sm text-cardDate'
                 }`}
               >
-                {format(datas.locationEnd.estimatedDuration)}
+                {format(datas?.locationEnd?.estimatedDuration)}
               </h1>
               <div className="xs:hidden space-y-1 lg:space-y-2">
                 <div className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
                   <CurrencyFormat
-                    value={datas.adultTicket}
+                    value={datas?.adultTicket}
                     displayType={'text'}
                     thousandSeparator={true}
                     renderText={value => <div>{value}</div>}
@@ -166,7 +166,7 @@ export default function StepCard({ datas, scheduleId }) {
             <div className={style.rowDirection}>
               <div>
                 <h1 className="text-cardDate font-semibold text-xs md:text-sm ">
-                  {datas.directionName}
+                  {datas?.directionName}
                 </h1>
               </div>
               <div className="flex items-center space-x-8">
@@ -189,27 +189,27 @@ export default function StepCard({ datas, scheduleId }) {
             <div className="px-5 lg:px-20 py-5 grid sm:grid-cols-2 lg:grid-cols-1">
               <Steps progressDot direction="vertical" className="text-xs">
                 <Step
-                  title={datas.leaveDate}
+                  title={datas?.leaveDate}
                   description={
-                    datas.startStopName +
+                    datas?.startStopName +
                     ' /' +
-                    datas.locationEnd.locationStop.location.name +
+                    datas?.locationEnd?.locationStop?.location.name +
                     '/'
                   }
                 />
                 <Step
                   title={moment.unix(unixDates).format('YYYY-MM-DD')}
                   description={
-                    datas.locationEnd.locationEnd.name +
+                    datas?.locationEnd?.locationEnd?.name +
                     ' /' +
-                    datas.locationEnd.locationEnd.location.name +
+                    datas?.locationEnd?.locationEnd?.location.name +
                     '/'
                   }
                 />
               </Steps>
               <div className="w-full col-span-1 flex flex-wrap items-end sm:justify-end lg:justify-start font-medium text-sm sm:text-base text-cardDate">
                 <p className="font-normal pr-2">{t('insuranceCompany')}:</p>
-                <p>{datas.insurance.name}</p>
+                <p>{datas?.insurance.name}</p>
               </div>
             </div>
           </div>

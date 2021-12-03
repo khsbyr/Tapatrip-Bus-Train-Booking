@@ -17,7 +17,7 @@ const { Step } = Steps;
 
 export default function Card({ datas }) {
   const { t } = useTranslation(['order']);
-  const unixDates = unixDate(datas.node);
+  const unixDates = unixDate(datas?.node);
   console.log(datas?.node);
   const [isActive, setIsActive] = useState(false);
   const format = n =>
@@ -94,7 +94,7 @@ export default function Card({ datas }) {
               <div className="hidden xs:block space-y-1 lg:space-y-2">
                 <div className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
                   <CurrencyFormat
-                    value={datas.node.adultTicket}
+                    value={datas?.node.adultTicket}
                     displayType={'text'}
                     thousandSeparator={true}
                     renderText={value => <div>{value}</div>}
@@ -121,7 +121,7 @@ export default function Card({ datas }) {
               <div className="xs:hidden space-y-1 lg:space-y-2">
                 <div className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
                   <CurrencyFormat
-                    value={datas.node.adultTicket}
+                    value={datas?.node.adultTicket}
                     displayType={'text'}
                     thousandSeparator={true}
                     renderText={value => <div>{value}</div>}
@@ -142,7 +142,7 @@ export default function Card({ datas }) {
             <div className={style.rowDirection}>
               <div>
                 <h1 className="text-cardDate font-semibold text-xs md:text-sm lg:text-md">
-                  {datas.node.directionName}
+                  {datas?.node.directionName}
                 </h1>
               </div>
               <div className="flex items-center space-x-8 justify-center">
@@ -172,7 +172,7 @@ export default function Card({ datas }) {
             <div className="px-5 lg:px-20 py-5 grid sm:grid-cols-2">
               <Steps progressDot direction="vertical" className="col-span-1">
                 <Step
-                  title={datas.node.leaveDate}
+                  title={datas?.node.leaveDate}
                   description={
                     datas?.node.startStopName +
                     ' /' +
