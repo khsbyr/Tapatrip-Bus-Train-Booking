@@ -26,7 +26,7 @@ export default function PaymentCard({ datas, scheduleId }) {
           <p>
             {persons.length} {t('adult')}
           </p>
-          <p>{datas.adultTicket * persons.length}₮</p>
+          <p>{datas?.adultTicket * persons.length}₮</p>
         </div>
       )}
       {childs.length > 0 && (
@@ -34,7 +34,7 @@ export default function PaymentCard({ datas, scheduleId }) {
           <p>
             {childs.length} {t('child')}
           </p>
-          <p>{datas.childTicket * childs.length}₮</p>
+          <p>{datas?.childTicket * childs.length}₮</p>
         </div>
       )}
       <div className="flex justify-between font-bold">

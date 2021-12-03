@@ -283,7 +283,9 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           {seat.isChild
                             ? t('passengerChild')
                             : t('passengerAdults')}{' '}
-                          {seat.isChild ? datas.childTicket : datas.adultTicket}
+                          {seat.isChild
+                            ? datas?.childTicket
+                            : datas?.adultTicket}
                         </h1>
                       </p>
                     </div>

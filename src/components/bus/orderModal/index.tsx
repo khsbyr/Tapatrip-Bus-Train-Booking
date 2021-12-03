@@ -18,7 +18,7 @@ export default function OrderModal(props) {
 
   const [busBookingCheck, { data }] = useMutation(BUS_BOOKING_CHECK);
 
-  const datas = data && data.busBookingCheck.booking;
+  const datas = data && data?.busBookingCheck.booking;
   const unixDates = unixDate(datas?.schedule);
 
   const format = n =>
