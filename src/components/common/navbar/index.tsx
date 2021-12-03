@@ -180,11 +180,9 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 </a>
                 <div>
                   <Link href="/auth/login">
-                    <a>
-                      <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
-                        {t('login')}
-                      </button>
-                    </a>
+                    <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
+                      {t('login')}
+                    </button>
                   </Link>
                 </div>
                 <hr />

@@ -27,16 +27,19 @@ export default function Profile({ data }) {
     <div className="">
       <div onClick={onClick}>
         <button
-          className="flex items-center text-base rounded border border-profile bg-profile hover:border hover:bg-white text-cardDate hover:text-blue-600 py-2 px-3"
+          className="flex items-center justify-between text-base rounded border w-56 md:w-auto border-profile bg-profile hover:border hover:bg-white text-cardDate hover:text-blue-600 py-2 px-3"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <img
-            src="/assets/profile1.png"
-            alt=""
-            width="30"
-            className="rounded-full"
-          />
-          <p className="px-2 pr-4 text-sm">{data?.phone}</p>
+          <p className="flex items-center">
+            <img
+              src="/assets/profile1.png"
+              alt=""
+              width="30"
+              className="rounded-full"
+            />
+            <p className="px-2 pr-4 text-sm">{data?.phone}</p>
+          </p>
+
           {isSelected ? (
             <ChevronUpIcon className="h-4" />
           ) : (
@@ -49,7 +52,7 @@ export default function Profile({ data }) {
         className={`${
           !isOpen
             ? 'hidden'
-            : 'bg-white absolute block rounded shadow-lg p-3 z-20 text-sm text-cardDate w-60 lg:-ml-20'
+            : 'bg-white absolute block rounded shadow-lg p-3 z-20 text-sm text-cardDate w-60 md:-ml-20'
         }`}
         onClick={select}
       >
