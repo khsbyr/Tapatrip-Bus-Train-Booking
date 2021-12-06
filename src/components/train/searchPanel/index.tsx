@@ -61,7 +61,7 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
             />
           ))}
         </Tabs>
-        <SearchInput startLocations={startLocations} />
+        {/* <SearchInput startLocations={startLocations} /> */}
       </div>
     </ContentWrapper>
   );
