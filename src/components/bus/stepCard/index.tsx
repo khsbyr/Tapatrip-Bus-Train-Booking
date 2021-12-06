@@ -61,12 +61,11 @@ export default function StepCard({ datas, scheduleId }) {
                     </p>
                   </div>
                   <div>
-                    {console.log(datas?.locationEnd)}
                     <p
                       className={
                         datas?.locationEnd?.estimatedDuration === 0
                           ? 'hidden'
-                          : 'block flex justify-center'
+                          : 'flex justify-center'
                       }
                     >
                       <ArrowRightIcon className="h-5 text-direction" />

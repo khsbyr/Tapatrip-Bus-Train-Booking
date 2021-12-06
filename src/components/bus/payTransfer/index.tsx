@@ -160,7 +160,7 @@ export default function Payment() {
               <h1>{t('accountNumber')}</h1>
               <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
                 <h1 className="text-cardDate text-base">
-                  {banks[selected.id].accountNumber}
+                  {/* {banks[selected.id].accountNumber} */}
                 </h1>
                 <button onClick={() => copyToAccNumber(banks[selected.id])}>
                   {copyAccNumber}

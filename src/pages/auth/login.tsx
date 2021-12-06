@@ -404,7 +404,7 @@ const Login = () => {
   return (
     <div>
       <Head>
-        <title>{'loginButton'}</title>
+        <title>{t('login')}</title>
       </Head>
       <div className="fixed z-20 w-screen top-0">
         <NavbarProfile navbarData={NavData} />
