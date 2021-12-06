@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import NavData from '@data/navData.json';
 import { useQuery } from '@apollo/client';
 import {
@@ -15,14 +15,36 @@ import { arrayFormat } from '@helpers/array-format';
 import Loader from '@components/common/loader';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
+import AuthService from '@services/auth';
+import isEmpty from '@utils/isEmpty';
+import { useGlobalStore } from '@context/globalStore';
 
 export default function Orders() {
   const { t } = useTranslation(['order']);
   const router = useRouter();
+  const { setUser } = useGlobalStore();
+  useEffect(() => {
+    async function loadUserFromCookies() {
+      const token = AuthTokenStorageService.getAccessToken();
+      if (token) {
+        try {
+          const res = await AuthService.getCurrentUser();
+          if (res && res?.status === 200) {
+            if (!isEmpty(res?.result?.user)) {
+              setUser(res?.result?.user);
+            }
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+    loadUserFromCookies();
+  }, []);
   const { startLocation, stopLocation, endLocation, date, endDate } =
     router.query;
   const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
-
   const {
     data: scheduleData,
     loading,

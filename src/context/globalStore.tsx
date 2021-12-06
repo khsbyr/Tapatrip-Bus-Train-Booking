@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo, useState } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 
 export interface State {
   selectStartLocation: string;
@@ -14,6 +14,7 @@ export interface State {
   current: any;
   booking: any;
   user: any;
+  payment: any;
 }
 
 const initialState = {
@@ -30,6 +31,7 @@ const initialState = {
   current: 0,
   booking: '',
   user: '',
+  payment: '',
 };
 
 type Action =
@@ -83,6 +85,10 @@ type Action =
     }
   | {
       type: 'SET_USER';
+      value: any;
+    }
+  | {
+      type: 'SET_PAYMENT';
       value: any;
     };
 
@@ -170,6 +176,12 @@ function uiReducer(state: State, action: Action) {
         user: action.value,
       };
     }
+    case 'SET_PAYMENT': {
+      return {
+        ...state,
+        payment: action.value,
+      };
+    }
   }
 }
 
@@ -241,6 +253,11 @@ export const GlobalProvider: FC = props => {
     [dispatch]
   );
 
+  const setPayment = useCallback(
+    (value: any) => dispatch({ type: 'SET_PAYMENT', value }),
+    [dispatch]
+  );
+
   const value = useMemo(
     () => ({
       ...state,
@@ -257,6 +274,7 @@ export const GlobalProvider: FC = props => {
       setCurrent,
       setBooking,
       setUser,
+      setPayment,
     }),
     [state]
   );

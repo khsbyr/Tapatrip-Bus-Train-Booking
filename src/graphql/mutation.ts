@@ -117,11 +117,12 @@ export const BUS_BOOKING_CREATE = gql`
       }
     ) {
       toPay
+      ebarimt
+      totalFare
       schedule
       statusName
       refNumber
       clientMutationId
-      payment
     }
   }
 `;

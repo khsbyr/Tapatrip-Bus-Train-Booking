@@ -2,8 +2,7 @@ import axios from 'axios';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
 
 const token =
-  typeof AuthTokenStorageService.getAccessToken() === 'undefined' ||
-  AuthTokenStorageService.getAccessToken() === 'false'
+  AuthTokenStorageService.getAccessToken() === undefined
     ? AuthTokenStorageService.getGuestToken()
     : AuthTokenStorageService.getAccessToken();
 
