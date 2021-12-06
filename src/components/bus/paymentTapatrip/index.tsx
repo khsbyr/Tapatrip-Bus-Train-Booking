@@ -10,9 +10,8 @@ import StepCard from '../stepCard';
 import PaymentCard from '../paymentCard';
 import EndModal from '@components/common/endModal';
 import { useTranslation } from 'next-i18next';
-import { CheckIcon } from '@heroicons/react/solid';
 import PaymentService from '@services/payment';
-import isEmpty from '@utils/isEmpty';
+import PaymentModal from '@components/common/paymentModal';
 
 export default function PaymentTapatrip({ datas, scheduleId }) {
   const { t } = useTranslation(['steps']);
@@ -21,6 +20,8 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalPayment, setIsModalPayment] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState(payment?.ecommerce[0]);
+  const [paymentResponse, setPaymentResponse] = useState(null);
+  const [loading, setLoading] = useState('');
   const { Countdown } = Statistic;
   const deadline = Date.now() + 60 * 60 * 333.3;
 
@@ -60,6 +61,7 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
   };
 
   const handlePayment = async () => {
+    setLoading('true');
     try {
       const payload = {
         payment_type: selectedPayment.name,
@@ -68,12 +70,18 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
       };
       const res = await PaymentService.createInvoice(payload);
       if (res && res?.status === 200) {
+        setPaymentResponse(res.result);
+        console.log(res);
         setIsModalPayment(true);
+        setLoading('false');
       } else {
         message.warning(res.message);
+        setLoading('false');
       }
+      setLoading('false');
     } catch (err) {
       message.warning(err.message);
+      setLoading('false');
     }
   };
 
@@ -133,11 +141,15 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
               </Radio.Group>
               <div className="flex justify-center">
                 <button
+                  className="bg-homeLogin flex justify-center text-white space-x-3 py-3 rounded w-full sm:w-1/3 hover:bg-blue-900"
+                  type="submit"
                   onClick={handlePayment}
-                  className="bg-homeLogin flex justify-center text-white space-x-3 py-2 rounded w-full sm:w-1/3 hover:bg-blue-900"
                 >
-                  <CheckIcon className="h-6 w-6" />
-                  <p>{t('paymentButton')}</p>
+                  {loading === 'true' ? (
+                    <div className={style.ldsDualRing}></div>
+                  ) : (
+                    t('paymentButton')
+                  )}
                 </button>
               </div>
             </div>
@@ -161,7 +173,12 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
         <EndModal isModalVisible={isModalVisible} close={closeModal} />
       )}
       {isModalPayment && (
-        <EndModal isModalVisible={isModalPayment} close={closeModal} />
+        <PaymentModal
+          isModalVisible={isModalPayment}
+          close={closeModal}
+          data={paymentResponse}
+          payment={selectedPayment}
+        />
       )}
     </ContentWrapper>
   );

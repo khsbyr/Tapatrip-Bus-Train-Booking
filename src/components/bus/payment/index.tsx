@@ -81,12 +81,13 @@ export default function Payment({ datas, scheduleId }) {
                       <div>
                         <p className={style.paymentShape}>QPay</p>
                         {value === 2 && (
-                          <img
-                            src={`data:image/png;base64,${qrCode}`}
-                            alt="Qpay code"
-                            width={150}
-                            height={150}
-                          />
+                          // <img
+                          //   src={`data:image/png;base64,${qrCode}`}
+                          //   alt="Qpay code"
+                          //   width={150}
+                          //   height={150}
+                          // />
+                          <div>QPAY</div>
                         )}
                       </div>
                     </Radio>

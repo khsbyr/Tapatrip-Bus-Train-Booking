@@ -2,10 +2,9 @@ import { useGlobalStore } from '@context/globalStore';
 import { arrayFilterSchedule, arrayFilterSeat } from '@helpers/array-format';
 import { useTranslation } from 'next-i18next';
 
-const persons = [];
-const childs = [];
-
 export default function PaymentCard({ datas, scheduleId }) {
+  const persons = [];
+  const childs = [];
   const { t } = useTranslation(['steps']);
   const { booking } = useGlobalStore();
   const { selectedSeats } = useGlobalStore();
@@ -35,6 +34,10 @@ export default function PaymentCard({ datas, scheduleId }) {
           <p>{datas?.childTicket * childs.length}₮</p>
         </div>
       )}
+      <div className="flex justify-between">
+        <p> {'Амь даатгал үнэ'}</p>
+        <p>{console.log(booking)}₮</p>
+      </div>
       <div className="flex justify-between font-bold">
         <p> {t('totalPrice')}</p>
         <p>{booking.toPay}₮</p>
