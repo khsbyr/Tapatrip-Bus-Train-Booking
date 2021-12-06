@@ -75,10 +75,10 @@ export default function PhoneNumber({ name }) {
       >
         <div className="flex rounded-lg bg-bg">
           <Listbox value={selectedCountry} onChange={handleChange}>
-            <div className="flex items-center z-10 cursor-pointer relative pl-4 w-44 border-r-2">
+            <div className="flex items-center z-10 cursor-pointer relative border-r-2">
               <Listbox.Button
                 onClick={onClick}
-                className="cursor-pointer flex items-center relative text-cardDate"
+                className="cursor-pointer flex items-center justify-center relative text-cardDate w-28 px-2"
               >
                 <img
                   className="rounded flex-shrink-0"
@@ -86,35 +86,34 @@ export default function PhoneNumber({ name }) {
                   width="32"
                   height="16"
                 />
-                <h1 className="pl-2 text-cardDate w-10">
+                <h1 className="text-cardDate px-1 w-10">
                   {'+' + selectedCountry.name}
                 </h1>
                 <ChevronDownIcon className="text-gray-400 h-5 w-5" />
               </Listbox.Button>
-              <Listbox.Options className="mt-28 -ml-3.5 absolute w-32 overflow-auto text-base bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;">
+              <Listbox.Options className="mt-40 absolute w-28 overflow-auto text-base bg-white rounded shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;">
                 {countries.map((country, id) => (
                   <Listbox.Option
                     key={id}
                     className={({ active }) =>
-                      `${active ? 'text-blue-400 ' : ''}relative py-2 pl-4`
+                      `${active ? 'text-blue-400 ' : ''}relative bg-bg`
                     }
                     value={country}
                   >
                     {({ selected }) => (
                       <span className="truncate">
-                        <p className="flex items-center text-sm">
+                        <p className="flex items-center text-sm p-2">
                           <img
-                            className="rounded mr-2"
+                            className="rounded"
                             src={country.src}
-                            height="16"
-                            width="32"
+                            width="34"
                           />
                           <h1 className="pl-2 text-cardDate">
                             {'+' + country.name}
                           </h1>
                         </p>
                         {selected ? (
-                          <span className="absolute inset-y-0 left-0 flex items-center ml-20 pl-5 text-blue-400;">
+                          <span className="absolute inset-y-0 left-0 flex items-center ml-20 pl-2 text-blue-300;">
                             <CheckIcon
                               className="w-5 h-5 text-blue-400"
                               aria-hidden="true"

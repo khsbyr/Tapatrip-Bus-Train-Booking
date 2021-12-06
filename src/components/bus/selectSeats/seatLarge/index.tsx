@@ -7,7 +7,7 @@ const seats = [];
 const isSelected = [];
 
 const SeatLarge = ({ datas, scheduleId }) => {
-  const seatRanges = seatRangeMap(datas.seats);
+  const seatRanges = seatRangeMap(datas?.seats);
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
 

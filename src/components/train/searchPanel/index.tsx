@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Tabs } from 'antd';
 import ContentWrapper from './style';
 import style from './searchPanel.module.scss';
-import SearchInput from '@components/bus/searchInput';
+import SearchInput from '@components/train/searchInput';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 

@@ -20,7 +20,7 @@ import { useRouter } from 'next/router';
 import style from './login.module.scss';
 
 const Login = () => {
-  const { t } = useTranslation(['steps']);
+  const { t } = useTranslation(['common']);
   const { setUser } = useGlobalStore();
   const router = useRouter();
   const { TabPane } = Tabs;
@@ -69,7 +69,7 @@ const Login = () => {
   };
 
   const handlePassword = async () => {
-    if (!currentPassword) setPasswordError('Та нууц үгээ оруулна уу?');
+    if (!currentPassword) setPasswordError(t('passwordWarning'));
     setLoading('true');
     let data = {};
     data = {
@@ -105,11 +105,8 @@ const Login = () => {
   };
 
   const handleVerifyCode = async () => {
-    if (!pinCode) setConfirmError('Та баталгаажуулах кодоо оруулна уу?');
-    else if (pinCode.length < 4)
-      setConfirmError(
-        'Таны оруулсан баталгаажуулах код 4 оронтой байх ёстой!!!'
-      );
+    if (!pinCode) setConfirmError(t('confirmCodeWarning'));
+    else if (pinCode.length < 4) setConfirmError(t('confirmCodeError'));
     setLoading('true');
     let data = {};
     data = {
@@ -192,7 +189,7 @@ const Login = () => {
             className="flex text-lg text-cardDate"
             centered
           >
-            <TabPane tab="НЭВТРЭХ" key="1">
+            <TabPane tab={t('loginTab')} key="1">
               <Form name="login" onFinish={handleLogin} className="space-y-4">
                 <InputPhoneNumber name="loginNumber" />
                 <div className="flex justify-end">
@@ -200,19 +197,19 @@ const Login = () => {
                     onClick={handleForgetPaasword}
                     className="w-32 bg-bg py-4 font-medium text-cardDate text-xs rounded hover:bg-gray-200"
                   >
-                    Нууц үг мартсан
+                    {t('forgetPasswordButton')}
                   </button>
                 </div>
                 <button className={style.button} type="submit">
                   {loading === 'true' ? (
                     <div className={style.ldsDualRing}></div>
                   ) : (
-                    'НЭВТРЭХ'
+                    t('loginTab')
                   )}
                 </button>
               </Form>
             </TabPane>
-            <TabPane tab="БҮРТГҮҮЛЭХ" key="2">
+            <TabPane tab={t('registerTab')} key="2">
               <Form
                 name="register"
                 onFinish={handleLogin}
@@ -223,7 +220,7 @@ const Login = () => {
                   {loading === 'true' ? (
                     <div className={style.ldsDualRing}></div>
                   ) : (
-                    'БҮРТГҮҮЛЭХ'
+                    t('registerTab')
                   )}
                 </button>
               </Form>
@@ -243,11 +240,8 @@ const Login = () => {
           className="space-y-8 py-6"
         >
           <div className="text-cardDate space-y-6">
-            <p className="text-lg font-medium">БАТАЛГААЖУУЛАХ</p>
-            <p>
-              Таны утасруу баталгаажуулах 4 оронтой тоо явууллаа. Тухайн кодыг
-              оруулж утасны дугаараа баталгаажуулна уу. Баярлалаа
-            </p>
+            <p className="text-lg font-medium">{t('confirmationButton')}</p>
+            <p>{t('confirmationBody')}</p>
             <div className="bg-bg py-4 space-y-2 rounded-lg">
               <div className="text-center">
                 {<Countdown format="mm:ss" value={deadline} />}
@@ -270,14 +264,14 @@ const Login = () => {
             {loading === 'true' ? (
               <div className={style.ldsDualRing}></div>
             ) : (
-              'БАТАЛГААЖУУЛАХ'
+              t('registerTab')
             )}
           </button>
           <div className="flex justify-end mt-2">
-            <span className="mr-2">Эхнээс нь эхлэх бол? </span>
+            <span className="mr-2">{t('startQuiz')} </span>
             <Link href={'/auth/login'}>
               <a onClick={reset} className="font-medium underline">
-                ЭНД ДАРНА УУ
+                {t('thisClick')}
               </a>
             </Link>
           </div>
@@ -295,19 +289,19 @@ const Login = () => {
           className="space-y-8"
         >
           <div className="text-cardDate space-y-6">
-            <p className="text-lg font-semibold">Нууц үг үүсгэх</p>
+            <p className="text-lg font-semibold">{t('createPassword')}</p>
             <div className="space-y-6">
               <Form.Item
                 name="password"
                 rules={[
                   {
                     required: true,
-                    message: 'Та нууц үгээ оруулна уу?',
+                    message: t('passwordWarning'),
                   },
                 ]}
               >
                 <Input.Password
-                  placeholder="Нууц үг"
+                  placeholder={t('password')}
                   type="password"
                   className="rounded-lg h-12"
                 />
@@ -318,16 +312,14 @@ const Login = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Та нууц үгээ давтаж оруулна уу?',
+                    message: t('rePasswordMessage'),
                   },
                   ({ getFieldValue }) => ({
                     validator(_, value) {
                       if (!value || getFieldValue('password') === value) {
                         return Promise.resolve();
                       }
-                      return Promise.reject(
-                        new Error('Нууц үг хоёулаа ижил байх ёстой!')
-                      );
+                      return Promise.reject(new Error(t('passwordError')));
                     },
                   }),
                 ]}
@@ -347,7 +339,7 @@ const Login = () => {
             {loading === 'true' ? (
               <div className={style.ldsDualRing}></div>
             ) : (
-              'ХАДГАЛАХ'
+              t('saveButton')
             )}
           </button>
         </Form>
@@ -360,10 +352,10 @@ const Login = () => {
       <>
         <Form name="password" onFinish={handlePassword}>
           <div className="text-cardDate space-y-6">
-            <p className="text-lg font-semibold">Нууц үг оруулах</p>
+            <p className="text-lg font-semibold">{t('enterPassword')}</p>
             <div className="space-y-2">
               <Input
-                placeholder="Нууц үг оруулах"
+                placeholder={t('enterPassword')}
                 type="password"
                 name="currentPassword"
                 defaultValue={currentPassword}
@@ -373,25 +365,21 @@ const Login = () => {
               {passwordError && (
                 <span className="text-red-500">{passwordError}</span>
               )}
-              {!passwordError && (
-                <p>
-                  Таны дугаар бүртгэлтэй байна, та нууц үгээ хийж нэвтэрнэ үү.
-                </p>
-              )}
+              {!passwordError && <p>{t('enterPasswordError')}</p>}
             </div>
           </div>
           <button className={style.loginButton} type="submit">
             {loading === 'true' ? (
               <div className={style.ldsDualRing}></div>
             ) : (
-              'НЭВТРЭХ'
+              t('loginTab')
             )}
           </button>
           <div className="flex justify-end mt-2">
-            <span className="mr-2">Эхнээс нь эхлэх бол? </span>
+            <span className="mr-2">{t('startScratch')} </span>
             <Link href={'/auth/login'}>
               <a onClick={reset} className="font-medium underline">
-                ЭНД ДАРНА УУ
+                {t('thisClick')}
               </a>
             </Link>
           </div>
@@ -416,7 +404,7 @@ const Login = () => {
   return (
     <div>
       <Head>
-        <title>Нэвтрэх</title>
+        <title>{'loginButton'}</title>
       </Head>
       <div className="fixed z-20 w-screen top-0">
         <NavbarProfile navbarData={NavData} />
@@ -442,12 +430,23 @@ const Login = () => {
             <div className="w-full sm:w-96 lg:w-2/5 z-2 sm:mx-auto rounded-lg bg-white p-7 sm:p-10">
               {renderRegister(code)}
               <div className="text-left text-sm font-light pt-4">
-                Бүртгүүлэх товчийг дарж, Facebook эрхээрээ нэвтрэх болон бүртгэл
-                үүсгэснээр Та tapatrip.com-н{' '}
-                <a className="font-medium underline">Үйлчилгээний нөхцөл</a>{' '}
-                болон{' '}
-                <a className="font-medium underline">Нууцлалын баталгааг</a>{' '}
-                хүлээн зөвшөөрч буй болно.
+                {t('registerInstructionsBody1')}{' '}
+                <a
+                  href="/term-condition"
+                  className="font-medium underline"
+                  target="_blank"
+                >
+                  {t(`termsConditions`)}
+                </a>{' '}
+                {t('registerInstructionsBody2')}{' '}
+                <a
+                  href="/privacy-policy"
+                  className="font-medium underline"
+                  target="_blank"
+                >
+                  {t(`privacyPolicy`)}
+                </a>{' '}
+                {t('registerInstructionsBody3')}
               </div>
             </div>
           </div>

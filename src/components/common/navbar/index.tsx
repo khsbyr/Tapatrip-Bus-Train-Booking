@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Profile from './profile';
 import { useTranslation } from 'next-i18next';
 import { useGlobalStore } from '@context/globalStore';
+import { delay } from 'lodash';
 
 interface Props {
   navbarData?: any;
@@ -139,7 +140,8 @@ const Navbar: FC<Props> = ({ navbarData }) => {
         </div>
         <div className="hidden max-w-7xl mx-auto justify-end pr-4 lg:flex">
           <div className="flex justify-center items-center mt-7">
-            <span className="animate-ping absolute inline-flex h-8 w-28 bg-onlineSupport rounded-lg"></span>
+            <span className="animate-ping absolute inline-flex h-7 w-28 bg-green-200 rounded-lg"></span>
+            <span className="animate-ping absolute inline-flex h-7 w-28 bg-onlineSupport rounded-lg z-8"></span>
             <button className="z-10 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-3 rounded-lg">
               <PhoneIcon className="w-4" />
               <p className="pl-1 w-36">{t('onlineHelp')}</p>
@@ -176,42 +178,45 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     <p className="pl-2">(976)-7514-4444</p>
                   </div>
                 </a>
-                <div>
-                  <Link href="/auth/login">
-                    <a>
-                      <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
+                <hr />
+
+                <div className={styles.loginBody}>
+                  {isAuth ? (
+                    // <Profile data={user} />
+                    <div className="text-cardDate">
+                      <a className="flex items-center text-base border-4 border-white  hover:border-blue-200 p-2 rounded hover:text-cardDate">
+                        <img
+                          src="/assets/profile1.png"
+                          alt=""
+                          width="30"
+                          className="rounded-full"
+                        />
+                        <p className="space-y-1 pl-4 text-sm">
+                          {user?.phone} <p>{t('customerSection')}</p>
+                        </p>
+                      </a>
+                      <a
+                        className="flex items-center border-2 border-white  hover:border-blue-200 rounded p-2 hover:text-cardDate"
+                        href=""
+                      >
+                        <CheckIcon className="pr-2 h-5" />
+                        {t('myOrders')}
+                      </a>
+                      <a
+                        className="flex items-center rounded border-4 border-white  hover:border-blue-200 p-2 text-red-600 hover:text-red-600"
+                        href="/"
+                      >
+                        <LogoutIcon className="pr-2 h-5" />
+                        {t('logout')}
+                      </a>
+                    </div>
+                  ) : (
+                    <a href="/auth/login">
+                      <button className={styles.loginButton}>
                         {t('login')}
                       </button>
                     </a>
-                  </Link>
-                </div>
-                <hr />
-                <div className="text-cardDate">
-                  <a className="flex items-center text-base border-4 border-white  hover:border-blue-200 p-2 rounded hover:text-cardDate">
-                    <img
-                      src="/assets/profile1.png"
-                      alt=""
-                      width="30"
-                      className="rounded-full"
-                    />
-                    <p className="space-y-1 pl-4 text-sm">
-                      99331137 <p>{t('customerSection')}</p>
-                    </p>
-                  </a>
-                  <a
-                    className="flex items-center border-2 border-white  hover:border-blue-200 rounded p-2 hover:text-cardDate"
-                    href=""
-                  >
-                    <CheckIcon className="pr-2 h-5" />
-                    {t('myOrders')}
-                  </a>
-                  <a
-                    className="flex items-center rounded border-4 border-white  hover:border-blue-200 p-2 text-red-600 hover:text-red-600"
-                    href=""
-                  >
-                    <LogoutIcon className="pr-2 h-5" />
-                    {t('logout')}
-                  </a>
+                  )}
                 </div>
               </div>
             </div>

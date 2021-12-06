@@ -15,10 +15,8 @@ import { useTranslation } from 'next-i18next';
 
 const { Step } = Steps;
 
-export default function Card({ datas }) {
+export default function Card() {
   const { t } = useTranslation(['order']);
-  const unixDates = unixDate(datas?.node);
-  console.log(datas?.node);
   const [isActive, setIsActive] = useState(false);
   const format = n =>
     `0${(n / 60) ^ 0}`.slice(-2) +
@@ -28,43 +26,26 @@ export default function Card({ datas }) {
     ('0' + (n % 60)).slice(-2) +
     ' ' +
     t('orderMinutes');
-
   return (
     <div className="px-2">
       <div className="max-w-7xl mx-auto">
         <div className={style.card}>
-          <div className="px-7 md:px-12 space-y-2 lg:space-y-4">
-            <div className="flex justify-between flex-wrap pt-5">
-              <div className="mb-4 sm:mb-0 space-y-0 sm:space-y-2">
-                <div className="flex space-x-4 items-center">
+          <div className="space-y-2 lg:space-y-4">
+            <div className="px-5 md:px-12 flex justify-between">
+              <div className="mb-4 sm:mb-0 space-y-0 sm:space-y-2 w-full xs:w-auto">
+                <div className="flex space-x-4 items-center justify-center">
                   <div className="">
-                    <h1 className={style.startTitle}>
-                      {datas?.node.leaveDate}
-                    </h1>
-                    <h1 className={style.timeText}>
-                      {datas?.node.leaveTime.slice(0, 5)}
-                    </h1>
+                    <h1 className={style.startTitle}>{'2021-12-14'}</h1>
+                    <h1 className={style.timeText}>{'17:00'}</h1>
                   </div>
                   <div>
-                    <p
-                      className={
-                        datas?.node?.locationEnd?.estimatedDuration === 0
-                          ? 'hidden'
-                          : 'block flex justify-center'
-                      }
-                    >
+                    <p className="flex justify-center">
                       <ArrowRightIcon className="h-5 text-direction" />
                     </p>
-                    <h1
-                      className={`${
-                        datas?.node.locationEnd.distance === 0
-                          ? 'hidden'
-                          : style.timeText
-                      }`}
-                    >
+                    <h1>
                       <div className="flex items-center">
                         <CurrencyFormat
-                          value={datas?.node.locationEnd.distance}
+                          value={200}
                           displayType={'text'}
                           thousandSeparator={true}
                           renderText={value => <div>{value}</div>}
@@ -73,67 +54,73 @@ export default function Card({ datas }) {
                       </div>
                     </h1>
                   </div>
-
-                  <div
-                    className={
-                      datas?.node?.locationEnd?.estimatedDuration === 0
-                        ? 'hidden'
-                        : 'block'
-                    }
-                  >
-                    <h1 className={style.startTitle}>
-                      {moment.unix(unixDates).format('YYYY-MM-DD')}
-                    </h1>
-                    <h1 className="flex justify-end font-light text-cardDate text-xs md:text-sm lg:text-lg">
-                      {moment.unix(unixDates).format('hh:mm')}
+                  <div className="">
+                    <h1 className={style.startTitle}>{'2021-12-15'}</h1>
+                    <h1 className={style.timeText}>
+                      <p className="text-right">{'08:30'}</p>
                     </h1>
                   </div>
                 </div>
               </div>
-
-              <div className="hidden xs:block space-y-1 lg:space-y-2">
-                <div className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
+              <div className="hidden xs:block text-lg text-cardDate font-medium">
+                НИЙТИЙН
+              </div>
+              <div className="hidden sm:block lg:hidden xl:block space-y-1 lg:space-y-2">
+                <div className="flex justify-between text-cardDate font-bold text-sm md:text-lg lg:text-xl space-x-2">
+                  <p className="font-normal">Том хүн:</p>
                   <CurrencyFormat
-                    value={datas?.node.adultTicket}
+                    value={10000}
                     displayType={'text'}
                     thousandSeparator={true}
                     renderText={value => <div>{value}</div>}
                   />
                   <h1 className={style.priceText}>{' MNT'}</h1>
                 </div>
-                <h1 className="flex items-center text-xs md:text-sm lg:text-base">
-                  <UserIcon className="w-3 md:w-4 h-3 md:h-4 " /> 1{' '}
-                  {t('passengerPrice')}
-                </h1>
-              </div>
-            </div>
-
-            <div className="flex justify-between">
-              <h1
-                className={`${
-                  datas?.node.locationEnd.distance === 0
-                    ? 'hidden'
-                    : 'flex text-sm text-cardDate items-center xs:items-start'
-                }`}
-              >
-                {format(datas?.node.locationEnd.estimatedDuration)}
-              </h1>
-              <div className="xs:hidden space-y-1 lg:space-y-2">
-                <div className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
+                <div className="flex justify-between text-cardDate font-bold text-sm md:text-lg lg:text-xl space-x-2">
+                  <p className="font-normal">Хүүхэд:</p>
                   <CurrencyFormat
-                    value={datas?.node.adultTicket}
+                    value={7000}
                     displayType={'text'}
                     thousandSeparator={true}
                     renderText={value => <div>{value}</div>}
                   />
                   <h1 className={style.priceText}>{' MNT'}</h1>
                 </div>
-                <h1 className="flex items-center text-xs md:text-sm lg:text-base">
-                  <UserIcon className="w-3 md:w-4 h-3 md:h-4 " /> 1{' '}
-                  {t('passengerPrice')}
-                </h1>
               </div>
             </div>
+
+            <div className="px-5 md:px-12 flex justify-between items-center space-x-5 xs:space-x-0">
+              <div className="xs:hidden text-lg text-cardDate font-medium">
+                НИЙТИЙН
+              </div>
+              <h1 className="hidden xs:block text-cardDate">{format(186)}</h1>
+              <div className="sm:hidden lg:block xl:hidden space-y-1 lg:space-y-2">
+                <div className="flex justify-between text-cardDate font-bold text-sm md:text-lg lg:text-xl space-x-2">
+                  <p className="font-normal">Том хүн:</p>
+                  <CurrencyFormat
+                    value={10000}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    renderText={value => <div>{value}</div>}
+                  />
+                  <h1 className={style.priceText}>{' MNT'}</h1>
+                </div>
+                <div className="flex justify-between text-cardDate font-bold text-sm md:text-lg lg:text-xl space-x-2">
+                  <p className="font-normal">Хүүхэд:</p>
+                  <CurrencyFormat
+                    value={7000}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    renderText={value => <div>{value}</div>}
+                  />
+                  <h1 className={style.priceText}>{' MNT'}</h1>
+                </div>
+              </div>
+            </div>
+            <h1 className="block xs:hidden px-5 text-cardDate">
+              {format(186)}
+            </h1>
+
             <div className="flex items-center pt-4 sm:pt-4">
               <div className={style.rightRound}></div>
               <div className="bg-bg w-full h-0.5"></div>
@@ -142,7 +129,7 @@ export default function Card({ datas }) {
             <div className={style.rowDirection}>
               <div>
                 <h1 className="text-cardDate font-semibold text-xs md:text-sm lg:text-md">
-                  {datas?.node.directionName}
+                  {'directionName'}
                 </h1>
               </div>
               <div className="flex items-center space-x-8 justify-center">
@@ -150,7 +137,7 @@ export default function Card({ datas }) {
                   className="text-direction font-medium flex text-xs md:text-base"
                   onClick={() => setIsActive(!isActive)}
                 >
-                  {t('directionInformation')}
+                  {'Маршрутын мэдээлэл'}
                   {isActive ? (
                     <ChevronUpIcon className="md:w-6 md:h-6 w-4 h-4" />
                   ) : (
@@ -159,7 +146,7 @@ export default function Card({ datas }) {
                 </button>
               </div>
               <div className="col-span-2 mt-5 lg:mt-0 lg:col-span-1">
-                <Link href={`/bus/orders/${datas?.node.id}`}>
+                <Link href={`/bus/orders/${1}`}>
                   <button className={style.orderButton}>
                     {t('orderButton')}
                   </button>
@@ -172,20 +159,20 @@ export default function Card({ datas }) {
             <div className="px-5 lg:px-20 py-5 grid sm:grid-cols-2">
               <Steps progressDot direction="vertical" className="col-span-1">
                 <Step
-                  title={datas?.node.leaveDate}
+                  title={'YYYY-MM-DD'}
                   description={
-                    datas?.node.startStopName +
+                    'locationEnd.name' +
                     ' /' +
-                    datas?.node.locationEnd.locationStop.location.name +
+                    'locationEnd.location.name ' +
                     '/'
                   }
                 />
                 <Step
-                  title={moment.unix(unixDates).format('YYYY-MM-DD')}
+                  title={'YYYY-MM-DD'}
                   description={
-                    datas?.node.locationEnd.locationEnd.name +
+                    'locationEnd.name' +
                     ' /' +
-                    datas?.node.locationEnd.locationEnd.location.name +
+                    'locationEnd.location.name ' +
                     '/'
                   }
                 />
@@ -194,7 +181,7 @@ export default function Card({ datas }) {
                 <h1 className="text-sm sm:text-base text-cardDate font-normal pr-2">
                   {t('insuranceCompany')}:
                 </h1>
-                <p>{datas?.node.insurance.name}</p>
+                <p>{'insurance.name'}</p>
               </div>
             </div>
           </div>

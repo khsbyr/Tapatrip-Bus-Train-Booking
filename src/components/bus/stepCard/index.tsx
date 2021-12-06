@@ -37,20 +37,50 @@ export default function StepCard({ datas, scheduleId }) {
             <div className="flex flex-wrap justify-between pt-5">
               <div className="mb-4 sm:mb-0 space-y-0 sm:space-y-2">
                 <div className="flex space-x-8 items-center">
-                  <div className="">
-                    <h1 className={style.startTitle}>{datas.leaveDate}</h1>
-                    <h1 className={style.timeText}>
-                      {datas?.leaveTime?.slice(0, 5)}
-                    </h1>
+                  <div
+                    className={
+                      datas?.locationEnd?.estimatedDuration === 0
+                        ? 'flex space-x-4'
+                        : ''
+                    }
+                  >
+                    <p
+                      className={
+                        datas?.locationEnd?.estimatedDuration === 0
+                          ? 'block text-cardDate font-medium text-sm'
+                          : 'hidden'
+                      }
+                    >
+                      Хөдлөх огноо:
+                    </p>
+                    <p>
+                      <h1 className={style.startTitle}>{datas?.leaveDate}</h1>
+                      <h1 className={style.timeText}>
+                        {datas?.leaveTime.slice(0, 5)}
+                      </h1>
+                    </p>
                   </div>
                   <div>
-                    <p className="flex justify-center">
+                    {console.log(datas?.locationEnd)}
+                    <p
+                      className={
+                        datas?.locationEnd?.estimatedDuration === 0
+                          ? 'hidden'
+                          : 'block flex justify-center'
+                      }
+                    >
                       <ArrowRightIcon className="h-5 text-direction" />
                     </p>
-                    <h1 className={style.timeText}>
+                    <h1
+                      className={`${
+                        datas?.locationEnd.distance === 0
+                          ? 'hidden'
+                          : style.timeText
+                      }`}
+                    >
                       <div className="flex items-center">
                         <CurrencyFormat
-                          value={datas?.locationEnd?.distance}
+                          value={datas?.locationEnd.distance}
                           displayType={'text'}
                           thousandSeparator={true}
                           renderText={value => <div>{value}</div>}
@@ -59,7 +89,13 @@ export default function StepCard({ datas, scheduleId }) {
                       </div>
                     </h1>
                   </div>
-                  <div className="">
+                  <div
+                    className={
+                      datas?.locationEnd?.estimatedDuration === 0
+                        ? 'hidden'
+                        : 'block'
+                    }
+                  >
                     <h1 className={style.startTitle}>
                       {moment.unix(unixDates).format('YYYY-MM-DD')}
                     </h1>
@@ -70,14 +106,14 @@ export default function StepCard({ datas, scheduleId }) {
                 </div>
               </div>
 
-              <div className="space-y-1 lg:space-y-2">
+              <div className="hidden xs:block space-y-1 lg:space-y-2">
                 <h1 className={style.priceText}>
                   <h1 className="flex text-cardDate font-bold text-sm sm:text-base lg:text-sm space-x-2">
                     <CurrencyFormat
                       value={
                         formatSelectedSeats.length > 0
-                          ? datas.adultTicket * formatSelectedSeats.length
-                          : datas.adultTicket
+                          ? datas?.adultTicket * formatSelectedSeats.length
+                          : datas?.adultTicket
                       }
                       displayType={'text'}
                       thousandSeparator={true}
@@ -95,9 +131,33 @@ export default function StepCard({ datas, scheduleId }) {
                 </h1>
               </div>
             </div>
-            <h1 className="flex text-sm text-cardDate">
-              {format(datas?.locationEnd?.estimatedDuration)}
-            </h1>
+
+            <div className="flex justify-between">
+              <h1
+                className={`${
+                  datas?.locationEnd.distance === 0
+                    ? 'hidden'
+                    : 'flex text-sm text-cardDate'
+                }`}
+              >
+                {format(datas?.locationEnd?.estimatedDuration)}
+              </h1>
+              <div className="xs:hidden space-y-1 lg:space-y-2">
+                <div className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
+                  <CurrencyFormat
+                    value={datas?.adultTicket}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    renderText={value => <div>{value}</div>}
+                  />
+                  <h1 className={style.priceText}>{' MNT'}</h1>
+                </div>
+                <h1 className="flex items-center text-xs md:text-sm lg:text-base">
+                  <UserIcon className="w-3 md:w-4 h-3 md:h-4 " /> 1{' '}
+                  {t('passengerPrice')}
+                </h1>
+              </div>
+            </div>
             <div className="flex items-center pt-4 sm:pt-4">
               <div className={style.rightRound}></div>
               <div className="bg-bg w-full h-0.5 "></div>
@@ -106,7 +166,7 @@ export default function StepCard({ datas, scheduleId }) {
             <div className={style.rowDirection}>
               <div>
                 <h1 className="text-cardDate font-semibold text-xs md:text-sm ">
-                  {datas.directionName}
+                  {datas?.directionName}
                 </h1>
               </div>
               <div className="flex items-center space-x-8">
@@ -127,7 +187,7 @@ export default function StepCard({ datas, scheduleId }) {
           <div className={`${!isActive ? 'hidden' : 'block'}`}>
             <div className="border border-dashed"></div>
             <div className="px-5 lg:px-20 py-5 grid sm:grid-cols-2 lg:grid-cols-1">
-              <Steps progressDot direction="vertical">
+              <Steps progressDot direction="vertical" className="text-xs">
                 <Step
                   title={datas?.leaveDate}
                   description={
@@ -147,11 +207,9 @@ export default function StepCard({ datas, scheduleId }) {
                   }
                 />
               </Steps>
-              <div className="w-full col-span-1 flex flex-wrap items-end sm:justify-end lg:justify-start font-medium text-base text-cardDate">
-                <h1 className="text-base text-cardDate font-normal pr-2">
-                  {t('insuranceCompany')}:
-                </h1>
-                <p>{datas?.insurance?.name}</p>
+              <div className="w-full col-span-1 flex flex-wrap items-end sm:justify-end lg:justify-start font-medium text-sm sm:text-base text-cardDate">
+                <p className="font-normal pr-2">{t('insuranceCompany')}:</p>
+                <p>{datas?.insurance.name}</p>
               </div>
             </div>
           </div>
