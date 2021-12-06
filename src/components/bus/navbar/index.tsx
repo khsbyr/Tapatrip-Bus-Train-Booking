@@ -38,25 +38,12 @@ export default function BusNavbar({ navbarData, startLocations }) {
                   </a>
                 </Link>
               </div>
-              <div className="hidden">
-                <div className="ml-10 flex items-baseline space-x-4">
-                  {navbarData.generalList.map(data => (
-                    <a
-                      className={`${'text-white'} hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
-                      href={`${data.route}`}
-                      key={data.id}
-                    >
-                      {data.text}
-                    </a>
-                  ))}
-                </div>
-              </div>
             </div>
 
             <div className="w-32 text-gray-700"></div>
 
             <div className="flex items-center ">
-              <div className="hidden md:block">
+              <div className="hidden lg:block">
                 <div className="ml-10 flex items-center space-x-5">
                   <OrderCheck />
                   <div className="z-20">
@@ -77,7 +64,7 @@ export default function BusNavbar({ navbarData, startLocations }) {
               </div>
             </div>
 
-            <div className=" flex md:hidden">
+            <div className=" flex lg:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
@@ -108,7 +95,7 @@ export default function BusNavbar({ navbarData, startLocations }) {
         >
           {ref => (
             <div
-              className="flex justify-center px-6 py-3 md:hidden bg-white rounded-xl shadow-lg"
+              className="flex justify-center px-6 py-3 lg:hidden bg-white rounded-xl shadow-lg"
               id="mobile-menu"
             >
               <div ref={ref} className="p-3 space-y-4">
