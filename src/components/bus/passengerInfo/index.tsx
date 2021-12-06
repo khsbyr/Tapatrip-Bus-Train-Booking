@@ -321,7 +321,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           <label className={style.Label} htmlFor="Vaccine">
                             {t('checkVaccineTitle')}
                           </label>
-                          <Input
+                          {/* <Input
                             disabled
                             value={
                               seat.isVaccine
@@ -329,7 +329,14 @@ export default function PassengerIfo({ datas, scheduleId }) {
                                 : '' + t('noVaccine') + ''
                             }
                             className={style.input}
-                          />
+                          /> */}
+                          <p className={style.input}>
+                            {seat.documentNumber === ''
+                              ? '?'
+                              : seat.isVaccine
+                              ? '' + t('yesVaccine') + ''
+                              : '' + t('noVaccine') + ''}
+                          </p>
                         </div>
                       </div>
                       <div className={style.InfoForm}>

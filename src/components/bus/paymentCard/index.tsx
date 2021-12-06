@@ -1,5 +1,6 @@
 import { useGlobalStore } from '@context/globalStore';
 import { arrayFilterSchedule, arrayFilterSeat } from '@helpers/array-format';
+import CurrencyFormat from 'react-currency-format';
 import { useTranslation } from 'next-i18next';
 
 export default function PaymentCard({ datas, scheduleId }) {
@@ -23,25 +24,69 @@ export default function PaymentCard({ datas, scheduleId }) {
       {persons.length > 0 && (
         <div className="flex justify-between">
           <p>{persons.length + ' ' + t('adult')}</p>
-          <p>{datas.adultTicket * persons.length}₮</p>
+          <p className="flex">
+            <CurrencyFormat
+              value={datas.adultTicket * persons.length}
+              displayType={'text'}
+              thousandSeparator={true}
+              renderText={value => <div>{value}</div>}
+            />
+            ₮
+          </p>
         </div>
       )}
+      <div className="flex justify-between text-sm">
+        <p> {'Амь даатгал үнэ (Том хүн)'}</p>
+        <p className="flex">
+          <CurrencyFormat
+            value={1000}
+            displayType={'text'}
+            thousandSeparator={true}
+            renderText={value => <div>{value}</div>}
+          />
+          ₮
+        </p>
+      </div>
       {childs.length > 0 && (
         <div className="flex justify-between">
           <p>
             {childs.length} {t('child')}
           </p>
-          <p>{datas?.childTicket * childs.length}₮</p>
+          <p className="flex">
+            <CurrencyFormat
+              value={datas?.childTicket * childs.length}
+              displayType={'text'}
+              thousandSeparator={true}
+              renderText={value => <div>{value}</div>}
+            />
+            ₮
+          </p>
         </div>
       )}
-      <div className="flex justify-between">
-        <p> {'Амь даатгал үнэ'}</p>
+      <div className="flex justify-between text-sm">
+        <p> {'Амь даатгал үнэ (Хүүхэд)'}</p>
+        <p className="flex">
+          <CurrencyFormat
+            value={400}
+            displayType={'text'}
+            thousandSeparator={true}
+            renderText={value => <div>{value}</div>}
+          />
+          ₮
+        </p>
       </div>
       <div className="flex justify-between font-bold">
         <p> {t('totalPrice')}</p>
-        <p>{booking.toPay}₮</p>
+        <p className="flex">
+          <CurrencyFormat
+            value={booking.toPay}
+            displayType={'text'}
+            thousandSeparator={true}
+            renderText={value => <div>{value}</div>}
+          />
+          ₮
+        </p>
       </div>
-      <p className="flex justify-end text-sm"> {t('insurancePrice')}</p>
     </div>
   );
 }
