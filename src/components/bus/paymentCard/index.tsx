@@ -36,7 +36,6 @@ export default function PaymentCard({ datas, scheduleId }) {
       )}
       <div className="flex justify-between">
         <p> {'Амь даатгал үнэ'}</p>
-        <p>{console.log(booking)}₮</p>
       </div>
       <div className="flex justify-between font-bold">
         <p> {t('totalPrice')}</p>

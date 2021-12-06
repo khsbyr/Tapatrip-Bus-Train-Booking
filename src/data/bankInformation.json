@@ -1,25 +1,16 @@
 [
   {
+    "src": "/assets/khan.png",
+    "name": "Хаан банк",
+    "value": 0,
+    "accountNumber": "5057397049",
+    "accountName": "АВТО ТЭЭВРИЙН ҮНДЭСНИЙ ТӨВ"
+  },
+  {
     "name": "Голомт банк",
     "src": "/assets/golomt.png",
-    "value": 0,
-    "accnum": "5858585858",
-    "accname": "Tapatrip LLC"
-  },
-  {
-    "name": "Хас банк",
-    "src": "/assets/khas.png",
     "value": 1,
-    "accnum": "1258585858",
-    "accname": "Tapatrip LLC"
-  },
-  {
-    "name": "Төрийн банк",
-    "src": "/assets/turiin.png",
-    "value": 2,
-    "accnum": "2258585858",
-    "accname": "Tapatrip LLC"
-  },
-  { "name": "HiPay", "src": "/assets/hipay.png", "value": 3 },
-  { "name": "QPay", "src": "/assets/qpay.png", "value": 4 }
+    "accountNumber": "1605186111",
+    "accountName": "АВТО ТЭЭВРИЙН ҮНДЭСНИЙ ТӨВ"
+  }
 ]
