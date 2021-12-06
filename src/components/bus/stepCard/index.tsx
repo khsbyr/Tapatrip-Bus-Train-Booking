@@ -56,7 +56,7 @@ export default function StepCard({ datas, scheduleId }) {
                     <p>
                       <h1 className={style.startTitle}>{datas?.leaveDate}</h1>
                       <h1 className={style.timeText}>
-                        {datas?.leaveTime.slice(0, 5)}
+                        {datas?.leaveTime?.slice(0, 5)}
                       </h1>
                     </p>
                   </div>
@@ -72,14 +72,14 @@ export default function StepCard({ datas, scheduleId }) {
                     </p>
                     <h1
                       className={`${
-                        datas?.locationEnd.distance === 0
+                        datas?.locationEnd?.distance === 0
                           ? 'hidden'
                           : style.timeText
                       }`}
                     >
                       <div className="flex items-center">
                         <CurrencyFormat
-                          value={datas?.locationEnd.distance}
+                          value={datas?.locationEnd?.distance}
                           displayType={'text'}
                           thousandSeparator={true}
                           renderText={value => <div>{value}</div>}
@@ -134,7 +134,7 @@ export default function StepCard({ datas, scheduleId }) {
             <div className="flex justify-between">
               <h1
                 className={`${
-                  datas?.locationEnd.distance === 0
+                  datas?.locationEnd?.distance === 0
                     ? 'hidden'
                     : 'flex text-sm text-cardDate'
                 }`}
@@ -208,7 +208,7 @@ export default function StepCard({ datas, scheduleId }) {
               </Steps>
               <div className="w-full col-span-1 flex flex-wrap items-end sm:justify-end lg:justify-start font-medium text-sm sm:text-base text-cardDate">
                 <p className="font-normal pr-2">{t('insuranceCompany')}:</p>
-                <p>{datas?.insurance.name}</p>
+                <p>{datas?.insurance?.name}</p>
               </div>
             </div>
           </div>
