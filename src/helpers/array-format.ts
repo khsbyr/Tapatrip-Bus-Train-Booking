@@ -102,8 +102,8 @@ export function arrayFilterSchedule(data: any, value: String) {
   return result;
 }
 export function unixDate(data: any) {
-  let result =
-    new Date(data?.leaveDate + ' ' + data?.leaveTime).getTime() / 1000 +
+  const result =
+    new Date(data?.leaveDate + 'T' + data?.leaveTime).getTime() / 1000 +
     data?.locationEnd?.estimatedDuration * 60;
   return result;
 }

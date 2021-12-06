@@ -17,7 +17,8 @@ const { Step } = Steps;
 
 export default function Card({ datas }) {
   const { t } = useTranslation(['order']);
-  const unixDates = unixDate(datas.node);
+  const unixDates = unixDate(datas?.node);
+  console.log(datas?.node);
   const [isActive, setIsActive] = useState(false);
   const format = n =>
     `0${(n / 60) ^ 0}`.slice(-2) +
@@ -45,7 +46,13 @@ export default function Card({ datas }) {
                     </h1>
                   </div>
                   <div>
-                    <p className="flex justify-center">
+                    <p
+                      className={
+                        datas?.node?.locationEnd?.estimatedDuration === 0
+                          ? 'hidden'
+                          : 'block flex justify-center'
+                      }
+                    >
                       <ArrowRightIcon className="h-5 text-direction" />
                     </p>
                     <h1
@@ -66,12 +73,19 @@ export default function Card({ datas }) {
                       </div>
                     </h1>
                   </div>
-                  <div className="">
+
+                  <div
+                    className={
+                      datas?.node?.locationEnd?.estimatedDuration === 0
+                        ? 'hidden'
+                        : 'block'
+                    }
+                  >
                     <h1 className={style.startTitle}>
                       {moment.unix(unixDates).format('YYYY-MM-DD')}
                     </h1>
                     <h1 className="flex justify-end font-light text-cardDate text-xs md:text-sm lg:text-lg">
-                      {moment.unix(unixDates).format('HH:mm')}
+                      {moment.unix(unixDates).format('hh:mm')}
                     </h1>
                   </div>
                 </div>
@@ -80,7 +94,7 @@ export default function Card({ datas }) {
               <div className="hidden xs:block space-y-1 lg:space-y-2">
                 <div className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
                   <CurrencyFormat
-                    value={datas.node.adultTicket}
+                    value={datas?.node.adultTicket}
                     displayType={'text'}
                     thousandSeparator={true}
                     renderText={value => <div>{value}</div>}
@@ -107,7 +121,7 @@ export default function Card({ datas }) {
               <div className="xs:hidden space-y-1 lg:space-y-2">
                 <div className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
                   <CurrencyFormat
-                    value={datas.node.adultTicket}
+                    value={datas?.node.adultTicket}
                     displayType={'text'}
                     thousandSeparator={true}
                     renderText={value => <div>{value}</div>}
@@ -128,7 +142,7 @@ export default function Card({ datas }) {
             <div className={style.rowDirection}>
               <div>
                 <h1 className="text-cardDate font-semibold text-xs md:text-sm lg:text-md">
-                  {datas.node.directionName}
+                  {datas?.node.directionName}
                 </h1>
               </div>
               <div className="flex items-center space-x-8 justify-center">
@@ -158,7 +172,7 @@ export default function Card({ datas }) {
             <div className="px-5 lg:px-20 py-5 grid sm:grid-cols-2">
               <Steps progressDot direction="vertical" className="col-span-1">
                 <Step
-                  title={datas.node.leaveDate}
+                  title={datas?.node.leaveDate}
                   description={
                     datas?.node.startStopName +
                     ' /' +

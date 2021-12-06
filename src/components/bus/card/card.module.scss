@@ -16,7 +16,7 @@
     @apply py-5 grid grid-cols-2 lg:grid-cols-3 items-center text-center;
   }
   .orderButton {
-    @apply bg-button text-white font-thin md:font-bold md:py-1 px-4 rounded-lg h-8 md:h-10 text-center w-full lg:w-40 hover:bg-hover focus:bg-down;
+    @apply bg-button text-white md:font-bold md:py-1 px-4 rounded-lg h-8 md:h-10 text-center w-full lg:w-40 hover:bg-hover focus:bg-down;
   }
   .rightRound {
     @apply border-4 w-4 h-7 sm:w-6 sm:h-10 border-r-0 rounded-tl-full rounded-bl-full absolute right-0 bg-bg border-bg;

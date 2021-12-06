@@ -15,6 +15,8 @@ import ConfirmModal from '@components/common/confirmModal';
 import AuthService from '@services/auth';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import PaymentService from '@services/payment';
+import isEmpty from '@utils/isEmpty';
 
 const { Option } = Select;
 
@@ -22,21 +24,26 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const { t } = useTranslation(['steps']);
   const router = useRouter();
   const [isCompoany, setIsCompany] = useState(false);
-  const { customers, setCustomers } = useGlobalStore();
+  const { user, customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
-  const { setBooking } = useGlobalStore();
+  const { setBooking, setPayment } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState('');
   const [loading1, setLoading1] = useState('');
+  const isAuth = user ? true : false;
 
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 
-  const [addBusBooking, { data }] = useMutation(BUS_BOOKING_CREATE);
+  const [addBusBooking] = useMutation(BUS_BOOKING_CREATE);
 
   window.onpopstate = () => {
     router.push(`/bus/orders/${scheduleId}`);
     setCurrent(0);
+  };
+
+  const handleRegister = () => {
+    router.push('/auth/login');
   };
 
   const handleCompany = data => {
@@ -104,7 +111,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
     setSelectedSeats(formatSelectedSeats);
   };
 
-  const onFinish = async values => {
+  const onFinish = async () => {
     setLoading('true');
     let payload = {
       phone: customers.phoneNumber,
@@ -153,12 +160,25 @@ export default function PassengerIfo({ datas, scheduleId }) {
             pax: passengers,
           },
         });
-        if (data) setBooking(data.busBooking);
+        if (data) {
+          try {
+            setBooking(data.busBooking);
+            const res = await PaymentService.paymentMethods();
+            console.log(res);
+            if (res && res?.status === 200) {
+              if (!isEmpty(res?.result)) {
+                setPayment(res?.result);
+              }
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        }
+
         setCurrent(current + 1);
         setIsModalVisible(false);
         setLoading1('false');
       } catch (e) {
-        console.log(e);
         Modal.error({
           title: t('errorTitle'),
           content: e.message,
@@ -180,12 +200,17 @@ export default function PassengerIfo({ datas, scheduleId }) {
         <div className={style.content}>
           <ContentWrapper>
             <div className={style.root}>
-              <div className={style.regist}>
-                <p className="text-cardDate">{t('registrationContent')}</p>
-                <button className={style.registButton}>
-                  {t('registrationButton')}
-                </button>
-              </div>
+              {!isAuth && (
+                <div className={style.regist}>
+                  <p className="text-cardDate">{t('registrationContent')}</p>
+                  <button
+                    onClick={handleRegister}
+                    className={style.registButton}
+                  >
+                    {t('registrationButton')}
+                  </button>
+                </div>
+              )}
               <div className={style.Information}>
                 <h1 className={style.customerInfoTitle}>
                   {t('passengerInformationTitle')}
@@ -255,7 +280,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                       >
                         {t('passengerPhoneNumber')}
                       </label>
-                      <InputPhoneNumber />
+                      <InputPhoneNumber name="customerNumber" />
                     </div>
                   </div>
                 </div>
@@ -274,7 +299,9 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           {seat.isChild
                             ? t('passengerChild')
                             : t('passengerAdults')}{' '}
-                          {seat.isChild ? datas.childTicket : datas.adultTicket}
+                          {seat.isChild
+                            ? datas?.childTicket
+                            : datas?.adultTicket}
                         </h1>
                       </p>
                     </div>

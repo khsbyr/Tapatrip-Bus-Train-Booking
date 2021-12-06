@@ -3,8 +3,9 @@ import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import { Transition } from '@headlessui/react';
 import OrderCheck from '@components/bus/orderCheck';
 import SelectLanguage from '@components/common/language';
-import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
+import Profile from '@components/common/navbar/profile';
+import { useGlobalStore } from '@context/globalStore';
 
 interface Props {
   navbarData?: any;
@@ -13,6 +14,8 @@ interface Props {
 export default function SeatNav({ navbarData }) {
   const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useGlobalStore();
+  const isAuth = user ? true : false;
   return (
     <div>
       <nav
@@ -45,18 +48,19 @@ export default function SeatNav({ navbarData }) {
 
             <div className="flex items-center ">
               <div className="hidden md:block">
-                <div className="ml-10 flex items-baseline space-x-4">
+                <div className="ml-10 flex items-center space-x-4">
                   <OrderCheck />
                   <SelectLanguage isBlack={true} />
-
                   <div>
-                    <Link href="/auth/login">
-                      <a>
+                    {isAuth ? (
+                      <Profile data={user} />
+                    ) : (
+                      <a href="/auth/login">
                         <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40 hover:bg-red-500">
                           {t('login')}
                         </button>
                       </a>
-                    </Link>
+                    )}
                   </div>
                 </div>
               </div>
@@ -105,13 +109,15 @@ export default function SeatNav({ navbarData }) {
                   <OrderCheck />
                 </div>
                 <div>
-                  <Link href="/auth/login">
-                    <a>
+                  {isAuth ? (
+                    <Profile data={user} />
+                  ) : (
+                    <a href="/auth/login">
                       <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
                         {t('login')}
                       </button>
                     </a>
-                  </Link>
+                  )}
                 </div>
               </div>
             </div>

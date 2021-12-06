@@ -7,7 +7,7 @@ import Search from '@components/travel/Search-Travel';
 import ServicesCard from '@components/travel/Travel-Card/ServicesCard';
 import Tips from '@components/travel/Travel-Card/Tips';
 import TravelCard from '@components/travel/Travel-Card/TravelCard';
-
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Company from '@data/company.json';
 import NavData from '@data/navData.json';
 import TapaServiceList from '@data/tapaServiceList.json';
@@ -72,7 +72,7 @@ export default function Travel({ NavData, Packages, TipsFor, BannerItems }) {
     </div>
   );
 }
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const navData = NavData;
 
   const tour = await postRequest('/activity/package_tour/', {});
@@ -86,6 +86,7 @@ export const getStaticProps: GetStaticProps = async () => {
       Packages: tour.result,
       TipsFor: tips.result,
       BannerItems: bannerItems,
+      ...(await serverSideTranslations(locale, ['common', 'footer'])),
     },
   };
 };

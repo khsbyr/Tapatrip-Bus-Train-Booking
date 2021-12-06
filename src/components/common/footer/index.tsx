@@ -19,14 +19,15 @@ const Footer: FC<Props> = ({ companyInfo }) => {
             </h1>
             <div className="mt-5 text-cardDate mr-0 md:mr-10 space-y-1">
               <p>
-                <b>{t('addressTitle')}:</b>
+                <b className="pr-1">{t('addressTitle')}:</b>
                 {t('addressBody')}
               </p>
               <p>
-                <b>{t('addressPhonenumber')}:</b> (976)-75154444
+                <b className="pr-1">{t('addressPhonenumber')}:</b>{' '}
+                (976)-75154444
               </p>
               <p>
-                <b>{t('addressEmail')}:</b> crm@tapatrip.com
+                <b className="pr-1">{t('addressEmail')}:</b> crm@tapatrip.com
               </p>
             </div>
           </div>

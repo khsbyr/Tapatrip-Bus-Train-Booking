@@ -4,8 +4,10 @@ import OrderCheck from '@components/bus/orderCheck';
 import { Transition } from '@headlessui/react';
 import SearchInput from '@components/bus/searchInput';
 import Link from 'next/link';
+import Profile from '@components/common/navbar/profile';
 import SelectLanguage from '@components/common/language';
 import { useTranslation } from 'next-i18next';
+import { useGlobalStore } from '@context/globalStore';
 
 interface Props {
   navbarData?: any;
@@ -15,6 +17,8 @@ interface Props {
 export default function BusNavbar({ navbarData, startLocations }) {
   const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useGlobalStore();
+  const isAuth = user ? true : false;
   return (
     <div>
       <nav
@@ -59,13 +63,15 @@ export default function BusNavbar({ navbarData, startLocations }) {
                     <SelectLanguage isBlack={true} />
                   </div>
                   <div>
-                    <Link href="/auth/login">
+                    {isAuth ? (
+                      <Profile data={user} />
+                    ) : (
                       <a>
                         <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40 hover:bg-red-500">
                           {t('login')}
                         </button>
                       </a>
-                    </Link>
+                    )}
                   </div>
                 </div>
               </div>
@@ -75,7 +81,7 @@ export default function BusNavbar({ navbarData, startLocations }) {
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
-                className=" inline-flex items-center justify-center p-2 rounded-md text-gray-400 "
+                className=" inline-flex items-center justify-center p-2 rounded-md text-gray-400 mr-2"
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >
@@ -116,13 +122,15 @@ export default function BusNavbar({ navbarData, startLocations }) {
                   <OrderCheck />
                 </div>
                 <div>
-                  <Link href="/auth/login">
+                  {isAuth ? (
+                    <Profile data={user} />
+                  ) : (
                     <a>
                       <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
                         {t('login')}
                       </button>
                     </a>
-                  </Link>
+                  )}
                 </div>
               </div>
             </div>

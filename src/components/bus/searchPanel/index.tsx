@@ -16,10 +16,11 @@ interface Props {
 const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
   const { t } = useTranslation();
   const router = useRouter();
-  const activePath = router.route == '/travel' ? '3' : '4';
+  const activePath =
+    router.route == '/travel' ? '3' : router.route == '/train' ? '5' : '4';
 
   const handleTabChange = key => {
-    const route = key == 4 ? 'bus' : 'travel';
+    const route = key == 4 ? 'bus' : key == 3 ? '/travel' : '/train';
     router.push(`/${route}`);
   };
 
@@ -53,7 +54,9 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
                   <span className="text">{t(`${menu.text}`)}</span>
                 </div>
               }
-              disabled={menu.id !== 4 && menu.id !== 3 ? true : false}
+              disabled={
+                menu.id !== 4 && menu.id !== 3 && menu.id !== 5 ? true : false
+              }
               key={menu.id}
             />
           ))}

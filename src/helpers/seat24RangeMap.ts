@@ -1,6 +1,6 @@
 export default function set24RangeMap(seats) {
   const arr = [];
-  const n = seats.length / 3 + 1;
+  const n = seats?.length / 3 + 1;
   for (let k = 0, i = 0; i < n; i++) {
     const row = [];
 
