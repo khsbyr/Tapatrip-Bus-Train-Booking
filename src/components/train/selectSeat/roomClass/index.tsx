@@ -1,9 +1,9 @@
-export default function SelectSeat(params) {
+export default function SelectSeat() {
   return (
-    <div>
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
+    <div className="w-full">
+      <div className="max-w-7xl mx-auto">
+        <div>1</div>
+      </div>
     </div>
   );
 }

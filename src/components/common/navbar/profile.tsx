@@ -27,7 +27,7 @@ export default function Profile({ data }) {
     <div className="">
       <div onClick={onClick}>
         <button
-          className="flex items-center justify-between text-base rounded border w-56 md:w-auto border-profile bg-profile hover:border hover:bg-white text-cardDate hover:text-blue-600 py-2 px-3"
+          className="flex items-center justify-between text-base rounded border w-56 lg:w-auto border-profile bg-profile hover:border hover:bg-white text-cardDate hover:text-blue-600 py-2 px-3"
           onClick={() => setIsOpen(!isOpen)}
         >
           <p className="flex items-center">
