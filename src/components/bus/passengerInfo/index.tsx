@@ -164,7 +164,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
           try {
             setBooking(data.busBooking);
             const res = await PaymentService.paymentMethods();
-            console.log(res);
             if (res && res?.status === 200) {
               if (!isEmpty(res?.result)) {
                 setPayment(res?.result);

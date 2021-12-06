@@ -67,9 +67,7 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
         cbweb: true,
       };
       const res = await PaymentService.createInvoice(payload);
-      console.log(res);
       if (res && res?.status === 200) {
-        console.log('dd');
         setIsModalPayment(true);
       } else {
         message.warning(res.message);

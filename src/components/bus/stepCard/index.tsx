@@ -34,40 +34,17 @@ export default function StepCard({ datas, scheduleId }) {
       <div className="max-w-7xl mx-auto">
         <div className={style.card}>
           <div className="px-3 md:px-6 space-y-2 lg:space-y-4">
-            <div className="flex flex-wrap justify-between pt-5">
-              <div className="mb-4 sm:mb-0 space-y-0 sm:space-y-2">
+            <div className="flex flex-wrap justify-between">
+              <div className="mb-4 sm:mb-0 space-y-0 sm:space-y-2 pt-5">
                 <div className="flex space-x-8 items-center">
-                  <div
-                    className={
-                      datas?.locationEnd?.estimatedDuration === 0
-                        ? 'flex space-x-4'
-                        : ''
-                    }
-                  >
-                    <p
-                      className={
-                        datas?.locationEnd?.estimatedDuration === 0
-                          ? 'block text-cardDate font-medium text-sm'
-                          : 'hidden'
-                      }
-                    >
-                      Хөдлөх огноо:
-                    </p>
-                    <p>
-                      <h1 className={style.startTitle}>{datas?.leaveDate}</h1>
-                      <h1 className={style.timeText}>
-                        {datas?.leaveTime.slice(0, 5)}
-                      </h1>
-                    </p>
+                  <div>
+                    <h1 className={style.startTitle}>{datas?.leaveDate}</h1>
+                    <h1 className={style.timeText}>
+                      {datas?.leaveTime.slice(0, 5)}
+                    </h1>
                   </div>
                   <div>
-                    <p
-                      className={
-                        datas?.locationEnd?.estimatedDuration === 0
-                          ? 'hidden'
-                          : 'flex justify-center'
-                      }
-                    >
+                    <p className="flex justify-center">
                       <ArrowRightIcon className="h-5 text-direction" />
                     </p>
                     <h1
@@ -88,13 +65,7 @@ export default function StepCard({ datas, scheduleId }) {
                       </div>
                     </h1>
                   </div>
-                  <div
-                    className={
-                      datas?.locationEnd?.estimatedDuration === 0
-                        ? 'hidden'
-                        : 'block'
-                    }
-                  >
+                  <div>
                     <h1 className={style.startTitle}>
                       {moment.unix(unixDates).format('YYYY-MM-DD')}
                     </h1>
@@ -105,9 +76,9 @@ export default function StepCard({ datas, scheduleId }) {
                 </div>
               </div>
 
-              <div className="hidden xs:block space-y-1 lg:space-y-2">
-                <h1 className={style.priceText}>
-                  <h1 className="flex text-cardDate font-bold text-sm sm:text-base lg:text-sm space-x-2">
+              <div className="hidden xs:block space-y-1 lg:space-y-2 pt-5">
+                <div className={style.priceText}>
+                  <h1 className="flex text-cardDate font-bold text-sm sm:text-base space-x-2">
                     <CurrencyFormat
                       value={
                         formatSelectedSeats.length > 0
@@ -120,7 +91,7 @@ export default function StepCard({ datas, scheduleId }) {
                     />
                     <h1 className={style.priceText}>{' MNT'}</h1>
                   </h1>
-                </h1>
+                </div>
                 <h1 className="flex items-center text-xs md:text-sm lg:text-base">
                   <UserIcon className="w-3 md:w-4 h-3 md:h-4 " />
                   {formatSelectedSeats.length > 0

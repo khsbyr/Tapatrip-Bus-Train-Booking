@@ -14,7 +14,7 @@ interface Props {
   startLocations?: any;
 }
 
-export default function BusNavbar({ navbarData, startLocations }) {
+export default function BusNavbar({ startLocations }) {
   const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useGlobalStore();

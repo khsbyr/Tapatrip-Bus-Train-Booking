@@ -1,4 +1,3 @@
-import { Statistic } from 'antd';
 import {
   ChevronDownIcon,
   ChevronUpIcon,
@@ -14,7 +13,6 @@ import { useTranslation } from 'next-i18next';
 
 export default function Payment() {
   const { t } = useTranslation(['steps']);
-  const { Countdown } = Statistic;
   const [selected, setSelected] = useState(banks[0]);
   const [isSelected, setIsSelected] = useState(false);
   const { booking, setBooking } = useGlobalStore();

@@ -67,7 +67,7 @@ export default function Orders() {
   return (
     <Layout>
       <div className=" bg-bg">
-        <BusNavbar navbarData={NavData} startLocations={startLocations} />
+        <BusNavbar startLocations={startLocations} />
         <div className="max-w-7xl mx-auto my-5 grid grid-cols-1 lg:grid-cols-3">
           <div className="md:col-span-2 space-y-5">
             <div className="px-2">

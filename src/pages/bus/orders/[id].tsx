@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PassengerInfo from '@components/bus/passengerInfo';
-// import Payments from '@components/bus/payment';
-import Payments from '@components/bus/paymentTapatrip';
+import Payments from '@components/bus/payment';
+// import Payments from '@components/bus/paymentTapatrip';
 import { useQuery } from '@apollo/client';
 import { BUS_SCHEDULES_DETAIL_QUERY } from '@graphql/queries';
 import { Steps } from 'antd';
@@ -56,7 +56,6 @@ export default function Payment() {
 
   const scheduleDataResult =
     scheduleDataDetail === undefined ? '' : scheduleDataDetail.busSchedule;
-
   const steps = [
     {
       title: t('stepSelectSeat'),
@@ -82,7 +81,7 @@ export default function Payment() {
   return (
     <Layout>
       <div className="relative bg-bg">
-        <SeatNav navbarData={NavData} />
+        <SeatNav />
         <div className="bg-steps w-full">
           <div className="max-w-7xl mx-auto">
             <ContentWrapper>
