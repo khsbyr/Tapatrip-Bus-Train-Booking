@@ -40,7 +40,7 @@ export default function StepCard({ datas, scheduleId }) {
                   <div className="">
                     <h1 className={style.startTitle}>{datas.leaveDate}</h1>
                     <h1 className={style.timeText}>
-                      {datas.leaveTime.slice(0, 5)}
+                      {datas?.leaveTime?.slice(0, 5)}
                     </h1>
                   </div>
                   <div>
@@ -50,7 +50,7 @@ export default function StepCard({ datas, scheduleId }) {
                     <h1 className={style.timeText}>
                       <div className="flex items-center">
                         <CurrencyFormat
-                          value={datas.locationEnd.distance}
+                          value={datas?.locationEnd?.distance}
                           displayType={'text'}
                           thousandSeparator={true}
                           renderText={value => <div>{value}</div>}
@@ -96,7 +96,7 @@ export default function StepCard({ datas, scheduleId }) {
               </div>
             </div>
             <h1 className="flex text-sm text-cardDate">
-              {format(datas.locationEnd.estimatedDuration)}
+              {format(datas?.locationEnd?.estimatedDuration)}
             </h1>
             <div className="flex items-center pt-4 sm:pt-4">
               <div className={style.rightRound}></div>
@@ -129,20 +129,20 @@ export default function StepCard({ datas, scheduleId }) {
             <div className="px-5 lg:px-20 py-5 grid sm:grid-cols-2 lg:grid-cols-1">
               <Steps progressDot direction="vertical">
                 <Step
-                  title={datas.leaveDate}
+                  title={datas?.leaveDate}
                   description={
-                    datas.startStopName +
+                    datas?.startStopName +
                     ' /' +
-                    datas.locationEnd.locationStop.location.name +
+                    datas?.locationEnd?.locationStop?.location.name +
                     '/'
                   }
                 />
                 <Step
                   title={moment.unix(unixDates).format('YYYY-MM-DD')}
                   description={
-                    datas.locationEnd.locationEnd.name +
+                    datas?.locationEnd?.locationEnd?.name +
                     ' /' +
-                    datas.locationEnd.locationEnd.location.name +
+                    datas?.locationEnd?.locationEnd?.location.name +
                     '/'
                   }
                 />
@@ -151,7 +151,7 @@ export default function StepCard({ datas, scheduleId }) {
                 <h1 className="text-base text-cardDate font-normal pr-2">
                   {t('insuranceCompany')}:
                 </h1>
-                <p>{datas.insurance.name}</p>
+                <p>{datas?.insurance?.name}</p>
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-export default function setRangeMap(seats) {
+export default function setRangeMap(seats = '') {
   const arr = [];
   const n = seats?.length - 5;
   let i1, k1;

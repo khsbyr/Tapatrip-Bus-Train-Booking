@@ -29,8 +29,8 @@ export default function payTransferTapa({ corporate }) {
     <DuplicateIcon className="text-secondary h-6 w-6  hover:text-indigo-300" />
   );
 
-  const copyToBankName = orderNum => {
-    navigator.clipboard.writeText(orderNum);
+  const copyToBankName = name => {
+    navigator.clipboard.writeText(name);
     (async () => {
       setCopyBankName(<CheckIcon className="text-secondary h-6 w-6" />);
       await delay(500);
@@ -51,8 +51,8 @@ export default function payTransferTapa({ corporate }) {
     })();
   };
 
-  const copyToTotalPrice = orderNum => {
-    navigator.clipboard.writeText(orderNum);
+  const copyToTotalPrice = price => {
+    navigator.clipboard.writeText(price);
     (async () => {
       setCopyTotalPrice(<CheckIcon className="text-secondary h-6 w-6" />);
       await delay(500);
@@ -62,8 +62,8 @@ export default function payTransferTapa({ corporate }) {
     })();
   };
 
-  const copyToAccNumber = bank => {
-    navigator.clipboard.writeText(bank.accnum);
+  const copyToAccNumber = accnum => {
+    navigator.clipboard.writeText(accnum);
     (async () => {
       setCopyAccNumber(<CheckIcon className="text-secondary h-6 w-6" />);
       await delay(500);
@@ -73,8 +73,8 @@ export default function payTransferTapa({ corporate }) {
     })();
   };
 
-  const copyToAccName = bank => {
-    navigator.clipboard.writeText(bank.accname);
+  const copyToAccName = accname => {
+    navigator.clipboard.writeText(accname);
     (async () => {
       setCopyAccName(<CheckIcon className="text-secondary h-6 w-6" />);
       await delay(500);

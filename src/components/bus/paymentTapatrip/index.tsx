@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useGlobalStore } from '@context/globalStore';
 import { useRouter } from 'next/router';
-import { Statistic, Radio, Space, Modal } from 'antd';
+import { Statistic, Radio, Modal, message } from 'antd';
 // import PayTransfer from '@components/bus/payTransfer';
 import PayTransferTapa from '@components/bus/payTransferTapa';
 import style from './payment.module.scss';
@@ -11,14 +11,16 @@ import PaymentCard from '../paymentCard';
 import EndModal from '@components/common/endModal';
 import { useTranslation } from 'next-i18next';
 import { CheckIcon } from '@heroicons/react/solid';
-// import PaymentService from '@services/payment';
-// import isEmpty from '@utils/isEmpty';
+import PaymentService from '@services/payment';
+import isEmpty from '@utils/isEmpty';
 
 export default function PaymentTapatrip({ datas, scheduleId }) {
   const { t } = useTranslation(['steps']);
   const router = useRouter();
-  const { setCurrent, booking, payment } = useGlobalStore();
+  const { setCurrent, payment, booking } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalPayment, setIsModalPayment] = useState(false);
+  const [selectedPayment, setSelectedPayment] = useState(payment?.ecommerce[0]);
   const { Countdown } = Statistic;
   const deadline = Date.now() + 60 * 60 * 333.3;
 
@@ -54,6 +56,31 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
 
   const closeModal = () => {
     setIsModalVisible(false);
+    setIsModalPayment(false);
+  };
+
+  const handlePayment = async () => {
+    try {
+      const payload = {
+        payment_type: selectedPayment.name,
+        ref_number: booking.refNumber,
+        cbweb: true,
+      };
+      const res = await PaymentService.createInvoice(payload);
+      console.log(res);
+      if (res && res?.status === 200) {
+        console.log('dd');
+        setIsModalPayment(true);
+      } else {
+        message.warning(res.message);
+      }
+    } catch (err) {
+      message.warning(err.message);
+    }
+  };
+
+  const onChange = e => {
+    setSelectedPayment(e.target.value);
   };
 
   return (
@@ -89,13 +116,14 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
               <p className="text-sm font-medium">{t('paymentCardAppTitle')}</p>
               <Radio.Group
                 name="radiogroup"
-                defaultValue={0}
+                value={selectedPayment}
+                onChange={onChange}
                 className="grid gap-3 sm:grid-cols-2 sm:gap-4"
               >
                 {payment?.ecommerce &&
                   payment?.ecommerce.map(bank => (
                     <Radio
-                      value={bank.name}
+                      value={bank}
                       className="w-full flex-row-reverse justify-between items-start border rounded p-2 hover:bg-gray-50"
                     >
                       <div className="flex items-center font-medium space-x-3 w-56 md:w-72 lg:w-52 xl:w-72">
@@ -106,7 +134,10 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
                   ))}
               </Radio.Group>
               <div className="flex justify-center">
-                <button className="bg-homeLogin flex justify-center text-white space-x-3 py-2 rounded w-full sm:w-1/3 hover:bg-blue-900">
+                <button
+                  onClick={handlePayment}
+                  className="bg-homeLogin flex justify-center text-white space-x-3 py-2 rounded w-full sm:w-1/3 hover:bg-blue-900"
+                >
                   <CheckIcon className="h-6 w-6" />
                   <p>{t('paymentButton')}</p>
                 </button>
@@ -130,6 +161,9 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
       </div>
       {isModalVisible && (
         <EndModal isModalVisible={isModalVisible} close={closeModal} />
+      )}
+      {isModalPayment && (
+        <EndModal isModalVisible={isModalPayment} close={closeModal} />
       )}
     </ContentWrapper>
   );
