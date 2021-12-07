@@ -80,7 +80,7 @@ export default function Payment() {
   return (
     <Layout>
       <div className="relative bg-bg">
-        <SeatNav props={false} />
+        <SeatNav />
         <div className="bg-steps w-full">
           <div className="max-w-7xl mx-auto">
             <ContentWrapper>

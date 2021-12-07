@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import NavbarProfile from '@components/bus/seatNavbar';
 import { Form, Statistic, Input, Modal } from 'antd';
 import InputPhoneNumber from '@components/common/phoneNumber';
 import ContentWrapper from '@components/bus/orderModal/style';
-import NavData from '@data/navData.json';
 import { Tabs } from 'antd';
 import Footer from '@components/common/footer';
 import Company from '@data/company.json';
@@ -18,6 +16,7 @@ import ReactCodeInput from 'react-verification-code-input';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import style from './login.module.scss';
+import SeatNav from '@components/bus/seatNavbar';
 
 const Login = () => {
   const { t } = useTranslation(['common']);
@@ -407,7 +406,7 @@ const Login = () => {
         <title>{t('login')}</title>
       </Head>
       <div className="fixed z-20 w-screen top-0">
-        <NavbarProfile />
+        <SeatNav />
       </div>
       <div className="flex relative mt-10 lg:mt-20 bg-bg">
         {/* <div className="absolute">
