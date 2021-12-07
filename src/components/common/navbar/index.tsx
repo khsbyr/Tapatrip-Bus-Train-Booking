@@ -90,7 +90,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     } flex text-base font-bold cursor-pointer mr-5 hover:bg-onlineSupport hover:text-white hover:rounded px-3 py-2`}
                   >
                     <PhoneIcon className="w-4" />
-                    <p className="pl-2">7515-4444</p>
+                    <p className="pl-2">7515 4444</p>
                   </div>
                 </a>
                 <div className={styles.loginBody}>
@@ -182,37 +182,10 @@ const Navbar: FC<Props> = ({ navbarData }) => {
 
                 <div className={styles.loginBody}>
                   {isAuth ? (
-                    // <Profile data={user} />
-                    <div className="text-cardDate">
-                      <a className="flex items-center text-base border-4 border-white  hover:border-blue-200 p-2 rounded hover:text-cardDate">
-                        <img
-                          src="/assets/profile1.png"
-                          alt=""
-                          width="30"
-                          className="rounded-full"
-                        />
-                        <p className="space-y-1 pl-4 text-sm">
-                          {user?.phone} <p>{t('customerSection')}</p>
-                        </p>
-                      </a>
-                      <a
-                        className="flex items-center border-2 border-white  hover:border-blue-200 rounded p-2 hover:text-cardDate"
-                        href=""
-                      >
-                        <CheckIcon className="pr-2 h-5" />
-                        {t('myOrders')}
-                      </a>
-                      <a
-                        className="flex items-center rounded border-4 border-white  hover:border-blue-200 p-2 text-red-600 hover:text-red-600"
-                        href="/"
-                      >
-                        <LogoutIcon className="pr-2 h-5" />
-                        {t('logout')}
-                      </a>
-                    </div>
+                    <Profile data={user} />
                   ) : (
                     <a href="/auth/login">
-                      <button className={styles.loginButton}>
+                      <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
                         {t('login')}
                       </button>
                     </a>
