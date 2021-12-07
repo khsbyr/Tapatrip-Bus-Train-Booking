@@ -15,7 +15,7 @@ const TapaService: FC<Props> = ({ tapaServiceList }) => {
           <div className="ml-5">
             <h1 className={styles.title}>{t(`${service.title}`)}</h1>
             <p className="text-sm" style={{ color: '#0A3761' }}>
-              {t(`${service.body}`)}
+              {/* {t(`${service.body}`)} */}
             </p>
           </div>
         </div>

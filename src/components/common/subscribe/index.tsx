@@ -40,29 +40,28 @@ const Subscribe: FC = () => {
       <Form validateMessages={validateMessages}>
         <div className={styles.body}>
           <div className={styles.application}>
-            <div className="flex">
+            <div className="flex items-center">
               <div className={styles.image}>
-                <img src="assets/Application.png" className="h-32" />
+                <img src="assets/Application.png" className="" />
               </div>
               <div className={styles.childBody}>
                 <h1 className={styles.title}>{t('appDownloadTitle')}</h1>
-                <p className={styles.description}>{t('appDownloadBody')}</p>
+                {/* <p className={styles.description}>{t('appDownloadBody')}</p> */}
+
                 <div className={styles.download}>
                   <a
-                    className="mr-1"
+                    className=""
                     target="_blank"
                     href="https://apps.apple.com/mn/app/tapatrip-hotel-flight-travel/id1563199559?fbclid=IwAR3t5NGJY47n1B1yZA2VssPtRtdpZykA0dxF6yPLZBB-hZLHHYZ1eocNnhE"
                   >
-                    <div className="flex justify-between px-2 rounded-md bg-black text-white w-28 h-10 hover:bg-gray-700 items-center">
-                      <div className="">
-                        <img src="/assets/apple.png" height="24" width="24" />
-                      </div>
+                    <div className="flex justify-between px-2 rounded-md bg-black text-white w-24 h-10 hover:bg-gray-700 items-center">
+                      <img src="/assets/apple.png" height="20" width="20" />
                       <div className="">
                         <h1 className="text-small text-white">
                           Download on the
                         </h1>
-                        <h1 className="text-xs text-white font-medium">
-                          App Store
+                        <h1 className="text-small text-white font-bold">
+                          APP STORE
                         </h1>
                       </div>
                     </div>
@@ -72,17 +71,11 @@ const Subscribe: FC = () => {
                     target="_blank"
                     href="https://play.google.com/store/apps/details?id=com.tapatrip"
                   >
-                    <div className="flex justify-between px-2 rounded-md bg-black text-white w-28 h-10 hover:bg-gray-700 items-center">
+                    <div className="flex justify-between px-2 rounded-md bg-black text-white w-24 h-10 hover:bg-gray-700 items-center">
+                      <img src="/assets/playStore.png" height="24" width="24" />
                       <div className="">
-                        <img
-                          src="/assets/playStore.png"
-                          height="24"
-                          width="24"
-                        />
-                      </div>
-                      <div className="">
-                        <h1 className="text-small text-white">GET IT ON</h1>
-                        <h1 className="text-xs text-white font-medium">
+                        <h1 className="text-small text-white">Get it on</h1>
+                        <h1 className="text-small text-white font-bold">
                           Google Play
                         </h1>
                       </div>
@@ -93,14 +86,12 @@ const Subscribe: FC = () => {
                     target="_blank"
                     href="https://appgallery.huawei.com/?fbclid=IwAR1-w45U-mLLn7IC23ClYziQPiZWTRU7lqfC5ODJUpkiqaRHL9i08XCvVPc#/app/C104355437"
                   >
-                    <div className="flex justify-between px-2 rounded-md bg-black text-white w-28 h-10 hover:bg-gray-700 items-center">
+                    <div className="flex justify-between px-2 gap-1 rounded-md bg-black text-white w-24 h-10 hover:bg-gray-700 items-center">
+                      <img src="/assets/huawei.png" height="24" width="24" />
                       <div className="">
-                        <img src="/assets/huawei.png" height="24" width="24" />
-                      </div>
-                      <div className="">
-                        <h1 className="text-small text-white">EXPLORE IT ON</h1>
-                        <h1 className="text-xs text-white font-medium">
-                          AppGallery
+                        {/* <h1 className="text-small text-white">EXPLORE IT ON</h1> */}
+                        <h1 className="text-small text-white font-bold">
+                          APP GALLERY
                         </h1>
                       </div>
                     </div>
@@ -109,8 +100,13 @@ const Subscribe: FC = () => {
               </div>
             </div>
           </div>
-
           <div className={styles.application}>
+            <img src="/assets/svgIcons/trip.svg" alt="" width="200" />
+            <h1 className="text-cardDate flex justify-center font-semibold lg:text-base text-center md:text-left text-sm">
+              Зорчигчийн анхаарах зүйлс
+            </h1>
+          </div>
+          {/* <div className={styles.application}>
             <div className="flex">
               <div className={styles.image}>
                 <img src="assets/mail1.png" className="h-28 px-5" />
@@ -146,7 +142,7 @@ const Subscribe: FC = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </Form>
     </ContentWrapper>
