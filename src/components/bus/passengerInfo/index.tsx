@@ -15,8 +15,6 @@ import ConfirmModal from '@components/common/confirmModal';
 import AuthService from '@services/auth';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import PaymentService from '@services/payment';
-import isEmpty from '@utils/isEmpty';
 
 const { Option } = Select;
 
@@ -26,11 +24,13 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const [isCompoany, setIsCompany] = useState(false);
   const { user, customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
-  const { setBooking, setPayment } = useGlobalStore();
+  const { setBooking } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState('');
   const [loading1, setLoading1] = useState('');
+
   const isAuth = user ? true : false;
 
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
@@ -103,29 +103,54 @@ export default function PassengerIfo({ datas, scheduleId }) {
 
   const handlePassengerSurname = e => {
     formatSelectedSeats[e.target.id - 1].lastName = e.target.value;
+    formatSelectedSeats[e.target.id - 1].lastNameError = '';
     setSelectedSeats(formatSelectedSeats);
   };
 
   const handlePassengerFirstname = e => {
     formatSelectedSeats[e.target.id - 1].firstName = e.target.value;
+    formatSelectedSeats[e.target.id - 1].firstNameError = '';
     setSelectedSeats(formatSelectedSeats);
   };
 
   const onFinish = async () => {
-    setLoading('true');
-    let payload = {
-      phone: customers.phoneNumber,
-      dialCode: customers.dialNumber,
-    };
-    const result = await AuthService.verifySms(payload);
-    if (result) setIsModalVisible(true), setLoading('false');
-    else {
-      Modal.error({
-        title: t('errorTitle'),
-        content: t('errorContent'),
+    var p1 = new Promise((resolve, reject) => {
+      formatSelectedSeats.forEach(async (element, i) => {
+        formatSelectedSeats[i].lastNameError = element.lastName
+          ? ''
+          : 'Та овог нэрээ оруулна уу?';
+        formatSelectedSeats[i].firstNameError = element.firstName
+          ? ''
+          : 'Та нэрээ оруулна уу?';
+        setSelectedSeats(formatSelectedSeats);
+        if (element.lastName === '' || element.firstName === '') {
+          reject(new Error('Error!'));
+        }
       });
-      setLoading('false');
-    }
+      resolve('Success!');
+    });
+
+    p1.then(
+      async () => {
+        setLoading('true');
+        let payload = {
+          phone: customers.phoneNumber,
+          dialCode: customers.dialNumber,
+        };
+        const result = await AuthService.verifySms(payload);
+        if (result) setIsModalVisible(true), setLoading('false');
+        else {
+          Modal.error({
+            title: t('errorTitle'),
+            content: t('errorContent'),
+          });
+          setLoading('false');
+        }
+      },
+      reason => {
+        console.error(reason); // Error!
+      }
+    );
   };
 
   const handleBooking = async pinCode => {
@@ -160,21 +185,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
             pax: passengers,
           },
         });
-        if (data) {
-          try {
-            setBooking(data.busBooking);
-            const res = await PaymentService.paymentMethods();
-            console.log(res);
-            if (res && res?.status === 200) {
-              if (!isEmpty(res?.result)) {
-                setPayment(res?.result);
-              }
-            }
-          } catch (err) {
-            console.log(err);
-          }
-        }
-
+        if (data) setBooking(data?.busBooking);
         setCurrent(current + 1);
         setIsModalVisible(false);
         setLoading1('false');
@@ -322,15 +333,24 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           <label className={style.Label} htmlFor="Vaccine">
                             {t('checkVaccineTitle')}
                           </label>
-                          <Input
+                          {/* <Input
                             disabled
                             value={
-                              seat.isVaccine
+                              seat.documentNumber === ''
+                                ? '?'
+                                : seat.isVaccine
                                 ? '' + t('yesVaccine') + ''
                                 : '' + t('noVaccine') + ''
                             }
                             className={style.input}
-                          />
+                          /> */}
+                          <p className={style.input}>
+                            {seat.documentNumber === ''
+                              ? '?'
+                              : seat.isVaccine
+                              ? '' + t('yesVaccine') + ''
+                              : '' + t('noVaccine') + ''}
+                          </p>
                         </div>
                       </div>
                       <div className={style.InfoForm}>
@@ -338,15 +358,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           <label className={style.Label} htmlFor="lastName">
                             {t('passengerLastName')}
                           </label>
-                          {/* <Form.Item
-                            name={'lastName' + i}
-                            rules={[
-                              {
-                                required: true,
-                                message: 'Зорчигчийн овгийг заавал бөглөнө үү!',
-                              },
-                            ]}
-                          > */}
                           <Input
                             onChange={handlePassengerSurname}
                             id={i}
@@ -354,21 +365,16 @@ export default function PassengerIfo({ datas, scheduleId }) {
                             className={style.input}
                             placeholder={t('passengerLastNamePlaceholder')}
                           />
-                          {/* </Form.Item> */}
+                          {seat.lastNameError && (
+                            <span className="text-red-500 text-sm">
+                              {seat.lastNameError}
+                            </span>
+                          )}
                         </div>
                         <div className={style.rightContent}>
                           <label className={style.Label} htmlFor="firstName">
                             {t('passengerFirstName')}
                           </label>
-                          {/* <Form.Item
-                            name={'firstName' + i}
-                            rules={[
-                              {
-                                required: true,
-                                message: 'Зорчигчийн нэрийг заавал бөглөнө үү!',
-                              },
-                            ]}
-                          > */}
                           <Input
                             id={i}
                             onChange={handlePassengerFirstname}
@@ -376,7 +382,11 @@ export default function PassengerIfo({ datas, scheduleId }) {
                             value={seat.firstName}
                             placeholder={t('passengerFirstNamePlaceholder')}
                           />
-                          {/* </Form.Item> */}
+                          {seat.firstNameError && (
+                            <span className="text-red-500 text-sm">
+                              {seat.firstNameError}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>

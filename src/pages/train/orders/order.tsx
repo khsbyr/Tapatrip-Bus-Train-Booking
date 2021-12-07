@@ -31,7 +31,7 @@ export default function Order() {
 
   return (
     <div className="relative bg-bg">
-      <SeatNav navbarData={NavData} />
+      <SeatNav />
       <div className="bg-steps w-full">
         <div className="max-w-7xl mx-auto">
           <ContentWrapper>

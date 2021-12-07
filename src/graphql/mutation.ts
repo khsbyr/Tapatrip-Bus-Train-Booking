@@ -34,6 +34,8 @@ export const BUS_BOOKING_CHECK = gql`
           driverPhone
           adultTicket
           childTicket
+          adultInsurance
+          childInsurance
           startStopName
           leaveTime
           endStopName
@@ -116,6 +118,7 @@ export const BUS_BOOKING_CREATE = gql`
         pax: $pax
       }
     ) {
+      orderNumber
       toPay
       ebarimt
       totalFare
@@ -123,6 +126,7 @@ export const BUS_BOOKING_CREATE = gql`
       statusName
       refNumber
       clientMutationId
+      payment
     }
   }
 `;

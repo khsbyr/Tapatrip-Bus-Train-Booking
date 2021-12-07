@@ -7,8 +7,10 @@ import {
 import { UserCircleIcon } from '@heroicons/react/solid';
 import { useState } from 'react';
 import AuthService from '@services/auth';
+import { useTranslation } from 'next-i18next';
 
 export default function Profile({ data }) {
+  const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
 
@@ -52,23 +54,23 @@ export default function Profile({ data }) {
         className={`${
           !isOpen
             ? 'hidden'
-            : 'bg-white absolute block rounded shadow-lg p-3 z-20 text-sm text-cardDate w-60 md:-ml-20'
+            : 'bg-white absolute block rounded shadow-lg p-3 z-20 text-sm text-cardDate w-56 md:w-60 md:-ml-20'
         }`}
         onClick={select}
       >
         <a
           className="flex items-center rounded p-4 hover:bg-bg border-b border-dotted hover:text-cardDate"
-          href="#"
+          href="/bus/profile"
         >
           <UserCircleIcon className="pr-2 h-5" />
-          Хэрэглэгчийн хэсэг
+          {t('customerSection')}
         </a>
         <a
           className="flex items-center p-4 hover:bg-bg rounded border-b border-dotted hover:text-cardDate"
-          href="#"
+          href="/bus/profile/myOrders"
         >
           <DocumentIcon className="pr-2 h-5" />
-          Миний захиалгууд
+          {t('myOrders')}
         </a>
         <a
           className="flex items-center hover:bg-red-100 rounded p-4 hover:text-cardDate"
@@ -76,7 +78,7 @@ export default function Profile({ data }) {
           onClick={handleLogout}
         >
           <LogoutIcon className="pr-2 h-5" />
-          Системээс гарах
+          {t('logout')}
         </a>
       </div>
     </div>

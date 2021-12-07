@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import PassengerInfo from '@components/bus/passengerInfo';
-// import Payments from '@components/bus/payment';
-import Payments from '@components/bus/paymentTapatrip';
+import Payments from '@components/bus/payment';
+// import Payments from '@components/bus/paymentTapatrip';
 import { useQuery } from '@apollo/client';
 import { BUS_SCHEDULES_DETAIL_QUERY } from '@graphql/queries';
 import { Steps } from 'antd';
-import NavData from '@data/navData.json';
 import SelectSeats from '@components/bus/selectSeats';
 import ContentWrapper from './style';
 import Layout from '@components/common/layout';
@@ -56,7 +55,6 @@ export default function Payment() {
 
   const scheduleDataResult =
     scheduleDataDetail === undefined ? '' : scheduleDataDetail.busSchedule;
-
   const steps = [
     {
       title: t('stepSelectSeat'),
@@ -82,7 +80,7 @@ export default function Payment() {
   return (
     <Layout>
       <div className="relative bg-bg">
-        <SeatNav navbarData={NavData} />
+        <SeatNav />
         <div className="bg-steps w-full">
           <div className="max-w-7xl mx-auto">
             <ContentWrapper>
@@ -95,7 +93,10 @@ export default function Payment() {
                 className="site-navigation-steps max-w-2xl mr-auto hidden md:flex"
               >
                 {steps.map(item => (
-                  <Step key={item.title} icon=" " title={item.title} />
+                  <>
+                    <Step key={item.title} icon=" " title={item.title} />
+                    {item.title !== t('stepPayment') ? true : false}
+                  </>
                 ))}
               </Steps>
             </ContentWrapper>

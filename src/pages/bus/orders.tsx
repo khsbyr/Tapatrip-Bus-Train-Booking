@@ -57,24 +57,29 @@ export default function Orders() {
       leaveDate: date ? date + ',' + endDate : '',
     },
   });
-
   if (error) return `Error! ${error.message}`;
 
   const scheduleResult =
     scheduleData === undefined ? '' : scheduleData.busAllSchedules.edges;
   const startLocations = arrayFormat(data);
+  console.log(scheduleResult[0]?.node?.leaveDate);
+  console.log(date);
 
   return (
     <Layout>
       <div className=" bg-bg">
-        <BusNavbar navbarData={NavData} startLocations={startLocations} />
+        <BusNavbar startLocations={startLocations} />
         <div className="max-w-7xl mx-auto my-5 grid grid-cols-1 lg:grid-cols-3">
           <div className="md:col-span-2 space-y-5">
-            <div className="px-2">
+            <div
+              className={
+                date === scheduleResult[0]?.node?.leaveDate ? 'hidden' : 'px-2'
+              }
+            >
               <div className="bg-alert border border-alert h-auto flex items-center rounded-2xl space-x-5 px-2">
                 <ShieldExclamationIcon className="w-7 h-7 ml-2 lg:ml-12 text-alert flex-shrink-0" />
                 <p className="text-alert font-bold text-md md:text-lg py-3">
-                  {t('covid19TripInformation')}
+                  {t('warningTripInformation')}
                 </p>
               </div>
             </div>

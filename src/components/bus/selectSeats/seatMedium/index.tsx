@@ -23,6 +23,9 @@ const SeatMedium = ({ datas, scheduleId }) => {
         gender: '',
         isChild: false,
         isVaccine: false,
+        lastNameError: '',
+        firstNameError: '',
+        registerError: '',
         seatNumber: e.target.value,
       };
       seats.push(passenger);
