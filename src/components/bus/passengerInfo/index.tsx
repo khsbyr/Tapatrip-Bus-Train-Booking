@@ -160,20 +160,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
             pax: passengers,
           },
         });
-        if (data) {
-          try {
-            setBooking(data.busBooking);
-            const res = await PaymentService.paymentMethods();
-            if (res && res?.status === 200) {
-              if (!isEmpty(res?.result)) {
-                setPayment(res?.result);
-              }
-            }
-          } catch (err) {
-            console.log(err);
-          }
-        }
-
+        if (data) setBooking(data?.busBooking);
         setCurrent(current + 1);
         setIsModalVisible(false);
         setLoading1('false');

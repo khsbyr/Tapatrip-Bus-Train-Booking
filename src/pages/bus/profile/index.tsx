@@ -12,7 +12,7 @@ export default function index() {
       <Head>
         <title>Tapatrip - Online Travel Platform</title>
       </Head>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="w-full">
         <div className="max-w-7xl mx-auto bg-bg">

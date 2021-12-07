@@ -4,10 +4,12 @@ import { DuplicateIcon } from '@heroicons/react/outline';
 import { CheckIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'next-i18next';
 import banks from '@data/bankInformation.json';
+
 export default function payTransferTapa() {
   const { t } = useTranslation(['steps']);
   const { booking } = useGlobalStore();
   const [bankIndex, setBankIndex] = useState(0);
+  console.log(booking);
 
   const [copyBankName, setCopyBankName] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6  hover:text-indigo-300" />
@@ -99,7 +101,7 @@ export default function payTransferTapa() {
               >
                 <div className="flex justify-between w-full">
                   <div className="flex items-center space-x-2">
-                    <img src={bank.src} alt="" width="35" />
+                    <img src={bank.image} alt="" width="35" />
                     <p>{bank.name}</p>
                   </div>
                   <button className="bg-bg hover:bg-gray-200 px-2 py-1 rounded font-medium">
@@ -133,7 +135,6 @@ export default function payTransferTapa() {
           <div className="flex justify-between border-b-2 border-dotted py-2">
             <p>{t('accountName')}</p>
             <div className="flex">
-              {console.log(banks[bankIndex].accountName)}
               <p className="pr-2">{banks[bankIndex].accountName}</p>
               <button
                 onClick={() => copyToAccName(banks[bankIndex].accountName)}
@@ -154,8 +155,8 @@ export default function payTransferTapa() {
           <div className="flex justify-between py-2">
             <p>{t('transactionValue')}</p>
             <div className="flex">
-              <p className="pr-2">{booking.refNumber}</p>
-              <button onClick={() => copyToOrderNumber(booking.refNumber)}>
+              <p className="pr-2">{booking.orderNumber}</p>
+              <button onClick={() => copyToOrderNumber(booking.orderNumber)}>
                 {copyOrderNumber}
               </button>
             </div>

@@ -72,7 +72,7 @@ export default function Card({ datas }) {
                       {moment.unix(unixDates).format('YYYY-MM-DD')}
                     </h1>
                     <h1 className="flex justify-end font-light text-cardDate text-xs md:text-sm lg:text-lg">
-                      {moment.unix(unixDates).format('hh:mm')}
+                      {moment.unix(unixDates).format('HH:mm')}
                     </h1>
                   </div>
                 </div>

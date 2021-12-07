@@ -1,6 +1,6 @@
 [
   {
-    "src": "/assets/khan.png",
+    "image": "/assets/khan.png",
     "name": "Хаан банк",
     "value": 0,
     "accountNumber": "5057397049",
@@ -8,7 +8,7 @@
   },
   {
     "name": "Голомт банк",
-    "src": "/assets/golomt.png",
+    "image": "/assets/golomt.png",
     "value": 1,
     "accountNumber": "1605186111",
     "accountName": "АВТО ТЭЭВРИЙН ҮНДЭСНИЙ ТӨВ"

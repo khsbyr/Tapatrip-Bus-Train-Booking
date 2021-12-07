@@ -15,7 +15,6 @@ const RegisterNumber = ({
   passengerNumber = 0,
   scheduleId = '',
 }) => {
-  console.log(registNo);
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);

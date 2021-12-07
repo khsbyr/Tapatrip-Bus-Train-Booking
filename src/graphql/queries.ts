@@ -140,6 +140,8 @@ export const BUS_SCHEDULES_DETAIL_QUERY = gql`
       driverPhone
       adultTicket
       childTicket
+      adultInsurance
+      childInsurance
       startStopName
       directionName
       locationEnd {
