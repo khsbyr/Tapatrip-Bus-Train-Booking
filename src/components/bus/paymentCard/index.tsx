@@ -26,7 +26,7 @@ export default function PaymentCard({ datas, scheduleId }) {
           <p>{persons.length + ' ' + t('adult')}</p>
           <p className="flex">
             <CurrencyFormat
-              value={datas.adultTicket * persons.length}
+              value={datas?.adultTicket * persons.length}
               displayType={'text'}
               thousandSeparator={true}
               renderText={value => <div>{value}</div>}
@@ -39,7 +39,7 @@ export default function PaymentCard({ datas, scheduleId }) {
         <p> {'Амь даатгал үнэ (Том хүн)'}</p>
         <p className="flex">
           <CurrencyFormat
-            value={1000}
+            value={datas?.adultInsurance * persons.length}
             displayType={'text'}
             thousandSeparator={true}
             renderText={value => <div>{value}</div>}
@@ -48,33 +48,35 @@ export default function PaymentCard({ datas, scheduleId }) {
         </p>
       </div>
       {childs.length > 0 && (
-        <div className="flex justify-between">
-          <p>
-            {childs.length} {t('child')}
-          </p>
-          <p className="flex">
-            <CurrencyFormat
-              value={datas?.childTicket * childs.length}
-              displayType={'text'}
-              thousandSeparator={true}
-              renderText={value => <div>{value}</div>}
-            />
-            ₮
-          </p>
-        </div>
+        <>
+          <div className="flex justify-between">
+            <p>
+              {childs.length} {t('child')}
+            </p>
+            <p className="flex">
+              <CurrencyFormat
+                value={datas?.childTicket * childs.length}
+                displayType={'text'}
+                thousandSeparator={true}
+                renderText={value => <div>{value}</div>}
+              />
+              ₮
+            </p>
+          </div>
+          <div className="flex justify-between text-sm">
+            <p> {'Амь даатгал үнэ (Хүүхэд)'}</p>
+            <p className="flex">
+              <CurrencyFormat
+                value={datas?.childInsurance * childs.length}
+                displayType={'text'}
+                thousandSeparator={true}
+                renderText={value => <div>{value}</div>}
+              />
+              ₮
+            </p>
+          </div>
+        </>
       )}
-      <div className="flex justify-between text-sm">
-        <p> {'Амь даатгал үнэ (Хүүхэд)'}</p>
-        <p className="flex">
-          <CurrencyFormat
-            value={400}
-            displayType={'text'}
-            thousandSeparator={true}
-            renderText={value => <div>{value}</div>}
-          />
-          ₮
-        </p>
-      </div>
       <div className="flex justify-between font-bold">
         <p> {t('totalPrice')}</p>
         <p className="flex">

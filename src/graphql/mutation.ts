@@ -34,6 +34,8 @@ export const BUS_BOOKING_CHECK = gql`
           driverPhone
           adultTicket
           childTicket
+          adultInsurance
+          childInsurance
           startStopName
           leaveTime
           endStopName
