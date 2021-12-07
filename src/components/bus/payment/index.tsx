@@ -19,10 +19,10 @@ export default function Payment({ datas, scheduleId }) {
   const { Countdown } = Statistic;
   const deadline = Date.now() + 60 * 60 * 333.3;
   const { booking } = useGlobalStore();
-  // const qrCode =
-  //   JSON.parse(booking.payment)[0].invoice.qPay_QRimage === undefined
-  //     ? JSON.parse(booking.payment)[1].invoice.qPay_QRimage
-  //     : JSON.parse(booking.payment)[0].invoice.qPay_QRimage;
+  const qrCode =
+    JSON.parse(booking.payment)[0].invoice.qPay_QRimage === undefined
+      ? JSON.parse(booking.payment)[1].invoice.qPay_QRimage
+      : JSON.parse(booking.payment)[0].invoice.qPay_QRimage;
 
   window.onpopstate = () => {
     Modal.warning({
@@ -76,9 +76,9 @@ export default function Payment({ datas, scheduleId }) {
             </div>
             <div>
               <PayTransfer />
-              <div className="space-y-6">
+              <div>
                 <p className="text-base font-medium">QPay</p>
-                <img src="/assets/qpay.png" alt="" />
+                <img src={`data:image/png;base64,${qrCode}`} />
               </div>
             </div>
           </div>

@@ -116,6 +116,7 @@ export const BUS_BOOKING_CREATE = gql`
         pax: $pax
       }
     ) {
+      orderNumber
       toPay
       ebarimt
       totalFare
@@ -123,6 +124,7 @@ export const BUS_BOOKING_CREATE = gql`
       statusName
       refNumber
       clientMutationId
+      payment
     }
   }
 `;

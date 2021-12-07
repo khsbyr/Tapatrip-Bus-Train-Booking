@@ -5,7 +5,6 @@ import Payments from '@components/bus/payment';
 import { useQuery } from '@apollo/client';
 import { BUS_SCHEDULES_DETAIL_QUERY } from '@graphql/queries';
 import { Steps } from 'antd';
-import NavData from '@data/navData.json';
 import SelectSeats from '@components/bus/selectSeats';
 import ContentWrapper from './style';
 import Layout from '@components/common/layout';
