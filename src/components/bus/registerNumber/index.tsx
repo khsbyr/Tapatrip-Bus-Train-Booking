@@ -26,11 +26,13 @@ const RegisterNumber = ({
   const [addPassenger, { data }] = useMutation(BUS_PASSENGER);
 
   const handleReg1 = e => {
+    formatSelectedSeats[passengerNumber - 1].registerError = '';
     setIsOpen1(!isOpen1);
     setIsOpen2(false);
   };
 
   const handleReg2 = e => {
+    formatSelectedSeats[passengerNumber - 1].registerError = '';
     setIsOpen2(!isOpen2);
     setIsOpen1(false);
   };
@@ -49,25 +51,48 @@ const RegisterNumber = ({
   const handleRegister = async e => {
     if (e.target.value.length === 8) {
       const registerNumber = values1 + values2 + e.target.value;
-      try {
-        const { data } = await addPassenger({
-          variables: {
-            documentNumber: registerNumber,
-          },
-        });
-        const passenger = data && data.busPassenger.passenger;
-        formatSelectedSeats[passengerNumber - 1].isChild = passenger.isChild;
-        formatSelectedSeats[passengerNumber - 1].isVaccine =
-          passenger.firstName === '' ? false : true;
-        formatSelectedSeats[passengerNumber - 1].firstName =
-          passenger.firstName;
-        formatSelectedSeats[passengerNumber - 1].lastName = passenger.lastName;
-        formatSelectedSeats[passengerNumber - 1].documentNumber =
-          registerNumber;
-        setSelectedSeats(formatSelectedSeats);
-      } catch (e) {
-        console.log(e);
-      }
+      var p1 = new Promise((resolve, reject) => {
+        if (passengerNumber > 1) {
+          for (let i = 1; i < passengerNumber; i++) {
+            if (formatSelectedSeats[i - 1].documentNumber === registerNumber) {
+              reject(new Error('Error!'));
+            } else resolve('Success!');
+          }
+        }
+        resolve('Success!');
+      });
+
+      p1.then(
+        async () => {
+          try {
+            const { data } = await addPassenger({
+              variables: {
+                documentNumber: registerNumber,
+              },
+            });
+            const passenger = data && data.busPassenger.passenger;
+            formatSelectedSeats[passengerNumber - 1].isChild = passenger
+              ? passenger.isChild
+              : '';
+            formatSelectedSeats[passengerNumber - 1].isVaccine =
+              passenger.firstName ? true : false;
+            formatSelectedSeats[passengerNumber - 1].firstName = passenger
+              ? passenger.firstName
+              : '';
+            formatSelectedSeats[passengerNumber - 1].lastName = passenger
+              ? passenger.lastName
+              : '';
+            formatSelectedSeats[passengerNumber - 1].documentNumber =
+              registerNumber;
+            setSelectedSeats(formatSelectedSeats);
+          } catch (e) {
+            console.log(e);
+          }
+        },
+        reason => {
+          console.error(reason); // Error!
+        }
+      );
     }
   };
 
@@ -83,6 +108,25 @@ const RegisterNumber = ({
           required: true,
           message: t('registerWarning'),
         },
+        ({ getFieldValue }) => ({
+          validator(_, value) {
+            if (passengerNumber > 1 && value) {
+              const registerNumber = values1 + values2 + value;
+              for (let i = 1; i < passengerNumber; i++) {
+                if (
+                  formatSelectedSeats[i - 1].documentNumber.slice(0, 2) +
+                    getFieldValue('register' + i) ===
+                  registerNumber
+                ) {
+                  return Promise.reject(
+                    new Error('Зорчигчийн регистерийн дугаар давхцаж байна!!')
+                  );
+                }
+              }
+            }
+            return Promise.resolve();
+          },
+        }),
       ]}
     >
       <div className="w-full mt-0.5">

@@ -9,7 +9,6 @@ export default function payTransferTapa() {
   const { t } = useTranslation(['steps']);
   const { booking } = useGlobalStore();
   const [bankIndex, setBankIndex] = useState(0);
-  console.log(booking);
 
   const [copyBankName, setCopyBankName] = useState(
     <DuplicateIcon className="text-secondary h-6 w-6  hover:text-indigo-300" />

@@ -12,11 +12,11 @@ interface Props {
 export default function PaymentModal(props) {
   const { t } = useTranslation(['steps']);
   const { booking } = useGlobalStore();
-  console.log(props);
+
   /*rendering popupAllowed banks */
   const renderPayment = () => {
-    console.log('paymentResponse : ', props.data);
-    console.log('payment : ', props.payment);
+    // console.log('paymentResponse : ', props.data);
+    // console.log('payment : ', props.payment);
     // if (
     //   props.payment.name === 'XACBANK' ||
     //   props.payment.name === 'GOLOMT' ||
