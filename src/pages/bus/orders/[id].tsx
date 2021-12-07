@@ -81,7 +81,7 @@ export default function Payment() {
   return (
     <Layout>
       <div className="relative bg-bg">
-        <SeatNav />
+        <SeatNav props={false} />
         <div className="bg-steps w-full">
           <div className="max-w-7xl mx-auto">
             <ContentWrapper>
@@ -94,7 +94,10 @@ export default function Payment() {
                 className="site-navigation-steps max-w-2xl mr-auto hidden md:flex"
               >
                 {steps.map(item => (
-                  <Step key={item.title} icon=" " title={item.title} />
+                  <>
+                    <Step key={item.title} icon=" " title={item.title} />
+                    {item.title !== t('stepPayment') ? true : false}
+                  </>
                 ))}
               </Steps>
             </ContentWrapper>

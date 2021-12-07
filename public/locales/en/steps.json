@@ -77,7 +77,7 @@
     "confirmModalButton": "Verify",
     "endModalTitle": "Thank you for visiting us",
     "endModalBody": "Your order has been received. Confirmation information will be sent to your mobile phone via SMS. Please go to the order check section on the front page of the system and make sure the order is confirmed !!!. For more information on online ordering, please call 7515-4444 Tapatrip LLC, for payment and order confirmation information, please call 1900-1949 National Center for Road Transport.",
-    "endModalButton": "Check order information",
+    "endModalButton": "Home page",
     "warningTitlePayment": "Warning",
     "warningContentPayment": "Will you pay?"
 }
