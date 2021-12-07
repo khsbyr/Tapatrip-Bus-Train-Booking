@@ -291,7 +291,7 @@ const PasswordRecovery = () => {
         <title>{t('passwordRecoveryTitle')}</title>
       </Head>
       <div className="fixed z-20 w-screen top-0">
-        <NavbarProfile navbarData={NavData} />
+        <NavbarProfile />
       </div>
       <div className="flex relative mt-10 lg:mt-20 bg-bg">
         {/* <div className="absolute">

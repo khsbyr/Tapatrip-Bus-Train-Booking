@@ -10,7 +10,7 @@
     @apply font-light text-cardDate text-xs;
   }
   .priceText {
-    @apply text-cardDate font-bold text-sm sm:text-base lg:text-sm;
+    @apply text-cardDate font-bold text-sm sm:text-base;
   }
   .rowDirection {
     @apply pb-5 pt-4 flex justify-between items-center;

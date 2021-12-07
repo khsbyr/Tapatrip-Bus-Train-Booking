@@ -11,7 +11,7 @@ interface Props {
   navbarData?: any;
 }
 
-export default function SeatNav({ navbarData }) {
+export default function SeatNav() {
   const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useGlobalStore();
@@ -29,25 +29,12 @@ export default function SeatNav({ navbarData }) {
                   <img src="../../assets/svgIcons/NewLogo.svg" alt="Logo" />
                 </a>
               </div>
-              <div className="hidden">
-                <div className="ml-10 flex items-baseline space-x-4">
-                  {navbarData.generalList.map(z => (
-                    <a
-                      className={`${'text-white'} hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium`}
-                      href={`${z.route}`}
-                      key={z.id}
-                    >
-                      {z.text}
-                    </a>
-                  ))}
-                </div>
-              </div>
             </div>
 
             <div className="w-32 text-gray-700"></div>
 
             <div className="flex items-center ">
-              <div className="hidden md:block">
+              <div className="hidden lg:block">
                 <div className="ml-10 flex items-center space-x-4">
                   <OrderCheck />
                   <SelectLanguage isBlack={true} />
@@ -66,7 +53,7 @@ export default function SeatNav({ navbarData }) {
               </div>
             </div>
 
-            <div className="-mr-2 flex md:hidden">
+            <div className="-mr-2 flex lg:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
@@ -95,7 +82,7 @@ export default function SeatNav({ navbarData }) {
         >
           {ref => (
             <div
-              className="flex justify-center px-6 py-3 md:hidden bg-white rounded-xl shadow-lg"
+              className="flex justify-center px-6 py-3 lg:hidden bg-white rounded-xl shadow-lg"
               id="mobile-menu"
             >
               <div ref={ref} className="p-3 space-y-4">

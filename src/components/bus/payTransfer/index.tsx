@@ -1,82 +1,83 @@
-import { Statistic } from 'antd';
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  DuplicateIcon,
-} from '@heroicons/react/outline';
-import { Listbox, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
-import { CheckIcon } from '@heroicons/react/solid';
-import banks from '@data/bankInformation.json';
-import s from './payTransfer.module.scss';
+import React, { useState } from 'react';
 import { useGlobalStore } from '@context/globalStore';
+import { DuplicateIcon } from '@heroicons/react/outline';
+import { CheckIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'next-i18next';
-
-export default function Payment() {
+import banks from '@data/bankInformation.json';
+export default function payTransferTapa() {
   const { t } = useTranslation(['steps']);
-  const { Countdown } = Statistic;
-  const [selected, setSelected] = useState(banks[0]);
-  const [isSelected, setIsSelected] = useState(false);
-  const { booking, setBooking } = useGlobalStore();
-  const { customers } = useGlobalStore();
+  const { booking } = useGlobalStore();
+  const [bankIndex, setBankIndex] = useState(0);
 
-  const onClick = () => {
-    setIsSelected(!isSelected);
-  };
-
-  const select = () => {
-    setIsSelected(!isSelected);
-  };
-
-  const [copyOrderNumber, setCopyOrderNumber] = useState(
-    <DuplicateIcon className="text-secondary h-6 w-6" />
+  const [copyBankName, setCopyBankName] = useState(
+    <DuplicateIcon className="text-secondary h-6 w-6  hover:text-indigo-300" />
   );
+  const [copyOrderNumber, setCopyOrderNumber] = useState(
+    <DuplicateIcon className="text-secondary h-6 w-6  hover:text-indigo-300" />
+  );
+  const [copyTotalPrice, setCopyTotalPrice] = useState(
+    <DuplicateIcon className="text-secondary h-6 w-6  hover:text-indigo-300" />
+  );
+  const [copyAccNumber, setCopyAccNumber] = useState(
+    <DuplicateIcon className="text-secondary h-6 w-6  hover:text-indigo-300" />
+  );
+
+  const [copyAccName, setCopyAccName] = useState(
+    <DuplicateIcon className="text-secondary h-6 w-6  hover:text-indigo-300" />
+  );
+
+  const copyToBankName = name => {
+    navigator.clipboard.writeText(name);
+    (async () => {
+      setCopyBankName(<CheckIcon className="text-secondary h-6 w-6" />);
+      await delay(500);
+      setCopyBankName(
+        <DuplicateIcon className="text-secondary h-6 w-6  hover:text-indigo-300" />
+      );
+    })();
+  };
 
   const copyToOrderNumber = orderNum => {
     navigator.clipboard.writeText(orderNum);
     (async () => {
       setCopyOrderNumber(<CheckIcon className="text-secondary h-6 w-6" />);
-      await delay(2000);
-      setCopyOrderNumber(<DuplicateIcon className="text-secondary h-6 w-6" />);
+      await delay(500);
+      setCopyOrderNumber(
+        <DuplicateIcon className="text-secondary h-6 w-6  hover:text-indigo-300" />
+      );
     })();
   };
 
-  const [copyAccNumber, setCopyAccNumber] = useState(
-    <DuplicateIcon className="text-secondary h-6 w-6" />
-  );
+  const copyToTotalPrice = price => {
+    navigator.clipboard.writeText(price);
+    (async () => {
+      setCopyTotalPrice(<CheckIcon className="text-secondary h-6 w-6" />);
+      await delay(500);
+      setCopyTotalPrice(
+        <DuplicateIcon className="text-secondary h-6 w-6  hover:text-indigo-300" />
+      );
+    })();
+  };
 
-  const copyToAccNumber = bank => {
-    navigator.clipboard.writeText(bank.accountNumber);
+  const copyToAccNumber = accnum => {
+    navigator.clipboard.writeText(accnum);
     (async () => {
       setCopyAccNumber(<CheckIcon className="text-secondary h-6 w-6" />);
-      await delay(2000);
-      setCopyAccNumber(<DuplicateIcon className="text-secondary h-6 w-6" />);
+      await delay(500);
+      setCopyAccNumber(
+        <DuplicateIcon className="text-secondary h-6 w-6  hover:text-indigo-300" />
+      );
     })();
   };
 
-  const [copyPhoneNumber, setCopyPhoneNumber] = useState(
-    <DuplicateIcon className="text-secondary h-6 w-6" />
-  );
-
-  const copyToPhoneNumber = phoneNumber => {
-    navigator.clipboard.writeText(phoneNumber);
-    (async () => {
-      setCopyPhoneNumber(<CheckIcon className="text-secondary h-6 w-6" />);
-      await delay(2000);
-      setCopyPhoneNumber(<DuplicateIcon className="text-secondary h-6 w-6" />);
-    })();
-  };
-
-  const [copyAccName, setCopyAccName] = useState(
-    <DuplicateIcon className="text-secondary h-6 w-6" />
-  );
-
-  const copyToAccName = bank => {
-    navigator.clipboard.writeText(bank.accountName);
+  const copyToAccName = accname => {
+    navigator.clipboard.writeText(accname);
     (async () => {
       setCopyAccName(<CheckIcon className="text-secondary h-6 w-6" />);
-      await delay(2000);
-      setCopyAccName(<DuplicateIcon className="text-secondary h-6 w-6" />);
+      await delay(500);
+      setCopyAccName(
+        <DuplicateIcon className="text-secondary h-6 w-6 hover:text-indigo-300" />
+      );
     })();
   };
 
@@ -85,117 +86,82 @@ export default function Payment() {
   }
 
   return (
-    <>
-      <div className={s.root}>
-        <Listbox value={selected} onChange={setSelected}>
-          <div className="relative mt-1">
-            <button className="w-full" onClick={onClick}>
-              <Listbox.Button className="w-full py-4 pl-3 text-left text-cardDate bg-bg rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500">
-                <span className="block truncate font-medium">
-                  {t(`${selected.name}`)}
-                </span>
-                <span className={s.ListBoxIcon}>
-                  {isSelected ? (
-                    <ChevronUpIcon className="text-secondary h-6 w-6" />
-                  ) : (
-                    <ChevronDownIcon className="text-secondary h-6 w-6" />
-                  )}
-                </span>
-              </Listbox.Button>
-            </button>
-            <Transition
-              as={Fragment}
-              leave="transition ease-in duration-100"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <Listbox.Options onClick={select} className={s.ListBoxOptions}>
-                {banks.map((bank, personIdx) => (
-                  <Listbox.Option
-                    key={personIdx}
-                    className={({ active }) =>
-                      `${active ? 'bg-bg' : 'bg-white'}
-                          cursor-default select-none font-medium text-cardDate relative py-2 pl-10 pr-4`
-                    }
-                    value={bank}
-                  >
-                    {({ selected, active }) => (
-                      <>
-                        <span
-                          className={`${
-                            selected ? '' : ''
-                          } block truncate text-sm sm:text-base`}
-                        >
-                          {t(`${bank.name}`)}
-                        </span>
-                        {selected ? (
-                          <span
-                            className={`${active ? '' : ''}
-                                absolute inset-y-0 left-0 flex items-center pl-3`}
-                          >
-                            <CheckIcon className="w-5 h-5" aria-hidden="true" />
-                          </span>
-                        ) : null}
-                      </>
-                    )}
-                  </Listbox.Option>
-                ))}
-              </Listbox.Options>
-            </Transition>
-          </div>
-        </Listbox>
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 text-base">
-          <div className={s.leftContent}>
-            <div className="space-y-2">
-              <h1 className="text-cardDate ml-2">{t('orderNumber')}</h1>
-
-              <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                <h1 className="text-cardDate text-base">{booking.refNumber}</h1>
-                <button onClick={() => copyToOrderNumber(booking.refNumber)}>
-                  {copyOrderNumber}
-                </button>
-              </p>
-            </div>
-            <div className="">
-              <h1>{t('accountNumber')}</h1>
-              <p className="flex justify-between items-center bg-bg rounded-lg py-3 p-2">
-                <h1 className="text-cardDate text-base">
-                  {/* {banks[selected.id].accountNumber} */}
-                </h1>
-                {/* <button onClick={() => copyToAccNumber(banks[selected.id])}>
-                  {copyAccNumber}
-                </button> */}
-              </p>
+    <div className="space-y-6">
+      <p className="text-sm font-medium">{t('paymentAccountTitle')}</p>
+      <div className="grid sm:grid-cols-2">
+        <div className="space-y-3 mb-4 sm:mb-0 sm:pr-4 ">
+          {banks &&
+            banks.map((bank, index) => (
+              <div
+                key={index}
+                className="w-full border rounded p-2 hover:bg-gray-50 cursor-pointer"
+                onClick={() => setBankIndex(index)}
+              >
+                <div className="flex justify-between w-full">
+                  <div className="flex items-center space-x-2">
+                    <img src={bank.src} alt="" width="35" />
+                    <p>{bank.name}</p>
+                  </div>
+                  <button className="bg-bg hover:bg-gray-200 px-2 py-1 rounded font-medium">
+                    {'MNT'}
+                  </button>
+                </div>
+              </div>
+            ))}
+        </div>
+        <div className="bg-gray-50 rounded py-2 px-5">
+          <div className="flex justify-between border-b-2 border-dotted py-2">
+            <p>{t('bankName')}</p>
+            <div className="flex">
+              <p className="pr-2">{banks[bankIndex]?.name}</p>
+              <button onClick={() => copyToBankName(banks[bankIndex]?.name)}>
+                {copyBankName}
+              </button>
             </div>
           </div>
-          <div className={s.rightContent}>
-            <div>
-              <h1>{t('contactPhone')}</h1>
-              <p>
-                <h1 className="text-cardDate text-base">
-                  {customers.phoneNumber}
-                </h1>
-                <button
-                  onClick={() => copyToPhoneNumber(customers.phoneNumber)}
-                >
-                  {copyPhoneNumber}
-                </button>
-              </p>
+          <div className="grid grid-cols-2 border-b-2 border-dotted py-2">
+            <p>{t('accountNumber')}</p>
+            <div className="flex justify-end">
+              <p className="pr-2">{banks[bankIndex].accountNumber}</p>
+              <button
+                onClick={() => copyToAccNumber(banks[bankIndex].accountNumber)}
+              >
+                {copyAccNumber}
+              </button>
             </div>
-            <div>
-              <h1>{t('accountName')}</h1>
-              <p>
-                <h1 className="text-cardDate text-sm lg:pr-10">
-                  {/* {banks[selected.id].accountName} */}
-                </h1>
-                {/* <button onClick={() => copyToAccName(banks[selected.id])}>
-                  {copyAccName}
-                </button> */}
-              </p>
+          </div>
+          <div className="flex justify-between border-b-2 border-dotted py-2">
+            <p>{t('accountName')}</p>
+            <div className="flex">
+              {console.log(banks[bankIndex].accountName)}
+              <p className="pr-2">{banks[bankIndex].accountName}</p>
+              <button
+                onClick={() => copyToAccName(banks[bankIndex].accountName)}
+              >
+                {copyAccName}
+              </button>
+            </div>
+          </div>
+          <div className="flex justify-between border-b-2 border-dotted py-2">
+            <p>{t('transferAmount')}</p>
+            <div className="flex">
+              <p className="pr-2">{booking.toPay}₮</p>
+              <button onClick={() => copyToTotalPrice(booking.toPay)}>
+                {copyTotalPrice}
+              </button>
+            </div>
+          </div>
+          <div className="flex justify-between py-2">
+            <p>{t('transactionValue')}</p>
+            <div className="flex">
+              <p className="pr-2">{booking.refNumber}</p>
+              <button onClick={() => copyToOrderNumber(booking.refNumber)}>
+                {copyOrderNumber}
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

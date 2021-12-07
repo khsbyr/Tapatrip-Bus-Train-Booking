@@ -71,6 +71,7 @@ export default function PaymentTapatrip({ datas, scheduleId }) {
       const res = await PaymentService.createInvoice(payload);
       if (res && res?.status === 200) {
         setPaymentResponse(res.result);
+        console.log(res);
         setIsModalPayment(true);
         setLoading('false');
       } else {

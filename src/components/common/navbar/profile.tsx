@@ -52,7 +52,7 @@ export default function Profile({ data }) {
         className={`${
           !isOpen
             ? 'hidden'
-            : 'bg-white absolute block rounded shadow-lg p-3 z-20 text-sm text-cardDate w-60 md:-ml-20'
+            : 'bg-white absolute block rounded shadow-lg p-3 z-20 text-sm text-cardDate w-56 md:w-60 md:-ml-20'
         }`}
         onClick={select}
       >
