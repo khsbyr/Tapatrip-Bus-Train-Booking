@@ -115,21 +115,19 @@ export default function PassengerIfo({ datas, scheduleId }) {
 
   const onFinish = async () => {
     var p1 = new Promise((resolve, reject) => {
-      for (let i = 0; i < formatSelectedSeats.length; i++) {
-        formatSelectedSeats[i].lastNameError = formatSelectedSeats[i].lastName
+      formatSelectedSeats.forEach(async (element, i) => {
+        formatSelectedSeats[i].lastNameError = element.lastName
           ? ''
           : 'Та овог нэрээ оруулна уу?';
-        formatSelectedSeats[i].firstNameError = formatSelectedSeats[i].firstName
+        formatSelectedSeats[i].firstNameError = element.firstName
           ? ''
           : 'Та нэрээ оруулна уу?';
         setSelectedSeats(formatSelectedSeats);
-        if (
-          formatSelectedSeats[i].lastNameError ||
-          formatSelectedSeats[i].firstNameError
-        ) {
+        if (element.lastName === '' || element.firstName === '') {
           reject(new Error('Error!'));
-        } else resolve('Success!');
-      }
+        }
+      });
+      resolve('Success!');
     });
 
     p1.then(
