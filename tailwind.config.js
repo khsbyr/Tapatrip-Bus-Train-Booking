@@ -71,7 +71,7 @@ module.exports = {
         primary: '#8AB1D5',
       },
       fontSize: {
-        small: '8px',
+        small: '4px',
       },
 
       screens: {

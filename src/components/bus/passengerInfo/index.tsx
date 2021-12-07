@@ -15,8 +15,6 @@ import ConfirmModal from '@components/common/confirmModal';
 import AuthService from '@services/auth';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import PaymentService from '@services/payment';
-import isEmpty from '@utils/isEmpty';
 
 const { Option } = Select;
 
@@ -26,11 +24,13 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const [isCompoany, setIsCompany] = useState(false);
   const { user, customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
-  const { setBooking, setPayment } = useGlobalStore();
+  const { setBooking } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState('');
   const [loading1, setLoading1] = useState('');
+
   const isAuth = user ? true : false;
 
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
@@ -103,29 +103,56 @@ export default function PassengerIfo({ datas, scheduleId }) {
 
   const handlePassengerSurname = e => {
     formatSelectedSeats[e.target.id - 1].lastName = e.target.value;
+    formatSelectedSeats[e.target.id - 1].lastNameError = '';
     setSelectedSeats(formatSelectedSeats);
   };
 
   const handlePassengerFirstname = e => {
     formatSelectedSeats[e.target.id - 1].firstName = e.target.value;
+    formatSelectedSeats[e.target.id - 1].firstNameError = '';
     setSelectedSeats(formatSelectedSeats);
   };
 
   const onFinish = async () => {
-    setLoading('true');
-    let payload = {
-      phone: customers.phoneNumber,
-      dialCode: customers.dialNumber,
-    };
-    const result = await AuthService.verifySms(payload);
-    if (result) setIsModalVisible(true), setLoading('false');
-    else {
-      Modal.error({
-        title: t('errorTitle'),
-        content: t('errorContent'),
-      });
-      setLoading('false');
-    }
+    var p1 = new Promise((resolve, reject) => {
+      for (let i = 0; i < formatSelectedSeats.length; i++) {
+        formatSelectedSeats[i].lastNameError = formatSelectedSeats[i].lastName
+          ? ''
+          : 'Та овог нэрээ оруулна уу?';
+        formatSelectedSeats[i].firstNameError = formatSelectedSeats[i].firstName
+          ? ''
+          : 'Та нэрээ оруулна уу?';
+        setSelectedSeats(formatSelectedSeats);
+        if (
+          formatSelectedSeats[i].lastNameError ||
+          formatSelectedSeats[i].firstNameError
+        ) {
+          reject(new Error('Error!'));
+        } else resolve('Success!');
+      }
+    });
+
+    p1.then(
+      async () => {
+        setLoading('true');
+        let payload = {
+          phone: customers.phoneNumber,
+          dialCode: customers.dialNumber,
+        };
+        const result = await AuthService.verifySms(payload);
+        if (result) setIsModalVisible(true), setLoading('false');
+        else {
+          Modal.error({
+            title: t('errorTitle'),
+            content: t('errorContent'),
+          });
+          setLoading('false');
+        }
+      },
+      reason => {
+        console.error(reason); // Error!
+      }
+    );
   };
 
   const handleBooking = async pinCode => {
@@ -311,7 +338,9 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           {/* <Input
                             disabled
                             value={
-                              seat.isVaccine
+                              seat.documentNumber === ''
+                                ? '?'
+                                : seat.isVaccine
                                 ? '' + t('yesVaccine') + ''
                                 : '' + t('noVaccine') + ''
                             }
@@ -331,15 +360,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           <label className={style.Label} htmlFor="lastName">
                             {t('passengerLastName')}
                           </label>
-                          {/* <Form.Item
-                            name={'lastName' + i}
-                            rules={[
-                              {
-                                required: true,
-                                message: 'Зорчигчийн овгийг заавал бөглөнө үү!',
-                              },
-                            ]}
-                          > */}
                           <Input
                             onChange={handlePassengerSurname}
                             id={i}
@@ -347,21 +367,16 @@ export default function PassengerIfo({ datas, scheduleId }) {
                             className={style.input}
                             placeholder={t('passengerLastNamePlaceholder')}
                           />
-                          {/* </Form.Item> */}
+                          {seat.lastNameError && (
+                            <span className="text-red-500 text-sm">
+                              {seat.lastNameError}
+                            </span>
+                          )}
                         </div>
                         <div className={style.rightContent}>
                           <label className={style.Label} htmlFor="firstName">
                             {t('passengerFirstName')}
                           </label>
-                          {/* <Form.Item
-                            name={'firstName' + i}
-                            rules={[
-                              {
-                                required: true,
-                                message: 'Зорчигчийн нэрийг заавал бөглөнө үү!',
-                              },
-                            ]}
-                          > */}
                           <Input
                             id={i}
                             onChange={handlePassengerFirstname}
@@ -369,7 +384,11 @@ export default function PassengerIfo({ datas, scheduleId }) {
                             value={seat.firstName}
                             placeholder={t('passengerFirstNamePlaceholder')}
                           />
-                          {/* </Form.Item> */}
+                          {seat.firstNameError && (
+                            <span className="text-red-500 text-sm">
+                              {seat.firstNameError}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>

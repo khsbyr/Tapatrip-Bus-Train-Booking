@@ -52,7 +52,7 @@ export default function StepCard({ datas, scheduleId }) {
                   <div>
                     <h1 className={style.startTitle}>{datas?.leaveDate}</h1>
                     <h1 className={style.timeText}>
-                      {datas?.leaveTime.slice(0, 5)}
+                      {datas?.leaveTime?.slice(0, 5)}
                     </h1>
                   </div>
                   <div>
