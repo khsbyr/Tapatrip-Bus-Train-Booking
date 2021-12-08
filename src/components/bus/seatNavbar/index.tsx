@@ -11,7 +11,7 @@ interface Props {
   navbarData?: any;
 }
 
-export default function SeatNav({ props }) {
+export default function SeatNav() {
   const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useGlobalStore();

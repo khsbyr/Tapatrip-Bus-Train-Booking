@@ -8,19 +8,34 @@ interface Props {
 const TapaService: FC<Props> = ({ tapaServiceList }) => {
   const { t } = useTranslation(['common']);
   return (
-    <div className={styles.body}>
-      {tapaServiceList.map(service => (
-        <div key={service.id} className={styles.card}>
-          <img src={service.image} className="w-32 h-28" />
-          <div className="ml-5">
-            <h1 className={styles.title}>{t(`${service.title}`)}</h1>
-            <p className="text-sm" style={{ color: '#0A3761' }}>
-              {/* {t(`${service.body}`)} */}
-            </p>
-          </div>
-        </div>
-      ))}
-    </div>
+    <>
+      <div className={styles.content}>
+        <a className={styles.card} href="bus/instructions" target="_blank">
+          <img src="/assets/svgIcons/anhaarah.svg" alt="" />
+          <h1 className={styles.title}>{t('passengeСonsiderations')}</h1>
+        </a>
+        <a
+          className={styles.card}
+          href="/bus/instructions/considerations"
+          target="_blank"
+        >
+          <img src="/assets/svgIcons/zaavar.svg" alt="" />
+          <h1 className={styles.title}>{t('videoInstructions')}</h1>
+        </a>
+      </div>
+      <div className={styles.body}>
+        {tapaServiceList.map(service => (
+          <a
+            target="_blank"
+            key={service.id}
+            className={styles.card}
+            href={service.link}
+          >
+            <img src={service.image} className="w-full" />
+          </a>
+        ))}
+      </div>
+    </>
   );
 };
 
