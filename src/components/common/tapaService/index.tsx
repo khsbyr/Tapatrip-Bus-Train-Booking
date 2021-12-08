@@ -12,7 +12,13 @@ const TapaService: FC<Props> = ({ tapaServiceList }) => {
       <div className={styles.content}>
         <a className={styles.card} href="bus/instructions" target="_blank">
           <img src="/assets/svgIcons/anhaarah.svg" alt="" />
-          <h1 className={styles.title}>{t('passengeСonsiderations')}</h1>
+          <div className="space-y-0 sm:space-y-3">
+            <h1 className={styles.title}>{t('passengeСonsiderations')}</h1>
+            <p className="hidden sm:block">
+              Автобусанд суухдаа зорчигчид хувийн бичиг баримтаа жолоочид
+              шалгуулаад сууна.
+            </p>
+          </div>
         </a>
         <a
           className={styles.card}
@@ -20,7 +26,14 @@ const TapaService: FC<Props> = ({ tapaServiceList }) => {
           target="_blank"
         >
           <img src="/assets/svgIcons/zaavar.svg" alt="" />
-          <h1 className={styles.title}>{t('videoInstructions')}</h1>
+          <div className="space-y-0 sm:space-y-3">
+            <h1 className={styles.title}>{t('videoInstructions')}</h1>
+            <p className="hidden sm:block">
+              Хэрэв төлбөрийн баримт шаардлагатай бол автобус хөдлөн явахаас 30
+              минутын өмнө ирж лавлагаа хэвлүүлж авсан байх ба суудлаа эзэлсэн
+              байх.
+            </p>
+          </div>
         </a>
       </div>
       <div className={styles.body}>
