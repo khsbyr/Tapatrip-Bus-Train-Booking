@@ -1,20 +1,17 @@
 [
   {
     "id": 0,
-    "title": "covidInformationTitle",
-    "body": "covidInformationBody",
-    "image": "../assets/Covid19.png"
+    "image": "../assets/svgIcons/aylal1.svg",
+    "link": "https://www.facebook.com/TapaTripTravelAgency"
   },
   {
     "id": 1,
-    "title": "appDownloadTitle",
-    "body": "appDownloadBody",
-    "image": "../assets/Application.png"
+    "image": "../assets/svgIcons/aylal2.svg",
+    "link": "https://www.facebook.com/TapaTripTravelAgency"
   },
   {
     "id": 2,
-    "title": "motivationTripTitle",
-    "body": "motivationTripBody",
-    "image": "../assets/Aylal.png"
+    "image": "../assets/svgIcons/aylal3.svg",
+    "link": "https://www.facebook.com/TapaTripTravelAgency"
   }
 ]

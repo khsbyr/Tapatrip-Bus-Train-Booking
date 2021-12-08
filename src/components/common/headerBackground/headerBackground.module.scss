@@ -6,14 +6,14 @@
   }
 
   .card {
-    @apply hidden md:block md:mb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-60;
+    @apply mb-20 md:mb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-60;
 
     .title {
-      @apply text-white text-4xl font-bold;
+      @apply text-white text-2xl sm:text-4xl font-bold;
     }
 
     .description {
-      @apply text-white  text-2xl font-light mt-2;
+      @apply text-white text-lg sm:text-2xl font-light mt-2;
     }
   }
   .image1 {
