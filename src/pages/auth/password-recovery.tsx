@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavbarProfile from '@components/bus/seatNavbar';
 import { Form, Statistic, Input, Modal } from 'antd';
 import InputPhoneNumber from '@components/common/phoneNumber';
 import ContentWrapper from '@components/bus/orderModal/style';
-import NavData from '@data/navData.json';
 import Footer from '@components/common/footer';
 import Company from '@data/company.json';
 import styles from '@components/common/layout/layout.module.scss';
@@ -15,12 +14,13 @@ import AuthService from '@services/auth';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import ReactCodeInput from 'react-verification-code-input';
 import Link from 'next/link';
+import isEmpty from '@utils/isEmpty';
 import { useRouter } from 'next/router';
 import style from './login.module.scss';
 
 const PasswordRecovery = () => {
   const { t } = useTranslation(['common']);
-  const { user } = useGlobalStore();
+  const { user, setUser } = useGlobalStore();
   const router = useRouter();
   const [code, setCode] = useState(0);
   const { Countdown } = Statistic;
@@ -31,7 +31,27 @@ const PasswordRecovery = () => {
   const [error, setError] = useState(null);
   const [rePasswordError, setRePasswordError] = useState(null);
   const [confirmError, setConfirmError] = useState(null);
+
   const isAuth = user ? true : false;
+
+  useEffect(() => {
+    async function loadUserFromCookies() {
+      const token = AuthTokenStorageService.getAccessToken();
+      if (token) {
+        try {
+          const res = await AuthService.getCurrentUser();
+          if (res && res?.status === 200) {
+            if (!isEmpty(res?.result?.user)) {
+              setUser(res?.result?.user);
+            }
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+    loadUserFromCookies();
+  }, []);
 
   if (isAuth === true) {
     if (router.query && router.query.from) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Statistic, Input, Modal } from 'antd';
 import InputPhoneNumber from '@components/common/phoneNumber';
 import ContentWrapper from '@components/bus/orderModal/style';
@@ -17,10 +17,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import style from './login.module.scss';
 import SeatNav from '@components/bus/seatNavbar';
+import isEmpty from '@utils/isEmpty';
 
 const Login = () => {
   const { t } = useTranslation(['common']);
-  const { setUser } = useGlobalStore();
+  const { user, setUser } = useGlobalStore();
   const router = useRouter();
   const { TabPane } = Tabs;
   const [code, setCode] = useState(0);
@@ -33,6 +34,35 @@ const Login = () => {
   const [rePasswordError, setRePasswordError] = useState(null);
   const [confirmError, setConfirmError] = useState(null);
   const [currentPassword, setCurrentPassword] = useState('');
+
+  const isAuth = user ? true : false;
+
+  if (isAuth === true) {
+    if (router.query && router.query.from) {
+      router.push('/bus' + router.query.from);
+    } else {
+      router.push('/bus');
+    }
+  }
+
+  useEffect(() => {
+    async function loadUserFromCookies() {
+      const token = AuthTokenStorageService.getAccessToken();
+      if (token) {
+        try {
+          const res = await AuthService.getCurrentUser();
+          if (res && res?.status === 200) {
+            if (!isEmpty(res?.result?.user)) {
+              setUser(res?.result?.user);
+            }
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+    loadUserFromCookies();
+  }, []);
 
   function reset() {
     setCode(0);
