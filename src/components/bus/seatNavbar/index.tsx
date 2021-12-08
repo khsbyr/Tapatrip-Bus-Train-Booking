@@ -7,10 +7,6 @@ import { useTranslation } from 'next-i18next';
 import Profile from '@components/common/navbar/profile';
 import { useGlobalStore } from '@context/globalStore';
 
-interface Props {
-  navbarData?: any;
-}
-
 export default function SeatNav() {
   const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
