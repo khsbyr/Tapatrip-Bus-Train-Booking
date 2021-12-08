@@ -1,12 +1,12 @@
 import cookie from 'js-cookie';
 
 const AuthTokenStorageService = {
-  store(accessToken) {
+  store(accessToken: string) {
     cookie.set('user-token', accessToken, { expires: 1 / 24 });
   },
 
-  guestStore(guestToken) {
-    cookie.set('guest-token', guestToken, { expires: 1 / 24 });
+  guestStore(guestToken: string) {
+    cookie.set('guest-token', guestToken);
   },
 
   getAccessToken() {
