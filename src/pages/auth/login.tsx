@@ -364,7 +364,9 @@ const Login = () => {
               {passwordError && (
                 <span className="text-red-500">{passwordError}</span>
               )}
-              {!passwordError && <p>{t('enterPasswordError')}</p>}
+              {!passwordError && (
+                <p className="py-2">{t('enterPasswordError')}</p>
+              )}
             </div>
           </div>
           <button className={style.loginButton} type="submit">

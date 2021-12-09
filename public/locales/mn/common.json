@@ -85,5 +85,10 @@
   "sendButton":"ИЛГЭЭХ",
   "passwordInputPlaceholder": "Нууц үг давтах",
   "privacyPolicy": "Нууцлалын баталгаа",
-  "termsConditions": "Үйлчилгээний нөхцөл"
+  "termsConditions": "Үйлчилгээний нөхцөл",
+  "userInformation": "Хэрэглэгчийн мэдээлэл",
+  "userName": "Хэрэглэгчийн нэр",
+  "editButton": "ЗАСАХ",
+  "mailTitle":  "И-мэйл хаяг",
+  "numberTitle": "Утасны дугаар"
 }

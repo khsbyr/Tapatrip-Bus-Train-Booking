@@ -118,10 +118,10 @@ export default function PassengerIfo({ datas, scheduleId }) {
       formatSelectedSeats.forEach(async (element, i) => {
         formatSelectedSeats[i].lastNameError = element.lastName
           ? ''
-          : 'Та овог нэрээ оруулна уу?';
+          : t('passengerLastNameWarning');
         formatSelectedSeats[i].firstNameError = element.firstName
           ? ''
-          : 'Та нэрээ оруулна уу?';
+          : t('passengerFirstNameWarning');
         setSelectedSeats(formatSelectedSeats);
         if (element.lastName === '' || element.firstName === '') {
           reject(new Error('Error!'));

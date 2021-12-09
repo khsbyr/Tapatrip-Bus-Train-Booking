@@ -13,7 +13,6 @@ import { useTranslation } from 'next-i18next';
 export default function Payment({ datas, scheduleId }) {
   const { t } = useTranslation(['steps']);
   const router = useRouter();
-  const [value, setValue] = useState(1);
   const { setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { Countdown } = Statistic;
@@ -32,10 +31,6 @@ export default function Payment({ datas, scheduleId }) {
     });
     router.push(`/bus/orders/${scheduleId}`);
     setCurrent(2);
-  };
-
-  const onChange = (e: any) => {
-    setValue(e.target.value);
   };
 
   const handleCheck = () => {

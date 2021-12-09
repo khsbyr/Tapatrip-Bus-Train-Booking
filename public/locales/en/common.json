@@ -85,6 +85,10 @@
   "sendButton":"SEND",
   "passwordInputPlaceholder": "Repeat password",
   "privacyPolicy": "Privacy policy",
-  "termsConditions": "Terms & Conditions"
-
+  "termsConditions": "Terms & Conditions",
+  "userInformation": "Customer information",
+  "userName": "Customer name",
+  "editButton": "EDIT",
+  "mailTitle":  "Email address",
+  "numberTitle": "Phone number"
 }
