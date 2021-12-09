@@ -29,6 +29,7 @@
     "registerNumber":"注册号码",
     "registerNumberError":"注册号有误！",
     "registerWarning":"请务必填写您的注册号！",
+    "registNumberCheck": "旅客登记号码重叠！！",
     "registerNumberWarning":"机构注册号不正确",
     "organizationRNumberPlaceholder":"组织注册号",
     "mailAddressTitle": "电子邮件",
@@ -81,12 +82,16 @@
     "adult":"成年人",
     "child":"孩子",
     "totalPrice":"总价",
-    "insurancePrice":"价格包括人寿保险",
+    "insurancePriceAdult":"人寿保险价格（成人）",
+    "insurancePriceChild":"人寿保险价格（儿童）",
     "confirmModalTitle": "输入发送给您的 4 位数码？",
     "confirmModalButton": "确认",
     "endModalTitle": "感谢您的光临",
     "endModalBody": "您的订单已收到。 确认信息将通过短信发送到您的手机。请到系统首页的订单查询部分，确认订单已确认！！！。如需更多在线订购信息，请致电 7515-4444 塔帕特里普，有关付款和订单确认信息，请致电 1900-1949 国家道路运输中心。",
     "endModalButton": "主页",
     "warningTitlePayment": "警告",
-    "warningContentPayment": "请付款？"
+    "warningContentPayment": "请付款？",
+    "orderPriceTitle" : "订单金额：",
+    "orderPaymentBody" : "请使用您的网上银行应用程序阅读上面的二维码并付款。",
+    "orderPhoneNumberTitle": "求助热线:"
 }
