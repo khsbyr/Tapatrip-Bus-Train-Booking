@@ -21,6 +21,7 @@ import { useGlobalStore } from '@context/globalStore';
 export default function Bus({ guestToken }) {
   const { t } = useTranslation(['common', 'footer']);
   const { setUser } = useGlobalStore();
+
   useEffect(() => {
     AuthTokenStorageService.guestStore(guestToken);
     async function loadUserFromCookies() {

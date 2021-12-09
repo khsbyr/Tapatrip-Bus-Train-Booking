@@ -86,8 +86,8 @@ export function arrayFilterSeat(data: any, value: String, scheduleId: String) {
     data &&
     data.filter(function (currentElement) {
       return (
-        currentElement.seatNumber.indexOf(value) > -1 &&
-        currentElement.scheduleId.indexOf(scheduleId) > -1
+        currentElement.seatNumber === value &&
+        currentElement.scheduleId === scheduleId
       );
     });
   return result;

@@ -24,6 +24,7 @@ export default function Orders() {
   const { t } = useTranslation(['order']);
   const router = useRouter();
   const { setUser } = useGlobalStore();
+
   useEffect(() => {
     async function loadUserFromCookies() {
       const token = AuthTokenStorageService.getAccessToken();
@@ -42,6 +43,7 @@ export default function Orders() {
     }
     loadUserFromCookies();
   }, []);
+
   const { startLocation, stopLocation, endLocation, date, endDate } =
     router.query;
   const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
@@ -62,8 +64,6 @@ export default function Orders() {
   const scheduleResult =
     scheduleData === undefined ? '' : scheduleData.busAllSchedules.edges;
   const startLocations = arrayFormat(data);
-  console.log(scheduleResult[0]?.node?.leaveDate);
-  console.log(date);
 
   return (
     <Layout>
