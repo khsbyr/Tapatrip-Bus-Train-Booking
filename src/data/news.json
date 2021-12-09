@@ -1,0 +1,18 @@
+[
+  {
+    "id": 0,
+    "src": "/assets/svgIcons/anhaarah.svg",
+    "title": "passengeСonsiderations",
+    "head": "considerations",
+    "body": "passengeСonsiderationsBody",
+    "url": "https://www.facebook.com/TapaTripTravelAgency"
+  },
+  {
+    "id": 1,
+    "src": "/assets/svgIcons/zaavar.svg",
+    "head": "instructions",
+    "title": "videoInstructions",
+    "body": "passengeСonsiderationsBody",
+    "url": "https://www.facebook.com"
+  }
+]

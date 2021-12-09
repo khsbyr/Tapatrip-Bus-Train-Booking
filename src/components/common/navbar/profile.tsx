@@ -9,8 +9,10 @@ import { useState } from 'react';
 import AuthService from '@services/auth';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import { useGlobalStore } from '@context/globalStore';
 
 export default function Profile({ data }) {
+  console.log(useGlobalStore());
   const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
