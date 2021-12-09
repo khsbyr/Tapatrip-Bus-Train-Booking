@@ -32,10 +32,6 @@ export default function Profile({ data }) {
     setIsOpen(!isOpen);
     router.push({
       pathname: isActive === false ? '/bus/user/profile' : '/bus/user/orders',
-      // pathname: '/bus/user',
-      // query: {
-      //   my: isActive === false ? 'profile' : 'orders',
-      // },
     });
   };
   return (

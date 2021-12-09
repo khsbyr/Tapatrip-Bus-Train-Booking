@@ -2,12 +2,14 @@ import { Button, Form, Input } from 'antd';
 import ContentWrapper from './style';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
+import { useGlobalStore } from '@context/globalStore';
 export default function MyProfile() {
+  const { user } = useGlobalStore();
   const [isActive, setIsActive] = useState(true);
   const { t } = useTranslation();
-  const [isUserName, setIsUserName] = useState();
-  const [isEmail, setIsEmail] = useState();
-  const [isPhoneNumber, setIsPhoneNumber] = useState();
+  const [isUserName, setIsUserName] = useState(user.first_name);
+  const [isEmail, setIsEmail] = useState(user.email);
+  const [isPhoneNumber, setIsPhoneNumber] = useState(user.phone);
   const [isPassword, setIsPassword] = useState();
 
   const handleUserName = async e => {
@@ -39,7 +41,11 @@ export default function MyProfile() {
                 {t('userName')}
               </label>
               <Form.Item name="username">
-                <Input disabled={isActive} onChange={handleUserName} />
+                <Input
+                  disabled={isActive}
+                  onChange={handleUserName}
+                  defaultValue={isUserName}
+                />
               </Form.Item>
             </div>
             <div>
@@ -47,7 +53,11 @@ export default function MyProfile() {
                 {t('mailTitle')}
               </label>
               <Form.Item name="email">
-                <Input disabled={isActive} onChange={handleEmail} />
+                <Input
+                  disabled={isActive}
+                  onChange={handleEmail}
+                  defaultValue={isEmail}
+                />
               </Form.Item>
             </div>
 
@@ -56,7 +66,11 @@ export default function MyProfile() {
                 {t('numberTitle')}
               </label>
               <Form.Item name="number">
-                <Input disabled={isActive} onChange={handlePhoneNumber} />
+                <Input
+                  disabled={isActive}
+                  onChange={handlePhoneNumber}
+                  defaultValue={isPhoneNumber}
+                />
               </Form.Item>
             </div>
             <div>
