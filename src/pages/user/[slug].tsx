@@ -18,6 +18,7 @@ export default function index() {
   const router = useRouter();
   const { slug } = router.query;
   const { setUser } = useGlobalStore();
+
   const handleLogout = () => {
     AuthService.logout();
   };
@@ -40,6 +41,7 @@ export default function index() {
     }
     loadUserFromCookies();
   }, []);
+
   return (
     <Layout>
       <Head>
@@ -63,7 +65,7 @@ export default function index() {
                 className={`${
                   slug === 'profile' ? 'bg-bg text-blue-400' : ''
                 } w-full flex justify-start p-3 hover:bg-bg rounded cursor-pointer hover:text-blue-400`}
-                onClick={() => router.push('/bus/user/profile')}
+                onClick={() => router.push('/user/profile')}
               >
                 {t('customerSection')}
               </button>
@@ -71,7 +73,7 @@ export default function index() {
                 className={`${
                   slug === 'orders' ? 'bg-bg text-blue-400' : ''
                 } w-full flex justify-start p-3 hover:bg-bg rounded cursor-pointer hover:text-blue-400`}
-                onClick={() => router.push('/bus/user/orders')}
+                onClick={() => router.push('/user/orders')}
               >
                 {t('myOrders')}
               </button>

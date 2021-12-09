@@ -31,7 +31,7 @@ export default function Profile({ data }) {
   const handleUserInfo = async isActive => {
     setIsOpen(!isOpen);
     router.push({
-      pathname: isActive === false ? '/bus/user/profile' : '/bus/user/orders',
+      pathname: isActive === false ? '/user/profile' : '/user/orders',
     });
   };
   return (
