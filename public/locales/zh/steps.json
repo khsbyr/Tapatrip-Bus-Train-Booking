@@ -47,6 +47,8 @@
     "passengerFirstName": "姓",
     "passengerFirstNamePlaceholder": "乘客姓",
     "passengerLastName": "名",
+    "passengerLastNameWarning": "请输入您的姓氏？",
+    "passengerFirstNameWarning": "请输入你的名字？",
     "passengerLastNamePlaceholder": "乘客姓名",
     "paymentInstructions":"付款指示",
     "paymentInstructionsContent2":"请注意，您的订单将在以下情况下被取消。",

@@ -85,5 +85,10 @@
   "sendButton":"发送",
   "passwordInputPlaceholder": "重复输入密码",
   "privacyPolicy": "隐私政策",
-  "termsConditions": "服务条件"
+  "termsConditions": "服务条件",
+  "userInformation": "客户信息",
+  "userName": "顾客姓名",
+  "editButton": "编辑",
+  "mailTitle":  "电子邮件地址",
+  "numberTitle": "电话号码"
   }

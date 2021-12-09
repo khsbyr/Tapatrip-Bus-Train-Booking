@@ -4,30 +4,28 @@ const ContentWrapper = styled.div`
   .ant-input {
     padding: 0.5rem;
     border: none;
+    font-size: 0.9rem;
+    color: #2982d4;
     background-color: #f1f2f6;
-    color: #0a3761;
-    font-size: 1rem;
     border-radius: 0.5rem;
-  }
-
-  .ant-form-item-has-error .ant-input {
-    background-color: #f1f2f6 !important;
-  }
-
-  .ant-modal-title {
-    color: #0a3761 !important;
+    border: 1px solid #94aae7;
   }
   .ant-input-password {
     background-color: #f1f2f6;
     padding: 0.5rem;
     border: none;
+    font-size: 0.9rem;
     background-color: #f1f2f6;
-    color: #0a3761;
-    font-size: 1rem;
     border-radius: 0.5rem;
+    border: 1px solid #94aae7;
   }
-  .ant-input-affix-wrapper .ant-input-password {
-    background-color: #f1f2f6 !important;
+  .ant-input-disabled {
+    color: #104a80;
+    border: 1px solid transparent;
+  }
+  .ant-input-affix-wrapper-disabled {
+    color: #104a80;
+    border: 1px solid transparent;
   }
 `;
 

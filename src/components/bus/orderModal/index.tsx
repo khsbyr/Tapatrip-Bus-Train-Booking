@@ -140,10 +140,17 @@ export default function OrderModal(props) {
                     </h1>
                     <h1 className="hidden sm:block">-</h1>
                     <h1 className="sm:hidden p-1">&darr;</h1>
-                    <h1 className="text-cardDate text-center -mt-2">
+                    <h1
+                      className={
+                        datas?.schedule?.locationEnd?.distance === 0
+                          ? 'hidden'
+                          : 'text-cardDate text-center -mt-2'
+                      }
+                    >
                       {datas?.schedule?.locationEnd?.distance}
                       {t('measurement')}
                       <br />
+
                       {format(datas?.schedule?.locationEnd?.estimatedDuration)}
                     </h1>
                     <h1 className="hidden sm:block">-</h1>

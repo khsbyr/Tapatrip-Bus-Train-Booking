@@ -47,6 +47,8 @@
     "passengerFirstName": "First Name",
     "passengerFirstNamePlaceholder": "Passenger first name",
     "passengerLastName": "Last Name",
+    "passengerLastNameWarning": "Please enter your last name?",
+    "passengerFirstNameWarning": "Please enter your name?",
     "passengerLastNamePlaceholder": "Passenger last name",
     "paymentInstructions":"Payment instructions",
     "paymentInstructionsTitle":"Please pay within that time.",

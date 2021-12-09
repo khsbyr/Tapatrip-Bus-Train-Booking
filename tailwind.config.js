@@ -35,6 +35,7 @@ module.exports = {
         onlineSupport: '#8bc34a',
         registHover: '#1669d5',
         profile: '#f5f3f4',
+        myOrders: 'rgba(22, 121, 213, 0.1)',
       }),
       theme: {
         screens: {
@@ -65,6 +66,7 @@ module.exports = {
         direction: '#8AB1D5',
         copyText: '#BFC1DA',
         mobileNav: '#BCC4CC',
+        orders: '#1679d5',
       },
 
       placeholderColor: {

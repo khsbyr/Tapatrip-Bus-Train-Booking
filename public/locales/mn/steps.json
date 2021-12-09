@@ -47,6 +47,8 @@
     "passengerFirstName": "Нэр",
     "passengerFirstNamePlaceholder": "Зорчигчийн нэр",
     "passengerLastName": "Овог",
+    "passengerLastNameWarning": "Та овог нэрээ оруулна уу?",
+    "passengerFirstNameWarning": "Та нэрээ оруулна уу?",
     "passengerLastNamePlaceholder": "Зорчигчийн овог",
     "paymentInstructions":"Төлбөр төлөх зааварчилгаа",
     "paymentInstructionsTitle":"Та тухайн хугацаанд багтааж төлбөрөө хийнэ үү.",

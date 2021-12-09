@@ -7,12 +7,14 @@ import {
 import { UserCircleIcon } from '@heroicons/react/solid';
 import { useState } from 'react';
 import AuthService from '@services/auth';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
 export default function Profile({ data }) {
   const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
+  const router = useRouter();
 
   const onClick = () => {
     setIsSelected(!isSelected);
@@ -25,6 +27,13 @@ export default function Profile({ data }) {
   const handleLogout = () => {
     AuthService.logout();
   };
+
+  const handleUserInfo = async isActive => {
+    setIsOpen(!isOpen);
+    router.push({
+      pathname: isActive === false ? '/bus/user/profile' : '/bus/user/orders',
+    });
+  };
   return (
     <div className="">
       <div onClick={onClick}>
@@ -33,12 +42,7 @@ export default function Profile({ data }) {
           onClick={() => setIsOpen(!isOpen)}
         >
           <p className="flex items-center">
-            <img
-              src="/assets/profile1.png"
-              alt=""
-              width="30"
-              className="rounded-full"
-            />
+            <UserCircleIcon className="h-6" />
             <p className="px-2 pr-4 text-sm">{data?.phone}</p>
           </p>
 
@@ -60,20 +64,20 @@ export default function Profile({ data }) {
       >
         <a
           className="flex items-center rounded p-4 hover:bg-bg border-b border-dotted hover:text-cardDate"
-          href="/bus/profile"
+          onClick={() => handleUserInfo(false)}
         >
           <UserCircleIcon className="pr-2 h-5" />
           {t('customerSection')}
         </a>
         <a
           className="flex items-center p-4 hover:bg-bg rounded border-b border-dotted hover:text-cardDate"
-          href="/bus/profile/myOrders"
+          onClick={() => handleUserInfo(true)}
         >
           <DocumentIcon className="pr-2 h-5" />
           {t('myOrders')}
         </a>
         <a
-          className="flex items-center hover:bg-red-100 rounded p-4 hover:text-cardDate"
+          className="flex items-center hover:bg-red-100 rounded p-4 hover:text-red-400"
           href="/bus"
           onClick={handleLogout}
         >
