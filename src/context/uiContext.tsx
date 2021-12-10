@@ -3,7 +3,6 @@ import React from 'react';
 export interface State {
   listActive: boolean;
   displayModal: boolean;
-  displayMenu: boolean;
   displayLanguage: boolean;
   displayDirection: boolean;
 }
@@ -11,7 +10,6 @@ export interface State {
 const initialState = {
   listActive: false,
   displayModal: false,
-  displayMenu: true,
   displayLanguage: true,
   displayDirection: true,
 };
@@ -46,18 +44,7 @@ function uiReducer(state, action) {
         displayModal: false,
       };
     }
-    case 'OPEN_MENU': {
-      return {
-        ...state,
-        displayMenu: true,
-      };
-    }
-    case 'CLOSE_MENU': {
-      return {
-        ...state,
-        displayMenu: false,
-      };
-    }
+
     case 'OPEN_LANGUAGE': {
       return {
         ...state,
@@ -91,8 +78,6 @@ export const UIProvider = props => {
   const closeListActive = () => dispatch({ type: 'CLOSE_LIST_ACTIVE' });
   const openModal = () => dispatch({ type: 'OPEN_MODAL' });
   const closeModal = () => dispatch({ type: 'CLOSE_MODAL' });
-  const openMenu = () => dispatch({ type: 'OPEN_MENU' });
-  const closeMenu = () => dispatch({ type: 'CLOSE_MENU' });
   const openLanguage = () => dispatch({ type: 'OPEN_LANGUAGE' });
   const closeLanguage = () => dispatch({ type: 'CLOSE_LANGUAGE' });
   const openDirection = () => dispatch({ type: 'OPEN_DIRECTION' });
@@ -104,8 +89,6 @@ export const UIProvider = props => {
       closeListActive,
       openModal,
       closeModal,
-      openMenu,
-      closeMenu,
       openLanguage,
       closeLanguage,
       openDirection,

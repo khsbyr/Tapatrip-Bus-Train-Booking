@@ -8,12 +8,10 @@ import { UserCircleIcon } from '@heroicons/react/solid';
 import AuthService from '@services/auth';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import { useUI } from '@context/uiContext';
+import { useState } from 'react';
 
 export default function Profile({ data }) {
   const { t } = useTranslation(['common']);
-  const { openMenu, closeMenu, displayMenu } = useUI();
-  console.log(displayMenu);
   const router = useRouter();
   const handleLogout = () => {
     AuthService.logout();
@@ -23,32 +21,33 @@ export default function Profile({ data }) {
       pathname: isActive === false ? '/user/profile' : '/user/orders',
     });
   };
+  const [isHovering, setIsHovering] = useState(false);
+
   return (
     <div className="">
       <button
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
         className="flex items-center justify-between text-base rounded border w-56 lg:w-auto border-profile bg-profile hover:border hover:bg-white text-cardDate hover:text-blue-600 py-2 px-3"
-        onClick={() => (displayMenu ? closeMenu() : openMenu())}
       >
-        <p className="flex items-center">
+        <p className="flex items-center border-0">
           <UserCircleIcon className="h-6" />
           <p className="px-2 pr-4 text-sm">{data?.phone}</p>
         </p>
-
-        {displayMenu ? (
+        {!isHovering ? (
           <ChevronDownIcon className="h-4" />
         ) : (
           <ChevronUpIcon className="h-4" />
         )}
-      </button>
-
+      </button>{' '}
       <div
         className={`${
-          displayMenu
+          !isHovering
             ? 'hidden'
             : 'bg-white absolute block rounded shadow-lg p-3 z-20 text-sm text-cardDate w-56 md:w-60 md:-ml-20'
         }`}
-        defaultChecked={openMenu()}
-        onClick={() => (displayMenu ? closeMenu() : openMenu())}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
       >
         <a
           className="flex items-center rounded p-4 hover:bg-bg border-b border-dotted hover:text-blue-600 hover:text-cardDate"
