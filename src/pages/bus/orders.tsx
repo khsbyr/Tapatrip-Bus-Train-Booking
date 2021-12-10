@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import NavData from '@data/navData.json';
 import { useQuery } from '@apollo/client';
 import {
   BUS_ALL_LOCATIONS_QUERY,

@@ -10,7 +10,7 @@ const TapaService: FC<Props> = ({ tapaServiceList }) => {
   return (
     <>
       <div className={styles.content}>
-        <a className={styles.card} href="instructions" target="_blank">
+        <a className={styles.card} href="news" target="_blank">
           <img src="/assets/svgIcons/anhaarah.svg" alt="" />
           <div className="space-y-0 sm:space-y-3">
             <h1 className={styles.title}>{t('passengeСonsiderations')}</h1>
@@ -20,11 +20,7 @@ const TapaService: FC<Props> = ({ tapaServiceList }) => {
             </p>
           </div>
         </a>
-        <a
-          className={styles.card}
-          href="/instructions/considerations"
-          target="_blank"
-        >
+        <a className={styles.card} href="/news/considerations" target="_blank">
           <img src="/assets/svgIcons/zaavar.svg" alt="" />
           <div className="space-y-0 sm:space-y-3">
             <h1 className={styles.title}>{t('videoInstructions')}</h1>
