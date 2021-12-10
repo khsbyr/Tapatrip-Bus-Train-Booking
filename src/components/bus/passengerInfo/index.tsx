@@ -27,7 +27,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const { setBooking } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState('');
   const [loading1, setLoading1] = useState('');
 
@@ -132,6 +131,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
 
     p1.then(
       async () => {
+        alert('ddd');
         setLoading('true');
         let payload = {
           phone: customers.phoneNumber,

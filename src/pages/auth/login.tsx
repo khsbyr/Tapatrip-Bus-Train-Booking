@@ -47,7 +47,11 @@ const Login = () => {
 
   useEffect(() => {
     async function loadUserFromCookies() {
-      const token = AuthTokenStorageService.getAccessToken();
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : '';
       if (token) {
         try {
           const res = await AuthService.getCurrentUser();
@@ -229,11 +233,7 @@ const Login = () => {
                     {t('forgetPasswordButton')}
                   </div>
                 </div>
-                <button
-                  onClick={handleLogin}
-                  className={style.button}
-                  type="submit"
-                >
+                <button className={style.button} type="submit">
                   {loading === 'true' ? (
                     <div className={style.ldsDualRing}></div>
                   ) : (
