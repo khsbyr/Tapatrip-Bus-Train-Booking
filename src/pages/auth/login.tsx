@@ -76,7 +76,7 @@ const Login = () => {
       ? values.loginNumber
       : values.registerNumber;
     let payload = {
-      phone: phoneNumber.toString(),
+      phone: phoneNumber?.toString(),
       dialCode: 976,
     };
     setUserPhoneNumber(phoneNumber);
@@ -221,15 +221,19 @@ const Login = () => {
             <TabPane tab={t('loginTab')} key="1">
               <Form name="login" onFinish={handleLogin} className="space-y-4">
                 <InputPhoneNumber name="loginNumber" />
-                <div className="flex justify-end">
-                  <button
+                <div className="flex justify-end cursor-pointer">
+                  <div
                     onClick={handleForgetPaasword}
-                    className="w-32 bg-bg py-4 font-medium text-cardDate text-xs rounded hover:bg-gray-200"
+                    className="text-center w-32 bg-bg py-4 font-medium text-cardDate text-xs rounded hover:bg-gray-200"
                   >
                     {t('forgetPasswordButton')}
-                  </button>
+                  </div>
                 </div>
-                <button className={style.button} type="submit">
+                <button
+                  onClick={handleLogin}
+                  className={style.button}
+                  type="submit"
+                >
                   {loading === 'true' ? (
                     <div className={style.ldsDualRing}></div>
                   ) : (
@@ -450,13 +454,17 @@ const Login = () => {
         </div> */}
         <div className="relative z-10 py-36 px-4 max-w-7xl mx-auto ">
           <div className="flex flex-col-reverse lg:flex-row lg:space-x-16 xl:space-x-20">
-            <div className="w-full lg:w-3/5 lg:pr-5 mt-10 lg:mt-0">
+            <a
+              href="https://www.facebook.com/TapaTripTravelAgency"
+              className="w-full lg:w-3/5 lg:pr-5 mt-10 lg:mt-0"
+              target="_blank"
+            >
               <img
                 className="rounded-lg object-cover"
                 src="/assets/loginImage.jpg"
                 alt="Picture of the author"
               />
-            </div>
+            </a>
 
             <div className="w-full sm:w-96 lg:w-2/5 z-2 sm:mx-auto rounded-lg bg-white p-7 sm:p-10">
               {renderRegister(code)}
