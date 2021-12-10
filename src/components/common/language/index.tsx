@@ -4,6 +4,7 @@ import s from './language.module.scss';
 import { CheckIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
+import { useUI } from '@context/uiContext';
 
 const languages = [
   { name: 'Mongolia', src: '/assets/flagMongolia.png', route: 'mn' },
@@ -11,20 +12,11 @@ const languages = [
   { name: 'China', src: '/assets/flagChina.png', route: 'zh' },
 ];
 export default function Language(props) {
+  const { openLanguage, closeLanguage, displayLanguage } = useUI();
   const router = useRouter();
   const { locale } = router;
   const index = languages.findIndex(item => item.route === locale);
   const [selectedLanguage, setSelectedLanguage] = useState(languages[index]);
-
-  const [isSelected, setIsSelected] = useState(false);
-
-  const onClick = () => {
-    setIsSelected(!isSelected);
-  };
-
-  const select = () => {
-    setIsSelected(!isSelected);
-  };
 
   const changeLanguage = value => {
     const locale = value.route;
@@ -35,18 +27,25 @@ export default function Language(props) {
 
   return (
     <Listbox value={selectedLanguage} onChange={changeLanguage}>
-      <div className={s.body} onClick={onClick}>
+      <div
+        className={s.body}
+        onClick={() => (displayLanguage ? closeLanguage() : openLanguage())}
+      >
         <Listbox.Button className={s.listboxButton}>
           <img className="rounded-sm" src={selectedLanguage.src} width="34" />
-          {isSelected ? (
-            <ChevronUpIcon className={`${props.isBlack ? s.icon1 : s.icon} `} />
-          ) : (
+          {/* <ChevronDownIcon className={`${props.isBlack ? s.icon1 : s.icon} `} /> */}
+          {displayLanguage ? (
             <ChevronDownIcon
               className={`${props.isBlack ? s.icon1 : s.icon} `}
             />
+          ) : (
+            <ChevronUpIcon className={`${props.isBlack ? s.icon1 : s.icon} `} />
           )}
         </Listbox.Button>
-        <Listbox.Options onClick={select} className={s.listboxOption}>
+        <Listbox.Options
+          onClick={() => (displayLanguage ? closeLanguage() : openLanguage())}
+          className={s.listboxOption}
+        >
           {languages.map((language, id) => (
             <Listbox.Option
               key={id}

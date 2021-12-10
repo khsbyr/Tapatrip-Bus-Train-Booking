@@ -28,7 +28,7 @@ const Subscribe: FC = () => {
         }
       } catch (e) {
         Modal.error({
-          title: 'Алдаа',
+          title: t('errorOrderTitle'),
           content: e.message,
         });
       }

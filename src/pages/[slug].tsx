@@ -9,7 +9,6 @@ import { useTranslation } from 'next-i18next';
 
 export default function About({ info }) {
   const { t } = useTranslation(['footer']);
-
   return (
     <div>
       {info &&

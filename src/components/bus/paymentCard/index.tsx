@@ -36,7 +36,7 @@ export default function PaymentCard({ datas, scheduleId }) {
         </div>
       )}
       <div className="flex justify-between text-sm">
-        <p> {'Амь даатгал үнэ (Том хүн)'}</p>
+        <p> {t('insurancePriceAdult')}</p>
         <p className="flex">
           <CurrencyFormat
             value={datas?.adultInsurance * persons.length}
@@ -64,7 +64,7 @@ export default function PaymentCard({ datas, scheduleId }) {
             </p>
           </div>
           <div className="flex justify-between text-sm">
-            <p> {'Амь даатгал үнэ (Хүүхэд)'}</p>
+            <p>{t('insurancePriceChild')}</p>
             <p className="flex">
               <CurrencyFormat
                 value={datas?.childInsurance * childs.length}

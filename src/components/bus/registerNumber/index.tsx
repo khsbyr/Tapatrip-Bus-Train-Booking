@@ -118,9 +118,7 @@ const RegisterNumber = ({
                     getFieldValue('register' + i) ===
                   registerNumber
                 ) {
-                  return Promise.reject(
-                    new Error('Зорчигчийн регистерийн дугаар давхцаж байна!!')
-                  );
+                  return Promise.reject(new Error(t('registNumberCheck')));
                 }
               }
             }
