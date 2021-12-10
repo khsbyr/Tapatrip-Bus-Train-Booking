@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import NavData from '@data/navData.json';
 import { useQuery } from '@apollo/client';
 import {
   BUS_ALL_LOCATIONS_QUERY,
@@ -27,7 +26,11 @@ export default function Orders() {
 
   useEffect(() => {
     async function loadUserFromCookies() {
-      const token = AuthTokenStorageService.getAccessToken();
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : '';
       if (token) {
         try {
           const res = await AuthService.getCurrentUser();

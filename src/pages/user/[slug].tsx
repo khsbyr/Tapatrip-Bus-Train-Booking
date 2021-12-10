@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import NavData from '@data/navData.json';
 import Layout from '@components/common/layout';
 import Navbar from '@components/bus/seatNavbar';
@@ -12,6 +12,8 @@ import { useRouter } from 'next/router';
 import isEmpty from '@utils/isEmpty';
 import { useTranslation } from 'next-i18next';
 import { useGlobalStore } from '@context/globalStore';
+import { useQuery } from '@apollo/client';
+import { MY_BOOKING_LIST_QUERY } from '@graphql/queries';
 
 export default function index() {
   const { t } = useTranslation();
@@ -19,13 +21,21 @@ export default function index() {
   const { slug } = router.query;
   const { setUser } = useGlobalStore();
 
+  const { data, loading, error } = useQuery(MY_BOOKING_LIST_QUERY);
+  if (error) return `Error! ${error.message}`;
+  console.log(data);
+
   const handleLogout = () => {
     AuthService.logout();
   };
 
   useEffect(() => {
     async function loadUserFromCookies() {
-      const token = AuthTokenStorageService.getAccessToken();
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : '';
       if (token) {
         try {
           const res = await AuthService.getCurrentUser();
