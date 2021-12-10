@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
 import NavData from '@data/navData.json';
 import TapaServiceList from '@data/tapaServiceList.json';
+import News from '@data/news.json';
 import Layout from '@components/common/layout';
 import Search from '@components/bus/searchPanel';
 import Navbar from '@components/common/navbar';
@@ -52,7 +53,7 @@ export default function Bus({ guestToken }) {
       <Search navbarData={NavData} startLocations={startLocations} />
       {loading && <Loader />}
       <Subscribe />
-      <TapaService tapaServiceList={TapaServiceList} />
+      <TapaService tapaServiceList={TapaServiceList} tapaNews={News} />
     </Layout>
   );
 }
