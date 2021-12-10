@@ -19,9 +19,7 @@ const TapaService: FC<Props> = ({ tapaServiceList, tapaNews }) => {
               <img src={news.src} alt="" />
               <div className="space-y-0 sm:space-y-3">
                 <h1 className={styles.title}>{t(`${news.title}`)}</h1>
-                <p className="hidden sm:block">
-                  {'Зорчигчидын анхаарах зүйлс'}
-                </p>
+                <p className="hidden sm:block">{t(`${news.subTitle}`)}</p>
               </div>
             </a>
           </Link>
