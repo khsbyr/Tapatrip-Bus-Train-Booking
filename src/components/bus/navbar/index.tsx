@@ -31,9 +31,9 @@ export default function BusNavbar({ startLocations }) {
                 <Link href="/bus">
                   <a>
                     <img
-                      src="/assets/svgIcons/NewLogo.svg"
+                      src="/assets/svgIcons/tapatripBlue.svg"
                       alt="Logo"
-                      className="w-full h-full"
+                      className="w-40"
                     />{' '}
                   </a>
                 </Link>
