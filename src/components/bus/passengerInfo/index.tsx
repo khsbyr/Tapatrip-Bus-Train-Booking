@@ -4,6 +4,7 @@ import registNo from '@data/registerNumber.json';
 import RegisterNumber from '@components/bus/registerNumber';
 import style from './passengerInfo.module.scss';
 import { useGlobalStore } from '@context/globalStore';
+import { useUI } from '@context/uiContext';
 import { useMutation } from '@apollo/client';
 import { BUS_BOOKING_CREATE } from '@graphql/mutation';
 import { PATTERN_COMPANY_REGISTER } from '@helpers/constantValidation';
@@ -24,6 +25,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const [isCompoany, setIsCompany] = useState(false);
   const { user, customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
+  const { displayBlock, setDisplayBlock, setDisplayNone } = useUI();
   const { setBooking } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -42,6 +44,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
   };
 
   const handleRegister = () => {
+    setDisplayBlock();
     router.push('/auth/login');
   };
 
@@ -112,7 +115,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
     setSelectedSeats(formatSelectedSeats);
   };
 
-  const onFinish = async values => {
+  const onFinish = async e => {
     var p1 = new Promise((resolve, reject) => {
       formatSelectedSeats.forEach(async (element, i) => {
         formatSelectedSeats[i].lastNameError = element.lastName
@@ -127,7 +130,10 @@ export default function PassengerIfo({ datas, scheduleId }) {
           element.firstName === '' ||
           element.documentNumber === '' ||
           customers.phoneNumber === '' ||
-          customers.email === ''
+          customers.email === '' ||
+          customers.phoneNumber === undefined ||
+          customers.email === undefined ||
+          element.documentNumber === undefined
         ) {
           reject(new Error('Error!'));
         }
@@ -135,27 +141,29 @@ export default function PassengerIfo({ datas, scheduleId }) {
       resolve('Success!');
     });
 
-    p1.then(
-      async () => {
-        setLoading('true');
-        let payload = {
-          phone: customers.phoneNumber,
-          dialCode: customers.dialNumber,
-        };
-        const result = await AuthService.verifySms(payload);
-        if (result) setIsModalVisible(true), setLoading('false');
-        else {
-          Modal.error({
-            title: t('errorTitle'),
-            content: t('errorContent'),
-          });
-          setLoading('false');
+    if (!displayBlock) {
+      p1.then(
+        async () => {
+          setLoading('true');
+          let payload = {
+            phone: customers.phoneNumber,
+            dialCode: customers.dialNumber,
+          };
+          const result = await AuthService.verifySms(payload);
+          if (result) setIsModalVisible(true), setLoading('false');
+          else {
+            Modal.error({
+              title: t('errorTitle'),
+              content: t('errorContent'),
+            });
+            setLoading('false');
+          }
+        },
+        reason => {
+          console.error(reason); // Error!
         }
-      },
-      reason => {
-        console.error(reason); // Error!
-      }
-    );
+      );
+    }
   };
 
   const handleBooking = async pinCode => {
@@ -211,7 +219,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
   };
 
   return (
-    <Form name="busBookingItem">
+    <Form name="busBookingItem" onFinish={onFinish}>
       <div className={style.body}>
         <div className={style.content}>
           <ContentWrapper>
@@ -281,6 +289,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                             message: t('mailAddressWarning'),
                           },
                         ]}
+                        shouldUpdate={customers.email}
                       >
                         <Input
                           className={style.input}
@@ -388,7 +397,10 @@ export default function PassengerIfo({ datas, scheduleId }) {
                 ))}
             </div>
           </ContentWrapper>
-          <button className={style.buttonBlock} onClick={onFinish}>
+          <button
+            className={style.buttonBlock}
+            onClick={() => setDisplayNone()}
+          >
             {loading === 'true' ? (
               <div className={style.ldsDualRing}></div>
             ) : (
@@ -399,7 +411,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
         <div className={style.card}>
           <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
             <StepCard datas={datas} scheduleId={scheduleId} />
-            <button className={style.button} onClick={onFinish}>
+            <button className={style.button} onClick={() => setDisplayNone()}>
               {loading === 'true' ? (
                 <div className={style.ldsDualRing}></div>
               ) : (

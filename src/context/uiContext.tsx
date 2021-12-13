@@ -5,6 +5,7 @@ export interface State {
   displayModal: boolean;
   displayLanguage: boolean;
   displayDirection: boolean;
+  displayBlock: boolean;
 }
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   displayModal: false,
   displayLanguage: true,
   displayDirection: true,
+  displayBlock: false,
 };
 
 export const UIContext = React.createContext<State | any>(initialState);
@@ -69,6 +71,18 @@ function uiReducer(state, action) {
         displayDirection: false,
       };
     }
+    case 'SET_DISPLAY_BLOCK': {
+      return {
+        ...state,
+        displayBlock: true,
+      };
+    }
+    case 'SET_DISPLAY_NONE': {
+      return {
+        ...state,
+        displayBlock: false,
+      };
+    }
   }
 }
 
@@ -82,6 +96,8 @@ export const UIProvider = props => {
   const closeLanguage = () => dispatch({ type: 'CLOSE_LANGUAGE' });
   const openDirection = () => dispatch({ type: 'OPEN_DIRECTION' });
   const closeDirection = () => dispatch({ type: 'CLOSE_DIRECTION' });
+  const setDisplayBlock = () => dispatch({ type: 'SET_DISPLAY_BLOCK' });
+  const setDisplayNone = () => dispatch({ type: 'SET_DISPLAY_NONE' });
   const value = React.useMemo(
     () => ({
       ...state,
@@ -93,6 +109,8 @@ export const UIProvider = props => {
       closeLanguage,
       openDirection,
       closeDirection,
+      setDisplayBlock,
+      setDisplayNone,
     }),
     [state]
   );

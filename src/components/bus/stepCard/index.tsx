@@ -24,7 +24,13 @@ export default function StepCard({ datas, scheduleId }) {
   const { t } = useTranslation(['order']);
   const unixDates = unixDate(datas);
   const { selectedSeats } = useGlobalStore();
-  const { openDirection, closeDirection, displayDirection } = useUI();
+  const {
+    openDirection,
+    closeDirection,
+    displayDirection,
+    displayBlock,
+    setDisplayBlock,
+  } = useUI();
   let format = n =>
     `0${(n / 60) ^ 0}`.slice(-2) +
     ' ' +
@@ -43,6 +49,14 @@ export default function StepCard({ datas, scheduleId }) {
     });
   const totalPrice =
     datas?.adultTicket * persons.length + datas?.childTicket * childs.length;
+
+  const handleDirection = () => {
+    if (displayDirection) {
+      closeDirection();
+    } else openDirection();
+    setDisplayBlock();
+  };
+
   return (
     <div>
       <div className="max-w-7xl mx-auto">
@@ -161,9 +175,7 @@ export default function StepCard({ datas, scheduleId }) {
               <div className="flex items-center space-x-8">
                 <button
                   className="text-direction font-medium flex text-xs md:text-sm"
-                  onClick={() =>
-                    displayDirection ? closeDirection() : openDirection()
-                  }
+                  onClick={handleDirection}
                 >
                   {t('directionInformation')}
                   {!displayDirection ? (
