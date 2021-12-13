@@ -113,50 +113,49 @@ export default function PassengerIfo({ datas, scheduleId }) {
   };
 
   const onFinish = async values => {
-    console.log(values);
-    // var p1 = new Promise((resolve, reject) => {
-    //   formatSelectedSeats.forEach(async (element, i) => {
-    //     formatSelectedSeats[i].lastNameError = element.lastName
-    //       ? ''
-    //       : t('passengerLastNameWarning');
-    //     formatSelectedSeats[i].firstNameError = element.firstName
-    //       ? ''
-    //       : t('passengerFirstNameWarning');
-    //     setSelectedSeats(formatSelectedSeats);
-    //     if (
-    //       element.lastName === '' ||
-    //       element.firstName === '' ||
-    //       element.documentNumber === '' ||
-    //       customers.phoneNumber === '' ||
-    //       customers.email === ''
-    //     ) {
-    //       reject(new Error('Error!'));
-    //     }
-    //   });
-    //   resolve('Success!');
-    // });
+    var p1 = new Promise((resolve, reject) => {
+      formatSelectedSeats.forEach(async (element, i) => {
+        formatSelectedSeats[i].lastNameError = element.lastName
+          ? ''
+          : t('passengerLastNameWarning');
+        formatSelectedSeats[i].firstNameError = element.firstName
+          ? ''
+          : t('passengerFirstNameWarning');
+        setSelectedSeats(formatSelectedSeats);
+        if (
+          element.lastName === '' ||
+          element.firstName === '' ||
+          element.documentNumber === '' ||
+          customers.phoneNumber === '' ||
+          customers.email === ''
+        ) {
+          reject(new Error('Error!'));
+        }
+      });
+      resolve('Success!');
+    });
 
-    // p1.then(
-    //   async () => {
-    //     setLoading('true');
-    //     let payload = {
-    //       phone: customers.phoneNumber,
-    //       dialCode: customers.dialNumber,
-    //     };
-    //     const result = await AuthService.verifySms(payload);
-    //     if (result) setIsModalVisible(true), setLoading('false');
-    //     else {
-    //       Modal.error({
-    //         title: t('errorTitle'),
-    //         content: t('errorContent'),
-    //       });
-    //       setLoading('false');
-    //     }
-    //   },
-    //   reason => {
-    //     console.error(reason); // Error!
-    //   }
-    // );
+    p1.then(
+      async () => {
+        setLoading('true');
+        let payload = {
+          phone: customers.phoneNumber,
+          dialCode: customers.dialNumber,
+        };
+        const result = await AuthService.verifySms(payload);
+        if (result) setIsModalVisible(true), setLoading('false');
+        else {
+          Modal.error({
+            title: t('errorTitle'),
+            content: t('errorContent'),
+          });
+          setLoading('false');
+        }
+      },
+      reason => {
+        console.error(reason); // Error!
+      }
+    );
   };
 
   const handleBooking = async pinCode => {
@@ -339,17 +338,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           <label className={style.Label} htmlFor="Vaccine">
                             {t('checkVaccineTitle')}
                           </label>
-                          {/* <Input
-                            disabled
-                            value={
-                              seat.documentNumber === ''
-                                ? '?'
-                                : seat.isVaccine
-                                ? '' + t('yesVaccine') + ''
-                                : '' + t('noVaccine') + ''
-                            }
-                            className={style.input}
-                          /> */}
                           <p className={style.input}>
                             {seat.documentNumber === ''
                               ? '?'
@@ -400,7 +388,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                 ))}
             </div>
           </ContentWrapper>
-          <button className={style.buttonBlock} type="submit">
+          <button className={style.buttonBlock} onClick={onFinish}>
             {loading === 'true' ? (
               <div className={style.ldsDualRing}></div>
             ) : (
