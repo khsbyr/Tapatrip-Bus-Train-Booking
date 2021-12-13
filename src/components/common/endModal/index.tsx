@@ -1,9 +1,5 @@
-import { Form, Input, Modal } from 'antd';
-import React, { useState, FC } from 'react';
-import { PATTERN_PHONE } from '@helpers/constantValidation';
-import { useMutation } from '@apollo/client';
-import { BUS_BOOKING_CHECK } from '@graphql/mutation';
-import moment from 'moment';
+import { Modal } from 'antd';
+import React from 'react';
 import { useTranslation } from 'next-i18next';
 
 interface Props {
