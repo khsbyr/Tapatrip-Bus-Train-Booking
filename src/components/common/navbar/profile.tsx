@@ -13,7 +13,6 @@ import { useUI } from '@context/uiContext';
 export default function Profile({ data }) {
   const { t } = useTranslation(['common']);
   const { openMenu, closeMenu, displayMenu } = useUI();
-  console.log(displayMenu);
   const router = useRouter();
   const handleLogout = () => {
     AuthService.logout();
@@ -33,32 +32,29 @@ export default function Profile({ data }) {
           <UserCircleIcon className="h-6" />
           <p className="px-2 pr-4 text-sm">{data?.phone}</p>
         </p>
-
         {displayMenu ? (
           <ChevronDownIcon className="h-4" />
         ) : (
           <ChevronUpIcon className="h-4" />
         )}
       </button>
-
       <div
         className={`${
           displayMenu
             ? 'hidden'
             : 'bg-white absolute block rounded shadow-lg p-3 z-20 text-sm text-cardDate w-56 md:w-60 md:-ml-20'
         }`}
-        defaultChecked={openMenu()}
         onClick={() => (displayMenu ? closeMenu() : openMenu())}
       >
         <a
-          className="flex items-center rounded p-4 hover:bg-bg border-b border-dotted hover:text-blue-600 hover:text-cardDate"
+          className="flex items-center rounded p-4 hover:bg-bg border-b border-dotted hover:text-cardDate"
           onClick={() => handleUserInfo(false)}
         >
           <UserCircleIcon className="pr-2 h-5" />
           {t('customerSection')}
         </a>
         <a
-          className="flex items-center p-4 hover:bg-bg rounded border-b border-dotted hover:text-blue-600 hover:text-cardDate"
+          className="flex items-center p-4 hover:bg-bg rounded border-b border-dotted hover:text-cardDate"
           onClick={() => handleUserInfo(true)}
         >
           <DocumentIcon className="pr-2 h-5" />

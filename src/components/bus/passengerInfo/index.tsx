@@ -112,45 +112,51 @@ export default function PassengerIfo({ datas, scheduleId }) {
     setSelectedSeats(formatSelectedSeats);
   };
 
-  const onFinish = async () => {
-    var p1 = new Promise((resolve, reject) => {
-      formatSelectedSeats.forEach(async (element, i) => {
-        formatSelectedSeats[i].lastNameError = element.lastName
-          ? ''
-          : t('passengerLastNameWarning');
-        formatSelectedSeats[i].firstNameError = element.firstName
-          ? ''
-          : t('passengerFirstNameWarning');
-        setSelectedSeats(formatSelectedSeats);
-        if (element.lastName === '' || element.firstName === '') {
-          reject(new Error('Error!'));
-        }
-      });
-      resolve('Success!');
-    });
+  const onFinish = async values => {
+    console.log(values);
+    // var p1 = new Promise((resolve, reject) => {
+    //   formatSelectedSeats.forEach(async (element, i) => {
+    //     formatSelectedSeats[i].lastNameError = element.lastName
+    //       ? ''
+    //       : t('passengerLastNameWarning');
+    //     formatSelectedSeats[i].firstNameError = element.firstName
+    //       ? ''
+    //       : t('passengerFirstNameWarning');
+    //     setSelectedSeats(formatSelectedSeats);
+    //     if (
+    //       element.lastName === '' ||
+    //       element.firstName === '' ||
+    //       element.documentNumber === '' ||
+    //       customers.phoneNumber === '' ||
+    //       customers.email === ''
+    //     ) {
+    //       reject(new Error('Error!'));
+    //     }
+    //   });
+    //   resolve('Success!');
+    // });
 
-    p1.then(
-      async () => {
-        alert('ddd');
-        setLoading('true');
-        let payload = {
-          phone: customers.phoneNumber,
-          dialCode: customers.dialNumber,
-        };
-        const result = await AuthService.verifySms(payload);
-        if (result) setIsModalVisible(true), setLoading('false');
-        else {
-          Modal.error({
-            title: t('errorTitle'),
-            content: t('errorContent'),
-          });
-          setLoading('false');
-        }
-      },
-      reason => {
-        console.error(reason); // Error!
-      }
-    );
+    // p1.then(
+    //   async () => {
+    //     setLoading('true');
+    //     let payload = {
+    //       phone: customers.phoneNumber,
+    //       dialCode: customers.dialNumber,
+    //     };
+    //     const result = await AuthService.verifySms(payload);
+    //     if (result) setIsModalVisible(true), setLoading('false');
+    //     else {
+    //       Modal.error({
+    //         title: t('errorTitle'),
+    //         content: t('errorContent'),
+    //       });
+    //       setLoading('false');
+    //     }
+    //   },
+    //   reason => {
+    //     console.error(reason); // Error!
+    //   }
+    // );
   };
 
   const handleBooking = async pinCode => {
@@ -206,7 +212,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
   };
 
   return (
-    <Form name="busBookingItem" onFinish={onFinish}>
+    <Form name="busBookingItem">
       <div className={style.body}>
         <div className={style.content}>
           <ContentWrapper>
@@ -405,7 +411,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
         <div className={style.card}>
           <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
             <StepCard datas={datas} scheduleId={scheduleId} />
-            <button className={style.button} type="submit">
+            <button className={style.button} onClick={onFinish}>
               {loading === 'true' ? (
                 <div className={style.ldsDualRing}></div>
               ) : (

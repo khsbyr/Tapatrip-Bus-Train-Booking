@@ -1,16 +1,12 @@
 import React from 'react';
 
 export interface State {
-  listActive: boolean;
-  displayModal: boolean;
   displayMenu: boolean;
   displayLanguage: boolean;
   displayDirection: boolean;
 }
 
 const initialState = {
-  listActive: false,
-  displayModal: false,
   displayMenu: true,
   displayLanguage: true,
   displayDirection: true,
@@ -22,30 +18,6 @@ UIContext.displayName = 'UIContext';
 
 function uiReducer(state, action) {
   switch (action.type) {
-    case 'OPEN_LIST_ACTIVE': {
-      return {
-        ...state,
-        listActive: true,
-      };
-    }
-    case 'CLOSE_LIST_ACTIVE': {
-      return {
-        ...state,
-        listActive: false,
-      };
-    }
-    case 'OPEN_MODAL': {
-      return {
-        ...state,
-        displayModal: true,
-      };
-    }
-    case 'CLOSE_MODAL': {
-      return {
-        ...state,
-        displayModal: false,
-      };
-    }
     case 'OPEN_MENU': {
       return {
         ...state,
@@ -87,10 +59,6 @@ function uiReducer(state, action) {
 
 export const UIProvider = props => {
   const [state, dispatch] = React.useReducer(uiReducer, initialState);
-  const openListActive = () => dispatch({ type: 'OPEN_LIST_ACTIVE' });
-  const closeListActive = () => dispatch({ type: 'CLOSE_LIST_ACTIVE' });
-  const openModal = () => dispatch({ type: 'OPEN_MODAL' });
-  const closeModal = () => dispatch({ type: 'CLOSE_MODAL' });
   const openMenu = () => dispatch({ type: 'OPEN_MENU' });
   const closeMenu = () => dispatch({ type: 'CLOSE_MENU' });
   const openLanguage = () => dispatch({ type: 'OPEN_LANGUAGE' });
@@ -100,10 +68,6 @@ export const UIProvider = props => {
   const value = React.useMemo(
     () => ({
       ...state,
-      openListActive,
-      closeListActive,
-      openModal,
-      closeModal,
       openMenu,
       closeMenu,
       openLanguage,
