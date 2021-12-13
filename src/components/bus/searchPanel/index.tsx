@@ -16,10 +16,23 @@ interface Props {
 const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
   const { t } = useTranslation();
   const router = useRouter();
-  const activePath = router.route == '/travel' ? '3' : '4';
+  console.log(router.route);
+  const activePath =
+    router.route == '/train'
+      ? '5'
+      : router.route == '/bus'
+      ? '4'
+      : router.route == 'https://tapatrip.com/'
+      ? '1'
+      : router.route == 'https://tapatrip.com/'
+      ? '2'
+      : '3';
 
-  const handleTabChange = () => {
-    router.push(`/bus`);
+  const handleTabChange = key => {
+    const route = key == 4 ? '/bus' : key == 3;
+    key == 2 || key == 1
+      ? window.open('https://tapatrip.com/', '_blank')
+      : router.push(`/${route}`);
   };
 
   return (
@@ -52,7 +65,7 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
                   <span className="text">{t(`${menu.text}`)}</span>
                 </div>
               }
-              disabled={menu.id !== 4 ? true : false}
+              disabled={menu.id === 3 || menu.id === 5 ? true : false}
               key={menu.id}
             />
           ))}
