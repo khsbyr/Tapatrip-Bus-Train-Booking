@@ -49,13 +49,13 @@ export default function Profile({ data }) {
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        <a
+        {/* <a
           className="flex items-center rounded p-4 hover:bg-bg border-b border-dotted hover:text-cardDate"
           onClick={() => handleUserInfo(false)}
         >
           <UserCircleIcon className="pr-2 h-5" />
           {t('customerSection')}
-        </a>
+        </a> */}
         <a
           className="flex items-center p-4 hover:bg-bg rounded border-b border-dotted hover:text-cardDate"
           onClick={() => handleUserInfo(true)}

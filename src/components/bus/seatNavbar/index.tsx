@@ -26,7 +26,11 @@ export default function SeatNav() {
             <div className="flex items-center ">
               <div className="flex-shrink-0">
                 <a href="/">
-                  <img src="../../assets/svgIcons/NewLogo.svg" alt="Logo" />
+                  <img
+                    src="/assets/svgIcons/tapatripBlue.svg"
+                    alt="Logo"
+                    className="w-40"
+                  />
                 </a>
               </div>
             </div>
