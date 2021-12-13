@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavData from '@data/navData.json';
 import Layout from '@components/common/layout';
 import Navbar from '@components/bus/seatNavbar';
@@ -14,16 +14,27 @@ import { useTranslation } from 'next-i18next';
 import { useGlobalStore } from '@context/globalStore';
 import { useQuery } from '@apollo/client';
 import { MY_BOOKING_LIST_QUERY } from '@graphql/queries';
+import { bookingListFormat } from '@helpers/array-format';
 
 export default function index() {
   const { t } = useTranslation();
   const router = useRouter();
   const { slug } = router.query;
   const { setUser } = useGlobalStore();
+  const [bookingList, setBookingList] = useState([]);
 
-  const { data, loading, error } = useQuery(MY_BOOKING_LIST_QUERY);
-  if (error) return `Error! ${error.message}`;
-  console.log(data);
+  const token =
+    AuthTokenStorageService.getAccessToken() &&
+    AuthTokenStorageService.getAccessToken() != 'false'
+      ? AuthTokenStorageService.getAccessToken()
+      : '';
+
+  // if (token) {
+  //   const { data, loading, error } = useQuery(MY_BOOKING_LIST_QUERY);
+  //   if (error) return `Error! ${error.message}`;
+  //   const bookingData = data && bookingListFormat(data);
+  //   setBookingList(bookingData);
+  // }
 
   const handleLogout = () => {
     AuthService.logout();
@@ -31,14 +42,9 @@ export default function index() {
 
   useEffect(() => {
     async function loadUserFromCookies() {
-      const token =
-        AuthTokenStorageService.getAccessToken() &&
-        AuthTokenStorageService.getAccessToken() != 'false'
-          ? AuthTokenStorageService.getAccessToken()
-          : '';
       if (token) {
         try {
-          const res = await AuthService.getCurrentUser();
+          const res = await AuthService.getCurrentUser(token);
           if (res && res?.status === 200) {
             if (!isEmpty(res?.result?.user)) {
               setUser(res?.result?.user);
@@ -47,6 +53,8 @@ export default function index() {
         } catch (err) {
           console.log(err);
         }
+      } else {
+        router.push('/bus');
       }
     }
     loadUserFromCookies();

@@ -33,8 +33,12 @@ const AuthService = {
     return datas;
   },
 
-  async getCurrentUser() {
-    const response = await Client.get('/account/profile/');
+  async getCurrentUser(token = '') {
+    const response = await Client.get('/account/profile/', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const datas = {
       status: response.data.status_code,
       result: response.data.result,
