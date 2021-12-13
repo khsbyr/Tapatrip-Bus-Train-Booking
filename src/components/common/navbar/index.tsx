@@ -64,6 +64,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                       key={menu.id}
                       className={styles.menu}
                       href={`${menu.route}`}
+                      target={'_blank'}
                     >
                       {t(`${menu.text}`)}
                     </a>
