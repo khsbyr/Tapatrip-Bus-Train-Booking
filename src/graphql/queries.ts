@@ -199,11 +199,50 @@ export const MY_BOOKING_LIST_QUERY = gql`
             firstName
             seat
           }
+          createdAt
           schedule {
             adultTicket
             adultInsurance
             childTicket
             childInsurance
+            leaveDate
+            driverPhone
+            leaveTime
+            endStopName
+            startStopName
+            locationEnd {
+              id
+              distance
+              estimatedDuration
+              locationStop {
+                id
+                name
+                location {
+                  id
+                  name
+                }
+              }
+              locationEnd {
+                id
+                location {
+                  id
+                  name
+                }
+                type
+                name
+              }
+            }
+            bus {
+              modelName
+              seatCount
+              plateNumber
+              transporter {
+                name
+              }
+            }
+            insurance {
+              name
+            }
           }
           statusName
         }
