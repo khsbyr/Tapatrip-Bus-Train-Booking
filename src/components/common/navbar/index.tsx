@@ -8,6 +8,7 @@ import Link from 'next/link';
 import Profile from './profile';
 import { useTranslation } from 'next-i18next';
 import { useGlobalStore } from '@context/globalStore';
+import OnlineHelpModal from '@components/common/onlineHelpModal';
 
 interface Props {
   navbarData?: any;
@@ -18,6 +19,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   const [navbar, setNavbar] = useState(false);
   const [openTab, setOpenTab] = React.useState(4);
   const { user } = useGlobalStore();
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const isAuth = user ? true : false;
 
   const changeBackground = () => {
@@ -31,6 +33,14 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   if (typeof window !== 'undefined') {
     window.addEventListener('scroll', changeBackground);
   }
+
+  const handleModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <div>
@@ -64,6 +74,9 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                       key={menu.id}
                       className={styles.menu}
                       href={`${menu.route}`}
+                      target={
+                        menu.id === 2 || menu.id === 1 ? '_blank' : '_parent'
+                      }
                     >
                       {t(`${menu.text}`)}
                     </a>
@@ -142,7 +155,13 @@ const Navbar: FC<Props> = ({ navbarData }) => {
             <span className="animate-ping absolute inline-flex h-7 w-28 bg-onlineSupport rounded-lg z-8"></span>
             <button className="z-10 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-3 rounded-lg">
               <PhoneIcon className="w-4" />
-              <p className="pl-1 w-36">{t('onlineHelp')}</p>
+              <a
+                href="https://my.telcocom.mn/callus/#!#%2FCE05E5603B1C11EC8428FFD132F2D921"
+                target="_blank"
+                className="pl-1 w-36"
+              >
+                {t('onlineHelp')}
+              </a>
             </button>
           </div>
         </div>
@@ -233,6 +252,9 @@ const Navbar: FC<Props> = ({ navbarData }) => {
           ))}
         </nav>
       </nav>
+      {isModalVisible && (
+        <OnlineHelpModal isModalVisible={isModalVisible} close={closeModal} />
+      )}
     </div>
   );
 };

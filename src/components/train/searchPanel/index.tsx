@@ -17,10 +17,28 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
   const { t } = useTranslation();
   const router = useRouter();
   const activePath =
-    router.route == '/travel' ? '3' : router.route == '/train' ? '5' : '4';
+    router.route == '/train'
+      ? '5'
+      : router.route == '/bus'
+      ? '4'
+      : router.route == '/flight'
+      ? '1'
+      : router.route == '/hotel'
+      ? '2'
+      : '3';
 
   const handleTabChange = key => {
-    const route = key == 4 ? 'bus' : key == 3 ? '/travel' : '/train';
+    console.log(key);
+    const route =
+      key == 5
+        ? '/train'
+        : key == 4
+        ? '/bus'
+        : key == 1
+        ? '/flight'
+        : key == 2
+        ? '/hotel'
+        : key == 3;
     router.push(`/${route}`);
   };
 
@@ -54,9 +72,7 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
                   <span className="text">{t(`${menu.text}`)}</span>
                 </div>
               }
-              disabled={
-                menu.id !== 4 && menu.id !== 3 && menu.id !== 5 ? true : false
-              }
+              disabled={menu.id === 3 ? true : false}
               key={menu.id}
             />
           ))}
