@@ -16,7 +16,6 @@ interface Props {
 const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
   const { t } = useTranslation();
   const router = useRouter();
-  console.log(router.route);
   const activePath =
     router.route == '/train'
       ? '5'
