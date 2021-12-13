@@ -1,13 +1,15 @@
 import React from 'react';
 
 export interface State {
-  displayMenu: boolean;
+  listActive: boolean;
+  displayModal: boolean;
   displayLanguage: boolean;
   displayDirection: boolean;
 }
 
 const initialState = {
-  displayMenu: true,
+  listActive: false,
+  displayModal: false,
   displayLanguage: true,
   displayDirection: true,
 };
@@ -18,18 +20,31 @@ UIContext.displayName = 'UIContext';
 
 function uiReducer(state, action) {
   switch (action.type) {
-    case 'OPEN_MENU': {
+    case 'OPEN_LIST_ACTIVE': {
       return {
         ...state,
-        displayMenu: true,
+        listActive: true,
       };
     }
-    case 'CLOSE_MENU': {
+    case 'CLOSE_LIST_ACTIVE': {
       return {
         ...state,
-        displayMenu: false,
+        listActive: false,
       };
     }
+    case 'OPEN_MODAL': {
+      return {
+        ...state,
+        displayModal: true,
+      };
+    }
+    case 'CLOSE_MODAL': {
+      return {
+        ...state,
+        displayModal: false,
+      };
+    }
+
     case 'OPEN_LANGUAGE': {
       return {
         ...state,
@@ -59,8 +74,10 @@ function uiReducer(state, action) {
 
 export const UIProvider = props => {
   const [state, dispatch] = React.useReducer(uiReducer, initialState);
-  const openMenu = () => dispatch({ type: 'OPEN_MENU' });
-  const closeMenu = () => dispatch({ type: 'CLOSE_MENU' });
+  const openListActive = () => dispatch({ type: 'OPEN_LIST_ACTIVE' });
+  const closeListActive = () => dispatch({ type: 'CLOSE_LIST_ACTIVE' });
+  const openModal = () => dispatch({ type: 'OPEN_MODAL' });
+  const closeModal = () => dispatch({ type: 'CLOSE_MODAL' });
   const openLanguage = () => dispatch({ type: 'OPEN_LANGUAGE' });
   const closeLanguage = () => dispatch({ type: 'CLOSE_LANGUAGE' });
   const openDirection = () => dispatch({ type: 'OPEN_DIRECTION' });
@@ -68,8 +85,10 @@ export const UIProvider = props => {
   const value = React.useMemo(
     () => ({
       ...state,
-      openMenu,
-      closeMenu,
+      openListActive,
+      closeListActive,
+      openModal,
+      closeModal,
       openLanguage,
       closeLanguage,
       openDirection,
