@@ -28,7 +28,7 @@ export default function Travel() {
         <HeaderBackground />
         <Navbar navbarData={NavData} />
         <Search navbarData={NavData} startLocations={startLocations} />
-        <div className="bg-bg relative w-full mt-10">
+        {/* <div className="bg-bg relative w-full mt-10">
           <div className="bg-white max-w-7xl mx-auto p-5 rounded-lg">
             <p className="text-center text-lg text-blue-500 font-medium">
               Coming soon
@@ -37,7 +37,7 @@ export default function Travel() {
               <img src="/assets/not_found.gif" alt="" width={'800'} />
             </div>
           </div>
-        </div>
+        </div> */}
         <App />
         <TapaService tapaServiceList={TapaServiceList} />
         <Footer companyInfo={Company} />

@@ -28,11 +28,16 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
       ? '2'
       : '3';
 
+<<<<<<< HEAD
   const handleTabChange = key => {
     const route = key == 4 ? '/bus' : key == 3;
     key == 2 || key == 1
       ? window.open('https://tapatrip.com/', '_blank')
       : router.push(`/${route}`);
+=======
+  const handleTabChange = () => {
+    router.push(`/bus`);
+>>>>>>> 57818a300398b68d02054302534d4dad07c7be61
   };
 
   return (
@@ -65,7 +70,11 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
                   <span className="text">{t(`${menu.text}`)}</span>
                 </div>
               }
+<<<<<<< HEAD
               disabled={menu.id === 3 || menu.id === 5 ? true : false}
+=======
+              disabled={menu.id !== 4 ? true : false}
+>>>>>>> 57818a300398b68d02054302534d4dad07c7be61
               key={menu.id}
             />
           ))}
