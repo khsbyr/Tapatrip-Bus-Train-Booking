@@ -197,12 +197,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
             companyRegister: customers.companyRegister,
             pax: passengers,
           },
-          context: {
-            headers: {
-              'x-custom-component-add': 'kkk-add',
-              'x-origin-server': 'pure-react',
-            },
-          },
         });
         if (data) setBooking(data?.busBooking);
         setCurrent(current + 1);
