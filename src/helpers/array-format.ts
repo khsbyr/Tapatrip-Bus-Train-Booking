@@ -1,7 +1,12 @@
-import cyrillicToLatin from '@helpers/cyrillic-to-latin';
+import cyrillicToLatin from './cyrillic-to-latin';
 
 export function arrayFormat(data: any) {
   const result = data === undefined ? '' : data.busAllLocations.edges;
+  return result;
+}
+
+export function bookingListFormat(data: any) {
+  const result = data === undefined ? '' : data.busAllBookings.edges;
   return result;
 }
 

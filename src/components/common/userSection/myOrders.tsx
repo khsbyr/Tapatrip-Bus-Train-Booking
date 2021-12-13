@@ -43,7 +43,7 @@ export default function MyOrders() {
           </div>
           <div className="flex items-center flex-wrap justify-center xs:justify-between py-2 gap-3">
             <div className="flex items-center gap-1 text-xs sm:text-sm">
-              <h1 className="flex text-orders flex-wrap text-cardDate font-medium gap-1">
+              <h1 className="flex flex-wrap text-cardDate font-medium gap-1">
                 {'2021-12-08'}
                 <p> {' 13:00'}</p>
               </h1>

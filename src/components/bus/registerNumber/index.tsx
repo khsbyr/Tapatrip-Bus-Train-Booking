@@ -84,6 +84,8 @@ const RegisterNumber = ({
               : '';
             formatSelectedSeats[passengerNumber - 1].documentNumber =
               registerNumber;
+            formatSelectedSeats[passengerNumber - 1].lastNameError = '';
+            formatSelectedSeats[passengerNumber - 1].firstNameError = '';
             setSelectedSeats(formatSelectedSeats);
           } catch (e) {
             console.log(e);
