@@ -74,7 +74,9 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                       key={menu.id}
                       className={styles.menu}
                       href={`${menu.route}`}
-                      target={'_blank'}
+                      target={
+                        menu.id === 2 || menu.id === 1 ? '_blank' : '_parent'
+                      }
                     >
                       {t(`${menu.text}`)}
                     </a>
