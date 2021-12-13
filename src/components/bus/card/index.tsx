@@ -4,7 +4,7 @@ import {
   ChevronUpIcon,
   UserIcon,
 } from '@heroicons/react/solid';
-import React, { useState } from 'react';
+import React from 'react';
 import { Steps } from 'antd';
 import style from './card.module.scss';
 import Link from 'next/link';
@@ -12,13 +12,14 @@ import { unixDate } from '@helpers/array-format';
 import moment from 'moment';
 import CurrencyFormat from 'react-currency-format';
 import { useTranslation } from 'next-i18next';
+import { useUI } from '@context/uiContext';
 
 const { Step } = Steps;
 
 export default function Card({ datas }) {
+  const { openDirection, closeDirection, displayDirection } = useUI();
   const { t } = useTranslation(['order']);
   const unixDates = unixDate(datas?.node);
-  const [isActive, setIsActive] = useState(false);
   const format = n =>
     `0${(n / 60) ^ 0}`.slice(-2) +
     ' ' +
@@ -135,13 +136,15 @@ export default function Card({ datas }) {
               <div className="flex items-center space-x-8 justify-center">
                 <button
                   className="text-direction font-medium flex text-xs md:text-base"
-                  onClick={() => setIsActive(!isActive)}
+                  onClick={() =>
+                    displayDirection ? closeDirection() : openDirection()
+                  }
                 >
                   {t('directionInformation')}
-                  {isActive ? (
-                    <ChevronUpIcon className="md:w-6 md:h-6 w-4 h-4" />
-                  ) : (
+                  {displayDirection ? (
                     <ChevronDownIcon className="md:w-6 md:h-6 w-4 h-4" />
+                  ) : (
+                    <ChevronUpIcon className="md:w-6 md:h-6 w-4 h-4" />
                   )}
                 </button>
               </div>
@@ -154,7 +157,7 @@ export default function Card({ datas }) {
               </div>
             </div>
           </div>
-          <div className={`${!isActive ? 'hidden' : 'block'}`}>
+          <div className={`${displayDirection ? 'hidden' : 'block'}`}>
             <div className="border border-dashed "></div>
             <div className="px-5 lg:px-20 py-5 grid sm:grid-cols-2">
               <Steps progressDot direction="vertical" className="col-span-1">

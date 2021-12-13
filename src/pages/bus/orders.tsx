@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import NavData from '@data/navData.json';
 import { useQuery } from '@apollo/client';
 import {
   BUS_ALL_LOCATIONS_QUERY,
@@ -24,9 +23,14 @@ export default function Orders() {
   const { t } = useTranslation(['order']);
   const router = useRouter();
   const { setUser } = useGlobalStore();
+
   useEffect(() => {
     async function loadUserFromCookies() {
-      const token = AuthTokenStorageService.getAccessToken();
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : '';
       if (token) {
         try {
           const res = await AuthService.getCurrentUser();
@@ -42,6 +46,7 @@ export default function Orders() {
     }
     loadUserFromCookies();
   }, []);
+
   const { startLocation, stopLocation, endLocation, date, endDate } =
     router.query;
   const { data } = useQuery(BUS_ALL_LOCATIONS_QUERY);
@@ -62,8 +67,6 @@ export default function Orders() {
   const scheduleResult =
     scheduleData === undefined ? '' : scheduleData.busAllSchedules.edges;
   const startLocations = arrayFormat(data);
-  console.log(scheduleResult[0]?.node?.leaveDate);
-  console.log(date);
 
   return (
     <Layout>
@@ -102,7 +105,7 @@ export default function Orders() {
                 href="https://www.facebook.com/TapaTripTravelAgency/"
                 target="_blank"
               >
-                <img src="/assets/Thailand.jpg" className="rounded-lg" />{' '}
+                <img src="/assets/Thailand.png" className="rounded-lg" />{' '}
               </a>
             </div>
           </div>

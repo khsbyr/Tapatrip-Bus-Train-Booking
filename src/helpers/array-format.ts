@@ -1,7 +1,12 @@
-import cyrillicToLatin from '@helpers/cyrillic-to-latin';
+import cyrillicToLatin from './cyrillic-to-latin';
 
 export function arrayFormat(data: any) {
   const result = data === undefined ? '' : data.busAllLocations.edges;
+  return result;
+}
+
+export function bookingListFormat(data: any) {
+  const result = data === undefined ? '' : data.busAllBookings.edges;
   return result;
 }
 
@@ -86,8 +91,8 @@ export function arrayFilterSeat(data: any, value: String, scheduleId: String) {
     data &&
     data.filter(function (currentElement) {
       return (
-        currentElement.seatNumber.indexOf(value) > -1 &&
-        currentElement.scheduleId.indexOf(scheduleId) > -1
+        currentElement.seatNumber === value &&
+        currentElement.scheduleId === scheduleId
       );
     });
   return result;

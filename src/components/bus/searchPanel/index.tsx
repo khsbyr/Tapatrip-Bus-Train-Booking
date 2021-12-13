@@ -18,9 +18,8 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
   const router = useRouter();
   const activePath = router.route == '/travel' ? '3' : '4';
 
-  const handleTabChange = key => {
-    const route = key == 4 ? 'bus' : '/travel';
-    router.push(`/${route}`);
+  const handleTabChange = () => {
+    router.push(`/bus`);
   };
 
   return (
@@ -53,7 +52,7 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
                   <span className="text">{t(`${menu.text}`)}</span>
                 </div>
               }
-              disabled={menu.id !== 4 && menu.id !== 3 ? true : false}
+              disabled={menu.id !== 4 ? true : false}
               key={menu.id}
             />
           ))}

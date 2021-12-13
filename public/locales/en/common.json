@@ -49,10 +49,10 @@
   "getIncentivesWarning": "Please enter your email address",
   "registrationButton": "Register",
   "passengeСonsiderations": "Passenger considerations",
-  "passengeСonsiderationsBody": "<p>- When boarding a bus, passengers must check their personal documents with the driver.</p><p>- If proof of payment is required, the bus must arrive 30 minutes before departure, print out a reference, and occupy the seat.</p><p>- Free transportation for children aged 0-6 without seating.</p><p>- Hand luggage not exceeding 60 x 40 x 20 cm and weighing up to 20 kg is allowed.</p><p>- If you are unable to travel on the trip and return the ticket, you will have to pay a service fee equal to 15 percent of the ticket price and an online service fee.</p><p>- The customer will transfer the payment to the account of the National Center for Motor Transportation within 20 minutes after placing the order.</p>",
-  "passengeСonsiderationsTitle2": "You have the right to refuse to transport a passenger under the following conditions.",
-  "passengeСonsiderationsTitle2Body": "<p>- Passengers who have consumed alcohol will not be served. </p><p> - Passengers will not be served if their names, registration numbers and ages are incorrectly reported. </p><p> - Minors without guardians / 0-12 / children will not be allowed to travel. </p> <p> - Passengers will not be eligible for the discount, they will not be included in the age limit, but passengers will not be served if they have received a child ticket or underpaid. </p> ",
+    "passengerСonsiderationsBody": "Learn what to look for and tactics to help ease the way",
+  "passengeСonsiderationsBody": "<p> -Passengers are required to check their personal documents with the driver when boarding the bus </p><p> -Free transportation for children aged 0-6 without seating  </p> <p> - If proof of payment is required, the bus must arrive 30 minutes before departure, print out a reference, and occupy the seat </ p> <p> - Hand luggage not exceeding 60 * 40 * 20 cm and weighing up to 20 kg is allowed.  </p><p>Within 20 minutes after placing your order, the customer will transfer the payment to the account of the National Center for Road Transport and enter the ORDER CODE (mandatory) and the relevant phone number in the transaction value field.</p><p style =\"font-size: 20px; text-align: center;\"> <b> Ticket cancellation conditions </b> </p> <p> -If you return the ticket 2 hours before the bus departure, you will pay a 10% fee </ p> <p> -If you return your ticket 2 hours before the bus departure, you will be charged a 20% fee  </p> <p> -If you return the ticket after the bus departs, you will pay a 50% fee  </p> <p style = \"font-size: 20px; text-align: center; \"> <b> Have the right to refuse to carry passengers under the following conditions. These include:  </b> </p> <p> -Passengers who have consumed alcohol will not be served.  </p> <p> -If the passenger's name, registration number and age are incorrectly reported, the passenger will not be served.  </p> <p> -Young children (0-12) are not allowed to travel without a guardian  </p> <p> Passengers will not be eligible for the discount and will not be eligible for the discount, but passengers will not be eligible if they receive a child ticket or underpay.  </p> ",
   "videoInstructions": "Video instructions for ordering tickets",
+  "videoInstructionsBody": "Check out the video instructions for ordering tickets",
   "appDownloadTitle": "Download the Tapatrip application",
   "appDownloadBody": "Flight, hotel, tour, bus and train tickets can be ordered from one place.",
   "logout": "Log out",
@@ -85,6 +85,10 @@
   "sendButton":"SEND",
   "passwordInputPlaceholder": "Repeat password",
   "privacyPolicy": "Privacy policy",
-  "termsConditions": "Terms & Conditions"
-
+  "termsConditions": "Terms & Conditions",
+  "userInformation": "Customer information",
+  "userName": "Customer name",
+  "editButton": "EDIT",
+  "mailTitle":  "Email address",
+  "numberTitle": "Phone number"
 }

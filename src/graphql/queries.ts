@@ -186,8 +186,8 @@ export const BUS_SCHEDULES_DETAIL_QUERY = gql`
 `;
 
 export const MY_BOOKING_LIST_QUERY = gql`
-  query busAllBookings($id: String) {
-    busAllBookings(id: $id) {
+  query busAllBookings {
+    busAllBookings {
       edges {
         node {
           id
@@ -196,11 +196,7 @@ export const MY_BOOKING_LIST_QUERY = gql`
           statusName
           payment
           pax {
-            passenger {
-              firstName
-              lastName
-              documentNumber
-            }
+            firstName
             seat
           }
           schedule {
@@ -209,6 +205,7 @@ export const MY_BOOKING_LIST_QUERY = gql`
             childTicket
             childInsurance
           }
+          statusName
         }
       }
     }

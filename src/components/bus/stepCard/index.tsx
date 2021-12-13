@@ -13,8 +13,10 @@ import { arrayFilterSchedule, arrayFilterSeat } from '@helpers/array-format';
 import { unixDate } from '@helpers/array-format';
 import CurrencyFormat from 'react-currency-format';
 import { useTranslation } from 'next-i18next';
+import { useUI } from '@context/uiContext';
 
 const { Step } = Steps;
+
 export default function StepCard({ datas, scheduleId }) {
   const persons = [];
   const childs = [];
@@ -22,7 +24,13 @@ export default function StepCard({ datas, scheduleId }) {
   const { t } = useTranslation(['order']);
   const unixDates = unixDate(datas);
   const { selectedSeats } = useGlobalStore();
-  const [isActive, setIsActive] = useState(false);
+  const {
+    openDirection,
+    closeDirection,
+    displayDirection,
+    displayBlock,
+    setDisplayBlock,
+  } = useUI();
   let format = n =>
     `0${(n / 60) ^ 0}`.slice(-2) +
     ' ' +
@@ -41,6 +49,14 @@ export default function StepCard({ datas, scheduleId }) {
     });
   const totalPrice =
     datas?.adultTicket * persons.length + datas?.childTicket * childs.length;
+
+  const handleDirection = () => {
+    if (displayDirection) {
+      closeDirection();
+    } else openDirection();
+    setDisplayBlock();
+  };
+
   return (
     <div>
       <div className="max-w-7xl mx-auto">
@@ -159,10 +175,10 @@ export default function StepCard({ datas, scheduleId }) {
               <div className="flex items-center space-x-8">
                 <button
                   className="text-direction font-medium flex text-xs md:text-sm"
-                  onClick={() => setIsActive(!isActive)}
+                  onClick={handleDirection}
                 >
                   {t('directionInformation')}
-                  {isActive ? (
+                  {!displayDirection ? (
                     <ChevronUpIcon className="md:w-6 md:h-6 w-5 h-5" />
                   ) : (
                     <ChevronDownIcon className="md:w-6 md:h-6 w-5 h-5" />
@@ -171,7 +187,7 @@ export default function StepCard({ datas, scheduleId }) {
               </div>
             </div>
           </div>
-          <div className={`${!isActive ? 'hidden' : 'block'}`}>
+          <div className={`${displayDirection ? 'hidden' : 'block'}`}>
             <div className="border border-dashed"></div>
             <div className="px-5 lg:px-20 py-5 grid sm:grid-cols-2 lg:grid-cols-1">
               <Steps progressDot direction="vertical" className="text-xs">

@@ -38,7 +38,7 @@ export default function PaymentModal(props) {
       return (
         <div className="text-cardDate text-base font-medium">
           <p className="flex justify-center">
-            Захиалгын дүн:
+            {t('orderPriceTitle')}
             <p className="ml-3 font-normal">{booking.toPay}</p>
           </p>
           <img
@@ -46,12 +46,10 @@ export default function PaymentModal(props) {
             src={`data:image/png;base64,${props.data.qPay_QRimage}`}
             alt="Qpay code"
           />
-          <p className="text-center">
-            Та дээрх QR кодыг өөрийн интернет банкны аппликейшн ашиглан уншуулж
-            төлбөрөө төлнө үү.
-          </p>
+          <p className="text-center">{t('orderPaymentBody')}</p>
           <p className="flex justify-center">
-            Лавлах утас: <p className="ml-3 font-normal"> 75154444</p>
+            {t('orderPhoneNumberTitle')}{' '}
+            <p className="ml-3 font-normal"> 75154444</p>
           </p>
         </div>
       );

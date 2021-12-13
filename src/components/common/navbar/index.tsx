@@ -1,5 +1,4 @@
 import { MenuIcon, XIcon, PhoneIcon } from '@heroicons/react/solid';
-import { LogoutIcon, CheckIcon } from '@heroicons/react/outline';
 import React, { FC, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import OrderCheck from '@components/bus/orderCheck';
@@ -9,7 +8,6 @@ import Link from 'next/link';
 import Profile from './profile';
 import { useTranslation } from 'next-i18next';
 import { useGlobalStore } from '@context/globalStore';
-import { delay } from 'lodash';
 
 interface Props {
   navbarData?: any;

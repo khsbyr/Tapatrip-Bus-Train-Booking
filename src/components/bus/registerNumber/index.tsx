@@ -84,6 +84,8 @@ const RegisterNumber = ({
               : '';
             formatSelectedSeats[passengerNumber - 1].documentNumber =
               registerNumber;
+            formatSelectedSeats[passengerNumber - 1].lastNameError = '';
+            formatSelectedSeats[passengerNumber - 1].firstNameError = '';
             setSelectedSeats(formatSelectedSeats);
           } catch (e) {
             console.log(e);
@@ -118,9 +120,7 @@ const RegisterNumber = ({
                     getFieldValue('register' + i) ===
                   registerNumber
                 ) {
-                  return Promise.reject(
-                    new Error('Зорчигчийн регистерийн дугаар давхцаж байна!!')
-                  );
+                  return Promise.reject(new Error(t('registNumberCheck')));
                 }
               }
             }

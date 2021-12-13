@@ -1,5 +1,5 @@
 .button {
-  @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white;
+  @apply w-full bg-button text-sm sm:text-base shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white;
 }
 .loginButton {
   @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white;
