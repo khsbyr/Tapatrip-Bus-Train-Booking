@@ -89,11 +89,15 @@ const AuthService = {
     };
 
     const response = await Client.post('/account/register/customer/', data);
-    const result = response.data;
-    const customerToken =
-      result.status_code === 200 && response.data.result.token;
+    // const result = response.data.status_code === 200 ? true : false;
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    const customerToken = result && response.data.result.token;
     AuthTokenStorageService.store(customerToken);
-    return result;
+    return datas;
   },
 
   async guestToken() {

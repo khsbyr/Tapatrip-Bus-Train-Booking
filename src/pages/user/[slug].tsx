@@ -12,29 +12,18 @@ import { useRouter } from 'next/router';
 import isEmpty from '@utils/isEmpty';
 import { useTranslation } from 'next-i18next';
 import { useGlobalStore } from '@context/globalStore';
-import { useQuery } from '@apollo/client';
-import { MY_BOOKING_LIST_QUERY } from '@graphql/queries';
-import { bookingListFormat } from '@helpers/array-format';
 
 export default function index() {
   const { t } = useTranslation();
   const router = useRouter();
   const { slug } = router.query;
   const { setUser } = useGlobalStore();
-  const [bookingList, setBookingList] = useState([]);
 
   const token =
     AuthTokenStorageService.getAccessToken() &&
     AuthTokenStorageService.getAccessToken() != 'false'
       ? AuthTokenStorageService.getAccessToken()
       : '';
-
-  // if (token) {
-  //   const { data, loading, error } = useQuery(MY_BOOKING_LIST_QUERY);
-  //   if (error) return `Error! ${error.message}`;
-  //   const bookingData = data && bookingListFormat(data);
-  //   setBookingList(bookingData);
-  // }
 
   const handleLogout = () => {
     AuthService.logout();

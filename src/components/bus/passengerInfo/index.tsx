@@ -21,6 +21,7 @@ const { Option } = Select;
 
 export default function PassengerIfo({ datas, scheduleId }) {
   const { t } = useTranslation(['steps']);
+  const [confirmError, setConfirmError] = useState(null);
   const router = useRouter();
   const [isCompoany, setIsCompany] = useState(false);
   const { user, customers, setCustomers } = useGlobalStore();
@@ -165,55 +166,65 @@ export default function PassengerIfo({ datas, scheduleId }) {
       );
     }
   };
-
   const handleBooking = async pinCode => {
+    if (!pinCode) setConfirmError(t('enterConfirmationCode'));
+    else if (pinCode.length < 4) setConfirmError(t('confirmCodeError'));
     setLoading1('true');
     let payload = {
       phone: customers.phoneNumber,
       dialCode: customers.dialNumber,
       code: pinCode,
     };
-    const result = await AuthService.verifyCode(payload);
-    if (result) {
-      const passengers = [];
-      formatSelectedSeats.map(seat => {
-        let passenger = {
-          firstName: seat.firstName,
-          seat: parseInt(seat.seatNumber),
-          lastName: seat.lastName,
-          documentNumber: seat.documentNumber,
-        };
-        passengers.push(passenger);
-      });
+    if (pinCode.length > 3) {
       try {
-        const { data } = await addBusBooking({
-          variables: {
-            schedule: scheduleId,
-            contactName: passengers[0].firstName,
-            contactDialNumber: parseInt(customers.dialNumber),
-            contactPhone: customers.phoneNumber,
-            contactEmail: customers.email,
-            isCompany: customers.isCompany,
-            companyRegister: customers.companyRegister,
-            pax: passengers,
-          },
-        });
-        if (data) setBooking(data?.busBooking);
-        setCurrent(current + 1);
-        setIsModalVisible(false);
-        setLoading1('false');
+        if (pinCode.length > 3) {
+          const res = await AuthService.verifyCode(payload);
+          if (res && res.status === 200) {
+            const passengers = [];
+            formatSelectedSeats.map(seat => {
+              let passenger = {
+                firstName: seat.firstName,
+                seat: parseInt(seat.seatNumber),
+                lastName: seat.lastName,
+                documentNumber: seat.documentNumber,
+              };
+              passengers.push(passenger);
+            });
+            try {
+              const { data } = await addBusBooking({
+                variables: {
+                  schedule: scheduleId,
+                  contactName: passengers[0].firstName,
+                  contactDialNumber: parseInt(customers.dialNumber),
+                  contactPhone: customers.phoneNumber,
+                  contactEmail: customers.email,
+                  isCompany: customers.isCompany,
+                  companyRegister: customers.companyRegister,
+                  pax: passengers,
+                },
+              });
+              if (data) setBooking(data?.busBooking);
+              setCurrent(current + 1);
+              setIsModalVisible(false);
+              setLoading1('false');
+            } catch (e) {
+              Modal.error({
+                title: t('errorTitle'),
+                content: e.message,
+              });
+              setLoading1('false');
+            }
+          }
+          if (res && res.status === 400) {
+            setConfirmError(res.message);
+          }
+          setLoading('false');
+        }
+        setLoading('false');
       } catch (e) {
-        Modal.error({
-          title: t('errorTitle'),
-          content: e.message,
-        });
-        setLoading1('false');
+        setConfirmError(e.message);
+        setLoading('false');
       }
-    } else {
-      Modal.error({
-        title: t('errorTitle'),
-        content: t('errorContentCode'),
-      });
       setLoading1('false');
     }
   };
@@ -424,6 +435,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
           <ConfirmModal
             isModalVisible={isModalVisible}
             booking={handleBooking}
+            errorMessage={confirmError}
             close={close}
             loading={loading1}
           />

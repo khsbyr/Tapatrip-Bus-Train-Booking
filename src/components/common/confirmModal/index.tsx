@@ -8,6 +8,7 @@ import { useTranslation } from 'next-i18next';
 export default function ConfirmModal(props) {
   const [pinCode, setPinCode] = useState('');
   const { t } = useTranslation(['steps']);
+  const [confirmError, setConfirmError] = useState(null);
   const handlePinChange = pinCode => {
     setPinCode(pinCode);
   };
@@ -16,6 +17,7 @@ export default function ConfirmModal(props) {
       return props.booking(pinCode);
     }
   };
+
   return (
     <ContentWrapper>
       <Modal
@@ -30,13 +32,18 @@ export default function ConfirmModal(props) {
           <h1 className="text-lg md:text-xl text-cardDate font-bold">
             {t('confirmModalTitle')}
           </h1>
-          <p className="flex justify-center py-4" onKeyPress={handleKeyPress}>
+          <p className="flex justify-center pt-4" onKeyPress={handleKeyPress}>
             <ReactCodeInput
               fields={4}
               fieldWidth={46}
               fieldHeight={44}
               onChange={handlePinChange}
             />
+          </p>
+          <p className="flex justify-center pb-4">
+            {props.errorMessage && (
+              <span className="text-red-500">{props.errorMessage}</span>
+            )}
           </p>
           <button
             onClick={() => props.booking(pinCode)}
