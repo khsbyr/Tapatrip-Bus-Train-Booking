@@ -8,7 +8,6 @@ export default function MyProfile() {
   const { user } = useGlobalStore();
   const [isActive, setIsActive] = useState(true);
   const { t } = useTranslation();
-  console.log(user);
 
   return (
     <div className="space-y-8">

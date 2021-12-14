@@ -15,21 +15,15 @@ import { unixDate } from '@helpers/array-format';
 export default function MyOrders() {
   const { t } = useTranslation();
   const [isActive1, setIsActive1] = useState(false);
-  const { data, loading, error } = useQuery(MY_BOOKING_LIST_QUERY);
-  let unixDates;
-  if (error) return `Error! ${error.message}`;
+  const { data } = useQuery(MY_BOOKING_LIST_QUERY);
   const bookingData = data && bookingListFormat(data);
-  console.log(bookingData);
-  //setBookingList(bookingData);
   return (
     <div>
       <h1 className="text-cardDate text-lg font-medium">{t('bus')}</h1>
       {bookingData &&
-        bookingData?.map((item, index) => (
+        bookingData?.map((item: any, index: number) => (
           <div key={index}>
-            <div className="hidden">
-              {(unixDates = unixDate(item?.node?.schedule))}
-            </div>
+            <div className="hidden">{unixDate(item?.node?.schedule)}</div>
             <hr className="my-4" />
             <div className="rounded-lg border p-2 space-y-2">
               <div className="flex justify-between flex-wrap items-center">
@@ -99,8 +93,14 @@ export default function MyOrders() {
                     </h1>
                     <h1 className="font-bold">-</h1>
                     <h1 className="flex flex-wrap text-orders font-medium gap-1">
-                      {moment.unix(unixDates).format('YYYY-MM-DD')}{' '}
-                      <p>{moment.unix(unixDates).format('HH:mm')}</p>
+                      {moment
+                        .unix(unixDate(item?.node?.schedule))
+                        .format('YYYY-MM-DD')}{' '}
+                      <p>
+                        {moment
+                          .unix(unixDate(item?.node?.schedule))
+                          .format('HH:mm')}
+                      </p>
                     </h1>
                   </div>
                   <div className="flex items-center">
