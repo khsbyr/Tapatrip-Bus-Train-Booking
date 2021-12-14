@@ -34,8 +34,14 @@ const Navbar: FC<Props> = ({ navbarData }) => {
     window.addEventListener('scroll', changeBackground);
   }
 
-  const handleModal = () => {
-    setIsModalVisible(true);
+  const handleTelcocom = () => {
+    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+width=600,height=300,left=100,top=100`;
+    window.open(
+      'https://my.telcocom.mn/callus/#!#%2FCE05E5603B1C11EC8428FFD132F2D921',
+      'Tapatrip',
+      params
+    );
   };
 
   const closeModal = () => {
@@ -153,13 +159,14 @@ const Navbar: FC<Props> = ({ navbarData }) => {
             <span className="animate-ping absolute inline-flex h-7 w-28 bg-onlineSupport rounded-lg z-8"></span>
             <button className="z-10 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-3 rounded-lg">
               <PhoneIcon className="w-4" />
-              <a
-                href="https://my.telcocom.mn/callus/#!#%2FCE05E5603B1C11EC8428FFD132F2D921"
-                target="_blank"
+              <p
+                // href="https://my.telcocom.mn/callus/#!#%2FCE05E5603B1C11EC8428FFD132F2D921"
+                // target="_blank"
                 className="pl-1 w-36"
+                onClick={handleTelcocom}
               >
                 {t('onlineHelp')}
-              </a>
+              </p>
             </button>
           </div>
         </div>
