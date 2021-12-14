@@ -42,7 +42,7 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
           centered
           tabBarGutter={160}
           onChange={handleTabChange}
-          className="hidden lg:block"
+          className="hidden lg:flex"
         >
           {navbarData.generalList.map(menu => (
             <TabPane
@@ -71,6 +71,39 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
         </Tabs>
         <SearchInput startLocations={startLocations} />
       </div>
+      <Tabs
+        activeKey={activePath}
+        centered
+        onChange={handleTabChange}
+        className="z-50 w-full fixed bottom-0 inset-x-0 bg-white text-sm text-secondary shadow-2xl h-20 lg:hidden"
+      >
+        {navbarData.generalList.map(menu => (
+          <TabPane
+            tabKey={menu.id}
+            tab={
+              <div
+                key={menu.id}
+                className="tab-title -mx-1.5 xs:mx-2 sm:px-4 md:px-7"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-8 h-8"
+                  viewBox="-5 0 60 45"
+                >
+                  <g>
+                    {menu.path.map(value => (
+                      <path key={value} d={value} />
+                    ))}
+                  </g>
+                </svg>
+                <span className="text-xs sm:text-sm">{t(`${menu.text}`)}</span>
+              </div>
+            }
+            disabled={menu.id === 3 || menu.id === 5 ? true : false}
+            key={menu.id}
+          />
+        ))}
+      </Tabs>
     </ContentWrapper>
   );
 };

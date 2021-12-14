@@ -54,7 +54,13 @@ export default function SelectSeats({ datas, scheduleId }) {
                 {t('busInformations')}
               </h1>
               <div className="flex ">
-                <img src="/assets/busimg.jpg" className="pr-4 h-32" />
+                {bus?.seatCount < 26 ? (
+                  <img src="/assets/bus24.png" className="pr-4 h-32" />
+                ) : bus?.seatCount < 46 ? (
+                  <img src="/assets/busimg.jpg" className="pr-4 h-32" />
+                ) : (
+                  <img src="/assets/bus53.jpg" className="pr-4 h-32" />
+                )}
                 <div className={style.busInformation}>
                   <p>
                     <h1> {t('businessFirms')}: </h1>

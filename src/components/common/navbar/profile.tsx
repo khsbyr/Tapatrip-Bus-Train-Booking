@@ -28,7 +28,7 @@ export default function Profile({ data }) {
       <button
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
-        className="flex items-center justify-between text-base rounded border w-56 lg:w-auto border-profile bg-profile hover:border hover:bg-white text-cardDate hover:text-blue-600 py-2 px-3"
+        className="flex items-center justify-between text-base rounded border w-56 lg:w-40 border-profile bg-profile hover:border hover:bg-white text-cardDate hover:text-blue-600 py-2 px-3"
       >
         <p className="flex items-center border-0">
           <UserCircleIcon className="h-6" />
@@ -44,7 +44,7 @@ export default function Profile({ data }) {
         className={`${
           !isHovering
             ? 'hidden'
-            : 'bg-white absolute block rounded shadow-lg p-3 z-20 text-sm text-cardDate w-56 md:w-60 md:-ml-20'
+            : 'bg-white absolute block rounded shadow-lg p-3 z-20 text-sm text-cardDate w-56 lg:-ml-16'
         }`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}

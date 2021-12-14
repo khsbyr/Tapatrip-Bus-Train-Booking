@@ -136,7 +136,7 @@ export default function OrderModal(props) {
                   <div className="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-between pt-4">
                     <h1 className="text-cardDate font-medium">
                       {t('startDate')}: {datas?.schedule?.leaveDate}{' '}
-                      {datas?.schedule?.leaveTime}
+                      {datas?.schedule?.leaveTime.slice(0, 5)}
                     </h1>
                     <h1 className="hidden sm:block">-</h1>
                     <h1 className="sm:hidden p-1">&darr;</h1>
@@ -180,16 +180,13 @@ export default function OrderModal(props) {
                   </div>
                   <div className={style.rowDirection}>
                     <div className="flex">
-                      <h1 className="text-cardDate font-semibold text-xs md:text-sm mr-1">
-                        {t('payment')}:
-                      </h1>
                       <h1
-                        className={`font-semibold text-xs md:text-sm ${
+                        className={`font-medium text-xs bg-red-600 text-white p-2 rounded ${
                           datas?.status === 7
-                            ? 'text-red-400'
+                            ? 'bg-red-600'
                             : datas?.status === 4
-                            ? 'text-green-400'
-                            : 'text-cardDate'
+                            ? 'bg-green-400'
+                            : 'bg-yellow-300'
                         }`}
                       >
                         {datas?.statusName}

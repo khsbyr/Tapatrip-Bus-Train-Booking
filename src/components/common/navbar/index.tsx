@@ -17,7 +17,6 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [navbar, setNavbar] = useState(false);
-  const [openTab, setOpenTab] = React.useState(4);
   const { user } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const isAuth = user ? true : false;
@@ -52,7 +51,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
         <div className={styles.navbar}>
           <div className={styles.navbarBody}>
             <div className="flex items-center">
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 cursor-pointer">
                 <Link href="/bus">
                   <img
                     src={`${
@@ -210,45 +209,6 @@ const Navbar: FC<Props> = ({ navbarData }) => {
             </div>
           )}
         </Transition>
-
-        <nav className={styles.bottomMenu}>
-          {navbarData.generalList.map(menu => (
-            <div key={menu.id}>
-              <a
-                className={
-                  'text-xs pt-3 rounded-full block leading-normal' +
-                  (openTab === menu.id
-                    ? 'text-selected'
-                    : 'text-mobileNav bg-white cursor-default pointer-events-none ')
-                }
-                onClick={e => {
-                  e.preventDefault();
-                  setOpenTab(menu.id);
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="40"
-                  height="40"
-                  viewBox="-5 0 60 45"
-                  fill={openTab === menu.id ? 'white' : '#BCC4CC'}
-                  className={
-                    openTab === menu.id
-                      ? 'bg-blue-600 rounded-full p-1.5'
-                      : '#BCC4CC'
-                  }
-                >
-                  <g>
-                    {menu.path.map(value => (
-                      <path key={value} d={value} />
-                    ))}
-                  </g>
-                </svg>
-                <span className="flex justify-center">{t(`${menu.text}`)}</span>
-              </a>
-            </div>
-          ))}
-        </nav>
       </nav>
       {isModalVisible && (
         <OnlineHelpModal isModalVisible={isModalVisible} close={closeModal} />
