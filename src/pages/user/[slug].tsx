@@ -68,14 +68,14 @@ export default function index() {
               )}
             </div>
             <div className="w-full md:w-1/4 bg-white rounded-lg shadow-md p-4 text-cardDate">
-              <button
+              {/* <button
                 className={`${
                   slug === 'profile' ? 'bg-bg text-blue-400' : ''
                 } w-full flex justify-start p-3 hover:bg-bg rounded cursor-pointer hover:text-blue-400`}
                 onClick={() => router.push('/user/profile')}
               >
                 {t('customerSection')}
-              </button>
+              </button> */}
               <button
                 className={`${
                   slug === 'orders' ? 'bg-bg text-blue-400' : ''
