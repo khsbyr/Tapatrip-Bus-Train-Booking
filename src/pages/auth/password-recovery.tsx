@@ -34,6 +34,14 @@ const PasswordRecovery = () => {
 
   const isAuth = user ? true : false;
 
+  if (isAuth === true) {
+    if (router.query && router.query.from) {
+      router.push('/bus' + router.query.from);
+    } else {
+      router.push('/bus');
+    }
+  }
+
   useEffect(() => {
     async function loadUserFromCookies() {
       const token =
@@ -56,14 +64,6 @@ const PasswordRecovery = () => {
     }
     loadUserFromCookies();
   }, []);
-
-  if (isAuth === true) {
-    if (router.query && router.query.from) {
-      router.push('/bus' + router.query.from);
-    } else {
-      router.push('/bus');
-    }
-  }
 
   function reset() {
     setCode(0);

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavData from '@data/navData.json';
 import Layout from '@components/common/layout';
 import Navbar from '@components/bus/seatNavbar';
@@ -12,8 +12,6 @@ import { useRouter } from 'next/router';
 import isEmpty from '@utils/isEmpty';
 import { useTranslation } from 'next-i18next';
 import { useGlobalStore } from '@context/globalStore';
-import { useQuery } from '@apollo/client';
-import { MY_BOOKING_LIST_QUERY } from '@graphql/queries';
 
 export default function index() {
   const { t } = useTranslation();
@@ -21,9 +19,11 @@ export default function index() {
   const { slug } = router.query;
   const { setUser } = useGlobalStore();
 
-  const { data, loading, error } = useQuery(MY_BOOKING_LIST_QUERY);
-  if (error) return `Error! ${error.message}`;
-  console.log(data);
+  const token =
+    AuthTokenStorageService.getAccessToken() &&
+    AuthTokenStorageService.getAccessToken() != 'false'
+      ? AuthTokenStorageService.getAccessToken()
+      : '';
 
   const handleLogout = () => {
     AuthService.logout();
@@ -31,14 +31,9 @@ export default function index() {
 
   useEffect(() => {
     async function loadUserFromCookies() {
-      const token =
-        AuthTokenStorageService.getAccessToken() &&
-        AuthTokenStorageService.getAccessToken() != 'false'
-          ? AuthTokenStorageService.getAccessToken()
-          : '';
       if (token) {
         try {
-          const res = await AuthService.getCurrentUser();
+          const res = await AuthService.getCurrentUser(token);
           if (res && res?.status === 200) {
             if (!isEmpty(res?.result?.user)) {
               setUser(res?.result?.user);
@@ -47,6 +42,8 @@ export default function index() {
         } catch (err) {
           console.log(err);
         }
+      } else {
+        router.push('/bus');
       }
     }
     loadUserFromCookies();
@@ -71,14 +68,14 @@ export default function index() {
               )}
             </div>
             <div className="w-full md:w-1/4 bg-white rounded-lg shadow-md p-4 text-cardDate">
-              <button
+              {/* <button
                 className={`${
                   slug === 'profile' ? 'bg-bg text-blue-400' : ''
                 } w-full flex justify-start p-3 hover:bg-bg rounded cursor-pointer hover:text-blue-400`}
                 onClick={() => router.push('/user/profile')}
               >
                 {t('customerSection')}
-              </button>
+              </button> */}
               <button
                 className={`${
                   slug === 'orders' ? 'bg-bg text-blue-400' : ''

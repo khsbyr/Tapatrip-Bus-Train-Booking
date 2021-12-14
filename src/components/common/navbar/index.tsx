@@ -54,17 +54,15 @@ const Navbar: FC<Props> = ({ navbarData }) => {
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <Link href="/bus">
-                  <a>
-                    <img
-                      src={`${
-                        navbar
-                          ? '/assets/svgIcons/NewLogo.svg'
-                          : '/assets/svgIcons/NewLogoWhite.svg'
-                      } `}
-                      alt="Logo"
-                      className={styles.logo}
-                    />
-                  </a>
+                  <img
+                    src={`${
+                      navbar
+                        ? '/assets/svgIcons/tapatripBlue.svg'
+                        : '/assets/svgIcons/tapatripWhite.svg'
+                    } `}
+                    alt="Logo"
+                    className={styles.logo}
+                  />
                 </Link>
               </div>
               <div className={`${navbar ? 'hidden' : 'lg:block'} hidden`}>

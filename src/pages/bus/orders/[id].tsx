@@ -34,7 +34,7 @@ export default function Payment() {
           : '';
       if (token) {
         try {
-          const res = await AuthService.getCurrentUser();
+          const res = await AuthService.getCurrentUser(token);
           if (res && res?.status === 200) {
             if (!isEmpty(res?.result?.user)) {
               setUser(res?.result?.user);
