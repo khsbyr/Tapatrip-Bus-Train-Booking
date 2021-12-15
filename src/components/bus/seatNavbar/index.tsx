@@ -7,8 +7,11 @@ import { useTranslation } from 'next-i18next';
 import Profile from '@components/common/navbar/profile';
 import { useGlobalStore } from '@context/globalStore';
 import AuthService from '@services/auth';
+import { useUI } from '@context/uiContext';
+import styles from '@components/common/navbar/navbar.module.scss';
 
 export default function SeatNav() {
+  const { openLoadingLogin, displayLoadingLogin } = useUI();
   const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useGlobalStore();
@@ -24,7 +27,7 @@ export default function SeatNav() {
         <div className="max-w-7xl mx-auto py-4">
           <div className="flex items-center justify-around md:justify-between h-12">
             <div className="flex items-center ">
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 cursor-pointer">
                 <a href="/">
                   <img
                     src="/assets/svgIcons/tapatripBlue.svg"
@@ -47,8 +50,15 @@ export default function SeatNav() {
                       <Profile data={user} />
                     ) : (
                       <a href="/auth/login">
-                        <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40 hover:bg-red-500">
-                          {t('login')}
+                        <button
+                          onClick={() => openLoadingLogin()}
+                          className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40 hover:bg-red-500"
+                        >
+                          {displayLoadingLogin === true ? (
+                            <div className={styles.ldsDualRing}></div>
+                          ) : (
+                            t('login')
+                          )}
                         </button>
                       </a>
                     )}
@@ -104,8 +114,15 @@ export default function SeatNav() {
                     <Profile data={user} />
                   ) : (
                     <a href="/auth/login">
-                      <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
-                        {t('login')}
+                      <button
+                        onClick={() => openLoadingLogin()}
+                        className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500"
+                      >
+                        {displayLoadingLogin === true ? (
+                          <div className={styles.ldsDualRing}></div>
+                        ) : (
+                          t('login')
+                        )}
                       </button>
                     </a>
                   )}

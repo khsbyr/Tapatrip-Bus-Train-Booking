@@ -85,5 +85,8 @@
     "warningContentPayment": "Will you pay?",
     "orderPriceTitle" : "Order amount:",
     "orderPaymentBody" : "Please read the QR code above using your internet banking application and pay.",
-    "orderPhoneNumberTitle": "Helpline:"
+    "orderPhoneNumberTitle": "Helpline:",
+    "enterConfirmationCode": "Please enter your verification code?",
+    "confirmCodeWarning": "Your confirmation code must be 4 digits !!!",
+    "confirmCodeError": "The code you entered is incorrect. Please check the verification code."
 }

@@ -9,6 +9,7 @@ import Profile from './profile';
 import { useTranslation } from 'next-i18next';
 import { useGlobalStore } from '@context/globalStore';
 import OnlineHelpModal from '@components/common/onlineHelpModal';
+import { useUI } from '@context/uiContext';
 
 interface Props {
   navbarData?: any;
@@ -17,11 +18,10 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [navbar, setNavbar] = useState(false);
-  const [openTab, setOpenTab] = React.useState(4);
   const { user } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const isAuth = user ? true : false;
-
+  const { openLoadingLogin, displayLoadingLogin } = useUI();
   const changeBackground = () => {
     if (window.scrollY >= 80) {
       setNavbar(true);
@@ -36,7 +36,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
 
   const handleTelcocom = () => {
     let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-width=600,height=300,left=100,top=100`;
+    width=300,height=600,left=1340,top=220`;
     window.open(
       'https://my.telcocom.mn/callus/#!#%2FCE05E5603B1C11EC8428FFD132F2D921',
       'Tapatrip',
@@ -58,7 +58,7 @@ width=600,height=300,left=100,top=100`;
         <div className={styles.navbar}>
           <div className={styles.navbarBody}>
             <div className="flex items-center">
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 cursor-pointer">
                 <Link href="/bus">
                   <img
                     src={`${
@@ -113,8 +113,15 @@ width=600,height=300,left=100,top=100`;
                     <Profile data={user} />
                   ) : (
                     <a href="/auth/login">
-                      <button className={styles.loginButton}>
-                        {t('login')}
+                      <button
+                        className={styles.loginButton}
+                        onClick={() => openLoadingLogin()}
+                      >
+                        {displayLoadingLogin === true ? (
+                          <div className={styles.ldsDualRing}></div>
+                        ) : (
+                          t('login')
+                        )}
                       </button>
                     </a>
                   )}
@@ -125,7 +132,10 @@ width=600,height=300,left=100,top=100`;
             <div className="-mr-2 flex space-x-5 lg:hidden">
               <div className="flex items-center justify-center">
                 <span className="animate-ping absolute inline-flex h-8 w-8 bg-onlineSupport rounded-lg"></span>
-                <button className="z-10 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-2 rounded-lg">
+                <button
+                  onClick={() => handleTelcocom()}
+                  className="z-10 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-2 rounded-lg"
+                >
                   <PhoneIcon className="w-6" />
                 </button>
               </div>
@@ -163,7 +173,7 @@ width=600,height=300,left=100,top=100`;
                 // href="https://my.telcocom.mn/callus/#!#%2FCE05E5603B1C11EC8428FFD132F2D921"
                 // target="_blank"
                 className="pl-1 w-36"
-                onClick={handleTelcocom}
+                onClick={() => handleTelcocom()}
               >
                 {t('onlineHelp')}
               </p>
@@ -207,8 +217,15 @@ width=600,height=300,left=100,top=100`;
                     <Profile data={user} />
                   ) : (
                     <a href="/auth/login">
-                      <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
-                        {t('login')}
+                      <button
+                        onClick={() => openLoadingLogin()}
+                        className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500"
+                      >
+                        {displayLoadingLogin === true ? (
+                          <div className={styles.ldsDualRing}></div>
+                        ) : (
+                          t('login')
+                        )}
                       </button>
                     </a>
                   )}
@@ -217,45 +234,6 @@ width=600,height=300,left=100,top=100`;
             </div>
           )}
         </Transition>
-
-        <nav className={styles.bottomMenu}>
-          {navbarData.generalList.map(menu => (
-            <div key={menu.id}>
-              <a
-                className={
-                  'text-xs pt-3 rounded-full block leading-normal' +
-                  (openTab === menu.id
-                    ? 'text-selected'
-                    : 'text-mobileNav bg-white cursor-default pointer-events-none ')
-                }
-                onClick={e => {
-                  e.preventDefault();
-                  setOpenTab(menu.id);
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="40"
-                  height="40"
-                  viewBox="-5 0 60 45"
-                  fill={openTab === menu.id ? 'white' : '#BCC4CC'}
-                  className={
-                    openTab === menu.id
-                      ? 'bg-blue-600 rounded-full p-1.5'
-                      : '#BCC4CC'
-                  }
-                >
-                  <g>
-                    {menu.path.map(value => (
-                      <path key={value} d={value} />
-                    ))}
-                  </g>
-                </svg>
-                <span className="flex justify-center">{t(`${menu.text}`)}</span>
-              </a>
-            </div>
-          ))}
-        </nav>
       </nav>
       {isModalVisible && (
         <OnlineHelpModal isModalVisible={isModalVisible} close={closeModal} />

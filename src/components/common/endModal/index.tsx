@@ -30,7 +30,7 @@ export default function EndModal(props) {
         </p>
         <div className="flex justify-center">
           <a href="/">
-            <button className="px-10 bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white">
+            <button className="px-10 bg-button w-full text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white">
               {t('endModalButton')}
             </button>
           </a>

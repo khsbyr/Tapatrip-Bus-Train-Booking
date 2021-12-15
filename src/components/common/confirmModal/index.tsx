@@ -16,6 +16,7 @@ export default function ConfirmModal(props) {
       return props.booking(pinCode);
     }
   };
+
   return (
     <ContentWrapper>
       <Modal
@@ -30,7 +31,7 @@ export default function ConfirmModal(props) {
           <h1 className="text-lg md:text-xl text-cardDate font-bold">
             {t('confirmModalTitle')}
           </h1>
-          <p className="flex justify-center py-4" onKeyPress={handleKeyPress}>
+          <p className="flex justify-center pt-4" onKeyPress={handleKeyPress}>
             <ReactCodeInput
               fields={4}
               fieldWidth={46}
@@ -38,11 +39,16 @@ export default function ConfirmModal(props) {
               onChange={handlePinChange}
             />
           </p>
+          <p className="flex justify-center pb-4">
+            {props.errorMessage && (
+              <span className="text-red-500">{props.errorMessage}</span>
+            )}
+          </p>
           <button
             onClick={() => props.booking(pinCode)}
             className={style.button}
           >
-            {props.loading === 'true' ? (
+            {props.loading === true ? (
               <div className={style.ldsDualRing}></div>
             ) : (
               t('confirmModalButton')

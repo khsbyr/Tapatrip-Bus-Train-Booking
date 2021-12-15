@@ -21,24 +21,34 @@ const { Option } = Select;
 
 export default function PassengerIfo({ datas, scheduleId }) {
   const { t } = useTranslation(['steps']);
+  const [confirmError, setConfirmError] = useState(null);
   const router = useRouter();
   const [isCompoany, setIsCompany] = useState(false);
   const { user, customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
-  const { displayBlock, setDisplayBlock, setDisplayNone } = useUI();
+  const {
+    displayBlock,
+    setDisplayBlock,
+    setDisplayNone,
+    closeLoading,
+    openLoadingConfirm,
+    displayLoadingConfirm,
+    closeLoadingConfirm,
+    openLoadingPassengerInfo,
+    displayLoadingPassengerInfo,
+    closeLoadingPassengerInfo,
+  } = useUI();
   const { setBooking } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [loading, setLoading] = useState('');
-  const [loading1, setLoading1] = useState('');
 
   const isAuth = user ? true : false;
 
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 
   const [addBusBooking] = useMutation(BUS_BOOKING_CREATE);
-
   window.onpopstate = () => {
+    closeLoading();
     router.push(`/bus/orders/${scheduleId}`);
     setCurrent(0);
   };
@@ -68,7 +78,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
 
   const close = () => {
     setIsModalVisible(false);
-    setLoading1('false');
+    closeLoadingConfirm();
   };
 
   const handleCustomerEmail = e => {
@@ -144,19 +154,19 @@ export default function PassengerIfo({ datas, scheduleId }) {
     if (!displayBlock) {
       p1.then(
         async () => {
-          setLoading('true');
+          openLoadingPassengerInfo();
           let payload = {
             phone: customers.phoneNumber,
             dialCode: customers.dialNumber,
           };
           const result = await AuthService.verifySms(payload);
-          if (result) setIsModalVisible(true), setLoading('false');
+          if (result) setIsModalVisible(true), closeLoadingPassengerInfo();
           else {
             Modal.error({
               title: t('errorTitle'),
               content: t('errorContent'),
             });
-            setLoading('false');
+            closeLoadingPassengerInfo();
           }
         },
         reason => {
@@ -165,57 +175,68 @@ export default function PassengerIfo({ datas, scheduleId }) {
       );
     }
   };
-
   const handleBooking = async pinCode => {
-    setLoading1('true');
+    if (!pinCode) setConfirmError(t('enterConfirmationCode'));
+    else if (pinCode.length < 4) setConfirmError(t('confirmCodeWarning'));
+    openLoadingConfirm();
+
     let payload = {
       phone: customers.phoneNumber,
       dialCode: customers.dialNumber,
       code: pinCode,
     };
-    const result = await AuthService.verifyCode(payload);
-    if (result) {
-      const passengers = [];
-      formatSelectedSeats.map(seat => {
-        let passenger = {
-          firstName: seat.firstName,
-          seat: parseInt(seat.seatNumber),
-          lastName: seat.lastName,
-          documentNumber: seat.documentNumber,
-        };
-        passengers.push(passenger);
-      });
+    if (pinCode.length > 3) {
       try {
-        const { data } = await addBusBooking({
-          variables: {
-            schedule: scheduleId,
-            contactName: passengers[0].firstName,
-            contactDialNumber: parseInt(customers.dialNumber),
-            contactPhone: customers.phoneNumber,
-            contactEmail: customers.email,
-            isCompany: customers.isCompany,
-            companyRegister: customers.companyRegister,
-            pax: passengers,
-          },
-        });
-        if (data) setBooking(data?.busBooking);
-        setCurrent(current + 1);
-        setIsModalVisible(false);
-        setLoading1('false');
+        if (pinCode.length > 3) {
+          const res = await AuthService.verifyCode(payload);
+          if (res && res.status === 200) {
+            const passengers = [];
+            formatSelectedSeats.map(seat => {
+              let passenger = {
+                firstName: seat.firstName,
+                seat: parseInt(seat.seatNumber),
+                lastName: seat.lastName,
+                documentNumber: seat.documentNumber,
+              };
+              passengers.push(passenger);
+            });
+            try {
+              const { data } = await addBusBooking({
+                variables: {
+                  schedule: scheduleId,
+                  contactName: passengers[0].firstName,
+                  contactDialNumber: parseInt(customers.dialNumber),
+                  contactPhone: customers.phoneNumber,
+                  contactEmail: customers.email,
+                  isCompany: customers.isCompany,
+                  companyRegister: customers.companyRegister,
+                  pax: passengers,
+                },
+              });
+              if (data) setBooking(data?.busBooking);
+              setCurrent(current + 1);
+              setIsModalVisible(false);
+              closeLoadingConfirm();
+            } catch (e) {
+              Modal.error({
+                title: t('errorTitle'),
+                content: e.message,
+              });
+              closeLoadingConfirm();
+            }
+          }
+          if (res && res.status === 400) {
+            setConfirmError(res.message);
+          }
+          closeLoadingConfirm();
+        }
+        closeLoadingConfirm();
       } catch (e) {
-        Modal.error({
-          title: t('errorTitle'),
-          content: e.message,
-        });
-        setLoading1('false');
+        setConfirmError(t('confirmCodeError'));
+        closeLoadingConfirm();
       }
-    } else {
-      Modal.error({
-        title: t('errorTitle'),
-        content: t('errorContentCode'),
-      });
-      setLoading1('false');
     }
+    closeLoadingConfirm();
   };
 
   return (
@@ -401,7 +422,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
             className={style.buttonBlock}
             onClick={() => setDisplayNone()}
           >
-            {loading === 'true' ? (
+            {displayLoadingPassengerInfo === true ? (
               <div className={style.ldsDualRing}></div>
             ) : (
               t('stepPassengerInfoButton')
@@ -412,7 +433,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
           <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
             <StepCard datas={datas} scheduleId={scheduleId} />
             <button className={style.button} onClick={() => setDisplayNone()}>
-              {loading === 'true' ? (
+              {displayLoadingPassengerInfo === true ? (
                 <div className={style.ldsDualRing}></div>
               ) : (
                 t('stepPassengerInfoButton')
@@ -424,8 +445,9 @@ export default function PassengerIfo({ datas, scheduleId }) {
           <ConfirmModal
             isModalVisible={isModalVisible}
             booking={handleBooking}
+            errorMessage={confirmError}
             close={close}
-            loading={loading1}
+            loading={displayLoadingConfirm}
           />
         )}
       </div>
