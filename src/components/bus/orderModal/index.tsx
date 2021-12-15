@@ -9,13 +9,13 @@ import React, { useState } from 'react';
 import ContentWrapper from '@components/bus/orderModal/style';
 import style from './orderModal.module.scss';
 import { useTranslation } from 'next-i18next';
+import { useUI } from '@context/uiContext';
 
 export default function OrderModal(props) {
   const { t } = useTranslation();
   const [isActive, setIsActive] = useState(false);
   const [isActive1, setIsActive1] = useState(false);
-  const [loading, setLoading] = useState('');
-
+  const { closeLoadingModal, openLoadingModal, displayLoadingModal } = useUI();
   const [busBookingCheck, { data }] = useMutation(BUS_BOOKING_CHECK);
 
   const datas = data && data?.busBookingCheck.booking;
@@ -30,7 +30,7 @@ export default function OrderModal(props) {
     t('orderMinutes');
 
   const onFinish = async values => {
-    setLoading('true');
+    openLoadingModal();
     try {
       const { data } = await busBookingCheck({
         variables: {
@@ -39,14 +39,14 @@ export default function OrderModal(props) {
         },
       });
       setIsActive(true);
-      setLoading('false');
+      closeLoadingModal();
     } catch (e) {
       setIsActive(false);
       Modal.error({
         title: t('errorOrderTitle'),
         content: t('errorOrderContent'),
       });
-      setLoading('false');
+      closeLoadingModal();
     }
   };
 
@@ -110,7 +110,7 @@ export default function OrderModal(props) {
                   className="text-white bg-blue-500 text-base w-full font-medium py-3 rounded-lg hover:bg-blue-600 focus:bg-blue-700"
                   type="submit"
                 >
-                  {loading === 'true' ? (
+                  {displayLoadingModal === true ? (
                     <div className={style.ldsDualRing}></div>
                   ) : (
                     t('checkButton')

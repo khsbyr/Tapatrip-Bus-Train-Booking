@@ -18,13 +18,16 @@ import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import AuthService from '@services/auth';
 import isEmpty from '@utils/isEmpty';
 import { useGlobalStore } from '@context/globalStore';
+import { useUI } from '@context/uiContext';
 
 export default function Orders() {
   const { t } = useTranslation(['order']);
   const router = useRouter();
   const { setUser } = useGlobalStore();
+  const { closeLoading } = useUI();
 
   useEffect(() => {
+    closeLoading();
     async function loadUserFromCookies() {
       const token =
         AuthTokenStorageService.getAccessToken() &&
@@ -70,7 +73,7 @@ export default function Orders() {
 
   return (
     <Layout>
-      <div className=" bg-bg">
+      <div className="bg-bg">
         <BusNavbar startLocations={startLocations} />
         <div className="max-w-7xl mx-auto my-5 grid grid-cols-1 lg:grid-cols-3">
           <div className="md:col-span-2 space-y-5">
@@ -82,14 +85,16 @@ export default function Orders() {
               <div className="bg-alert border border-alert h-auto flex items-center rounded-2xl space-x-5 px-2">
                 <ShieldExclamationIcon className="w-7 h-7 ml-2 lg:ml-12 text-alert flex-shrink-0" />
                 <p className="text-alert font-bold text-md md:text-lg py-3">
-                  {t('warningTripInformation')}
+                  {scheduleResult.length > 0
+                    ? t('warningTripInformation')
+                    : t('warningTripInformation1')}
                 </p>
               </div>
             </div>
             {loading ? <Loader /> : ''}
             {scheduleResult.length > 0 ? (
-              scheduleResult.map(schedules => (
-                <Card key={schedules.node.id} datas={schedules} />
+              scheduleResult.map((schedules, id) => (
+                <Card key={schedules.node.id} datas={schedules} id={id} />
               ))
             ) : (
               <Result

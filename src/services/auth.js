@@ -95,7 +95,7 @@ const AuthService = {
       result: response.data.result,
       message: response.data.message,
     };
-    const customerToken = result && response.data.result.token;
+    const customerToken = datas && response.data.result.token;
     AuthTokenStorageService.store(customerToken);
     return datas;
   },

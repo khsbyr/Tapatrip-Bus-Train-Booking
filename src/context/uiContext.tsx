@@ -6,6 +6,13 @@ export interface State {
   displayLanguage: boolean;
   displayDirection: boolean;
   displayBlock: boolean;
+  displayLoading: boolean;
+  displayLoadingSearch: boolean;
+  displayLoadingLogin: boolean;
+  displayLoadingConfirm: boolean;
+  displayLoadingPassengerInfo: boolean;
+  displayLoadingModal: boolean;
+  displayLoadingRegister: boolean;
 }
 
 const initialState = {
@@ -14,6 +21,13 @@ const initialState = {
   displayLanguage: true,
   displayDirection: true,
   displayBlock: false,
+  displayLoading: false,
+  displayLoadingSearch: false,
+  displayLoadingLogin: false,
+  displayLoadingConfirm: false,
+  displayLoadingPassengerInfo: false,
+  displayLoadingRegister: false,
+  displayLoadingModal: false,
 };
 
 export const UIContext = React.createContext<State | any>(initialState);
@@ -83,9 +97,92 @@ function uiReducer(state, action) {
         displayBlock: false,
       };
     }
+    case 'OPEN_LOADING': {
+      return {
+        ...state,
+        displayLoading: true,
+      };
+    }
+    case 'CLOSE_LOADING': {
+      return {
+        ...state,
+        displayLoading: false,
+      };
+    }
+    case 'OPEN_LOADING_SEARCH': {
+      return {
+        ...state,
+        displayLoadingSearch: true,
+      };
+    }
+    case 'CLOSE_LOADING_SEARCH': {
+      return {
+        ...state,
+        displayLoadingSearch: false,
+      };
+    }
+    case 'OPEN_LOADING_LOGIN': {
+      return {
+        ...state,
+        displayLoadingLogin: true,
+      };
+    }
+    case 'CLOSE_LOADING_LOGIN': {
+      return {
+        ...state,
+        displayLoadingLogin: false,
+      };
+    }
+    case 'OPEN_LOADING_CONFIRM': {
+      return {
+        ...state,
+        displayLoadingConfirm: true,
+      };
+    }
+    case 'CLOSE_LOADING_CONFIRM': {
+      return {
+        ...state,
+        displayLoadingConfirm: false,
+      };
+    }
+    case 'OPEN_LOADING_INFO': {
+      return {
+        ...state,
+        displayLoadingPassengerInfo: true,
+      };
+    }
+    case 'CLOSE_LOADING_INFO': {
+      return {
+        ...state,
+        displayLoadingPassengerInfo: false,
+      };
+    }
+    case 'OPEN_LOADING_MODAL': {
+      return {
+        ...state,
+        displayLoadingModal: true,
+      };
+    }
+    case 'CLOSE_LOADING_MODAL': {
+      return {
+        ...state,
+        displayLoadingModal: false,
+      };
+    }
+    case 'OPEN_LOADING_REGISTER': {
+      return {
+        ...state,
+        displayLoadingRegister: true,
+      };
+    }
+    case 'CLOSE_LOADING_REGISTER': {
+      return {
+        ...state,
+        displayLoadingRegister: false,
+      };
+    }
   }
 }
-
 export const UIProvider = props => {
   const [state, dispatch] = React.useReducer(uiReducer, initialState);
   const openListActive = () => dispatch({ type: 'OPEN_LIST_ACTIVE' });
@@ -98,6 +195,23 @@ export const UIProvider = props => {
   const closeDirection = () => dispatch({ type: 'CLOSE_DIRECTION' });
   const setDisplayBlock = () => dispatch({ type: 'SET_DISPLAY_BLOCK' });
   const setDisplayNone = () => dispatch({ type: 'SET_DISPLAY_NONE' });
+  const openLoading = () => dispatch({ type: 'OPEN_LOADING' });
+  const closeLoading = () => dispatch({ type: 'CLOSE_LOADING' });
+  const openLoadingSearch = () => dispatch({ type: 'OPEN_LOADING_SEARCH' });
+  const closeLoadingSearch = () => dispatch({ type: 'CLOSE_LOADING_SEARCH' });
+  const openLoadingLogin = () => dispatch({ type: 'OPEN_LOADING_LOGIN' });
+  const closeLoadingLogin = () => dispatch({ type: 'CLOSE_LOADING_LOGIN' });
+  const openLoadingConfirm = () => dispatch({ type: 'OPEN_LOADING_CONFIRM' });
+  const closeLoadingConfirm = () => dispatch({ type: 'CLOSE_LOADING_CONFIRM' });
+  const openLoadingPassengerInfo = () =>
+    dispatch({ type: 'OPEN_LOADING_INFO' });
+  const closeLoadingPassengerInfo = () =>
+    dispatch({ type: 'CLOSE_LOADING_INFO' });
+  const openLoadingModal = () => dispatch({ type: 'OPEN_LOADING_MODAL' });
+  const closeLoadingModal = () => dispatch({ type: 'CLOSE_LOADING_MODAL' });
+  const openLoadingRegister = () => dispatch({ type: 'OPEN_LOADING_REGISTER' });
+  const closeLoadingRegister = () =>
+    dispatch({ type: 'CLOSE_LOADING_REGISTER' });
   const value = React.useMemo(
     () => ({
       ...state,
@@ -109,8 +223,22 @@ export const UIProvider = props => {
       closeLanguage,
       openDirection,
       closeDirection,
+      openLoading,
+      closeLoading,
       setDisplayBlock,
       setDisplayNone,
+      openLoadingSearch,
+      closeLoadingSearch,
+      openLoadingLogin,
+      closeLoadingLogin,
+      openLoadingConfirm,
+      closeLoadingConfirm,
+      openLoadingPassengerInfo,
+      closeLoadingPassengerInfo,
+      openLoadingModal,
+      closeLoadingModal,
+      openLoadingRegister,
+      closeLoadingRegister,
     }),
     [state]
   );

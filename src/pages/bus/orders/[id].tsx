@@ -17,6 +17,7 @@ import { useTranslation } from 'next-i18next';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import AuthService from '@services/auth';
 import isEmpty from '@utils/isEmpty';
+import { useUI } from '@context/uiContext';
 
 const { Step } = Steps;
 
@@ -25,7 +26,10 @@ export default function Payment() {
   const router = useRouter();
   const { current, setCurrent, setUser } = useGlobalStore();
   const { id } = router.query;
+
+  const { closeLoading } = useUI();
   useEffect(() => {
+    closeLoading();
     async function loadUserFromCookies() {
       const token =
         AuthTokenStorageService.getAccessToken() &&

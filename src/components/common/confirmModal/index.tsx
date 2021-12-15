@@ -8,7 +8,6 @@ import { useTranslation } from 'next-i18next';
 export default function ConfirmModal(props) {
   const [pinCode, setPinCode] = useState('');
   const { t } = useTranslation(['steps']);
-  const [confirmError, setConfirmError] = useState(null);
   const handlePinChange = pinCode => {
     setPinCode(pinCode);
   };
@@ -49,7 +48,7 @@ export default function ConfirmModal(props) {
             onClick={() => props.booking(pinCode)}
             className={style.button}
           >
-            {props.loading === 'true' ? (
+            {props.loading === true ? (
               <div className={style.ldsDualRing}></div>
             ) : (
               t('confirmModalButton')

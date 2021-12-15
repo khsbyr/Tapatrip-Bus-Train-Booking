@@ -4,7 +4,7 @@ import {
   ChevronUpIcon,
   UserIcon,
 } from '@heroicons/react/solid';
-import React from 'react';
+import React, { useState } from 'react';
 import { Steps } from 'antd';
 import style from './card.module.scss';
 import Link from 'next/link';
@@ -16,8 +16,15 @@ import { useUI } from '@context/uiContext';
 
 const { Step } = Steps;
 
-export default function Card({ datas }) {
-  const { openDirection, closeDirection, displayDirection } = useUI();
+export default function Card({ datas, id }) {
+  console.log(datas, id);
+  const {
+    openDirection,
+    closeDirection,
+    displayDirection,
+    openLoading,
+    displayLoading,
+  } = useUI();
   const { t } = useTranslation(['order']);
   const unixDates = unixDate(datas?.node);
   const format = n =>
@@ -28,7 +35,9 @@ export default function Card({ datas }) {
     ('0' + (n % 60)).slice(-2) +
     ' ' +
     t('orderMinutes');
-
+  const checkLoading = e => {
+    console.log(e);
+  };
   return (
     <div className="px-2">
       <div className="max-w-7xl mx-auto">
@@ -130,7 +139,7 @@ export default function Card({ datas }) {
             <div className={style.rowDirection}>
               <div>
                 <h1 className="text-cardDate font-semibold text-xs md:text-sm lg:text-md">
-                  {datas?.node.directionName}
+                  {datas?.node?.directionName}
                 </h1>
               </div>
               <div className="flex items-center space-x-8 justify-center">
@@ -150,8 +159,16 @@ export default function Card({ datas }) {
               </div>
               <div className="col-span-2 mt-5 lg:mt-0 lg:col-span-1">
                 <Link href={`/bus/orders/${datas?.node.id}`}>
-                  <button className={style.orderButton}>
-                    {t('orderButton')}
+                  <button
+                    className={style.orderButton}
+                    onClick={() => openLoading()}
+                    // onClick={id => checkLoading(id)}
+                  >
+                    {displayLoading === true ? (
+                      <div className={style.ldsDualRing}></div>
+                    ) : (
+                      t('orderButton')
+                    )}
                   </button>
                 </Link>
               </div>

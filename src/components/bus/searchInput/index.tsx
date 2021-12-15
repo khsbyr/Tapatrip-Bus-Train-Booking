@@ -19,9 +19,11 @@ import moment from 'moment';
 import locale from 'antd/lib/date-picker/locale/mn_MN';
 import 'moment/locale/mn';
 import { useTranslation } from 'next-i18next';
+import { useUI } from '@context/uiContext';
 const dateFormat = 'YYYY-MM-DD';
 
 export default function SearchInput({ startLocations }) {
+  const { openLoadingSearch, displayLoadingSearch } = useUI();
   const { t } = useTranslation();
   const client = useApolloClient();
   const { Option } = AutoComplete;
@@ -99,6 +101,7 @@ export default function SearchInput({ startLocations }) {
     if (selectEndLocation.key === undefined || selectEndLocation.key == '') {
       message.warning(t('warningDirectionSelect'));
     } else {
+      openLoadingSearch();
       const endDate = moment(selectDate)
         .add(7, 'days')
         .format(dateFormat)
@@ -321,7 +324,11 @@ export default function SearchInput({ startLocations }) {
           locale={locale}
         />
         <button className={style.searchButton} onClick={handleSearchBus}>
-          {t('searchButton')}
+          {displayLoadingSearch === true ? (
+            <div className={style.ldsDualRing}></div>
+          ) : (
+            t('searchButton')
+          )}
         </button>
       </div>
     </ContentWrapper>
