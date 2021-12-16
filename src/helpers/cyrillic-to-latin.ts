@@ -39,7 +39,7 @@ export default function cyrillicToLatin(value: String) {
   a['О'] = 'O';
   a['Л'] = 'L';
   a['Д'] = 'D';
-  a['Ж'] = 'Zh';
+  a['Ж'] = 'J';
   a['Э'] = 'E';
   a['ф'] = 'f';
   a['ы'] = 'i';
@@ -52,7 +52,7 @@ export default function cyrillicToLatin(value: String) {
   a['ү'] = 'u';
   a['л'] = 'l';
   a['д'] = 'd';
-  a['ж'] = 'zh';
+  a['ж'] = 'j';
   a['э'] = 'e';
   a['Я'] = 'Ya';
   a['Ч'] = 'Ch';

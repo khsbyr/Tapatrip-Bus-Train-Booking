@@ -17,16 +17,18 @@ import Link from 'next/link';
 import isEmpty from '@utils/isEmpty';
 import { useRouter } from 'next/router';
 import style from './login.module.scss';
+import { useUI } from '@context/uiContext';
 
 const PasswordRecovery = () => {
   const { t } = useTranslation(['common']);
   const { user, setUser } = useGlobalStore();
   const router = useRouter();
+  const { closeLoadingRegister, openLoadingRegister, displayLoadingRegister } =
+    useUI();
   const [code, setCode] = useState(0);
   const { Countdown } = Statistic;
   const deadline = Date.now() + 60 * 60 * 83.3;
   const [pinCode, setPinCode] = useState('');
-  const [loading, setLoading] = useState('');
   const [userPhoneNumber, setUserPhoneNumber] = useState(null);
   const [error, setError] = useState(null);
   const [rePasswordError, setRePasswordError] = useState(null);
@@ -68,9 +70,8 @@ const PasswordRecovery = () => {
   function reset() {
     setCode(0);
   }
-
   const handleForgot = async values => {
-    setLoading('true');
+    openLoadingRegister();
     let payload = {
       phone: values.loginNumber.toString(),
       dialCode: 976,
@@ -83,17 +84,17 @@ const PasswordRecovery = () => {
       } else {
         setError(t('confirmationCodeError'));
       }
-      setLoading('false');
+      closeLoadingRegister();
     } catch (e) {
       setConfirmError(e.message);
-      setLoading('false');
+      closeLoadingRegister();
     }
   };
 
   const handleVerifyCode = async () => {
     if (!pinCode) setConfirmError(t('enterConfirmationCode'));
     else if (pinCode.length < 4) setConfirmError(t('confirmCodeError'));
-    setLoading('true');
+    openLoadingRegister();
     let data = {};
     data = {
       phone: userPhoneNumber.toString(),
@@ -109,17 +110,17 @@ const PasswordRecovery = () => {
         if (res && res.status === 400) {
           setConfirmError(res.message);
         }
-        setLoading('false');
+        closeLoadingRegister();
       }
-      setLoading('false');
+      closeLoadingRegister();
     } catch (e) {
       setConfirmError(e.message);
-      setLoading('false');
+      closeLoadingRegister();
     }
   };
 
   const handleRePassword = async values => {
-    setLoading('true');
+    openLoadingRegister();
     const { password, rePassword } = values;
     let data = {};
     data = {
@@ -141,12 +142,12 @@ const PasswordRecovery = () => {
         } else {
           setRePasswordError(res?.message);
         }
-        setLoading('false');
+        closeLoadingRegister();
       }
-      setLoading('false');
+      closeLoadingRegister();
     } catch (e) {
       setRePasswordError(e.message);
-      setLoading('false');
+      closeLoadingRegister();
     }
   };
 
@@ -170,7 +171,7 @@ const PasswordRecovery = () => {
               </div>
             </div>
             <button className={style.loginButton} type="submit">
-              {loading === 'true' ? (
+              {displayLoadingRegister === true ? (
                 <div className={style.ldsDualRing}></div>
               ) : (
                 t('sendButton')
@@ -212,7 +213,7 @@ const PasswordRecovery = () => {
             )}
           </div>
           <button className={style.button} type="submit">
-            {loading === 'true' ? (
+            {displayLoadingRegister === true ? (
               <div className={style.ldsDualRing}></div>
             ) : (
               t('confirmationButton')
@@ -287,7 +288,7 @@ const PasswordRecovery = () => {
             )}
           </div>
           <button className={style.button} type="submit">
-            {loading === 'true' ? (
+            {displayLoadingRegister === true ? (
               <div className={style.ldsDualRing}></div>
             ) : (
               t('saveButton')

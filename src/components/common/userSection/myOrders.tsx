@@ -35,17 +35,15 @@ export default function MyOrders() {
                 </h1>
                 <h1 className="font-medium text-cardDate text-center">
                   {t('seatNumber')}:{' '}
-                  {item?.node?.pax?.map(seat =>
-                    item?.node?.pax?.length > 1 ? seat.seat + ', ' : seat.seat
-                  )}
+                  {item?.node?.pax?.map(z => z.seat).join(', ')}
                 </h1>
                 <h1
-                  className={`font-medium text-xs bg-red-600 text-white py-1 px-2 rounded ${
+                  className={`font-medium text-xs bg-red-600 text-white p-2 rounded ${
                     item?.node?.status === 7
                       ? 'bg-red-600'
                       : item?.node?.status === 4
                       ? 'bg-green-400'
-                      : 'bg-register'
+                      : 'bg-yellow-500'
                   }`}
                 >
                   {item?.node?.statusName}

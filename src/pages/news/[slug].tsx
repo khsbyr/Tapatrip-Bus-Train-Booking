@@ -6,12 +6,12 @@ import Navbar from '@components/common/navbar';
 import Footer from '@components/common/footer';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import Layout from '@components/common/layout';
 
 export default function News({ info }) {
   const { t } = useTranslation(['common']);
-  console.log(data);
   return (
-    <div>
+    <Layout>
       {info &&
         data.map(post =>
           post.head === info.slug ? (
@@ -22,8 +22,8 @@ export default function News({ info }) {
               <HeaderBackground isBorderRadius={false} />
               <Navbar navbarData={NavData} />
               <div className="bg-bg py-5 px-7 lg:py-10 sm:px-20">
-                <div className="z-40 relative max-w-7xl bg-white rounded-lg px-5 sm:px-20 py-8 mx-auto text-cardDate space-y-5">
-                  <p className="text-center font-bold sm: text-lg text-2xl">
+                <div className="relative max-w-7xl bg-white rounded-lg px-5 sm:px-20 py-8 mx-auto text-cardDate space-y-5">
+                  <p className="text-center font-bold sm: text-lg">
                     {t(`${post.title}`)}
                   </p>
                   <div
@@ -34,13 +34,10 @@ export default function News({ info }) {
                   />
                 </div>
               </div>
-              <div className="bg-bg font-Roboto">
-                <Footer companyInfo={data} />
-              </div>
             </div>
           ) : null
         )}
-    </div>
+    </Layout>
   );
 }
 

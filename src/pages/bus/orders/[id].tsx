@@ -17,6 +17,7 @@ import { useTranslation } from 'next-i18next';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import AuthService from '@services/auth';
 import isEmpty from '@utils/isEmpty';
+import { useUI } from '@context/uiContext';
 
 const { Step } = Steps;
 
@@ -25,6 +26,9 @@ export default function Payment() {
   const router = useRouter();
   const { current, setCurrent, setUser } = useGlobalStore();
   const { id } = router.query;
+
+  const { setDisplayLoading } = useUI();
+
   useEffect(() => {
     async function loadUserFromCookies() {
       const token =
@@ -54,6 +58,9 @@ export default function Payment() {
       variables: {
         id: id,
       },
+      onCompleted: () => {
+        setDisplayLoading('');
+      },
     }
   );
 
@@ -78,7 +85,10 @@ export default function Payment() {
   ];
 
   const onChange = currentStep => {
-    if (current === 1 && currentStep === 0) setCurrent(0);
+    if (current === 1 && currentStep === 0) {
+      setDisplayLoading('');
+      setCurrent(0);
+    }
   };
 
   return (

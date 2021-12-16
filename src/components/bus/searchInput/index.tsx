@@ -19,14 +19,18 @@ import moment from 'moment';
 import locale from 'antd/lib/date-picker/locale/mn_MN';
 import 'moment/locale/mn';
 import { useTranslation } from 'next-i18next';
+import { useUI } from '@context/uiContext';
 const dateFormat = 'YYYY-MM-DD';
 
 export default function SearchInput({ startLocations }) {
+  const { openLoadingSearch, displayLoadingSearch, closeLoadingSearch } =
+    useUI();
   const { t } = useTranslation();
   const client = useApolloClient();
   const { Option } = AutoComplete;
   const router = useRouter();
-  const { date } = router.query;
+  const { startLocation, stopLocation, endLocation, date, endDate } =
+    router.query;
   const currentDate = date
     ? date
     : moment().endOf('day').format(dateFormat).toString();
@@ -99,21 +103,40 @@ export default function SearchInput({ startLocations }) {
     if (selectEndLocation.key === undefined || selectEndLocation.key == '') {
       message.warning(t('warningDirectionSelect'));
     } else {
-      const endDate = moment(selectDate)
+      const endScheduleDate = moment(selectDate)
         .add(7, 'days')
         .format(dateFormat)
         .toString();
 
+      if (isUlaanbaatar) {
+        if (
+          startLocation != selectStartLocation.key ||
+          stopLocation != selectEndLocation.key ||
+          date != selectDate ||
+          endDate != endScheduleDate
+        ) {
+          openLoadingSearch();
+        }
+      } else {
+        if (
+          endLocation != selectEndLocation.key ||
+          date != selectDate ||
+          endDate != endScheduleDate
+        ) {
+          openLoadingSearch();
+        }
+      }
+
       const params = {
         endLocation: selectEndLocation.key,
         date: selectDate,
-        endDate: endDate,
+        endDate: endScheduleDate,
       };
       const ubParams = {
         startLocation: selectStartLocation.key,
         stopLocation: selectEndLocation.key,
         date: selectDate,
-        endDate: endDate,
+        endDate: endScheduleDate,
       };
       router.push({
         pathname: '/bus/orders',
@@ -321,7 +344,11 @@ export default function SearchInput({ startLocations }) {
           locale={locale}
         />
         <button className={style.searchButton} onClick={handleSearchBus}>
-          {t('searchButton')}
+          {displayLoadingSearch === true ? (
+            <div className={style.ldsDualRing}></div>
+          ) : (
+            t('searchButton')
+          )}
         </button>
       </div>
     </ContentWrapper>

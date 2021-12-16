@@ -1,5 +1,5 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import OrderCheck from '@components/bus/orderCheck';
 import { Transition } from '@headlessui/react';
 import SearchInput from '@components/bus/searchInput';
@@ -8,6 +8,8 @@ import Profile from '@components/common/navbar/profile';
 import SelectLanguage from '@components/common/language';
 import { useTranslation } from 'next-i18next';
 import { useGlobalStore } from '@context/globalStore';
+import { useUI } from '@context/uiContext';
+import styles from '@components/common/navbar/navbar.module.scss';
 
 interface Props {
   navbarData?: any;
@@ -16,9 +18,11 @@ interface Props {
 
 export default function BusNavbar({ startLocations }) {
   const { t } = useTranslation(['common']);
+  const { openLoadingLogin, displayLoadingLogin } = useUI();
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useGlobalStore();
   const isAuth = user ? true : false;
+
   return (
     <div>
       <nav
@@ -53,9 +57,16 @@ export default function BusNavbar({ startLocations }) {
                     {isAuth ? (
                       <Profile data={user} />
                     ) : (
-                      <a>
-                        <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40 hover:bg-red-500">
-                          {t('login')}
+                      <a href="/auth/login">
+                        <button
+                          onClick={() => openLoadingLogin()}
+                          className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40 hover:bg-red-500"
+                        >
+                          {displayLoadingLogin === true ? (
+                            <div className={styles.ldsDualRing}></div>
+                          ) : (
+                            t('login')
+                          )}
                         </button>
                       </a>
                     )}
@@ -112,9 +123,16 @@ export default function BusNavbar({ startLocations }) {
                   {isAuth ? (
                     <Profile data={user} />
                   ) : (
-                    <a>
-                      <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
-                        {t('login')}
+                    <a href="/auth/login">
+                      <button
+                        onClick={() => openLoadingLogin()}
+                        className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500"
+                      >
+                        {displayLoadingLogin === true ? (
+                          <div className={styles.ldsDualRing}></div>
+                        ) : (
+                          t('login')
+                        )}
                       </button>
                     </a>
                   )}

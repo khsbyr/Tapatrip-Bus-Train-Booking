@@ -92,5 +92,8 @@
     "warningContentPayment": "请付款？",
     "orderPriceTitle" : "订单金额：",
     "orderPaymentBody" : "请使用您的网上银行应用程序阅读上面的二维码并付款。",
-    "orderPhoneNumberTitle": "求助热线:"
+    "orderPhoneNumberTitle": "求助热线:",
+    "enterConfirmationCode": "请输入您的验证码？",
+    "confirmCodeWarning": "您的确认码必须是 4 位数字！！！",
+    "confirmCodeError": "您输入的验证码不正确，请检查验证码。"
 }

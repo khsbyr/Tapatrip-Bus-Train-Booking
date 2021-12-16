@@ -87,12 +87,14 @@ const AuthService = {
       dial_code: payload.dialCode,
       code: payload.code,
     };
-
     const response = await Client.post('/account/register/customer/', data);
-    const result = response.data.status_code === 200 ? true : false;
-    const customerToken = result && response.data.result.token;
-    AuthTokenStorageService.store(customerToken);
-    return result;
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+      token: response.data.result.token,
+    };
+    return datas;
   },
 
   async guestToken() {

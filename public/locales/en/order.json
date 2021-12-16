@@ -1,5 +1,6 @@
 {
     "warningTripInformation":"There are no buses on this day, so we offer you the following days",
+    "warningTripInformation1": "There are no buses on this route",
     "ordersSearchResult": "Sorry",
     "ordersSearchResultBody": "No results were found for this search. Please try again.",
     "passengerPrice": "passenger price",

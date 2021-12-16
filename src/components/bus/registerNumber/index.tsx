@@ -100,6 +100,7 @@ const RegisterNumber = ({
 
   return (
     <Form.Item
+      key={passengerNumber}
       name={'register' + passengerNumber}
       rules={[
         {

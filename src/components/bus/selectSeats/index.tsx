@@ -8,6 +8,7 @@ import StepCard from '../stepCard';
 import { Modal } from 'antd';
 import { arrayFilterSchedule } from '@helpers/array-format';
 import { useTranslation } from 'next-i18next';
+import { useUI } from '@context/uiContext';
 
 export default function SelectSeats({ datas, scheduleId }) {
   const { t } = useTranslation(['steps']);
@@ -15,6 +16,7 @@ export default function SelectSeats({ datas, scheduleId }) {
   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const { bus, driverPhone } = datas;
+  const { displayLoading, setDisplayLoading } = useUI();
 
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 
@@ -32,8 +34,10 @@ export default function SelectSeats({ datas, scheduleId }) {
   };
 
   const next = () => {
-    if (formatSelectedSeats.length > 0) setCurrent(current + 1);
-    else {
+    if (formatSelectedSeats.length > 0) {
+      setDisplayLoading(scheduleId + 'loading');
+      setCurrent(current + 1);
+    } else {
       Modal.warning({
         title: t('selectSeatWarning'),
         content: t('selectSeatWarningContent'),
@@ -54,7 +58,13 @@ export default function SelectSeats({ datas, scheduleId }) {
                 {t('busInformations')}
               </h1>
               <div className="flex ">
-                <img src="/assets/busimg.jpg" className="pr-4 h-32" />
+                {bus?.seatCount < 26 ? (
+                  <img src="/assets/bus24.png" className="pr-4 h-32" />
+                ) : bus?.seatCount < 46 ? (
+                  <img src="/assets/busimg.jpg" className="pr-4 h-32" />
+                ) : (
+                  <img src="/assets/bus53.jpg" className="pr-4 h-32" />
+                )}
                 <div className={style.busInformation}>
                   <p>
                     <h1> {t('businessFirms')}: </h1>
@@ -117,14 +127,22 @@ export default function SelectSeats({ datas, scheduleId }) {
           </div>
         </div>
         <button className={style.buttonBlock} onClick={next}>
-          {t('stepSelectSeatButton')}
+          {displayLoading === scheduleId + 'loading' ? (
+            <div className={style.ldsDualRing}></div>
+          ) : (
+            t('stepSelectSeatButton')
+          )}
         </button>
       </div>
       <div className={style.card}>
         <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
           <StepCard datas={datas} scheduleId={scheduleId} />
           <button className={style.button} onClick={next}>
-            {t('stepSelectSeatButton')}
+            {displayLoading === scheduleId + 'loading' ? (
+              <div className={style.ldsDualRing}></div>
+            ) : (
+              t('stepSelectSeatButton')
+            )}
           </button>
         </div>
       </div>

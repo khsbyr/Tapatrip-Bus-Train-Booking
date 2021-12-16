@@ -4,7 +4,7 @@ import {
   ChevronUpIcon,
   UserIcon,
 } from '@heroicons/react/solid';
-import React from 'react';
+import React, { useState } from 'react';
 import { Steps } from 'antd';
 import style from './card.module.scss';
 import Link from 'next/link';
@@ -17,7 +17,13 @@ import { useUI } from '@context/uiContext';
 const { Step } = Steps;
 
 export default function Card({ datas }) {
-  const { openDirection, closeDirection, displayDirection } = useUI();
+  const {
+    openDirection,
+    closeDirection,
+    displayDirection,
+    displayLoading,
+    setDisplayLoading,
+  } = useUI();
   const { t } = useTranslation(['order']);
   const unixDates = unixDate(datas?.node);
   const format = n =>
@@ -30,7 +36,7 @@ export default function Card({ datas }) {
     t('orderMinutes');
 
   return (
-    <div className="px-2">
+    <div key={datas?.node?.id} className="px-2">
       <div className="max-w-7xl mx-auto">
         <div className={style.card}>
           <div className="px-7 md:px-12 space-y-2 lg:space-y-4">
@@ -130,7 +136,7 @@ export default function Card({ datas }) {
             <div className={style.rowDirection}>
               <div>
                 <h1 className="text-cardDate font-semibold text-xs md:text-sm lg:text-md">
-                  {datas?.node.directionName}
+                  {datas?.node?.directionName}
                 </h1>
               </div>
               <div className="flex items-center space-x-8 justify-center">
@@ -149,9 +155,18 @@ export default function Card({ datas }) {
                 </button>
               </div>
               <div className="col-span-2 mt-5 lg:mt-0 lg:col-span-1">
-                <Link href={`/bus/orders/${datas?.node.id}`}>
-                  <button className={style.orderButton}>
-                    {t('orderButton')}
+                <Link href={`/bus/orders/${datas?.node?.id}`}>
+                  <button
+                    className={style.orderButton}
+                    onClick={() =>
+                      setDisplayLoading(datas?.node?.id + 'loading')
+                    }
+                  >
+                    {displayLoading === datas?.node?.id + 'loading' ? (
+                      <div className={style.ldsDualRing}></div>
+                    ) : (
+                      t('orderButton')
+                    )}
                   </button>
                 </Link>
               </div>

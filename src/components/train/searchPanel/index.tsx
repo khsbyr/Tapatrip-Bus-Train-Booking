@@ -28,7 +28,6 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
       : '3';
 
   const handleTabChange = key => {
-    console.log(key);
     const route =
       key == 5
         ? '/train'

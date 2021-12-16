@@ -18,6 +18,7 @@ import { useRouter } from 'next/router';
 import style from './login.module.scss';
 import SeatNav from '@components/bus/seatNavbar';
 import isEmpty from '@utils/isEmpty';
+import { useUI } from '@context/uiContext';
 
 const Login = () => {
   const { t } = useTranslation(['common']);
@@ -28,7 +29,8 @@ const Login = () => {
   const { Countdown } = Statistic;
   const deadline = Date.now() + 60 * 60 * 83.3;
   const [pinCode, setPinCode] = useState('');
-  const [loading, setLoading] = useState('');
+  const { closeLoadingRegister, openLoadingRegister, displayLoadingRegister } =
+    useUI();
   const [userPhoneNumber, setUserPhoneNumber] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const [rePasswordError, setRePasswordError] = useState(null);
@@ -75,7 +77,9 @@ const Login = () => {
   }
 
   const handleLogin = async values => {
-    setLoading('true');
+    //     openLoadingRegister();
+    openLoadingRegister();
+
     const phoneNumber = values.loginNumber
       ? values.loginNumber
       : values.registerNumber;
@@ -91,19 +95,19 @@ const Login = () => {
       } else {
         setCode(3);
       }
-      setLoading('false');
+      closeLoadingRegister();
     } catch (e) {
       Modal.error({
         title: t('errorTitle'),
         content: e.message,
       });
-      setLoading('false');
+      closeLoadingRegister();
     }
   };
 
   const handlePassword = async () => {
     if (!currentPassword) setPasswordError(t('passwordWarning'));
-    setLoading('true');
+    openLoadingRegister();
     let data = {};
     data = {
       phone: userPhoneNumber.toString(),
@@ -125,22 +129,22 @@ const Login = () => {
         } else {
           setPasswordError(res?.message);
         }
-        setLoading('false');
+        closeLoadingRegister();
       }
-      setLoading('false');
+      closeLoadingRegister();
     } catch (e) {
       Modal.error({
         title: t('errorTitle'),
         content: e.message,
       });
-      setLoading('false');
+      closeLoadingRegister();
     }
   };
 
   const handleVerifyCode = async () => {
     if (!pinCode) setConfirmError(t('confirmCodeWarning'));
     else if (pinCode.length < 4) setConfirmError(t('confirmCodeError'));
-    setLoading('true');
+    openLoadingRegister();
     let data = {};
     data = {
       phone: userPhoneNumber.toString(),
@@ -156,17 +160,17 @@ const Login = () => {
         if (res && res.status === 400) {
           setConfirmError(res.message);
         }
-        setLoading('false');
+        closeLoadingRegister();
       }
-      setLoading('false');
+      closeLoadingRegister();
     } catch (e) {
       setConfirmError(e.message);
-      setLoading('false');
+      closeLoadingRegister();
     }
   };
 
   const handleRePassword = async values => {
-    setLoading('true');
+    openLoadingRegister();
     const { password } = values;
     let data = {};
     data = {
@@ -189,12 +193,12 @@ const Login = () => {
         } else {
           setRePasswordError(res?.message);
         }
-        setLoading('false');
+        closeLoadingRegister();
       }
-      setLoading('false');
+      closeLoadingRegister();
     } catch (e) {
       setRePasswordError(e.message);
-      setLoading('false');
+      closeLoadingRegister();
     }
   };
 
@@ -234,7 +238,7 @@ const Login = () => {
                   </div>
                 </div>
                 <button className={style.button} type="submit">
-                  {loading === 'true' ? (
+                  {displayLoadingRegister === true ? (
                     <div className={style.ldsDualRing}></div>
                   ) : (
                     t('loginTab')
@@ -250,7 +254,7 @@ const Login = () => {
               >
                 <InputPhoneNumber name="registerNumber" />
                 <button className={style.button} type="submit">
-                  {loading === 'true' ? (
+                  {displayLoadingRegister === true ? (
                     <div className={style.ldsDualRing}></div>
                   ) : (
                     t('registerTab')
@@ -294,7 +298,7 @@ const Login = () => {
             )}
           </div>
           <button className={style.button} type="submit">
-            {loading === 'true' ? (
+            {displayLoadingRegister === true ? (
               <div className={style.ldsDualRing}></div>
             ) : (
               t('registerTab')
@@ -369,7 +373,7 @@ const Login = () => {
             )}
           </div>
           <button className={style.button} type="submit">
-            {loading === 'true' ? (
+            {displayLoadingRegister === true ? (
               <div className={style.ldsDualRing}></div>
             ) : (
               t('saveButton')
@@ -404,7 +408,7 @@ const Login = () => {
             </div>
           </div>
           <button className={style.loginButton} type="submit">
-            {loading === 'true' ? (
+            {displayLoadingRegister === true ? (
               <div className={style.ldsDualRing}></div>
             ) : (
               t('loginTab')
