@@ -16,14 +16,13 @@ import { useUI } from '@context/uiContext';
 
 const { Step } = Steps;
 
-export default function Card({ datas, id }) {
-  console.log(datas, id);
+export default function Card({ datas }) {
   const {
     openDirection,
     closeDirection,
     displayDirection,
-    openLoading,
     displayLoading,
+    setDisplayLoading,
   } = useUI();
   const { t } = useTranslation(['order']);
   const unixDates = unixDate(datas?.node);
@@ -35,9 +34,7 @@ export default function Card({ datas, id }) {
     ('0' + (n % 60)).slice(-2) +
     ' ' +
     t('orderMinutes');
-  const checkLoading = e => {
-    console.log(e);
-  };
+
   return (
     <div className="px-2">
       <div className="max-w-7xl mx-auto">
@@ -158,13 +155,14 @@ export default function Card({ datas, id }) {
                 </button>
               </div>
               <div className="col-span-2 mt-5 lg:mt-0 lg:col-span-1">
-                <Link href={`/bus/orders/${datas?.node.id}`}>
+                <Link href={`/bus/orders/${datas?.node?.id}`}>
                   <button
                     className={style.orderButton}
-                    onClick={() => openLoading()}
-                    // onClick={id => checkLoading(id)}
+                    onClick={() =>
+                      setDisplayLoading(datas?.node?.id + 'loading')
+                    }
                   >
-                    {displayLoading === true ? (
+                    {displayLoading === datas?.node?.id + 'loading' ? (
                       <div className={style.ldsDualRing}></div>
                     ) : (
                       t('orderButton')

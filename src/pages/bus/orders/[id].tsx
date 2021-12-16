@@ -27,9 +27,9 @@ export default function Payment() {
   const { current, setCurrent, setUser } = useGlobalStore();
   const { id } = router.query;
 
-  const { closeLoading } = useUI();
+  const { setDisplayLoading } = useUI();
+
   useEffect(() => {
-    closeLoading();
     async function loadUserFromCookies() {
       const token =
         AuthTokenStorageService.getAccessToken() &&
@@ -57,6 +57,9 @@ export default function Payment() {
     {
       variables: {
         id: id,
+      },
+      onCompleted: () => {
+        setDisplayLoading('');
       },
     }
   );

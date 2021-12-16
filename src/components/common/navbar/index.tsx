@@ -20,8 +20,10 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   const [navbar, setNavbar] = useState(false);
   const { user } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const isAuth = user ? true : false;
   const { openLoadingLogin, displayLoadingLogin } = useUI();
+
+  const isAuth = user ? true : false;
+
   const changeBackground = () => {
     if (window.scrollY >= 80) {
       setNavbar(true);
@@ -35,8 +37,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   }
 
   const handleTelcocom = () => {
-    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-    width=300,height=600,left=1340,top=220`;
+    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=300,height=600,left=1340,top=220`;
     window.open(
       'https://my.telcocom.mn/callus/#!#%2FCE05E5603B1C11EC8428FFD132F2D921',
       'Tapatrip',
@@ -169,12 +170,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
             <span className="animate-ping absolute inline-flex h-7 w-28 bg-onlineSupport rounded-lg z-8"></span>
             <button className="z-10 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-3 rounded-lg">
               <PhoneIcon className="w-4" />
-              <p
-                // href="https://my.telcocom.mn/callus/#!#%2FCE05E5603B1C11EC8428FFD132F2D921"
-                // target="_blank"
-                className="pl-1 w-36"
-                onClick={() => handleTelcocom()}
-              >
+              <p className="pl-1 w-36" onClick={() => handleTelcocom()}>
                 {t('onlineHelp')}
               </p>
             </button>

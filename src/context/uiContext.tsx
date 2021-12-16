@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 export interface State {
   listActive: boolean;
@@ -6,7 +6,7 @@ export interface State {
   displayLanguage: boolean;
   displayDirection: boolean;
   displayBlock: boolean;
-  displayLoading: boolean;
+  displayLoading: string;
   displayLoadingSearch: boolean;
   displayLoadingLogin: boolean;
   displayLoadingConfirm: boolean;
@@ -21,7 +21,7 @@ const initialState = {
   displayLanguage: true,
   displayDirection: true,
   displayBlock: false,
-  displayLoading: false,
+  displayLoading: '',
   displayLoadingSearch: false,
   displayLoadingLogin: false,
   displayLoadingConfirm: false,
@@ -34,7 +34,7 @@ export const UIContext = React.createContext<State | any>(initialState);
 
 UIContext.displayName = 'UIContext';
 
-function uiReducer(state, action) {
+function uiReducer(state: State, action) {
   switch (action.type) {
     case 'OPEN_LIST_ACTIVE': {
       return {
@@ -97,16 +97,10 @@ function uiReducer(state, action) {
         displayBlock: false,
       };
     }
-    case 'OPEN_LOADING': {
+    case 'SET_DISPLAY_LOADING': {
       return {
         ...state,
-        displayLoading: true,
-      };
-    }
-    case 'CLOSE_LOADING': {
-      return {
-        ...state,
-        displayLoading: false,
+        displayLoading: action.value,
       };
     }
     case 'OPEN_LOADING_SEARCH': {
@@ -195,8 +189,10 @@ export const UIProvider = props => {
   const closeDirection = () => dispatch({ type: 'CLOSE_DIRECTION' });
   const setDisplayBlock = () => dispatch({ type: 'SET_DISPLAY_BLOCK' });
   const setDisplayNone = () => dispatch({ type: 'SET_DISPLAY_NONE' });
-  const openLoading = () => dispatch({ type: 'OPEN_LOADING' });
-  const closeLoading = () => dispatch({ type: 'CLOSE_LOADING' });
+  const setDisplayLoading = useCallback(
+    (value: any) => dispatch({ type: 'SET_DISPLAY_LOADING', value }),
+    [dispatch]
+  );
   const openLoadingSearch = () => dispatch({ type: 'OPEN_LOADING_SEARCH' });
   const closeLoadingSearch = () => dispatch({ type: 'CLOSE_LOADING_SEARCH' });
   const openLoadingLogin = () => dispatch({ type: 'OPEN_LOADING_LOGIN' });
@@ -223,8 +219,7 @@ export const UIProvider = props => {
       closeLanguage,
       openDirection,
       closeDirection,
-      openLoading,
-      closeLoading,
+      setDisplayLoading,
       setDisplayBlock,
       setDisplayNone,
       openLoadingSearch,

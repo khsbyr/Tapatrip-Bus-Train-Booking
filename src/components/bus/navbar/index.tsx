@@ -18,13 +18,11 @@ interface Props {
 
 export default function BusNavbar({ startLocations }) {
   const { t } = useTranslation(['common']);
-  const { openLoadingLogin, displayLoadingLogin, closeLoadingSearch } = useUI();
+  const { openLoadingLogin, displayLoadingLogin } = useUI();
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useGlobalStore();
   const isAuth = user ? true : false;
-  useEffect(() => {
-    closeLoadingSearch();
-  });
+
   return (
     <div>
       <nav

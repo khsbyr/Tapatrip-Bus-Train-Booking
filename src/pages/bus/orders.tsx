@@ -24,10 +24,9 @@ export default function Orders() {
   const { t } = useTranslation(['order']);
   const router = useRouter();
   const { setUser } = useGlobalStore();
-  const { closeLoading } = useUI();
+  const { closeLoadingSearch } = useUI();
 
   useEffect(() => {
-    closeLoading();
     async function loadUserFromCookies() {
       const token =
         AuthTokenStorageService.getAccessToken() &&
@@ -64,13 +63,19 @@ export default function Orders() {
       locationEnd: endLocation ? endLocation : '',
       leaveDate: date ? date + ',' + endDate : '',
     },
+    onCompleted: () => {
+      closeLoadingSearch();
+    },
+    onError: () => {
+      closeLoadingSearch();
+    },
   });
+
   if (error) return `Error! ${error.message}`;
 
   const scheduleResult =
     scheduleData === undefined ? '' : scheduleData.busAllSchedules.edges;
   const startLocations = arrayFormat(data);
-
   return (
     <Layout>
       <div className="bg-bg">
@@ -93,8 +98,8 @@ export default function Orders() {
             </div>
             {loading ? <Loader /> : ''}
             {scheduleResult.length > 0 ? (
-              scheduleResult.map((schedules, id) => (
-                <Card key={schedules.node.id} datas={schedules} id={id} />
+              scheduleResult.map(schedules => (
+                <Card key={schedules.node.id} datas={schedules} />
               ))
             ) : (
               <Result
