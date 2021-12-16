@@ -47,6 +47,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 
   const [addBusBooking] = useMutation(BUS_BOOKING_CREATE);
+
   window.onpopstate = () => {
     setDisplayLoading('');
     router.push(`/bus/orders/${scheduleId}`);
@@ -125,6 +126,43 @@ export default function PassengerIfo({ datas, scheduleId }) {
     setSelectedSeats(formatSelectedSeats);
   };
 
+  const booking = async () => {
+    const passengers = [];
+    formatSelectedSeats.map(seat => {
+      let passenger = {
+        firstName: seat.firstName,
+        seat: parseInt(seat.seatNumber),
+        lastName: seat.lastName,
+        documentNumber: seat.documentNumber,
+      };
+      passengers.push(passenger);
+    });
+    try {
+      const { data } = await addBusBooking({
+        variables: {
+          schedule: scheduleId,
+          contactName: passengers[0].firstName,
+          contactDialNumber: parseInt(customers.dialNumber),
+          contactPhone: customers.phoneNumber,
+          contactEmail: customers.email,
+          isCompany: customers.isCompany,
+          companyRegister: customers.companyRegister,
+          pax: passengers,
+        },
+      });
+      if (data) setBooking(data?.busBooking);
+      setCurrent(current + 1);
+      setIsModalVisible(false);
+      closeLoadingConfirm();
+    } catch (e) {
+      Modal.error({
+        title: t('errorTitle'),
+        content: e.message,
+      });
+      closeLoadingConfirm();
+    }
+  };
+
   const onFinish = async e => {
     var p1 = new Promise((resolve, reject) => {
       formatSelectedSeats.forEach(async (element, i) => {
@@ -156,40 +194,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
         async () => {
           openLoadingPassengerInfo();
           if (isAuth) {
-            const passengers = [];
-            formatSelectedSeats.map(seat => {
-              let passenger = {
-                firstName: seat.firstName,
-                seat: parseInt(seat.seatNumber),
-                lastName: seat.lastName,
-                documentNumber: seat.documentNumber,
-              };
-              passengers.push(passenger);
-            });
-            try {
-              const { data } = await addBusBooking({
-                variables: {
-                  schedule: scheduleId,
-                  contactName: passengers[0].firstName,
-                  contactDialNumber: parseInt(customers.dialNumber),
-                  contactPhone: customers.phoneNumber,
-                  contactEmail: customers.email,
-                  isCompany: customers.isCompany,
-                  companyRegister: customers.companyRegister,
-                  pax: passengers,
-                },
-              });
-              if (data) setBooking(data?.busBooking);
-              setCurrent(current + 1);
-              setIsModalVisible(false);
-              closeLoadingConfirm();
-            } catch (e) {
-              Modal.error({
-                title: t('errorTitle'),
-                content: e.message,
-              });
-              closeLoadingConfirm();
-            }
+            booking();
           } else {
             let payload = {
               phone: customers.phoneNumber,
@@ -226,40 +231,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
         if (pinCode.length > 3) {
           const res = await AuthService.verifyCode(payload);
           if (res && res.status === 200) {
-            const passengers = [];
-            formatSelectedSeats.map(seat => {
-              let passenger = {
-                firstName: seat.firstName,
-                seat: parseInt(seat.seatNumber),
-                lastName: seat.lastName,
-                documentNumber: seat.documentNumber,
-              };
-              passengers.push(passenger);
-            });
-            try {
-              const { data } = await addBusBooking({
-                variables: {
-                  schedule: scheduleId,
-                  contactName: passengers[0].firstName,
-                  contactDialNumber: parseInt(customers.dialNumber),
-                  contactPhone: customers.phoneNumber,
-                  contactEmail: customers.email,
-                  isCompany: customers.isCompany,
-                  companyRegister: customers.companyRegister,
-                  pax: passengers,
-                },
-              });
-              if (data) setBooking(data?.busBooking);
-              setCurrent(current + 1);
-              setIsModalVisible(false);
-              closeLoadingConfirm();
-            } catch (e) {
-              Modal.error({
-                title: t('errorTitle'),
-                content: e.message,
-              });
-              closeLoadingConfirm();
-            }
+            booking();
           }
           if (res && res.status === 400) {
             setConfirmError(res.message);
