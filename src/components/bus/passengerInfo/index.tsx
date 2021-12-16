@@ -49,13 +49,14 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const [addBusBooking] = useMutation(BUS_BOOKING_CREATE);
 
   window.onpopstate = () => {
-    setDisplayLoading('');
     router.push(`/bus/orders/${scheduleId}`);
     setCurrent(0);
+    setDisplayLoading('');
   };
 
   const handleRegister = () => {
     setDisplayBlock();
+    setDisplayLoading('');
     router.push('/auth/login');
   };
 
@@ -78,6 +79,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
   };
 
   const close = () => {
+    setConfirmError(null);
     setIsModalVisible(false);
     closeLoadingConfirm();
   };
@@ -126,7 +128,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
     setSelectedSeats(formatSelectedSeats);
   };
 
-  const booking = async () => {
+  const booking = async (token = '') => {
     const passengers = [];
     formatSelectedSeats.map(seat => {
       let passenger = {
@@ -148,6 +150,11 @@ export default function PassengerIfo({ datas, scheduleId }) {
           isCompany: customers.isCompany,
           companyRegister: customers.companyRegister,
           pax: passengers,
+        },
+        context: {
+          headers: {
+            userToken: token,
+          },
         },
       });
       if (data) setBooking(data?.busBooking);
@@ -231,7 +238,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
         if (pinCode.length > 3) {
           const res = await AuthService.verifyCode(payload);
           if (res && res.status === 200) {
-            booking();
+            booking(res.token);
           }
           if (res && res.status === 400) {
             setConfirmError(res.message);

@@ -85,7 +85,10 @@ export default function Payment() {
   ];
 
   const onChange = currentStep => {
-    if (current === 1 && currentStep === 0) setCurrent(0);
+    if (current === 1 && currentStep === 0) {
+      setDisplayLoading('');
+      setCurrent(0);
+    }
   };
 
   return (
