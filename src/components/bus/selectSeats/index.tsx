@@ -16,7 +16,7 @@ export default function SelectSeats({ datas, scheduleId }) {
   const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const { bus, driverPhone } = datas;
-  const { displayLoading, openLoading } = useUI();
+  const { displayLoading, setDisplayLoading } = useUI();
 
   const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
 
@@ -35,7 +35,7 @@ export default function SelectSeats({ datas, scheduleId }) {
 
   const next = () => {
     if (formatSelectedSeats.length > 0) {
-      openLoading();
+      setDisplayLoading(scheduleId + 'loading');
       setCurrent(current + 1);
     } else {
       Modal.warning({
@@ -127,7 +127,7 @@ export default function SelectSeats({ datas, scheduleId }) {
           </div>
         </div>
         <button className={style.buttonBlock} onClick={next}>
-          {displayLoading === true ? (
+          {displayLoading === scheduleId + 'loading' ? (
             <div className={style.ldsDualRing}></div>
           ) : (
             t('stepSelectSeatButton')
@@ -138,7 +138,7 @@ export default function SelectSeats({ datas, scheduleId }) {
         <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
           <StepCard datas={datas} scheduleId={scheduleId} />
           <button className={style.button} onClick={next}>
-            {displayLoading === true ? (
+            {displayLoading === scheduleId + 'loading' ? (
               <div className={style.ldsDualRing}></div>
             ) : (
               t('stepSelectSeatButton')

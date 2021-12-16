@@ -30,7 +30,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
     displayBlock,
     setDisplayBlock,
     setDisplayNone,
-    closeLoading,
+    setDisplayLoading,
     openLoadingConfirm,
     displayLoadingConfirm,
     closeLoadingConfirm,
@@ -48,7 +48,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
 
   const [addBusBooking] = useMutation(BUS_BOOKING_CREATE);
   window.onpopstate = () => {
-    closeLoading();
+    setDisplayLoading('');
     router.push(`/bus/orders/${scheduleId}`);
     setCurrent(0);
   };
@@ -155,18 +155,55 @@ export default function PassengerIfo({ datas, scheduleId }) {
       p1.then(
         async () => {
           openLoadingPassengerInfo();
-          let payload = {
-            phone: customers.phoneNumber,
-            dialCode: customers.dialNumber,
-          };
-          const result = await AuthService.verifySms(payload);
-          if (result) setIsModalVisible(true), closeLoadingPassengerInfo();
-          else {
-            Modal.error({
-              title: t('errorTitle'),
-              content: t('errorContent'),
+          if (isAuth) {
+            const passengers = [];
+            formatSelectedSeats.map(seat => {
+              let passenger = {
+                firstName: seat.firstName,
+                seat: parseInt(seat.seatNumber),
+                lastName: seat.lastName,
+                documentNumber: seat.documentNumber,
+              };
+              passengers.push(passenger);
             });
-            closeLoadingPassengerInfo();
+            try {
+              const { data } = await addBusBooking({
+                variables: {
+                  schedule: scheduleId,
+                  contactName: passengers[0].firstName,
+                  contactDialNumber: parseInt(customers.dialNumber),
+                  contactPhone: customers.phoneNumber,
+                  contactEmail: customers.email,
+                  isCompany: customers.isCompany,
+                  companyRegister: customers.companyRegister,
+                  pax: passengers,
+                },
+              });
+              if (data) setBooking(data?.busBooking);
+              setCurrent(current + 1);
+              setIsModalVisible(false);
+              closeLoadingConfirm();
+            } catch (e) {
+              Modal.error({
+                title: t('errorTitle'),
+                content: e.message,
+              });
+              closeLoadingConfirm();
+            }
+          } else {
+            let payload = {
+              phone: customers.phoneNumber,
+              dialCode: customers.dialNumber,
+            };
+            const result = await AuthService.verifySms(payload);
+            if (result) setIsModalVisible(true), closeLoadingPassengerInfo();
+            else {
+              Modal.error({
+                title: t('errorTitle'),
+                content: t('errorContent'),
+              });
+              closeLoadingPassengerInfo();
+            }
           }
         },
         reason => {
@@ -179,7 +216,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
     if (!pinCode) setConfirmError(t('enterConfirmationCode'));
     else if (pinCode.length < 4) setConfirmError(t('confirmCodeWarning'));
     openLoadingConfirm();
-
     let payload = {
       phone: customers.phoneNumber,
       dialCode: customers.dialNumber,

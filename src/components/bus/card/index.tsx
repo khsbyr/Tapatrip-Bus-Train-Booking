@@ -36,7 +36,7 @@ export default function Card({ datas }) {
     t('orderMinutes');
 
   return (
-    <div className="px-2">
+    <div key={datas?.node?.id} className="px-2">
       <div className="max-w-7xl mx-auto">
         <div className={style.card}>
           <div className="px-7 md:px-12 space-y-2 lg:space-y-4">
