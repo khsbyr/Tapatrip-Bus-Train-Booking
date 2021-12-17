@@ -144,7 +144,9 @@ export default function PassengerIfo({ datas, scheduleId }) {
         variables: {
           schedule: scheduleId,
           contactName: passengers[0].firstName,
-          contactDialNumber: parseInt(customers.dialNumber),
+          contactDialNumber: customers?.dialNumber
+            ? parseInt(customers.dialNumber)
+            : 976,
           contactPhone: customers.phoneNumber,
           contactEmail: customers.email,
           isCompany: customers.isCompany,
@@ -161,12 +163,14 @@ export default function PassengerIfo({ datas, scheduleId }) {
       setCurrent(current + 1);
       setIsModalVisible(false);
       closeLoadingConfirm();
+      closeLoadingPassengerInfo();
     } catch (e) {
       Modal.error({
         title: t('errorTitle'),
         content: e.message,
       });
       closeLoadingConfirm();
+      closeLoadingPassengerInfo();
     }
   };
 

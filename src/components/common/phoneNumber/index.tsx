@@ -51,7 +51,7 @@ export default function PhoneNumber({ name }) {
         companyRegister: '',
         isCompany: true,
         email: '',
-        dialNumber: '',
+        dialNumber: selectedCountry.name,
         phoneNumber: e.target.value,
       };
       setCustomers(customer);
