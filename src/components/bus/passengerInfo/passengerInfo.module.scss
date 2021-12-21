@@ -26,7 +26,7 @@
   @apply w-full space-y-3 sm:pl-2;
 }
 .Label {
-  @apply text-cardDate text-sm sm:text-base px-2 font-medium;
+  @apply after:content-['*'] after:ml-0.5 after:text-red-500 text-cardDate text-sm sm:text-base px-2 font-medium;
 }
 .leftContent {
   @apply w-full space-y-2 sm:pr-2 h-24;

@@ -2,6 +2,7 @@ import { DownloadOutlined } from '@ant-design/icons';
 import { PDFExport } from '@progress/kendo-react-pdf';
 import PaymentService from '@services/payment';
 import { Button, Empty } from 'antd';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import s from './refNumber.module.scss';
@@ -38,6 +39,9 @@ export default function ticketGenerate() {
 
   return (
     <div id="example">
+      <Head>
+        <title>Tapatrip - Ticket</title>
+      </Head>
       {status !== 200 ? (
         ''
       ) : (
