@@ -1,6 +1,16 @@
 import Client from '@lib/apiClient';
 
 const PaymentService = {
+  async checkTicket(params) {
+    const response = await Client.post('/bus/booking_ticket/', params);
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    return datas;
+  },
+
   async paymentMethods(params) {
     const response = await Client.post('/payment/v1/payment_methods/', params);
     const datas = {

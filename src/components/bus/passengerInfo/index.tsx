@@ -148,7 +148,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
             ? parseInt(customers.dialNumber)
             : 976,
           contactPhone: customers.phoneNumber,
-          contactEmail: customers.email,
+          contactEmail: customers.email ? customers.email : '',
           isCompany: customers.isCompany,
           companyRegister: customers.companyRegister,
           pax: passengers,
@@ -189,9 +189,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
           element.firstName === '' ||
           element.documentNumber === '' ||
           customers.phoneNumber === '' ||
-          customers.email === '' ||
           customers.phoneNumber === undefined ||
-          customers.email === undefined ||
           element.documentNumber === undefined
         ) {
           reject(new Error('Error!'));
@@ -282,7 +280,10 @@ export default function PassengerIfo({ datas, scheduleId }) {
                 <div className="w-full px-4 pt-2 pb-4">
                   <div className={style.InfoForm}>
                     <div className={style.leftContent}>
-                      <label className={style.Label} htmlFor="type"></label>
+                      <label
+                        className="text-cardDate px-2 font-medium"
+                        htmlFor="type"
+                      ></label>
                       <Form.Item name="type">
                         <Select onChange={handleCompany} defaultValue="0">
                           <Option value="0">{t('individual')}</Option>
@@ -291,7 +292,10 @@ export default function PassengerIfo({ datas, scheduleId }) {
                       </Form.Item>
                     </div>
                     <div className={style.rightContent}>
-                      <label className={style.Label} htmlFor="companyRegister">
+                      <label
+                        className="text-cardDate px-2 font-medium"
+                        htmlFor="companyRegister"
+                      >
                         {t(`registerNumber`)}
                       </label>
                       <Form.Item
@@ -314,7 +318,19 @@ export default function PassengerIfo({ datas, scheduleId }) {
                   </div>
                   <div className={style.InfoForm}>
                     <div className={style.leftContent}>
-                      <label className={style.Label} htmlFor="email">
+                      <label
+                        className="after:content-['*'] after:ml-0.5 after:text-red-500 text-cardDate px-2 font-medium"
+                        htmlFor="pNumber"
+                      >
+                        {t('passengerPhoneNumber')}
+                      </label>
+                      <InputPhoneNumber name="customerNumber" />
+                    </div>
+                    <div className={style.rightContent}>
+                      <label
+                        className="text-cardDate px-2 font-medium"
+                        htmlFor="email"
+                      >
                         {t('mailAddressTitle')}
                       </label>
                       <Form.Item
@@ -323,10 +339,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           {
                             type: 'email',
                             message: t('mailAddressCheck'),
-                          },
-                          {
-                            required: true,
-                            message: t('mailAddressWarning'),
                           },
                         ]}
                         shouldUpdate={customers.email}
@@ -337,15 +349,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           placeholder={t('mailAddressPlaceholder')}
                         />
                       </Form.Item>
-                    </div>
-                    <div className={style.rightContent}>
-                      <label
-                        className="text-cardDate px-2 font-medium"
-                        htmlFor="pNumber"
-                      >
-                        {t('passengerPhoneNumber')}
-                      </label>
-                      <InputPhoneNumber name="customerNumber" />
                     </div>
                   </div>
                 </div>
