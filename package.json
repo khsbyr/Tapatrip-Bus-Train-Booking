@@ -19,6 +19,7 @@
     "@headlessui/react": "^1.4.1",
     "@heroicons/react": "^1.0.4",
     "@progress/kendo-drawing": "^1.16.0",
+    "@progress/kendo-licensing": "^1.2.1",
     "@progress/kendo-react-pdf": "^4.13.0",
     "antd": "^4.16.13",
     "autoprefixer": "^10.3.7",

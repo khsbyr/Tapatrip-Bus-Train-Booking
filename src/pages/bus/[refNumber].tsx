@@ -22,6 +22,7 @@ export default function ticketGenerate() {
       <div className="box wide hidden-on-narrow">
         <div className="box-col">
           <h4>Export PDF</h4>
+          <button onClick={handleExportWithComponent}>export</button>
         </div>
       </div>
       <div className="page-container hidden-on-narrow">
