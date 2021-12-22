@@ -9,6 +9,8 @@ import { useGlobalStore } from '@context/globalStore';
 import AuthService from '@services/auth';
 import { useUI } from '@context/uiContext';
 import styles from '@components/common/navbar/navbar.module.scss';
+import NavData from '@data/navData.json';
+import s from './seatNavbar.module.scss';
 
 export default function SeatNav() {
   const { openLoadingLogin, displayLoadingLogin } = useUI();
@@ -19,6 +21,7 @@ export default function SeatNav() {
   const handleLogout = () => {
     AuthService.logout();
   };
+
   return (
     <div>
       <nav
@@ -26,7 +29,7 @@ export default function SeatNav() {
       >
         <div className="max-w-7xl mx-auto py-4">
           <div className="flex items-center justify-around md:justify-between h-12">
-            <div className="flex items-center ">
+            <div className="flex items-center">
               <div className="flex-shrink-0 cursor-pointer">
                 <a href="/">
                   <img
@@ -36,9 +39,19 @@ export default function SeatNav() {
                   />
                 </a>
               </div>
-            </div>
 
-            <div className="w-32 text-gray-700"></div>
+              <div className="h-8 bg-gray-200 w-px mx-12"></div>
+
+              <div className="text-gray-700">
+                <ul className="flex">
+                  {NavData.generalList.map(menu => (
+                    <li className={s.li}>
+                      <a>{t(`${menu.text}`)}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
             <div className="flex items-center ">
               <div className="hidden lg:block">
