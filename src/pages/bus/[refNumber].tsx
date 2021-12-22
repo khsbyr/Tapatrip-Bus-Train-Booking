@@ -171,28 +171,18 @@ export default function ticketGenerate() {
                   </div>
 
                   <div>
-                    <table className={s.table2}>
-                      <tr>
-                        <th>Сугалааны огноо:</th>
-                        <td>{data?.ebarimt?.data}</td>
-                      </tr>
-                      <tr>
-                        <th>Сугалааны дугаар:</th>
-                        <td>{data?.ebarimt?.lottery}</td>
-                      </tr>
-                      <tr>
-                        <th>ДДТД:</th>
-                        <td>{data?.ebarimt?.id}</td>
-                      </tr>
-                      <tr>
-                        <th>Нийт дүн:</th>
-                        <td>{data?.ebarimt?.amount}</td>
-                      </tr>
-                      <tr>
-                        <th>Бүртгүүлэх дүн:</th>
-                        <td>{data?.ebarimt?.amount}</td>
-                      </tr>
-                    </table>
+                    <ul className={s.ebarimt}>
+                      <li className={s.title}>Сугалааны огноо:</li>
+                      <li>{data?.ebarimt?.date}</li>
+                      <li className={s.title}>Сугалааны дугаар:</li>
+                      <li>{data?.ebarimt?.lottery}</li>
+                      <li className={s.title}>ДДТД:</li>
+                      <li>{data?.ebarimt?.id}</li>
+                      <li className={s.title}>Нийт дүн:</li>
+                      <li>{data?.ebarimt?.amount}</li>
+                      <li className={s.title}>Бүртгүүлэх дүн:</li>
+                      <li>{data?.ebarimt?.amount}</li>
+                    </ul>
                   </div>
                 </div>
               </>
