@@ -5,12 +5,15 @@ import { Button, Empty } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import s from './refNumber.module.scss';
+import Loader from '@components/common/loader';
+import QRCode from 'react-qr-code';
 
 export default function ticketGenerate() {
   const router = useRouter();
   const { refNumber } = router.query;
   const [data, setData] = useState(null);
   const [status, setStatus] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getTicketInfo() {
@@ -20,11 +23,13 @@ export default function ticketGenerate() {
       try {
         const res = await PaymentService.checkTicket(data);
         setStatus(res.status);
+        setLoading(false);
         if (res && res?.status === 200) {
           setData(res?.result);
         }
       } catch (err) {
         console.log(err);
+        setLoading(false);
       }
     }
     if (refNumber) getTicketInfo();
@@ -36,7 +41,9 @@ export default function ticketGenerate() {
     pdfExportComponent.current.save();
   };
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <div id="example">
       {status !== 200 ? (
         ''
@@ -53,7 +60,7 @@ export default function ticketGenerate() {
       )}
       <div className="page-container hidden-on-narrow">
         <PDFExport ref={pdfExportComponent}>
-          <div className={`${s.a4size} shadow-xl p-14 pt-8 ${s.pdfPage}`}>
+          <div className={`${s.a4size} shadow-xl p-14 pt-2 ${s.pdfPage}`}>
             {status !== 200 ? (
               <Empty description={'Захиалгын мэдээлэл олдсонгүй'} />
             ) : (
@@ -147,7 +154,8 @@ export default function ticketGenerate() {
                 </div>
               </>
             )}
-            {data && data.ebarimt.id ? (
+
+            {data && data?.ebarimt.id ? (
               <>
                 {' '}
                 <div className="text-md font-medium text-gray-700 mt-10">
@@ -157,33 +165,35 @@ export default function ticketGenerate() {
                   className="bg-gray-100 w-full mt-5"
                   style={{ height: '2px' }}
                 />
-                <div className="flex mt-5">
-                  <img
-                    src={`data:image/png;base64,${data?.ebarimt?.qr_data}`}
-                  />
+                <div className="mt-5 grid grid-cols-2">
+                  <div>
+                    <QRCode value={data?.ebarimt?.qr_data} />
+                  </div>
 
-                  <table className={s.table2}>
-                    <tr>
-                      <th>Сугалааны огноо:</th>
-                      <td>{data?.ebarimt?.data}</td>
-                    </tr>
-                    <tr>
-                      <th>Сугалааны дугаар:</th>
-                      <td>{data?.ebarimt?.lottery}</td>
-                    </tr>
-                    <tr>
-                      <th>ДДТД:</th>
-                      <td>{data?.ebarimt?.id}</td>
-                    </tr>
-                    <tr>
-                      <th>Нийт дүн:</th>
-                      <td>{data?.ebarimt?.amount}</td>
-                    </tr>
-                    <tr>
-                      <th>Бүртгүүлэх дүн:</th>
-                      <td>{data?.ebarimt?.amount}</td>
-                    </tr>
-                  </table>
+                  <div>
+                    <table className={s.table2}>
+                      <tr>
+                        <th>Сугалааны огноо:</th>
+                        <td>{data?.ebarimt?.data}</td>
+                      </tr>
+                      <tr>
+                        <th>Сугалааны дугаар:</th>
+                        <td>{data?.ebarimt?.lottery}</td>
+                      </tr>
+                      <tr>
+                        <th>ДДТД:</th>
+                        <td>{data?.ebarimt?.id}</td>
+                      </tr>
+                      <tr>
+                        <th>Нийт дүн:</th>
+                        <td>{data?.ebarimt?.amount}</td>
+                      </tr>
+                      <tr>
+                        <th>Бүртгүүлэх дүн:</th>
+                        <td>{data?.ebarimt?.amount}</td>
+                      </tr>
+                    </table>
+                  </div>
                 </div>
               </>
             ) : (
