@@ -106,9 +106,30 @@ export function arrayFilterSchedule(data: any, value: String) {
     });
   return result;
 }
+
 export function unixDate(data: any) {
   const result =
     new Date(data?.leaveDate + 'T' + data?.leaveTime).getTime() / 1000 +
     data?.locationEnd?.estimatedDuration * 60;
   return result;
+}
+
+export function registerNumberCheck(registerNumber = '') {
+  let regNumScriptError = false;
+  let bd = registerNumber.split('');
+  let birthYear = parseInt(bd[2]) * 10 + parseInt(bd[3]);
+  birthYear = birthYear > 20 ? 1900 : 2000;
+  let birthMonth = parseInt(bd[4]) * 10 + parseInt(bd[5]);
+  let birthDay = parseInt(bd[6]) * 10 + parseInt(bd[7]);
+
+  /* 2000 оноос хойш төрөгсөд  */ {
+    if (birthYear < 2000 && birthMonth > 12) regNumScriptError = true;
+    if (birthMonth > 12) birthMonth = birthMonth - 20;
+    if (birthMonth < 1 || birthMonth > 12 || birthDay > 31)
+      regNumScriptError = true;
+  }
+
+  if (birthMonth > 12 || birthDay > 31) regNumScriptError = true;
+
+  return regNumScriptError;
 }
