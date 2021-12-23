@@ -1,16 +1,18 @@
 import React from 'react';
+import s from './travelProgram.module.scss';
+import tourData from '@data/tourData.json';
 
 const TravelProgram = () => {
   return (
-    <div className="max-w-7xl mx-auto grid justify-center py-12">
-      <h1 className="text-2xl font-bold">АЯЛАЛ, ХӨТӨЛБӨР</h1>
+    <div className={s.main}>
+      <h1 className={s.programText}>АЯЛАЛ, ХӨТӨЛБӨР</h1>
 
-      <div className="grid grid-cols-5 gap-x-4">
-        <img src="/assets/tourImages/1.jpg" />
-        <img src="/assets/tourImages/2.jpg" />
-        <img src="/assets/tourImages/3.jpg" />
-        <img src="/assets/tourImages/4.jpg" />
-        <img src="/assets/tourImages/5.jpg" />
+      <div className={s.imageContent}>
+        {tourData?.travelProgramList.map(program => (
+          <div key={program.id}>
+            <img src={program.image} className={s.programImage} />
+          </div>
+        ))}
       </div>
     </div>
   );

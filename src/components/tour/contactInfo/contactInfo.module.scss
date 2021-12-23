@@ -1,0 +1,15 @@
+.button {
+  @apply flex items-center bg-transparent hover:bg-tourButton text-orders font-semibold hover:text-white py-3 px-5 border border-tourButtonBorder hover:border-transparent rounded;
+}
+
+.main {
+  @apply max-w-7xl mx-auto py-8;
+}
+
+.info {
+  @apply text-center px-2;
+}
+
+.phoneContent {
+  @apply flex justify-center gap-4 mt-5 px-2 flex-wrap;
+}

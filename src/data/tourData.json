@@ -1,0 +1,106 @@
+{
+  "travelProgramList": [
+    {
+      "id": 1,
+      "image": "/assets/tourImages/1.jpg"
+    },
+    {
+      "id": 2,
+      "image": "/assets/tourImages/2.jpg"
+    },
+    {
+      "id": 3,
+      "image": "/assets/tourImages/3.jpg"
+    },
+    {
+      "id": 4,
+      "image": "/assets/tourImages/4.jpg"
+    },
+    {
+      "id": 5,
+      "image": "/assets/tourImages/5.jpg"
+    }
+  ],
+
+  "contact": [
+    {
+      "id": 1,
+      "phone": "7515-4444"
+    },
+    {
+      "id": 2,
+      "phone": "9443-1444"
+    },
+    {
+      "id": 3,
+      "phone": "9441-6444"
+    }
+  ],
+
+  "package1": [
+    {
+      "id": 1,
+      "image": "/assets/tourImages/2484180.png",
+      "text": "Нислэгийн тийз 2 талдаа"
+    },
+    {
+      "id": 2,
+      "image": "/assets/tourImages/2484045.png",
+      "text": "Хөтөлбөрт багтсан хоол"
+    },
+    {
+      "id": 3,
+      "image": "/assets/tourImages/2483799.png",
+      "text": "Ковидын даатгал"
+    },
+    {
+      "id": 4,
+      "image": "/assets/tourImages/2483906.png",
+      "text": "Хөтөлбөрт багтсан үзвэр үйлчилгээ"
+    },
+    {
+      "id": 5,
+      "image": "/assets/tourImages/2484029.png",
+      "text": "Тайланд дах 2 удаагийн ПГУ (PCR) шинжилгээ"
+    }
+  ],
+
+  "package2": [
+    {
+      "id": 1,
+      "image": "/assets/tourImages/2483823.png",
+      "text": "Зочид буудал (7 шөнө)"
+    },
+    {
+      "id": 2,
+      "image": "/assets/tourImages/2484096.png",
+      "text": "Аяллын даатгал"
+    },
+    {
+      "id": 3,
+      "image": "/assets/tourImages/2483809.png",
+      "text": "Хөтөлбөрт багтсан унаа"
+    },
+    {
+      "id": 4,
+      "image": "/assets/tourImages/2483900.png",
+      "text": "Монгол хэлтэй аяллын хөтөч"
+    },
+    {
+      "id": 5,
+      "image": "/assets/tourImages/2484039.png",
+      "text": "Тайланд улсан зорчих эрх (Thai Pass)"
+    }
+  ],
+
+  "covid": [
+    {
+      "id": 1,
+      "image": "/assets/tourImages/7.jpg"
+    },
+    {
+      "id": 2,
+      "image": "/assets/tourImages/6.jpg"
+    }
+  ]
+}

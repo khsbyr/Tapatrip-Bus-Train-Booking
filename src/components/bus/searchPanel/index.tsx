@@ -101,7 +101,7 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
                 <span className="text-xs sm:text-sm">{t(`${menu.text}`)}</span>
               </div>
             }
-            disabled={menu.id === 3 || menu.id === 5 ? true : false}
+            disabled={menu.id === 5 ? true : false}
             key={menu.id}
           />
         ))}

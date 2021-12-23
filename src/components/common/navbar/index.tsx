@@ -170,7 +170,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
             <span className="animate-ping absolute inline-flex h-7 w-28 bg-onlineSupport rounded-lg z-8"></span>
             <button className="z-10 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-3 rounded-lg">
               <PhoneIcon className="w-4" />
-              <p className="pl-1 w-36" onClick={() => handleTelcocom()}>
+              <p className="pl-1 w-36 text-sm" onClick={() => handleTelcocom()}>
                 {t('onlineHelp')}
               </p>
             </button>
