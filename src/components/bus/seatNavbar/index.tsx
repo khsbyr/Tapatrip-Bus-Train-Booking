@@ -9,6 +9,9 @@ import { useGlobalStore } from '@context/globalStore';
 import AuthService from '@services/auth';
 import { useUI } from '@context/uiContext';
 import styles from '@components/common/navbar/navbar.module.scss';
+import NavData from '@data/navData.json';
+import s from './seatNavbar.module.scss';
+import { useRouter } from 'next/router';
 
 export default function SeatNav() {
   const { openLoadingLogin, displayLoadingLogin } = useUI();
@@ -19,14 +22,16 @@ export default function SeatNav() {
   const handleLogout = () => {
     AuthService.logout();
   };
+  const router = useRouter();
+
   return (
     <div>
       <nav
-        className={`relative w-full bg-white md:h-auto md:top-0 z-10 shadow-lg `}
+        className={`relative w-full bg-white md:h-auto md:top-0 z-10 shadow-lg`}
       >
         <div className="max-w-7xl mx-auto py-4">
           <div className="flex items-center justify-around md:justify-between h-12">
-            <div className="flex items-center ">
+            <div className="flex items-center">
               <div className="flex-shrink-0 cursor-pointer">
                 <a href="/">
                   <img
@@ -36,14 +41,31 @@ export default function SeatNav() {
                   />
                 </a>
               </div>
-            </div>
 
-            <div className="w-32 text-gray-700"></div>
+              <div className="h-8 bg-gray-200 w-px mx-12 hidden md:block"></div>
+
+              <div className="text-gray-700 hidden md:block">
+                <ul className="flex">
+                  {NavData.generalList.map(menu => (
+                    <li className={s.li} key={menu.id}>
+                      <a
+                        href={`${menu.route}`}
+                        target={
+                          menu.id === 2 || menu.id === 1 ? '_blank' : '_parent'
+                        }
+                      >
+                        {t(`${menu.text}`)}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
             <div className="flex items-center ">
               <div className="hidden lg:block">
                 <div className="ml-10 flex items-center space-x-4">
-                  <OrderCheck />
+                  {router.route !== '/tour' ? <OrderCheck /> : ''}
                   <SelectLanguage isBlack={true} />
                   <div>
                     {isAuth ? (
