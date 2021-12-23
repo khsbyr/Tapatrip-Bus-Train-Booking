@@ -6,7 +6,10 @@ import { useGlobalStore } from '@context/globalStore';
 import { useMutation } from '@apollo/client';
 import { BUS_PASSENGER } from '@graphql/mutation';
 import { PATTERN_PHONE } from '@helpers/constantValidation';
-import { arrayFilterSchedule } from '@helpers/array-format';
+import {
+  arrayFilterSchedule,
+  registerNumberCheck,
+} from '@helpers/array-format';
 import { useTranslation } from 'next-i18next';
 
 const RegisterNumber = ({
@@ -51,12 +54,20 @@ const RegisterNumber = ({
   const handleRegister = async e => {
     if (e.target.value.length === 8) {
       const registerNumber = values1 + values2 + e.target.value;
+      const resError = registerNumberCheck(registerNumber);
       var p1 = new Promise((resolve, reject) => {
         if (passengerNumber > 1) {
           for (let i = 1; i < passengerNumber; i++) {
-            if (formatSelectedSeats[i - 1].documentNumber === registerNumber) {
+            if (
+              formatSelectedSeats[i - 1].documentNumber === registerNumber ||
+              resError
+            ) {
               reject(new Error('Error!'));
             } else resolve('Success!');
+          }
+        } else {
+          if (resError) {
+            reject(new Error('Error!'));
           }
         }
         resolve('Success!');
@@ -113,8 +124,8 @@ const RegisterNumber = ({
         },
         ({ getFieldValue }) => ({
           validator(_, value) {
-            if (passengerNumber > 1 && value) {
-              const registerNumber = values1 + values2 + value;
+            const registerNumber = values1 + values2 + value;
+            if (value && passengerNumber > 1 && value.length === 8) {
               for (let i = 1; i < passengerNumber; i++) {
                 if (
                   formatSelectedSeats[i - 1].documentNumber.slice(0, 2) +
@@ -124,6 +135,18 @@ const RegisterNumber = ({
                   return Promise.reject(new Error(t('registNumberCheck')));
                 }
               }
+            }
+            if (value && value.length === 8 && registerNumber) {
+              const registerError = registerNumberCheck(registerNumber);
+              let bd = registerNumber.split('');
+              let birthYear = parseInt(bd[2]) * 10 + parseInt(bd[3]);
+              birthYear = birthYear > 21 ? 0 : birthYear;
+              if (registerError)
+                return Promise.reject(new Error(t('registerNumberError')));
+              if (birthYear > 17)
+                return Promise.reject(
+                  new Error('4-ээс дээш насны хүүхдэд билет бичих боломжтой')
+                );
             }
             return Promise.resolve();
           },

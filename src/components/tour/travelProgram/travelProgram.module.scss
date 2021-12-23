@@ -1,0 +1,15 @@
+.main {
+  @apply max-w-7xl mx-auto grid justify-center pt-2 md:pt-16;
+}
+
+.programText {
+  @apply text-xl md:text-2xl font-bold py-6 text-center;
+}
+
+.imageContent {
+  @apply grid grid-cols-2 md:grid-cols-5 gap-4 px-2 justify-end;
+}
+
+.programImage {
+  @apply rounded-lg shadow-2xl cursor-pointer transition hover:rotate-2 hover:scale-100;
+}
