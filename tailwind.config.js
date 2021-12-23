@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       fontFamily: {
         Roboto: ['Roboto', 'sans-serif'],
+        Cuprum: ['Cuprum', 'sans-serif'],
       },
       backgroundImage: theme => ({
         'Header-image': "url('assets/Header.png')",
@@ -36,6 +37,7 @@ module.exports = {
         registHover: '#1669d5',
         profile: '#f5f3f4',
         myOrders: 'rgba(22, 121, 213, 0.1)',
+        tourButton: '#1679d5',
       }),
       theme: {
         screens: {
@@ -52,6 +54,7 @@ module.exports = {
         register: '#F1583C',
         homeLogin: '#1679D5',
         profile: '#f5f3f4',
+        tourButtonBorder: '#1679d5',
       }),
       width: {
         98: '26rem',
@@ -67,6 +70,7 @@ module.exports = {
         copyText: '#BFC1DA',
         mobileNav: '#BCC4CC',
         orders: '#1679d5',
+        covid: '#d62828',
       },
 
       placeholderColor: {
