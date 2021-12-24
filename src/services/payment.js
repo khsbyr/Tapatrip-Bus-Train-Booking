@@ -40,6 +40,13 @@ const PaymentService = {
     };
     return datas;
   },
+
+  async getCompanyRegister(register = '') {
+    const response = await Client.get(
+      `http://info.ebarimt.mn/rest/merchant/info?regno=${register}`
+    );
+    return response;
+  },
 };
 
 export default PaymentService;

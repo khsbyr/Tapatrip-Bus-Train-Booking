@@ -14,6 +14,7 @@ import InputPhoneNumber from '@components/common/phoneNumber';
 import { arrayFilterSchedule } from '@helpers/array-format';
 import ConfirmModal from '@components/common/confirmModal';
 import AuthService from '@services/auth';
+import PaymentService from '@services/payment';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
@@ -23,7 +24,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const { t } = useTranslation(['steps']);
   const [confirmError, setConfirmError] = useState(null);
   const router = useRouter();
-  const [isCompoany, setIsCompany] = useState(false);
+  const [isCompany, setIsCompany] = useState(false);
   const { user, customers, setCustomers } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useGlobalStore();
   const {
@@ -60,16 +61,16 @@ export default function PassengerIfo({ datas, scheduleId }) {
     router.push('/auth/login');
   };
 
-  const handleCompany = data => {
-    let company = data == 0 ? false : true;
+  const handleCompany = value => {
+    let company = parseInt(value) === 0 ? false : true;
     setIsCompany(company);
     if (customers) {
-      customers.isCompany = data === 0 ? false : true;
+      customers.isCompany = parseInt(value) === 0 ? false : true;
       setCustomers(customers);
     } else {
       let customer = {
         companyRegister: '',
-        isCompany: data === 0 ? false : true,
+        isCompany: parseInt(value) === 0 ? false : true,
         email: '',
         dialNumber: 976,
         phoneNumber: '',
@@ -100,19 +101,21 @@ export default function PassengerIfo({ datas, scheduleId }) {
     }
   };
 
-  const handleCustomerRegister = e => {
-    if (customers) {
-      customers.companyRegister = e.target.value;
-      setCustomers(customers);
-    } else {
-      let customer = {
-        companyRegister: e.target.value,
-        isCompany: false,
-        email: '',
-        dialNumber: 976,
-        phoneNumber: '',
-      };
-      setCustomers(customer);
+  const handleCustomerRegister = async e => {
+    if (e.target.value.length === 7) {
+      if (customers) {
+        customers.companyRegister = e.target.value;
+        setCustomers(customers);
+      } else {
+        let customer = {
+          companyRegister: e.target.value,
+          isCompany: false,
+          email: '',
+          dialNumber: 976,
+          phoneNumber: '',
+        };
+        setCustomers(customer);
+      }
     }
   };
 
@@ -197,7 +200,6 @@ export default function PassengerIfo({ datas, scheduleId }) {
       });
       resolve('Success!');
     });
-
     if (!displayBlock) {
       p1.then(
         async () => {
@@ -244,10 +246,9 @@ export default function PassengerIfo({ datas, scheduleId }) {
           }
           if (res && res.status === 400) {
             setConfirmError(res.message);
+            closeLoadingConfirm();
           }
-          closeLoadingConfirm();
         }
-        closeLoadingConfirm();
       } catch (e) {
         setConfirmError(t('confirmCodeError'));
         closeLoadingConfirm();
@@ -305,10 +306,15 @@ export default function PassengerIfo({ datas, scheduleId }) {
                             pattern: PATTERN_COMPANY_REGISTER,
                             message: t('registerNumberWarning'),
                           },
+                          isCompany && {
+                            required: true,
+                            message:
+                              'Компаний регистерийн дугаараа оруулна уу?',
+                          },
                         ]}
                       >
                         <Input
-                          disabled={!isCompoany}
+                          disabled={!isCompany}
                           className={style.input}
                           onChange={handleCustomerRegister}
                           placeholder={t('organizationRNumberPlaceholder')}

@@ -28,6 +28,7 @@
       "@typeDefs/*": ["./src/types/*"],
       "@generated/*": ["./src/generated/*"],
       "@public/*": ["./public/*"],
+      "@config/*": ["./config/*"],
       "@utils/*": ["./src/utils/*"],
       "@app/*": ["./src/app/*"],
       "@assets/*": ["./src/assets/*"],

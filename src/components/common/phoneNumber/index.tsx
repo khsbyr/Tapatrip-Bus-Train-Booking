@@ -33,7 +33,7 @@ export default function PhoneNumber({ name }) {
     } else {
       let customer = {
         companyRegister: '',
-        isCompany: true,
+        isCompany: false,
         email: '',
         dialNumber: value.name,
         phoneNumber: '',
@@ -49,7 +49,7 @@ export default function PhoneNumber({ name }) {
     } else {
       let customer = {
         companyRegister: '',
-        isCompany: true,
+        isCompany: false,
         email: '',
         dialNumber: selectedCountry.name,
         phoneNumber: e.target.value,
