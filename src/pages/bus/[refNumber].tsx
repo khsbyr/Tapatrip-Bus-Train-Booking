@@ -1,15 +1,13 @@
-import { DownloadOutlined } from '@ant-design/icons';
-import { PDFExport } from '@progress/kendo-react-pdf';
+import Loader from '@components/common/loader';
 import PaymentService from '@services/payment';
 import { Button, Empty } from 'antd';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react';
-import s from './refNumber.module.scss';
-import Loader from '@components/common/loader';
-import QRCode from 'react-qr-code';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import QRCode from 'react-qr-code';
+import s from './refNumber.module.scss';
 
 export default function ticketGenerate() {
   const router = useRouter();
@@ -17,6 +15,7 @@ export default function ticketGenerate() {
   const [data, setData] = useState(null);
   const [status, setStatus] = useState();
   const [loading, setLoading] = useState(true);
+  const [loading1, setLoading1] = useState('');
 
   useEffect(() => {
     async function getTicketInfo() {
@@ -38,50 +37,17 @@ export default function ticketGenerate() {
     if (refNumber) getTicketInfo();
   }, [refNumber]);
 
-  const pdfExportComponent = useRef(null);
-
-  const handleExportWithComponent = event => {
-    pdfExportComponent.current.save();
-  };
-
-  // function printDocument() {
-  //   const input = document.getElementById('divToPrint');
-  //   html2canvas(input).then(canvas => {
-  //     let imgWidth = 208;
-  //     let imgHeight = (canvas.height * imgWidth) / canvas.width;
-  //     const imgData = canvas.toDataURL('img/png');
-  //     const pdf = new jsPDF('p', 'mm', 'a4');
-  //     pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-  //     pdf.save('download.pdf');
-  //   });
-  // }
-
   function printDocument() {
+    setLoading1('true');
     const printArea = document.getElementById('divToPrint');
-
     html2canvas(printArea).then(canvas => {
       const dataURL = canvas.toDataURL();
       const pdf = new jsPDF();
-      pdf.addImage(dataURL, 'PNG', 20, 20);
-
+      pdf.addImage(dataURL, 'PNG', 35, 35, 0, 0);
       pdf.save('saved.pdf');
+      setLoading1('false');
     });
   }
-
-  // function printDocument() {
-  //   const printArea = document.getElementById('divToPrint');
-  //   html2canvas(printArea).then(canvas => {
-  //     const imgData = canvas.toDataURL('image/png');
-  //     const pdf = new jsPDF({
-  //       orientation: 'portrait',
-  //     });
-  //     const imgProps = pdf.getImageProperties(imgData);
-  //     const pdfWidth = pdf.internal.pageSize.getWidth();
-  //     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-  //     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-  //     pdf.save('download.pdf');
-  //   });
-  // }
 
   return loading ? (
     <Loader />
@@ -94,17 +60,16 @@ export default function ticketGenerate() {
         ''
       ) : (
         <div className="text-center my-10">
-          <Button
-            type="primary"
-            icon={<DownloadOutlined />}
-            onClick={printDocument}
-          >
-            Татаж авах
+          <Button type="primary" onClick={printDocument}>
+            {loading1 === 'true' ? (
+              <div className={s.ldsDualRing} />
+            ) : (
+              'Татаж авах'
+            )}
           </Button>
         </div>
       )}
       <div id="asd">
-        {/* <PDFExport ref={pdfExportComponent}> */}
         <div className={`${s.a4size} shadow-xl p-14 pt-2 ${s.pdfPage}`}>
           <div id="divToPrint">
             {status !== 200 ? (
@@ -175,27 +140,31 @@ export default function ticketGenerate() {
 
                 <div className="mt-5">
                   <table className={s.table1}>
-                    <tr>
-                      <th>№</th>
-                      <th>Суудал</th>
-                      <th>Нас</th>
-                      <th>Регистер</th>
-                      <th>Овог нэр</th>
-                      <th>Даатгал</th>
-                    </tr>
-                    {data &&
-                      data.pax.map((user, index) => (
-                        <tr>
-                          <td>{++index}</td>
-                          <td>{user.seat}</td>
-                          <td>{user.is_child ? 'Хүүхэд' : 'Том хүн'}</td>
-                          <td>{user.document_number}</td>
-                          <td>
-                            {user.first_name} {user.last_name}
-                          </td>
-                          <td>{data.schedule_object.insurance_name}</td>
-                        </tr>
-                      ))}
+                    <thead>
+                      <tr>
+                        <th>№</th>
+                        <th>Суудал</th>
+                        <th>Нас</th>
+                        <th>Регистер</th>
+                        <th>Овог нэр</th>
+                        <th>Даатгал</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data &&
+                        data.pax.map((user, index) => (
+                          <tr key={index}>
+                            <td>{++index}</td>
+                            <td>{user.seat}</td>
+                            <td>{user.is_child ? 'Хүүхэд' : 'Том хүн'}</td>
+                            <td>{user.document_number}</td>
+                            <td>
+                              {user.first_name} {user.last_name}
+                            </td>
+                            <td>{data.schedule_object.insurance_name}</td>
+                          </tr>
+                        ))}
+                    </tbody>
                   </table>
                 </div>
               </>
@@ -237,7 +206,6 @@ export default function ticketGenerate() {
             )}
           </div>
         </div>
-        {/* </PDFExport> */}
       </div>
     </div>
   );
