@@ -1,0 +1,13 @@
+{
+  "title": "TAPATRIP - Online Travel Platform",
+  "titleTemplate": "%s - TAPATRIP",
+  "description": "TAPATRIP Online Travel Platform - https://bus.tapatrip.com/",
+  "openGraph": {
+    "title": "TAPATRIP - Online Travel Platform",
+    "description": "TAPATRIP Online Travel Platform - https://bus.tapatrip.com/",
+    "type": "website",
+    "locale": "en_IE",
+    "url": "https://bus.tapatrip.com/",
+    "site_name": "TAPATRIP"
+  }
+}
