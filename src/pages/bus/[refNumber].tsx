@@ -8,6 +8,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import s from './refNumber.module.scss';
 import Loader from '@components/common/loader';
 import QRCode from 'react-qr-code';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 export default function ticketGenerate() {
   const router = useRouter();
@@ -42,6 +44,45 @@ export default function ticketGenerate() {
     pdfExportComponent.current.save();
   };
 
+  // function printDocument() {
+  //   const input = document.getElementById('divToPrint');
+  //   html2canvas(input).then(canvas => {
+  //     let imgWidth = 208;
+  //     let imgHeight = (canvas.height * imgWidth) / canvas.width;
+  //     const imgData = canvas.toDataURL('img/png');
+  //     const pdf = new jsPDF('p', 'mm', 'a4');
+  //     pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+  //     pdf.save('download.pdf');
+  //   });
+  // }
+
+  function printDocument() {
+    const printArea = document.getElementById('divToPrint');
+
+    html2canvas(printArea).then(canvas => {
+      const dataURL = canvas.toDataURL();
+      const pdf = new jsPDF();
+      pdf.addImage(dataURL, 'PNG', 20, 20);
+
+      pdf.save('saved.pdf');
+    });
+  }
+
+  // function printDocument() {
+  //   const printArea = document.getElementById('divToPrint');
+  //   html2canvas(printArea).then(canvas => {
+  //     const imgData = canvas.toDataURL('image/png');
+  //     const pdf = new jsPDF({
+  //       orientation: 'portrait',
+  //     });
+  //     const imgProps = pdf.getImageProperties(imgData);
+  //     const pdfWidth = pdf.internal.pageSize.getWidth();
+  //     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  //     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  //     pdf.save('download.pdf');
+  //   });
+  // }
+
   return loading ? (
     <Loader />
   ) : (
@@ -49,29 +90,30 @@ export default function ticketGenerate() {
       <Head>
         <title>Tapatrip - Ticket</title>
       </Head>
-      {status !== 200 ? (
+      {status && status !== 200 ? (
         ''
       ) : (
         <div className="text-center my-10">
           <Button
             type="primary"
             icon={<DownloadOutlined />}
-            onClick={handleExportWithComponent}
+            onClick={printDocument}
           >
             Татаж авах
           </Button>
         </div>
       )}
-      <div className="page-container hidden-on-narrow">
-        <PDFExport ref={pdfExportComponent}>
-          <div className={`${s.a4size} shadow-xl p-14 pt-2 ${s.pdfPage}`}>
+      <div id="asd">
+        {/* <PDFExport ref={pdfExportComponent}> */}
+        <div className={`${s.a4size} shadow-xl p-14 pt-2 ${s.pdfPage}`}>
+          <div id="divToPrint">
             {status !== 200 ? (
               <Empty description={'Захиалгын мэдээлэл олдсонгүй'} />
             ) : (
               <>
                 <img src="/assets/svgIcons/NewLogo.svg" />
 
-                <div className="text-md font-medium text-gray-700 mt-5">
+                <div className="text-md font-medium text-gray-700 mt-4">
                   <div className="">Захиалгын мэдээлэл</div>
                 </div>
 
@@ -122,7 +164,7 @@ export default function ticketGenerate() {
                   </table>
                 </div>
 
-                <div className="text-md font-medium text-gray-700 mt-10">
+                <div className="text-md font-medium text-gray-700 mt-5">
                   <div className="">Зорчигчдын мэдээлэл</div>
                 </div>
 
@@ -162,7 +204,7 @@ export default function ticketGenerate() {
             {data && data?.ebarimt.id ? (
               <>
                 {' '}
-                <div className="text-md font-medium text-gray-700 mt-10">
+                <div className="text-md font-medium text-gray-700 mt-5">
                   <div className="">Сугалааны мэдээлэл</div>
                 </div>
                 <div
@@ -170,8 +212,8 @@ export default function ticketGenerate() {
                   style={{ height: '2px' }}
                 />
                 <div className="mt-5 grid grid-cols-2">
-                  <div>
-                    <QRCode value={data?.ebarimt?.qr_data} />
+                  <div className="mt-4">
+                    <QRCode size={200} value={data?.ebarimt?.qr_data} />
                   </div>
 
                   <div>
@@ -194,7 +236,8 @@ export default function ticketGenerate() {
               ''
             )}
           </div>
-        </PDFExport>
+        </div>
+        {/* </PDFExport> */}
       </div>
     </div>
   );
