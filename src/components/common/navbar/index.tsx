@@ -72,21 +72,28 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   />
                 </Link>
               </div>
-              <div className={`${navbar ? 'hidden' : 'lg:block'} hidden`}>
-                <div className={styles.menuBody}>
-                  {navbarData.generalList.map(menu => (
-                    <a
-                      key={menu.id}
-                      className={styles.menu}
-                      href={`${menu.route}`}
-                      target={
-                        menu.id === 2 || menu.id === 1 ? '_blank' : '_parent'
-                      }
-                    >
-                      {t(`${menu.text}`)}
-                    </a>
-                  ))}
-                </div>
+
+              <div
+                className={`${
+                  navbar ? 'block' : 'hidden'
+                } h-8 bg-gray-200 w-px ml-10`}
+              />
+
+              <div className={styles.menuBody}>
+                {navbarData.generalList.map(menu => (
+                  <a
+                    key={menu.id}
+                    className={`${
+                      navbar ? 'text-gray-700' : 'text-white'
+                    }  hover:text-gray-300 px-1 py-2 rounded-md text-sm font-light hidden md:block`}
+                    href={`${menu.route}`}
+                    target={
+                      menu.id === 2 || menu.id === 1 ? '_blank' : '_parent'
+                    }
+                  >
+                    {t(`${menu.text}`)}
+                  </a>
+                ))}
               </div>
             </div>
             <div className="flex items-center space-x-5">
