@@ -5,12 +5,5 @@
     "value": 0,
     "accountNumber": "5057397049",
     "accountName": "АВТО ТЭЭВРИЙН ҮНДЭСНИЙ ТӨВ"
-  },
-  {
-    "name": "Голомт банк",
-    "image": "/assets/golomt.png",
-    "value": 1,
-    "accountNumber": "1605186111",
-    "accountName": "АВТО ТЭЭВРИЙН ҮНДЭСНИЙ ТӨВ"
   }
 ]
