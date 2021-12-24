@@ -244,10 +244,9 @@ export default function PassengerIfo({ datas, scheduleId }) {
           }
           if (res && res.status === 400) {
             setConfirmError(res.message);
+            closeLoadingConfirm();
           }
-          closeLoadingConfirm();
         }
-        closeLoadingConfirm();
       } catch (e) {
         setConfirmError(t('confirmCodeError'));
         closeLoadingConfirm();
