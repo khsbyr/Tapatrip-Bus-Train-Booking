@@ -1,13 +1,13 @@
-import { DownloadOutlined } from '@ant-design/icons';
-import { PDFExport } from '@progress/kendo-react-pdf';
+import Loader from '@components/common/loader';
 import PaymentService from '@services/payment';
 import { Button, Empty } from 'antd';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react';
-import s from './refNumber.module.scss';
-import Loader from '@components/common/loader';
+import React, { useEffect, useState } from 'react';
 import QRCode from 'react-qr-code';
+import s from './refNumber.module.scss';
 
 export default function ticketGenerate() {
   const router = useRouter();
@@ -15,6 +15,7 @@ export default function ticketGenerate() {
   const [data, setData] = useState(null);
   const [status, setStatus] = useState();
   const [loading, setLoading] = useState(true);
+  const [loading1, setLoading1] = useState('');
 
   useEffect(() => {
     async function getTicketInfo() {
@@ -36,11 +37,17 @@ export default function ticketGenerate() {
     if (refNumber) getTicketInfo();
   }, [refNumber]);
 
-  const pdfExportComponent = useRef(null);
-
-  const handleExportWithComponent = event => {
-    pdfExportComponent.current.save();
-  };
+  function printDocument() {
+    setLoading1('true');
+    const printArea = document.getElementById('divToPrint');
+    html2canvas(printArea).then(canvas => {
+      const dataURL = canvas.toDataURL();
+      const pdf = new jsPDF();
+      pdf.addImage(dataURL, 'PNG', 35, 35, 0, 0);
+      pdf.save('saved.pdf');
+      setLoading1('false');
+    });
+  }
 
   return loading ? (
     <Loader />
@@ -49,29 +56,29 @@ export default function ticketGenerate() {
       <Head>
         <title>Tapatrip - Ticket</title>
       </Head>
-      {status !== 200 ? (
+      {status && status !== 200 ? (
         ''
       ) : (
         <div className="text-center my-10">
-          <Button
-            type="primary"
-            icon={<DownloadOutlined />}
-            onClick={handleExportWithComponent}
-          >
-            Татаж авах
+          <Button type="primary" onClick={printDocument}>
+            {loading1 === 'true' ? (
+              <div className={s.ldsDualRing} />
+            ) : (
+              'Татаж авах'
+            )}
           </Button>
         </div>
       )}
-      <div className="page-container hidden-on-narrow">
-        <PDFExport ref={pdfExportComponent}>
-          <div className={`${s.a4size} shadow-xl p-14 pt-2 ${s.pdfPage}`}>
+      <div id="asd">
+        <div className={`${s.a4size} shadow-xl p-14 pt-2 ${s.pdfPage}`}>
+          <div id="divToPrint">
             {status !== 200 ? (
               <Empty description={'Захиалгын мэдээлэл олдсонгүй'} />
             ) : (
               <>
                 <img src="/assets/svgIcons/NewLogo.svg" />
 
-                <div className="text-md font-medium text-gray-700 mt-5">
+                <div className="text-md font-medium text-gray-700 mt-4">
                   <div className="">Захиалгын мэдээлэл</div>
                 </div>
 
@@ -122,7 +129,7 @@ export default function ticketGenerate() {
                   </table>
                 </div>
 
-                <div className="text-md font-medium text-gray-700 mt-10">
+                <div className="text-md font-medium text-gray-700 mt-5">
                   <div className="">Зорчигчдын мэдээлэл</div>
                 </div>
 
@@ -133,27 +140,31 @@ export default function ticketGenerate() {
 
                 <div className="mt-5">
                   <table className={s.table1}>
-                    <tr>
-                      <th>№</th>
-                      <th>Суудал</th>
-                      <th>Нас</th>
-                      <th>Регистер</th>
-                      <th>Овог нэр</th>
-                      <th>Даатгал</th>
-                    </tr>
-                    {data &&
-                      data.pax.map((user, index) => (
-                        <tr>
-                          <td>{++index}</td>
-                          <td>{user.seat}</td>
-                          <td>{user.is_child ? 'Хүүхэд' : 'Том хүн'}</td>
-                          <td>{user.document_number}</td>
-                          <td>
-                            {user.first_name} {user.last_name}
-                          </td>
-                          <td>{data.schedule_object.insurance_name}</td>
-                        </tr>
-                      ))}
+                    <thead>
+                      <tr>
+                        <th>№</th>
+                        <th>Суудал</th>
+                        <th>Нас</th>
+                        <th>Регистер</th>
+                        <th>Овог нэр</th>
+                        <th>Даатгал</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data &&
+                        data.pax.map((user, index) => (
+                          <tr key={index}>
+                            <td>{++index}</td>
+                            <td>{user.seat}</td>
+                            <td>{user.is_child ? 'Хүүхэд' : 'Том хүн'}</td>
+                            <td>{user.document_number}</td>
+                            <td>
+                              {user.first_name} {user.last_name}
+                            </td>
+                            <td>{data.schedule_object.insurance_name}</td>
+                          </tr>
+                        ))}
+                    </tbody>
                   </table>
                 </div>
               </>
@@ -162,7 +173,7 @@ export default function ticketGenerate() {
             {data && data?.ebarimt.id ? (
               <>
                 {' '}
-                <div className="text-md font-medium text-gray-700 mt-10">
+                <div className="text-md font-medium text-gray-700 mt-5">
                   <div className="">Сугалааны мэдээлэл</div>
                 </div>
                 <div
@@ -170,8 +181,8 @@ export default function ticketGenerate() {
                   style={{ height: '2px' }}
                 />
                 <div className="mt-5 grid grid-cols-2">
-                  <div>
-                    <QRCode value={data?.ebarimt?.qr_data} />
+                  <div className="mt-4">
+                    <QRCode size={200} value={data?.ebarimt?.qr_data} />
                   </div>
 
                   <div>
@@ -194,7 +205,7 @@ export default function ticketGenerate() {
               ''
             )}
           </div>
-        </PDFExport>
+        </div>
       </div>
     </div>
   );
