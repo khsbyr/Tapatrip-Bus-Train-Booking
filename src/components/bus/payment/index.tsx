@@ -19,6 +19,7 @@ export default function Payment({ datas, scheduleId }) {
   const deadline = Date.now() + 60 * 60 * 333.3;
   const { booking } = useGlobalStore();
   const [timer, setTimer] = useState(deadline);
+
   const qrCode =
     JSON.parse(booking.payment)[0].invoice.qPay_QRimage === undefined
       ? JSON.parse(booking.payment)[1].invoice.qPay_QRimage
@@ -41,6 +42,10 @@ export default function Payment({ datas, scheduleId }) {
     setIsModalVisible(false);
   };
 
+  function onFinish() {
+    router.push(`/bus`);
+  }
+
   return (
     <ContentWrapper>
       <div className={style.body}>
@@ -53,7 +58,13 @@ export default function Payment({ datas, scheduleId }) {
               <div className="border-2 border-yellow-200 rounded-lg px-5 py-2 sm:px-10 sm:py-5 space-y-4">
                 <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-10">
                   <p className="bg-yellow-400 px-3 rounded shadow-lg">
-                    {<Countdown format="mm:ss" value={timer} />}
+                    {
+                      <Countdown
+                        format="mm:ss"
+                        value={timer}
+                        onFinish={onFinish}
+                      />
+                    }
                   </p>
                   <p className="text-center text-sm font-medium">
                     {t('paymentInstructionsTitle')}
