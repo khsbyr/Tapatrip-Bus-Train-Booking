@@ -40,10 +40,12 @@ export default function ticketGenerate() {
   function printDocument() {
     setLoading1('true');
     const printArea = document.getElementById('divToPrint');
-    html2canvas(printArea).then(canvas => {
+    html2canvas(printArea, { scale: 2 }).then(canvas => {
       const dataURL = canvas.toDataURL();
       const pdf = new jsPDF();
-      pdf.addImage(dataURL, 'PNG', 35, 35, 0, 0);
+      var width = pdf.internal.pageSize.getWidth();
+      var height = pdf.internal.pageSize.getHeight();
+      pdf.addImage(dataURL, 'PNG', 0, 0, width, height);
       pdf.save('saved.pdf');
       setLoading1('false');
     });
@@ -70,8 +72,8 @@ export default function ticketGenerate() {
         </div>
       )}
       <div id="asd">
-        <div className={`${s.a4size} shadow-xl p-14 pt-2 ${s.pdfPage}`}>
-          <div id="divToPrint">
+        <div className={`${s.a4size} shadow-xl pt-2 ${s.pdfPage}`}>
+          <div id="divToPrint" className="p-14 pt-5">
             {status !== 200 ? (
               <Empty description={'Захиалгын мэдээлэл олдсонгүй'} />
             ) : (
