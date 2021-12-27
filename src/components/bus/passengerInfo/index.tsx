@@ -335,15 +335,22 @@ export default function PassengerIfo({ datas, scheduleId }) {
                     </div>
                     {!isEmailVisible ? (
                       <div className={style.rightButton}>
-                        <Tooltip title="Email Add Field">
-                          <Button
-                            type="dashed"
-                            shape="circle"
-                            onClick={() => setIsEmailVisible(true)}
-                            icon={<PlusOutlined />}
-                            size="large"
-                          />
-                        </Tooltip>
+                        <label
+                          className="text-cardDate px-2 font-medium"
+                          htmlFor="email"
+                        ></label>
+                        <Form.Item>
+                          <Tooltip title="И-мэйл хаяг нэмэх">
+                            <Button
+                              type="dashed"
+                              shape="circle"
+                              onClick={() => setIsEmailVisible(true)}
+                              icon={<PlusOutlined />}
+                              size="middle"
+                              className="sm:mt-4"
+                            />
+                          </Tooltip>
+                        </Form.Item>
                       </div>
                     ) : (
                       <div className={style.rightContent}>
@@ -363,21 +370,21 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           ]}
                           shouldUpdate={customers.email}
                         >
-                          <Input
-                            className={style.inputEmail}
-                            onChange={handleCustomerEmail}
-                            placeholder={t('mailAddressPlaceholder')}
-                          />
+                          <div className="flex items-center">
+                            <Input
+                              className={style.inputEmail}
+                              onChange={handleCustomerEmail}
+                              placeholder={t('mailAddressPlaceholder')}
+                            />
 
-                          <Tooltip title="Email Remove Field">
                             <Button
                               type="dashed"
                               shape="circle"
                               onClick={() => setIsEmailVisible(false)}
                               icon={<MinusOutlined />}
-                              size="large"
+                              size="middle"
                             />
-                          </Tooltip>
+                          </div>
                         </Form.Item>
                       </div>
                     )}
