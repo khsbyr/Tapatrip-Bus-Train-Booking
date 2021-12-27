@@ -369,7 +369,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
                             placeholder={t('mailAddressPlaceholder')}
                           />
 
-                          <Tooltip title="Email Add Field">
+                          <Tooltip title="Email Remove Field">
                             <Button
                               type="dashed"
                               shape="circle"
