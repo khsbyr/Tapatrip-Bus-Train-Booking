@@ -9,16 +9,27 @@ import NavData from '@data/navData.json';
 import TapaServiceList from '@data/tapaServiceList.json';
 import Head from 'next/head';
 import styles from '@components/common/layout/layout.module.scss';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Search from '@components/train/searchPanel';
-import { arrayFormat } from '@helpers/array-format';
-import { useQuery } from '@apollo/client';
-import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
+import TrainService from '@services/train';
+
 export default function Travel() {
-  const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
-  if (error) return `Error! ${error.message}`;
-  const startLocations = arrayFormat(data);
+  const [stationData, setStationData] = useState([]);
+  useEffect(() => {
+    async function getTrainStations() {
+      try {
+        const res = await TrainService.getTrainStations();
+        if (res && res.status === 200) {
+          setStationData(res.result);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getTrainStations();
+  }, []);
+
   return (
     <div>
       <Head>
@@ -27,17 +38,7 @@ export default function Travel() {
       <div className={styles.main}>
         <HeaderBackground />
         <Navbar navbarData={NavData} />
-        <Search navbarData={NavData} startLocations={startLocations} />
-        {/* <div className="bg-bg relative w-full mt-10">
-          <div className="bg-white max-w-7xl mx-auto p-5 rounded-lg">
-            <p className="text-center text-lg text-blue-500 font-medium">
-              Coming soon
-            </p>
-            <div className="flex justify-center -mt-10">
-              <img src="/assets/not_found.gif" alt="" width={'800'} />
-            </div>
-          </div>
-        </div> */}
+        <Search navbarData={NavData} stationData={stationData} />
         <App />
         <TapaService tapaServiceList={TapaServiceList} />
         <Footer companyInfo={Company} />
