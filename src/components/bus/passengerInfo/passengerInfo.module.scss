@@ -34,8 +34,14 @@
 .rightContent {
   @apply w-full space-y-2 sm:pl-2 h-24;
 }
+.rightButton {
+  @apply w-full mt-9 ml-3;
+}
 .input {
   @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base;
+}
+.inputEmail {
+  @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base w-72 mr-3;
 }
 .passengerInfoTitle {
   @apply flex justify-between w-full items-center text-cardDate text-base sm:text-lg font-bold border-b-2 px-4 py-2;

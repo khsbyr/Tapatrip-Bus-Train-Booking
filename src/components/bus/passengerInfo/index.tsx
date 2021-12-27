@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Form, Input, Modal, Select } from 'antd';
+import { Form, Input, Modal, Select, Button, Tooltip } from 'antd';
+import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import registNo from '@data/registerNumber.json';
 import RegisterNumber from '@components/bus/registerNumber';
 import style from './passengerInfo.module.scss';
@@ -14,7 +15,6 @@ import InputPhoneNumber from '@components/common/phoneNumber';
 import { arrayFilterSchedule } from '@helpers/array-format';
 import ConfirmModal from '@components/common/confirmModal';
 import AuthService from '@services/auth';
-import PaymentService from '@services/payment';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
@@ -42,6 +42,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
   const { setBooking } = useGlobalStore();
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isEmailVisible, setIsEmailVisible] = useState(false);
 
   const isAuth = user ? true : false;
 
@@ -332,30 +333,54 @@ export default function PassengerIfo({ datas, scheduleId }) {
                       </label>
                       <InputPhoneNumber name="customerNumber" />
                     </div>
-                    <div className={style.rightContent}>
-                      <label
-                        className="text-cardDate px-2 font-medium"
-                        htmlFor="email"
-                      >
-                        {t('mailAddressTitle')}
-                      </label>
-                      <Form.Item
-                        name="email"
-                        rules={[
-                          {
-                            type: 'email',
-                            message: t('mailAddressCheck'),
-                          },
-                        ]}
-                        shouldUpdate={customers.email}
-                      >
-                        <Input
-                          className={style.input}
-                          onChange={handleCustomerEmail}
-                          placeholder={t('mailAddressPlaceholder')}
-                        />
-                      </Form.Item>
-                    </div>
+                    {!isEmailVisible ? (
+                      <div className={style.rightButton}>
+                        <Tooltip title="Email Add Field">
+                          <Button
+                            type="dashed"
+                            shape="circle"
+                            onClick={() => setIsEmailVisible(true)}
+                            icon={<PlusOutlined />}
+                            size="large"
+                          />
+                        </Tooltip>
+                      </div>
+                    ) : (
+                      <div className={style.rightContent}>
+                        <label
+                          className="text-cardDate px-2 font-medium"
+                          htmlFor="email"
+                        >
+                          {t('mailAddressTitle')}
+                        </label>
+                        <Form.Item
+                          name="email"
+                          rules={[
+                            {
+                              type: 'email',
+                              message: t('mailAddressCheck'),
+                            },
+                          ]}
+                          shouldUpdate={customers.email}
+                        >
+                          <Input
+                            className={style.inputEmail}
+                            onChange={handleCustomerEmail}
+                            placeholder={t('mailAddressPlaceholder')}
+                          />
+
+                          <Tooltip title="Email Add Field">
+                            <Button
+                              type="dashed"
+                              shape="circle"
+                              onClick={() => setIsEmailVisible(false)}
+                              icon={<MinusOutlined />}
+                              size="large"
+                            />
+                          </Tooltip>
+                        </Form.Item>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
