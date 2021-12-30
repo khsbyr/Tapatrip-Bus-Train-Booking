@@ -43,7 +43,7 @@ export default function Payment({ datas, scheduleId }) {
   };
 
   function onFinish() {
-    router.push(`/bus`);
+    router.push(`/`);
   }
 
   return (
