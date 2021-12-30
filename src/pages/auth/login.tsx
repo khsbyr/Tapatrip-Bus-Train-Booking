@@ -77,9 +77,7 @@ const Login = () => {
   }
 
   const handleLogin = async values => {
-    //     openLoadingRegister();
     openLoadingRegister();
-
     const phoneNumber = values.loginNumber
       ? values.loginNumber
       : values.registerNumber;

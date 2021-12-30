@@ -51,7 +51,7 @@ export default function SeatNav() {
                       <a
                         href={`${menu.route}`}
                         target={
-                          menu.id === 2 || menu.id === 1 ? '_blank' : '_parent'
+                          menu.id === 2 || menu.id === 1 ? '_parent' : '_parent'
                         }
                       >
                         {t(`${menu.text}`)}

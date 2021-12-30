@@ -39,7 +39,7 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
   const handleTabChange = key => {
     const route = key == 4 ? '/' : key == 3 ? '/tour' : '';
     key == 2 || key == 1
-      ? window.open('https://tapatrip.com/', '_blank')
+      ? router.push('https://tapatrip.com/')
       : router.push(`/${route}`);
   };
 
