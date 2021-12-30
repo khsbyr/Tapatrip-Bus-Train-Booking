@@ -25,7 +25,7 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
         return '5';
       case '/tour':
         return '3';
-      case '/bus':
+      case '/':
         return '4';
       case 'https://tapatrip.com/':
         return '1';
@@ -37,7 +37,7 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
   }
 
   const handleTabChange = key => {
-    const route = key == 4 ? '/bus' : key == 3 ? '/tour' : '';
+    const route = key == 4 ? '/' : key == 3 ? '/tour' : '';
     key == 2 || key == 1
       ? window.open('https://tapatrip.com/', '_blank')
       : router.push(`/${route}`);
