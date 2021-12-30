@@ -88,7 +88,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     }  hover:text-gray-300 px-1 py-2 rounded-md text-sm font-light hidden md:block`}
                     href={`${menu.route}`}
                     target={
-                      menu.id === 2 || menu.id === 1 ? '_blank' : '_parent'
+                      menu.id === 2 || menu.id === 1 ? '_parent' : '_parent'
                     }
                   >
                     {t(`${menu.text}`)}
