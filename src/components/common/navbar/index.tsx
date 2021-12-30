@@ -60,7 +60,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
           <div className={styles.navbarBody}>
             <div className="flex items-center">
               <div className="flex-shrink-0 cursor-pointer">
-                <Link href="/bus">
+                <Link href="/">
                   <img
                     src={`${
                       navbar

@@ -38,9 +38,9 @@ const PasswordRecovery = () => {
 
   if (isAuth === true) {
     if (router.query && router.query.from) {
-      router.push('/bus' + router.query.from);
+      router.push('/' + router.query.from);
     } else {
-      router.push('/bus');
+      router.push('/');
     }
   }
 

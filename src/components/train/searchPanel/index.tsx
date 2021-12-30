@@ -16,16 +16,24 @@ interface Props {
 const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
   const { t } = useTranslation();
   const router = useRouter();
-  const activePath =
-    router.route == '/train'
-      ? '5'
-      : router.route == '/bus'
-      ? '4'
-      : router.route == '/flight'
-      ? '1'
-      : router.route == '/hotel'
-      ? '2'
-      : '3';
+  const activePath = getRoute(router);
+
+  function getRoute(router: any) {
+    switch (router.route) {
+      case '/train':
+        return '5';
+      case '/tour':
+        return '3';
+      case '/bus':
+        return '4';
+      case 'https://tapatrip.com/':
+        return '1';
+      case 'https://tapatrip.com/':
+        return '2';
+      default:
+        return '4';
+    }
+  }
 
   const handleTabChange = key => {
     const route =
