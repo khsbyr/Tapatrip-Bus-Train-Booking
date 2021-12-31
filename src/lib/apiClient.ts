@@ -7,11 +7,18 @@ const token =
     ? AuthTokenStorageService.getAccessToken()
     : AuthTokenStorageService.getGuestToken();
 
+const locale =
+  AuthTokenStorageService.getLocale() &&
+  AuthTokenStorageService.getLocale() != 'false'
+    ? AuthTokenStorageService.getLocale()
+    : 'mn';
+
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     'Content-type': 'application/json',
     Authorization: token ? `Bearer ${token}` : '',
+    'Accept-Language': locale,
   },
 });
 export default apiClient;
