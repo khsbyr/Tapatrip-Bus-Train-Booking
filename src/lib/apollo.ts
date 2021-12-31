@@ -13,6 +13,12 @@ const authLink = setContext((_, { headers }) => {
     AuthTokenStorageService.getAccessToken() != 'false'
       ? AuthTokenStorageService.getAccessToken()
       : AuthTokenStorageService.getGuestToken();
+
+  const locale =
+    AuthTokenStorageService.getLocale() &&
+    AuthTokenStorageService.getLocale() != 'false'
+      ? AuthTokenStorageService.getLocale()
+      : 'mn';
   // return the headers to the context so httpLink can read them
   return {
     headers: {
@@ -22,6 +28,12 @@ const authLink = setContext((_, { headers }) => {
           : token
           ? `Bearer ${token}`
           : '',
+      'Accept-Language':
+        headers && headers.locale
+          ? `${headers.locale}`
+          : locale
+          ? locale
+          : 'mn',
     },
   };
 });

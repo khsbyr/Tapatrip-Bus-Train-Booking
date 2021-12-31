@@ -4,6 +4,7 @@ import s from './language.module.scss';
 import { CheckIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import { useUI } from '@context/uiContext';
 
 const languages = [
@@ -22,6 +23,7 @@ export default function Language(props) {
     const locale = value.route;
     const index = languages.findIndex(item => item.route === locale);
     setSelectedLanguage(languages[index]);
+    AuthTokenStorageService.setLocale(languages[index].route);
     router.push(router.pathname, router.asPath, { locale });
   };
 
