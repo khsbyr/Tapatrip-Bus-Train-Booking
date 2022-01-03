@@ -43,7 +43,7 @@ export default function index() {
           console.log(err);
         }
       } else {
-        router.push('/bus');
+        router.push('/');
       }
     }
     loadUserFromCookies();
@@ -86,7 +86,7 @@ export default function index() {
               </button>
               <div className="w-full flex justify-start p-3 hover:bg-red-100 text-red-600 rounded cursor-pointer">
                 <a
-                  href="/bus"
+                  href="/"
                   className="hover:text-red-600"
                   onClick={handleLogout}
                 >

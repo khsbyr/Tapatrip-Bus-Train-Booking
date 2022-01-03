@@ -60,7 +60,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
           <div className={styles.navbarBody}>
             <div className="flex items-center">
               <div className="flex-shrink-0 cursor-pointer">
-                <Link href="/bus">
+                <Link href="/">
                   <img
                     src={`${
                       navbar
@@ -88,7 +88,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                     }  hover:text-gray-300 px-1 py-2 rounded-md text-sm font-light hidden md:block`}
                     href={`${menu.route}`}
                     target={
-                      menu.id === 2 || menu.id === 1 ? '_blank' : '_parent'
+                      menu.id === 2 || menu.id === 1 ? '_parent' : '_parent'
                     }
                   >
                     {t(`${menu.text}`)}

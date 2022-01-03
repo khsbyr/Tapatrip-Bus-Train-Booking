@@ -9,8 +9,16 @@ const AuthTokenStorageService = {
     cookie.set('guest-token', guestToken);
   },
 
+  setLocale(locale: string) {
+    cookie.set('locale', locale);
+  },
+
   getAccessToken() {
     return cookie.get('user-token');
+  },
+
+  getLocale() {
+    return cookie.get('locale');
   },
 
   getGuestToken() {

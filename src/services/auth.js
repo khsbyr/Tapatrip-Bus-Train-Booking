@@ -70,8 +70,12 @@ const AuthService = {
       '/account/global_verification_code/phone/',
       data
     );
-    const result = response.data.status_code === 200 ? true : false;
-    return result;
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    return datas;
   },
 
   async emailSubscribe(email) {

@@ -162,12 +162,14 @@ export default function PassengerIfo({ datas, scheduleId }) {
             userToken: token,
           },
         },
+        onCompleted: () => {
+          closeLoadingConfirm();
+          closeLoadingPassengerInfo();
+        },
       });
       if (data) setBooking(data?.busBooking);
-      setCurrent(current + 1);
       setIsModalVisible(false);
-      closeLoadingConfirm();
-      closeLoadingPassengerInfo();
+      setCurrent(current + 1);
     } catch (e) {
       Modal.error({
         title: t('errorTitle'),
@@ -204,6 +206,7 @@ export default function PassengerIfo({ datas, scheduleId }) {
     if (!displayBlock) {
       p1.then(
         async () => {
+          setConfirmError(null);
           openLoadingPassengerInfo();
           if (isAuth) {
             booking();
@@ -212,9 +215,18 @@ export default function PassengerIfo({ datas, scheduleId }) {
               phone: customers.phoneNumber,
               dialCode: customers.dialNumber,
             };
-            const result = await AuthService.verifySms(payload);
-            if (result) setIsModalVisible(true), closeLoadingPassengerInfo();
-            else {
+            try {
+              const res = await AuthService.verifySms(payload);
+              if (res && res.status === 200) {
+                setIsModalVisible(true);
+                closeLoadingPassengerInfo();
+              }
+              if (res && res.status === 400) {
+                setIsModalVisible(true);
+                closeLoadingPassengerInfo();
+                setConfirmError(res.message);
+              }
+            } catch (e) {
               Modal.error({
                 title: t('errorTitle'),
                 content: t('errorContent'),

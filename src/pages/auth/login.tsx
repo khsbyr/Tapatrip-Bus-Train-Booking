@@ -41,9 +41,9 @@ const Login = () => {
 
   if (isAuth === true) {
     if (router.query && router.query.from) {
-      router.push('/bus' + router.query.from);
+      router.push('/' + router.query.from);
     } else {
-      router.push('/bus');
+      router.push('/');
     }
   }
 
@@ -77,9 +77,7 @@ const Login = () => {
   }
 
   const handleLogin = async values => {
-    //     openLoadingRegister();
     openLoadingRegister();
-
     const phoneNumber = values.loginNumber
       ? values.loginNumber
       : values.registerNumber;
@@ -122,9 +120,9 @@ const Login = () => {
           setUser(res?.result?.user);
           setPasswordError(null);
           if (router.query && router.query.from) {
-            router.push('/bus' + router.query.from);
+            router.push('/' + router.query.from);
           } else {
-            router.push('/bus');
+            router.push('/');
           }
         } else {
           setPasswordError(res?.message);
@@ -186,9 +184,9 @@ const Login = () => {
           setUser(res?.result?.user);
           setRePasswordError(null);
           if (router.query && router.query.from) {
-            router.push('/bus' + router.query.from);
+            router.push('/' + router.query.from);
           } else {
-            router.push('/bus');
+            router.push('/');
           }
         } else {
           setRePasswordError(res?.message);

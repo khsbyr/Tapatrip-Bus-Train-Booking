@@ -20,15 +20,15 @@ module.exports = phase => {
   return {
     i18n,
     reactStrictMode: true,
-    async redirects() {
-      return [
-        {
-          source: '/',
-          destination: '/bus',
-          permanent: true,
-        },
-      ];
-    },
+    // async redirects() {
+    //   return [
+    //     {
+    //       source: '/',
+    //       destination: '/bus',
+    //       permanent: true,
+    //     },
+    //   ];
+    // },
     images: {
       loader: 'imgix',
       path: 'https://noop/',

@@ -36,7 +36,7 @@ export default function TrainNavbar({ navbarData }) {
           <div className=" flex items-center justify-between h-12">
             <div className="flex items-center flex-shrink-0 ">
               <div className="ml-2 mt-5">
-                <Link href="/bus">
+                <Link href="/">
                   <a>
                     <img
                       src="/assets/svgIcons/NewLogo.svg"
