@@ -1,17 +1,19 @@
 import SeatNav from '@components/bus/seatNavbar';
-import RoomClass from '@components/train/selectSeat/roomClass';
 import NavData from '@data/navData.json';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Steps } from 'antd';
 import ContentWrapper from './style';
 import { useGlobalStore } from '@context/globalStore';
+import SelectSeats from '@components/train/selectSeat';
+
 const { Step } = Steps;
+
 export default function Order() {
   const { current, setCurrent } = useGlobalStore();
   const steps = [
     {
       title: 'Select Seat',
-      content: <RoomClass />,
+      content: <SelectSeats />,
       button: 'Select Seat Button',
     },
     {
@@ -25,6 +27,7 @@ export default function Order() {
       button: 'Payment Button',
     },
   ];
+
   const onChange = currentStep => {
     if (current === 1 && currentStep === 0) setCurrent(0);
   };

@@ -1,20 +1,40 @@
-import React from 'react';
-import NavData from '@data/navData.json';
-
-import { Checkbox } from 'antd';
-import { Result } from 'antd';
-import Card from '@components/train/card';
-import { ShieldExclamationIcon } from '@heroicons/react/solid';
-import TrainNavbar from '@components/train/navbar';
 import Layout from '@components/common/layout';
-import { useRouter } from 'next/router';
-import { arrayFormat } from '@helpers/array-format';
-import Loader from '@components/common/loader';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Card from '@components/train/card';
+import TrainNavbar from '@components/train/navbar';
+import NavData from '@data/navData.json';
+import { ShieldExclamationIcon } from '@heroicons/react/solid';
+import { Checkbox, Result } from 'antd';
 import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import TrainService from '@services/train';
 
 export default function Orders() {
   const { t } = useTranslation(['order']);
+  const [voyageData, setVoyageData] = useState([]);
+  const router = useRouter();
+  const { startStation, endStation, date } = router.query;
+
+  useEffect(() => {
+    async function getTrainStations() {
+      let params = {
+        fromStation: startStation,
+        toStation: endStation,
+        date: date,
+      };
+
+      try {
+        const res = await TrainService.getVoyageData(params);
+        if (res && res.status === 200) {
+          setVoyageData(res.result);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getTrainStations();
+  }, []);
 
   return (
     <Layout>
@@ -30,16 +50,18 @@ export default function Orders() {
                 </p>
               </div>
             </div>
-
-            <Card key={1} />
-
-            <Result
-              status="404"
-              title={t('ordersSearchResult')}
-              subTitle={t('ordersSearchResultBody')}
-            />
+            {voyageData.length > 0 ? (
+              voyageData?.map(voyage => <Card voyage={voyage} />)
+            ) : (
+              <Result
+                status="404"
+                title={t('ordersSearchResult')}
+                subTitle={t('ordersSearchResultBody')}
+              />
+            )}
           </div>
-          <div className="bg-white p-8 text-cardDate rounded-2xl space-y-4 text-lg">
+
+          <div className="bg-white p-8 text-cardDate rounded-2xl space-y-4 text-lg h-64 mt-3">
             <div className="space-y-3">
               <p className="font-medium">Төрөл</p>
               <div className="space-y-1 px-2 text-base">
@@ -57,17 +79,6 @@ export default function Orders() {
                 </div>
               </div>
             </div>
-            <div>
-              <p className="font-medium">Тосох цаг</p>
-            </div>
-            <div>
-              <p className="font-medium">Хүргэх цаг</p>
-            </div>
-            {/* <div className="sticky top-0 ">
-              <li></li>
-              <li></li>
-              <li></li>
-            </div> */}
           </div>
         </div>
       </div>

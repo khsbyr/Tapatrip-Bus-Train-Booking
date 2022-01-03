@@ -1,132 +1,78 @@
-import React, { useState } from 'react';
-import style from './selectSeats.module.scss';
-import SeatLarge from '@components/bus/selectSeats/seatLarge';
-import SeatMedium from '@components/bus/selectSeats/seatMedium';
-import SeatSmall from '@components/bus/selectSeats/seatSmall';
 import { useGlobalStore } from '@context/globalStore';
-import { Modal } from 'antd';
-import { arrayFilterSchedule } from '@helpers/array-format';
-import { useTranslation } from 'next-i18next';
+import React, { useEffect, useState } from 'react';
+import style from './selectSeats.module.scss';
+import { useRouter } from 'next/router';
+import TrainService from '@services/train';
 
-export default function SelectSeats({ datas, scheduleId }) {
-  const { t } = useTranslation(['steps']);
-  const { selectedSeats, setSelectedSeats } = useGlobalStore();
-  const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
+export default function SelectSeats({}) {
   const { current, setCurrent } = useGlobalStore();
-  const { bus, driverPhone } = datas;
+  const [wagonData, setWagonData] = useState([]);
+  const router = useRouter();
+  const { voyageId, startStop, endStop, priceType } = router.query;
 
-  const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
+  useEffect(() => {
+    async function getTrainStations() {
+      let params = {
+        voyage_id: voyageId,
+        start_stop: startStop,
+        end_stop: endStop,
+        price_type: priceType,
+      };
 
-  const handleRemoveSeat = e => {
-    const index = selectedSeats.findIndex(
-      item =>
-        item.seatNumber === e.target.value && item.scheduleId === scheduleId
-    );
-    if (index > -1) {
-      selectedSeats.splice(index, 1);
-      isSelectedSeats[scheduleId + e.target.value] = false;
-      setSelectedSeats(selectedSeats);
-      setIsSelectedSeats(isSelectedSeats);
+      try {
+        const res = await TrainService.getWagonData(params);
+        if (res && res.status === 200) {
+          setWagonData(res.result);
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
-  };
+    getTrainStations();
+  }, []);
+
+  console.log(wagonData);
 
   const next = () => {
-    if (formatSelectedSeats.length > 0) setCurrent(current + 1);
-    else {
-      Modal.warning({
-        title: t('selectSeatWarning'),
-        content: t('selectSeatWarningContent'),
-      });
-    }
+    setCurrent(current + 1);
+    // else {
+    //   Modal.warning({
+    //     title: t('selectSeatWarning'),
+    //     content: t('selectSeatWarningContent'),
+    //   });
+    // }
   };
 
   return (
     <div className={style.body}>
-      <div className={style.content}>
-        <div className={style.root}>
-          <div>
-            <h1 className={style.selecetSeatTitle}>{t('selectSeat')}</h1>
+      <div className={style.root}>
+        <h1 className="font-semibold text-base">СУУДАЛ СОНГОХ</h1>
+        <div className="h-0.5 w-full bg-bg" />
+
+        <div className="flex">
+          <div className="w-2/5">
+            <h1>Галт тэрэгний мэдээлэл</h1>
           </div>
-          <div className={style.information}>
-            <div className="sm:w-7/12 space-y-6">
-              <h1 className={style.busInformationTitle}>
-                {t('busInformations')}
-              </h1>
-              <div className="flex ">
-                <img src="/assets/busimg.jpg" className="pr-4 h-32" />
-                <div className={style.busInformation}>
-                  <p>
-                    <h1> {t('businessFirms')}: </h1>
-                    {bus?.transporter?.name}
-                  </p>
-                  <p>
-                    <h1>{t('busInsuranceName')}: </h1>
-                    {datas?.insurance?.name}
-                  </p>
-                  <p>
-                    <h1>{t('busModelName')}: </h1>
-                    {bus?.modelName}
-                  </p>
-                  <p>
-                    <h1>{t('busPlateNumber')}: </h1>
-                    {bus?.plateNumber}
-                  </p>
-                  <p>
-                    <h1>{t('driversPhoneNumber')}: </h1>
-                    {driverPhone}
-                  </p>
+
+          <div className="w-3/5 flex justify-around">
+            <div className="space-y-2">
+              <img src="/assets/trainImages/Tolgoi.png" className="" />
+              {wagonData?.map(wagon => (
+                <div className="flex">
+                  <h1 className="">{wagon.NAME}</h1>
+                  <img src="/assets/trainImages/train.png" className="" />
                 </div>
-              </div>
-              <div className="flex flex-wrap">
-                <div className="flex items-center py-1 space-x-5 mr-5">
-                  <p className="text-cardDate font-bold border-2 border-seat bg-white h-10 w-8 rounded-md"></p>
-                  <h1 className="text-cardDate">{t('canBeOredered')}</h1>
-                </div>
-                <div className="text-cardDate py-1 flex items-center space-x-5">
-                  <div className=" bg-bg border-2 border-bg h-10 w-8 rounded-md"></div>
-                  <h1 className="text-cardDate">{t('ordered')}</h1>
-                </div>
-              </div>
-              <div className="flex flex-wrap">
-                <h1 className="h-full text-cardDate font-bold text-base sm:text-lg pr-4">
-                  {t('selectedSeats')}
-                </h1>
-                <div className="py-2 text-lg font-bold">
-                  {formatSelectedSeats &&
-                    formatSelectedSeats.map(seat => (
-                      <button
-                        key={seat.seatNumber}
-                        value={seat.seatNumber}
-                        onClick={handleRemoveSeat}
-                        className={style.selectedSeats}
-                      >
-                        {seat.seatNumber}
-                      </button>
-                    ))}
-                </div>
-              </div>
+              ))}
             </div>
-            {bus?.seatCount < 25 ? (
-              <SeatSmall datas={datas} scheduleId={scheduleId} />
-            ) : bus?.seatCount < 46 ? (
-              <SeatMedium datas={datas} scheduleId={scheduleId} />
-            ) : (
-              <SeatLarge datas={datas} scheduleId={scheduleId} />
-            )}
+
+            <div>
+              <img src="/assets/trainImages/trainskech.png" />
+            </div>
           </div>
         </div>
-        <button className={style.buttonBlock} onClick={next}>
-          {t('stepSelectSeatButton')}
-        </button>
       </div>
-      <div className={style.card}>
-        <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
-          {'Card'}
-          <button className={style.button} onClick={next}>
-            {t('stepSelectSeatButton')}
-          </button>
-        </div>
-      </div>
+
+      <div className="bg-white w-2/5 h-48"></div>
     </div>
   );
 }

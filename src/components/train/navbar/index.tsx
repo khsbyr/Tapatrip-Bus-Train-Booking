@@ -1,20 +1,32 @@
-import { MenuIcon, XIcon } from '@heroicons/react/solid';
-import React, { FC, useState } from 'react';
 import OrderCheck from '@components/bus/orderCheck';
-import { Transition } from '@headlessui/react';
-import SearchInput from '@components/train/searchInput';
-import Link from 'next/link';
 import SelectLanguage from '@components/common/language';
+import SearchInput from '@components/train/searchInput';
+import { Transition } from '@headlessui/react';
+import { MenuIcon, XIcon } from '@heroicons/react/solid';
+import TrainService from '@services/train';
 import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 
-interface Props {
-  navbarData?: any;
-  startLocations?: any;
-}
-
-export default function BusNavbar({ navbarData }) {
+export default function TrainNavbar({ navbarData }) {
   const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
+  const [stationData, setStationData] = useState([]);
+
+  useEffect(() => {
+    async function getTrainStations() {
+      try {
+        const res = await TrainService.getTrainStations();
+        if (res && res.status === 200) {
+          setStationData(res.result);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getTrainStations();
+  }, []);
+
   return (
     <div>
       <nav
@@ -87,7 +99,7 @@ export default function BusNavbar({ navbarData }) {
               </button>
             </div>
           </div>
-          <SearchInput />
+          <SearchInput stationData={stationData} />
         </div>
 
         <Transition

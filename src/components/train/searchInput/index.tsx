@@ -1,6 +1,7 @@
+import { useTrainContext } from '@context/trainContext';
 import { availableDatesFormat } from '@helpers/train-array-format';
 import TrainService from '@services/train';
-import { AutoComplete, DatePicker } from 'antd';
+import { AutoComplete, DatePicker, message } from 'antd';
 import locale from 'antd/lib/date-picker/locale/mn_MN';
 import moment from 'moment';
 import 'moment/locale/mn';
@@ -10,16 +11,24 @@ import React, { useEffect, useState } from 'react';
 import style from './searchBus.module.scss';
 import ContentWrapper from './style';
 
+const dFormat = 'YYYY-MM-DD';
+
 export default function SearchInput({ stationData }) {
   const { t } = useTranslation();
   const { Option } = AutoComplete;
-  const [startStationID, setStartStationID] = useState('');
-  const [endStationID, setEndStationID] = useState('');
+  const { startStationID, setStartStationID } = useTrainContext();
+  const { endStationID, setEndStationID } = useTrainContext();
+  const { startStationName, setStartStationName } = useTrainContext();
+  const { endStationName, setEndStationName } = useTrainContext();
   const [availableDates, setAvailableDates] = useState([]);
   const dateFormat = availableDatesFormat(availableDates);
   const date = dateFormat.map(z => z.date);
   const router = useRouter();
-  const [endDate, setEndDate] = useState('');
+  const currentDate = router.query.date
+    ? router.query.date
+    : moment().endOf('day').format(dFormat).toString();
+
+  const [selectDate, setSelectDate] = useState(currentDate);
 
   useEffect(() => {
     async function getDates() {
@@ -37,15 +46,17 @@ export default function SearchInput({ stationData }) {
   }, [startStationID, endStationID]);
 
   const SelectStartStation = (value, options) => {
+    setStartStationName(value);
     setStartStationID(options.key);
   };
 
   const SelectEndStation = (value, options) => {
+    setEndStationName(value);
     setEndStationID(options.key);
   };
 
-  const SelectDate = (e, datestring) => {
-    setEndDate(datestring);
+  const SelectDate = (e, dateString) => {
+    setSelectDate(dateString);
   };
 
   const disabledDate = current => {
@@ -56,18 +67,18 @@ export default function SearchInput({ stationData }) {
   };
 
   const searchTrain = () => {
-    if (startStationID && endStationID && endDate) {
+    if (startStationID && endStationID && selectDate) {
       const params = {
         startStation: startStationID,
         endStation: endStationID,
-        date: endDate,
+        date: selectDate,
       };
       router.push({
         pathname: '/train/orders',
         query: params,
       });
     } else {
-      console.log('Чиглэлээ сонгон уу');
+      message.warning('Та явах чиглэл, өдөрөө сонгоно уу?');
     }
   };
 
@@ -80,6 +91,10 @@ export default function SearchInput({ stationData }) {
             notFoundContent={t('warningResult')}
             placeholder={t('startCity')}
             onSelect={SelectStartStation}
+            filterOption={(input, option) =>
+              option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+            defaultValue={startStationName}
           >
             {stationData?.map(station => (
               <Option key={station.stations_id} value={station.stations_name}>
@@ -105,6 +120,10 @@ export default function SearchInput({ stationData }) {
             notFoundContent={t('warningResult')}
             placeholder={t('endCity')}
             onSelect={SelectEndStation}
+            filterOption={(input, option) =>
+              option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+            defaultValue={endStationName}
           >
             {stationData?.map(station => (
               <Option key={station.stations_id} value={station.stations_name}>
@@ -130,6 +149,7 @@ export default function SearchInput({ stationData }) {
             locale={locale}
             disabledDate={disabledDate}
             onChange={SelectDate}
+            defaultValue={moment(selectDate, dFormat)}
           />
           <button className={style.searchButton} onClick={searchTrain}>
             {t('searchButton')}

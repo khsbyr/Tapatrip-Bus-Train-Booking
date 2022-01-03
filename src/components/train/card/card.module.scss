@@ -1,38 +1,74 @@
 .card {
-  @apply relative bg-white w-full h-auto rounded-2xl py-5 sm:py-10;
-  .leaveTitle {
-    @apply pt-4 font-bold text-cardDescColor text-xs md:text-sm lg:text-base;
-  }
-  .startTitle {
-    @apply text-cardDate font-bold text-sm md:text-lg lg:text-xl;
-  }
-  .timeText {
-    @apply font-light text-cardDate text-xs md:text-sm lg:text-lg;
-  }
-  .priceText {
-    @apply text-cardDate font-bold text-sm md:text-lg lg:text-2xl;
-  }
-  .rowDirection {
-    @apply px-5 md:px-12 pt-5 grid grid-cols-2 lg:grid-cols-3 items-center text-center;
-  }
-  .orderButton {
-    @apply bg-button text-white md:font-bold md:py-1 px-4 rounded-lg h-8 md:h-10 text-center w-full lg:w-40 hover:bg-hover focus:bg-down;
-  }
+  @apply relative bg-white w-full h-auto rounded-lg py-5 sm:py-5;
+
   .rightRound {
     @apply border-4 w-4 h-7 sm:w-6 sm:h-10 border-r-0 rounded-tl-full rounded-bl-full absolute right-0 bg-bg border-bg;
   }
   .leftRound {
     @apply border-4 w-4 h-7 sm:w-6 sm:h-10 border-l-0 rounded-tr-full rounded-br-full absolute left-0 bg-bg border-bg;
   }
+
+  .border {
+    @apply w-full h-0.5 border border-gray-300 border-dashed;
+  }
+
+  .ticket {
+    @apply h-auto w-full  rounded-md cursor-pointer px-4 py-2;
+  }
+
+  .orderButton {
+    @apply px-14 py-3 text-white font-medium rounded-lg;
+  }
+
+  .headerSection {
+    @apply flex justify-between items-center flex-wrap space-y-3 xs:space-y-0 px-8;
+  }
+
+  .trainName {
+    @apply font-bold text-trainTicket text-medium md:text-base;
+  }
+
+  .trainNo {
+    @apply font-bold text-small2x md:text-xs text-gray-400;
+  }
+
+  .marshrut {
+    @apply px-3 py-2 bg-bg font-semibold rounded-lg text-small2x cursor-pointer text-trainTicket;
+  }
+
+  .middleSection {
+    @apply px-8 md:flex md:justify-between;
+  }
+
   .line {
-    @apply hidden lg:block bg-bg w-full h-0.5 absolute;
+    @apply w-11/12 bg-bg h-px mx-auto my-3;
   }
 
-  .line1 {
-    @apply hidden md:block lg:hidden bg-bg w-full h-0.5 absolute;
+  .depDate {
+    @apply text-small2x md:text-xs text-gray-400 font-semibold;
   }
 
-  .line2 {
-    @apply md:hidden bg-bg w-full h-0.5 absolute;
+  .depTime {
+    @apply font-semibold text-trainTicket text-xs md:text-sm;
+  }
+
+  .arrDate {
+    @apply text-right text-small2x md:text-xs text-gray-400 font-semibold;
+  }
+
+  .distance {
+    @apply text-small2x md:text-xs text-gray-400 font-semibold text-center mt-3 md:mt-0;
+  }
+
+  .distanceLine {
+    @apply w-full bg-gray-300 h-0.5 mx-auto my-2;
+  }
+
+  .distanceTime {
+    @apply text-small2x md:text-xs text-gray-400 font-semibold text-center;
+  }
+
+  .footerSection {
+    @apply px-8 py-3 space-y-3 md:flex md:space-x-3 md:space-y-0;
   }
 }

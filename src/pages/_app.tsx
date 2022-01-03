@@ -5,6 +5,7 @@ import { client } from '@lib/apollo';
 import { ManagedGlobalContext } from '@context/globalStore';
 import { appWithTranslation } from 'next-i18next';
 import { ManagedUIContext } from '@context/uiContext';
+import { ManagedTrainContext } from '@context/trainContext';
 
 import 'antd/dist/antd.css';
 import '@assets/chrome-bug.scss';
@@ -15,7 +16,9 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
     <ApolloProvider client={client}>
       <ManagedUIContext>
         <ManagedGlobalContext>
-          <Component {...pageProps} />
+          <ManagedTrainContext>
+            <Component {...pageProps} />
+          </ManagedTrainContext>
         </ManagedGlobalContext>
       </ManagedUIContext>
     </ApolloProvider>
