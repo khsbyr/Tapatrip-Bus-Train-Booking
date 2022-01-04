@@ -1,28 +1,27 @@
+import { useUI } from '@context/uiContext';
+import { unixDate } from '@helpers/array-format';
 import {
   ArrowRightIcon,
   ChevronDownIcon,
   ChevronUpIcon,
   UserIcon,
 } from '@heroicons/react/solid';
-import React, { useState } from 'react';
 import { Steps } from 'antd';
-import style from './card.module.scss';
-import Link from 'next/link';
-import { unixDate } from '@helpers/array-format';
 import moment from 'moment';
-import CurrencyFormat from 'react-currency-format';
 import { useTranslation } from 'next-i18next';
-import { useUI } from '@context/uiContext';
+import Link from 'next/link';
+import React from 'react';
+import CurrencyFormat from 'react-currency-format';
+import style from './card.module.scss';
 
 const { Step } = Steps;
 
 export default function Card({ datas }) {
   const {
-    openDirection,
-    closeDirection,
-    displayDirection,
     displayLoading,
     setDisplayLoading,
+    setDirectionLoading,
+    directionLoading,
   } = useUI();
   const { t } = useTranslation(['order']);
   const unixDates = unixDate(datas?.node);
@@ -143,11 +142,13 @@ export default function Card({ datas }) {
                 <button
                   className="text-direction font-medium flex text-xs md:text-base"
                   onClick={() =>
-                    displayDirection ? closeDirection() : openDirection()
+                    directionLoading === datas?.node?.id + 'loading'
+                      ? setDirectionLoading([])
+                      : setDirectionLoading(datas?.node?.id + 'loading')
                   }
                 >
                   {t('directionInformation')}
-                  {displayDirection ? (
+                  {directionLoading !== datas?.node?.id + 'loading' ? (
                     <ChevronDownIcon className="md:w-6 md:h-6 w-4 h-4" />
                   ) : (
                     <ChevronUpIcon className="md:w-6 md:h-6 w-4 h-4" />
@@ -172,7 +173,13 @@ export default function Card({ datas }) {
               </div>
             </div>
           </div>
-          <div className={`${displayDirection ? 'hidden' : 'block'}`}>
+          <div
+            className={`${
+              directionLoading !== datas?.node?.id + 'loading'
+                ? 'hidden'
+                : 'block'
+            }`}
+          >
             <div className="border border-dashed "></div>
             <div className="px-5 lg:px-20 py-5 grid sm:grid-cols-2">
               <Steps progressDot direction="vertical" className="col-span-1">
