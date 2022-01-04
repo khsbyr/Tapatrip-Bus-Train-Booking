@@ -7,6 +7,7 @@ export interface State {
   displayDirection: boolean;
   displayBlock: boolean;
   displayLoading: string;
+  directionLoading: string;
   displayLoadingSearch: boolean;
   displayLoadingLogin: boolean;
   displayLoadingConfirm: boolean;
@@ -22,6 +23,7 @@ const initialState = {
   displayDirection: true,
   displayBlock: false,
   displayLoading: '',
+  directionLoading: '',
   displayLoadingSearch: false,
   displayLoadingLogin: false,
   displayLoadingConfirm: false,
@@ -103,6 +105,14 @@ function uiReducer(state: State, action) {
         displayLoading: action.value,
       };
     }
+
+    case 'SET_DIRECTION_LOADING': {
+      return {
+        ...state,
+        directionLoading: action.value,
+      };
+    }
+
     case 'OPEN_LOADING_SEARCH': {
       return {
         ...state,
@@ -193,6 +203,10 @@ export const UIProvider = props => {
     (value: any) => dispatch({ type: 'SET_DISPLAY_LOADING', value }),
     [dispatch]
   );
+  const setDirectionLoading = useCallback(
+    (value: any) => dispatch({ type: 'SET_DIRECTION_LOADING', value }),
+    [dispatch]
+  );
   const openLoadingSearch = () => dispatch({ type: 'OPEN_LOADING_SEARCH' });
   const closeLoadingSearch = () => dispatch({ type: 'CLOSE_LOADING_SEARCH' });
   const openLoadingLogin = () => dispatch({ type: 'OPEN_LOADING_LOGIN' });
@@ -234,6 +248,7 @@ export const UIProvider = props => {
       closeLoadingModal,
       openLoadingRegister,
       closeLoadingRegister,
+      setDirectionLoading,
     }),
     [state]
   );
