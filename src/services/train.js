@@ -40,6 +40,16 @@ const TrainService = {
     };
     return datas;
   },
+
+  async getMestData(params) {
+    const response = await Client.post(`/train/get_mests/`, params);
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    return datas;
+  },
 };
 
 export default TrainService;

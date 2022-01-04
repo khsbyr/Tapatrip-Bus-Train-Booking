@@ -5,6 +5,8 @@ export interface State {
   endStationID: string;
   startStationName: string;
   endStationName: string;
+  selectedSeats: any;
+  isSelectedSeats: any;
 }
 
 const initialState = {
@@ -12,6 +14,8 @@ const initialState = {
   endStationID: '',
   startStationName: '',
   endStationName: '',
+  selectedSeats: '',
+  isSelectedSeats: '',
 };
 
 type Action =
@@ -30,6 +34,14 @@ type Action =
   | {
       type: 'SET_END_STATION_NAME';
       value: string;
+    }
+  | {
+      type: 'SET_SELECTED_SEATS';
+      value: any;
+    }
+  | {
+      type: 'SET_IS_SELECTED_SEATS';
+      value: any;
     };
 
 export const GlobalContext = React.createContext<State | any>(initialState);
@@ -64,6 +76,20 @@ function uiReducer(state: State, action: Action) {
         endStationName: action.value,
       };
     }
+
+    case 'SET_SELECTED_SEATS': {
+      return {
+        ...state,
+        selectedSeats: action.value,
+      };
+    }
+
+    case 'SET_IS_SELECTED_SEATS': {
+      return {
+        ...state,
+        isSelectedSeats: action.value,
+      };
+    }
   }
 }
 
@@ -90,6 +116,16 @@ export const GlobalProvider: FC = props => {
     [dispatch]
   );
 
+  const setSelectedSeats = useCallback(
+    (value: any) => dispatch({ type: 'SET_SELECTED_SEATS', value }),
+    [dispatch]
+  );
+
+  const setIsSelectedSeats = useCallback(
+    (value: any) => dispatch({ type: 'SET_IS_SELECTED_SEATS', value }),
+    [dispatch]
+  );
+
   const value = useMemo(
     () => ({
       ...state,
@@ -97,6 +133,8 @@ export const GlobalProvider: FC = props => {
       setEndStationID,
       setStartStationName,
       setEndStationName,
+      setSelectedSeats,
+      setIsSelectedSeats,
     }),
     [state]
   );

@@ -3,10 +3,15 @@ import React, { useEffect, useState } from 'react';
 import style from './selectSeats.module.scss';
 import { useRouter } from 'next/router';
 import TrainService from '@services/train';
+import ClassPublic from './classPublic';
+import { ClassPublicFormat } from '@helpers/train-array-format';
 
 export default function SelectSeats({}) {
   const { current, setCurrent } = useGlobalStore();
   const [wagonData, setWagonData] = useState([]);
+  const [mestData, setMestDate] = useState([]);
+  const [wagonId, setWagonId] = useState();
+  const [wagonName, setWagonName] = useState('');
   const router = useRouter();
   const { voyageId, startStop, endStop, priceType } = router.query;
 
@@ -31,48 +36,116 @@ export default function SelectSeats({}) {
     getTrainStations();
   }, []);
 
-  console.log(wagonData);
-
-  const next = () => {
-    setCurrent(current + 1);
-    // else {
-    //   Modal.warning({
-    //     title: t('selectSeatWarning'),
-    //     content: t('selectSeatWarningContent'),
-    //   });
-    // }
+  const getMest = async wagon => {
+    setWagonName(wagon.NAME);
+    setWagonId(wagon.WAGON);
+    let params = {
+      uid: 1,
+      order_id: 0,
+      wagon_id: wagon.WAGON,
+      start_stop: startStop,
+      end_stop: endStop,
+      mest_no: 0,
+    };
+    try {
+      const res = await TrainService.getMestData(params);
+      if (res && res.status === 200) {
+        setMestDate(res.result);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
-    <div className={style.body}>
-      <div className={style.root}>
-        <h1 className="font-semibold text-base">СУУДАЛ СОНГОХ</h1>
-        <div className="h-0.5 w-full bg-bg" />
+    <div className="max-w-7xl mx-auto py-5 flex gap-2">
+      <div className="bg-white h-auto w-3/12 rounded-lg p-4 space-y-3">
+        <h1 className="font-bold text-base text-trainTicket">
+          1. Вагон сонгох
+        </h1>
 
-        <div className="flex">
-          <div className="w-2/5">
-            <h1>Галт тэрэгний мэдээлэл</h1>
-          </div>
+        <div className="flex items-center gap-4 cursor-pointer p-2">
+          <img src="/assets/trainImages/train.svg" className="h-8" />
+          <h1 className="font-semibold text-base text-trainTicket">
+            Толгой вагон
+          </h1>
+        </div>
 
-          <div className="w-3/5 flex justify-around">
-            <div className="space-y-2">
-              <img src="/assets/trainImages/Tolgoi.png" className="" />
-              {wagonData?.map(wagon => (
-                <div className="flex">
-                  <h1 className="">{wagon.NAME}</h1>
-                  <img src="/assets/trainImages/train.png" className="" />
-                </div>
-              ))}
-            </div>
+        {wagonData?.map(wagon => (
+          <div
+            className={`flex items-center gap-4 p-2 rounded-lg   
+            ${
+              wagon.FREEMEST !== 0
+                ? 'cursor-pointer hover:opacity-80'
+                : 'cursor-not-allowed opacity-30'
+            }
+              ${
+                wagon.WAGON === wagonId
+                  ? 'bg-white border-red-500 border-2'
+                  : 'bg-bg border'
+              }
+            `}
+            key={wagon.WAGON}
+            onClick={() => getMest(wagon)}
+          >
+            <img
+              src={`${
+                wagon.WAGON === wagonId
+                  ? '/assets/trainImages/wagonRed.svg'
+                  : '/assets/trainImages/wagon.svg'
+              }
+              `}
+              className="h-14"
+            />
 
             <div>
-              <img src="/assets/trainImages/trainskech.png" />
+              <h1
+                className={`font-semibold text-base ${
+                  wagon.WAGON === wagonId ? 'text-red-500' : 'text-trainTicket'
+                }`}
+              >
+                {wagon.NAME}-р вагон
+              </h1>
+
+              <h1 className="text-sm text-trainTicket">
+                {wagon.FREEMEST !== 0
+                  ? `${wagon.FREEMEST} сул суудал`
+                  : 'Дүүрсэн'}
+              </h1>
             </div>
           </div>
+        ))}
+      </div>
+
+      <div className="bg-white h-auto w-5/12 rounded-lg p-4">
+        <h1 className="font-bold text-base text-trainTicket">
+          2. Суудал сонгох
+        </h1>
+
+        <div className="border border-gray-200 text-center w-2/3 rounded-md py-4 cursor-pointer ml-auto mr-0">
+          Бие засах өрөө
+        </div>
+
+        <div className="border border-gray-200 text-center w-2/3 rounded-md py-4 my-3 cursor-pointer ml-auto mr-0 ">
+          Кондукторын өрөө
+        </div>
+
+        {priceType === '5' ? (
+          <ClassPublic
+            data={ClassPublicFormat(mestData)}
+            voyageId={voyageId}
+            wagonName={wagonName}
+          />
+        ) : (
+          ''
+        )}
+
+        <div className="border border-gray-200 text-center w-2/3 rounded-md py-4 my-3 cursor-pointer ml-auto mr-0 ">
+          Бие засах өрөө
         </div>
       </div>
 
-      <div className="bg-white w-2/5 h-48"></div>
+      <div className="bg-white h-32 w-4/12 rounded-lg"></div>
     </div>
   );
 }
