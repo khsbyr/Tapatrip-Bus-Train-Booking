@@ -1,15 +1,18 @@
 import SeatNav from '@components/bus/seatNavbar';
-import NavData from '@data/navData.json';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Steps } from 'antd';
 import ContentWrapper from './style';
 import { useGlobalStore } from '@context/globalStore';
 import SelectSeats from '@components/train/selectSeat';
+import React, { useEffect } from 'react';
+import { useTrainContext } from '@context/trainContext';
 
 const { Step } = Steps;
 
 export default function Order() {
   const { current, setCurrent } = useGlobalStore();
+  const { setLoadingOrder } = useTrainContext();
+
   const steps = [
     {
       title: 'Select Seat',
@@ -18,7 +21,7 @@ export default function Order() {
     },
     {
       title: 'Passenger Information',
-      content: '',
+      content: 'hi',
       button: 'Passenger Button',
     },
     {
@@ -27,6 +30,10 @@ export default function Order() {
       button: 'Payment Button',
     },
   ];
+
+  useEffect(() => {
+    setLoadingOrder(false);
+  }, []);
 
   const onChange = currentStep => {
     if (current === 1 && currentStep === 0) setCurrent(0);

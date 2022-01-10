@@ -32,11 +32,36 @@ export function ClassPublicFormat(data) {
   return arr;
 }
 
-export function arrayFilterSeat(data: any, value: String) {
+export function ClassPrivateFormat(data) {
+  const arr = [];
+  const n = data?.length;
+  let i1, k1;
+  for (let i = 0, k = 0; i < n / 4; i++) {
+    const row = [];
+    for (let j = 0; j < 4; k++, j++) {
+      row[j] = data[k];
+    }
+    arr[i] = row;
+    i1 = i;
+    k1 = k;
+  }
+  return arr;
+}
+
+export function arrayFilterSeat(
+  data: any,
+  value: String,
+  wagonName: any,
+  voyageId: any
+) {
   let result =
     data &&
     data.filter(function (currentElement) {
-      return currentElement.seatNumber === value;
+      return (
+        currentElement.seatNumber === value &&
+        currentElement.wagonName === wagonName &&
+        currentElement.voyageId === voyageId
+      );
     });
   return result;
 }

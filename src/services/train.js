@@ -50,6 +50,27 @@ const TrainService = {
     };
     return datas;
   },
+
+  async getVoyageStations(params) {
+    const response = await Client.post(`/train/get_voyage_stations/`, params);
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    return datas;
+  },
+
+  async setMestState(params) {
+    const response = await Client.post(`/train/set_mest_state/`, params);
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+      order_id: response.data.result.order_id,
+    };
+    return datas;
+  },
 };
 
 export default TrainService;

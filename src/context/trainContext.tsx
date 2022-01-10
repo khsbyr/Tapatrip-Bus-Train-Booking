@@ -7,6 +7,10 @@ export interface State {
   endStationName: string;
   selectedSeats: any;
   isSelectedSeats: any;
+  selectedVoyageData: any;
+  loading: boolean;
+  loadingOrder: any;
+  orderId: any;
 }
 
 const initialState = {
@@ -16,6 +20,10 @@ const initialState = {
   endStationName: '',
   selectedSeats: '',
   isSelectedSeats: '',
+  selectedVoyageData: '',
+  loading: false,
+  loadingOrder: '',
+  orderId: undefined,
 };
 
 type Action =
@@ -41,6 +49,22 @@ type Action =
     }
   | {
       type: 'SET_IS_SELECTED_SEATS';
+      value: any;
+    }
+  | {
+      type: 'SET_SELECTED_VOYAGE_DATA';
+      value: any;
+    }
+  | {
+      type: 'SET_LOADING';
+      value: boolean;
+    }
+  | {
+      type: 'SET_LOADING_ORDER';
+      value: any;
+    }
+  | {
+      type: 'SET_ORDER_ID';
       value: any;
     };
 
@@ -90,6 +114,34 @@ function uiReducer(state: State, action: Action) {
         isSelectedSeats: action.value,
       };
     }
+
+    case 'SET_SELECTED_VOYAGE_DATA': {
+      return {
+        ...state,
+        selectedVoyageData: action.value,
+      };
+    }
+
+    case 'SET_LOADING': {
+      return {
+        ...state,
+        loading: action.value,
+      };
+    }
+
+    case 'SET_LOADING_ORDER': {
+      return {
+        ...state,
+        loadingOrder: action.value,
+      };
+    }
+
+    case 'SET_ORDER_ID': {
+      return {
+        ...state,
+        orderId: action.value,
+      };
+    }
   }
 }
 
@@ -126,6 +178,26 @@ export const GlobalProvider: FC = props => {
     [dispatch]
   );
 
+  const setSelectedVoyageData = useCallback(
+    (value: any) => dispatch({ type: 'SET_SELECTED_VOYAGE_DATA', value }),
+    [dispatch]
+  );
+
+  const setLoading = useCallback(
+    (value: any) => dispatch({ type: 'SET_LOADING', value }),
+    [dispatch]
+  );
+
+  const setLoadingOrder = useCallback(
+    (value: any) => dispatch({ type: 'SET_LOADING_ORDER', value }),
+    [dispatch]
+  );
+
+  const setOrderId = useCallback(
+    (value: any) => dispatch({ type: 'SET_ORDER_ID', value }),
+    [dispatch]
+  );
+
   const value = useMemo(
     () => ({
       ...state,
@@ -135,6 +207,10 @@ export const GlobalProvider: FC = props => {
       setEndStationName,
       setSelectedSeats,
       setIsSelectedSeats,
+      setSelectedVoyageData,
+      setLoading,
+      setLoadingOrder,
+      setOrderId,
     }),
     [state]
   );

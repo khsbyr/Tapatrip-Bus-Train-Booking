@@ -1,3 +1,4 @@
+import LoadingRing from '@components/common/loadingRing';
 import { useTrainContext } from '@context/trainContext';
 import { availableDatesFormat } from '@helpers/train-array-format';
 import TrainService from '@services/train';
@@ -20,6 +21,7 @@ export default function SearchInput({ stationData }) {
   const { endStationID, setEndStationID } = useTrainContext();
   const { startStationName, setStartStationName } = useTrainContext();
   const { endStationName, setEndStationName } = useTrainContext();
+  const { loading, setLoading } = useTrainContext();
   const [availableDates, setAvailableDates] = useState([]);
   const dateFormat = availableDatesFormat(availableDates);
   const date = dateFormat.map(z => z.date);
@@ -66,8 +68,9 @@ export default function SearchInput({ stationData }) {
     );
   };
 
-  const searchTrain = () => {
+  const searchTrain = async () => {
     if (startStationID && endStationID && selectDate) {
+      setLoading(true);
       const params = {
         startStation: startStationID,
         endStation: endStationID,
@@ -152,7 +155,7 @@ export default function SearchInput({ stationData }) {
             defaultValue={moment(selectDate, dFormat)}
           />
           <button className={style.searchButton} onClick={searchTrain}>
-            {t('searchButton')}
+            {loading ? <LoadingRing /> : t('searchButton')}
           </button>
         </div>
 

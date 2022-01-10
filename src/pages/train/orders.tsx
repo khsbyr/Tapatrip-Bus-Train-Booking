@@ -9,14 +9,19 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import TrainService from '@services/train';
+import { useTrainContext } from '@context/trainContext';
+import Loader from '@components/common/loader';
 
 export default function Orders() {
   const { t } = useTranslation(['order']);
   const [voyageData, setVoyageData] = useState([]);
   const router = useRouter();
   const { startStation, endStation, date } = router.query;
+  const { setLoading } = useTrainContext();
+  const [isLoad, setIsLoad] = useState(true);
 
   useEffect(() => {
+    setLoading(false);
     async function getTrainStations() {
       let params = {
         fromStation: startStation,
@@ -28,13 +33,17 @@ export default function Orders() {
         const res = await TrainService.getVoyageData(params);
         if (res && res.status === 200) {
           setVoyageData(res.result);
+          setLoading(false);
+          setIsLoad(false);
         }
       } catch (err) {
         console.log(err);
+        setLoading(false);
+        setIsLoad(false);
       }
     }
     getTrainStations();
-  }, []);
+  }, [startStation, endStation, date]);
 
   return (
     <Layout>
@@ -50,7 +59,9 @@ export default function Orders() {
                 </p>
               </div>
             </div>
-            {voyageData.length > 0 ? (
+            {isLoad ? (
+              <Loader />
+            ) : voyageData.length > 0 ? (
               voyageData?.map(voyage => <Card voyage={voyage} />)
             ) : (
               <Result

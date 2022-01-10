@@ -1,13 +1,13 @@
 import { useTrainContext } from '@context/trainContext';
 import { arrayFilterSeat } from '@helpers/train-array-format';
 import TrainService from '@services/train';
-import React, { useState } from 'react';
-import style from './classPublic.module.scss';
+import React from 'react';
+import s from './classPrivate.module.scss';
 
 const seats = [];
 const isSelected = [];
 
-const classPublic = ({
+const classPrivate = ({
   data,
   voyageId,
   wagonName,
@@ -39,6 +39,7 @@ const classPublic = ({
       isSelected[voyageId + wagonName + e.target.value] = true;
       setSelectedSeats(seats);
       setIsSelectedSeats(isSelected);
+
       let params = {
         mest_id: e.target.value,
         wagon_id: wagonId,
@@ -63,8 +64,9 @@ const classPublic = ({
         selectedSeats.splice(index, 1);
         isSelected[voyageId + wagonName + e.target.value] = false;
         setSelectedSeats(selectedSeats);
-        setIsSelectedSeats(isSelected);
+        setIsSelectedSeats(isSelectedSeats);
       }
+
       let params = {
         mest_id: e.target.value,
         wagon_id: wagonId,
@@ -85,58 +87,38 @@ const classPublic = ({
   return (
     <>
       {data?.map((mests, index) => (
-        <div className="flex gap-x-5 lg:gap-x-14" key={index}>
-          <div className={style.plat3}>
-            {mests?.map((mest, index) =>
-              index < 9 && index > 5 ? (
-                <button
-                  className={`${style.button} ${
-                    mest.MEST_STATE !== '0'
-                      ? 'opacity-30 cursor-not-allowed'
-                      : 'opacity-100 hover:opacity-80'
-                  }
-                   ${
-                     isSelectedSeats[voyageId + wagonName + mest.MEST_NO]
-                       ? 'bg-white border-2 border-red-500 text-red-500'
-                       : 'bg-bg border-2 text-trainTicket'
-                   }
-                  `}
-                  key={index}
-                  disabled={mest.MEST_STATE !== '0' ? true : false}
-                  onClick={selectSeat}
-                  value={mest.MEST_NO}
-                >
-                  {mest.MEST_NO}
-                </button>
-              ) : (
-                ''
-              )
-            )}
+        <div className="flex gap-x-0" key={index}>
+          <div className={s.plat3}>
+            <div className="border-l-4 border-gray-200" />
+            <div className="border-l-4 border-gray-400" />
+            <div className="border-l-4 border-gray-200" />
           </div>
 
           <div className="w-full text-center">
-            <div className={style.plat1}>
+            <div className={s.plat1}>
               {mests?.map((mest, index) =>
-                index < 3 ? (
+                index < 2 ? (
                   <button
-                    className={`${style.button} 
-                    ${
-                      mest.MEST_STATE !== '0'
-                        ? 'opacity-30 cursor-not-allowed'
-                        : 'opacity-100 hover:opacity-80'
-                    }     
-                         ${
-                           isSelectedSeats[voyageId + wagonName + mest.MEST_NO]
-                             ? 'bg-white border-2 border-red-500 text-red-500'
-                             : 'bg-bg border-2 text-trainTicket'
-                         }              
-                        `}
+                    className={`${s.button} 
+                        ${
+                          mest.MEST_STATE !== '0'
+                            ? 'opacity-30 cursor-not-allowed'
+                            : 'opacity-100 hover:opacity-80'
+                        }     
+                        ${
+                          isSelectedSeats[voyageId + wagonName + mest.MEST_NO]
+                            ? 'bg-white border-2 border-red-500 text-red-500'
+                            : 'bg-bg border-2 text-trainTicket'
+                        }   
+                        ${mest.MEST_NO % 2 === 0 ? 'shadow-lg' : ''}           
+                    `}
                     key={index}
                     disabled={mest.MEST_STATE !== '0' ? true : false}
                     onClick={selectSeat}
                     value={mest.MEST_NO}
                   >
-                    {mest.MEST_NO}
+                    {mest.MEST_NO}{' '}
+                    {mest.MEST_NO % 2 === 0 ? '(Дээр)' : '(Доор)'}
                   </button>
                 ) : (
                   ''
@@ -144,31 +126,34 @@ const classPublic = ({
               )}
             </div>
 
-            <div className={style.tableMain}>
-              <div className={style.table}></div>
+            <div className={s.tableMain}>
+              <div className={s.table}></div>
             </div>
 
-            <div className={style.plat2}>
+            <div className={s.plat2}>
               {mests?.map((mest, index) =>
-                index < 6 && index > 2 ? (
+                index > 1 && index < 4 ? (
                   <button
-                    className={`${style.button} ${
-                      mest.MEST_STATE !== '0'
-                        ? 'opacity-30 cursor-not-allowed'
-                        : 'opacity-100 hover:opacity-80'
-                    }
+                    className={`${s.button} 
+                        ${
+                          mest.MEST_STATE !== '0'
+                            ? 'opacity-30 cursor-not-allowed'
+                            : 'opacity-100 hover:opacity-80'
+                        }
                          ${
                            isSelectedSeats[voyageId + wagonName + mest.MEST_NO]
                              ? 'bg-white border-2 border-red-500 text-red-500'
                              : 'bg-bg border-2 text-trainTicket'
                          }
+                         ${mest.MEST_NO % 2 === 0 ? 'shadow-lg' : ''}     
                     `}
                     key={index}
                     disabled={mest.MEST_STATE !== '0' ? true : false}
                     onClick={selectSeat}
                     value={mest.MEST_NO}
                   >
-                    {mest.MEST_NO}
+                    {mest.MEST_NO}{' '}
+                    {mest.MEST_NO % 2 === 0 ? '(Дээр)' : '(Доор)'}
                   </button>
                 ) : (
                   ''
@@ -182,4 +167,4 @@ const classPublic = ({
   );
 };
 
-export default classPublic;
+export default classPrivate;

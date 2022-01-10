@@ -1,31 +1,21 @@
-import { useTranslation } from 'next-i18next';
+import Loader from '@components/common/loader';
+import LoadingRing from '@components/common/loadingRing';
+import { useTrainContext } from '@context/trainContext';
+import TrainService from '@services/train';
+import { Modal } from 'antd';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import CurrencyFormat from 'react-currency-format';
 import style from './card.module.scss';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 export default function Card({ voyage }) {
-  const { t } = useTranslation(['order']);
+  const { setSelectedVoyageData } = useTrainContext();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [voyageStations, setVoyageStations] = useState([]);
+  const { loadingOrder, setLoadingOrder } = useTrainContext();
   const [SelectedTicket, setSelectedTicket] = useState([]);
   const router = useRouter();
-
-  const arrTime = voyage.ARR_TIME.split(':');
-  const arrSeconds = arrTime[0] * 60 + parseInt(arrTime[1]);
-
-  const depTime = voyage.DEP_TIME.split(':');
-  const depSeconds = depTime[0] * 60 + parseInt(depTime[1]);
-
-  const time = arrSeconds - depSeconds;
-
-  const format = n =>
-    `0${(n / 60) ^ 0}`.slice(-2) +
-    ' ' +
-    t('orderHours') +
-    ' ' +
-    ('0' + (n % 60)).slice(-2) +
-    ' ' +
-    t('orderMinutes');
+  const [loadingMarshrut, setLoadingMarshrut] = useState(false);
 
   const selectTicket = (voyage, wagon) => {
     if (
@@ -45,9 +35,8 @@ export default function Card({ voyage }) {
     }
   };
 
-  console.log(SelectedTicket);
-
   const order = () => {
+    setLoadingOrder(SelectedTicket[0]?.voyage_id);
     let params = {
       voyageId: SelectedTicket[0]?.voyage_id,
       startStop: SelectedTicket[0]?.start_stop,
@@ -58,6 +47,33 @@ export default function Card({ voyage }) {
       pathname: `/train/orders/${SelectedTicket[0]?.voyage_id}`,
       query: params,
     });
+    setSelectedVoyageData(voyage);
+  };
+
+  const showModal = async () => {
+    setLoadingMarshrut(true);
+    setIsModalVisible(true);
+    let params = {
+      voyage_id: voyage.VOYAGE_ID,
+    };
+    try {
+      const res = await TrainService.getVoyageStations(params);
+      if (res && res.status === 200) {
+        setVoyageStations(res.result);
+        setLoadingMarshrut(false);
+      }
+    } catch (err) {
+      console.log(err);
+      setLoadingMarshrut(false);
+    }
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -73,9 +89,45 @@ export default function Card({ voyage }) {
               </h1>
             </div>
           </div>
-          <div className="pt-3 md:pt-0">
+          <div className="pt-3 md:pt-0" onClick={showModal}>
             <h1 className={style.marshrut}>Аяллын маршрут</h1>
           </div>
+          <Modal
+            title={`${voyage.TRAIN_NO} ${voyage.TRAIN_NAME_MN} аялалын маршрут`}
+            visible={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            width={700}
+            bodyStyle={{ height: '600px', overflow: 'auto' }}
+            okButtonProps={{ style: { display: 'none' } }}
+            cancelText="Хаах"
+          >
+            {loadingMarshrut ? (
+              <Loader />
+            ) : (
+              <table className={style.styledTable}>
+                <thead>
+                  <tr>
+                    <th className="w-8 md:w-14">№</th>
+                    <th>Өртөөний нэр</th>
+                    <th>Хүрэх цаг</th>
+                    <th>Хөдлөх цаг</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {voyageStations &&
+                    voyageStations?.map((station, index) => (
+                      <tr>
+                        <td>{++index}</td>
+                        <td>{station.stop_name}</td>
+                        <td>{station.arr_time}</td>
+                        <td>{station.dep_time}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            )}
+          </Modal>
         </div>
 
         <div className={style.line} />
@@ -102,7 +154,6 @@ export default function Card({ voyage }) {
               Нийт туулах зам - {voyage.DISTANCE_KM}км
             </p>
             <div className={style.distanceLine} />
-            {/* <p className={style.distanceTime}>{format(time)}</p> */}
           </div>
 
           <div className="hidden md:block">
@@ -126,9 +177,16 @@ export default function Card({ voyage }) {
                 SelectedTicket[0]?.voyage_id + SelectedTicket[0]?.price_type ===
                 voyage.VOYAGE_ID + wagon.TARIF_TYPE
                   ? 'bg-button'
-                  : 'bg-bg'
-              } `}
-              onClick={() => selectTicket(voyage, wagon)}
+                  : 'bg-bg hover:opacity-80'
+              }           
+              ${
+                wagon.FREEMEST === 0
+                  ? 'opacity-30 hover:opacity-30 cursor-not-allowed'
+                  : 'opacity-100 cursor-pointer'
+              }`}
+              onClick={() =>
+                wagon.FREEMEST !== 0 ? selectTicket(voyage, wagon) : ''
+              }
             >
               <div className="flex items-center space-x-2">
                 <p
@@ -216,7 +274,7 @@ export default function Card({ voyage }) {
             onClick={order}
             disabled={SelectedTicket.length > 0 ? false : true}
           >
-            Захиалах
+            {loadingOrder === voyage.VOYAGE_ID ? <LoadingRing /> : 'Захиалах'}
           </button>
         </div>
       </div>

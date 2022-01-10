@@ -13,11 +13,11 @@
   }
 
   .ticket {
-    @apply h-auto w-full  rounded-md px-4 py-2;
+    @apply h-auto w-full  rounded-md cursor-pointer px-4 py-2;
   }
 
   .orderButton {
-    @apply px-14 py-3 text-white font-medium rounded-lg w-48 h-12;
+    @apply px-14 py-3 text-white font-medium rounded-lg bg-button;
   }
 
   .headerSection {
@@ -33,7 +33,7 @@
   }
 
   .marshrut {
-    @apply px-3 py-2 bg-bg font-semibold rounded-lg text-small2x cursor-pointer text-trainTicket hover:opacity-80;
+    @apply px-3 py-2 bg-bg font-semibold rounded-lg text-small2x cursor-pointer text-trainTicket;
   }
 
   .middleSection {
@@ -69,37 +69,14 @@
   }
 
   .footerSection {
-    @apply px-8 py-3 space-y-3 md:flex md:space-x-3 md:space-y-0;
+    @apply px-8 py-5;
   }
-}
 
-.styledTable {
-  font-size: 0.9em;
-  font-family: sans-serif;
-  width: 100%;
-}
+  .cardMain {
+    @apply w-full h-16 bg-bg rounded-lg space-y-2 p-2 cursor-default mb-2;
+  }
 
-.styledTable thead tr {
-  color: rgb(95, 95, 95);
-  text-align: left;
-  border-bottom: 1px solid rgb(204, 204, 204);
-}
-
-.styledTable th,
-.styledTable td {
-  padding: 12px 12px;
-  text-align: left;
-  color: rgb(95, 95, 95);
-}
-
-.styledTable tbody tr {
-  border-bottom: 1px solid #ececec;
-}
-
-.styledTable tbody tr:nth-of-type(even) {
-  background-color: rgb(243, 243, 243);
-}
-
-.styledTable tbody tr:last-of-type {
-  border-bottom: 1px solid rgb(204, 204, 204);
+  .cardText {
+    @apply font-semibold text-trainTicket text-xs md:text-sm;
+  }
 }
