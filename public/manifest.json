@@ -1,0 +1,11 @@
+{
+  "name": "bus.tapatrip.com",
+  "short_name": "Online Travel Platform",
+  "theme_color": "#ffffff",
+  "background_color": "#004740",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "splash_pages": null
+}

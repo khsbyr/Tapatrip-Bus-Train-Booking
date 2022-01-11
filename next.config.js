@@ -21,6 +21,14 @@ module.exports = phase => {
     i18n,
     reactStrictMode: true,
     compress: true,
+    env: {
+      BASE_GRAPHQL_HOST: process.env.NEXT_PUBLIC_GRAPHQL_HOST,
+      BASE_MEDIA_URL: process.env.NEXT_PUBLIC_MEDIA_URL,
+      BASE_API_URL: process.env.NEXT_PUBLIC_API_URL,
+      USER_TOKEN_KEY: process.env.NEXT_PUBLIC_USER_TOKEN_KEY,
+      GUEST_TOKEN_KEY: process.env.NEXT_PUBLIC_GUEST_TOKEN_KEY,
+      ANALYTICS_WRITE_KEY: process.env.ANALYTICS_WRITE_KEY,
+    },
     images: {
       deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
       minimumCacheTTL: 60,
