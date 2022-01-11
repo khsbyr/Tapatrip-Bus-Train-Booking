@@ -1,13 +1,18 @@
 {
-  "title": "TAPATRIP - Online Travel Platform",
+  "title": "Tapatrip - Bus Booking System",
   "titleTemplate": "%s - TAPATRIP",
-  "description": "TAPATRIP Online Travel Platform - https://bus.tapatrip.com/",
+  "description": "автобус, билет захиалга, автобусны билет захиалга, автобусны билет захиалга үнэ, автобусны хуваарь үнэ тариф, Bus, Train",
+  "author": {
+    "name": "TapaTrip, LLC.",
+    "websiteUrl": "https://www.bus.tapatrip.com",
+    "address": ""
+  },
   "openGraph": {
-    "title": "TAPATRIP - Online Travel Platform",
-    "description": "TAPATRIP Online Travel Platform - https://bus.tapatrip.com/",
+    "title": "Tapatrip - Bus Booking System",
+    "description": "автобус, билет захиалга, автобусны билет захиалга, автобусны билет захиалга үнэ, автобусны хуваарь үнэ тариф, Bus, Train",
     "type": "website",
-    "locale": "en_IE",
+    "locale": "mn",
     "url": "https://bus.tapatrip.com/",
-    "site_name": "TAPATRIP"
+    "site_name": "TapaTrip, LLC."
   }
 }
