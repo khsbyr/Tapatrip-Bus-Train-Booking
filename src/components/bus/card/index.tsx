@@ -34,6 +34,14 @@ export default function Card({ datas }) {
     ' ' +
     t('orderMinutes');
 
+  const handleOrder = e => {
+    setDisplayLoading(e.target.id + 'loading');
+    global.analytics.track('Bus/Schedule/ChooseSchedule', {
+      id: e.target.id,
+      time: Date.now(),
+    });
+  };
+
   return (
     <div key={datas?.node?.id} className="px-2">
       <div className="max-w-7xl mx-auto">
@@ -158,10 +166,9 @@ export default function Card({ datas }) {
               <div className="col-span-2 mt-5 lg:mt-0 lg:col-span-1">
                 <Link href={`/bus/orders/${datas?.node?.id}`}>
                   <button
+                    id={datas?.node?.id}
                     className={style.orderButton}
-                    onClick={() =>
-                      setDisplayLoading(datas?.node?.id + 'loading')
-                    }
+                    onClick={handleOrder}
                   >
                     {displayLoading === datas?.node?.id + 'loading' ? (
                       <div className={style.ldsDualRing}></div>

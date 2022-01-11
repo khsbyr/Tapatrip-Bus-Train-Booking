@@ -35,6 +35,10 @@ export default function ticketGenerate() {
       }
     }
     if (refNumber) getTicketInfo();
+    global.analytics.track('Bus/Ticket', {
+      refNumber: refNumber,
+      time: Date.now(),
+    });
   }, [refNumber]);
 
   function printDocument() {

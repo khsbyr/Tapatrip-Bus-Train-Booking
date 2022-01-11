@@ -32,6 +32,11 @@ export default function OrderModal(props) {
   const onFinish = async values => {
     openLoadingModal();
     try {
+      global.analytics.track('Bus/Home/Check', {
+        refNumber: values.refNumber,
+        contactPhone: values.phone,
+        time: Date.now(),
+      });
       const { data } = await busBookingCheck({
         variables: {
           refNumber: values.refNumber,
@@ -45,6 +50,10 @@ export default function OrderModal(props) {
       Modal.error({
         title: t('errorOrderTitle'),
         content: t('errorOrderContent'),
+      });
+      global.analytics.track('Bus/Home/CheckError', {
+        error: e.message,
+        time: Date.now(),
       });
       closeLoadingModal();
     }

@@ -144,6 +144,12 @@ export default function PassengerIfo({ datas, scheduleId }) {
       passengers.push(passenger);
     });
     try {
+      global.analytics.track('Bus/Seat/OrderButton', {
+        schedule: scheduleId,
+        contactPhone: customers.phoneNumber,
+        seatCount: passengers.length,
+        time: Date.now(),
+      });
       const { data } = await addBusBooking({
         variables: {
           schedule: scheduleId,
@@ -174,6 +180,10 @@ export default function PassengerIfo({ datas, scheduleId }) {
       Modal.error({
         title: t('errorTitle'),
         content: e.message,
+      });
+      global.analytics.track('Bus/Seat/Error', {
+        error: e.message,
+        time: Date.now(),
       });
       closeLoadingConfirm();
       closeLoadingPassengerInfo();

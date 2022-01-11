@@ -36,6 +36,10 @@ export default function Payment({ datas, scheduleId }) {
 
   const handleCheck = () => {
     setIsModalVisible(true);
+    global.analytics.track('Bus/Seat/FinishButton', {
+      schedule: scheduleId,
+      time: Date.now(),
+    });
   };
 
   const closeModal = () => {
@@ -44,6 +48,10 @@ export default function Payment({ datas, scheduleId }) {
 
   function onFinish() {
     router.push(`/`);
+    global.analytics.track('Bus/Seat/HomePageButton', {
+      schedule: scheduleId,
+      time: Date.now(),
+    });
   }
 
   return (
