@@ -86,6 +86,11 @@ const Login = () => {
       phone: phoneNumber?.toString(),
       dialCode: 976,
     };
+    global.analytics.track('Login Phone Number', {
+      phone: phoneNumber?.toString(),
+      dial_code: 976,
+      time: Date.now(),
+    });
     setUserPhoneNumber(phoneNumber);
     try {
       const res = await AuthService.createUserCheck(payload);

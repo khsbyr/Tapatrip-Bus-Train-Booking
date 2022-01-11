@@ -3,7 +3,7 @@ import { setContext } from '@apollo/client/link/context';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
 
 const httpLink = createHttpLink({
-  uri: process.env.NEXT_PUBLIC_GRAPHQL_HOST,
+  uri: process.env.BASE_GRAPHQL_HOST,
 });
 
 const authLink = setContext((_, { headers }) => {

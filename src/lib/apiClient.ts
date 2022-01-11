@@ -14,7 +14,7 @@ const locale =
     : 'mn';
 
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: process.env.BASE_API_URL,
   headers: {
     'Content-type': 'application/json',
     Authorization: token ? `Bearer ${token}` : '',
