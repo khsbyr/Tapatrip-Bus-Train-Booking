@@ -10,6 +10,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import { useGlobalStore } from '@context/globalStore';
 import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import AuthService from '@services/auth';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import ReactCodeInput from 'react-verification-code-input';
@@ -440,6 +441,23 @@ const Login = () => {
 
   return (
     <div>
+      <NextSeo
+        title={'Нэвтрэх'}
+        description={'Нэвтрэх'}
+        openGraph={{
+          type: 'website',
+          title: 'Нэвтрэх',
+          description: 'Нэвтрэх',
+          images: [
+            {
+              url: 'process.env.BASE_IMAGE_URL + `${product.images[0]?.path}',
+              width: 800,
+              height: 600,
+              alt: 'Нэвтрэх',
+            },
+          ],
+        }}
+      />
       <Head>
         <title>{t('login')}</title>
       </Head>
@@ -447,13 +465,6 @@ const Login = () => {
         <SeatNav />
       </div>
       <div className="flex relative mt-10 lg:mt-20 bg-bg">
-        {/* <div className="absolute">
-          <img
-            src="/assets/loginBackground.jpg"
-            alt=""
-            className="object-cover"
-          />{' '}
-        </div> */}
         <div className="relative z-10 py-36 px-4 max-w-7xl mx-auto ">
           <div className="flex flex-col-reverse lg:flex-row lg:space-x-16 xl:space-x-20">
             <a
