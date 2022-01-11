@@ -7,18 +7,18 @@ export default function Layout({ children }) {
   return (
     <>
       <Head>
-        <title>Tapatrip - Bus Booking System</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta charSet="utf-8" />
+        <meta
+          name="google-site-verification"
+          content="d-1_Ce67ksx6nK8vEgHb8WiuYPZQLTyFUvzy5fFhFA4"
+        />
+        <meta name="robots" content="noindex,nofollow"></meta>
         <meta
           name="description"
-          key="description"
           content="автобус, билет захиалга, автобусны билет захиалга, автобусны билет захиалга үнэ, автобусны хуваарь үнэ тариф, Bus, Train"
         />
-        <meta
-          name="title"
-          key="title"
-          content="Tapatrip - Bus Booking System"
-        />
+        <meta name="title" content="Tapatrip - Bus Booking System" />
         <meta name="category" content="bus, travel, train" />
         <meta name="subject" content="bus" />
         <meta
@@ -27,10 +27,10 @@ export default function Layout({ children }) {
         />
         <meta
           property="og:title"
-          key="og:title"
+          key="ogtitle"
           content="Tapatrip - Bus Booking System"
         />
-        <meta property="og:locale" key="og:locale" content="mn_MN" />
+        <meta property="og:locale" key="oglocale" content="mn_MN" />
         <meta property="og:email" content="crm@tapatrip.com" />
         <meta property="og:phone_number" content="75154444" />
         <meta
@@ -42,15 +42,16 @@ export default function Layout({ children }) {
         <meta property="og:country-name" content="Mongolia" />
         <meta
           property="og:url"
-          key="og:url"
+          key="ogurl"
           content="https://www.bus.tapatrip.com"
         />
-        <meta property="og:type" key="og:type" content="website" />
+        <meta property="og:type" key="ogtype" content="website" />
         <meta
           property="og:description"
-          key="og:description"
+          key="ogdesc"
           content="автобус, билет захиалга, автобусны билет захиалга, автобусны билет захиалга үнэ, автобусны хуваарь үнэ тариф, Bus, Train"
         />
+        <title>Tapatrip - Bus Booking System</title>
       </Head>
       <main className={styles.main}>
         {children}
