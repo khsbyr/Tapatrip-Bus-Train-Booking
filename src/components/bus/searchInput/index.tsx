@@ -138,6 +138,10 @@ export default function SearchInput({ startLocations }) {
         date: selectDate,
         endDate: endScheduleDate,
       };
+      global.analytics.track('Bus/Home/Search', {
+        query: isUlaanbaatar ? ubParams : params,
+        time: Date.now(),
+      });
       router.push({
         pathname: '/bus/orders',
         query: isUlaanbaatar ? ubParams : params,

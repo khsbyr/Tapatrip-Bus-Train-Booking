@@ -36,6 +36,10 @@ export default function SelectSeats({ datas, scheduleId }) {
   const next = () => {
     if (formatSelectedSeats.length > 0) {
       setDisplayLoading(scheduleId + 'loading');
+      global.analytics.track('Bus/Schedule/ChooseTicket', {
+        id: scheduleId,
+        time: Date.now(),
+      });
       setCurrent(current + 1);
     } else {
       Modal.warning({
