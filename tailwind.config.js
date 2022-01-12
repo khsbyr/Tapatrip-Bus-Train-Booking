@@ -38,6 +38,7 @@ module.exports = {
         profile: '#f5f3f4',
         myOrders: 'rgba(22, 121, 213, 0.1)',
         tourButton: '#1679d5',
+        loadingBg: '#164b70',
       }),
       theme: {
         screens: {
