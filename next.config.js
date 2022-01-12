@@ -28,6 +28,7 @@ module.exports = phase => {
       USER_TOKEN_KEY: process.env.NEXT_PUBLIC_USER_TOKEN_KEY,
       GUEST_TOKEN_KEY: process.env.NEXT_PUBLIC_GUEST_TOKEN_KEY,
       ANALYTICS_WRITE_KEY: process.env.ANALYTICS_WRITE_KEY,
+      NEXT_PUBLIC_DEPLOYMENT_URL: process.env.NEXT_PUBLIC_DEPLOYMENT_URL,
     },
     images: {
       deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],

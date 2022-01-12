@@ -10,11 +10,6 @@ export default function Layout({ children }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta charSet="utf-8" />
         <meta
-          name="google-site-verification"
-          content="d-1_Ce67ksx6nK8vEgHb8WiuYPZQLTyFUvzy5fFhFA4"
-        />
-        <meta name="robots" content="noindex,nofollow"></meta>
-        <meta
           name="description"
           content="автобус, билет захиалга, автобусны билет захиалга, автобусны билет захиалга үнэ, автобусны хуваарь үнэ тариф, Bus, Train"
         />
