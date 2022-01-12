@@ -6,6 +6,7 @@ import Document, {
   DocumentContext,
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import { GA_TRACKING_ID } from '@lib/gtag';
 import * as snippet from '@segment/snippet';
 
 const { ANALYTICS_WRITE_KEY, NODE_ENV } = process.env;
@@ -62,6 +63,23 @@ class MyDocument extends Document {
           <link rel="manifest" href="/manifest.json" />
           <link href="/favicon.png" rel="icon" type="image/png" sizes="32x32" />
           <meta name="theme-color" content="#317EFB" />
+          {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', '${GA_TRACKING_ID}', {
+                              page_path: window.location.pathname,
+                            });
+                          `,
+            }}
+          />
           <script dangerouslySetInnerHTML={{ __html: this.renderSnippet() }} />
         </Head>
         <body>

@@ -41,6 +41,7 @@
     "**/*.tsx",
     "next-env.d.ts",
     "next.config.js",
-    "src/services/auth.js"
+    "src/services/auth.js",
+    "src/lib/gtag.js"
   ]
 }
