@@ -9,7 +9,11 @@ import {
 import { Steps } from 'antd';
 import moment from 'moment';
 import { useTranslation } from 'next-i18next';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useApolloClient } from '@apollo/client';
+import { BUS_SCHEDULES_DETAIL_QUERY } from '@graphql/queries';
+import { useGlobalStore } from '@context/globalStore';
+import { Modal } from 'antd';
 import React from 'react';
 import CurrencyFormat from 'react-currency-format';
 import style from './card.module.scss';
@@ -23,7 +27,10 @@ export default function Card({ datas }) {
     setDirectionLoading,
     directionLoading,
   } = useUI();
+  const { setScheduleDetail } = useGlobalStore();
+  const client = useApolloClient();
   const { t } = useTranslation(['order']);
+  const router = useRouter();
   const unixDates = unixDate(datas?.node);
   const format = n =>
     `0${(n / 60) ^ 0}`.slice(-2) +
@@ -34,8 +41,31 @@ export default function Card({ datas }) {
     ' ' +
     t('orderMinutes');
 
-  const handleOrder = e => {
+  const handleOrder = async e => {
     setDisplayLoading(e.target.id + 'loading');
+    const {
+      data: scheduleDataDetail,
+      error,
+      loading,
+    } = await client.query({
+      query: BUS_SCHEDULES_DETAIL_QUERY,
+      variables: {
+        id: e.target.id,
+      },
+    });
+    if (error || !scheduleDataDetail.busSchedule.seats) {
+      Modal.error({
+        title: t('errorTitle'),
+        content: t('errorContentTitle'),
+      });
+      setDisplayLoading('');
+    } else {
+      router.push({
+        pathname: `/bus/orders/${e.target.id}`,
+      });
+      setScheduleDetail(scheduleDataDetail);
+      setDisplayLoading('');
+    }
     global.analytics.track('Bus/Schedule/ChooseSchedule', {
       id: e.target.id,
       time: Date.now(),
@@ -164,19 +194,17 @@ export default function Card({ datas }) {
                 </button>
               </div>
               <div className="col-span-2 mt-5 lg:mt-0 lg:col-span-1">
-                <Link href={`/bus/orders/${datas?.node?.id}`}>
-                  <button
-                    id={datas?.node?.id}
-                    className={style.orderButton}
-                    onClick={handleOrder}
-                  >
-                    {displayLoading === datas?.node?.id + 'loading' ? (
-                      <div className={style.ldsDualRing}></div>
-                    ) : (
-                      t('orderButton')
-                    )}
-                  </button>
-                </Link>
+                <button
+                  id={datas?.node?.id}
+                  className={style.orderButton}
+                  onClick={handleOrder}
+                >
+                  {displayLoading === datas?.node?.id + 'loading' ? (
+                    <div className={style.ldsDualRing}></div>
+                  ) : (
+                    t('orderButton')
+                  )}
+                </button>
               </div>
             </div>
           </div>

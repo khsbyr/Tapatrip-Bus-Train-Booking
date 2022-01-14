@@ -33,9 +33,15 @@ export default function SelectSeats({ datas, scheduleId }) {
     }
   };
 
+  if (typeof window !== 'undefined') {
+    window.onpopstate = () => {
+      setDisplayLoading('');
+    };
+  }
+
   const next = () => {
     if (formatSelectedSeats.length > 0) {
-      setDisplayLoading(scheduleId + 'loading');
+      setDisplayLoading(scheduleId + 'loadingMore');
       global.analytics.track('Bus/Schedule/ChooseTicket', {
         id: scheduleId,
         time: Date.now(),
@@ -131,7 +137,7 @@ export default function SelectSeats({ datas, scheduleId }) {
           </div>
         </div>
         <button className={style.buttonBlock} onClick={next}>
-          {displayLoading === scheduleId + 'loading' ? (
+          {displayLoading === scheduleId + 'loadingMore' ? (
             <div className={style.ldsDualRing}></div>
           ) : (
             t('stepSelectSeatButton')
@@ -142,7 +148,7 @@ export default function SelectSeats({ datas, scheduleId }) {
         <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
           <StepCard datas={datas} scheduleId={scheduleId} />
           <button className={style.button} onClick={next}>
-            {displayLoading === scheduleId + 'loading' ? (
+            {displayLoading === scheduleId + 'loadingMore' ? (
               <div className={style.ldsDualRing}></div>
             ) : (
               t('stepSelectSeatButton')

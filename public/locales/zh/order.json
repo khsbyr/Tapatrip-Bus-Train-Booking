@@ -1,4 +1,6 @@
 {
+    "errorTitle":"發生錯誤",
+    "errorContentTitle":"巴士座位是空的",
     "warningTripInformation":"这一天没有巴士，所以我们为您提供接下来的日子",
     "warningTripInformation1": "这条路线上没有公交车",
     "ordersSearchResult": "抱歉",

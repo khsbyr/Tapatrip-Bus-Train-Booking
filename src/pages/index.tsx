@@ -55,7 +55,7 @@ export default function Bus({ guestToken }) {
       <HeaderBackground />
       <Navbar navbarData={NavData} />
       <Search navbarData={NavData} startLocations={startLocations} />
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
       <Subscribe />
       <TapaService tapaServiceList={TapaServiceList} tapaNews={News} />
     </Layout>

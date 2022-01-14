@@ -96,7 +96,7 @@ export default function Orders() {
                 </p>
               </div>
             </div>
-            {loading ? <Loader /> : ''}
+            {/* {loading ? <Loader /> : ''} */}
             {scheduleResult.length > 0 ? (
               scheduleResult.map(schedules => (
                 <Card key={schedules.node.id} datas={schedules} />

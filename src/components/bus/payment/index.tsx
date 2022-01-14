@@ -21,9 +21,9 @@ export default function Payment({ datas, scheduleId }) {
   const [timer, setTimer] = useState(deadline);
 
   const qrCode =
-    JSON.parse(booking.payment)[0].invoice.qPay_QRimage === undefined
-      ? JSON.parse(booking.payment)[1].invoice.qPay_QRimage
-      : JSON.parse(booking.payment)[0].invoice.qPay_QRimage;
+    JSON.parse(booking.payment)[0].type === 'qpay'
+      ? JSON.parse(booking.payment)[0].invoice.qPay_QRimage
+      : '';
 
   window.onpopstate = () => {
     Modal.warning({
@@ -91,10 +91,12 @@ export default function Payment({ datas, scheduleId }) {
             </div>
             <div>
               <PayTransfer />
-              <div>
-                <p className="text-base font-medium">QPay</p>
-                <img src={`data:image/png;base64,${qrCode}`} />
-              </div>
+              {qrCode && (
+                <div>
+                  <p className="text-base font-medium">QPay</p>
+                  <img src={`data:image/png;base64,${qrCode}`} />
+                </div>
+              )}
             </div>
           </div>
           <button className={style.buttonBlock} onClick={handleCheck}>
