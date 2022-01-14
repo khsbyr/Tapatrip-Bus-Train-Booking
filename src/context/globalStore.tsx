@@ -11,6 +11,7 @@ export interface State {
   selectedSeats: any;
   isSelectedSeats: any;
   customers: any;
+  scheduleDetail: any;
   current: any;
   booking: any;
   user: any;
@@ -28,6 +29,7 @@ const initialState = {
   selectedSeats: '',
   isSelectedSeats: '',
   customers: '',
+  scheduleDetail: '',
   current: 0,
   booking: '',
   user: '',
@@ -73,6 +75,10 @@ type Action =
     }
   | {
       type: 'SET_CUSTOMERS';
+      value: any;
+    }
+  | {
+      type: 'SET_SCHEDULE_DETAIL';
       value: any;
     }
   | {
@@ -158,6 +164,12 @@ function uiReducer(state: State, action: Action) {
         customers: action.value,
       };
     }
+    case 'SET_SCHEDULE_DETAIL': {
+      return {
+        ...state,
+        scheduleDetail: action.value,
+      };
+    }
     case 'SET_CURRENT': {
       return {
         ...state,
@@ -238,6 +250,11 @@ export const GlobalProvider: FC = props => {
     [dispatch]
   );
 
+  const setScheduleDetail = useCallback(
+    (value: any) => dispatch({ type: 'SET_SCHEDULE_DETAIL', value }),
+    [dispatch]
+  );
+
   const setCurrent = useCallback(
     (value: Int16Array) => dispatch({ type: 'SET_CURRENT', value }),
     [dispatch]
@@ -271,6 +288,7 @@ export const GlobalProvider: FC = props => {
       setSelectedSeats,
       setIsSelectedSeats,
       setCustomers,
+      setScheduleDetail,
       setCurrent,
       setBooking,
       setUser,
