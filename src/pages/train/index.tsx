@@ -13,9 +13,12 @@ import React, { useEffect, useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Search from '@components/train/searchPanel';
 import TrainService from '@services/train';
+import LastSearch from '@components/train/lastSearch';
 
 export default function Travel() {
   const [stationData, setStationData] = useState([]);
+  const [lastSearch, setLastSearch] = useState([]);
+
   useEffect(() => {
     async function getTrainStations() {
       try {
@@ -28,21 +31,27 @@ export default function Travel() {
       }
     }
     getTrainStations();
+
+    if (typeof window !== 'undefined') {
+      setLastSearch(JSON.parse(localStorage.getItem('lastSearch')));
+    }
   }, []);
 
   return (
     <div>
       <Head>
-        <title>Tapatrip - Online Travel Platform</title>
+        <title>Tapatrip - Online Travel Platform1</title>
       </Head>
-      <div className={styles.main}>
-        <HeaderBackground />
-        <Navbar navbarData={NavData} />
-        <Search navbarData={NavData} stationData={stationData} />
-        <App />
-        <TapaService tapaServiceList={TapaServiceList} />
-        <Footer companyInfo={Company} />
-      </div>
+      <Layout>
+        <div className={styles.main}>
+          <HeaderBackground />
+          <Navbar navbarData={NavData} />
+          <Search navbarData={NavData} stationData={stationData} />
+          {lastSearch ? <LastSearch /> : ''}
+          <App />
+          <TapaService tapaServiceList={TapaServiceList} />
+        </div>
+      </Layout>
     </div>
   );
 }

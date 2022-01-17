@@ -1,6 +1,9 @@
 import LoadingRing from '@components/common/loadingRing';
 import { useTrainContext } from '@context/trainContext';
-import { availableDatesFormat } from '@helpers/train-array-format';
+import {
+  arrayFilterPrevSearch,
+  availableDatesFormat,
+} from '@helpers/train-array-format';
 import TrainService from '@services/train';
 import { AutoComplete, DatePicker, message } from 'antd';
 import locale from 'antd/lib/date-picker/locale/mn_MN';
@@ -26,6 +29,7 @@ export default function SearchInput({ stationData }) {
   const dateFormat = availableDatesFormat(availableDates);
   const date = dateFormat.map(z => z.date);
   const router = useRouter();
+  const { startName, endName } = router.query;
   const currentDate = router.query.date
     ? router.query.date
     : moment().endOf('day').format(dFormat).toString();
@@ -71,11 +75,44 @@ export default function SearchInput({ stationData }) {
   const searchTrain = async () => {
     if (startStationID && endStationID && selectDate) {
       setLoading(true);
+      const recent = [];
+
+      recent.push({
+        startStation: startStationID,
+        endStation: endStationID,
+        startStationName: startStationName,
+        endStationName: endStationName,
+      });
+
+      let prevSearch = JSON.parse(localStorage.getItem('lastSearch'));
+
+      if (prevSearch) {
+        let isArray = arrayFilterPrevSearch(
+          prevSearch,
+          endStationID,
+          startStationID
+        );
+        if (isArray.length === 0) {
+          prevSearch.push({
+            startStation: recent[0].startStation,
+            endStation: recent[0].endStation,
+            startStationName: recent[0].startStationName,
+            endStationName: recent[0].endStationName,
+          });
+          localStorage.setItem('lastSearch', JSON.stringify(prevSearch));
+        }
+      } else {
+        localStorage.setItem('lastSearch', JSON.stringify(recent));
+      }
+
       const params = {
         startStation: startStationID,
         endStation: endStationID,
         date: selectDate,
+        startName: startStationName,
+        endName: endStationName,
       };
+
       router.push({
         pathname: '/train/orders',
         query: params,
@@ -97,16 +134,16 @@ export default function SearchInput({ stationData }) {
             filterOption={(input, option) =>
               option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
-            defaultValue={startStationName}
+            defaultValue={`${startName ? startName : ''}`}
           >
             {stationData?.map(station => (
-              <Option key={station.stations_id} value={station.stations_name}>
+              <Option key={station.station_id} value={station.station_name}>
                 <div className="flex items-center">
                   <img
                     className="w-7 h-7 text-direction pr-3"
                     src="../../assets/svgIcons/stopLocation.svg"
                   />
-                  {station.stations_name}
+                  {station.station_name}
                 </div>
               </Option>
             ))}
@@ -126,16 +163,16 @@ export default function SearchInput({ stationData }) {
             filterOption={(input, option) =>
               option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
-            defaultValue={endStationName}
+            defaultValue={`${endName ? endName : ''}`}
           >
             {stationData?.map(station => (
-              <Option key={station.stations_id} value={station.stations_name}>
+              <Option key={station.station_id} value={station.station_name}>
                 <div className="flex items-center">
                   <img
                     className="w-7 h-7 text-direction pr-3"
                     src="../../assets/svgIcons/stopLocation.svg"
                   />
-                  {station.stations_name}
+                  {station.station_name}
                 </div>
               </Option>
             ))}

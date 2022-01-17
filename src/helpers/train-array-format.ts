@@ -65,3 +65,15 @@ export function arrayFilterSeat(
     });
   return result;
 }
+
+export function arrayFilterPrevSearch(data: any, endStation, startStation) {
+  let result =
+    data &&
+    data.filter(function (currentElement) {
+      return (
+        currentElement.startStation === startStation &&
+        currentElement.endStation === endStation
+      );
+    });
+  return result;
+}

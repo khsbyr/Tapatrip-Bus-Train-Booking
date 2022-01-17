@@ -11,6 +11,7 @@ export interface State {
   loading: boolean;
   loadingOrder: any;
   orderId: any;
+  customer: any;
 }
 
 const initialState = {
@@ -24,6 +25,7 @@ const initialState = {
   loading: false,
   loadingOrder: '',
   orderId: undefined,
+  customer: '',
 };
 
 type Action =
@@ -65,6 +67,10 @@ type Action =
     }
   | {
       type: 'SET_ORDER_ID';
+      value: any;
+    }
+  | {
+      type: 'SET_CUSTOMER';
       value: any;
     };
 
@@ -142,6 +148,13 @@ function uiReducer(state: State, action: Action) {
         orderId: action.value,
       };
     }
+
+    case 'SET_CUSTOMER': {
+      return {
+        ...state,
+        customer: action.value,
+      };
+    }
   }
 }
 
@@ -198,6 +211,11 @@ export const GlobalProvider: FC = props => {
     [dispatch]
   );
 
+  const setCustomer = useCallback(
+    (value: any) => dispatch({ type: 'SET_CUSTOMER', value }),
+    [dispatch]
+  );
+
   const value = useMemo(
     () => ({
       ...state,
@@ -211,6 +229,7 @@ export const GlobalProvider: FC = props => {
       setLoading,
       setLoadingOrder,
       setOrderId,
+      setCustomer,
     }),
     [state]
   );

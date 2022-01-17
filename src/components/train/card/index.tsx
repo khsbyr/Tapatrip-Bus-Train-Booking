@@ -119,9 +119,21 @@ export default function Card({ voyage }) {
                     voyageStations?.map((station, index) => (
                       <tr>
                         <td>{++index}</td>
-                        <td>{station.stop_name}</td>
-                        <td>{station.arr_time}</td>
-                        <td>{station.dep_time}</td>
+                        <td>
+                          {station.stop_name
+                            ? station.stop_name
+                            : station.STOP_NAME}
+                        </td>
+                        <td>
+                          {station.arr_time
+                            ? station.arr_time
+                            : station.ARR_TIME}
+                        </td>
+                        <td>
+                          {station.dep_time
+                            ? station.dep_time
+                            : station.DEP_TIME}
+                        </td>
                       </tr>
                     ))}
                 </tbody>

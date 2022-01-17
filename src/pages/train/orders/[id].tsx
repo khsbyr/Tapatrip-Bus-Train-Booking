@@ -6,6 +6,7 @@ import { useGlobalStore } from '@context/globalStore';
 import SelectSeats from '@components/train/selectSeat';
 import React, { useEffect } from 'react';
 import { useTrainContext } from '@context/trainContext';
+import PassengerInfo from '@components/train/passengerInfo';
 
 const { Step } = Steps;
 
@@ -21,7 +22,7 @@ export default function Order() {
     },
     {
       title: 'Passenger Information',
-      content: 'hi',
+      content: <PassengerInfo />,
       button: 'Passenger Button',
     },
     {

@@ -72,23 +72,14 @@ export default function Orders() {
             )}
           </div>
 
-          <div className="bg-white p-8 text-cardDate rounded-2xl space-y-4 text-lg h-64 mt-3">
-            <div className="space-y-3">
-              <p className="font-medium">Төрөл</p>
-              <div className="space-y-1 px-2 text-base">
-                <div className="flex justify-between">
-                  <p className="text-secondary">Нийтийн</p>
-                  <Checkbox></Checkbox>
-                </div>
-                <div className="flex justify-between">
-                  <p className="text-secondary">Унтлагын</p>
-                  <Checkbox></Checkbox>
-                </div>
-                <div className="flex justify-between">
-                  <p className="text-secondary">Тасалгаат</p>
-                  <Checkbox></Checkbox>
-                </div>
-              </div>
+          <div className="hidden lg:block">
+            <div className="sticky top-0 ">
+              <a
+                href="https://www.facebook.com/TapaTripTravelAgency/"
+                target="_blank"
+              >
+                <img src="/assets/Thailand.png" className="rounded-lg" />{' '}
+              </a>
             </div>
           </div>
         </div>
