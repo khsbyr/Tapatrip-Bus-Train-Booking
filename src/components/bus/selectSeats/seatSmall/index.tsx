@@ -23,6 +23,7 @@ const Seat24 = ({ datas, scheduleId }) => {
         gender: '',
         isChild: false,
         isVaccine: false,
+        isField: false,
         lastNameError: '',
         firstNameError: '',
         registerError: '',
