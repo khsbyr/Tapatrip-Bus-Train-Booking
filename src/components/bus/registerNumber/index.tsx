@@ -49,6 +49,11 @@ const RegisterNumber = ({
     setValues2(e.target.value);
     setIsOpen2(false);
   };
+
+  const handleFocus = e => {
+    setIsOpen1(false);
+    setIsOpen2(false);
+  };
   const { t } = useTranslation(['steps']);
 
   const handleRegister = async e => {
@@ -188,6 +193,7 @@ const RegisterNumber = ({
             </h2>
           </div>
           <Input
+            onFocus={handleFocus}
             className="z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base"
             onChange={handleRegister}
             placeholder={t('registerNumber')}
