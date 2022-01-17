@@ -19,18 +19,18 @@ export default function index() {
   const { slug } = router.query;
   const { setUser } = useGlobalStore();
 
-  const token =
-    AuthTokenStorageService.getAccessToken() &&
-    AuthTokenStorageService.getAccessToken() != 'false'
-      ? AuthTokenStorageService.getAccessToken()
-      : '';
-
   const handleLogout = () => {
     AuthService.logout();
   };
 
   useEffect(() => {
     async function loadUserFromCookies() {
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : '';
+
       if (token) {
         try {
           const res = await AuthService.getCurrentUser(token);

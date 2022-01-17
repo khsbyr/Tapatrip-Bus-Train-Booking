@@ -87,6 +87,9 @@ const RegisterNumber = ({
               : '';
             formatSelectedSeats[passengerNumber - 1].isVaccine =
               passenger.firstName ? true : false;
+
+            formatSelectedSeats[passengerNumber - 1].isField = true;
+
             formatSelectedSeats[passengerNumber - 1].firstName = passenger
               ? passenger.firstName
               : '';
@@ -106,6 +109,9 @@ const RegisterNumber = ({
           console.error(reason); // Error!
         }
       );
+    } else {
+      formatSelectedSeats[passengerNumber - 1].isField = false;
+      setSelectedSeats(formatSelectedSeats);
     }
   };
 
