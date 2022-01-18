@@ -29,8 +29,16 @@ export default function SearchInput({ startLocations }) {
   const client = useApolloClient();
   const { Option } = AutoComplete;
   const router = useRouter();
-  const { startLocation, stopLocation, endLocation, date, endDate } =
-    router.query;
+  const {
+    startLocation,
+    stopLocation,
+    endLocation,
+    date,
+    endDate,
+    startLocationName,
+    endLocationName,
+    stopLocationName,
+  } = router.query;
   const currentDate = date
     ? date
     : moment().endOf('day').format(dateFormat).toString();
@@ -131,13 +139,52 @@ export default function SearchInput({ startLocations }) {
         endLocation: selectEndLocation.key,
         date: selectDate,
         endDate: endScheduleDate,
+        startLocationName: selectStartLocation.value,
+        endLocationName: selectEndLocation.value,
+        stopLocationName: selectStopLocation.value,
       };
       const ubParams = {
         startLocation: selectStartLocation.key,
         stopLocation: selectEndLocation.key,
         date: selectDate,
         endDate: endScheduleDate,
+        startLocationName: selectStartLocation.value,
+        endLocationName: selectEndLocation.value,
+        stopLocationName: selectStopLocation.value,
       };
+
+      const paramSearch = {
+        startLocation: selectStartLocation.key,
+        startLocationName: selectStartLocation.value,
+        endLocation: selectEndLocation.key,
+        endLocationName: selectEndLocation.value,
+        stopLocationName: selectStopLocation.value,
+        isUlaanbaatar: isUlaanbaatar,
+        time: moment().format('YYYY-MM-DD hh:mm:ss').toString(),
+      };
+
+      const recent = [];
+
+      recent.push(paramSearch);
+
+      let prevSearch = JSON.parse(localStorage.getItem('lastSearch'));
+
+      if (prevSearch) {
+        const index = prevSearch.findIndex(
+          item =>
+            item.startLocation === selectStartLocation.key &&
+            item.endLocation === selectEndLocation.key
+        );
+        if (index > -1) {
+          prevSearch.splice(index, 1);
+          prevSearch.push(paramSearch);
+          localStorage.setItem('lastSearch', JSON.stringify(prevSearch));
+        } else prevSearch.push(paramSearch);
+        localStorage.setItem('lastSearch', JSON.stringify(prevSearch));
+      } else {
+        localStorage.setItem('lastSearch', JSON.stringify(recent));
+      }
+
       global.analytics.track('Bus/Home/Search', {
         query: isUlaanbaatar ? ubParams : params,
         time: Date.now(),
@@ -209,7 +256,9 @@ export default function SearchInput({ startLocations }) {
         <div className={style.startLocation}>
           <AutoComplete
             allowClear
-            defaultValue={selectStartLocation.value}
+            defaultValue={
+              startLocationName ? startLocationName : selectStartLocation.value
+            }
             notFoundContent={t('warningResult')}
             onSearch={handleStartSearch}
             onSelect={handleStartSelect}
@@ -251,7 +300,9 @@ export default function SearchInput({ startLocations }) {
             allowClear
             onSelect={handleStopSelect}
             onSearch={handleStopSearch}
-            defaultValue={selectStopLocation.value}
+            defaultValue={
+              stopLocationName ? stopLocationName : selectStopLocation.value
+            }
             disabled={isUlaanbaatar}
             placeholder={t('startSoum')}
           >
@@ -289,7 +340,9 @@ export default function SearchInput({ startLocations }) {
         <div className={style.startLocation}>
           <AutoComplete
             allowClear
-            defaultValue={selectEndLocation.value}
+            defaultValue={
+              endLocationName ? endLocationName : selectEndLocation.value
+            }
             notFoundContent={t('warningResult')}
             onSelect={handleEndSelect}
             onSearch={handleEndSearch}
