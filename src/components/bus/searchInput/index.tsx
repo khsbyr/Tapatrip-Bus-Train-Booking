@@ -303,13 +303,7 @@ export default function SearchInput({ startLocations }) {
             defaultValue={
               stopLocationName ? stopLocationName : selectStopLocation.value
             }
-            disabled={
-              startLocationName
-                ? startLocationName === 'Улаанбаатар'
-                : isUlaanbaatar
-                ? true
-                : false
-            }
+            disabled={isUlaanbaatar}
             placeholder={t('startSoum')}
           >
             {stopSearchLocationList.length > 0
