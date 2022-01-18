@@ -35,7 +35,6 @@ export default function Language(props) {
       >
         <Listbox.Button className={s.listboxButton}>
           <img className="rounded-sm" src={selectedLanguage.src} width="34" />
-          {/* <ChevronDownIcon className={`${props.isBlack ? s.icon1 : s.icon} `} /> */}
           {displayLanguage ? (
             <ChevronDownIcon
               className={`${props.isBlack ? s.icon1 : s.icon} `}

@@ -35,6 +35,10 @@ export default function ticketGenerate() {
       }
     }
     if (refNumber) getTicketInfo();
+    global.analytics.track('Bus/Ticket', {
+      refNumber: refNumber,
+      time: Date.now(),
+    });
   }, [refNumber]);
 
   function printDocument() {
@@ -46,7 +50,7 @@ export default function ticketGenerate() {
       var width = pdf.internal.pageSize.getWidth();
       var height = pdf.internal.pageSize.getHeight();
       pdf.addImage(dataURL, 'PNG', 0, 0, width, height);
-      pdf.save('saved.pdf');
+      pdf.save('tapatrip_ticket.pdf');
       setLoading1('false');
     });
   }

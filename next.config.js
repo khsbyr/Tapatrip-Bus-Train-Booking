@@ -20,18 +20,55 @@ module.exports = phase => {
   return {
     i18n,
     reactStrictMode: true,
-    // async redirects() {
-    //   return [
-    //     {
-    //       source: '/',
-    //       destination: '/bus',
-    //       permanent: true,
-    //     },
-    //   ];
-    // },
+    compress: true,
+    env: {
+      BASE_GRAPHQL_HOST: process.env.NEXT_PUBLIC_GRAPHQL_HOST,
+      BASE_MEDIA_URL: process.env.NEXT_PUBLIC_MEDIA_URL,
+      BASE_API_URL: process.env.NEXT_PUBLIC_API_URL,
+      USER_TOKEN_KEY: process.env.NEXT_PUBLIC_USER_TOKEN_KEY,
+      GUEST_TOKEN_KEY: process.env.NEXT_PUBLIC_GUEST_TOKEN_KEY,
+      ANALYTICS_WRITE_KEY: process.env.ANALYTICS_WRITE_KEY,
+      NEXT_PUBLIC_DEPLOYMENT_URL: process.env.NEXT_PUBLIC_DEPLOYMENT_URL,
+    },
     images: {
-      loader: 'imgix',
-      path: 'https://noop/',
+      deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+      minimumCacheTTL: 60,
+    },
+    eslint: {
+      ignoreDuringBuilds: true,
+    },
+    swcMinify: false,
+    productionBrowserSourceMaps: true,
+    future: {
+      strictPostcssConfiguration: true,
+    },
+    async headers() {
+      return [
+        {
+          // This works, and returns appropriate Response headers:
+          source: '/:all*(svg|jpg|png|webp)',
+          locale: false,
+          headers: [
+            {
+              key: 'Cache-Control',
+              value:
+                'public, max-age=31536000, s-maxage=31536000, stale-while-revalidate=31536000, must-revalidate',
+            },
+          ],
+        },
+        {
+          // This doesn't work for 'Cache-Control' key (works for others though):
+          source: '/_next/image(.*)',
+          locale: false,
+          headers: [
+            {
+              key: 'Cache-Control',
+              value:
+                'public, max-age=31536000, s-maxage=31536000, stale-while-revalidate=31536000, must-revalidate',
+            },
+          ],
+        },
+      ];
     },
   };
 };

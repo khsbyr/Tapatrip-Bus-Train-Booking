@@ -144,6 +144,12 @@ export default function PassengerIfo({ datas, scheduleId }) {
       passengers.push(passenger);
     });
     try {
+      global.analytics.track('Bus/Seat/OrderButton', {
+        schedule: scheduleId,
+        contactPhone: customers.phoneNumber,
+        seatCount: passengers.length,
+        time: Date.now(),
+      });
       const { data } = await addBusBooking({
         variables: {
           schedule: scheduleId,
@@ -174,6 +180,10 @@ export default function PassengerIfo({ datas, scheduleId }) {
       Modal.error({
         title: t('errorTitle'),
         content: e.message,
+      });
+      global.analytics.track('Bus/Seat/Error', {
+        error: e.message,
+        time: Date.now(),
       });
       closeLoadingConfirm();
       closeLoadingPassengerInfo();
@@ -449,42 +459,44 @@ export default function PassengerIfo({ datas, scheduleId }) {
                           </p>
                         </div>
                       </div>
-                      <div className={style.InfoForm}>
-                        <div className={style.leftContent}>
-                          <label className={style.Label} htmlFor="lastName">
-                            {t('passengerLastName')}
-                          </label>
-                          <Input
-                            onChange={handlePassengerSurname}
-                            id={i}
-                            value={seat.lastName}
-                            className={style.input}
-                            placeholder={t('passengerLastNamePlaceholder')}
-                          />
-                          {seat.lastNameError && (
-                            <span className="text-red-500 text-sm">
-                              {seat.lastNameError}
-                            </span>
-                          )}
+                      {seat.isField && (
+                        <div className={style.InfoForm}>
+                          <div className={style.leftContent}>
+                            <label className={style.Label} htmlFor="lastName">
+                              {t('passengerLastName')}
+                            </label>
+                            <Input
+                              onChange={handlePassengerSurname}
+                              id={i}
+                              value={seat.lastName}
+                              className={style.input}
+                              placeholder={t('passengerLastNamePlaceholder')}
+                            />
+                            {seat.lastNameError && (
+                              <span className="text-red-500 text-sm">
+                                {seat.lastNameError}
+                              </span>
+                            )}
+                          </div>
+                          <div className={style.rightContent}>
+                            <label className={style.Label} htmlFor="firstName">
+                              {t('passengerFirstName')}
+                            </label>
+                            <Input
+                              id={i}
+                              onChange={handlePassengerFirstname}
+                              className={style.input}
+                              value={seat.firstName}
+                              placeholder={t('passengerFirstNamePlaceholder')}
+                            />
+                            {seat.firstNameError && (
+                              <span className="text-red-500 text-sm">
+                                {seat.firstNameError}
+                              </span>
+                            )}
+                          </div>
                         </div>
-                        <div className={style.rightContent}>
-                          <label className={style.Label} htmlFor="firstName">
-                            {t('passengerFirstName')}
-                          </label>
-                          <Input
-                            id={i}
-                            onChange={handlePassengerFirstname}
-                            className={style.input}
-                            value={seat.firstName}
-                            placeholder={t('passengerFirstNamePlaceholder')}
-                          />
-                          {seat.firstNameError && (
-                            <span className="text-red-500 text-sm">
-                              {seat.firstNameError}
-                            </span>
-                          )}
-                        </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 ))}

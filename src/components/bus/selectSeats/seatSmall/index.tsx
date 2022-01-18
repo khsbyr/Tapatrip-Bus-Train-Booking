@@ -23,6 +23,7 @@ const Seat24 = ({ datas, scheduleId }) => {
         gender: '',
         isChild: false,
         isVaccine: false,
+        isField: false,
         lastNameError: '',
         firstNameError: '',
         registerError: '',
@@ -53,32 +54,33 @@ const Seat24 = ({ datas, scheduleId }) => {
       </div>
       <div className="absolute mt-40 ml-7">
         <table>
-          {seatRanges.map((seats, i) => (
-            <tr key={i}>
-              {seats.map((seat, k) =>
-                i == 0 && (k == 0 || k == 1) ? (
-                  <td key={k}></td>
-                ) : (
-                  <td key={k}>
-                    <button
-                      className={
-                        !seat.isAvialable
-                          ? style.seatButtonDisabled
-                          : isSelectedSeats[scheduleId + seat.number]
-                          ? style.seatButtonSelected
-                          : style.seatButton
-                      }
-                      value={seat.number}
-                      onClick={handleSelectSeat}
-                      disabled={!seat.isAvialable}
-                    >
-                      {seat && seat.number}
-                    </button>
-                  </td>
-                )
-              )}
-            </tr>
-          ))}
+          {datas?.seats &&
+            seatRanges.map((seats, i) => (
+              <tr key={i}>
+                {seats.map((seat, k) =>
+                  i == 0 && (k == 0 || k == 1) ? (
+                    <td key={k}></td>
+                  ) : (
+                    <td key={k}>
+                      <button
+                        className={
+                          !seat.isAvialable
+                            ? style.seatButtonDisabled
+                            : isSelectedSeats[scheduleId + seat.number]
+                            ? style.seatButtonSelected
+                            : style.seatButton
+                        }
+                        value={seat.number}
+                        onClick={handleSelectSeat}
+                        disabled={!seat.isAvialable}
+                      >
+                        {seat && seat.number}
+                      </button>
+                    </td>
+                  )
+                )}
+              </tr>
+            ))}
         </table>
       </div>
     </div>

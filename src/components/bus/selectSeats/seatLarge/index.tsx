@@ -23,6 +23,7 @@ const SeatLarge = ({ datas, scheduleId }) => {
         gender: '',
         isChild: false,
         isVaccine: false,
+        isField: false,
         lastNameError: '',
         firstNameError: '',
         registerError: '',
@@ -52,93 +53,94 @@ const SeatLarge = ({ datas, scheduleId }) => {
       </div>
       <div className="absolute mt-40 ml-7">
         <table>
-          {seatRanges.map((seat, i) =>
-            seat.length === 4 ? (
-              <tr key={i}>
-                {seat.map((seat, j) =>
-                  j !== 2 ? (
-                    <td key={j}>
-                      <button
-                        key={seat.number}
-                        className={
-                          !seat.isAvialable
-                            ? style.seatButtonDisabled
-                            : isSelectedSeats[scheduleId + seat.number]
-                            ? style.seatButtonSelected
-                            : style.seatButton
-                        }
-                        value={seat.number}
-                        onClick={handleSelectSeat}
-                        disabled={!seat.isAvialable}
-                      >
-                        {seat && seat.number}
-                      </button>
-                    </td>
-                  ) : (
-                    <td key={j}>
-                      <button
-                        key={seat.number}
-                        className={
-                          !seat.isAvialable
-                            ? style.seatButtonMarginLeftDisabled
-                            : isSelectedSeats[scheduleId + seat.number]
-                            ? style.seatButtonMarginLeftSelected
-                            : style.seatButtonMarginLeft
-                        }
-                        value={seat.number}
-                        onClick={handleSelectSeat}
-                        disabled={!seat.isAvialable}
-                      >
-                        {seat && seat.number}
-                      </button>
-                    </td>
-                  )
-                )}
-              </tr>
-            ) : (
-              <tr key={i}>
-                {seat.map((seat, k) =>
-                  k == 3 || k == 4 ? (
-                    <td key={k}>
-                      <button
-                        key={seat.number}
-                        className={
-                          !seat.isAvialable
-                            ? style.seatButtonMarginRightDisabled
-                            : isSelectedSeats[scheduleId + seat.number]
-                            ? style.seatButtonMarginRightSelected
-                            : style.seatButtonMarginRight
-                        }
-                        value={seat.number}
-                        onClick={handleSelectSeat}
-                        disabled={!seat.isAvialable}
-                      >
-                        {seat && seat.number}
-                      </button>
-                    </td>
-                  ) : (
-                    <td key={k}>
-                      <button
-                        key={seat.number}
-                        className={
-                          !seat.isAvialable
-                            ? style.seatButtonDisabled
-                            : isSelectedSeats[scheduleId + seat.number]
-                            ? style.seatButtonSelected
-                            : style.seatButton
-                        }
-                        value={seat.number}
-                        onClick={handleSelectSeat}
-                        disabled={!seat.isAvialable}
-                      >
-                        {seat && seat.number}
-                      </button>
-                    </td>
-                  )
-                )}
-              </tr>
-            )
-          )}
+          {datas?.seats &&
+            seatRanges.map((seat, i) =>
+              seat.length === 4 ? (
+                <tr key={i}>
+                  {seat.map((seat, j) =>
+                    j !== 2 ? (
+                      <td key={j}>
+                        <button
+                          key={seat.number}
+                          className={
+                            !seat.isAvialable
+                              ? style.seatButtonDisabled
+                              : isSelectedSeats[scheduleId + seat.number]
+                              ? style.seatButtonSelected
+                              : style.seatButton
+                          }
+                          value={seat.number}
+                          onClick={handleSelectSeat}
+                          disabled={!seat.isAvialable}
+                        >
+                          {seat && seat.number}
+                        </button>
+                      </td>
+                    ) : (
+                      <td key={j}>
+                        <button
+                          key={seat.number}
+                          className={
+                            !seat.isAvialable
+                              ? style.seatButtonMarginLeftDisabled
+                              : isSelectedSeats[scheduleId + seat.number]
+                              ? style.seatButtonMarginLeftSelected
+                              : style.seatButtonMarginLeft
+                          }
+                          value={seat.number}
+                          onClick={handleSelectSeat}
+                          disabled={!seat.isAvialable}
+                        >
+                          {seat && seat.number}
+                        </button>
+                      </td>
+                    )
+                  )}
+                </tr>
+              ) : (
+                <tr key={i}>
+                  {seat.map((seat, k) =>
+                    k == 3 || k == 4 ? (
+                      <td key={k}>
+                        <button
+                          key={seat.number}
+                          className={
+                            !seat.isAvialable
+                              ? style.seatButtonMarginRightDisabled
+                              : isSelectedSeats[scheduleId + seat.number]
+                              ? style.seatButtonMarginRightSelected
+                              : style.seatButtonMarginRight
+                          }
+                          value={seat.number}
+                          onClick={handleSelectSeat}
+                          disabled={!seat.isAvialable}
+                        >
+                          {seat && seat.number}
+                        </button>
+                      </td>
+                    ) : (
+                      <td key={k}>
+                        <button
+                          key={seat.number}
+                          className={
+                            !seat.isAvialable
+                              ? style.seatButtonDisabled
+                              : isSelectedSeats[scheduleId + seat.number]
+                              ? style.seatButtonSelected
+                              : style.seatButton
+                          }
+                          value={seat.number}
+                          onClick={handleSelectSeat}
+                          disabled={!seat.isAvialable}
+                        >
+                          {seat && seat.number}
+                        </button>
+                      </td>
+                    )
+                  )}
+                </tr>
+              )
+            )}
         </table>
       </div>
     </div>

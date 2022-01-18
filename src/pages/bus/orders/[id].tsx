@@ -24,7 +24,7 @@ const { Step } = Steps;
 export default function Payment() {
   const { t } = useTranslation(['steps']);
   const router = useRouter();
-  const { current, setCurrent, setUser } = useGlobalStore();
+  const { current, setCurrent, setUser, scheduleDetail } = useGlobalStore();
   const { id } = router.query;
 
   const { setDisplayLoading } = useUI();
@@ -52,20 +52,25 @@ export default function Payment() {
     loadUserFromCookies();
   }, []);
 
-  const { data: scheduleDataDetail, loading } = useQuery(
-    BUS_SCHEDULES_DETAIL_QUERY,
-    {
-      variables: {
-        id: id,
-      },
-      onCompleted: () => {
-        setDisplayLoading('');
-      },
-    }
-  );
+  if (id != scheduleDetail.id) {
+    const { data: scheduleDataDetail, loading } = useQuery(
+      BUS_SCHEDULES_DETAIL_QUERY,
+      {
+        variables: {
+          id: id,
+        },
+        onCompleted: () => {
+          setDisplayLoading('');
+        },
+      }
+    );
+    var scheduleDataResult =
+      scheduleDataDetail === undefined ? '' : scheduleDataDetail.busSchedule;
+  } else {
+    var scheduleDataResult =
+      scheduleDetail === undefined ? '' : scheduleDetail.busSchedule;
+  }
 
-  const scheduleDataResult =
-    scheduleDataDetail === undefined ? '' : scheduleDataDetail.busSchedule;
   const steps = [
     {
       title: t('stepSelectSeat'),
@@ -116,7 +121,7 @@ export default function Payment() {
             </ContentWrapper>
           </div>
         </div>
-        {loading ? <Loader /> : steps[current].content}
+        {steps[current].content}
       </div>
     </Layout>
   );
