@@ -13,7 +13,6 @@ import Subscribe from '@components/common/subscribe';
 import AuthService from '@services/auth';
 import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import { arrayFormat } from '@helpers/array-format';
-import Loader from '@components/common/loader';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import isEmpty from '@utils/isEmpty';
@@ -62,7 +61,6 @@ export default function Bus({ guestToken }) {
       <Navbar navbarData={NavData} />
       <Search navbarData={NavData} startLocations={startLocations} />
       {lastSearch ? <LastSearch /> : ''}
-      {/* {loading && <Loader />} */}
       <Subscribe />
       <TapaService tapaServiceList={TapaServiceList} tapaNews={News} />
     </Layout>
