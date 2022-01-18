@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { BUS_ALL_LOCATIONS_QUERY } from '@graphql/queries';
 import NavData from '@data/navData.json';
@@ -18,10 +18,12 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import isEmpty from '@utils/isEmpty';
 import { useGlobalStore } from '@context/globalStore';
+import LastSearch from '@components/bus/lastSearch';
 
 export default function Bus({ guestToken }) {
   const { t } = useTranslation(['common', 'footer']);
   const { setUser } = useGlobalStore();
+  const [lastSearch, setLastSearch] = useState([]);
 
   useEffect(() => {
     AuthTokenStorageService.guestStore(guestToken);
@@ -45,6 +47,10 @@ export default function Bus({ guestToken }) {
       }
     }
     loadUserFromCookies();
+
+    if (typeof window !== 'undefined') {
+      setLastSearch(JSON.parse(localStorage.getItem('lastSearch')));
+    }
   }, []);
 
   const { data, loading, error } = useQuery(BUS_ALL_LOCATIONS_QUERY);
@@ -55,6 +61,7 @@ export default function Bus({ guestToken }) {
       <HeaderBackground />
       <Navbar navbarData={NavData} />
       <Search navbarData={NavData} startLocations={startLocations} />
+      {lastSearch ? <LastSearch /> : ''}
       {/* {loading && <Loader />} */}
       <Subscribe />
       <TapaService tapaServiceList={TapaServiceList} tapaNews={News} />
