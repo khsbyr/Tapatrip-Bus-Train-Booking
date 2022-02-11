@@ -28,6 +28,11 @@ export default function Layout({ children }) {
           key="ogtitle"
           content="Tapatrip - Bus Booking System"
         />
+        <meta
+          property="og:description"
+          key="ogdescription"
+          content="автобус, билет захиалга, автобусны билет захиалга, автобусны билет захиалга үнэ, автобусны хуваарь үнэ тариф, Bus, Train"
+        />
         <meta property="og:locale" key="og:locale" content="mn_MN" />
         {router.asPath === '/' && (
           <meta property="og:image" content="/images/fb_cover.jpg" />
@@ -53,11 +58,6 @@ export default function Layout({ children }) {
           content="https://www.bus.tapatrip.com"
         />
         <meta property="og:type" key="ogtype" content="website" />
-        <meta
-          property="og:description"
-          key="og:description"
-          content="автобус, билет захиалга, автобусны билет захиалга, автобусны билет захиалга үнэ, автобусны хуваарь үнэ тариф, Bus, Train"
-        />
         <meta
           name="google-site-verification"
           content="jLGHUohzVujDpZVKJOgJScLlCCZMh3D-_8neGKul6IQ"
