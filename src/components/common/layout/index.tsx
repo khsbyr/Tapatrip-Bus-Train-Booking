@@ -50,6 +50,10 @@ export default function Layout({ children }) {
           key="ogdesc"
           content="автобус, билет захиалга, автобусны билет захиалга, автобусны билет захиалга үнэ, автобусны хуваарь үнэ тариф, Bus, Train"
         />
+         <meta
+          property="og:image"
+          content="https://tapatrip.com/images/fb_cover.jpg"
+        />
         <title>Tapatrip - Bus Booking System</title>
       </Head>
       <main className={styles.main}>
