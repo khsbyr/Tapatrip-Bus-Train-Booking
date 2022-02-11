@@ -1,4 +1,4 @@
-import Loader from '@components/common/loader';
+import Loader from '@components/train/loader';
 import LoadingRing from '@components/common/loadingRing';
 import { useTrainContext } from '@context/trainContext';
 import TrainService from '@services/train';
@@ -185,7 +185,8 @@ export default function Card({ voyage }) {
         <div className={style.footerSection}>
           {voyage.WAGONS.map(wagon => (
             <div
-              className={`${style.ticket} ${
+              className={`${style.ticket} 
+              ${
                 SelectedTicket[0]?.voyage_id + SelectedTicket[0]?.price_type ===
                 voyage.VOYAGE_ID + wagon.TARIF_TYPE
                   ? 'bg-button'

@@ -8,9 +8,10 @@ import { useGlobalStore } from '@context/globalStore';
 import { useTrainContext } from '@context/trainContext';
 import { useUI } from '@context/uiContext';
 import registNo from '@data/registerNumber.json';
-import { PATTERN_COMPANY_REGISTER } from '@helpers/constantValidation';
+// import { PATTERN_COMPANY_REGISTER } from '@helpers/constantValidation';
 import AuthService from '@services/auth';
 import { Button, Form, Input, Select, Tooltip, Modal } from 'antd';
+import moment from 'moment';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -18,13 +19,13 @@ import PassengerInfoCard from '../passengerInfoCard';
 import style from './passengerInfo.module.scss';
 import ContentWrapper from './style';
 
-const { Option } = Select;
+// const { Option } = Select;
 
 export default function PassengerInfo() {
   const { t } = useTranslation(['steps']);
   const [confirmError, setConfirmError] = useState(null);
   const router = useRouter();
-  const [isCompany, setIsCompany] = useState(false);
+  // const [isCompany, setIsCompany] = useState(false);
   const { user } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useTrainContext();
   const { customer, setCustomer } = useTrainContext();
@@ -44,6 +45,7 @@ export default function PassengerInfo() {
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEmailVisible, setIsEmailVisible] = useState(false);
+  const { endDate } = useTrainContext();
 
   const isAuth = user ? true : false;
 
@@ -53,23 +55,23 @@ export default function PassengerInfo() {
     router.push('/auth/login');
   };
 
-  const handleCompany = value => {
-    let company = parseInt(value) === 0 ? false : true;
-    setIsCompany(company);
-    if (customer) {
-      customer.isCompany = parseInt(value) === 0 ? false : true;
-      setCustomer(customer);
-    } else {
-      let customer = {
-        companyRegister: '',
-        isCompany: parseInt(value) === 0 ? false : true,
-        email: '',
-        dialNumber: 976,
-        phoneNumber: '',
-      };
-      setCustomer(customer);
-    }
-  };
+  // const handleCompany = value => {
+  //   let company = parseInt(value) === 0 ? false : true;
+  //   setIsCompany(company);
+  //   if (customer) {
+  //     customer.isCompany = parseInt(value) === 0 ? false : true;
+  //     setCustomer(customer);
+  //   } else {
+  //     let customer = {
+  //       companyRegister: '',
+  //       isCompany: parseInt(value) === 0 ? false : true,
+  //       email: '',
+  //       dialNumber: 976,
+  //       phoneNumber: '',
+  //     };
+  //     setCustomer(customer);
+  //   }
+  // };
 
   const close = () => {
     setConfirmError(null);
@@ -93,23 +95,23 @@ export default function PassengerInfo() {
     }
   };
 
-  const handleCustomerRegister = async e => {
-    if (e.target.value.length === 7) {
-      if (customer) {
-        customer.companyRegister = e.target.value;
-        setCustomer(customer);
-      } else {
-        let customer = {
-          companyRegister: e.target.value,
-          isCompany: false,
-          email: '',
-          dialNumber: 976,
-          phoneNumber: '',
-        };
-        setCustomer(customer);
-      }
-    }
-  };
+  // const handleCustomerRegister = async e => {
+  //   if (e.target.value.length === 7) {
+  //     if (customer) {
+  //       customer.companyRegister = e.target.value;
+  //       setCustomer(customer);
+  //     } else {
+  //       let customer = {
+  //         companyRegister: e.target.value,
+  //         isCompany: false,
+  //         email: '',
+  //         dialNumber: 976,
+  //         phoneNumber: '',
+  //       };
+  //       setCustomer(customer);
+  //     }
+  //   }
+  // };
 
   const passengerLastName = e => {
     selectedSeats[e.target.id - 1].lastName = e.target.value;
@@ -161,6 +163,7 @@ export default function PassengerInfo() {
           const res = await AuthService.verifyCode(payload);
           if (res && res.status === 200) {
             console.log(res);
+            setCurrent(current + 1);
           }
           if (res && res.status === 400) {
             setConfirmError(res.message);
@@ -177,6 +180,19 @@ export default function PassengerInfo() {
 
   return (
     <Layout>
+      {endDate ? (
+        <div className="text-center mt-5 mb-1 max-w-7xl mx-auto px-2 cursor-pointer">
+          <div className="font-semibold text-xs text-cardDate  justify-center gap-2 bg-white py-5 rounded-lg md:flex md:text-base">
+            Та захиалгаа{' '}
+            <p className="text-yellow-400">
+              {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
+            </p>
+            -аас өмнө хийж дуусгана уу!
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
       <Form name="busBookingItem" onFinish={onFinish}>
         <div className={style.body}>
           <div className={style.content}>
@@ -198,7 +214,7 @@ export default function PassengerInfo() {
                     {t('passengerInformationTitle')}
                   </h1>
                   <div className="w-full px-4 pt-2 pb-4">
-                    <div className={style.InfoForm}>
+                    {/* <div className={style.InfoForm}>
                       <div className={style.leftContent}>
                         <label
                           className="text-cardDate px-2 font-medium"
@@ -240,7 +256,7 @@ export default function PassengerInfo() {
                           />
                         </Form.Item>
                       </div>
-                    </div>
+                    </div> */}
                     <div className={style.InfoForm}>
                       <div className={style.leftContent}>
                         <label
@@ -335,7 +351,7 @@ export default function PassengerInfo() {
                               passengerNumber={i}
                             />
                           </div>
-                          <div className={style.rightContent}>
+                          {/* <div className={style.rightContent}>
                             <label className={style.Label} htmlFor="Vaccine">
                               {t('checkVaccineTitle')}
                             </label>
@@ -346,7 +362,7 @@ export default function PassengerInfo() {
                                 ? '' + t('yesVaccine') + ''
                                 : '' + t('noVaccine') + ''}
                             </p>
-                          </div>
+                          </div> */}
                         </div>
                         <div className={style.InfoForm}>
                           <div className={style.leftContent}>

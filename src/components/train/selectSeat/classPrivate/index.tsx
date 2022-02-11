@@ -1,11 +1,11 @@
+import Loader from '@components/train/loader';
 import { useTrainContext } from '@context/trainContext';
 import { arrayFilterSeat } from '@helpers/train-array-format';
 import TrainService from '@services/train';
-import React from 'react';
+import { message } from 'antd';
+import moment from 'moment';
+import React, { useState } from 'react';
 import s from './classPrivate.module.scss';
-
-const seats = [];
-const isSelected = [];
 
 const classPrivate = ({
   data,
@@ -16,44 +16,64 @@ const classPrivate = ({
   wagonId,
 }) => {
   const { selectedSeats, setSelectedSeats } = useTrainContext();
-  const { isSelectedSeats, setIsSelectedSeats } = useTrainContext();
   const { orderId, setOrderId } = useTrainContext();
+  const [isSelected] = useState([]);
+  const [isLoadingSeat, setIsLoadingSeat] = useState(false);
+  const { setEndMinute } = useTrainContext();
+  const { setEndDate } = useTrainContext();
+  const { setIsSelectedSeats } = useTrainContext();
 
   const selectSeat = async e => {
-    let isArray = arrayFilterSeat(seats, e.target.value, wagonName, voyageId);
+    setIsLoadingSeat(true);
+    let isArray = arrayFilterSeat(
+      selectedSeats,
+      e.target.value,
+      wagonName,
+      voyageId
+    );
     if (isArray.length === 0) {
       let passenger = {
-        id: '',
         firstName: '',
         lastName: '',
-        documentNumber: '',
-        gender: '',
-        isChild: false,
-        isVaccine: false,
-        isOrderedTea: false,
+        registerNumber: '',
+        isOrderedTea: 0,
         seatNumber: e.target.value,
         voyageId: voyageId,
         wagonName: wagonName,
       };
-      seats.push(passenger);
-      isSelected[voyageId + wagonName + e.target.value] = true;
-      setSelectedSeats(seats);
-      setIsSelectedSeats(isSelected);
+      if (selectedSeats.length >= 4) {
+        message.warning('Та 4-өөс их суудал сонгох боломжгүй!');
+        setIsLoadingSeat(false);
+      } else {
+        selectedSeats.push(passenger);
+        isSelected[voyageId + wagonName + e.target.value] = true;
+        setIsSelectedSeats(isSelected);
+        setSelectedSeats(selectedSeats);
+        let params = {
+          mest_id: e.target.value,
+          wagon_id: wagonId,
+          start_stop: startStop,
+          end_stop: endStop,
+          state: 1,
+          order_id: orderId ? orderId : 0,
+        };
 
-      let params = {
-        mest_id: e.target.value,
-        wagon_id: wagonId,
-        start_stop: startStop,
-        end_stop: endStop,
-        state: 1,
-        order_id: orderId ? orderId : 0,
-      };
+        try {
+          const res = await TrainService.setMestState(params);
+          if (res && res.status === 200) {
+            setOrderId(res.order_id);
+            setIsLoadingSeat(false);
 
-      try {
-        const res = await TrainService.setMestState(params);
-        if (res && res.status === 200) setOrderId(res.order_id);
-      } catch (err) {
-        console.log(err);
+            var now = moment(new Date()),
+              end = moment(res.result.expired_date),
+              minutes = end.diff(now, 'minutes');
+            setEndMinute(minutes);
+            setEndDate(res.result.expired_date);
+          }
+        } catch (err) {
+          console.log(err);
+          setIsLoadingSeat(false);
+        }
       }
     } else {
       const index = selectedSeats.findIndex(
@@ -63,10 +83,9 @@ const classPrivate = ({
       if (index > -1) {
         selectedSeats.splice(index, 1);
         isSelected[voyageId + wagonName + e.target.value] = false;
+        setIsSelectedSeats(isSelected);
         setSelectedSeats(selectedSeats);
-        setIsSelectedSeats(isSelectedSeats);
       }
-
       let params = {
         mest_id: e.target.value,
         wagon_id: wagonId,
@@ -77,14 +96,20 @@ const classPrivate = ({
       };
 
       try {
-        await TrainService.setMestState(params);
+        const res = await TrainService.setMestState(params);
+        if (res && res.status === 200) {
+          setIsLoadingSeat(false);
+        }
       } catch (err) {
         console.log(err);
+        setIsLoadingSeat(false);
       }
     }
   };
 
-  return (
+  return isLoadingSeat ? (
+    <Loader />
+  ) : (
     <>
       {data?.map((mests, index) => (
         <div className="flex gap-x-0" key={index}>
@@ -106,7 +131,7 @@ const classPrivate = ({
                             : 'opacity-100 hover:opacity-80'
                         }     
                         ${
-                          isSelectedSeats[voyageId + wagonName + mest.MEST_NO]
+                          isSelected[voyageId + wagonName + mest.MEST_NO]
                             ? 'bg-white border-2 border-red-500 text-red-500'
                             : 'bg-bg border-2 text-trainTicket'
                         }   
@@ -141,7 +166,7 @@ const classPrivate = ({
                             : 'opacity-100 hover:opacity-80'
                         }
                          ${
-                           isSelectedSeats[voyageId + wagonName + mest.MEST_NO]
+                           isSelected[voyageId + wagonName + mest.MEST_NO]
                              ? 'bg-white border-2 border-red-500 text-red-500'
                              : 'bg-bg border-2 text-trainTicket'
                          }

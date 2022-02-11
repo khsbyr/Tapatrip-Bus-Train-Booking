@@ -1,3 +1,5 @@
+import cyrillicToLatin from './cyrillic-to-latin';
+
 export function availableDatesFormat(data: any) {
   const arr = [];
   data &&
@@ -56,7 +58,7 @@ export function arrayFilterSeat(
 ) {
   let result =
     data &&
-    data.filter(function (currentElement) {
+    data?.filter(function (currentElement) {
       return (
         currentElement.seatNumber === value &&
         currentElement.wagonName === wagonName &&
@@ -76,4 +78,17 @@ export function arrayFilterPrevSearch(data: any, endStation, startStation) {
       );
     });
   return result;
+}
+
+export function startLocationFormat(data: any) {
+  const arr = [];
+  data &&
+    data.map(element =>
+      arr.push({
+        station_id: element.station_id,
+        station_name: element.station_name,
+        station_latinName: cyrillicToLatin(element.station_name),
+      })
+    );
+  return arr;
 }

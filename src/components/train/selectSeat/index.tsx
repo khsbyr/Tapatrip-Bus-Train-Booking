@@ -9,9 +9,10 @@ import React, { useEffect, useState } from 'react';
 import SeatCard from '../seatCard';
 import ClassPrivate from './classPrivate';
 import ClassPublic from './classPublic';
-import Loader from '@components/common/loader';
+import Loader from '@components/train/loader';
 import { useGlobalStore } from '@context/globalStore';
 import Layout from '@components/common/layout';
+import moment from 'moment';
 
 export default function SelectSeats() {
   const { current, setCurrent } = useGlobalStore();
@@ -23,6 +24,7 @@ export default function SelectSeats() {
   const { voyageId, startStop, endStop, priceType } = router.query;
   const { selectedVoyageData } = useTrainContext();
   const [loading, setLoading] = useState(false);
+  const { endDate } = useTrainContext();
 
   useEffect(() => {
     async function getTrainStations() {
@@ -36,9 +38,9 @@ export default function SelectSeats() {
       try {
         const res = await TrainService.getWagonData(params);
         if (res && res.status === 200) {
-          setWagonData(res.result);
-          setWagonId(res.result[0]?.WAGON);
-          getMest(res.result[0]);
+          setWagonData(res?.result);
+          setWagonId(res?.result[0]?.WAGON);
+          getMest(res?.result[0]);
         }
       } catch (err) {
         console.log(err);
@@ -47,14 +49,28 @@ export default function SelectSeats() {
     getTrainStations();
   }, []);
 
+  if (endDate) {
+    const interval = setInterval(() => {
+      if (
+        moment().format('YYYY-MM-DD hh:mm') ===
+        moment(endDate).format('YYYY-MM-DD hh:mm')
+      ) {
+        router.push({
+          pathname: `/train`,
+        });
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
+
   const getMest = async wagon => {
     setLoading(true);
-    setWagonName(wagon.NAME);
-    setWagonId(wagon.WAGON);
+    setWagonName(wagon?.NAME);
+    setWagonId(wagon?.WAGON);
     let params = {
       uid: 1,
       order_id: 0,
-      wagon_id: wagon.WAGON,
+      wagon_id: wagon?.WAGON,
       start_stop: startStop,
       end_stop: endStop,
       mest_no: 0,
@@ -104,6 +120,19 @@ export default function SelectSeats() {
 
   return (
     <Layout>
+      {endDate ? (
+        <div className="text-center mt-5 mb-1 max-w-7xl mx-auto px-2 cursor-pointer">
+          <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
+            Та захиалгаа{' '}
+            <span className="text-yellow-400">
+              {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
+            </span>{' '}
+            -аас өмнө хийж дуусгана уу!
+          </p>
+        </div>
+      ) : (
+        ''
+      )}
       <div className="max-w-7xl mx-auto py-5 space-y-3 md:space-y-0 md:flex">
         <div className=" w-12/12 md:w-6/12 lg:w-3/12">
           <div className="bg-white rounded-lg p-4 space-y-3 flex-none mx-2">
@@ -153,7 +182,7 @@ export default function SelectSeats() {
                         : 'text-trainTicket'
                     }`}
                   >
-                    {wagon.NAME}-р вагон
+                    {wagon?.NAME}-р вагон
                   </h1>
 
                   <h1 className="text-sm text-trainTicket">
@@ -166,7 +195,11 @@ export default function SelectSeats() {
             ))}
           </div>
           <div className="w-12/12 mt-3 hidden md:block lg:hidden">
-            <SeatCard voyage={selectedVoyageData} voyageId={voyageId} />
+            <SeatCard
+              voyage={selectedVoyageData}
+              voyageId={voyageId}
+              wagonId={wagonId}
+            />
           </div>
         </div>
 
@@ -206,7 +239,11 @@ export default function SelectSeats() {
         </div>
 
         <div className="w-12/12 md:hidden lg:block lg:w-4/12">
-          <SeatCard voyage={selectedVoyageData} voyageId={voyageId} />
+          <SeatCard
+            voyage={selectedVoyageData}
+            voyageId={voyageId}
+            wagonId={wagonId}
+          />
         </div>
       </div>
     </Layout>

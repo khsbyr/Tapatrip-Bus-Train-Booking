@@ -1,8 +1,8 @@
 import LoadingRing from '@components/common/loadingRing';
 import { useTrainContext } from '@context/trainContext';
 import {
-  arrayFilterPrevSearch,
   availableDatesFormat,
+  startLocationFormat,
 } from '@helpers/train-array-format';
 import TrainService from '@services/train';
 import { AutoComplete, DatePicker, message } from 'antd';
@@ -41,7 +41,9 @@ export default function SearchInput({ stationData }) {
       let params = `?fromStation=${startStationID}&toStation=${endStationID}`;
       try {
         const res = await TrainService.getAvailableDates(params);
-        if (res && res.status === 200) setAvailableDates(res.result);
+        if (res && res.status === 200) {
+          setAvailableDates(res.result);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -75,34 +77,35 @@ export default function SearchInput({ stationData }) {
   const searchTrain = async () => {
     if (startStationID && endStationID && selectDate) {
       setLoading(true);
-      const recent = [];
 
-      recent.push({
+      const paramSearch = {
         startStation: startStationID,
         endStation: endStationID,
-        startStationName: startStationName,
-        endStationName: endStationName,
-      });
+        startName: startStationName,
+        endName: endStationName,
+        time: moment().format('YYYY-MM-DD hh:mm:ss').toString(),
+      };
 
-      let prevSearch = JSON.parse(localStorage.getItem('lastSearch'));
+      const recent = [];
+
+      recent.push(paramSearch);
+
+      let prevSearch = JSON.parse(localStorage.getItem('lastSearchTrain'));
 
       if (prevSearch) {
-        let isArray = arrayFilterPrevSearch(
-          prevSearch,
-          endStationID,
-          startStationID
+        const index = prevSearch.findIndex(
+          item =>
+            item.startStation === startStationID &&
+            item.endStation === endStationID
         );
-        if (isArray.length === 0) {
-          prevSearch.push({
-            startStation: recent[0].startStation,
-            endStation: recent[0].endStation,
-            startStationName: recent[0].startStationName,
-            endStationName: recent[0].endStationName,
-          });
-          localStorage.setItem('lastSearch', JSON.stringify(prevSearch));
-        }
+        if (index > -1) {
+          prevSearch.splice(index, 1);
+          prevSearch.push(paramSearch);
+          localStorage.setItem('lastSearchTrain', JSON.stringify(prevSearch));
+        } else prevSearch.push(paramSearch);
+        localStorage.setItem('lastSearchTrain', JSON.stringify(prevSearch));
       } else {
-        localStorage.setItem('lastSearch', JSON.stringify(recent));
+        localStorage.setItem('lastSearchTrain', JSON.stringify(recent));
       }
 
       const params = {
@@ -132,12 +135,17 @@ export default function SearchInput({ stationData }) {
             placeholder={t('startCity')}
             onSelect={SelectStartStation}
             filterOption={(input, option) =>
-              option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+              option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
             defaultValue={`${startName ? startName : ''}`}
           >
-            {stationData?.map(station => (
-              <Option key={station.station_id} value={station.station_name}>
+            {startLocationFormat(stationData)?.map(station => (
+              <Option
+                key={station.station_id}
+                value={station.station_name}
+                title={station.station_latinName}
+              >
                 <div className="flex items-center">
                   <img
                     className="w-7 h-7 text-direction pr-3"
@@ -161,12 +169,17 @@ export default function SearchInput({ stationData }) {
             placeholder={t('endCity')}
             onSelect={SelectEndStation}
             filterOption={(input, option) =>
-              option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+              option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
             defaultValue={`${endName ? endName : ''}`}
           >
-            {stationData?.map(station => (
-              <Option key={station.station_id} value={station.station_name}>
+            {startLocationFormat(stationData)?.map(station => (
+              <Option
+                key={station.station_id}
+                value={station.station_name}
+                title={station.station_latinName}
+              >
                 <div className="flex items-center">
                   <img
                     className="w-7 h-7 text-direction pr-3"

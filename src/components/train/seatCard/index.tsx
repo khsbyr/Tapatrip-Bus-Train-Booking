@@ -1,22 +1,26 @@
 import { useGlobalStore } from '@context/globalStore';
 import { useTrainContext } from '@context/trainContext';
 import { MinusIcon } from '@heroicons/react/solid';
-import { Tooltip, Checkbox } from 'antd';
+import { Checkbox, Tooltip } from 'antd';
 import React from 'react';
 import style from './seatCard.module.scss';
+import { useRouter } from 'next/router';
+import TrainService from '@services/train';
 
-export default function seatCard({ voyage, voyageId }) {
+export default function seatCard({ voyage, voyageId, wagonId }) {
   const { current, setCurrent } = useGlobalStore();
   const { setSelectedSeats, selectedSeats } = useTrainContext();
   const { isSelectedSeats, setIsSelectedSeats } = useTrainContext();
+  const router = useRouter();
+  const { startStop, endStop } = router.query;
+  const { orderId } = useTrainContext();
 
   const takeTea = e => {
-    selectedSeats[e.target.id - 1].isOrderedTea =
-      e.target.value === false ? true : false;
+    selectedSeats[e.target.id - 1].isOrderedTea = e.target.value === 0 ? 1 : 0;
     setSelectedSeats(selectedSeats);
   };
 
-  const remove = (seat, wagonName) => {
+  const remove = async (seat, wagonName) => {
     const index = selectedSeats.findIndex(
       item => item.seatNumber === seat && item.wagonName === wagonName
     );
@@ -27,6 +31,25 @@ export default function seatCard({ voyage, voyageId }) {
       setSelectedSeats(selectedSeats);
       setIsSelectedSeats(isSelectedSeats);
     }
+
+    let params = {
+      mest_id: seat,
+      wagon_id: wagonId,
+      start_stop: startStop,
+      end_stop: endStop,
+      state: 0,
+      order_id: orderId,
+    };
+
+    try {
+      await TrainService.setMestState(params);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const order = () => {
+    setCurrent(current + 1);
   };
 
   return (
@@ -130,7 +153,7 @@ export default function seatCard({ voyage, voyageId }) {
             className={`${style.orderButton} ${
               selectedSeats && selectedSeats?.length > 0 ? 'block' : 'hidden'
             }`}
-            onClick={() => setCurrent(current + 1)}
+            onClick={order}
           >
             Захиалах
           </button>

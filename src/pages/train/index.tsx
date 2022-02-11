@@ -33,16 +33,16 @@ export default function Travel() {
     getTrainStations();
 
     if (typeof window !== 'undefined') {
-      setLastSearch(JSON.parse(localStorage.getItem('lastSearch')));
+      setLastSearch(JSON.parse(localStorage.getItem('lastSearchTrain')));
     }
   }, []);
 
   return (
     <div>
-      <Head>
-        <title>Tapatrip - Online Travel Platform1</title>
-      </Head>
       <Layout>
+        <Head>
+          <title>Tapatrip - Train Booking System</title>
+        </Head>
         <div className={styles.main}>
           <HeaderBackground />
           <Navbar navbarData={NavData} />
@@ -60,7 +60,7 @@ export async function getStaticProps({ locale }) {
   return {
     props: {
       NavData: res,
-      ...(await serverSideTranslations(locale, ['common', 'footer'])),
+      ...(await serverSideTranslations(locale, ['common', 'footer', 'train'])),
     },
   };
 }

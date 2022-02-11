@@ -1,0 +1,22 @@
+.ldsDualRing {
+  display: flex;
+  justify-content: center;
+}
+.ldsDualRing:after {
+  content: ' ';
+  display: block;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  border-color: #264e73 transparent #264e73 transparent;
+  animation: ldsDualRing 1.2s linear infinite;
+}
+@keyframes ldsDualRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

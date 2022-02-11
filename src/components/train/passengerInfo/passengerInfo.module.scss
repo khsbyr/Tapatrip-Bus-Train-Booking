@@ -17,7 +17,7 @@
   @apply pb-2 w-full bg-white rounded-lg shadow-md text-sm sm:text-base;
 }
 .customerInfoTitle {
-  @apply text-cardDate text-base sm:text-lg font-bold border-b-2 px-4 py-2;
+  @apply text-cardDate text-base sm:text-lg font-bold border-b px-4 py-2;
 }
 .InfoForm {
   @apply sm:mt-4 sm:grid grid-cols-2;
@@ -44,7 +44,7 @@
   @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base mr-3;
 }
 .passengerInfoTitle {
-  @apply flex justify-between w-full items-center text-cardDate text-base sm:text-lg font-bold border-b-2 px-4 py-2;
+  @apply flex justify-between w-full items-center text-cardDate text-base sm:text-lg font-bold border-b px-4 py-2;
 }
 .card {
   @apply w-full lg:w-2/5;

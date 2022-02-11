@@ -1,4 +1,4 @@
-import Client from '@lib/apiLocal';
+import Client from '@lib/apiClient';
 
 const TrainService = {
   async getTrainStations() {

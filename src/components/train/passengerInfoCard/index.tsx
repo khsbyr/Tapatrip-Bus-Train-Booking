@@ -7,7 +7,7 @@ import style from './passengerInfoCard.module.scss';
 
 export default function PassengerInfoCard({ voyage }) {
   return (
-    <div className="px-2 max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto">
       <div className={style.card}>
         <div className={style.headerSection}>
           <div className="flex space-x-3">

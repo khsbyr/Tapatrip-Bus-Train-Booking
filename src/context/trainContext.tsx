@@ -5,13 +5,15 @@ export interface State {
   endStationID: string;
   startStationName: string;
   endStationName: string;
-  selectedSeats: any;
+  selectedSeats: Array<object>;
   isSelectedSeats: any;
   selectedVoyageData: any;
   loading: boolean;
   loadingOrder: any;
   orderId: any;
   customer: any;
+  endMinute: any;
+  endDate: any;
 }
 
 const initialState = {
@@ -19,13 +21,15 @@ const initialState = {
   endStationID: '',
   startStationName: '',
   endStationName: '',
-  selectedSeats: '',
+  selectedSeats: [],
   isSelectedSeats: '',
   selectedVoyageData: '',
   loading: false,
   loadingOrder: '',
   orderId: undefined,
   customer: '',
+  endMinute: '',
+  endDate: '',
 };
 
 type Action =
@@ -47,7 +51,7 @@ type Action =
     }
   | {
       type: 'SET_SELECTED_SEATS';
-      value: any;
+      value: Array<object>;
     }
   | {
       type: 'SET_IS_SELECTED_SEATS';
@@ -71,6 +75,14 @@ type Action =
     }
   | {
       type: 'SET_CUSTOMER';
+      value: any;
+    }
+  | {
+      type: 'SET_END_MINUTE';
+      value: any;
+    }
+  | {
+      type: 'SET_END_DATE';
       value: any;
     };
 
@@ -155,6 +167,18 @@ function uiReducer(state: State, action: Action) {
         customer: action.value,
       };
     }
+    case 'SET_END_MINUTE': {
+      return {
+        ...state,
+        endMinute: action.value,
+      };
+    }
+    case 'SET_END_DATE': {
+      return {
+        ...state,
+        endDate: action.value,
+      };
+    }
   }
 }
 
@@ -182,7 +206,7 @@ export const GlobalProvider: FC = props => {
   );
 
   const setSelectedSeats = useCallback(
-    (value: any) => dispatch({ type: 'SET_SELECTED_SEATS', value }),
+    (value: Array<object>) => dispatch({ type: 'SET_SELECTED_SEATS', value }),
     [dispatch]
   );
 
@@ -216,6 +240,16 @@ export const GlobalProvider: FC = props => {
     [dispatch]
   );
 
+  const setEndMinute = useCallback(
+    (value: any) => dispatch({ type: 'SET_END_MINUTE', value }),
+    [dispatch]
+  );
+
+  const setEndDate = useCallback(
+    (value: any) => dispatch({ type: 'SET_END_DATE', value }),
+    [dispatch]
+  );
+
   const value = useMemo(
     () => ({
       ...state,
@@ -230,6 +264,8 @@ export const GlobalProvider: FC = props => {
       setLoadingOrder,
       setOrderId,
       setCustomer,
+      setEndMinute,
+      setEndDate,
     }),
     [state]
   );
