@@ -51,7 +51,7 @@ export default function Layout({ children }) {
           content="автобус, билет захиалга, автобусны билет захиалга, автобусны билет захиалга үнэ, автобусны хуваарь үнэ тариф, Bus, Train"
         />
          <meta
-          property="og:image"
+          property="og:image:secure_url"
           content="https://tapatrip.com/images/fb_cover.jpg"
         />
         <title>Tapatrip - Bus Booking System</title>
