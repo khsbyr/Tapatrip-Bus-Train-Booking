@@ -44,6 +44,10 @@ export default function Layout({ children }) {
           key="ogurl"
           content="https://www.bus.tapatrip.com"
         />
+        <meta
+          property="og:image"
+          content="https://tapatrip.com/images/fb_cover.jpg"
+        />
         <meta property="og:type" key="ogtype" content="website" />
         <meta
           property="og:description"
