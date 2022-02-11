@@ -55,7 +55,6 @@ export default function Layout({ children }) {
         <meta property="og:type" key="ogtype" content="website" />
         <meta
           property="og:description"
-          key="ogdesc"
           content="автобус, билет захиалга, автобусны билет захиалга, автобусны билет захиалга үнэ, автобусны хуваарь үнэ тариф, Bus, Train"
         />
         <meta
