@@ -40,7 +40,7 @@ const RegisterNumber = ({ registNo, passengerNumber }) => {
       const registerNumber = values1 + values2 + e.target.value;
       const resError = registerNumberCheck(registerNumber);
       if (!resError) {
-        selectedSeats[passengerNumber - 1].registerNumber = registerNumber;
+        selectedSeats[passengerNumber].registerNumber = registerNumber;
         setSelectedSeats(selectedSeats);
       }
     }

@@ -28,6 +28,9 @@
 .Label {
   @apply after:content-['*'] after:ml-0.5 after:text-red-500 text-cardDate text-sm sm:text-base px-2 font-medium;
 }
+.Labelreq {
+  @apply text-cardDate text-sm sm:text-base px-2 font-medium;
+}
 .leftContent {
   @apply w-full space-y-2 sm:pr-2 h-24;
 }
@@ -39,6 +42,9 @@
 }
 .input {
   @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base;
+}
+.datepicker {
+  @apply z-0 rounded-lg bg-bg border-0 p-2 py-3.5 text-cardDate text-sm sm:text-base w-full hover:border-none;
 }
 .inputEmail {
   @apply z-0 rounded-lg bg-bg border-0 p-2 py-3 text-cardDate text-sm sm:text-base mr-3;

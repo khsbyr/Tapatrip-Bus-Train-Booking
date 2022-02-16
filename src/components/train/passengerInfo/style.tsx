@@ -41,6 +41,11 @@ const ContentWrapper = styled.div`
     :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
     background-color: #f1f2f6 !important;
   }
+
+  .ant-form-item-has-error .ant-input-number,
+  .ant-form-item-has-error .ant-picker {
+    background-color: #f1f2f6 !important;
+  }
 `;
 
 export default ContentWrapper;

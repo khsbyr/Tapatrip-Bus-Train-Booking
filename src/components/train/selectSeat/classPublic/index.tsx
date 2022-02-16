@@ -1,4 +1,4 @@
-import Loader from '@components/train/loader';
+import LoadingRingSeat from '@components/train/loadingRing';
 import { useTrainContext } from '@context/trainContext';
 import { arrayFilterSeat } from '@helpers/train-array-format';
 import TrainService from '@services/train';
@@ -19,11 +19,11 @@ const classPublic = ({
   const { orderId, setOrderId } = useTrainContext();
   const [isSelected] = useState([]);
   const [isLoadingSeat, setIsLoadingSeat] = useState(false);
-  const { setEndMinute } = useTrainContext();
-  const { setEndDate } = useTrainContext();
-  const { setIsSelectedSeats } = useTrainContext();
+  const { setEndMinute, setEndDate, setIsSelectedSeats } = useTrainContext();
+  const [seatLoading, setSeatLoading] = useState();
 
   const selectSeat = async e => {
+    setSeatLoading(e.target.value);
     setIsLoadingSeat(true);
     let isArray = arrayFilterSeat(
       selectedSeats,
@@ -36,7 +36,10 @@ const classPublic = ({
         firstName: '',
         lastName: '',
         registerNumber: '',
+        passportNumber: '',
+        birthDate: '',
         isOrderedTea: 0,
+        isForeign: false,
         seatNumber: e.target.value,
         voyageId: voyageId,
         wagonName: wagonName,
@@ -68,6 +71,7 @@ const classPublic = ({
               end = moment(res.result.expired_date),
               minutes = end.diff(now, 'minutes');
             setEndMinute(minutes);
+
             setEndDate(res.result.expired_date);
           }
         } catch (err) {
@@ -107,9 +111,7 @@ const classPublic = ({
     }
   };
 
-  return isLoadingSeat ? (
-    <Loader />
-  ) : (
+  return (
     <>
       {data?.map((mests, index) => (
         <div className="flex gap-x-5 lg:gap-x-14" key={index}>
@@ -129,11 +131,21 @@ const classPublic = ({
                    }
                   `}
                   key={index}
-                  disabled={mest.MEST_STATE !== '0' ? true : false}
+                  disabled={
+                    mest.MEST_STATE !== '0'
+                      ? true
+                      : isLoadingSeat
+                      ? true
+                      : false
+                  }
                   onClick={selectSeat}
                   value={mest.MEST_NO}
                 >
-                  {mest.MEST_NO}
+                  {isLoadingSeat && parseInt(seatLoading) === mest.MEST_NO ? (
+                    <LoadingRingSeat />
+                  ) : (
+                    mest.MEST_NO
+                  )}
                 </button>
               ) : (
                 ''
@@ -159,11 +171,21 @@ const classPublic = ({
                          }              
                         `}
                     key={index}
-                    disabled={mest.MEST_STATE !== '0' ? true : false}
+                    disabled={
+                      mest.MEST_STATE !== '0'
+                        ? true
+                        : isLoadingSeat
+                        ? true
+                        : false
+                    }
                     onClick={selectSeat}
                     value={mest.MEST_NO}
                   >
-                    {mest.MEST_NO}
+                    {isLoadingSeat && parseInt(seatLoading) === mest.MEST_NO ? (
+                      <LoadingRingSeat />
+                    ) : (
+                      mest.MEST_NO
+                    )}
                   </button>
                 ) : (
                   ''
@@ -191,11 +213,21 @@ const classPublic = ({
                          }
                     `}
                     key={index}
-                    disabled={mest.MEST_STATE !== '0' ? true : false}
+                    disabled={
+                      mest.MEST_STATE !== '0'
+                        ? true
+                        : isLoadingSeat
+                        ? true
+                        : false
+                    }
                     onClick={selectSeat}
                     value={mest.MEST_NO}
                   >
-                    {mest.MEST_NO}
+                    {isLoadingSeat && parseInt(seatLoading) === mest.MEST_NO ? (
+                      <LoadingRingSeat />
+                    ) : (
+                      mest.MEST_NO
+                    )}
                   </button>
                 ) : (
                   ''

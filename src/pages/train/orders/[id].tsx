@@ -7,6 +7,7 @@ import SelectSeats from '@components/train/selectSeat';
 import React, { useEffect } from 'react';
 import { useTrainContext } from '@context/trainContext';
 import PassengerInfo from '@components/train/passengerInfo';
+import Payment from '@components/train/payment';
 
 const { Step } = Steps;
 
@@ -27,7 +28,7 @@ export default function Order() {
     },
     {
       title: 'Make Payment',
-      content: '',
+      content: <Payment />,
       button: 'Payment Button',
     },
   ];

@@ -1,16 +1,23 @@
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import ConfirmModal from '@components/common/confirmModal';
 import Layout from '@components/common/layout';
-// import StepCard from '../stepCard';
 import InputPhoneNumber from '@components/train/phoneNumber';
 import RegisterNumber from '@components/train/registerNumber';
 import { useGlobalStore } from '@context/globalStore';
 import { useTrainContext } from '@context/trainContext';
 import { useUI } from '@context/uiContext';
 import registNo from '@data/registerNumber.json';
-// import { PATTERN_COMPANY_REGISTER } from '@helpers/constantValidation';
 import AuthService from '@services/auth';
-import { Button, Form, Input, Select, Tooltip, Modal } from 'antd';
+import {
+  Button,
+  Form,
+  Input,
+  Select,
+  Tooltip,
+  Modal,
+  Checkbox,
+  DatePicker,
+} from 'antd';
 import moment from 'moment';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -19,26 +26,21 @@ import PassengerInfoCard from '../passengerInfoCard';
 import style from './passengerInfo.module.scss';
 import ContentWrapper from './style';
 
-// const { Option } = Select;
-
 export default function PassengerInfo() {
   const { t } = useTranslation(['steps']);
   const [confirmError, setConfirmError] = useState(null);
   const router = useRouter();
-  // const [isCompany, setIsCompany] = useState(false);
   const { user } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useTrainContext();
   const { customer, setCustomer } = useTrainContext();
   const { selectedVoyageData } = useTrainContext();
   const {
-    displayBlock,
     setDisplayBlock,
     setDisplayNone,
     setDisplayLoading,
     openLoadingConfirm,
     displayLoadingConfirm,
     closeLoadingConfirm,
-    openLoadingPassengerInfo,
     displayLoadingPassengerInfo,
     closeLoadingPassengerInfo,
   } = useUI();
@@ -54,24 +56,6 @@ export default function PassengerInfo() {
     setDisplayLoading('');
     router.push('/auth/login');
   };
-
-  // const handleCompany = value => {
-  //   let company = parseInt(value) === 0 ? false : true;
-  //   setIsCompany(company);
-  //   if (customer) {
-  //     customer.isCompany = parseInt(value) === 0 ? false : true;
-  //     setCustomer(customer);
-  //   } else {
-  //     let customer = {
-  //       companyRegister: '',
-  //       isCompany: parseInt(value) === 0 ? false : true,
-  //       email: '',
-  //       dialNumber: 976,
-  //       phoneNumber: '',
-  //     };
-  //     setCustomer(customer);
-  //   }
-  // };
 
   const close = () => {
     setConfirmError(null);
@@ -94,32 +78,29 @@ export default function PassengerInfo() {
       setCustomer(customer);
     }
   };
-
-  // const handleCustomerRegister = async e => {
-  //   if (e.target.value.length === 7) {
-  //     if (customer) {
-  //       customer.companyRegister = e.target.value;
-  //       setCustomer(customer);
-  //     } else {
-  //       let customer = {
-  //         companyRegister: e.target.value,
-  //         isCompany: false,
-  //         email: '',
-  //         dialNumber: 976,
-  //         phoneNumber: '',
-  //       };
-  //       setCustomer(customer);
-  //     }
-  //   }
-  // };
-
-  const passengerLastName = e => {
-    selectedSeats[e.target.id - 1].lastName = e.target.value;
+  const passengerLastName = (e, i) => {
+    selectedSeats[i].lastName = e.target.value;
     setSelectedSeats(selectedSeats);
   };
 
-  const passengerFirstName = e => {
-    selectedSeats[e.target.id - 1].firstName = e.target.value;
+  const passengerFirstName = (e, i) => {
+    selectedSeats[i].firstName = e.target.value;
+    setSelectedSeats(selectedSeats);
+  };
+
+  const passangerPassportNo = (e, i) => {
+    selectedSeats[i].passportNumber = e.target.value;
+    setSelectedSeats(selectedSeats);
+  };
+
+  const foreign = e => {
+    selectedSeats[e.target.id].isForeign =
+      e.target.value === false ? true : false;
+    setSelectedSeats(selectedSeats);
+  };
+
+  const birthDate = (e, dateString, i) => {
+    selectedSeats[i].birthDate = dateString;
     setSelectedSeats(selectedSeats);
   };
 
@@ -155,7 +136,7 @@ export default function PassengerInfo() {
     let payload = {
       phone: customer.phoneNumber,
       dialCode: customer.dialNumber,
-      code: pinCode,
+      code: '0000',
     };
     if (pinCode.length > 3) {
       try {
@@ -177,6 +158,8 @@ export default function PassengerInfo() {
     }
     closeLoadingConfirm();
   };
+
+  console.log(selectedSeats);
 
   return (
     <Layout>
@@ -214,49 +197,6 @@ export default function PassengerInfo() {
                     {t('passengerInformationTitle')}
                   </h1>
                   <div className="w-full px-4 pt-2 pb-4">
-                    {/* <div className={style.InfoForm}>
-                      <div className={style.leftContent}>
-                        <label
-                          className="text-cardDate px-2 font-medium"
-                          htmlFor="type"
-                        ></label>
-                        <Form.Item name="type">
-                          <Select onChange={handleCompany} defaultValue="0">
-                            <Option value="0">{t('individual')}</Option>
-                            <Option value="1">{t('organization')}</Option>
-                          </Select>
-                        </Form.Item>
-                      </div>
-                      <div className={style.rightContent}>
-                        <label
-                          className="text-cardDate px-2 font-medium"
-                          htmlFor="companyRegister"
-                        >
-                          {t(`registerNumber`)}
-                        </label>
-                        <Form.Item
-                          name="companyRegister"
-                          rules={[
-                            {
-                              pattern: PATTERN_COMPANY_REGISTER,
-                              message: t('registerNumberWarning'),
-                            },
-                            isCompany && {
-                              required: true,
-                              message:
-                                'Компаний регистерийн дугаараа оруулна уу?',
-                            },
-                          ]}
-                        >
-                          <Input
-                            disabled={!isCompany}
-                            className={style.input}
-                            onChange={handleCustomerRegister}
-                            placeholder={t('organizationRNumberPlaceholder')}
-                          />
-                        </Form.Item>
-                      </div>
-                    </div> */}
                     <div className={style.InfoForm}>
                       <div className={style.leftContent}>
                         <label
@@ -330,74 +270,137 @@ export default function PassengerInfo() {
                   selectedSeats.map((seat, i) => (
                     <div key={i} className={style.Information}>
                       <div className={style.passengerInfoTitle}>
-                        <h1 className="text-cardDate">
-                          {t('passengerIndex')} {++i}
-                        </h1>
-
                         <p>
                           <h1 className="text-cardDate">
                             Суудал: {seat.seatNumber}
                           </h1>
                         </p>
+
+                        <div>
+                          <Checkbox
+                            onChange={foreign}
+                            id={i}
+                            value={seat.isForeign}
+                          >
+                            <h1 className="text-cardDate text-base">
+                              Гадаад иргэн
+                            </h1>
+                          </Checkbox>
+                        </div>
                       </div>
                       <div className="w-full px-4 py-2">
                         <div className={style.InfoForm}>
-                          <div className={style.leftContent}>
-                            <label className={style.Label} htmlFor="RegisterNo">
-                              {t('registerNumber')}
+                          {seat.isForeign ? (
+                            <div className={style.leftContent}>
+                              <label
+                                className={style.Label}
+                                htmlFor="birthDate"
+                              >
+                                Төрсөн он, сар, өдөр
+                              </label>
+                              <Form.Item
+                                name={`birthDate` + i}
+                                rules={[
+                                  {
+                                    required: true,
+                                    message:
+                                      'Зорчигчийн төрсөн он, сар, өдөр заавал бөглөнө үү!',
+                                  },
+                                ]}
+                              >
+                                <DatePicker
+                                  className={style.datepicker}
+                                  placeholder="Төрсөн он, сар, өдөр"
+                                  onChange={(e, dateString) =>
+                                    birthDate(e, dateString, i)
+                                  }
+                                />
+                              </Form.Item>
+                            </div>
+                          ) : (
+                            <div className={style.leftContent}>
+                              <label
+                                className={style.Label}
+                                htmlFor="RegisterNo"
+                              >
+                                {t('registerNumber')}
+                              </label>
+                              <RegisterNumber
+                                registNo={registNo}
+                                passengerNumber={i}
+                              />
+                            </div>
+                          )}
+                          <div className={style.rightContent}>
+                            <label
+                              className={
+                                seat.isForeign ? style.Label : style.Labelreq
+                              }
+                              htmlFor="passportNo"
+                            >
+                              Пасспортын дугаар
                             </label>
-                            <RegisterNumber
-                              registNo={registNo}
-                              passengerNumber={i}
-                            />
+                            <Form.Item
+                              name={`passportNo` + i}
+                              rules={[
+                                {
+                                  required: seat.isForeign ? true : false,
+                                  message:
+                                    'Зорчигчийн пасспорт заавал бөглөнө үү!',
+                                },
+                              ]}
+                            >
+                              <Input
+                                className={style.input}
+                                value={seat.passportNumber}
+                                placeholder="Пасспортын дугаар"
+                                onChange={e => passangerPassportNo(e, i)}
+                              />
+                            </Form.Item>
                           </div>
-                          {/* <div className={style.rightContent}>
-                            <label className={style.Label} htmlFor="Vaccine">
-                              {t('checkVaccineTitle')}
-                            </label>
-                            <p className={style.input}>
-                              {seat.documentNumber === ''
-                                ? '?'
-                                : seat.isVaccine
-                                ? '' + t('yesVaccine') + ''
-                                : '' + t('noVaccine') + ''}
-                            </p>
-                          </div> */}
                         </div>
                         <div className={style.InfoForm}>
                           <div className={style.leftContent}>
                             <label className={style.Label} htmlFor="lastName">
                               {t('passengerLastName')}
                             </label>
-                            <Input
-                              id={i}
-                              value={seat.lastName}
-                              className={style.input}
-                              placeholder={t('passengerLastNamePlaceholder')}
-                              onChange={passengerLastName}
-                            />
-                            {seat.lastNameError && (
-                              <span className="text-red-500 text-sm">
-                                {seat.lastNameError}
-                              </span>
-                            )}
+                            <Form.Item
+                              name={`lastName` + i}
+                              rules={[
+                                {
+                                  required: true,
+                                  message: 'Зорчигчийн овог заавал бөглөнө үү!',
+                                },
+                              ]}
+                            >
+                              <Input
+                                value={seat.lastName}
+                                className={style.input}
+                                placeholder={t('passengerLastNamePlaceholder')}
+                                onChange={e => passengerLastName(e, i)}
+                              />
+                            </Form.Item>
                           </div>
                           <div className={style.rightContent}>
                             <label className={style.Label} htmlFor="firstName">
                               {t('passengerFirstName')}
                             </label>
-                            <Input
-                              id={i}
-                              className={style.input}
-                              value={seat.firstName}
-                              placeholder={t('passengerFirstNamePlaceholder')}
-                              onChange={passengerFirstName}
-                            />
-                            {seat.firstNameError && (
-                              <span className="text-red-500 text-sm">
-                                {seat.firstNameError}
-                              </span>
-                            )}
+                            <Form.Item
+                              name={`firstName` + i}
+                              rules={[
+                                {
+                                  required: true,
+                                  message: 'Зорчигчийн нэр заавал бөглөнө үү!',
+                                },
+                              ]}
+                            >
+                              <Input
+                                className={style.input}
+                                value={seat.firstName}
+                                placeholder={t('passengerFirstNamePlaceholder')}
+                                onChange={e => passengerFirstName(e, i)}
+                              />
+                            </Form.Item>
                           </div>
                         </div>
                       </div>

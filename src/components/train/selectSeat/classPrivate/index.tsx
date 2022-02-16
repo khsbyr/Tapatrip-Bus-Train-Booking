@@ -1,4 +1,4 @@
-import Loader from '@components/train/loader';
+import LoadingRingSeat from '@components/train/loadingRing';
 import { useTrainContext } from '@context/trainContext';
 import { arrayFilterSeat } from '@helpers/train-array-format';
 import TrainService from '@services/train';
@@ -19,11 +19,11 @@ const classPrivate = ({
   const { orderId, setOrderId } = useTrainContext();
   const [isSelected] = useState([]);
   const [isLoadingSeat, setIsLoadingSeat] = useState(false);
-  const { setEndMinute } = useTrainContext();
-  const { setEndDate } = useTrainContext();
-  const { setIsSelectedSeats } = useTrainContext();
+  const { setEndMinute, setEndDate, setIsSelectedSeats } = useTrainContext();
+  const [seatLoading, setSeatLoading] = useState();
 
   const selectSeat = async e => {
+    setSeatLoading(e.target.value);
     setIsLoadingSeat(true);
     let isArray = arrayFilterSeat(
       selectedSeats,
@@ -36,7 +36,10 @@ const classPrivate = ({
         firstName: '',
         lastName: '',
         registerNumber: '',
+        passportNumber: '',
+        birthDate: '',
         isOrderedTea: 0,
+        isForeign: false,
         seatNumber: e.target.value,
         voyageId: voyageId,
         wagonName: wagonName,
@@ -107,9 +110,7 @@ const classPrivate = ({
     }
   };
 
-  return isLoadingSeat ? (
-    <Loader />
-  ) : (
+  return (
     <>
       {data?.map((mests, index) => (
         <div className="flex gap-x-0" key={index}>
@@ -138,12 +139,24 @@ const classPrivate = ({
                         ${mest.MEST_NO % 2 === 0 ? 'shadow-lg' : ''}           
                     `}
                     key={index}
-                    disabled={mest.MEST_STATE !== '0' ? true : false}
+                    disabled={
+                      mest.MEST_STATE !== '0'
+                        ? true
+                        : isLoadingSeat
+                        ? true
+                        : false
+                    }
                     onClick={selectSeat}
                     value={mest.MEST_NO}
                   >
-                    {mest.MEST_NO}{' '}
-                    {mest.MEST_NO % 2 === 0 ? '(Дээр)' : '(Доор)'}
+                    {isLoadingSeat && parseInt(seatLoading) === mest.MEST_NO ? (
+                      <LoadingRingSeat />
+                    ) : (
+                      <>
+                        {mest.MEST_NO}{' '}
+                        {mest.MEST_NO % 2 === 0 ? '(Дээр)' : '(Доор)'}
+                      </>
+                    )}
                   </button>
                 ) : (
                   ''
@@ -173,12 +186,24 @@ const classPrivate = ({
                          ${mest.MEST_NO % 2 === 0 ? 'shadow-lg' : ''}     
                     `}
                     key={index}
-                    disabled={mest.MEST_STATE !== '0' ? true : false}
+                    disabled={
+                      mest.MEST_STATE !== '0'
+                        ? true
+                        : isLoadingSeat
+                        ? true
+                        : false
+                    }
                     onClick={selectSeat}
                     value={mest.MEST_NO}
                   >
-                    {mest.MEST_NO}{' '}
-                    {mest.MEST_NO % 2 === 0 ? '(Дээр)' : '(Доор)'}
+                    {isLoadingSeat && parseInt(seatLoading) === mest.MEST_NO ? (
+                      <LoadingRingSeat />
+                    ) : (
+                      <>
+                        {mest.MEST_NO}{' '}
+                        {mest.MEST_NO % 2 === 0 ? '(Дээр)' : '(Доор)'}
+                      </>
+                    )}
                   </button>
                 ) : (
                   ''
