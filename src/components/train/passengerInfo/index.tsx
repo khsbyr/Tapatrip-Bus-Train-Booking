@@ -8,6 +8,7 @@ import { useTrainContext } from '@context/trainContext';
 import { useUI } from '@context/uiContext';
 import registNo from '@data/registerNumber.json';
 import AuthService from '@services/auth';
+import TrainService from '@services/train';
 import {
   Button,
   Form,
@@ -17,6 +18,7 @@ import {
   Modal,
   Checkbox,
   DatePicker,
+  message,
 } from 'antd';
 import moment from 'moment';
 import { useTranslation } from 'next-i18next';
@@ -25,6 +27,7 @@ import React, { useState } from 'react';
 import PassengerInfoCard from '../passengerInfoCard';
 import style from './passengerInfo.module.scss';
 import ContentWrapper from './style';
+import locale from 'antd/lib/date-picker/locale/mn_MN';
 
 export default function PassengerInfo() {
   const { t } = useTranslation(['steps']);
@@ -47,7 +50,7 @@ export default function PassengerInfo() {
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEmailVisible, setIsEmailVisible] = useState(false);
-  const { endDate } = useTrainContext();
+  const { endDate, orderId, setPaymentDetail } = useTrainContext();
 
   const isAuth = user ? true : false;
 
@@ -143,8 +146,7 @@ export default function PassengerInfo() {
         if (pinCode.length > 3) {
           const res = await AuthService.verifyCode(payload);
           if (res && res.status === 200) {
-            console.log(res);
-            setCurrent(current + 1);
+            booking();
           }
           if (res && res.status === 400) {
             setConfirmError(res.message);
@@ -159,7 +161,39 @@ export default function PassengerInfo() {
     closeLoadingConfirm();
   };
 
-  console.log(selectedSeats);
+  const booking = async () => {
+    const passengers = [];
+    selectedSeats.map(seat => {
+      let passenger = {
+        first_name: seat.firstName,
+        last_name: seat.lastName,
+        register_number: seat.registerNumber,
+        passport_number: seat.passportNumber,
+        birthdate: seat.birthDate,
+        tea: seat.isOrderedTea,
+      };
+      passengers.push(passenger);
+    });
+    let payload = {
+      order_id: orderId,
+      passengers: passengers,
+      phone_number: customer.phoneNumber,
+      email: customer.email,
+    };
+    try {
+      const res = await TrainService.createPassengers(payload);
+      if (res && res.status === 200) {
+        setPaymentDetail(res.result);
+        setCurrent(current + 1);
+      }
+      if ((res && res.status === 208) || res.status === 400) {
+        message.warning(res.message);
+        setIsModalVisible(false);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Layout>
@@ -314,6 +348,7 @@ export default function PassengerInfo() {
                                   onChange={(e, dateString) =>
                                     birthDate(e, dateString, i)
                                   }
+                                  locale={locale}
                                 />
                               </Form.Item>
                             </div>

@@ -14,6 +14,7 @@ export interface State {
   customer: any;
   endMinute: any;
   endDate: any;
+  paymentDetail: any;
 }
 
 const initialState = {
@@ -30,6 +31,7 @@ const initialState = {
   customer: '',
   endMinute: '',
   endDate: '',
+  paymentDetail: {},
 };
 
 type Action =
@@ -83,6 +85,10 @@ type Action =
     }
   | {
       type: 'SET_END_DATE';
+      value: any;
+    }
+  | {
+      type: 'SET_PAYMENT_DETAIL';
       value: any;
     };
 
@@ -179,6 +185,12 @@ function uiReducer(state: State, action: Action) {
         endDate: action.value,
       };
     }
+    case 'SET_PAYMENT_DETAIL': {
+      return {
+        ...state,
+        paymentDetail: action.value,
+      };
+    }
   }
 }
 
@@ -250,6 +262,11 @@ export const GlobalProvider: FC = props => {
     [dispatch]
   );
 
+  const setPaymentDetail = useCallback(
+    (value: any) => dispatch({ type: 'SET_PAYMENT_DETAIL', value }),
+    [dispatch]
+  );
+
   const value = useMemo(
     () => ({
       ...state,
@@ -266,6 +283,7 @@ export const GlobalProvider: FC = props => {
       setCustomer,
       setEndMinute,
       setEndDate,
+      setPaymentDetail,
     }),
     [state]
   );

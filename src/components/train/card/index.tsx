@@ -198,7 +198,10 @@ export default function Card({ voyage }) {
                   : 'opacity-100 cursor-pointer'
               }`}
               onClick={() =>
-                wagon.FREEMEST !== 0 ? selectTicket(voyage, wagon) : ''
+                (wagon.FREEMEST !== 0 && wagon.TARIF_TYPE === 5) ||
+                (wagon.FREEMEST !== 0 && wagon.TARIF_TYPE === 8)
+                  ? selectTicket(voyage, wagon)
+                  : ''
               }
             >
               <div className="flex items-center space-x-2">
