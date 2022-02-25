@@ -13,6 +13,7 @@ import { useState } from 'react';
 export default function Profile({ data }) {
   const { t } = useTranslation(['common']);
   const router = useRouter();
+
   const handleLogout = () => {
     AuthService.logout();
   };
@@ -65,7 +66,7 @@ export default function Profile({ data }) {
         </a>
         <a
           className="flex items-center hover:bg-red-100 rounded p-4 hover:text-red-400"
-          href="/"
+          href={router.pathname ? router.pathname : '/'}
           onClick={handleLogout}
         >
           <LogoutIcon className="pr-2 h-5" />

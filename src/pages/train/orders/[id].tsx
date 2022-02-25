@@ -8,26 +8,28 @@ import React, { useEffect } from 'react';
 import { useTrainContext } from '@context/trainContext';
 import PassengerInfo from '@components/train/passengerInfo';
 import Payment from '@components/train/payment';
+import { useTranslation } from 'next-i18next';
 
 const { Step } = Steps;
 
 export default function Order() {
   const { current, setCurrent } = useGlobalStore();
   const { setLoadingOrder } = useTrainContext();
+  const { t } = useTranslation(['train']);
 
   const steps = [
     {
-      title: 'Select Seat',
+      title: t('stepSelectSeat'),
       content: <SelectSeats />,
       button: 'Select Seat Button',
     },
     {
-      title: 'Passenger Information',
+      title: t('stepPassengerInfo'),
       content: <PassengerInfo />,
       button: 'Passenger Button',
     },
     {
-      title: 'Make Payment',
+      title: t('stepPayment'),
       content: <Payment />,
       button: 'Payment Button',
     },
@@ -74,6 +76,7 @@ export async function getServerSideProps({ locale }) {
         'footer',
         'steps',
         'order',
+        'train',
       ])),
     },
   };

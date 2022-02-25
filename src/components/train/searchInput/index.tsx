@@ -216,3 +216,11 @@ export default function SearchInput({ stationData }) {
     </ContentWrapper>
   );
 }
+
+export async function getStaticProps({ stationData }) {
+  return {
+    props: {
+      stationData: stationData,
+    },
+  };
+}

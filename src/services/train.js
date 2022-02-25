@@ -1,4 +1,4 @@
-import Client from '@lib/apiClient';
+import Client from '@lib/apiClientTrain';
 
 const TrainService = {
   async getTrainStations() {
@@ -72,18 +72,8 @@ const TrainService = {
     return datas;
   },
 
-  async createPassengers(params) {
-    const response = await Client.post(`/train/create_passengers/`, params);
-    const datas = {
-      status: response.data.status_code,
-      result: response.data.result,
-      message: response.data.message,
-    };
-    return datas;
-  },
-
-  async createPassengers(params) {
-    const response = await Client.post(`/train/create_passengers/`, params);
+  async createBooking(params) {
+    const response = await Client.post(`/train/create_booking/`, params);
     const datas = {
       status: response.data.status_code,
       result: response.data.result,
@@ -104,6 +94,16 @@ const TrainService = {
 
   async createInvoice(params) {
     const response = await Client.post(`/payment/v1/create_invoice/`, params);
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    return datas;
+  },
+
+  async checkInvoice(params) {
+    const response = await Client.post(`/payment/v1/check_invoice/`, params);
     const datas = {
       status: response.data.status_code,
       result: response.data.result,

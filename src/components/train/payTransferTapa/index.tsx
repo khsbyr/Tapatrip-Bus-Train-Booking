@@ -4,12 +4,13 @@ import { DuplicateIcon } from '@heroicons/react/outline';
 import { CheckIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'next-i18next';
 import paymentFilter from '@helpers/payment-filter';
+import { useTrainContext } from '@context/trainContext';
 
 export default function PayCorporate({ corporate }) {
   const { t } = useTranslation(['steps']);
   const { booking } = useGlobalStore();
   const [bankIndex, setBankIndex] = useState(0);
-
+  const { paymentDetail } = useTrainContext();
   const paymentFilterData = paymentFilter(corporate);
 
   const [copyBankName, setCopyBankName] = useState(
@@ -161,8 +162,8 @@ export default function PayCorporate({ corporate }) {
           <div className="flex justify-between border-b-2 border-dotted py-2">
             <p>{t('transferAmount')}</p>
             <div className="flex">
-              <p className="pr-2">{booking.toPay}₮</p>
-              <button onClick={() => copyToTotalPrice(booking.toPay)}>
+              <p className="pr-2">{paymentDetail.sum}₮</p>
+              <button onClick={() => copyToTotalPrice(paymentDetail.sum)}>
                 {copyTotalPrice}
               </button>
             </div>
@@ -170,8 +171,10 @@ export default function PayCorporate({ corporate }) {
           <div className="flex justify-between py-2">
             <p>{t('transactionValue')}</p>
             <div className="flex">
-              <p className="pr-2">{booking.refNumber}</p>
-              <button onClick={() => copyToOrderNumber(booking.refNumber)}>
+              <p className="pr-2">{paymentDetail.ref_number}</p>
+              <button
+                onClick={() => copyToOrderNumber(paymentDetail.ref_number)}
+              >
                 {copyOrderNumber}
               </button>
             </div>

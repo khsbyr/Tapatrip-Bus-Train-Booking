@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import CurrencyFormat from 'react-currency-format';
 import style from './card.module.scss';
+import { useTranslation } from 'next-i18next';
 
 export default function Card({ voyage }) {
   const { setSelectedVoyageData } = useTrainContext();
@@ -16,6 +17,7 @@ export default function Card({ voyage }) {
   const [SelectedTicket, setSelectedTicket] = useState([]);
   const router = useRouter();
   const [loadingMarshrut, setLoadingMarshrut] = useState(false);
+  const { t } = useTranslation(['train']);
 
   const selectTicket = (voyage, wagon) => {
     if (
@@ -33,6 +35,15 @@ export default function Card({ voyage }) {
 
       setSelectedTicket([params]);
     }
+
+    localStorage.setItem(
+      'selectedVoyage',
+      JSON.stringify({
+        ...voyage,
+        tarif_type: wagon.TARIF_TYPE,
+        mest_type: wagon.MESTTYPE,
+      })
+    );
   };
 
   const order = () => {
@@ -85,15 +96,17 @@ export default function Card({ voyage }) {
             <div>
               <h1 className={style.trainName}>{voyage.TRAIN_NAME_MN}</h1>
               <h1 className={style.trainNo}>
-                {voyage.TRAIN_NO}-р галт тэрэг /{voyage.TRAINTYPE_NAME}/
+                {voyage.TRAIN_NO} {t('trainn')} /{voyage.TRAINTYPE_NAME}/
               </h1>
             </div>
           </div>
           <div className="pt-3 md:pt-0" onClick={showModal}>
-            <h1 className={style.marshrut}>Аяллын маршрут</h1>
+            <h1 className={style.marshrut}>{t('marshrut')}</h1>
           </div>
           <Modal
-            title={`${voyage.TRAIN_NO} ${voyage.TRAIN_NAME_MN} аялалын маршрут`}
+            title={`${voyage.TRAIN_NO} ${voyage.TRAIN_NAME_MN} ${t(
+              'marshrut'
+            )}`}
             visible={isModalVisible}
             onOk={handleOk}
             onCancel={handleCancel}
@@ -109,9 +122,9 @@ export default function Card({ voyage }) {
                 <thead>
                   <tr>
                     <th className="w-8 md:w-14">№</th>
-                    <th>Өртөөний нэр</th>
-                    <th>Хүрэх цаг</th>
-                    <th>Хөдлөх цаг</th>
+                    <th>{t('stationName')}</th>
+                    <th>{t('reachTime')}</th>
+                    <th>{t('movingTime')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -163,7 +176,7 @@ export default function Card({ voyage }) {
 
           <div>
             <p className={style.distance}>
-              Нийт туулах зам - {voyage.DISTANCE_KM}км
+              {t('distance')} - {voyage.DISTANCE_KM}км
             </p>
             <div className={style.distanceLine} />
           </div>
@@ -214,7 +227,7 @@ export default function Card({ voyage }) {
                       : 'text-gray-500'
                   }`}
                 >
-                  Том хүн:{' '}
+                  {t('adult')}:{' '}
                 </p>
                 <p
                   className={`font-semibold text-xs md:text-sm ${
@@ -244,7 +257,7 @@ export default function Card({ voyage }) {
                       : 'text-gray-500'
                   }`}
                 >
-                  Хүүхэд:{' '}
+                  {t('children')}:{' '}
                 </p>
                 <p
                   className={`font-semibold text-xs md:text-sm ${
@@ -274,7 +287,7 @@ export default function Card({ voyage }) {
                       : 'text-trainTicket'
                   }`}
                 >
-                  {wagon.MESTTYPE} - {wagon.FREEMEST} сул суудал
+                  {wagon.MESTTYPE} - {wagon.FREEMEST} {t('looseSeats')}
                 </p>
               </div>
             </div>
@@ -290,7 +303,7 @@ export default function Card({ voyage }) {
             onClick={order}
             disabled={SelectedTicket.length > 0 ? false : true}
           >
-            {loadingOrder === voyage.VOYAGE_ID ? <LoadingRing /> : 'Захиалах'}
+            {loadingOrder === voyage.VOYAGE_ID ? <LoadingRing /> : t('order')}
           </button>
         </div>
       </div>

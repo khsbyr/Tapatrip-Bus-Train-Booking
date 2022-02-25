@@ -23,20 +23,21 @@ import {
 import moment from 'moment';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PassengerInfoCard from '../passengerInfoCard';
 import style from './passengerInfo.module.scss';
 import ContentWrapper from './style';
 import locale from 'antd/lib/date-picker/locale/mn_MN';
 
 export default function PassengerInfo() {
-  const { t } = useTranslation(['steps']);
+  const { t } = useTranslation(['steps', 'train']);
   const [confirmError, setConfirmError] = useState(null);
   const router = useRouter();
   const { user } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useTrainContext();
   const { customer, setCustomer } = useTrainContext();
   const { selectedVoyageData } = useTrainContext();
+  const [voyage, setVoyage] = useState(undefined);
   const {
     setDisplayBlock,
     setDisplayNone,
@@ -50,9 +51,15 @@ export default function PassengerInfo() {
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEmailVisible, setIsEmailVisible] = useState(false);
-  const { endDate, orderId, setPaymentDetail } = useTrainContext();
+  const { setPaymentDetail } = useTrainContext();
 
   const isAuth = user ? true : false;
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setVoyage(JSON.parse(localStorage.getItem('selectedVoyage')));
+    }
+  }, []);
 
   const handleRegister = () => {
     setDisplayBlock();
@@ -165,6 +172,9 @@ export default function PassengerInfo() {
     const passengers = [];
     selectedSeats.map(seat => {
       let passenger = {
+        mest_id: seat.seatNumber,
+        wagon_id: seat.wagonId,
+        mest_state: seat.mest_state,
         first_name: seat.firstName,
         last_name: seat.lastName,
         register_number: seat.registerNumber,
@@ -175,18 +185,33 @@ export default function PassengerInfo() {
       passengers.push(passenger);
     });
     let payload = {
-      order_id: orderId,
       passengers: passengers,
-      phone_number: customer.phoneNumber,
-      email: customer.email,
+      customer_phone_number: customer.phoneNumber ? customer.phoneNumber : 976,
+      customer_email: customer.email,
+      customer_dial_number: customer.dialNumber,
+      voyage_id: voyage && voyage.VOYAGE_ID,
+      train_no: voyage && voyage.TRAIN_NO,
+      train_name: voyage && voyage.TRAIN_NAME_MN,
+      train_type: voyage && voyage.TRAINTYPE_NAME,
+      tarif_type: voyage && voyage.tarif_type,
+      mest_type: voyage && voyage.mest_type,
+      fvstop_id: voyage && voyage.FVSTOP_ID,
+      fvstop_name: voyage && voyage.FST_NAME,
+      tvstop_id: voyage && voyage.TVSTOP_ID,
+      tvstop_name: voyage && voyage.TST_NAME,
+      distance: voyage && voyage.DISTANCE_KM,
+      dep_date: voyage && voyage.DEP_DATE,
+      dep_time: voyage && voyage.DEP_TIME,
+      arr_date: voyage && voyage.ARR_DATE,
+      arr_time: voyage && voyage.ARR_TIME,
     };
     try {
-      const res = await TrainService.createPassengers(payload);
+      const res = await TrainService.createBooking(payload);
       if (res && res.status === 200) {
         setPaymentDetail(res.result);
         setCurrent(current + 1);
       }
-      if ((res && res.status === 208) || res.status === 400) {
+      if ((res && res.status === 208) || res.status === 403) {
         message.warning(res.message);
         setIsModalVisible(false);
       }
@@ -197,19 +222,6 @@ export default function PassengerInfo() {
 
   return (
     <Layout>
-      {endDate ? (
-        <div className="text-center mt-5 mb-1 max-w-7xl mx-auto px-2 cursor-pointer">
-          <div className="font-semibold text-xs text-cardDate  justify-center gap-2 bg-white py-5 rounded-lg md:flex md:text-base">
-            Та захиалгаа{' '}
-            <p className="text-yellow-400">
-              {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
-            </p>
-            -аас өмнө хийж дуусгана уу!
-          </div>
-        </div>
-      ) : (
-        ''
-      )}
       <Form name="busBookingItem" onFinish={onFinish}>
         <div className={style.body}>
           <div className={style.content}>
@@ -306,7 +318,7 @@ export default function PassengerInfo() {
                       <div className={style.passengerInfoTitle}>
                         <p>
                           <h1 className="text-cardDate">
-                            Суудал: {seat.seatNumber}
+                            {t('seat', { ns: 'train' })}: {seat.seatNumber}
                           </h1>
                         </p>
 
@@ -317,7 +329,7 @@ export default function PassengerInfo() {
                             value={seat.isForeign}
                           >
                             <h1 className="text-cardDate text-base">
-                              Гадаад иргэн
+                              {t('foreigner', { ns: 'train' })}
                             </h1>
                           </Checkbox>
                         </div>
@@ -330,21 +342,22 @@ export default function PassengerInfo() {
                                 className={style.Label}
                                 htmlFor="birthDate"
                               >
-                                Төрсөн он, сар, өдөр
+                                {t('birthDate', { ns: 'train' })}
                               </label>
                               <Form.Item
                                 name={`birthDate` + i}
                                 rules={[
                                   {
                                     required: true,
-                                    message:
-                                      'Зорчигчийн төрсөн он, сар, өдөр заавал бөглөнө үү!',
+                                    message: t('birthDateWarning', {
+                                      ns: 'train',
+                                    }),
                                   },
                                 ]}
                               >
                                 <DatePicker
                                   className={style.datepicker}
-                                  placeholder="Төрсөн он, сар, өдөр"
+                                  placeholder={t('birthDate', { ns: 'train' })}
                                   onChange={(e, dateString) =>
                                     birthDate(e, dateString, i)
                                   }
@@ -373,22 +386,23 @@ export default function PassengerInfo() {
                               }
                               htmlFor="passportNo"
                             >
-                              Пасспортын дугаар
+                              {t('passport', { ns: 'train' })}
                             </label>
                             <Form.Item
                               name={`passportNo` + i}
                               rules={[
                                 {
                                   required: seat.isForeign ? true : false,
-                                  message:
-                                    'Зорчигчийн пасспорт заавал бөглөнө үү!',
+                                  message: t('passportWarning', {
+                                    ns: 'train',
+                                  }),
                                 },
                               ]}
                             >
                               <Input
                                 className={style.input}
                                 value={seat.passportNumber}
-                                placeholder="Пасспортын дугаар"
+                                placeholder={t('passport', { ns: 'train' })}
                                 onChange={e => passangerPassportNo(e, i)}
                               />
                             </Form.Item>
@@ -404,7 +418,7 @@ export default function PassengerInfo() {
                               rules={[
                                 {
                                   required: true,
-                                  message: 'Зорчигчийн овог заавал бөглөнө үү!',
+                                  message: t('passengerLastNameWarning'),
                                 },
                               ]}
                             >
@@ -425,7 +439,7 @@ export default function PassengerInfo() {
                               rules={[
                                 {
                                   required: true,
-                                  message: 'Зорчигчийн нэр заавал бөглөнө үү!',
+                                  message: t('passengerFirstNameWarning'),
                                 },
                               ]}
                             >
@@ -456,7 +470,7 @@ export default function PassengerInfo() {
           </div>
           <div className={style.card}>
             <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
-              <PassengerInfoCard voyage={selectedVoyageData} />
+              <PassengerInfoCard />
               <button className={style.button} onClick={() => setDisplayNone()}>
                 {displayLoadingPassengerInfo === true ? (
                   <div className={style.ldsDualRing}></div>

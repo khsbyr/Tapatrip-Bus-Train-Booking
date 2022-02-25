@@ -3,16 +3,21 @@ import Layout from '@components/common/layout';
 import { useTrainContext } from '@context/trainContext';
 import moment from 'moment';
 import TrainService from '@services/train';
-import { message, Radio } from 'antd';
+import { message, Radio, Modal } from 'antd';
 import ContentWrapper from './style';
 import PayCorporate from '../payTransferTapa';
-import style from './payment.module.scss';
+import { useTranslation } from 'next-i18next';
+import PassengerInfoCard from '../passengerInfoCard';
+import QRCode from 'react-qr-code';
 
 const Payment = () => {
   const { endDate } = useTrainContext();
   const [payMethods, setPayMethods] = useState(undefined);
   const [value, setValue] = React.useState('GOLOMT');
   const { paymentDetail } = useTrainContext();
+  const { t } = useTranslation(['train']);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [paymentResult, setPaymentResult] = useState(undefined);
 
   useEffect(() => {
     async function getPaymentMethods() {
@@ -28,6 +33,27 @@ const Payment = () => {
     getPaymentMethods();
   }, []);
 
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const afterClose = async () => {
+    let params = {
+      payment_type: value,
+      ref_number: paymentDetail.ref_number,
+      is_company: false,
+      company_register: 0,
+    };
+    try {
+      const res = await TrainService.checkInvoice(params);
+      if ((res && res.status === 200) || (res && res.status === 201)) {
+        message.info(res.result.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const setPayment = e => {
     setValue(e.target.value);
   };
@@ -35,14 +61,17 @@ const Payment = () => {
   const pay = async () => {
     let params = {
       payment_type: value,
-      ref_number: 'F210083991',
+      ref_number: paymentDetail.ref_number,
       is_company: false,
       company_register: 0,
     };
     try {
       const res = await TrainService.createInvoice(params);
       if (res && res.status === 200) {
-        window.open(res.result, '_blank');
+        setPaymentResult(res.result);
+        value === 'QPAY'
+          ? setIsModalVisible(true)
+          : window.open(res.result, '_blank');
       }
       if (res && res.status === 201) {
         message.warning(res.message);
@@ -72,7 +101,7 @@ const Payment = () => {
         <div className="max-w-7xl mx-auto px-2 my-5 flex gap-5">
           <div className="bg-white rounded-lg h-auto p-10 w-3/5">
             <h1 className="text-base font-semibold text-cardDate">
-              КАРТААР БОЛОН ИНТЕРНЕТ БАНКААР
+              {t('cardOrBank')}
             </h1>
 
             <div className="py-5 grid">
@@ -105,28 +134,32 @@ const Payment = () => {
                 className="bg-blue-500 py-3 px-12 text-white font-semibold text-xs rounded-md"
                 onClick={pay}
               >
-                ТӨЛБӨР ТӨЛӨХ
+                {t('pay')}
               </button>
             </div>
 
             <h1 className="text-base font-semibold text-cardDate mt-5">
-              ДАНСААР ШИЛЖҮҮЛЭХ
+              {t('transferAcc')}
             </h1>
 
             <PayCorporate corporate={payMethods?.corporate} />
           </div>
 
           <div className="w-2/5">
-            <div className="bg-white rounded-lg p-5 ">
+            <div className="mb-4">
+              <PassengerInfoCard />
+            </div>
+
+            {/* <div className="bg-white rounded-lg p-5 ">
               <h1 className="text-base font-semibold text-cardDate">
-                Захиалгын мэдээлэл
+                {t('orderInformation')}
               </h1>
               <table className={style.styledTable}>
                 <thead>
                   <tr>
-                    <th>Тайлбар</th>
-                    <th>Тоо</th>
-                    <th>Төлбөр</th>
+                    <th>{t('description')}</th>
+                    <th>{t('number')}</th>
+                    <th>{t('payment')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -143,12 +176,40 @@ const Payment = () => {
 
               <div className="flex justify-end mt-3">
                 <h1 className="font-semibold text-cardDate text-base">
-                  Нийт үнэ: {paymentDetail.sum} ₮
+                  {t('totalPrice')}: {paymentDetail.sum} ₮
                 </h1>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
+
+        <Modal
+          title={`QPAY`}
+          visible={isModalVisible}
+          onCancel={handleCancel}
+          width={400}
+          bodyStyle={{ height: '600px', overflow: 'auto' }}
+          okButtonProps={{ style: { display: 'none' } }}
+          cancelText="Хаах"
+          afterClose={afterClose}
+          centered
+        >
+          <div className="flex justify-center">
+            <QRCode
+              size={250}
+              value={paymentResult && paymentResult.qPay_QRcode}
+            />
+          </div>
+
+          <div className="flex justify-center">
+            <button
+              className="py-3 px-12 bg-blue-500 mt-8 font-bold text-white"
+              onClick={afterClose}
+            >
+              ТӨЛБӨР ШАЛГАХ
+            </button>
+          </div>
+        </Modal>
       </ContentWrapper>
     </Layout>
   );
