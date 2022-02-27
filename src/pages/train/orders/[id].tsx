@@ -1,4 +1,4 @@
-import SeatNav from '@components/bus/seatNavbar';
+import SeatNav from '@components/train/seatNavbar';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Steps } from 'antd';
 import ContentWrapper from './style';
@@ -9,11 +9,14 @@ import { useTrainContext } from '@context/trainContext';
 import PassengerInfo from '@components/train/passengerInfo';
 import Payment from '@components/train/payment';
 import { useTranslation } from 'next-i18next';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
+import AuthService from '@services/auth';
+import isEmpty from '@utils/isEmpty';
 
 const { Step } = Steps;
 
 export default function Order() {
-  const { current, setCurrent } = useGlobalStore();
+  const { current, setCurrent, setUser } = useGlobalStore();
   const { setLoadingOrder } = useTrainContext();
   const { t } = useTranslation(['train']);
 
@@ -37,6 +40,26 @@ export default function Order() {
 
   useEffect(() => {
     setLoadingOrder(false);
+    async function loadUserFromCookies() {
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : '';
+      if (token) {
+        try {
+          const res = await AuthService.getCurrentUser(token);
+          if (res && res?.status === 200) {
+            if (!isEmpty(res?.result?.user)) {
+              setUser(res?.result?.user);
+            }
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+    loadUserFromCookies();
   }, []);
 
   const onChange = currentStep => {

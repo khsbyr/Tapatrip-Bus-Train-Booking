@@ -30,7 +30,7 @@ const classPublic = ({
         registerNumber: '',
         passportNumber: '',
         birthDate: '',
-        isOrderedTea: 0,
+        isOrderedTea: 1,
         isForeign: false,
         seatNumber: e.target.value,
         voyageId: voyageId,

@@ -11,6 +11,16 @@ const TrainService = {
     return datas;
   },
 
+  async getEndStations() {
+    const response = await Client.get('/train/stop_stations/');
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    return datas;
+  },
+
   async getAvailableDates(params) {
     const response = await Client.get(`/train/available_dates/${params}`);
     const datas = {
@@ -72,8 +82,12 @@ const TrainService = {
     return datas;
   },
 
-  async createBooking(params) {
-    const response = await Client.post(`/train/create_booking/`, params);
+  async createBooking(params, token) {
+    const response = await Client.post(`/train/create_booking/`, params, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
     const datas = {
       status: response.data.status_code,
       result: response.data.result,

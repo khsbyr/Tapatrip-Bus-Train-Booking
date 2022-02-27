@@ -21,6 +21,7 @@ import { useGlobalStore } from '@context/globalStore';
 
 export default function Travel({ guestToken }) {
   const [stationData, setStationData] = useState([]);
+  const [endStationData, setEndStationData] = useState([]);
   const [lastSearch, setLastSearch] = useState([]);
   const { setUser } = useGlobalStore();
 
@@ -36,6 +37,18 @@ export default function Travel({ guestToken }) {
       }
     }
     getTrainStations();
+
+    async function getEndStations() {
+      try {
+        const res = await TrainService.getEndStations();
+        if (res && res.status === 200) {
+          setEndStationData(res.result);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getEndStations();
 
     AuthTokenStorageService.guestStore(guestToken);
     async function loadUserFromCookies() {

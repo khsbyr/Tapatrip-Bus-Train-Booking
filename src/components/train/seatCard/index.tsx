@@ -25,7 +25,7 @@ export default function seatCard({ voyageId, wagonId }) {
   }, []);
 
   const takeTea = e => {
-    selectedSeats[e.target.id - 1].isOrderedTea = e.target.value === 0 ? 1 : 0;
+    selectedSeats[e.target.id - 1].isOrderedTea = e.target.value === 1 ? 0 : 1;
     setSelectedSeats(selectedSeats);
   };
 
@@ -39,21 +39,6 @@ export default function seatCard({ voyageId, wagonId }) {
       isSelectedSeats[voyageId + wagonName + seat] = false;
       setSelectedSeats(selectedSeats);
       setIsSelectedSeats(isSelectedSeats);
-    }
-
-    let params = {
-      mest_id: seat,
-      wagon_id: wagonId,
-      start_stop: startStop,
-      end_stop: endStop,
-      state: 0,
-      order_id: orderId,
-    };
-
-    try {
-      await TrainService.setMestState(params);
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -132,6 +117,7 @@ export default function seatCard({ voyageId, wagonId }) {
                         onChange={takeTea}
                         id={index}
                         value={seat.isOrderedTea}
+                        defaultChecked
                       />
                     </div>
                   </div>

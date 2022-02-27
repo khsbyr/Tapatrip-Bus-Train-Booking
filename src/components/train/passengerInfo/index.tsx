@@ -28,15 +28,16 @@ import PassengerInfoCard from '../passengerInfoCard';
 import style from './passengerInfo.module.scss';
 import ContentWrapper from './style';
 import locale from 'antd/lib/date-picker/locale/mn_MN';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
+import isEmpty from '@utils/isEmpty';
 
 export default function PassengerInfo() {
   const { t } = useTranslation(['steps', 'train']);
   const [confirmError, setConfirmError] = useState(null);
   const router = useRouter();
-  const { user } = useGlobalStore();
+  const { user, setUser } = useGlobalStore();
   const { selectedSeats, setSelectedSeats } = useTrainContext();
   const { customer, setCustomer } = useTrainContext();
-  const { selectedVoyageData } = useTrainContext();
   const [voyage, setVoyage] = useState(undefined);
   const {
     setDisplayBlock,
@@ -115,27 +116,31 @@ export default function PassengerInfo() {
   };
 
   const onFinish = async () => {
-    let payload = {
-      phone: customer.phoneNumber,
-      dialCode: customer.dialNumber,
-    };
-    try {
-      const res = await AuthService.verifySms(payload);
-      if (res && res.status === 200) {
-        setIsModalVisible(true);
+    if (isAuth) {
+      booking(AuthTokenStorageService.getAccessToken());
+    } else {
+      let payload = {
+        phone: customer.phoneNumber,
+        dialCode: customer.dialNumber,
+      };
+      try {
+        const res = await AuthService.verifySms(payload);
+        if (res && res.status === 200) {
+          setIsModalVisible(true);
+          closeLoadingPassengerInfo();
+        }
+        if (res && res.status === 400) {
+          setIsModalVisible(true);
+          closeLoadingPassengerInfo();
+          setConfirmError(res.message);
+        }
+      } catch (e) {
+        Modal.error({
+          title: t('errorTitle'),
+          content: t('errorContent'),
+        });
         closeLoadingPassengerInfo();
       }
-      if (res && res.status === 400) {
-        setIsModalVisible(true);
-        closeLoadingPassengerInfo();
-        setConfirmError(res.message);
-      }
-    } catch (e) {
-      Modal.error({
-        title: t('errorTitle'),
-        content: t('errorContent'),
-      });
-      closeLoadingPassengerInfo();
     }
   };
 
@@ -153,7 +158,28 @@ export default function PassengerInfo() {
         if (pinCode.length > 3) {
           const res = await AuthService.verifyCode(payload);
           if (res && res.status === 200) {
-            booking();
+            booking(res.token);
+            AuthTokenStorageService.store(res.token);
+            async function loadUserFromCookies() {
+              const token =
+                AuthTokenStorageService.getAccessToken() &&
+                AuthTokenStorageService.getAccessToken() != 'false'
+                  ? AuthTokenStorageService.getAccessToken()
+                  : '';
+              if (token) {
+                try {
+                  const res = await AuthService.getCurrentUser(token);
+                  if (res && res?.status === 200) {
+                    if (!isEmpty(res?.result?.user)) {
+                      setUser(res?.result?.user);
+                    }
+                  }
+                } catch (err) {
+                  console.log(err);
+                }
+              }
+            }
+            loadUserFromCookies();
           }
           if (res && res.status === 400) {
             setConfirmError(res.message);
@@ -168,7 +194,7 @@ export default function PassengerInfo() {
     closeLoadingConfirm();
   };
 
-  const booking = async () => {
+  const booking = async (token = undefined) => {
     const passengers = [];
     selectedSeats.map(seat => {
       let passenger = {
@@ -206,7 +232,7 @@ export default function PassengerInfo() {
       arr_time: voyage && voyage.ARR_TIME,
     };
     try {
-      const res = await TrainService.createBooking(payload);
+      const res = await TrainService.createBooking(payload, token);
       if (res && res.status === 200) {
         setPaymentDetail(res.result);
         setCurrent(current + 1);
