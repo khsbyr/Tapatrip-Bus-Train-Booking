@@ -49,20 +49,6 @@ export default function SelectSeats() {
     getTrainStations();
   }, []);
 
-  if (endDate) {
-    const interval = setInterval(() => {
-      if (
-        moment().format('YYYY-MM-DD hh:mm') ===
-        moment(endDate).format('YYYY-MM-DD hh:mm')
-      ) {
-        router.push({
-          pathname: `/train`,
-        });
-        clearInterval(interval);
-      }
-    }, 1000);
-  }
-
   const getMest = async wagon => {
     setLoading(true);
     setWagonName(wagon?.NAME);

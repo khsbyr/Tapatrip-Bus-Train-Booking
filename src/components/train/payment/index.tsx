@@ -9,6 +9,7 @@ import PayCorporate from '../payTransferTapa';
 import { useTranslation } from 'next-i18next';
 import PassengerInfoCard from '../passengerInfoCard';
 import QRCode from 'react-qr-code';
+import { useRouter } from 'next/router';
 
 const Payment = () => {
   const { endDate } = useTrainContext();
@@ -18,6 +19,8 @@ const Payment = () => {
   const { t } = useTranslation(['train']);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [paymentResult, setPaymentResult] = useState(undefined);
+  const router = useRouter();
+  const { locale } = router;
 
   useEffect(() => {
     async function getPaymentMethods() {
@@ -81,18 +84,59 @@ const Payment = () => {
     }
   };
 
+  // if (endDate) {
+  //   const interval = setInterval(() => {
+  //     if (
+  //       moment().format('YYYY-MM-DD hh:mm') ===
+  //       moment(endDate).format('YYYY-MM-DD hh:mm')
+  //     ) {
+  //       router.push({
+  //         pathname: `/train`,
+  //       });
+  //       clearInterval(interval);
+  //     }
+  //   }, 1000);
+  // }
+
   return (
     <Layout>
       <ContentWrapper>
         {endDate ? (
           <div className="text-center mt-5 mb-1 max-w-7xl mx-auto px-2 cursor-pointer">
-            <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
-              Та захиалгаа{' '}
-              <span className="text-yellow-400">
-                {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
-              </span>{' '}
-              -аас өмнө хийж дуусгана уу!
-            </p>
+            {locale === 'mn' ? (
+              <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
+                Та захиалгаа{' '}
+                <span className="text-yellow-400">
+                  {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
+                </span>{' '}
+                -аас өмнө хийж дуусгана уу!
+              </p>
+            ) : locale === 'en' ? (
+              <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
+                Please complete your order before{' '}
+                <span className="text-yellow-400">
+                  {moment(endDate).format(`YYYY-MM-DD hh:mm`)}
+                </span>
+                !
+              </p>
+            ) : locale === 'zh' ? (
+              <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
+                请您与
+                <span className="text-yellow-400">
+                  {moment(endDate).format(
+                    'YYYY年MM月DD日hh点mm分之前定完您的订单.'
+                  )}
+                </span>
+              </p>
+            ) : (
+              <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
+                Та захиалгаа{' '}
+                <span className="text-yellow-400">
+                  {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
+                </span>{' '}
+                -аас өмнө хийж дуусгана уу!
+              </p>
+            )}
           </div>
         ) : (
           ''

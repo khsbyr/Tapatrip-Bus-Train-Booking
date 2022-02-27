@@ -52,7 +52,7 @@ export default function PassengerInfo() {
   const { current, setCurrent } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEmailVisible, setIsEmailVisible] = useState(false);
-  const { setPaymentDetail } = useTrainContext();
+  const { setPaymentDetail, setEndDate } = useTrainContext();
 
   const isAuth = user ? true : false;
 
@@ -235,6 +235,7 @@ export default function PassengerInfo() {
       const res = await TrainService.createBooking(payload, token);
       if (res && res.status === 200) {
         setPaymentDetail(res.result);
+        setEndDate(res.result?.expired_date);
         setCurrent(current + 1);
       }
       if ((res && res.status === 208) || res.status === 403) {
