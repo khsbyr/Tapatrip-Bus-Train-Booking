@@ -142,15 +142,15 @@ const Payment = () => {
           ''
         )}
 
-        <div className="max-w-7xl mx-auto px-2 my-5 flex gap-5">
-          <div className="bg-white rounded-lg h-auto p-10 w-3/5">
+        <div className="max-w-7xl mx-auto px-2 my-5 md:flex gap-5">
+          <div className="bg-white rounded-lg h-auto p-10 w-5/5 md:w-3/5">
             <h1 className="text-base font-semibold text-cardDate">
               {t('cardOrBank')}
             </h1>
 
             <div className="py-5 grid">
               <Radio.Group value={value}>
-                <div className="grid grid-cols-2 gap-y-2 gap-x-2">
+                <div className="grid grid-grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-2">
                   {payMethods?.ecommerce?.map((z, index) => (
                     <Radio
                       onChange={setPayment}
@@ -189,7 +189,7 @@ const Payment = () => {
             <PayCorporate corporate={payMethods?.corporate} />
           </div>
 
-          <div className="w-2/5">
+          <div className="w-5/5 md:w-2/5 mt-5 md:mt-0">
             <div className="mb-4">
               <PassengerInfoCard />
             </div>

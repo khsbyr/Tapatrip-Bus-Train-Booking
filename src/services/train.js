@@ -11,8 +11,8 @@ const TrainService = {
     return datas;
   },
 
-  async getEndStations() {
-    const response = await Client.get('/train/stop_stations/');
+  async getEndStations(params) {
+    const response = await Client.get(`/train/stop_stations/${params}`);
     const datas = {
       status: response.data.status_code,
       result: response.data.result,

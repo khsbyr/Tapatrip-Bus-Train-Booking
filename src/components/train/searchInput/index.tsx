@@ -30,6 +30,8 @@ export default function SearchInput({ stationData }) {
   const date = dateFormat.map(z => z.date);
   const router = useRouter();
   const { startName, endName } = router.query;
+  const [endStationData, setEndStationData] = useState([]);
+
   const currentDate = router.query.date
     ? router.query.date
     : moment().endOf('day').format(dFormat).toString();
@@ -54,6 +56,19 @@ export default function SearchInput({ stationData }) {
   }, [startStationID, endStationID]);
 
   const SelectStartStation = (value, options) => {
+    async function getEndStations() {
+      let params = `?from_stations=${options.key}`;
+      try {
+        const res = await TrainService.getEndStations(params);
+        if (res && res.status === 200) {
+          setEndStationData(res.result);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getEndStations();
+
     setStartStationName(value);
     setStartStationID(options.key);
   };
