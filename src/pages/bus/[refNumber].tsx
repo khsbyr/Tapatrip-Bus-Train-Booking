@@ -1,6 +1,6 @@
 import Loader from '@components/common/loader';
 import PaymentService from '@services/payment';
-import { Button, Empty } from 'antd';
+import { Button, Empty, Tag } from 'antd';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import Head from 'next/head';
@@ -55,6 +55,23 @@ export default function ticketGenerate() {
     });
   }
 
+  const getColor = status => {
+    switch (status) {
+      case 1:
+        return 'text-yellow-400';
+      case 2:
+        return 'text-green-400';
+      case 4:
+        return 'text-green-400';
+      case 6:
+        return 'text-red-400';
+      case 7:
+        return 'text-red-400';
+      default:
+        return 'text-blue-400';
+    }
+  };
+
   return loading ? (
     <Loader />
   ) : (
@@ -82,7 +99,17 @@ export default function ticketGenerate() {
               <Empty description={'Захиалгын мэдээлэл олдсонгүй'} />
             ) : (
               <>
-                <img src="/assets/svgIcons/NewLogo.svg" />
+                <div className="flex justify-between items-center ">
+                  <img src="/assets/svgIcons/refLogo.svg" />
+
+                  <h1
+                    className={`font-semibold py-2 px-10 ${getColor(
+                      data && data?.status
+                    )}`}
+                  >
+                    {data && data?.status_name}
+                  </h1>
+                </div>
 
                 <div className="text-md font-medium text-gray-700 mt-4">
                   <div className="">Захиалгын мэдээлэл</div>
