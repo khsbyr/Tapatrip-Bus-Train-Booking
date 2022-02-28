@@ -1,23 +1,22 @@
-import Footer from '@components/common/footer';
 import HeaderBackground from '@components/common/headerBackground';
-import Navbar from '@components/common/navbar';
 import Layout from '@components/common/layout';
+import styles from '@components/common/layout/layout.module.scss';
+import Navbar from '@components/common/navbar';
 import App from '@components/common/subscribe';
 import TapaService from '@components/common/tapaService';
-import Company from '@data/company.json';
-import NavData from '@data/navData.json';
-import TapaServiceList from '@data/tapaServiceList.json';
-import Head from 'next/head';
-import styles from '@components/common/layout/layout.module.scss';
-import React, { useEffect, useState } from 'react';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Search from '@components/train/searchPanel';
-import TrainService from '@services/train';
 import LastSearch from '@components/train/lastSearch';
-import AuthTokenStorageService from '@services/AuthTokenStorageService';
-import AuthService from '@services/auth';
-import isEmpty from '@utils/isEmpty';
+import Search from '@components/train/searchPanel';
 import { useGlobalStore } from '@context/globalStore';
+import NavData from '@data/navData.json';
+import News from '@data/newsTrain.json';
+import TapaServiceList from '@data/tapaServiceList.json';
+import AuthService from '@services/auth';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
+import TrainService from '@services/train';
+import isEmpty from '@utils/isEmpty';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Head from 'next/head';
+import React, { useEffect, useState } from 'react';
 
 export default function Travel({ guestToken }) {
   const [stationData, setStationData] = useState([]);
@@ -76,7 +75,7 @@ export default function Travel({ guestToken }) {
           <Search navbarData={NavData} stationData={stationData} />
           {lastSearch ? <LastSearch /> : ''}
           <App />
-          <TapaService tapaServiceList={TapaServiceList} />
+          <TapaService tapaServiceList={TapaServiceList} tapaNews={News} />
         </div>
       </Layout>
     </div>
