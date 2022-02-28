@@ -149,6 +149,11 @@ export default function Card({ datas }) {
               >
                 {format(datas?.node.locationEnd.estimatedDuration)}
               </h1>
+
+              <p className="font-semibold text-cardDate hidden xs:block">
+                1 КМ = 1 MNT
+              </p>
+
               <div className="xs:hidden space-y-1 lg:space-y-2">
                 <div className="flex text-cardDate font-bold text-sm md:text-lg lg:text-2xl space-x-2">
                   <CurrencyFormat
@@ -165,6 +170,13 @@ export default function Card({ datas }) {
                 </h1>
               </div>
             </div>
+
+            <div>
+              <p className="font-semibold text-cardDate xs:hidden">
+                1 КМ = 1 MNT
+              </p>
+            </div>
+
             <div className="flex items-center pt-4 sm:pt-4">
               <div className={style.rightRound}></div>
               <div className="bg-bg w-full h-0.5"></div>

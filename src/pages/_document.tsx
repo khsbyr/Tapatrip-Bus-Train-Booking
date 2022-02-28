@@ -15,8 +15,6 @@ class MyDocument extends Document {
   renderSnippet() {
     const opts = {
       apiKey: ANALYTICS_WRITE_KEY,
-      // note: the page option only covers SSR tracking.
-      // Page.js is used to track other events using `window.analytics.page()`
       page: true,
     };
 
