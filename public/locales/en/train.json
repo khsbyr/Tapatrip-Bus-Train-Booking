@@ -38,5 +38,6 @@
     "description": "Description",
     "number": "Number",
     "payment": "Payment",
-    "totalPrice": "Total price"
+    "totalPrice": "Total price",
+    "paymentDate": "Please complete your order before{' '}<span className='text-yellow-400'>{moment(endDate).format(`YYYY-MM-DD hh:mm`)}</span>!"
 }

@@ -3,6 +3,7 @@ import { useTrainContext } from '@context/trainContext';
 import {
   availableDatesFormat,
   startLocationFormat,
+  endLocationFormat,
 } from '@helpers/train-array-format';
 import TrainService from '@services/train';
 import { AutoComplete, DatePicker, message } from 'antd';
@@ -30,7 +31,7 @@ export default function SearchInput({ stationData }) {
   const date = dateFormat.map(z => z.date);
   const router = useRouter();
   const { startName, endName } = router.query;
-  const [endStationData, setEndStationData] = useState([]);
+  const [endStationData, setEndStationData] = useState(undefined);
 
   const currentDate = router.query.date
     ? router.query.date
@@ -57,11 +58,14 @@ export default function SearchInput({ stationData }) {
 
   const SelectStartStation = (value, options) => {
     async function getEndStations() {
-      let params = `?from_stations=${options.key}`;
+      let params = `?from_station=${options.key}`;
       try {
         const res = await TrainService.getEndStations(params);
         if (res && res.status === 200) {
           setEndStationData(res.result);
+          if (!res.result[0]) {
+            message.warning('Тухайн чиглэлд галт тэрэг олдсонгүй!');
+          }
         }
       } catch (err) {
         console.log(err);
@@ -189,21 +193,23 @@ export default function SearchInput({ stationData }) {
             }
             defaultValue={`${endName ? endName : ''}`}
           >
-            {startLocationFormat(stationData)?.map(station => (
-              <Option
-                key={station.station_id}
-                value={station.station_name}
-                title={station.station_latinName}
-              >
-                <div className="flex items-center">
-                  <img
-                    className="w-7 h-7 text-direction pr-3"
-                    src="../../assets/svgIcons/stopLocation.svg"
-                  />
-                  {station.station_name}
-                </div>
-              </Option>
-            ))}
+            {endLocationFormat(endStationData && endStationData)?.map(
+              station => (
+                <Option
+                  key={station.station_id}
+                  value={station.station_name}
+                  title={station.station_latinName}
+                >
+                  <div className="flex items-center">
+                    <img
+                      className="w-7 h-7 text-direction pr-3"
+                      src="../../assets/svgIcons/stopLocation.svg"
+                    />
+                    {station.station_name}
+                  </div>
+                </Option>
+              )
+            )}
           </AutoComplete>
           <img
             className={style.currentIcon}

@@ -92,3 +92,16 @@ export function startLocationFormat(data: any) {
     );
   return arr;
 }
+
+export function endLocationFormat(data: any) {
+  const arr = [];
+  data &&
+    data.map(element =>
+      arr.push({
+        station_id: element.to_station,
+        station_name: element.to_station_name,
+        station_latinName: cyrillicToLatin(element.to_station_name),
+      })
+    );
+  return arr;
+}

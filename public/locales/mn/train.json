@@ -38,5 +38,6 @@
     "description": "Тайлбар",
     "number": "Тоо",
     "payment": "Төлбөр",
-    "totalPrice": "Нийт үнэ"
+    "totalPrice": "Нийт үнэ",
+    "paymentDate": "Та захиалгаа{' '}<span className='text-yellow-400'>{moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}</span>{' '}-аас өмнө хийж дуусгана уу!"
 }

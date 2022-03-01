@@ -38,5 +38,6 @@
     "description": "描述",
     "number": "數字",
     "payment": "支付",
-    "totalPrice": "總價"
+    "totalPrice": "總價",
+    "paymentDate": "请您与<span className='text-yellow-400'>{moment(endDate).format('YYYY年MM月DD日hh点mm分之前定完您的订单.')}</span>"
 }

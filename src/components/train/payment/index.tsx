@@ -142,6 +142,16 @@ const Payment = () => {
           ''
         )}
 
+        {/* {endDate ? (
+          <div className="text-center mt-5 mb-1 max-w-7xl mx-auto px-2 cursor-pointer">
+            <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
+              {t('paymentDate')}
+            </p>
+          </div>
+        ) : (
+          ''
+        )} */}
+
         <div className="max-w-7xl mx-auto px-2 my-5 md:flex gap-5">
           <div className="bg-white rounded-lg h-auto p-10 w-5/5 md:w-3/5">
             <h1 className="text-base font-semibold text-cardDate">
