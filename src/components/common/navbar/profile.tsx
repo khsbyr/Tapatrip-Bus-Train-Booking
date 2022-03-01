@@ -13,7 +13,6 @@ import { useState } from 'react';
 export default function Profile({ data }) {
   const { t } = useTranslation(['common']);
   const router = useRouter();
-
   const handleLogout = () => {
     AuthService.logout();
   };
