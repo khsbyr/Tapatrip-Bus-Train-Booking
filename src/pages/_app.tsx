@@ -5,6 +5,7 @@ import { client } from '@lib/apollo';
 import { ManagedGlobalContext } from '@context/globalStore';
 import { appWithTranslation } from 'next-i18next';
 import { ManagedUIContext } from '@context/uiContext';
+import { ManagedTrainContext } from '@context/trainContext';
 import Router from 'next/router';
 import NProgress from 'nprogress'; //nprogress module
 import 'nprogress/nprogress.css'; //styles of nprogress
@@ -49,7 +50,9 @@ const MyApp: FC<AppProps> = ({ Component, router, pageProps }: AppProps) => {
       <ApolloProvider client={client}>
         <ManagedUIContext>
           <ManagedGlobalContext>
-            <Component {...pageProps} />
+            <ManagedTrainContext>
+              <Component {...pageProps} />
+            </ManagedTrainContext>
           </ManagedGlobalContext>
         </ManagedUIContext>
       </ApolloProvider>

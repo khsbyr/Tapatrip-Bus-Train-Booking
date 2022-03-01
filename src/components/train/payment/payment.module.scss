@@ -1,0 +1,30 @@
+.styledTable {
+  font-size: 0.9em;
+  font-family: sans-serif;
+  width: 100%;
+}
+
+.styledTable thead tr {
+  color: rgb(95, 95, 95);
+  text-align: left;
+  border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+.styledTable th,
+.styledTable td {
+  padding: 12px 12px;
+  text-align: left;
+  color: rgb(95, 95, 95);
+}
+
+.styledTable tbody tr {
+  border-bottom: 1px solid #ececec;
+}
+
+// .styledTable tbody tr:nth-of-type(even) {
+//   background-color: rgb(243, 243, 243);
+// }
+
+// .styledTable tbody tr:last-of-type {
+//   border-bottom: 1px solid rgb(204, 204, 204);
+// }

@@ -72,6 +72,7 @@ module.exports = {
         mobileNav: '#BCC4CC',
         orders: '#1679d5',
         covid: '#d62828',
+        trainTicket: '#264E73',
       },
 
       placeholderColor: {
@@ -79,6 +80,8 @@ module.exports = {
       },
       fontSize: {
         small: '8px',
+        small2x: '11px',
+        medium: '13px',
       },
 
       screens: {
