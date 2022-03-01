@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Layout from '@components/common/layout';
 import { useTrainContext } from '@context/trainContext';
 import moment from 'moment';
-import TrainService from '@services/train';
 import { message, Radio, Modal } from 'antd';
 import ContentWrapper from './style';
 import PayCorporate from '../payTransferTapa';
@@ -10,6 +9,7 @@ import { useTranslation } from 'next-i18next';
 import PassengerInfoCard from '../passengerInfoCard';
 import QRCode from 'react-qr-code';
 import { useRouter } from 'next/router';
+import PaymentService from '@services/payment';
 
 const Payment = () => {
   const { endDate } = useTrainContext();
@@ -25,7 +25,7 @@ const Payment = () => {
   useEffect(() => {
     async function getPaymentMethods() {
       try {
-        const res = await TrainService.paymentMethods();
+        const res = await PaymentService.paymentMethods();
         if (res && res.status === 200) {
           setPayMethods(res.result);
         }
@@ -48,7 +48,7 @@ const Payment = () => {
       company_register: 0,
     };
     try {
-      const res = await TrainService.checkInvoice(params);
+      const res = await PaymentService.checkInvoice(params);
       if ((res && res.status === 200) || (res && res.status === 201)) {
         message.info(res.result.message);
       }
@@ -69,7 +69,7 @@ const Payment = () => {
       company_register: 0,
     };
     try {
-      const res = await TrainService.createInvoice(params);
+      const res = await PaymentService.createInvoice(params);
       if (res && res.status === 200) {
         setPaymentResult(res.result);
         value === 'QPAY'

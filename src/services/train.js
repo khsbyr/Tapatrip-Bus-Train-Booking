@@ -95,36 +95,6 @@ const TrainService = {
     };
     return datas;
   },
-
-  async paymentMethods() {
-    const response = await Client.post(`/payment/v1/payment_methods/`);
-    const datas = {
-      status: response.data.status_code,
-      result: response.data.result,
-      message: response.data.message,
-    };
-    return datas;
-  },
-
-  async createInvoice(params) {
-    const response = await Client.post(`/payment/v1/create_invoice/`, params);
-    const datas = {
-      status: response.data.status_code,
-      result: response.data.result,
-      message: response.data.message,
-    };
-    return datas;
-  },
-
-  async checkInvoice(params) {
-    const response = await Client.post(`/payment/v1/check_invoice/`, params);
-    const datas = {
-      status: response.data.status_code,
-      result: response.data.result,
-      message: response.data.message,
-    };
-    return datas;
-  },
 };
 
 export default TrainService;
