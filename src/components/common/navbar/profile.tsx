@@ -65,7 +65,7 @@ export default function Profile({ data }) {
         </a>
         <a
           className="flex items-center hover:bg-red-100 rounded p-4 hover:text-red-400"
-          href="/"
+          href={router.pathname ? router.pathname : '/'}
           onClick={handleLogout}
         >
           <LogoutIcon className="pr-2 h-5" />

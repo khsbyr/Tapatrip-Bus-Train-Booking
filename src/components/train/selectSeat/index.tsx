@@ -1,132 +1,264 @@
-import React, { useState } from 'react';
-import style from './selectSeats.module.scss';
-import SeatLarge from '@components/bus/selectSeats/seatLarge';
-import SeatMedium from '@components/bus/selectSeats/seatMedium';
-import SeatSmall from '@components/bus/selectSeats/seatSmall';
-import { useGlobalStore } from '@context/globalStore';
-import { Modal } from 'antd';
-import { arrayFilterSchedule } from '@helpers/array-format';
+import { useTrainContext } from '@context/trainContext';
+import {
+  ClassPrivateFormat,
+  ClassPublicFormat,
+} from '@helpers/train-array-format';
+import TrainService from '@services/train';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import SeatCard from '../seatCard';
+import ClassPrivate from './classPrivate';
+import ClassPublic from './classPublic';
+import Loader from '@components/train/loader';
+import Layout from '@components/common/layout';
+import moment from 'moment';
 import { useTranslation } from 'next-i18next';
 
-export default function SelectSeats({ datas, scheduleId }) {
-  const { t } = useTranslation(['steps']);
-  const { selectedSeats, setSelectedSeats } = useGlobalStore();
-  const { isSelectedSeats, setIsSelectedSeats } = useGlobalStore();
-  const { current, setCurrent } = useGlobalStore();
-  const { bus, driverPhone } = datas;
+export default function SelectSeats() {
+  const [wagonData, setWagonData] = useState([]);
+  const [mestData, setMestDate] = useState([]);
+  const [wagonId, setWagonId] = useState();
+  const [wagonName, setWagonName] = useState('');
+  const router = useRouter();
+  const { voyageId, startStop, endStop, priceType } = router.query;
+  const [loading, setLoading] = useState(false);
+  const { endDate } = useTrainContext();
+  const { t } = useTranslation(['train']);
+  const { locale } = router;
 
-  const formatSelectedSeats = arrayFilterSchedule(selectedSeats, scheduleId);
+  useEffect(() => {
+    async function getTrainStations() {
+      let params = {
+        voyage_id: voyageId,
+        start_stop: startStop,
+        end_stop: endStop,
+        price_type: priceType,
+      };
 
-  const handleRemoveSeat = e => {
-    const index = selectedSeats.findIndex(
-      item =>
-        item.seatNumber === e.target.value && item.scheduleId === scheduleId
-    );
-    if (index > -1) {
-      selectedSeats.splice(index, 1);
-      isSelectedSeats[scheduleId + e.target.value] = false;
-      setSelectedSeats(selectedSeats);
-      setIsSelectedSeats(isSelectedSeats);
+      try {
+        const res = await TrainService.getWagonData(params);
+        if (res && res.status === 200) {
+          setWagonData(res?.result);
+          setWagonId(res?.result[0]?.WAGON);
+          getMest(res?.result[0]);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getTrainStations();
+  }, []);
+
+  const getMest = async wagon => {
+    setLoading(true);
+    setWagonName(wagon?.NAME);
+    setWagonId(wagon?.WAGON);
+    let params = {
+      uid: 1,
+      order_id: 0,
+      wagon_id: wagon?.WAGON,
+      start_stop: startStop,
+      end_stop: endStop,
+      mest_no: 0,
+    };
+    try {
+      const res = await TrainService.getMestData(params);
+      if (res && res.status === 200) {
+        setMestDate(res.result);
+        setLoading(false);
+      }
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
     }
   };
 
-  const next = () => {
-    if (formatSelectedSeats.length > 0) setCurrent(current + 1);
-    else {
-      Modal.warning({
-        title: t('selectSeatWarning'),
-        content: t('selectSeatWarningContent'),
-      });
+  const getTrainSkech = () => {
+    switch (priceType) {
+      case '5':
+        return (
+          <ClassPublic
+            data={ClassPublicFormat(mestData)}
+            voyageId={voyageId}
+            wagonName={wagonName}
+            startStop={startStop}
+            endStop={endStop}
+            wagonId={wagonId}
+          />
+        );
+
+      case '8':
+        return (
+          <ClassPrivate
+            data={ClassPrivateFormat(mestData)}
+            voyageId={voyageId}
+            wagonName={wagonName}
+            startStop={startStop}
+            endStop={endStop}
+            wagonId={wagonId}
+          />
+        );
+
+      default:
+        '';
     }
   };
 
   return (
-    <div className={style.body}>
-      <div className={style.content}>
-        <div className={style.root}>
-          <div>
-            <h1 className={style.selecetSeatTitle}>{t('selectSeat')}</h1>
-          </div>
-          <div className={style.information}>
-            <div className="sm:w-7/12 space-y-6">
-              <h1 className={style.busInformationTitle}>
-                {t('busInformations')}
+    <Layout>
+      {/* {endDate ? (
+        <div className="text-center mt-5 mb-1 max-w-7xl mx-auto px-2 cursor-pointer">
+          {locale === 'mn' ? (
+            <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
+              Та захиалгаа{' '}
+              <span className="text-yellow-400">
+                {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
+              </span>{' '}
+              -аас өмнө хийж дуусгана уу!
+            </p>
+          ) : locale === 'en' ? (
+            <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
+              Please complete your order before{' '}
+              <span className="text-yellow-400">
+                {moment(endDate).format(`YYYY-MM-DD hh:mm`)}
+              </span>
+              !
+            </p>
+          ) : locale === 'zh' ? (
+            <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
+              请您与
+              <span className="text-yellow-400">
+                {moment(endDate).format(
+                  'YYYY年MM月DD日hh点mm分之前定完您的订单.'
+                )}
+              </span>
+            </p>
+          ) : (
+            <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
+              Та захиалгаа{' '}
+              <span className="text-yellow-400">
+                {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
+              </span>{' '}
+              -аас өмнө хийж дуусгана уу!
+            </p>
+          )}
+        </div>
+      ) : (
+        ''
+      )} */}
+      <div className="max-w-7xl mx-auto py-5 space-y-3 md:space-y-0 md:flex">
+        <div className=" w-12/12 md:w-6/12 lg:w-3/12">
+          <div className="bg-white rounded-lg p-4 space-y-3 flex-none mx-2">
+            <h1 className="font-bold text-base text-trainTicket">
+              1. {t('chooseTrain')}
+            </h1>
+
+            <div className="flex items-center gap-4 cursor-pointer p-2">
+              <img src="/assets/trainImages/train.svg" className="h-8" />
+              <h1 className="font-semibold text-base text-trainTicket">
+                {t('headTrain')}
               </h1>
-              <div className="flex ">
-                <img src="/assets/busimg.jpg" className="pr-4 h-32" />
-                <div className={style.busInformation}>
-                  <p>
-                    <h1> {t('businessFirms')}: </h1>
-                    {bus?.transporter?.name}
-                  </p>
-                  <p>
-                    <h1>{t('busInsuranceName')}: </h1>
-                    {datas?.insurance?.name}
-                  </p>
-                  <p>
-                    <h1>{t('busModelName')}: </h1>
-                    {bus?.modelName}
-                  </p>
-                  <p>
-                    <h1>{t('busPlateNumber')}: </h1>
-                    {bus?.plateNumber}
-                  </p>
-                  <p>
-                    <h1>{t('driversPhoneNumber')}: </h1>
-                    {driverPhone}
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-wrap">
-                <div className="flex items-center py-1 space-x-5 mr-5">
-                  <p className="text-cardDate font-bold border-2 border-seat bg-white h-10 w-8 rounded-md"></p>
-                  <h1 className="text-cardDate">{t('canBeOredered')}</h1>
-                </div>
-                <div className="text-cardDate py-1 flex items-center space-x-5">
-                  <div className=" bg-bg border-2 border-bg h-10 w-8 rounded-md"></div>
-                  <h1 className="text-cardDate">{t('ordered')}</h1>
-                </div>
-              </div>
-              <div className="flex flex-wrap">
-                <h1 className="h-full text-cardDate font-bold text-base sm:text-lg pr-4">
-                  {t('selectedSeats')}
-                </h1>
-                <div className="py-2 text-lg font-bold">
-                  {formatSelectedSeats &&
-                    formatSelectedSeats.map(seat => (
-                      <button
-                        key={seat.seatNumber}
-                        value={seat.seatNumber}
-                        onClick={handleRemoveSeat}
-                        className={style.selectedSeats}
-                      >
-                        {seat.seatNumber}
-                      </button>
-                    ))}
-                </div>
-              </div>
             </div>
-            {bus?.seatCount < 25 ? (
-              <SeatSmall datas={datas} scheduleId={scheduleId} />
-            ) : bus?.seatCount < 46 ? (
-              <SeatMedium datas={datas} scheduleId={scheduleId} />
-            ) : (
-              <SeatLarge datas={datas} scheduleId={scheduleId} />
-            )}
+
+            {wagonData?.map(wagon => (
+              <div
+                className={`flex items-center gap-4 p-2 rounded-lg   
+            ${
+              wagon.FREEMEST !== 0
+                ? 'cursor-pointer hover:opacity-80'
+                : 'cursor-not-allowed opacity-30'
+            }
+              ${
+                wagon.WAGON === wagonId
+                  ? 'bg-white border-red-500 border-2'
+                  : 'bg-bg border-2'
+              }
+            `}
+                key={wagon.WAGON}
+                onClick={() => (wagon.FREEMEST !== 0 ? getMest(wagon) : '')}
+              >
+                <img
+                  src={`${
+                    wagon.WAGON === wagonId
+                      ? '/assets/trainImages/wagonRed.svg'
+                      : '/assets/trainImages/wagon.svg'
+                  }
+              `}
+                  className="h-14"
+                />
+
+                <div>
+                  <h1
+                    className={`font-semibold text-base ${
+                      wagon.WAGON === wagonId
+                        ? 'text-red-500'
+                        : 'text-trainTicket'
+                    }`}
+                  >
+                    {wagon?.NAME}-р {t('trainn')}
+                  </h1>
+
+                  <h1 className="text-sm text-trainTicket">
+                    {wagon.FREEMEST !== 0
+                      ? `${wagon.FREEMEST} ${t('looseSeats')}`
+                      : t('full')}
+                  </h1>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="w-12/12 mt-3 hidden md:block lg:hidden">
+            <SeatCard
+              // voyage={selectedVoyageData}
+              voyageId={voyageId}
+              wagonId={wagonId}
+            />
           </div>
         </div>
-        <button className={style.buttonBlock} onClick={next}>
-          {t('stepSelectSeatButton')}
-        </button>
-      </div>
-      <div className={style.card}>
-        <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
-          {'Card'}
-          <button className={style.button} onClick={next}>
-            {t('stepSelectSeatButton')}
-          </button>
+
+        <div className="bg-white h-auto rounded-lg p-4 mx-2 w-12/12 md:w-6/12 lg:w-5/12">
+          <h1 className="font-bold text-base text-trainTicket">
+            2. {t('chooseSeat')}
+          </h1>
+
+          <div className="py-5 grid grid-cols-3">
+            <div>
+              <button className="py-4 px-10 rounded-lg bg-bg border-2 flex mx-auto" />
+              <h1 className="text-center">{t('possible')}</h1>
+            </div>
+            <div>
+              <button className="py-4 px-10 rounded-lg bg-white border-2 border-red-500 flex mx-auto" />
+              <h1 className="text-center">{t('selected')}</h1>
+            </div>
+            <div>
+              <button className="py-4 px-10 rounded-lg bg-bg border-2 flex mx-auto opacity-30 cursor-not-allowed" />
+              <h1 className="text-center">{t('impossible')}</h1>
+            </div>
+          </div>
+
+          <div className="border border-gray-200 text-center w-2/3 rounded-md py-4 cursor-pointer ml-auto mr-0">
+            {t('toilet')}
+          </div>
+
+          <div className="border border-gray-200 text-center w-2/3 rounded-md py-4 my-3 cursor-pointer ml-auto mr-0 ">
+            {t('conductor')}
+          </div>
+
+          {loading ? <Loader /> : getTrainSkech()}
+
+          <div className="border border-gray-200 text-center w-2/3 rounded-md py-4 my-3 cursor-pointer ml-auto mr-0 ">
+            {t('toilet')}
+          </div>
+        </div>
+
+        <div className="w-12/12 md:hidden lg:block lg:w-4/12">
+          <SeatCard
+            // voyage={selectedVoyageData}
+            voyageId={voyageId}
+            wagonId={wagonId}
+          />
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }

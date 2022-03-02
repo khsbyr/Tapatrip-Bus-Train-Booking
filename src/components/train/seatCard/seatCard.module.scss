@@ -1,0 +1,82 @@
+.card {
+  @apply relative bg-white w-full h-auto rounded-lg py-5 sm:py-5;
+
+  .rightRound {
+    @apply border-4 w-4 h-7 sm:w-6 sm:h-10 border-r-0 rounded-tl-full rounded-bl-full absolute right-0 bg-bg border-bg;
+  }
+  .leftRound {
+    @apply border-4 w-4 h-7 sm:w-6 sm:h-10 border-l-0 rounded-tr-full rounded-br-full absolute left-0 bg-bg border-bg;
+  }
+
+  .border {
+    @apply w-full h-0.5 border border-gray-300 border-dashed;
+  }
+
+  .ticket {
+    @apply h-auto w-full  rounded-md cursor-pointer px-4 py-2;
+  }
+
+  .orderButton {
+    @apply px-14 py-3 text-white font-medium rounded-lg bg-button;
+  }
+
+  .headerSection {
+    @apply flex justify-between items-center flex-wrap space-y-3 xs:space-y-0 px-8;
+  }
+
+  .trainName {
+    @apply font-bold text-trainTicket text-medium md:text-base;
+  }
+
+  .trainNo {
+    @apply font-bold text-small2x md:text-xs text-gray-400;
+  }
+
+  .marshrut {
+    @apply px-3 py-2 bg-bg font-semibold rounded-lg text-small2x cursor-pointer text-trainTicket;
+  }
+
+  .middleSection {
+    @apply px-8 md:flex md:justify-between;
+  }
+
+  .line {
+    @apply w-11/12 bg-bg h-px mx-auto my-3;
+  }
+
+  .depDate {
+    @apply text-small2x md:text-xs text-gray-400 font-semibold;
+  }
+
+  .depTime {
+    @apply font-semibold text-trainTicket text-xs md:text-sm;
+  }
+
+  .arrDate {
+    @apply text-right text-small2x md:text-xs text-gray-400 font-semibold;
+  }
+
+  .distance {
+    @apply text-small2x md:text-xs text-gray-400 font-semibold text-center mt-3 md:mt-0;
+  }
+
+  .distanceLine {
+    @apply w-full bg-gray-300 h-0.5 mx-auto my-2;
+  }
+
+  .distanceTime {
+    @apply text-small2x md:text-xs text-gray-400 font-semibold text-center;
+  }
+
+  .footerSection {
+    @apply px-8 py-5;
+  }
+
+  .cardMain {
+    @apply w-full h-16 bg-bg rounded-lg space-y-2 p-2 cursor-default mb-2;
+  }
+
+  .cardText {
+    @apply font-semibold text-trainTicket text-xs md:text-sm;
+  }
+}
