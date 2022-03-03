@@ -84,19 +84,19 @@ const Payment = () => {
     }
   };
 
-  // if (endDate) {
-  //   const interval = setInterval(() => {
-  //     if (
-  //       moment().format('YYYY-MM-DD hh:mm') ===
-  //       moment(endDate).format('YYYY-MM-DD hh:mm')
-  //     ) {
-  //       router.push({
-  //         pathname: `/train`,
-  //       });
-  //       clearInterval(interval);
-  //     }
-  //   }, 1000);
-  // }
+  if (endDate) {
+    const interval = setInterval(() => {
+      if (
+        moment().format('YYYY-MM-DD hh:mm:ss') ===
+        moment(endDate).format('YYYY-MM-DD hh:mm:ss')
+      ) {
+        router.push({
+          pathname: `/train`,
+        });
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
 
   return (
     <Layout>
@@ -260,7 +260,7 @@ const Payment = () => {
               className="py-3 px-12 bg-blue-500 mt-8 font-bold text-white"
               onClick={afterClose}
             >
-              ТӨЛБӨР ШАЛГАХ
+              {t('checkPayment')}
             </button>
           </div>
         </Modal>

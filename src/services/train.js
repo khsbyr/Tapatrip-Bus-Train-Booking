@@ -22,7 +22,7 @@ const TrainService = {
   },
 
   async getAvailableDates(params) {
-    const response = await Client.get(`/train/available_dates/${params}`);
+    const response = await Client.post(`/train/get_dates/`, params);
     const datas = {
       status: response.data.status_code,
       result: response.data.result,

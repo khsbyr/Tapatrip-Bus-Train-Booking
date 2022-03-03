@@ -39,5 +39,6 @@
     "number": "Тоо",
     "payment": "Төлбөр",
     "totalPrice": "Нийт үнэ",
-    "paymentDate": "Та захиалгаа{' '}<span className='text-yellow-400'>{moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}</span>{' '}-аас өмнө хийж дуусгана уу!"
+    "paymentDate": "Та захиалгаа{' '}<span className='text-yellow-400'>{moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}</span>{' '}-аас өмнө хийж дуусгана уу!",
+    "checkPayment": "ТӨЛБӨР ШАЛГАХ"
 }
