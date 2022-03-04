@@ -191,13 +191,17 @@ export default function OrderModalTrain(props) {
                   <div className="flex justify-between flex-wrap">
                     <h1 className="font-medium text-cardDate text-center ">
                       Вагоны дугаар:{' '}
-                      {datas?.rs_payload?.passengers[0]?.WAGON_NAME}
+                      {datas?.rs_payload?.passengers[0]?.WAGON_NAME
+                        ? datas?.rs_payload?.passengers[0]?.WAGON_NAME
+                        : datas?.rs_payload?.passengers[0]?.WAGON}
                     </h1>
 
                     <h1 className="font-medium text-cardDate text-center">
                       {t('seatNumber')}:{' '}
                       {datas?.rs_payload?.passengers
-                        ?.map(passenger => passenger.MEST_NO)
+                        ?.map(passenger =>
+                          passenger.MEST_NO ? passenger.MEST_NO : passenger.MEST
+                        )
                         .join(', ')}
                     </h1>
                   </div>
