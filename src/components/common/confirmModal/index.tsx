@@ -47,6 +47,7 @@ export default function ConfirmModal(props) {
           <button
             onClick={() => props.booking(pinCode)}
             className={style.button}
+            disabled={props.loading ? true : false}
           >
             {props.loading === true ? (
               <div className={style.ldsDualRing}></div>

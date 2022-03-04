@@ -95,6 +95,26 @@ const TrainService = {
     };
     return datas;
   },
+
+  async getTicketInfo(params) {
+    const response = await Client.get(`/train/get_ticket/${params}`);
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    return datas;
+  },
+
+  async orderCheck(params) {
+    const response = await Client.get(`/train/order_check/${params}`);
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    return datas;
+  },
 };
 
 export default TrainService;

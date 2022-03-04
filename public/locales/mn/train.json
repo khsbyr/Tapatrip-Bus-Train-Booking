@@ -40,5 +40,6 @@
     "payment": "Төлбөр",
     "totalPrice": "Нийт үнэ",
     "paymentDate": "Та захиалгаа{' '}<span className='text-yellow-400'>{moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}</span>{' '}-аас өмнө хийж дуусгана уу!",
-    "checkPayment": "ТӨЛБӨР ШАЛГАХ"
+    "checkPayment": "ТӨЛБӨР ШАЛГАХ",
+    "notReq": "Орон нутгийн чиглэлд шаардлагагүй"
 }

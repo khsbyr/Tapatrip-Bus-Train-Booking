@@ -19,6 +19,7 @@ const Payment = () => {
   const { t } = useTranslation(['train']);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [paymentResult, setPaymentResult] = useState(undefined);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { locale } = router;
 
@@ -62,6 +63,7 @@ const Payment = () => {
   };
 
   const pay = async () => {
+    setLoading(true);
     let params = {
       payment_type: value,
       ref_number: paymentDetail.ref_number,
@@ -71,6 +73,7 @@ const Payment = () => {
     try {
       const res = await PaymentService.createInvoice(params);
       if (res && res.status === 200) {
+        setLoading(false);
         setPaymentResult(res.result);
         value === 'QPAY'
           ? setIsModalVisible(true)
@@ -78,9 +81,11 @@ const Payment = () => {
       }
       if (res && res.status === 201) {
         message.warning(res.message);
+        setLoading(false);
       }
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
 
