@@ -1,5 +1,2 @@
-service: bustravel-front
-provider:
-  name: aws
-  runtime: nodejs14.x
-  region: ap-east-1
+busbookingfront:
+  component: "@sls-next/serverless-component@3.6.0"
