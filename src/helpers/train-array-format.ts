@@ -5,7 +5,7 @@ export function availableDatesFormat(data: any) {
   data &&
     data.map(element =>
       arr.push({
-        date: element.voyage_date,
+        date: element.VOYAGE_DATE,
       })
     );
   return arr;

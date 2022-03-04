@@ -19,6 +19,7 @@ const Payment = () => {
   const { t } = useTranslation(['train']);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [paymentResult, setPaymentResult] = useState(undefined);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { locale } = router;
 
@@ -62,6 +63,7 @@ const Payment = () => {
   };
 
   const pay = async () => {
+    setLoading(true);
     let params = {
       payment_type: value,
       ref_number: paymentDetail.ref_number,
@@ -71,6 +73,7 @@ const Payment = () => {
     try {
       const res = await PaymentService.createInvoice(params);
       if (res && res.status === 200) {
+        setLoading(false);
         setPaymentResult(res.result);
         value === 'QPAY'
           ? setIsModalVisible(true)
@@ -78,25 +81,27 @@ const Payment = () => {
       }
       if (res && res.status === 201) {
         message.warning(res.message);
+        setLoading(false);
       }
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
 
-  // if (endDate) {
-  //   const interval = setInterval(() => {
-  //     if (
-  //       moment().format('YYYY-MM-DD hh:mm') ===
-  //       moment(endDate).format('YYYY-MM-DD hh:mm')
-  //     ) {
-  //       router.push({
-  //         pathname: `/train`,
-  //       });
-  //       clearInterval(interval);
-  //     }
-  //   }, 1000);
-  // }
+  if (endDate) {
+    const interval = setInterval(() => {
+      if (
+        moment().format('YYYY-MM-DD hh:mm:ss') ===
+        moment(endDate).format('YYYY-MM-DD hh:mm:ss')
+      ) {
+        router.push({
+          pathname: `/train`,
+        });
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
 
   return (
     <Layout>
@@ -260,7 +265,7 @@ const Payment = () => {
               className="py-3 px-12 bg-blue-500 mt-8 font-bold text-white"
               onClick={afterClose}
             >
-              ТӨЛБӨР ШАЛГАХ
+              {t('checkPayment')}
             </button>
           </div>
         </Modal>

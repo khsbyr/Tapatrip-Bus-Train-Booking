@@ -41,7 +41,11 @@ export default function SearchInput({ stationData }) {
 
   useEffect(() => {
     async function getDates() {
-      let params = `?fromStation=${startStationID}&toStation=${endStationID}`;
+      // let params = `?fromStation=${startStationID}&toStation=${endStationID}`;
+      let params = {
+        fromStation: startStationID,
+        toStation: endStationID,
+      };
       try {
         const res = await TrainService.getAvailableDates(params);
         if (res && res.status === 200) {

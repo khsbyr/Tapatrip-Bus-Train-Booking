@@ -39,6 +39,7 @@ export default function PassengerInfo() {
   const { selectedSeats, setSelectedSeats } = useTrainContext();
   const { customer, setCustomer } = useTrainContext();
   const [voyage, setVoyage] = useState(undefined);
+  const [loading, setLoading] = useState(false);
   const {
     setDisplayBlock,
     setDisplayNone,
@@ -116,6 +117,7 @@ export default function PassengerInfo() {
   };
 
   const onFinish = async () => {
+    setLoading(true);
     if (isAuth) {
       booking(AuthTokenStorageService.getAccessToken());
     } else {
@@ -128,11 +130,13 @@ export default function PassengerInfo() {
         if (res && res.status === 200) {
           setIsModalVisible(true);
           closeLoadingPassengerInfo();
+          setLoading(false);
         }
         if (res && res.status === 400) {
           setIsModalVisible(true);
           closeLoadingPassengerInfo();
           setConfirmError(res.message);
+          setLoading(false);
         }
       } catch (e) {
         Modal.error({
@@ -140,6 +144,7 @@ export default function PassengerInfo() {
           content: t('errorContent'),
         });
         closeLoadingPassengerInfo();
+        setLoading(false);
       }
     }
   };
@@ -429,7 +434,7 @@ export default function PassengerInfo() {
                               <Input
                                 className={style.input}
                                 value={seat.passportNumber}
-                                placeholder={t('passport', { ns: 'train' })}
+                                placeholder={t('notReq', { ns: 'train' })}
                                 onChange={e => passangerPassportNo(e, i)}
                               />
                             </Form.Item>
@@ -488,7 +493,7 @@ export default function PassengerInfo() {
               className={style.buttonBlock}
               onClick={() => setDisplayNone()}
             >
-              {displayLoadingPassengerInfo === true ? (
+              {loading === true ? (
                 <div className={style.ldsDualRing}></div>
               ) : (
                 t('stepPassengerInfoButton')
@@ -499,7 +504,7 @@ export default function PassengerInfo() {
             <div className="px-2 lg:px-0 space-y-3 mt-3 md:mt-0">
               <PassengerInfoCard />
               <button className={style.button} onClick={() => setDisplayNone()}>
-                {displayLoadingPassengerInfo === true ? (
+                {loading === true ? (
                   <div className={style.ldsDualRing}></div>
                 ) : (
                   t('stepPassengerInfoButton')
