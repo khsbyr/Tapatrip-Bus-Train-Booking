@@ -32,12 +32,16 @@
 .ldsDualRing {
   display: flex;
   justify-content: center;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 34px;
+  padding-right: 34px;
 }
 .ldsDualRing:after {
   content: ' ';
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: 2px solid #fff;
   border-color: #fff transparent #fff transparent;
