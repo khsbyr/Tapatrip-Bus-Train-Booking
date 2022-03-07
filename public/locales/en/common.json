@@ -91,5 +91,6 @@
   "userName": "Customer name",
   "editButton": "EDIT",
   "mailTitle":  "Email address",
-  "numberTitle": "Phone number"
+  "numberTitle": "Phone number",
+  "notFoundTrain": "No trains were found on that route!"
 }

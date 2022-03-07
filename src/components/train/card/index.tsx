@@ -179,6 +179,7 @@ export default function Card({ voyage }) {
               {t('distance')} - {voyage.DISTANCE_KM}км
             </p>
             <div className={style.distanceLine} />
+            <p className={style.bonus}>1 КМ = 10 TP</p>
           </div>
 
           <div className="hidden md:block">
