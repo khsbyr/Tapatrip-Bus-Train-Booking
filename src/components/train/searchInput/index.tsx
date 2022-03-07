@@ -18,7 +18,7 @@ import ContentWrapper from './style';
 
 const dFormat = 'YYYY-MM-DD';
 
-export default function SearchInput({ stationData }) {
+export default function SearchInput({ stationData, endStation }) {
   const { t } = useTranslation();
   const { Option } = AutoComplete;
   const { startStationID, setStartStationID } = useTrainContext();
@@ -200,7 +200,7 @@ export default function SearchInput({ stationData }) {
             }
             defaultValue={`${endName ? endName : ''}`}
           >
-            {endLocationFormat(endStationData && endStationData)?.map(
+            {endLocationFormat(endStation ? endStation : endStationData)?.map(
               station => (
                 <Option
                   key={station.station_id}

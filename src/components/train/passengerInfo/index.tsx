@@ -156,7 +156,7 @@ export default function PassengerInfo() {
     let payload = {
       phone: customer.phoneNumber,
       dialCode: customer.dialNumber,
-      code: '0000',
+      code: pinCode,
     };
     if (pinCode.length > 3) {
       try {
