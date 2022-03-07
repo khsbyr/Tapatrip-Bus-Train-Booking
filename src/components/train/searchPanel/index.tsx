@@ -84,7 +84,7 @@ const SearchPanel: FC<Props> = ({ navbarData, stationData }) => {
             />
           ))}
         </Tabs>
-        <SearchInput stationData={stationData} />
+        <SearchInput stationData={stationData} endStation="" />
       </div>
       <Tabs
         activeKey={activePath}
