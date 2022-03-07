@@ -1,7 +1,7 @@
 import { Modal } from 'antd';
 import React from 'react';
 import { useTranslation } from 'next-i18next';
-
+import { useRouter } from 'next/router';
 interface Props {
   isModalVisible?: any;
   close?: any;
@@ -9,6 +9,8 @@ interface Props {
 
 export default function EndModal(props) {
   const { t } = useTranslation(['steps']);
+  const router = useRouter();
+
   return (
     <Modal
       visible={props.isModalVisible}
@@ -29,7 +31,7 @@ export default function EndModal(props) {
           </h1>
         </p>
         <div className="flex justify-center">
-          <a href="/">
+          <a href={router.route === '/train/orders/[id]' ? '/train' : '/'}>
             <button className="px-10 bg-button w-full text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white">
               {t('endModalButton')}
             </button>
