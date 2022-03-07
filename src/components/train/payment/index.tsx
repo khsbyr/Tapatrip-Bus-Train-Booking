@@ -11,6 +11,7 @@ import QRCode from 'react-qr-code';
 import { useRouter } from 'next/router';
 import PaymentService from '@services/payment';
 import style from './payment.module.scss';
+import EndModal from '@components/common/endModal';
 
 const Payment = () => {
   const { endDate } = useTrainContext();
@@ -19,6 +20,7 @@ const Payment = () => {
   const { paymentDetail } = useTrainContext();
   const { t } = useTranslation(['train']);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisibleCheck, setIsModalVisibleCheck] = useState(false);
   const [paymentResult, setPaymentResult] = useState(undefined);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -103,6 +105,14 @@ const Payment = () => {
       }
     }, 1000);
   }
+
+  const handleCheck = () => {
+    setIsModalVisibleCheck(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisibleCheck(false);
+  };
 
   return (
     <Layout>
@@ -200,6 +210,18 @@ const Payment = () => {
               <PassengerInfoCard />
             </div>
 
+            <div>
+              <button className={style.buttonBlock} onClick={handleCheck}>
+                {t('endButton')}
+              </button>
+            </div>
+
+            <div>
+              <button className={style.button} onClick={handleCheck}>
+                {t('endButton')}
+              </button>
+            </div>
+
             {/* <div className="bg-white rounded-lg p-5 ">
               <h1 className="text-base font-semibold text-cardDate">
                 {t('orderInformation')}
@@ -232,6 +254,10 @@ const Payment = () => {
             </div> */}
           </div>
         </div>
+
+        {isModalVisibleCheck && (
+          <EndModal isModalVisible={isModalVisibleCheck} close={closeModal} />
+        )}
 
         <Modal
           title={`QPAY`}

@@ -21,6 +21,13 @@
   border-bottom: 1px solid #ececec;
 }
 
+.buttonBlock {
+  @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 my-3 md:-mb-2 text-white block lg:hidden;
+}
+
+.button {
+  @apply w-full bg-button text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white hidden lg:block;
+}
 // .styledTable tbody tr:nth-of-type(even) {
 //   background-color: rgb(243, 243, 243);
 // }
