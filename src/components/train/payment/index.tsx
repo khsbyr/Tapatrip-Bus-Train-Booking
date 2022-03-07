@@ -11,7 +11,7 @@ import QRCode from 'react-qr-code';
 import { useRouter } from 'next/router';
 import PaymentService from '@services/payment';
 import style from './payment.module.scss';
-import EndModal from '@components/common/endModal';
+import EndModal from '@components/train/endModal';
 
 const Payment = () => {
   const { endDate } = useTrainContext();
