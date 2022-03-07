@@ -91,5 +91,6 @@
   "userName": "顾客姓名",
   "editButton": "编辑",
   "mailTitle":  "电子邮件地址",
-  "numberTitle": "电话号码"
+  "numberTitle": "电话号码",
+  "notFoundTrain": "在那條路線上沒有找到火車!"
   }

@@ -50,6 +50,9 @@ export default function SearchInput({ stationData }) {
         const res = await TrainService.getAvailableDates(params);
         if (res && res.status === 200) {
           setAvailableDates(res.result);
+          if (!res.result[0]) {
+            message.warning(t('notFoundTrain'));
+          }
         }
       } catch (err) {
         console.log(err);
@@ -68,7 +71,7 @@ export default function SearchInput({ stationData }) {
         if (res && res.status === 200) {
           setEndStationData(res.result);
           if (!res.result[0]) {
-            message.warning('Тухайн чиглэлд галт тэрэг олдсонгүй!');
+            message.warning(t('notFoundTrain'));
           }
         }
       } catch (err) {

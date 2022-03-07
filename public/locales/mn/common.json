@@ -91,5 +91,6 @@
   "userName": "Хэрэглэгчийн нэр",
   "editButton": "ЗАСАХ",
   "mailTitle":  "И-мэйл хаяг",
-  "numberTitle": "Утасны дугаар"
+  "numberTitle": "Утасны дугаар",
+  "notFoundTrain": "Тухайн чиглэлд галт тэрэг олдсонгүй!"
 }

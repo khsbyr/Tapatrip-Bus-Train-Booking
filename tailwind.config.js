@@ -73,6 +73,7 @@ module.exports = {
         orders: '#1679d5',
         covid: '#d62828',
         trainTicket: '#264E73',
+        orange: '#F1583C',
       },
 
       placeholderColor: {
