@@ -1,20 +1,91 @@
-import { MenuIcon, XIcon } from '@heroicons/react/solid';
-import React, { FC, useState } from 'react';
 import OrderCheck from '@components/bus/orderCheck';
-import { Transition } from '@headlessui/react';
-import SearchInput from '@components/train/searchInput';
-import Link from 'next/link';
 import SelectLanguage from '@components/common/language';
+import SearchInput from '@components/train/searchInput';
+import { Transition } from '@headlessui/react';
+import { MenuIcon, XIcon } from '@heroicons/react/solid';
+import TrainService from '@services/train';
 import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { useGlobalStore } from '@context/globalStore';
+import Profile from '@components/common/navbar/profile';
+import { useUI } from '@context/uiContext';
+import { useRouter } from 'next/router';
+import LoadingRing from '@components/common/loadingRing';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
+import AuthService from '@services/auth';
+import isEmpty from '@utils/isEmpty';
+import { message } from 'antd';
 
-interface Props {
-  navbarData?: any;
-  startLocations?: any;
-}
-
-export default function BusNavbar({ navbarData }) {
+export default function TrainNavbar({ navbarData }) {
   const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
+  const [stationData, setStationData] = useState([]);
+  const [endStationData, setEndStationData] = useState([]);
+  const { user, setUser } = useGlobalStore();
+  const isAuth = AuthTokenStorageService.getAccessToken() ? true : false;
+  const { displayLoadingLogin } = useUI();
+  const router = useRouter();
+  const { startStation } = router.query;
+
+  useEffect(() => {
+    async function getTrainStations() {
+      try {
+        const res = await TrainService.getTrainStations();
+        if (res && res.status === 200) {
+          setStationData(res.result);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getTrainStations();
+
+    async function getEndStations() {
+      let params = `?from_station=${startStation}`;
+      try {
+        const res = await TrainService.getEndStations(params);
+        if (res && res.status === 200) {
+          setEndStationData(res.result);
+          if (!res.result[0]) {
+            message.warning(t('notFoundTrain'));
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getEndStations();
+
+    async function loadUserFromCookies() {
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : '';
+      if (token) {
+        try {
+          const res = await AuthService.getCurrentUser(token);
+          if (res && res?.status === 200) {
+            if (!isEmpty(res?.result?.user)) {
+              setUser(res?.result?.user);
+            }
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+    loadUserFromCookies();
+  }, []);
+
+  const login = () => {
+    router.push({
+      pathname: `/auth/login`,
+      query: { from: router.pathname },
+    });
+  };
+
   return (
     <div>
       <nav
@@ -24,7 +95,7 @@ export default function BusNavbar({ navbarData }) {
           <div className=" flex items-center justify-between h-12">
             <div className="flex items-center flex-shrink-0 ">
               <div className="ml-2 mt-5">
-                <Link href="/">
+                <Link href="/train">
                   <a>
                     <img
                       src="/assets/svgIcons/NewLogo.svg"
@@ -59,13 +130,20 @@ export default function BusNavbar({ navbarData }) {
                     <SelectLanguage isBlack={true} />
                   </div>
                   <div>
-                    <Link href="/auth/login">
-                      <a>
-                        <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-40 hover:bg-red-500">
-                          {t('login')}
-                        </button>
-                      </a>
-                    </Link>
+                    {isAuth ? (
+                      <Profile data={user} />
+                    ) : (
+                      <button
+                        onClick={login}
+                        className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500"
+                      >
+                        {displayLoadingLogin === true ? (
+                          <LoadingRing />
+                        ) : (
+                          t('login')
+                        )}
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -87,7 +165,7 @@ export default function BusNavbar({ navbarData }) {
               </button>
             </div>
           </div>
-          <SearchInput />
+          <SearchInput stationData={stationData} endStation={endStationData} />
         </div>
 
         <Transition
@@ -116,13 +194,20 @@ export default function BusNavbar({ navbarData }) {
                   <OrderCheck />
                 </div>
                 <div>
-                  <Link href="/auth/login">
-                    <a>
-                      <button className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500">
-                        {t('login')}
-                      </button>
-                    </a>
-                  </Link>
+                  {isAuth ? (
+                    <Profile data={user} />
+                  ) : (
+                    <button
+                      onClick={login}
+                      className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500"
+                    >
+                      {displayLoadingLogin === true ? (
+                        <LoadingRing />
+                      ) : (
+                        t('login')
+                      )}
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

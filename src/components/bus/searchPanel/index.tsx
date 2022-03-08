@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Tabs } from 'antd';
 import ContentWrapper from './style';
 import style from './searchPanel.module.scss';
@@ -16,28 +16,35 @@ interface Props {
 const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
   const { t } = useTranslation();
   const router = useRouter();
-
+  const [hostname, setHosname] = useState('');
   const activePath = getRoute(router);
+
+  useEffect(() => {
+    setHosname(window.location.hostname);
+  }, []);
 
   function getRoute(router: any) {
     switch (router.route) {
       case '/train':
         return '5';
+      case '/bus':
+        return '4';
       case '/tour':
         return '3';
       case '/':
-        return '4';
+        return hostname === 'train.tapatrip.com' ? '5' : '4';
       case 'https://tapatrip.com/':
         return '1';
       case 'https://tapatrip.com/':
         return '2';
       default:
-        return '4';
+        return hostname === 'train.tapatrip.com' ? '5' : '4';
     }
   }
 
   const handleTabChange = key => {
-    const route = key == 4 ? '/' : key == 3 ? '/tour' : '';
+    const route =
+      key == 4 ? '/' : key == 3 ? '/tour' : key == 5 ? '/train' : '';
     key == 2 || key == 1
       ? router.push('https://tapatrip.com/')
       : router.push(`/${route}`);
@@ -73,7 +80,6 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
                   <span className="text">{t(`${menu.text}`)}</span>
                 </div>
               }
-              disabled={menu.id === 5 ? true : false}
               key={menu.id}
             />
           ))}
@@ -108,7 +114,6 @@ const SearchPanel: FC<Props> = ({ navbarData, startLocations = '' }) => {
                 <span className="text-xs sm:text-sm">{t(`${menu.text}`)}</span>
               </div>
             }
-            disabled={menu.id === 5 ? true : false}
             key={menu.id}
           />
         ))}

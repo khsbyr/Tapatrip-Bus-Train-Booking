@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styles from './tapaService.module.scss';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-
+import { useRouter } from 'next/router';
 interface Props {
   tapaServiceList?: any;
   tapaNews?: any;
@@ -10,11 +10,20 @@ interface Props {
 
 const TapaService: FC<Props> = ({ tapaServiceList, tapaNews }) => {
   const { t } = useTranslation(['common']);
+  const router = useRouter();
+
   return (
     <>
       <div className={styles.content}>
         {tapaNews?.map(news => (
-          <Link key={news.id} href={`/news/` + news.head}>
+          <Link
+            key={news.id}
+            href={
+              `/news/` +
+              news.head +
+              `?${router.pathname === '/train' ? 'train' : '/bus'}`
+            }
+          >
             <a className={styles.card} target="_blank">
               <img src={news.src} alt="" />
               <div className="space-y-0 sm:space-y-3">

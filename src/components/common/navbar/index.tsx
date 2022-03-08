@@ -10,7 +10,7 @@ import { useTranslation } from 'next-i18next';
 import { useGlobalStore } from '@context/globalStore';
 import OnlineHelpModal from '@components/common/onlineHelpModal';
 import { useUI } from '@context/uiContext';
-
+import { useRouter } from 'next/router';
 interface Props {
   navbarData?: any;
 }
@@ -21,6 +21,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   const { user } = useGlobalStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { openLoadingLogin, displayLoadingLogin } = useUI();
+  const router = useRouter();
 
   const isAuth = user ? true : false;
 
@@ -49,6 +50,13 @@ const Navbar: FC<Props> = ({ navbarData }) => {
     setIsModalVisible(false);
   };
 
+  const login = () => {
+    router.push({
+      pathname: `/auth/login`,
+      query: { from: router.pathname },
+    });
+  };
+
   return (
     <div>
       <nav
@@ -60,7 +68,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
           <div className={styles.navbarBody}>
             <div className="flex items-center">
               <div className="flex-shrink-0 cursor-pointer">
-                <Link href="/">
+                <Link href={router.pathname}>
                   <img
                     src={`${
                       navbar
@@ -120,18 +128,13 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   {isAuth ? (
                     <Profile data={user} />
                   ) : (
-                    <a href="/auth/login">
-                      <button
-                        className={styles.loginButton}
-                        onClick={() => openLoadingLogin()}
-                      >
-                        {displayLoadingLogin === true ? (
-                          <div className={styles.ldsDualRing}></div>
-                        ) : (
-                          t('login')
-                        )}
-                      </button>
-                    </a>
+                    <button onClick={login} className={styles.loginButton}>
+                      {displayLoadingLogin === true ? (
+                        <div className={styles.ldsDualRing}></div>
+                      ) : (
+                        t('login')
+                      )}
+                    </button>
                   )}
                 </div>
               </div>
@@ -219,18 +222,16 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                   {isAuth ? (
                     <Profile data={user} />
                   ) : (
-                    <a href="/auth/login">
-                      <button
-                        onClick={() => openLoadingLogin()}
-                        className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500"
-                      >
-                        {displayLoadingLogin === true ? (
-                          <div className={styles.ldsDualRing}></div>
-                        ) : (
-                          t('login')
-                        )}
-                      </button>
-                    </a>
+                    <button
+                      onClick={login}
+                      className="bg-button text-white font-medium py-2 px-4 rounded-lg h-auto w-56 hover:bg-red-500"
+                    >
+                      {displayLoadingLogin === true ? (
+                        <div className={styles.ldsDualRing}></div>
+                      ) : (
+                        t('login')
+                      )}
+                    </button>
                   )}
                 </div>
               </div>

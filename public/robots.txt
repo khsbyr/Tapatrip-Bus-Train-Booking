@@ -1,0 +1,19 @@
+# Twitterbot
+User-agent: Twitterbot
+Disallow: 
+
+# *
+User-agent: *
+Allow: /
+Disallow: /_next
+Disallow: /404
+Disallow: /blank
+Disallow: /auth/login
+Disallow: /auth/password-recovery
+Disallow: /redirect
+
+# Host
+Host: undefined
+
+# Sitemaps
+Sitemap: undefined/sitemap.xml
