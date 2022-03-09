@@ -27,7 +27,7 @@ export default function EndModal(props) {
             {t('endModalTitle')}
           </h1>
           <h1 className="text-cardDate text-base text-center">
-            {t('endModalBody')}
+            {t('endModalBodyTrain')}
           </h1>
         </p>
         <div className="flex justify-center">

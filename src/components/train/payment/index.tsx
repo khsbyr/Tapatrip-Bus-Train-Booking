@@ -10,6 +10,8 @@ import PassengerInfoCard from '../passengerInfoCard';
 import QRCode from 'react-qr-code';
 import { useRouter } from 'next/router';
 import PaymentService from '@services/payment';
+import style from './payment.module.scss';
+import EndModal from '@components/train/endModal';
 
 const Payment = () => {
   const { endDate } = useTrainContext();
@@ -18,7 +20,9 @@ const Payment = () => {
   const { paymentDetail } = useTrainContext();
   const { t } = useTranslation(['train']);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisibleCheck, setIsModalVisibleCheck] = useState(false);
   const [paymentResult, setPaymentResult] = useState(undefined);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { locale } = router;
 
@@ -62,6 +66,7 @@ const Payment = () => {
   };
 
   const pay = async () => {
+    setLoading(true);
     let params = {
       payment_type: value,
       ref_number: paymentDetail.ref_number,
@@ -71,6 +76,7 @@ const Payment = () => {
     try {
       const res = await PaymentService.createInvoice(params);
       if (res && res.status === 200) {
+        setLoading(false);
         setPaymentResult(res.result);
         value === 'QPAY'
           ? setIsModalVisible(true)
@@ -78,79 +84,75 @@ const Payment = () => {
       }
       if (res && res.status === 201) {
         message.warning(res.message);
+        setLoading(false);
       }
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
 
-  // if (endDate) {
-  //   const interval = setInterval(() => {
-  //     if (
-  //       moment().format('YYYY-MM-DD hh:mm') ===
-  //       moment(endDate).format('YYYY-MM-DD hh:mm')
-  //     ) {
-  //       router.push({
-  //         pathname: `/train`,
-  //       });
-  //       clearInterval(interval);
-  //     }
-  //   }, 1000);
-  // }
+  if (endDate) {
+    const interval = setInterval(() => {
+      if (
+        moment().format('YYYY-MM-DD hh:mm:ss') ===
+        moment(endDate).format('YYYY-MM-DD hh:mm:ss')
+      ) {
+        router.push({
+          pathname: `/train`,
+        });
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
+
+  const handleCheck = () => {
+    setIsModalVisibleCheck(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisibleCheck(false);
+  };
 
   return (
     <Layout>
       <ContentWrapper>
         {endDate ? (
           <div className="text-center mt-5 mb-1 max-w-7xl mx-auto px-2 cursor-pointer">
-            {locale === 'mn' ? (
-              <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
-                Та захиалгаа{' '}
-                <span className="text-yellow-400">
-                  {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
-                </span>{' '}
-                -аас өмнө хийж дуусгана уу!
-              </p>
-            ) : locale === 'en' ? (
-              <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
-                Please complete your order before{' '}
-                <span className="text-yellow-400">
-                  {moment(endDate).format(`YYYY-MM-DD hh:mm`)}
-                </span>
-                !
-              </p>
-            ) : locale === 'zh' ? (
-              <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
-                请您与
-                <span className="text-yellow-400">
-                  {moment(endDate).format(
-                    'YYYY年MM月DD日hh点mm分之前定完您的订单.'
-                  )}
-                </span>
-              </p>
-            ) : (
-              <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
-                Та захиалгаа{' '}
-                <span className="text-yellow-400">
-                  {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
-                </span>{' '}
-                -аас өмнө хийж дуусгана уу!
-              </p>
-            )}
-          </div>
-        ) : (
-          ''
-        )}
-
-        {/* {endDate ? (
-          <div className="text-center mt-5 mb-1 max-w-7xl mx-auto px-2 cursor-pointer">
-            <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
-              {t('paymentDate')}
+            <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base  ">
+              {locale === 'mn' ? (
+                <p>
+                  Та захиалгаа{' '}
+                  <span className="text-yellow-400">
+                    {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
+                  </span>{' '}
+                  -аас өмнө хийж дуусгана уу!
+                </p>
+              ) : locale === 'en' ? (
+                <p>
+                  Please complete your order before{' '}
+                  <span className="text-yellow-400">
+                    {moment(endDate).format(`YYYY-MM-DD hh:mm`)}
+                  </span>
+                  !
+                </p>
+              ) : locale === 'zh' ? (
+                <p>
+                  请您与
+                  <span className="text-yellow-400">
+                    {moment(endDate).format(
+                      'YYYY年MM月DD日hh点mm分之前定完您的订单.'
+                    )}
+                  </span>
+                </p>
+              ) : (
+                ''
+              )}
             </p>
           </div>
         ) : (
           ''
-        )} */}
+        )}
 
         <div className="max-w-7xl mx-auto px-2 my-5 md:flex gap-5">
           <div className="bg-white rounded-lg h-auto p-10 w-5/5 md:w-3/5">
@@ -185,10 +187,14 @@ const Payment = () => {
 
             <div className="flex justify-center">
               <button
-                className="bg-blue-500 py-3 px-12 text-white font-semibold text-xs rounded-md"
+                className="bg-blue-500 py-2 px-12 text-white font-semibold text-xs rounded-md"
                 onClick={pay}
               >
-                {t('pay')}
+                {loading ? (
+                  <div className={style.ldsDualRing} />
+                ) : (
+                  <p className="py-2">{t('pay')}</p>
+                )}
               </button>
             </div>
 
@@ -202,6 +208,18 @@ const Payment = () => {
           <div className="w-5/5 md:w-2/5 mt-5 md:mt-0">
             <div className="mb-4">
               <PassengerInfoCard />
+            </div>
+
+            <div>
+              <button className={style.buttonBlock} onClick={handleCheck}>
+                {t('endButton')}
+              </button>
+            </div>
+
+            <div>
+              <button className={style.button} onClick={handleCheck}>
+                {t('endButton')}
+              </button>
             </div>
 
             {/* <div className="bg-white rounded-lg p-5 ">
@@ -237,6 +255,10 @@ const Payment = () => {
           </div>
         </div>
 
+        {isModalVisibleCheck && (
+          <EndModal isModalVisible={isModalVisibleCheck} close={closeModal} />
+        )}
+
         <Modal
           title={`QPAY`}
           visible={isModalVisible}
@@ -260,7 +282,7 @@ const Payment = () => {
               className="py-3 px-12 bg-blue-500 mt-8 font-bold text-white"
               onClick={afterClose}
             >
-              ТӨЛБӨР ШАЛГАХ
+              {t('checkPayment')}
             </button>
           </div>
         </Modal>

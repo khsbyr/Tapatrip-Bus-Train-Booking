@@ -77,7 +77,7 @@ export default function Orders() {
                 href="https://www.facebook.com/TapaTripTravelAgency/"
                 target="_blank"
               >
-                <img src="/assets/Thailand.png" className="rounded-lg" />{' '}
+                <img src="/assets/vietnam.png" className="rounded-lg" />{' '}
               </a>
             </div>
           </div>

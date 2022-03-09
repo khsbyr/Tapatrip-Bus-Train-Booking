@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import OrderModal from '@components/bus/orderModal';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import OrderModalTrain from '../../train/orderModalTrain';
 
 export default function OrderCheck() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { t } = useTranslation();
+  const router = useRouter();
+
   function checkOrder() {
     setIsModalVisible(true);
   }
@@ -21,9 +25,14 @@ export default function OrderCheck() {
       >
         {t('ordercheck')}
       </button>
-      {isModalVisible && (
-        <OrderModal isModalVisible={isModalVisible} close={closeModal} />
-      )}
+      {isModalVisible &&
+        (router.pathname === '/train' ||
+        router.pathname === '/train/orders' ||
+        router.pathname === '/train/orders/[id]' ? (
+          <OrderModalTrain isModalVisible={isModalVisible} close={closeModal} />
+        ) : (
+          <OrderModal isModalVisible={isModalVisible} close={closeModal} />
+        ))}
     </>
   );
 }

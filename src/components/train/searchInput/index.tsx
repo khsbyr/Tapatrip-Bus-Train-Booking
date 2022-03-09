@@ -18,7 +18,7 @@ import ContentWrapper from './style';
 
 const dFormat = 'YYYY-MM-DD';
 
-export default function SearchInput({ stationData }) {
+export default function SearchInput({ stationData, endStation }) {
   const { t } = useTranslation();
   const { Option } = AutoComplete;
   const { startStationID, setStartStationID } = useTrainContext();
@@ -41,11 +41,18 @@ export default function SearchInput({ stationData }) {
 
   useEffect(() => {
     async function getDates() {
-      let params = `?fromStation=${startStationID}&toStation=${endStationID}`;
+      // let params = `?fromStation=${startStationID}&toStation=${endStationID}`;
+      let params = {
+        fromStation: startStationID,
+        toStation: endStationID,
+      };
       try {
         const res = await TrainService.getAvailableDates(params);
         if (res && res.status === 200) {
           setAvailableDates(res.result);
+          if (!res.result[0]) {
+            message.warning(t('notFoundTrain'));
+          }
         }
       } catch (err) {
         console.log(err);
@@ -64,7 +71,7 @@ export default function SearchInput({ stationData }) {
         if (res && res.status === 200) {
           setEndStationData(res.result);
           if (!res.result[0]) {
-            message.warning('Тухайн чиглэлд галт тэрэг олдсонгүй!');
+            message.warning(t('notFoundTrain'));
           }
         }
       } catch (err) {
@@ -193,7 +200,7 @@ export default function SearchInput({ stationData }) {
             }
             defaultValue={`${endName ? endName : ''}`}
           >
-            {endLocationFormat(endStationData && endStationData)?.map(
+            {endLocationFormat(endStation ? endStation : endStationData)?.map(
               station => (
                 <Option
                   key={station.station_id}
