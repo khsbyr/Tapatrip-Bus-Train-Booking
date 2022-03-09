@@ -12,7 +12,7 @@ export default function ticketGenerate() {
   const router = useRouter();
   const { refNumber } = router.query;
   const [data, setData] = useState(null);
-  const [status, setStatus] = useState(200);
+  const [status, setStatus] = useState();
   const [loading, setLoading] = useState(true);
   const [loading1, setLoading1] = useState('');
 
