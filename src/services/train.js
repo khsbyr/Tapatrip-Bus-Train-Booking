@@ -1,8 +1,12 @@
 import Client from '@lib/apiClient';
 
 const TrainService = {
-  async getTrainStations() {
-    const response = await Client.get('/train/stations/');
+  async getTrainStations(token) {
+    const response = await Client.get('/train/stations/', {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
     const datas = {
       status: response.data.status_code,
       result: response.data.result,

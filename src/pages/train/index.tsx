@@ -24,19 +24,26 @@ export default function Travel({ guestToken }) {
   const { setUser } = useGlobalStore();
 
   useEffect(() => {
+    AuthTokenStorageService.guestStore(guestToken);
     async function getTrainStations() {
-      try {
-        const res = await TrainService.getTrainStations();
-        if (res && res.status === 200) {
-          setStationData(res.result);
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : AuthTokenStorageService.getGuestToken();
+      if (token) {
+        try {
+          const res = await TrainService.getTrainStations(token);
+          if (res && res.status === 200) {
+            setStationData(res.result);
+          }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
       }
     }
     getTrainStations();
 
-    AuthTokenStorageService.guestStore(guestToken);
     async function loadUserFromCookies() {
       const token =
         AuthTokenStorageService.getAccessToken() &&
