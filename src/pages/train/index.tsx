@@ -31,7 +31,6 @@ export default function Travel({ guestToken }) {
         AuthTokenStorageService.getAccessToken() != 'false'
           ? AuthTokenStorageService.getAccessToken()
           : AuthTokenStorageService.getGuestToken();
-      console.log(token);
       if (token) {
         try {
           const res = await TrainService.getTrainStations(token);
