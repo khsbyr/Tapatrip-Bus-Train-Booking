@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import CurrencyFormat from 'react-currency-format';
 import style from './card.module.scss';
 import { useTranslation } from 'next-i18next';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
 
 export default function Card({ voyage }) {
   const { setSelectedVoyageData } = useTrainContext();
@@ -64,18 +65,25 @@ export default function Card({ voyage }) {
   const showModal = async () => {
     setLoadingMarshrut(true);
     setIsModalVisible(true);
-    let params = {
-      voyage_id: voyage.VOYAGE_ID,
-    };
-    try {
-      const res = await TrainService.getVoyageStations(params);
-      if (res && res.status === 200) {
-        setVoyageStations(res.result);
+    const token =
+      AuthTokenStorageService.getAccessToken() &&
+      AuthTokenStorageService.getAccessToken() != 'false'
+        ? AuthTokenStorageService.getAccessToken()
+        : AuthTokenStorageService.getGuestToken();
+    if (token) {
+      let params = {
+        voyage_id: voyage.VOYAGE_ID,
+      };
+      try {
+        const res = await TrainService.getVoyageStations(params, token);
+        if (res && res.status === 200) {
+          setVoyageStations(res.result);
+          setLoadingMarshrut(false);
+        }
+      } catch (err) {
+        console.log(err);
         setLoadingMarshrut(false);
       }
-    } catch (err) {
-      console.log(err);
-      setLoadingMarshrut(false);
     }
   };
 
@@ -213,7 +221,8 @@ export default function Card({ voyage }) {
               }`}
               onClick={() =>
                 (wagon.FREEMEST !== 0 && wagon.TARIF_TYPE === 5) ||
-                (wagon.FREEMEST !== 0 && wagon.TARIF_TYPE === 8)
+                (wagon.FREEMEST !== 0 && wagon.TARIF_TYPE === 8) ||
+                (wagon.FREEMEST !== 0 && wagon.TARIF_TYPE === 41)
                   ? selectTicket(voyage, wagon)
                   : ''
               }

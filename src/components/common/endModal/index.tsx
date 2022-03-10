@@ -31,7 +31,7 @@ export default function EndModal(props) {
           </h1>
         </p>
         <div className="flex justify-center">
-          <a href={router.route === '/train/orders/[id]' ? '/train' : '/'}>
+          <a href={'https://bus.tapatrip.com/'}>
             <button className="px-10 bg-button w-full text-base sm:text-lg shadow-md rounded-md font-medium py-3 hover:bg-red-500 text-white">
               {t('endModalButton')}
             </button>

@@ -341,15 +341,13 @@ const Error404 = () => {
                   transform="translate(377.037 230.025)"
                   className={`${s.st8} ${s.st10}`}
                   font-size="21"
-                >
-                  TAPATRIP
-                </text>
+                ></text>
                 <text
                   transform="translate(659.5 213.994)"
                   className={`${s.st8} ${s.st10}`}
                   font-size="24.025"
                 >
-                  Алдаа гарлаа!
+                  TAPATRIP
                 </text>
               </g>
               <g id="ladders">

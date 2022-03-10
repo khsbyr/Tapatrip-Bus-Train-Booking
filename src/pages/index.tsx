@@ -18,13 +18,18 @@ import { useTranslation } from 'next-i18next';
 import isEmpty from '@utils/isEmpty';
 import { useGlobalStore } from '@context/globalStore';
 import LastSearch from '@components/bus/lastSearch';
+import { useRouter } from 'next/router';
 
 export default function Bus({ guestToken }) {
   const { t } = useTranslation(['common', 'footer']);
   const { setUser } = useGlobalStore();
   const [lastSearch, setLastSearch] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
+    window.location.hostname === 'train.tapatrip.com'
+      ? router.push('/train')
+      : '';
     AuthTokenStorageService.guestStore(guestToken);
     async function loadUserFromCookies() {
       const token =

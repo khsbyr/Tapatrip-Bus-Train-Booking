@@ -12,6 +12,8 @@ import { useRouter } from 'next/router';
 import PaymentService from '@services/payment';
 import style from './payment.module.scss';
 import EndModal from '@components/train/endModal';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
+import Error404 from '../404';
 
 const Payment = () => {
   const { endDate } = useTrainContext();
@@ -21,6 +23,7 @@ const Payment = () => {
   const { t } = useTranslation(['train']);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalVisibleCheck, setIsModalVisibleCheck] = useState(false);
+  const [isModalVisibleWarning, setIsModalVisibleWarning] = useState(true);
   const [paymentResult, setPaymentResult] = useState(undefined);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -28,13 +31,21 @@ const Payment = () => {
 
   useEffect(() => {
     async function getPaymentMethods() {
-      try {
-        const res = await PaymentService.paymentMethods();
-        if (res && res.status === 200) {
-          setPayMethods(res.result);
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : AuthTokenStorageService.getGuestToken();
+      if (token) {
+        let params = {};
+        try {
+          const res = await PaymentService.paymentMethods(params, token);
+          if (res && res.status === 200) {
+            setPayMethods(res.result);
+          }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
       }
     }
     getPaymentMethods();
@@ -44,6 +55,10 @@ const Payment = () => {
     setIsModalVisible(false);
   };
 
+  const handleCancelWarning = () => {
+    setIsModalVisibleWarning(false);
+  };
+
   const afterClose = async () => {
     let params = {
       payment_type: value,
@@ -51,13 +66,21 @@ const Payment = () => {
       is_company: false,
       company_register: 0,
     };
-    try {
-      const res = await PaymentService.checkInvoice(params);
-      if ((res && res.status === 200) || (res && res.status === 201)) {
-        message.info(res.result.message);
+
+    const token =
+      AuthTokenStorageService.getAccessToken() &&
+      AuthTokenStorageService.getAccessToken() != 'false'
+        ? AuthTokenStorageService.getAccessToken()
+        : AuthTokenStorageService.getGuestToken();
+    if (token) {
+      try {
+        const res = await PaymentService.checkInvoice(params, token);
+        if ((res && res.status === 200) || (res && res.status === 201)) {
+          message.info(res.result.message);
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -73,22 +96,30 @@ const Payment = () => {
       is_company: false,
       company_register: 0,
     };
-    try {
-      const res = await PaymentService.createInvoice(params);
-      if (res && res.status === 200) {
+
+    const token =
+      AuthTokenStorageService.getAccessToken() &&
+      AuthTokenStorageService.getAccessToken() != 'false'
+        ? AuthTokenStorageService.getAccessToken()
+        : AuthTokenStorageService.getGuestToken();
+    if (token) {
+      try {
+        const res = await PaymentService.createInvoice(params, token);
+        if (res && res.status === 200) {
+          setLoading(false);
+          setPaymentResult(res.result);
+          value === 'QPAY'
+            ? setIsModalVisible(true)
+            : window.open(res.result, '_blank');
+        }
+        if (res && res.status === 201) {
+          message.warning(res.message);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.log(err);
         setLoading(false);
-        setPaymentResult(res.result);
-        value === 'QPAY'
-          ? setIsModalVisible(true)
-          : window.open(res.result, '_blank');
       }
-      if (res && res.status === 201) {
-        message.warning(res.message);
-        setLoading(false);
-      }
-    } catch (err) {
-      console.log(err);
-      setLoading(false);
     }
   };
 
@@ -286,6 +317,57 @@ const Payment = () => {
             </button>
           </div>
         </Modal>
+
+        {endDate ? (
+          <Modal
+            title={`ТӨЛБӨРИЙН МЭДЭЭЛЭЛ`}
+            visible={isModalVisibleWarning}
+            onCancel={handleCancelWarning}
+            width={600}
+            bodyStyle={{ height: 'auto', overflow: 'auto' }}
+            okButtonProps={{ style: { display: 'none' } }}
+            cancelText="Хаах"
+            centered
+            maskClosable={false}
+          >
+            <Error404 />
+
+            <div className="text-center mt-5 mb-1 max-w-7xl mx-auto px-2 cursor-pointer">
+              <p className="font-semibold text-base text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-xl  ">
+                {locale === 'mn' ? (
+                  <p>
+                    Та захиалгаа{' '}
+                    <span className="text-yellow-400">
+                      {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
+                    </span>{' '}
+                    -аас өмнө хийж дуусгана уу!
+                  </p>
+                ) : locale === 'en' ? (
+                  <p>
+                    Please complete your order before{' '}
+                    <span className="text-yellow-400">
+                      {moment(endDate).format(`YYYY-MM-DD hh:mm`)}
+                    </span>
+                    !
+                  </p>
+                ) : locale === 'zh' ? (
+                  <p>
+                    请您与
+                    <span className="text-yellow-400">
+                      {moment(endDate).format(
+                        'YYYY年MM月DD日hh点mm分之前定完您的订单.'
+                      )}
+                    </span>
+                  </p>
+                ) : (
+                  ''
+                )}
+              </p>
+            </div>
+          </Modal>
+        ) : (
+          ''
+        )}
       </ContentWrapper>
     </Layout>
   );

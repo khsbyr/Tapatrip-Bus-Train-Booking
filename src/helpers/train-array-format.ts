@@ -50,6 +50,29 @@ export function ClassPrivateFormat(data) {
   return arr;
 }
 
+export function ClassSleepFormat(data) {
+  const arr = [];
+  const n = data?.length;
+  let l = data?.length - 1;
+  let i1, k1;
+  for (let i = 0, k = 0; i < n / 6; i++) {
+    const row = [];
+    for (let j = 0; j < 6; k++, j++) {
+      row[j] = data[k];
+      if (j >= 4) {
+        row[j] = data[l];
+        l--;
+      }
+    }
+    arr[i] = row;
+    i1 = i;
+    k = k - 2;
+    k1 = k;
+  }
+
+  return arr;
+}
+
 export function arrayFilterSeat(
   data: any,
   value: String,
