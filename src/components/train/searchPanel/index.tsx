@@ -43,11 +43,17 @@ const SearchPanel: FC<Props> = ({ navbarData, stationData }) => {
   }
 
   const handleTabChange = key => {
-    const route =
-      key == 4 ? '/' : key == 3 ? '/tour' : key == 5 ? '/train' : '';
-    key == 2 || key == 1
-      ? window.open('https://tapatrip.com/', '_blank')
-      : router.push(`/${route}`);
+    key == 4
+      ? router.push('https://bus.tapatrip.com/')
+      : key == 5
+      ? router.push('https://train.tapatrip.com/')
+      : key == 1
+      ? window.open('https://tapatrip.com/flights')
+      : key == 2
+      ? window.open('https://tapatrip.com/hotels')
+      : key == 3
+      ? router.push('/tour')
+      : '';
   };
 
   return (

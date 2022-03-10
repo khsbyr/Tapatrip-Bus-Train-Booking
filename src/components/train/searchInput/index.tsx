@@ -5,6 +5,7 @@ import {
   startLocationFormat,
   endLocationFormat,
 } from '@helpers/train-array-format';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import TrainService from '@services/train';
 import { AutoComplete, DatePicker, message } from 'antd';
 import locale from 'antd/lib/date-picker/locale/mn_MN';
@@ -41,21 +42,27 @@ export default function SearchInput({ stationData, endStation }) {
 
   useEffect(() => {
     async function getDates() {
-      // let params = `?fromStation=${startStationID}&toStation=${endStationID}`;
-      let params = {
-        fromStation: startStationID,
-        toStation: endStationID,
-      };
-      try {
-        const res = await TrainService.getAvailableDates(params);
-        if (res && res.status === 200) {
-          setAvailableDates(res.result);
-          if (!res.result[0]) {
-            message.warning(t('notFoundTrain'));
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : AuthTokenStorageService.getGuestToken();
+      if (token) {
+        let params = {
+          fromStation: startStationID,
+          toStation: endStationID,
+        };
+        try {
+          const res = await TrainService.getAvailableDates(params, token);
+          if (res && res.status === 200) {
+            setAvailableDates(res.result);
+            if (!res.result[0]) {
+              message.warning(t('notFoundTrain'));
+            }
           }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
       }
     }
     if (startStationID && endStationID) {
@@ -65,17 +72,24 @@ export default function SearchInput({ stationData, endStation }) {
 
   const SelectStartStation = (value, options) => {
     async function getEndStations() {
-      let params = `?from_station=${options.key}`;
-      try {
-        const res = await TrainService.getEndStations(params);
-        if (res && res.status === 200) {
-          setEndStationData(res.result);
-          if (!res.result[0]) {
-            message.warning(t('notFoundTrain'));
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : AuthTokenStorageService.getGuestToken();
+      if (token) {
+        let params = `?from_station=${options.key}`;
+        try {
+          const res = await TrainService.getEndStations(params, token);
+          if (res && res.status === 200) {
+            setEndStationData(res.result);
+            if (!res.result[0]) {
+              message.warning(t('notFoundTrain'));
+            }
           }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
       }
     }
     getEndStations();

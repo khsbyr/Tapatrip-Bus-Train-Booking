@@ -1,5 +1,4 @@
 import Client from '@lib/apiClient';
-import Train from '@lib/apiTrain';
 
 const TrainService = {
   async getTrainStations(token) {
@@ -16,8 +15,12 @@ const TrainService = {
     return datas;
   },
 
-  async getEndStations(params) {
-    const response = await Client.get(`/train/stop_stations/${params}`);
+  async getEndStations(params, token) {
+    const response = await Client.get(`/train/stop_stations/${params}`, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
     const datas = {
       status: response.data.status_code,
       result: response.data.result,
@@ -26,8 +29,12 @@ const TrainService = {
     return datas;
   },
 
-  async getAvailableDates(params) {
-    const response = await Client.post(`/train/get_dates/`, params);
+  async getAvailableDates(params, token) {
+    const response = await Client.post(`/train/get_dates/`, params, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
     const datas = {
       status: response.data.status_code,
       result: response.data.result,
@@ -36,8 +43,12 @@ const TrainService = {
     return datas;
   },
 
-  async getVoyageData(params) {
-    const response = await Client.post(`/train/search_voyage/`, params);
+  async getVoyageData(params, token) {
+    const response = await Client.post(`/train/search_voyage/`, params, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
     const datas = {
       status: response.data.status_code,
       result: response.data.result,
@@ -46,8 +57,12 @@ const TrainService = {
     return datas;
   },
 
-  async getWagonData(params) {
-    const response = await Client.post(`/train/get_wagons/`, params);
+  async getWagonData(params, token) {
+    const response = await Client.post(`/train/get_wagons/`, params, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
     const datas = {
       status: response.data.status_code,
       result: response.data.result,
@@ -56,8 +71,12 @@ const TrainService = {
     return datas;
   },
 
-  async getMestData(params) {
-    const response = await Client.post(`/train/get_mests/`, params);
+  async getMestData(params, token) {
+    const response = await Client.post(`/train/get_mests/`, params, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
     const datas = {
       status: response.data.status_code,
       result: response.data.result,
@@ -66,8 +85,12 @@ const TrainService = {
     return datas;
   },
 
-  async getVoyageStations(params) {
-    const response = await Client.post(`/train/get_voyage_stations/`, params);
+  async getVoyageStations(params, token) {
+    const response = await Client.post(`/train/get_voyage_stations/`, params, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
     const datas = {
       status: response.data.status_code,
       result: response.data.result,
@@ -102,7 +125,7 @@ const TrainService = {
   },
 
   async getTicketInfo(params) {
-    const response = await Train.get(`/train/get_ticket/${params}`);
+    const response = await Client.get(`/train/get_ticket/${params}`);
     const datas = {
       status: response.data.status_code,
       result: response.data.result,
@@ -111,8 +134,26 @@ const TrainService = {
     return datas;
   },
 
-  async orderCheck(params) {
-    const response = await Client.get(`/train/order_check/${params}`);
+  async orderCheck(params, token) {
+    const response = await Client.get(`/train/order_check/${params}`, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    const datas = {
+      status: response.data.status_code,
+      result: response.data.result,
+      message: response.data.message,
+    };
+    return datas;
+  },
+
+  async getMyOrder(token) {
+    const response = await Client.get('/train/train_history/', {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
     const datas = {
       status: response.data.status_code,
       result: response.data.result,

@@ -68,7 +68,13 @@ const Navbar: FC<Props> = ({ navbarData }) => {
           <div className={styles.navbarBody}>
             <div className="flex items-center">
               <div className="flex-shrink-0 cursor-pointer">
-                <Link href={router.pathname}>
+                <Link
+                  href={
+                    router.pathname === '/train'
+                      ? 'https://train.tapatrip.com/'
+                      : 'https://bus.tapatrip.com/'
+                  }
+                >
                   <img
                     src={`${
                       navbar
