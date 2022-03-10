@@ -30,29 +30,43 @@ export default function TrainNavbar({ navbarData }) {
 
   useEffect(() => {
     async function getTrainStations() {
-      try {
-        const res = await TrainService.getTrainStations();
-        if (res && res.status === 200) {
-          setStationData(res.result);
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : AuthTokenStorageService.getGuestToken();
+      if (token) {
+        try {
+          const res = await TrainService.getTrainStations(token);
+          if (res && res.status === 200) {
+            setStationData(res.result);
+          }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
       }
     }
     getTrainStations();
 
     async function getEndStations() {
-      let params = `?from_station=${startStation}`;
-      try {
-        const res = await TrainService.getEndStations(params);
-        if (res && res.status === 200) {
-          setEndStationData(res.result);
-          if (!res.result[0]) {
-            message.warning(t('notFoundTrain'));
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : AuthTokenStorageService.getGuestToken();
+      if (token) {
+        let params = `?from_station=${startStation}`;
+        try {
+          const res = await TrainService.getEndStations(params, token);
+          if (res && res.status === 200) {
+            setEndStationData(res.result);
+            if (!res.result[0]) {
+              message.warning(t('notFoundTrain'));
+            }
           }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
       }
     }
     getEndStations();
@@ -95,7 +109,7 @@ export default function TrainNavbar({ navbarData }) {
           <div className=" flex items-center justify-between h-12">
             <div className="flex items-center flex-shrink-0 ">
               <div className="ml-2 mt-5">
-                <Link href="/train">
+                <Link href="https://train.tapatrip.com/">
                   <a>
                     <img
                       src="/assets/svgIcons/NewLogo.svg"

@@ -1,49 +1,45 @@
-import { useMutation } from '@apollo/client';
-import { BUS_BOOKING_CHECK } from '@graphql/mutation';
-import { unixDate } from '@helpers/array-format';
-import { PATTERN_PHONE } from '@helpers/constantValidation';
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
-import { Form, Input, Modal } from 'antd';
-import moment from 'moment';
-import React, { useState } from 'react';
 import ContentWrapper from '@components/bus/orderModal/style';
-import style from './orderModal.module.scss';
-import { useTranslation } from 'next-i18next';
 import { useUI } from '@context/uiContext';
+import { PATTERN_PHONE } from '@helpers/constantValidation';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import TrainService from '@services/train';
+import { Form, Input, Modal } from 'antd';
+import { useTranslation } from 'next-i18next';
+import React, { useState } from 'react';
+import style from './orderModal.module.scss';
 
 export default function OrderModalTrain(props) {
   const { t } = useTranslation();
   const [isActive, setIsActive] = useState(false);
-  const [isActive1, setIsActive1] = useState(false);
   const { closeLoadingModal, openLoadingModal, displayLoadingModal } = useUI();
   const [datas, setDatas] = useState(Object);
-
-  const format = n =>
-    `0${(n / 60) ^ 0}`.slice(-2) +
-    ' ' +
-    t('orderHours') +
-    ('0' + (n % 60)).slice(-2) +
-    ' ' +
-    t('orderMinutes');
+  const [refNumber, setRefNumber] = useState('');
 
   const onFinish = async values => {
+    setRefNumber(values.refNumber);
     let params = `?ref_number=${values.refNumber}&phone_number=${values.phone}`;
     openLoadingModal();
-    try {
-      const res = await TrainService.orderCheck(params);
-      if (res && res.status === 200) {
-        setDatas(res.result);
+    const token =
+      AuthTokenStorageService.getAccessToken() &&
+      AuthTokenStorageService.getAccessToken() != 'false'
+        ? AuthTokenStorageService.getAccessToken()
+        : AuthTokenStorageService.getGuestToken();
+    if (token) {
+      try {
+        const res = await TrainService.orderCheck(params, token);
+        if (res && res.status === 200) {
+          setDatas(res.result);
+        }
+        setIsActive(true);
+        closeLoadingModal();
+      } catch (e) {
+        setIsActive(false);
+        Modal.error({
+          title: t('errorOrderTitle'),
+          content: t('errorOrderContent'),
+        });
+        closeLoadingModal();
       }
-      setIsActive(true);
-      closeLoadingModal();
-    } catch (e) {
-      setIsActive(false);
-      Modal.error({
-        title: t('errorOrderTitle'),
-        content: t('errorOrderContent'),
-      });
-      closeLoadingModal();
     }
   };
 
@@ -87,6 +83,10 @@ export default function OrderModalTrain(props) {
       default:
         return 'text-blue-400';
     }
+  };
+
+  const getTicket = () => {
+    window.open(`https://train.tapatrip.com/train/${refNumber}`, '_blank');
   };
 
   return (
@@ -220,40 +220,19 @@ export default function OrderModalTrain(props) {
                         {getStatusName(datas?.status)}
                       </h1>
                     </div>
-                    {/* <div className="flex items-center space-x-8">
-                      <button
-                        className="text-direction font-medium flex text-xs md:text-sm"
-                        onClick={() => setIsActive1(!isActive1)}
-                      >
-                        {t('busInformation')}
-                        {isActive1 ? (
-                          <ChevronUpIcon className="md:w-6 md:h-6 w-5 h-5" />
-                        ) : (
-                          <ChevronDownIcon className="md:w-6 md:h-6 w-5 h-5" />
-                        )}
-                      </button>
-                    </div> */}
-                  </div>
-                </div>
-                <div className={`${!isActive1 ? 'hidden' : 'block'}`}>
-                  <div className="border border-dashed "></div>
-                  <div className="px-3 md:px-6 flex flex-col xs:flex-row justify-around py-5 space-y-3 xs:space-y-0">
-                    <div className="space-y-3">
-                      <h1 className="text-cardDate font-medium text-xs sm:text-sm">
-                        {t('businessFirms')}:{' '}
-                        {datas?.schedule?.bus?.transporter.name}
-                      </h1>
-                      <h1 className="text-cardDate font-medium text-xs sm:text-sm">
-                        {t('busModel')}: {datas?.schedule?.bus?.modelName}
-                      </h1>
-                    </div>
-                    <div className="space-y-3">
-                      <h1 className="text-cardDate font-medium text-xs sm:text-sm">
-                        {t('busModel')}: {datas?.schedule?.bus?.plateNumber}
-                      </h1>
-                      <h1 className="text-cardDate font-medium text-xs sm:text-sm">
-                        {t('driverPhoneNumber')}: {datas?.schedule?.driverPhone}
-                      </h1>
+                    <div>
+                      {datas?.status === 4 ? (
+                        <button
+                          className="font-medium text-xs text-white p-2 rounded bg-blue-400"
+                          onClick={getTicket}
+                        >
+                          TICKET авах
+                        </button>
+                      ) : (
+                        <button className="font-medium text-xs text-white p-2 rounded bg-blue-400">
+                          {datas?.to_pay} MNT
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

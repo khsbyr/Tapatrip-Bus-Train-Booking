@@ -1,18 +1,19 @@
-import { useTrainContext } from '@context/trainContext';
+import Layout from '@components/common/layout';
+import Loader from '@components/train/loader';
 import {
   ClassPrivateFormat,
   ClassPublicFormat,
+  ClassSleepFormat,
 } from '@helpers/train-array-format';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import TrainService from '@services/train';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import SeatCard from '../seatCard';
 import ClassPrivate from './classPrivate';
 import ClassPublic from './classPublic';
-import Loader from '@components/train/loader';
-import Layout from '@components/common/layout';
-import moment from 'moment';
-import { useTranslation } from 'next-i18next';
+import ClassSleep from './classSleep';
 
 export default function SelectSeats() {
   const [wagonData, setWagonData] = useState([]);
@@ -22,28 +23,33 @@ export default function SelectSeats() {
   const router = useRouter();
   const { voyageId, startStop, endStop, priceType } = router.query;
   const [loading, setLoading] = useState(false);
-  const { endDate } = useTrainContext();
   const { t } = useTranslation(['train']);
-  const { locale } = router;
 
   useEffect(() => {
     async function getTrainStations() {
-      let params = {
-        voyage_id: voyageId,
-        start_stop: startStop,
-        end_stop: endStop,
-        price_type: priceType,
-      };
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : AuthTokenStorageService.getGuestToken();
+      if (token) {
+        let params = {
+          voyage_id: voyageId,
+          start_stop: startStop,
+          end_stop: endStop,
+          price_type: priceType,
+        };
 
-      try {
-        const res = await TrainService.getWagonData(params);
-        if (res && res.status === 200) {
-          setWagonData(res?.result);
-          setWagonId(res?.result[0]?.WAGON);
-          getMest(res?.result[0]);
+        try {
+          const res = await TrainService.getWagonData(params, token);
+          if (res && res.status === 200) {
+            setWagonData(res?.result);
+            setWagonId(res?.result[0]?.WAGON);
+            getMest(res?.result[0]);
+          }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
       }
     }
     getTrainStations();
@@ -53,23 +59,30 @@ export default function SelectSeats() {
     setLoading(true);
     setWagonName(wagon?.NAME);
     setWagonId(wagon?.WAGON);
-    let params = {
-      uid: 1,
-      order_id: 0,
-      wagon_id: wagon?.WAGON,
-      start_stop: startStop,
-      end_stop: endStop,
-      mest_no: 0,
-    };
-    try {
-      const res = await TrainService.getMestData(params);
-      if (res && res.status === 200) {
-        setMestDate(res.result);
+    const token =
+      AuthTokenStorageService.getAccessToken() &&
+      AuthTokenStorageService.getAccessToken() != 'false'
+        ? AuthTokenStorageService.getAccessToken()
+        : AuthTokenStorageService.getGuestToken();
+    if (token) {
+      let params = {
+        uid: 1,
+        order_id: 0,
+        wagon_id: wagon?.WAGON,
+        start_stop: startStop,
+        end_stop: endStop,
+        mest_no: 0,
+      };
+      try {
+        const res = await TrainService.getMestData(params, token);
+        if (res && res.status === 200) {
+          setMestDate(res.result);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.log(err);
         setLoading(false);
       }
-    } catch (err) {
-      console.log(err);
-      setLoading(false);
     }
   };
 
@@ -99,6 +112,18 @@ export default function SelectSeats() {
           />
         );
 
+      case '41':
+        return (
+          <ClassSleep
+            data={ClassSleepFormat(mestData)}
+            voyageId={voyageId}
+            wagonName={wagonName}
+            startStop={startStop}
+            endStop={endStop}
+            wagonId={wagonId}
+          />
+        );
+
       default:
         '';
     }
@@ -106,46 +131,6 @@ export default function SelectSeats() {
 
   return (
     <Layout>
-      {/* {endDate ? (
-        <div className="text-center mt-5 mb-1 max-w-7xl mx-auto px-2 cursor-pointer">
-          {locale === 'mn' ? (
-            <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
-              Та захиалгаа{' '}
-              <span className="text-yellow-400">
-                {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
-              </span>{' '}
-              -аас өмнө хийж дуусгана уу!
-            </p>
-          ) : locale === 'en' ? (
-            <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
-              Please complete your order before{' '}
-              <span className="text-yellow-400">
-                {moment(endDate).format(`YYYY-MM-DD hh:mm`)}
-              </span>
-              !
-            </p>
-          ) : locale === 'zh' ? (
-            <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
-              请您与
-              <span className="text-yellow-400">
-                {moment(endDate).format(
-                  'YYYY年MM月DD日hh点mm分之前定完您的订单.'
-                )}
-              </span>
-            </p>
-          ) : (
-            <p className="font-semibold text-xs text-cardDate  gap-2 bg-white py-5 rounded-lg md:text-base">
-              Та захиалгаа{' '}
-              <span className="text-yellow-400">
-                {moment(endDate).format('YYYY-MM-DD hh цаг mm минут')}
-              </span>{' '}
-              -аас өмнө хийж дуусгана уу!
-            </p>
-          )}
-        </div>
-      ) : (
-        ''
-      )} */}
       <div className="max-w-7xl mx-auto py-5 space-y-3 md:space-y-0 md:flex">
         <div className=" w-12/12 md:w-6/12 lg:w-3/12">
           <div className="bg-white rounded-lg p-4 space-y-3 flex-none mx-2">

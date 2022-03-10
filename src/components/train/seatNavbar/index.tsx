@@ -33,7 +33,7 @@ export default function SeatNav() {
           <div className="flex items-center justify-around md:justify-between h-12">
             <div className="flex items-center">
               <div className="flex-shrink-0 cursor-pointer">
-                <a href="/train">
+                <a href="https://train.tapatrip.com/">
                   <img
                     src="/assets/svgIcons/tapatripBlue.svg"
                     alt="Logo"

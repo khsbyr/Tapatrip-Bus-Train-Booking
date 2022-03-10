@@ -11,8 +11,12 @@ const PaymentService = {
     return datas;
   },
 
-  async paymentMethods(params) {
-    const response = await Client.post('/payment/v1/payment_methods/', params);
+  async paymentMethods(params, token) {
+    const response = await Client.post('/payment/v1/payment_methods/', params, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
     const datas = {
       status: response.data.status_code,
       result: response.data.result,
@@ -21,8 +25,12 @@ const PaymentService = {
     return datas;
   },
 
-  async createInvoice(payload) {
-    const response = await Client.post('/payment/v1/create_invoice/', payload);
+  async createInvoice(payload, token) {
+    const response = await Client.post('/payment/v1/create_invoice/', payload, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
     const datas = {
       status: response.data.status_code,
       result: response.data.result,
@@ -31,8 +39,12 @@ const PaymentService = {
     return datas;
   },
 
-  async checkInvoice(payload) {
-    const response = await Client.post('/payment/v1/check_invoice/', payload);
+  async checkInvoice(payload, token) {
+    const response = await Client.post('/payment/v1/check_invoice/', payload, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
     const datas = {
       status: response.data.status_code,
       result: response.data.result,

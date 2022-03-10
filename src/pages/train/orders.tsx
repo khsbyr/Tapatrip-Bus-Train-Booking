@@ -4,6 +4,7 @@ import Loader from '@components/train/loader';
 import TrainNavbar from '@components/train/navbar';
 import { useTrainContext } from '@context/trainContext';
 import NavData from '@data/navData.json';
+import AuthTokenStorageService from '@services/AuthTokenStorageService';
 import TrainService from '@services/train';
 import { Result } from 'antd';
 import { useTranslation } from 'next-i18next';
@@ -26,27 +27,34 @@ export default function Orders() {
     setOrderId(undefined);
     setEndDate(undefined);
     async function getTrainStations() {
-      let params = {
-        fromStation: startStation,
-        toStation: endStation,
-        date: date,
-      };
+      const token =
+        AuthTokenStorageService.getAccessToken() &&
+        AuthTokenStorageService.getAccessToken() != 'false'
+          ? AuthTokenStorageService.getAccessToken()
+          : AuthTokenStorageService.getGuestToken();
+      if (token) {
+        let params = {
+          fromStation: startStation,
+          toStation: endStation,
+          date: date,
+        };
 
-      try {
-        const res = await TrainService.getVoyageData(params);
-        if (res && res.status === 200) {
-          setVoyageData(res.result);
+        try {
+          const res = await TrainService.getVoyageData(params, token);
+          if (res && res.status === 200) {
+            setVoyageData(res.result);
+            setLoading(false);
+            setIsLoad(false);
+          }
+          if (res && res.status === 400) {
+            setLoading(false);
+            setIsLoad(false);
+          }
+        } catch (err) {
+          console.log(err);
           setLoading(false);
           setIsLoad(false);
         }
-        if (res && res.status === 400) {
-          setLoading(false);
-          setIsLoad(false);
-        }
-      } catch (err) {
-        console.log(err);
-        setLoading(false);
-        setIsLoad(false);
       }
     }
     getTrainStations();
