@@ -7,7 +7,7 @@ export default function HeaderBackground(props) {
   return (
     <div className={styles.body}>
       <img
-        src="/assets/Header.png"
+        src="/assets/backgroundBus.png"
         alt="Logo"
         className={`${props.isBorderRadius ? styles.image1 : styles.image} `}
       />
