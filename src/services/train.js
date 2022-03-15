@@ -149,7 +149,7 @@ const TrainService = {
   },
 
   async getMyOrder(token) {
-    const response = await Client.get('/train/train_history/', {
+    const response = await Client.get('/account/train_history/', {
       headers: {
         Authorization: 'Bearer ' + token,
       },

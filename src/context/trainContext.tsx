@@ -15,6 +15,7 @@ export interface State {
   endMinute: any;
   endDate: any;
   paymentDetail: any;
+  myOrderId: number;
 }
 
 const initialState = {
@@ -32,6 +33,7 @@ const initialState = {
   endMinute: '',
   endDate: '',
   paymentDetail: {},
+  myOrderId: 0,
 };
 
 type Action =
@@ -90,6 +92,10 @@ type Action =
   | {
       type: 'SET_PAYMENT_DETAIL';
       value: any;
+    }
+  | {
+      type: 'SET_MY_ORDER_ID';
+      value: number;
     };
 
 export const GlobalContext = React.createContext<State | any>(initialState);
@@ -191,6 +197,12 @@ function uiReducer(state: State, action: Action) {
         paymentDetail: action.value,
       };
     }
+    case 'SET_MY_ORDER_ID': {
+      return {
+        ...state,
+        myOrderId: action.value,
+      };
+    }
   }
 }
 
@@ -267,6 +279,11 @@ export const GlobalProvider: FC = props => {
     [dispatch]
   );
 
+  const setMyOrderId = useCallback(
+    (value: any) => dispatch({ type: 'SET_MY_ORDER_ID', value }),
+    [dispatch]
+  );
+
   const value = useMemo(
     () => ({
       ...state,
@@ -284,6 +301,7 @@ export const GlobalProvider: FC = props => {
       setEndMinute,
       setEndDate,
       setPaymentDetail,
+      setMyOrderId,
     }),
     [state]
   );
