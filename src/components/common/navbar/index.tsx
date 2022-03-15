@@ -22,6 +22,7 @@ const Navbar: FC<Props> = ({ navbarData }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { openLoadingLogin, displayLoadingLogin } = useUI();
   const router = useRouter();
+  const [isVisible, setIsVisible] = useState(false);
 
   const isAuth = user ? true : false;
 
@@ -55,6 +56,14 @@ const Navbar: FC<Props> = ({ navbarData }) => {
       pathname: `/auth/login`,
       query: { from: router.pathname },
     });
+  };
+
+  const showModal = () => {
+    setIsVisible(true);
+  };
+
+  const closeModalVisible = () => {
+    setIsVisible(false);
   };
 
   return (
@@ -120,16 +129,47 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 <SelectLanguage isBlack={false} />
               </div>
               <div className="hidden lg:flex items-center">
-                <a href="tel:97675154444">
-                  <div
-                    className={`${
-                      navbar ? 'text-cardDate' : 'text-white'
-                    } flex text-base font-bold cursor-pointer mr-5 hover:bg-onlineSupport hover:text-white hover:rounded px-3 py-2`}
-                  >
-                    <PhoneIcon className="w-4" />
-                    <p className="pl-2">7515 4444</p>
+                <div className="max-w-7xl mx-auto justify-end pr-4 relative">
+                  <div className="flex justify-center items-center">
+                    <span className="animate-ping absolute inline-flex h-7 w-7 bg-green-200 rounded-lg"></span>
+                    <span className="animate-ping absolute inline-flex h-7 w-7 bg-onlineSupport rounded-lg z-8"></span>
+                    <button className="z-10 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-3 rounded-lg">
+                      {isVisible ? (
+                        <XIcon
+                          className="h-5"
+                          onClick={() => closeModalVisible()}
+                        />
+                      ) : (
+                        <PhoneIcon
+                          className="h-5"
+                          onClick={() => showModal()}
+                        />
+                      )}
+                    </button>
                   </div>
-                </a>
+                  {isVisible ? (
+                    <div className="absolute top-11 right-4 w-80 auto bg-white rounded-sm shadow-lg">
+                      <div className="p-2 grid grid-cols-2 gap-x-2">
+                        <a href="tel:97675154444">
+                          <div className="text-cardDate flex text-md font-bold cursor-pointer bg-gray-100 rounded-sm hover:bg-onlineSupport hover:text-white px-3 py-2">
+                            <PhoneIcon className="w-4" />
+                            <p className="pl-2">7515 4444</p>
+                          </div>
+                        </a>
+
+                        <div
+                          onClick={() => handleTelcocom()}
+                          className="text-cardDate flex text-md font-bold cursor-pointer bg-gray-100 rounded-sm hover:bg-onlineSupport hover:text-white px-3 py-2"
+                        >
+                          <PhoneIcon className="w-4" />
+                          <p className="pl-2">{t('onlineHelp')}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                </div>
                 <div className={styles.loginBody}>
                   {isAuth ? (
                     <Profile data={user} />
@@ -147,15 +187,6 @@ const Navbar: FC<Props> = ({ navbarData }) => {
             </div>
 
             <div className="-mr-2 flex space-x-5 lg:hidden">
-              <div className="flex items-center justify-center">
-                <span className="animate-ping absolute inline-flex h-8 w-8 bg-onlineSupport rounded-lg"></span>
-                <button
-                  onClick={() => handleTelcocom()}
-                  className="z-10 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-2 rounded-lg"
-                >
-                  <PhoneIcon className="w-6" />
-                </button>
-              </div>
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
@@ -178,18 +209,6 @@ const Navbar: FC<Props> = ({ navbarData }) => {
                 )}
               </button>
             </div>
-          </div>
-        </div>
-        <div className="hidden max-w-7xl mx-auto justify-end pr-4 lg:flex">
-          <div className="flex justify-center items-center mt-7">
-            <span className="animate-ping absolute inline-flex h-7 w-28 bg-green-200 rounded-lg"></span>
-            <span className="animate-ping absolute inline-flex h-7 w-28 bg-onlineSupport rounded-lg z-8"></span>
-            <button className="z-10 flex text-xs font-thin cursor-pointer text-white bg-onlineSupport p-3 rounded-lg">
-              <PhoneIcon className="w-4" />
-              <p className="pl-1 w-36 text-sm" onClick={() => handleTelcocom()}>
-                {t('onlineHelp')}
-              </p>
-            </button>
           </div>
         </div>
 

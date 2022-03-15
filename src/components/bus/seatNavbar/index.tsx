@@ -65,7 +65,7 @@ export default function SeatNav() {
             <div className="flex items-center ">
               <div className="hidden lg:block">
                 <div className="ml-10 flex items-center space-x-4">
-                  {router.route !== '/tour' ? <OrderCheck /> : ''}
+                  {/* {router.route !== '/tour' ? <OrderCheck /> : ''} */}
                   <SelectLanguage isBlack={true} />
                   <div>
                     {isAuth ? (

@@ -104,6 +104,7 @@ export default function ticketGenerate() {
               <Empty description={'Захиалгын мэдээлэл олдсонгүй'} />
             ) : (
               <>
+                <div className={s.pageBreak} />
                 {data &&
                   data.rs_payload?.passengers?.map((z, index) => {
                     return (
@@ -528,6 +529,44 @@ export default function ticketGenerate() {
                       </div>
                     );
                   })}
+
+                {data &&
+                data.rs_payload?.ebarimt?.amount &&
+                data.rs_payload?.ebarimt?.ddtd &&
+                data.rs_payload?.ebarimt?.lottery &&
+                data.rs_payload?.ebarimt?.qrdata ? (
+                  <div
+                    style={{
+                      outline: '1px solid black',
+                      width: '100%',
+                      pageBreakInside: 'avoid',
+                      marginTop: '10px',
+                      fontFamily: 'Times New Roman',
+                    }}
+                  >
+                    <div className="p-2 grid grid-cols-2">
+                      <div>
+                        <ul>
+                          <li className="font-bold">Сугалааны дугаар:</li>
+                          <li>{data.rs_payload?.ebarimt?.lottery}</li>
+                          <li className="font-bold">ДДТД:</li>
+                          <li>{data.rs_payload?.ebarimt?.ddtd}</li>
+                          <li className="font-bold">Нийт дүн:</li>
+                          <li>{data.rs_payload?.ebarimt?.amount}</li>
+                        </ul>
+                      </div>
+
+                      <div className="flex justify-center">
+                        <QRCode
+                          size={150}
+                          value={data.rs_payload?.ebarimt?.qrdata}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  ''
+                )}
               </>
             )}
           </div>

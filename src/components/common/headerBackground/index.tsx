@@ -1,13 +1,20 @@
 import React from 'react';
 import styles from './headerBackground.module.scss';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 export default function HeaderBackground(props) {
   const { t } = useTranslation();
+  const router = useRouter();
+
   return (
     <div className={styles.body}>
       <img
-        src="/assets/backgroundBus.png"
+        src={
+          router.pathname === '/train'
+            ? '/assets/trainBGG.png'
+            : '/assets/busBGGG.png'
+        }
         alt="Logo"
         className={`${props.isBorderRadius ? styles.image1 : styles.image} `}
       />
