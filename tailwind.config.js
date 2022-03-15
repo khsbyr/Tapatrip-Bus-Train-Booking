@@ -15,7 +15,7 @@ module.exports = {
         Cuprum: ['Cuprum', 'sans-serif'],
       },
       backgroundImage: theme => ({
-        'Header-image': "url('assets/Header.png')",
+        'Header-image': "url('assets/backgroundBus.png')",
       }),
 
       backgroundColor: theme => ({
